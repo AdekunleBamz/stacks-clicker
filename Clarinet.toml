@@ -1,0 +1,24 @@
+[project]
+name = "stacks-clicker"
+description = "Transaction Generator App - Click to generate Stacks transactions!"
+authors = []
+telemetry = false
+cache_dir = "./.cache"
+
+[contracts.clicker]
+path = "contracts/clicker.clar"
+
+[contracts.tipjar]
+path = "contracts/tipjar.clar"
+
+[contracts.quickpoll]
+path = "contracts/quickpoll.clar"
+
+[repl.analysis]
+passes = ["check_checker"]
+
+[repl.analysis.check_checker]
+strict = false
+trusted_sender = false
+trusted_caller = false
+callee_filter = false
