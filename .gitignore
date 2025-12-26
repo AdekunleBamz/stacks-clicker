@@ -17,21 +17,11 @@ frontend/.env.local
 # Sensitive configuration - NEVER COMMIT THESE
 settings/Mainnet.toml
 settings/Testnet.toml
-wallets.env
 *mainnet*
 *mnemonic*
 *.secret
 *.key
 deployments/*-mainnet.yaml
-
-# Scripts
-generate-txs.js
-generate-txs-multi.js
-continue-txs.js
-retry-wallet3.js
-generate-wallets.js
-build-commits.sh
-build-commits.js
 
 # IDE
 .vscode/
