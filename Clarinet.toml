@@ -1,18 +1,18 @@
 [project]
-name = "stacks-clicker"
-description = "Transaction Generator App - Click to generate Stacks transactions!"
+name = "stacks-clicker-v2i"
+description = "Transaction Generator App v2i - Click to generate Stacks transactions!"
 authors = []
 telemetry = false
 cache_dir = "./.cache"
 
-[contracts.clicker]
-path = "contracts/clicker.clar"
+[contracts.clicker-v2i]
+path = "contracts/clicker-v2i.clar"
 
-[contracts.tipjar]
-path = "contracts/tipjar.clar"
+[contracts.tipjar-v2i]
+path = "contracts/tipjar-v2i.clar"
 
-[contracts.quickpoll]
-path = "contracts/quickpoll.clar"
+[contracts.quickpoll-v2i]
+path = "contracts/quickpoll-v2i.clar"
 
 [repl.analysis]
 passes = ["check_checker"]
