@@ -14,6 +14,15 @@ path = "contracts/tipjar-v2i.clar"
 [contracts.quickpoll-v2i]
 path = "contracts/quickpoll-v2i.clar"
 
+[contracts.clicker-v2j]
+path = "contracts/clicker-v2j.clar"
+
+[contracts.tipjar-v2j]
+path = "contracts/tipjar-v2j.clar"
+
+[contracts.quickpoll-v2j]
+path = "contracts/quickpoll-v2j.clar"
+
 [repl.analysis]
 passes = ["check_checker"]
 
