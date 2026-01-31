@@ -14,11 +14,11 @@ const INTERACTION_COST = 4000; // 0.004 STX total (fee + contract fee)
 
 // Contract functions to call (varied interactions)
 const INTERACTIONS = [
-  { contract: 'clicker-v2i', function: 'click', args: [], name: '🎯 Click' },
-  { contract: 'clicker-v2i', function: 'ping', args: [], name: '📡 Ping' },
-  { contract: 'clicker-v2i', function: 'multi-click', args: [uintCV(3)], name: '🔥 Multi-Click(3)' },
-  { contract: 'tipjar-v2i', function: 'self-ping', args: [], name: '🏓 Self-Ping' },
-  { contract: 'quickpoll-v2i', function: 'poll-ping', args: [], name: '🗳️ Poll-Ping' },
+  { contract: 'clicker-v2j', function: 'click', args: [], name: '🎯 Click' },
+  { contract: 'clicker-v2j', function: 'ping', args: [], name: '📡 Ping' },
+  { contract: 'clicker-v2j', function: 'multi-click', args: [uintCV(3)], name: '🔥 Multi-Click(3)' },
+  { contract: 'tipjar-v2j', function: 'self-ping', args: [], name: '🏓 Self-Ping' },
+  { contract: 'quickpoll-v2j', function: 'poll-ping', args: [], name: '🗳️ Poll-Ping' },
 ];
 
 async function sleep(ms) {
@@ -91,7 +91,7 @@ async function verifyDistributions() {
     
     if (i === 0) {
       console.log(`W1 (Main): ${(balance / 1000000).toFixed(4)} STX`);
-    } else if (balance < 50000) { // Less than 0.05 STX means not enough to interact
+    } else if (balance < 25000) { // Less than 0.025 STX means not enough to interact
       console.log(`W${i + 1}: ❌ ${(balance / 1000000).toFixed(4)} STX (insufficient)`);
       allConfirmed = false;
     } else {
@@ -127,7 +127,7 @@ function getRandomDelay() {
 async function runInteractions() {
   console.log('🎮 Contract Interaction Script (Phase-based)');
   console.log('='.repeat(60));
-  console.log(`Contracts: clicker-v2i, tipjar-v2i, quickpoll-v2i`);
+  console.log(`Contracts: clicker-v2j, tipjar-v2j, quickpoll-v2j`);
   console.log('='.repeat(60) + '\n');
   
   // First verify distributions
@@ -153,7 +153,7 @@ async function runInteractions() {
   let totalTx = 0;
   let successTx = 0;
   let failedTx = 0;
-  const maxPhases = 18; // ~18 interactions per wallet (accounting for funds used)
+  const maxPhases = 13; // ~13 interactions per wallet = ~325 txs (targeting 321)
   
   console.log(`📋 Plan: ${maxPhases} phases, 25 wallets = ~${maxPhases * 25} transactions\n`);
   
