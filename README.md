@@ -1,10 +1,11 @@
-# 🎮 StacksClicker v2i
+# 🎮 StacksClicker v2j
 
 Interactive Stacks dApp featuring Click-to-Earn game, community TipJar, and QuickPoll voting system. Built with Clarity smart contracts and React.
 
 [![Stacks](https://img.shields.io/badge/Built%20on-Stacks-5546FF?style=flat&logo=stacks)](https://stacks.co)
 [![Clarity](https://img.shields.io/badge/Smart%20Contracts-Clarity-00D4AA?style=flat)](https://clarity-lang.org)
 [![WalletConnect](https://img.shields.io/badge/WalletConnect-v2-3B99FC?style=flat)](https://walletconnect.com)
+[![Version](https://img.shields.io/badge/Version-2j-green?style=flat)](https://github.com/AdekunleBamz/stacks-clicker)
 
 ---
 
@@ -27,7 +28,7 @@ showConnect({
 // Call smart contract
 openContractCall({
   contractAddress: 'SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N',
-  contractName: 'clicker-v2i',
+  contractName: 'clicker-v2j',
   functionName: 'click',
   functionArgs: [],
   network: new StacksMainnet(),
@@ -51,7 +52,7 @@ import {
 // Build and broadcast transaction
 const txOptions = {
   contractAddress: 'SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N',
-  contractName: 'clicker-v2i',
+  contractName: 'clicker-v2j',
   functionName: 'multi-click',
   functionArgs: [uintCV(10)],
   senderKey: privateKey,
@@ -133,9 +134,12 @@ Open http://localhost:5173
 ```
 stacks-clicker/
 ├── contracts/
-│   ├── clicker-v2i.clar   # Click-to-earn game contract
-│   ├── tipjar-v2i.clar    # Tipping & donations contract
-│   └── quickpoll-v2i.clar # Community voting contract
+│   ├── clicker-v2j.clar   # Click-to-earn game contract (v2j)
+│   ├── tipjar-v2j.clar    # Tipping & donations contract (v2j)
+│   ├── quickpoll-v2j.clar # Community voting contract (v2j)
+│   ├── clicker-v2i.clar   # Legacy v2i contract
+│   ├── tipjar-v2i.clar    # Legacy v2i contract
+│   └── quickpoll-v2i.clar # Legacy v2i contract
 ├── frontend/
 │   ├── src/
 │   │   ├── components/    # React components
@@ -151,35 +155,65 @@ stacks-clicker/
 
 ---
 
-## 🔗 Smart Contracts (v2i)
+## 🔗 Smart Contracts (v2j - Current)
 
-All contracts are deployed on Stacks Mainnet:
+All contracts are deployed on Stacks Mainnet with enhanced features:
 
 | Contract | Address | Description |
 |----------|---------|-------------|
-| clicker-v2i | `SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N.clicker-v2i` | Click counter with streaks |
-| tipjar-v2i | `SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N.tipjar-v2i` | Micro-tipping system |
-| quickpoll-v2i | `SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N.quickpoll-v2i` | Decentralized polls |
+| clicker-v2j | `SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N.clicker-v2j` | Click counter with events & analytics |
+| tipjar-v2j | `SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N.tipjar-v2j` | Tipping with largest-tip tracking |
+| quickpoll-v2j | `SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N.quickpoll-v2j` | Polls with creator analytics |
+
+### v2j Enhancements over v2i
+
+| Feature | v2i | v2j |
+|---------|-----|-----|
+| Version constant | ❌ | ✅ `VERSION u2` |
+| Print events | ❌ | ✅ All actions emit events |
+| Unique user tracking | ❌ | ✅ `unique-users` counter |
+| First activity block | ❌ | ✅ Tracks first interaction |
+| Last activity block | ❌ | ✅ `last-activity-block` |
+| Contract info getter | ❌ | ✅ `get-contract-info` |
+| Largest tip tracking | ❌ | ✅ TipJar tracks largest |
+| Creator analytics | ❌ | ✅ QuickPoll creator stats |
 
 ### Contract Functions
 
-#### Clicker
-- `click` - Single click (0.001 STX fee)
-- `multi-click (count)` - Multiple clicks at once
-- `ping` - Heartbeat transaction
+#### Clicker (v2j)
+- `click` - Single click (0.001 STX fee) + emits `click-event`
+- `multi-click (count)` - Multiple clicks at once + emits `multi-click-event`
+- `ping` - Heartbeat transaction + emits `ping-event`
 - `get-user-clicks (user)` - Read click count
+- `get-contract-info` - Returns version, total clicks, unique users, fees collected
+- `get-version` - Returns VERSION constant (u2)
 
-#### TipJar
-- `quick-tip` - Quick 0.001 STX tip
-- `tip-user (recipient, amount)` - Tip specific user
-- `donate (amount)` - Donate to contract
-- `self-ping` - Activity ping
+#### TipJar (v2j)
+- `quick-tip` - Quick 0.001 STX tip + emits `quick-tip-event`
+- `tip-user (recipient, amount)` - Tip specific user + emits `tip-event`
+- `donate (amount)` - Donate to contract + emits `donate-event`
+- `self-ping` - Activity ping + emits `self-ping-event`
+- `get-contract-info` - Returns version, total tips, unique tippers, largest tip
+- `get-largest-tip` - Returns the largest tip amount ever sent
 
-#### QuickPoll
-- `create-poll (question)` - Create new poll
-- `vote-yes (poll-id)` - Vote yes on poll
-- `vote-no (poll-id)` - Vote no on poll
-- `poll-ping` - Activity ping
+#### QuickPoll (v2j)
+- `create-poll (question)` - Create new poll + emits `poll-created-event`
+- `vote-yes (poll-id)` - Vote yes + emits `vote-event`
+- `vote-no (poll-id)` - Vote no + emits `vote-event`
+- `poll-ping` - Activity ping + emits `ping-event`
+- `get-contract-info` - Returns version, total polls, total votes, unique voters/creators
+
+---
+
+## 📜 Legacy Contracts (v2i)
+
+Previous version contracts (still active on mainnet):
+
+| Contract | Address |
+|----------|---------|
+| clicker-v2i | `SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N.clicker-v2i` |
+| tipjar-v2i | `SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N.tipjar-v2i` |
+| quickpoll-v2i | `SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N.quickpoll-v2i` |
 
 ---
 
