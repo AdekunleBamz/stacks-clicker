@@ -1,10 +1,12 @@
 [project]
-name = "stacks-clicker-v2i"
-description = "Transaction Generator App v2i - Click to generate Stacks transactions!"
-authors = []
+name = "stacks-clicker-v2j"
+description = "StacksClicker v2j - Interactive dApp with Clicker, TipJar, and QuickPoll on Stacks"
+authors = ["AdekunleBamz"]
 telemetry = false
 cache_dir = "./.cache"
+requirements = []
 
+# Legacy v2i contracts (still active on mainnet)
 [contracts.clicker-v2i]
 path = "contracts/clicker-v2i.clar"
 
@@ -14,6 +16,7 @@ path = "contracts/tipjar-v2i.clar"
 [contracts.quickpoll-v2i]
 path = "contracts/quickpoll-v2i.clar"
 
+# Current v2j contracts (latest version)
 [contracts.clicker-v2j]
 path = "contracts/clicker-v2j.clar"
 
@@ -27,7 +30,7 @@ path = "contracts/quickpoll-v2j.clar"
 passes = ["check_checker"]
 
 [repl.analysis.check_checker]
-strict = false
+strict = true
 trusted_sender = false
 trusted_caller = false
 callee_filter = false
