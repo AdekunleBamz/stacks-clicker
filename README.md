@@ -1,10 +1,78 @@
-# 🎮 StacksClicker
+# 🎮 StacksClicker v2i
 
 Interactive Stacks dApp featuring Click-to-Earn game, community TipJar, and QuickPoll voting system. Built with Clarity smart contracts and React.
 
 [![Stacks](https://img.shields.io/badge/Built%20on-Stacks-5546FF?style=flat&logo=stacks)](https://stacks.co)
 [![Clarity](https://img.shields.io/badge/Smart%20Contracts-Clarity-00D4AA?style=flat)](https://clarity-lang.org)
 [![WalletConnect](https://img.shields.io/badge/WalletConnect-v2-3B99FC?style=flat)](https://walletconnect.com)
+
+---
+
+## 🛠️ Built With Stacks SDKs
+
+This project extensively uses the official **Stacks JavaScript libraries** for blockchain interactions:
+
+### [@stacks/connect](https://www.npmjs.com/package/@stacks/connect)
+> **Wallet Authentication & Transaction Signing**
+
+```javascript
+import { openContractCall, showConnect, disconnect } from '@stacks/connect';
+
+// Connect wallet
+showConnect({
+  appDetails: { name: 'StacksClicker', icon: '/logo.svg' },
+  onFinish: () => console.log('Connected!'),
+});
+
+// Call smart contract
+openContractCall({
+  contractAddress: 'SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N',
+  contractName: 'clicker-v2i',
+  functionName: 'click',
+  functionArgs: [],
+  network: new StacksMainnet(),
+});
+```
+
+### [@stacks/transactions](https://www.npmjs.com/package/@stacks/transactions)
+> **Transaction Building, Clarity Values & Broadcasting**
+
+```javascript
+import { 
+  makeContractCall,
+  broadcastTransaction,
+  uintCV,
+  stringAsciiCV,
+  principalCV,
+  PostConditionMode,
+  AnchorMode,
+} from '@stacks/transactions';
+
+// Build and broadcast transaction
+const txOptions = {
+  contractAddress: 'SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N',
+  contractName: 'clicker-v2i',
+  functionName: 'multi-click',
+  functionArgs: [uintCV(10)],
+  senderKey: privateKey,
+  network: new StacksMainnet(),
+  anchorMode: AnchorMode.Any,
+  postConditionMode: PostConditionMode.Allow,
+  fee: 2000,
+};
+
+const transaction = await makeContractCall(txOptions);
+const response = await broadcastTransaction(transaction, network);
+```
+
+### Other Stacks Libraries Used
+
+| Package | Purpose |
+|---------|---------|
+| `@stacks/network` | Mainnet/Testnet network configuration |
+| `@stacks/wallet-sdk` | Wallet generation & key management |
+
+---
 
 ## ✨ Features
 
@@ -16,6 +84,8 @@ Send micro-tips to support your favorite creators. Quick-tip with one click or s
 
 ### 🗳️ QuickPoll
 Create and vote on community polls. Decentralized voting for any topic.
+
+---
 
 ## 🚀 Quick Start
 
@@ -56,36 +126,40 @@ npm run dev
 
 Open http://localhost:5173
 
+---
+
 ## 📦 Project Structure
 
 ```
 stacks-clicker/
 ├── contracts/
-│   ├── clicker.clar      # Click-to-earn game contract
-│   ├── tipjar.clar       # Tipping & donations contract
-│   └── quickpoll.clar    # Community voting contract
+│   ├── clicker-v2i.clar   # Click-to-earn game contract
+│   ├── tipjar-v2i.clar    # Tipping & donations contract
+│   └── quickpoll-v2i.clar # Community voting contract
 ├── frontend/
 │   ├── src/
-│   │   ├── components/   # React components
-│   │   ├── context/      # Wallet context provider
-│   │   ├── utils/        # WalletConnect integration
-│   │   └── App.jsx       # Main application
+│   │   ├── components/    # React components
+│   │   ├── context/       # Wallet context provider
+│   │   ├── utils/         # WalletConnect integration
+│   │   └── App.jsx        # Main application
 │   └── package.json
 ├── tests/
-│   └── contracts_test.ts # Clarinet tests
-├── deployments/          # Deployment configurations
-└── settings/             # Network settings
+│   └── contracts_test.ts  # Clarinet tests
+├── deployments/           # Deployment configurations
+└── settings/              # Network settings
 ```
 
-## 🔗 Smart Contracts
+---
+
+## 🔗 Smart Contracts (v2i)
 
 All contracts are deployed on Stacks Mainnet:
 
 | Contract | Address | Description |
 |----------|---------|-------------|
-| clicker | `SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N.clicker` | Click counter with streaks |
-| tipjar | `SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N.tipjar` | Micro-tipping system |
-| quickpoll | `SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N.quickpoll` | Decentralized polls |
+| clicker-v2i | `SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N.clicker-v2i` | Click counter with streaks |
+| tipjar-v2i | `SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N.tipjar-v2i` | Micro-tipping system |
+| quickpoll-v2i | `SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N.quickpoll-v2i` | Decentralized polls |
 
 ### Contract Functions
 
@@ -107,6 +181,8 @@ All contracts are deployed on Stacks Mainnet:
 - `vote-no (poll-id)` - Vote no on poll
 - `poll-ping` - Activity ping
 
+---
+
 ## 🔌 WalletConnect Integration
 
 This app uses WalletConnect v2 (via Reown AppKit) for wallet connections:
@@ -116,11 +192,13 @@ This app uses WalletConnect v2 (via Reown AppKit) for wallet connections:
 - **stx_signTransaction** for transaction signing
 - **stx_callContract** as fallback for contract calls
 
-See [`frontend/src/utils/walletconnect.js`](frontend/src/utils/walletconnect.js) for implementation details.
+See `frontend/src/utils/walletconnect.js` for implementation details.
 
 ### Supported Wallets
 - Xverse (Mobile & Extension)
 - Leather (Mobile & Extension)
+
+---
 
 ## 🧪 Testing
 
@@ -129,6 +207,8 @@ Run Clarinet tests:
 ```bash
 clarinet test
 ```
+
+---
 
 ## 🚢 Deployment
 
@@ -154,6 +234,8 @@ npm run build
 Add environment variables in Vercel dashboard:
 - `VITE_WALLETCONNECT_PROJECT_ID`
 
+---
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
@@ -162,9 +244,13 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 MIT License - feel free to use this code for your own projects.
 
+---
+
 ## 🔗 Links
 
 - [View on Explorer](https://explorer.hiro.so/address/SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N?chain=mainnet)
 - [Stacks Documentation](https://docs.stacks.co)
 - [Clarity Language](https://clarity-lang.org)
+- [@stacks/connect NPM](https://www.npmjs.com/package/@stacks/connect)
+- [@stacks/transactions NPM](https://www.npmjs.com/package/@stacks/transactions)
 - [WalletConnect Docs](https://docs.walletconnect.com)
