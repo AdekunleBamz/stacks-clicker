@@ -1,0 +1,15 @@
+# Default owner for everything
+* @AdekunleBamz
+
+# Contract files require review
+/contracts/ @AdekunleBamz
+
+# Test files
+/tests/ @AdekunleBamz
+
+# CI/CD configuration
+/.github/ @AdekunleBamz
+
+# Documentation
+/docs/ @AdekunleBamz
+*.md @AdekunleBamz
