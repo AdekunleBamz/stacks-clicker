@@ -1,0 +1,177 @@
+[
+  {
+    "id": 1,
+    "name": "W1",
+    "mnemonic": "journey shine have lumber expire modify daring kid current draw since any",
+    "address": "SP3MBBQCFWAY97JMYRJQ31BRV69QQ4S7YZ875P2WX",
+    "privateKey": "94c259f04f806012a8cba1f74b7a11c455a5f8aabfdd67781ed32a4acf9e202a01"
+  },
+  {
+    "id": 2,
+    "name": "W2",
+    "mnemonic": "that stock surge rhythm public sausage average sad kangaroo diary tomato lonely",
+    "address": "SP3B3CX84E1VD9M8Q5YQAV1DVVZ3XJ86NCAD21AJ8",
+    "privateKey": "39bde7b0dfcc8974becb5b7f3019dd8201ebda35203537f427be0c84cfdc4a2301"
+  },
+  {
+    "id": 3,
+    "name": "W3",
+    "mnemonic": "mix uniform comic solution rug junior nominee velvet skill heavy ordinary door",
+    "address": "SPAPEBNZ9BZZDJT7G5VCEXDXQCFC3115W9MANDA7",
+    "privateKey": "20de957d78bc1b021c550577da099d58429e09285346ef8697972c1f6ef1490501"
+  },
+  {
+    "id": 4,
+    "name": "W4",
+    "mnemonic": "dirt keep swift toe start code banana pig ramp cricket finger coyote",
+    "address": "SP374J3DHH2FMZHVE2W08CMNM0KWX4SD2K793Q36Y",
+    "privateKey": "d389cc425772c3a1f35e85ddc407261694959e3e9b2f539b1755a2c3c6d61bea01"
+  },
+  {
+    "id": 5,
+    "name": "W5",
+    "mnemonic": "pattern life rent valve hurt mouse scatter hour bind actual mail salad",
+    "address": "SPA14GTABP5TVES5K3WC26NHVJC18M016VQWCPE6",
+    "privateKey": "0d478d77900a38125f72a85112707c445c1acb5d89cec4b4d4a24350cf8822b801"
+  },
+  {
+    "id": 6,
+    "name": "W6",
+    "mnemonic": "trick any image filter lobster thrive keen buddy input develop now nuclear",
+    "address": "SP1WBPNC633TNF4XNM7KTW1ZXDC1S5ZRKSJT0YZQ3",
+    "privateKey": "ad60d0c83c8afd4a6d06f5128e9273be7d320e9168d2f27b69c206e241c7dadc01"
+  },
+  {
+    "id": 7,
+    "name": "W7",
+    "mnemonic": "axis insane member dignity auction comic hobby book vicious second chest music",
+    "address": "SP2QDXCZ4DWT0KJSTAQ34Q10B46Z5GSYEW3JXT09X",
+    "privateKey": "465a7fe2a497f165bbfd47aa90dce5bba7e7b83c6a27bbe9c3863aeeb583c4a301"
+  },
+  {
+    "id": 8,
+    "name": "W8",
+    "mnemonic": "exhaust coconut summer dumb edge arrow long cause current balance audit harvest",
+    "address": "SP2M65Y53R74V5B5W8KBCXAD6CT5WK8X2MQWK9QMQ",
+    "privateKey": "5d9a9fb431b58fbf9c197b3066c322913f741b70505416995ae44cf55e3980de01"
+  },
+  {
+    "id": 9,
+    "name": "W9",
+    "mnemonic": "grass age market salon they hood layer mom pride idle artist prison",
+    "address": "SPXZ3CV6TW2NNJ16VBBQH0YHT7M6EG93Y2ATM2FW",
+    "privateKey": "97f8976710252bf28c2b0497c3774a20a7f339eaa5b255c15f8d65b92436a08401"
+  },
+  {
+    "id": 10,
+    "name": "W10",
+    "mnemonic": "luggage nation miracle oval win regret escape arrow camp luggage margin surround",
+    "address": "SP28863BF275HFD8SGN9TZM3BJP4YC59N891HV9AS",
+    "privateKey": "ada88a36481a38c8b43b3e9bbaf78fa10f3dd40fa2fbc662fd12eb32c8aecb4a01"
+  },
+  {
+    "id": 11,
+    "name": "W11",
+    "mnemonic": "sugar insane coil almost time good portion enemy chuckle shrimp cave three",
+    "address": "SP3ET2FGXBY3R2CPFHP89FMG0TMEGXQE5403S3QQ0",
+    "privateKey": "228801c328c7e7a2e970244f578b244ce72eb067aae72bd09f9316f32a0ab7b101"
+  },
+  {
+    "id": 12,
+    "name": "W12",
+    "mnemonic": "neck wrap jaguar black pioneer trick toy faculty present permit ozone only",
+    "address": "SPBFQCDFEPCKWHJ95N5AY3ATJQ72RXN27ZB6GPZJ",
+    "privateKey": "b8087cfd3cde064bc6d3cba69853f04714a0cc8655c578c6f0c8837ac681b38401"
+  },
+  {
+    "id": 13,
+    "name": "W13",
+    "mnemonic": "cupboard lottery program visual present tone tiger vote mean usual mail unaware",
+    "address": "SP11SQ3GQ18644HNTJJMK5XK5AS8TYNYRJTBXHSEW",
+    "privateKey": "792d52048a22123355e3cf5fe411099496bba63379491bac3f0e787ebf332dc701"
+  },
+  {
+    "id": 14,
+    "name": "W14",
+    "mnemonic": "empty bus glove search opera dumb crazy razor coconut ask hold cushion",
+    "address": "SP2EAF79D71M7SVFVFNBECQTS04JGC7ACGEH05WBV",
+    "privateKey": "f2ff26179e76cb6c1d958f0a815e222341b3b82d9be1f79e2482cc8a147274c801"
+  },
+  {
+    "id": 15,
+    "name": "W15",
+    "mnemonic": "false rice now patient impulse fee board cool best field wire express",
+    "address": "SP1QKXQ36KSC1YWKFH5TTTHD83H6ACS5A27K3WZGW",
+    "privateKey": "26fc0b820b3621d59a711e91cdb4ac716b76311211bf94baff5ba9ac3b43945001"
+  },
+  {
+    "id": 16,
+    "name": "W16",
+    "mnemonic": "inherit stadium very page legend naive general attitude budget subway hidden mystery",
+    "address": "SP962A7C0CGCYDSP7HFC5WPDCR8P49Y71AC2Y3CA",
+    "privateKey": "5d685e74132a6da894c5b1e6bc8a298e8d3dea660be72c3081c688272fb8a07c01"
+  },
+  {
+    "id": 17,
+    "name": "W17",
+    "mnemonic": "tortoise canyon gesture churn expect receive dial call shrimp buffalo secret pencil",
+    "address": "SP23Z1HV9JQ655WMSZ5ZQDS4KNGAVJASD4VTAKGD4",
+    "privateKey": "ae115ccd4b817deff541d1e0608e808a6d19b37f136edc3d12cb8d95cf61d77f01"
+  },
+  {
+    "id": 18,
+    "name": "W18",
+    "mnemonic": "frame warm range clog beyond siege rural master success cereal soon connect",
+    "address": "SPTS75Q9P6WT2MEY18WG8SSMPQST2428W5FR64BT",
+    "privateKey": "e5549659e8b0bfdb190233a60abe19487ef350957623c4599a5162534340e0c401"
+  },
+  {
+    "id": 19,
+    "name": "W19",
+    "mnemonic": "cabin scissors warfare prefer symptom quit enact betray region side same fever",
+    "address": "SP3Z6QCPZ955C36F43G3P05Z9NGBP4YHWYHBDQSNK",
+    "privateKey": "4798576bc0779883e63832fc74ad0b30aceb7495760fe1115a6c56e87158137b01"
+  },
+  {
+    "id": 20,
+    "name": "W20",
+    "mnemonic": "gravity stick slight hold rabbit anchor spike oak sponsor prize shaft mass",
+    "address": "SP8NGH2CEWWD9BV01B69S3G8XTGHCRMH3B33J60Y",
+    "privateKey": "626ad054ea00c0360066dd6a7e67321f4d8e2ce60669567bfe5b2ca3031798ee01"
+  },
+  {
+    "id": 21,
+    "name": "W21",
+    "mnemonic": "hood like issue job piece hurt obtain legend drama room person quantum",
+    "address": "SP2K87RV7CG8BYTC5GTPSCP0PDFYGYSSFRHRMP1FX",
+    "privateKey": "5e65a2ccc64b67914a6e287b364a3141f6a1d7a48cbcb4ce5dea1f0434b6aae301"
+  },
+  {
+    "id": 22,
+    "name": "W22",
+    "mnemonic": "situate mistake correct mother smart ocean erode range bamboo always drip autumn",
+    "address": "SP2KBMVX0XEH4E0CAMGWV73Z05ZDMP0W3R6H975XG",
+    "privateKey": "390970071d55d8003777fe5d9e5095ce6f840ef4ba23d8abc5c1ec65490939e401"
+  },
+  {
+    "id": 23,
+    "name": "W23",
+    "mnemonic": "price match average prefer behave knife curtain fluid come holiday since loud",
+    "address": "SP3T83EEEVVT6301JD7TFDKMKTNB4GKF4M4DC99JT",
+    "privateKey": "4fe00a62df88e1a43f34fe1d1c623b86eaa8c41cba68b31bcc81009e329a989f01"
+  },
+  {
+    "id": 24,
+    "name": "W24",
+    "mnemonic": "uncover pool rare maximum parent top use ocean enroll sadness legend soup",
+    "address": "SP3DPAJX4C7PPEMEWNECB58D5KJS5E9SEA6SYS4NM",
+    "privateKey": "b825608c54daff702f8ea53c3fb9039c329c082acb3fc62ee37127b41c4aa4ed01"
+  },
+  {
+    "id": 25,
+    "name": "W25",
+    "mnemonic": "clinic cheese spend zoo immune found text climb open toward scheme moment",
+    "address": "SPVNVP3NSXDHMHJ1GT2R560E1W5PW07HHSGZSAJV",
+    "privateKey": "83176e9f060440a8e1856010dde817e2cd12d3e598fc447d5a2666e4d123b4e601"
+  }
+]
