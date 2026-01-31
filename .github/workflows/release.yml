@@ -1,0 +1,74 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install Clarinet
+        run: |
+          curl -L https://github.com/hirosystems/clarinet/releases/download/v2.3.0/clarinet-linux-x64.tar.gz | tar xz
+          sudo mv clarinet /usr/local/bin/
+          clarinet --version
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run tests
+        run: clarinet test
+      
+      - name: Check contracts
+        run: clarinet check
+      
+      - name: Generate release notes
+        id: release_notes
+        run: |
+          # Get the previous tag
+          PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
+          
+          # Generate changelog
+          if [ -n "$PREV_TAG" ]; then
+            echo "## Changes since $PREV_TAG" > RELEASE_NOTES.md
+            echo "" >> RELEASE_NOTES.md
+            git log --pretty=format:"- %s (%h)" $PREV_TAG..HEAD >> RELEASE_NOTES.md
+          else
+            echo "## Initial Release" > RELEASE_NOTES.md
+            echo "" >> RELEASE_NOTES.md
+            echo "First release of Stacks Clicker contracts." >> RELEASE_NOTES.md
+          fi
+          
+          echo "" >> RELEASE_NOTES.md
+          echo "## Contracts" >> RELEASE_NOTES.md
+          echo "- clicker-v2j" >> RELEASE_NOTES.md
+          echo "- tipjar-v2j" >> RELEASE_NOTES.md
+          echo "- quickpoll-v2j" >> RELEASE_NOTES.md
+      
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          body_path: RELEASE_NOTES.md
+          draft: false
+          prerelease: ${{ contains(github.ref, '-rc') || contains(github.ref, '-beta') || contains(github.ref, '-alpha') }}
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
