@@ -1,0 +1,30 @@
+name: Clarity Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Clarinet
+        uses: hirosystems/clarinet-action@v1
+        with:
+          clarinet-version: '2.3.0'
+      
+      - name: Check contract syntax
+        run: clarinet check
+      
+      - name: Run Clarinet tests
+        run: clarinet test
+      
+      - name: Generate test coverage
+        run: clarinet test --coverage
+        continue-on-error: true
