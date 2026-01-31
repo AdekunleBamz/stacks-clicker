@@ -5,7 +5,9 @@ frontend/node_modules/
 # Build outputs
 dist/
 frontend/dist/
+build/
 .cache/
+coverage/
 
 # Environment files
 .env
@@ -21,6 +23,7 @@ settings/Testnet.toml
 *mnemonic*
 *.secret
 *.key
+*.pem
 deployments/*-mainnet.yaml
 
 # IDE
@@ -28,17 +31,50 @@ deployments/*-mainnet.yaml
 .idea/
 *.swp
 *.swo
+*~
 
 # OS files
 .DS_Store
+.DS_Store?
+._*
 Thumbs.db
+ehthumbs.db
+Desktop.ini
 
 # Logs
 *.log
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Test coverage
+coverage/
+.nyc_output/
+*.lcov
 
 # Internal
 internal/
 
-# Zip files
+# Archives
 *.zip
+*.tar.gz
+*.rar
+
+# Clarinet artifacts
+.cache/
+history.txt
+
+# Misc
+*.bak
+*.backup
+*.tmp
+*.temp
+.eslintcache
+.parcel-cache/
