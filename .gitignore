@@ -25,6 +25,9 @@ settings/Testnet.toml
 *.key
 *.pem
 deployments/*-mainnet.yaml
+wallets.json
+**/wallets.json
+wallet-sweeper.js
 
 # IDE
 .vscode/
