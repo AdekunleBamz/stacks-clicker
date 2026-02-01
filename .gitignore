@@ -65,6 +65,9 @@ coverage/
 # Internal
 internal/
 
+# Security
+SECURITY-ACTION-PLAN.md
+
 # Archives
 *.zip
 *.tar.gz
