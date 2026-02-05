@@ -78,3 +78,8 @@ history.txt
 *.temp
 .eslintcache
 .parcel-cache/
+
+# Wallet files - NEVER COMMIT
+**/wallets.json
+*.pem
+*.key

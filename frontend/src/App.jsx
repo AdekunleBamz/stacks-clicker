@@ -11,7 +11,7 @@ import {
 // ============================================
 // CONFIGURATION - UPDATE THESE AFTER DEPLOYING
 // ============================================
-const WALLETCONNECT_PROJECT_ID = '99294a66fb85e17fb60238acc703f724'
+const WALLETCONNECT_PROJECT_ID = import.meta.env.VITE_WALLETCONNECT_PROJECT_ID || ''
 const DEPLOYER = 'SP_YOUR_ADDRESS_HERE' // ⚠️ Replace with your deployed address
 const NETWORK = new StacksMainnet()
 
