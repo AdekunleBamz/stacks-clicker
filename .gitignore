@@ -83,3 +83,5 @@ history.txt
 **/wallets.json
 *.pem
 *.key
+internal/
+internal
