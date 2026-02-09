@@ -64,7 +64,7 @@ jobs:
           echo "- quickpoll-v2j" >> RELEASE_NOTES.md
       
       - name: Create Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           body_path: RELEASE_NOTES.md
           draft: false
