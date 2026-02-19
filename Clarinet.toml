@@ -1,30 +1,31 @@
 [project]
-name = "stacks-clicker-v2j"
-description = "StacksClicker v2j - Interactive dApp with Clicker, TipJar, and QuickPoll on Stacks"
+name = "stacks-clicker-v2m"
+description = "StacksClicker v2m - Interactive dApp with Clicker, TipJar, and QuickPoll on Stacks (Clarity 2, Epoch 3.0)"
 authors = ["AdekunleBamz"]
 telemetry = false
 cache_dir = "./.cache"
 requirements = []
 
-# Legacy v2i contracts (still active on mainnet)
-[contracts.clicker-v2i]
-path = "contracts/clicker-v2i.clar"
+# ── Active contracts (deployed to new wallet SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT) ──
+[contracts.clicker-v2m]
+path = "contracts/clicker-v2m.clar"
+clarity_version = 2
+epoch = 3.0
 
-[contracts.tipjar-v2i]
-path = "contracts/tipjar-v2i.clar"
+[contracts.tipjar-v2m]
+path = "contracts/tipjar-v2m.clar"
+clarity_version = 2
+epoch = 3.0
 
-[contracts.quickpoll-v2i]
-path = "contracts/quickpoll-v2i.clar"
+[contracts.quickpoll-v2m]
+path = "contracts/quickpoll-v2m.clar"
+clarity_version = 2
+epoch = 3.0
 
-# Current v2j contracts (latest version)
-[contracts.clicker-v2j]
-path = "contracts/clicker-v2j.clar"
-
-[contracts.tipjar-v2j]
-path = "contracts/tipjar-v2j.clar"
-
-[contracts.quickpoll-v2j]
-path = "contracts/quickpoll-v2j.clar"
+[contracts.quickpoll-v2n]
+path = "contracts/quickpoll-v2n.clar"
+clarity_version = 2
+epoch = 3.0
 
 [repl.analysis]
 passes = ["check_checker"]

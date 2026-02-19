@@ -1,20 +1,22 @@
-# 🎮 StacksClicker v2j
+# 🎮 StacksClicker v2m
 
 Interactive Stacks dApp featuring Click-to-Earn game, community TipJar, and QuickPoll voting system. Built with Clarity smart contracts and React.
 
 [![Stacks](https://img.shields.io/badge/Built%20on-Stacks-5546FF?style=flat&logo=stacks)](https://stacks.co)
 [![Clarity](https://img.shields.io/badge/Smart%20Contracts-Clarity-00D4AA?style=flat)](https://clarity-lang.org)
 [![WalletConnect](https://img.shields.io/badge/WalletConnect-v2-3B99FC?style=flat)](https://walletconnect.com)
-[![Version](https://img.shields.io/badge/Version-2j-green?style=flat)](https://github.com/AdekunleBamz/stacks-clicker)
+[![Version](https://img.shields.io/badge/Version-2m-green?style=flat)](https://github.com/AdekunleBamz/stacks-clicker)
 
 ---
 
 ## 🛠️ Built With Stacks SDKs
 
-This project extensively uses the official **Stacks JavaScript libraries** for blockchain interactions:
+This project extensively uses the official **Stacks JavaScript libraries** for all blockchain interactions — wallet authentication, transaction signing, contract calls, and key management.
 
 ### [@stacks/connect](https://www.npmjs.com/package/@stacks/connect)
 > **Wallet Authentication & Transaction Signing**
+
+Used in the frontend to connect user wallets (Xverse, Leather) and prompt transaction signing via the browser extension or mobile wallet.
 
 ```javascript
 import { openContractCall, showConnect, disconnect } from '@stacks/connect';
@@ -27,43 +29,42 @@ showConnect({
 
 // Call smart contract
 openContractCall({
-  contractAddress: 'SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N',
-  contractName: 'clicker-v2j',
+  contractAddress: 'SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT',
+  contractName: 'clicker-v2m',
   functionName: 'click',
   functionArgs: [],
-  network: new StacksMainnet(),
+  network: 'mainnet',
 });
 ```
 
 ### [@stacks/transactions](https://www.npmjs.com/package/@stacks/transactions)
 > **Transaction Building, Clarity Values & Broadcasting**
 
+Used in deployment and interaction scripts to build, sign, and broadcast contract-call and STX-transfer transactions programmatically.
+
 ```javascript
-import { 
+import {
   makeContractCall,
   broadcastTransaction,
   uintCV,
-  stringAsciiCV,
-  principalCV,
   PostConditionMode,
   AnchorMode,
 } from '@stacks/transactions';
 
 // Build and broadcast transaction
-const txOptions = {
-  contractAddress: 'SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N',
-  contractName: 'clicker-v2j',
+const tx = await makeContractCall({
+  contractAddress: 'SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT',
+  contractName: 'clicker-v2m',
   functionName: 'multi-click',
-  functionArgs: [uintCV(10)],
+  functionArgs: [uintCV(5)],
   senderKey: privateKey,
-  network: new StacksMainnet(),
+  network: 'mainnet',
   anchorMode: AnchorMode.Any,
   postConditionMode: PostConditionMode.Allow,
-  fee: 2000,
-};
+  fee: 1000,
+});
 
-const transaction = await makeContractCall(txOptions);
-const response = await broadcastTransaction(transaction, network);
+const result = await broadcastTransaction(tx, network);
 ```
 
 ### Other Stacks Libraries Used
@@ -71,20 +72,20 @@ const response = await broadcastTransaction(transaction, network);
 | Package | Purpose |
 |---------|---------|
 | `@stacks/network` | Mainnet/Testnet network configuration |
-| `@stacks/wallet-sdk` | Wallet generation & key management |
+| `@stacks/wallet-sdk` | Wallet generation & HD key derivation |
 
 ---
 
 ## ✨ Features
 
 ### 🎮 Clicker Game
-Build click streaks and compete for the highest score! Every click is recorded on-chain.
+Build click streaks and compete for the highest score! Every click is recorded on-chain with full event emission.
 
 ### 💰 TipJar
 Send micro-tips to support your favorite creators. Quick-tip with one click or send custom amounts.
 
 ### 🗳️ QuickPoll
-Create and vote on community polls. Decentralized voting for any topic.
+Create and vote on community polls. Decentralized voting for any topic — no poll IDs needed in v2n.
 
 ---
 
@@ -134,86 +135,75 @@ Open http://localhost:5173
 ```
 stacks-clicker/
 ├── contracts/
-│   ├── clicker-v2j.clar   # Click-to-earn game contract (v2j)
-│   ├── tipjar-v2j.clar    # Tipping & donations contract (v2j)
-│   ├── quickpoll-v2j.clar # Community voting contract (v2j)
-│   ├── clicker-v2i.clar   # Legacy v2i contract
-│   ├── tipjar-v2i.clar    # Legacy v2i contract
-│   └── quickpoll-v2i.clar # Legacy v2i contract
+│   ├── clicker-v2m.clar      # ✅ Active — Click-to-earn game (Clarity 2, Epoch 3.0)
+│   ├── tipjar-v2m.clar       # ✅ Active — Tipping & donations (Clarity 2, Epoch 3.0)
+│   ├── quickpoll-v2m.clar    # ✅ Active — Community voting (Clarity 2, Epoch 3.0)
+│   ├── quickpoll-v2n.clar    # ✅ Active — Simplified voting, no poll IDs (Clarity 2)
+│   └── archive/              # 📦 Legacy contracts (v2i, v2j, v2k, v2l) — retired
 ├── frontend/
 │   ├── src/
-│   │   ├── components/    # React components
-│   │   ├── context/       # Wallet context provider
-│   │   ├── utils/         # WalletConnect integration
-│   │   └── App.jsx        # Main application
+│   │   ├── components/       # React components
+│   │   ├── context/          # Wallet context provider
+│   │   ├── utils/            # WalletConnect integration
+│   │   └── App.jsx           # Main application
 │   └── package.json
-├── tests/
-│   └── contracts_test.ts  # Clarinet tests
-├── deployments/           # Deployment configurations
-└── settings/              # Network settings
+├── deployments/              # Deployment plan YAMLs
+└── settings/                 # Network settings (Devnet/Simnet only — Mainnet.toml is gitignored)
 ```
 
 ---
 
-## 🔗 Smart Contracts (v2j - Current)
+## 🔗 Active Smart Contracts (v2m — Current)
 
-All contracts are deployed on Stacks Mainnet with enhanced features:
+Deployed on Stacks Mainnet under the new deployer wallet:
 
-| Contract | Address | Description |
-|----------|---------|-------------|
-| clicker-v2j | `SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N.clicker-v2j` | Click counter with events & analytics |
-| tipjar-v2j | `SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N.tipjar-v2j` | Tipping with largest-tip tracking |
-| quickpoll-v2j | `SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N.quickpoll-v2j` | Polls with creator analytics |
+| Contract | Full Address | Description |
+|----------|-------------|-------------|
+| `clicker-v2m` | `SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT.clicker-v2m` | Click counter with streaks, events & analytics |
+| `tipjar-v2m` | `SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT.tipjar-v2m` | Tipping with largest-tip tracking |
+| `quickpoll-v2m` | `SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT.quickpoll-v2m` | Polls with creator analytics |
+| `quickpoll-v2n` | `SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT.quickpoll-v2n` | Simplified global voting (no poll IDs) |
 
-### v2j Enhancements over v2i
-
-| Feature | v2i | v2j |
-|---------|-----|-----|
-| Version constant | ❌ | ✅ `VERSION u2` |
-| Print events | ❌ | ✅ All actions emit events |
-| Unique user tracking | ❌ | ✅ `unique-users` counter |
-| First activity block | ❌ | ✅ Tracks first interaction |
-| Last activity block | ❌ | ✅ `last-activity-block` |
-| Contract info getter | ❌ | ✅ `get-contract-info` |
-| Largest tip tracking | ❌ | ✅ TipJar tracks largest |
-| Creator analytics | ❌ | ✅ QuickPoll creator stats |
+> All v2m/v2n contracts use **Clarity Version 2** and target **Epoch 3.0**.
 
 ### Contract Functions
 
-#### Clicker (v2j)
-- `click` - Single click (0.001 STX fee) + emits `click-event`
-- `multi-click (count)` - Multiple clicks at once + emits `multi-click-event`
-- `ping` - Heartbeat transaction + emits `ping-event`
-- `get-user-clicks (user)` - Read click count
-- `get-contract-info` - Returns version, total clicks, unique users, fees collected
-- `get-version` - Returns VERSION constant (u2)
+#### Clicker (v2m)
+- `click` — Single click (0.001 STX fee) + emits event
+- `multi-click (count)` — Multiple clicks + emits event
+- `ping` — Heartbeat transaction + emits event
+- `reset-streak` — Resets click streak
+- `get-user-clicks (user)` — Read click count
+- `get-contract-info` — Returns version, total clicks, unique users, fees collected
 
-#### TipJar (v2j)
-- `quick-tip` - Quick 0.001 STX tip + emits `quick-tip-event`
-- `tip-user (recipient, amount)` - Tip specific user + emits `tip-event`
-- `donate (amount)` - Donate to contract + emits `donate-event`
-- `self-ping` - Activity ping + emits `self-ping-event`
-- `get-contract-info` - Returns version, total tips, unique tippers, largest tip
-- `get-largest-tip` - Returns the largest tip amount ever sent
+#### TipJar (v2m)
+- `quick-tip` — Quick 0.001 STX tip + emits event
+- `ping` — Activity heartbeat
+- `get-contract-info` — Returns version, total tips, unique tippers, largest tip
 
-#### QuickPoll (v2j)
-- `create-poll (question)` - Create new poll + emits `poll-created-event`
-- `vote-yes (poll-id)` - Vote yes + emits `vote-event`
-- `vote-no (poll-id)` - Vote no + emits `vote-event`
-- `poll-ping` - Activity ping + emits `ping-event`
-- `get-contract-info` - Returns version, total polls, total votes, unique voters/creators
+#### QuickPoll (v2m)
+- `vote-yes (poll-id)` — Vote yes on a poll
+- `vote-no (poll-id)` — Vote no on a poll
+- `ping` — Activity heartbeat
+- `get-contract-info` — Returns version, total polls, votes, unique voters
+
+#### QuickPoll (v2n — Simplified)
+- `vote-yes` — Vote yes (global, no poll ID)
+- `vote-no` — Vote no (global, no poll ID)
+- `ping` — Activity heartbeat
 
 ---
 
-## 📜 Legacy Contracts (v2i)
+## 📦 Legacy / Archived Contracts
 
-Previous version contracts (still active on mainnet):
+Previous versions are archived in `contracts/archive/` and remain active on mainnet under the old deployer `SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N`. They are no longer maintained.
 
-| Contract | Address |
-|----------|---------|
-| clicker-v2i | `SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N.clicker-v2i` |
-| tipjar-v2i | `SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N.tipjar-v2i` |
-| quickpoll-v2i | `SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N.quickpoll-v2i` |
+| Version | Contracts | Status |
+|---------|-----------|--------|
+| v2i | clicker, tipjar, quickpoll | 🗄️ Archived |
+| v2j | clicker, tipjar, quickpoll | 🗄️ Archived |
+| v2k | clicker, tipjar, quickpoll | 🗄️ Archived (failed deploy) |
+| v2l | clicker, tipjar, quickpoll | 🗄️ Archived |
 
 ---
 
@@ -234,6 +224,15 @@ See `frontend/src/utils/walletconnect.js` for implementation details.
 
 ---
 
+## 🔐 Security
+
+- `settings/Mainnet.toml` is **gitignored** — never committed
+- `internal/` directory is **gitignored** — all wallet keys stay local
+- `wallets.json` is **gitignored** — private keys never leave your machine
+- Only public test mnemonics (`zoo zoo zoo...`) appear in `Devnet.toml` / `Simnet.toml`
+
+---
+
 ## 🧪 Testing
 
 Run Clarinet tests:
@@ -248,11 +247,17 @@ clarinet test
 
 ### Deploy Contracts
 
-1. Configure `settings/Mainnet.toml` with your mnemonic
-2. Run deployment:
+1. Configure `settings/Mainnet.toml` with your mnemonic (never commit this file)
+2. Generate deployment plan:
 
 ```bash
-clarinet deployments apply -p deployments/default.mainnet-plan.yaml
+clarinet deployments generate --mainnet --low-cost
+```
+
+3. Apply deployment:
+
+```bash
+clarinet deployments apply -p deployments/your-plan.yaml
 ```
 
 ### Deploy Frontend
@@ -282,7 +287,7 @@ MIT License - feel free to use this code for your own projects.
 
 ## 🔗 Links
 
-- [View on Explorer](https://explorer.hiro.so/address/SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N?chain=mainnet)
+- [View Deployer on Explorer](https://explorer.hiro.so/address/SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT?chain=mainnet)
 - [Stacks Documentation](https://docs.stacks.co)
 - [Clarity Language](https://clarity-lang.org)
 - [@stacks/connect NPM](https://www.npmjs.com/package/@stacks/connect)
