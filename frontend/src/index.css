@@ -220,7 +220,15 @@ body::after {
 .app-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.bg-particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* Header */
@@ -529,8 +537,145 @@ textarea:focus-visible {
 .card-depth-2 { box-shadow: var(--shadow-md); }
 .card-depth-3 { box-shadow: var(--shadow-lg); }
 
-.card-interactive:hover {
-  transform: translateY(-4px);
+.feature h3 {
+  font-size: 1.25rem;
+  margin-bottom: var(--space-sm);
+}
+
+.feature p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* ============================================
+   Games Grid
+   ============================================ */
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.game-card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--glass-border);
+  padding: calc(var(--space-unit) * 1.5);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.game-card:hover {
+  transform: translateY(-8px);
+  border-color: hsla(var(--pulse-purple) / 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px hsla(var(--pulse-purple) / 0.1);
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-lg);
+}
+
+.game-header h2 {
+  font-size: 1.25rem;
+}
+
+.game-badge {
+  background: var(--primary);
+  color: white;
+  font-size: 0.75rem;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+}
+
+.game-stats {
+  display: flex;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+.stat {
+  text-align: center;
+  padding: 1rem;
+  background: hsla(var(--bg-black) / 0.3);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--glass-border);
+  transition: all 0.3s ease;
+}
+
+.stat:hover {
+  background: hsla(var(--bg-black) / 0.5);
+  border-color: hsla(var(--pulse-cyan) / 0.3);
+  box-shadow: 0 0 20px hsla(var(--pulse-cyan) / 0.1);
+}
+
+.stat-value {
+  display: block;
+  font-size: 2rem;
+  font-weight: 800;
+  color: hsl(var(--secondary));
+  text-shadow: 0 0 10px hsla(var(--pulse-cyan) / 0.3);
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.game-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.game-fee {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-top: var(--space-md);
+}
+
+/* ============================================
+   Action Buttons
+   ============================================ */
+
+.action-btn {
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  font-size: 1rem;
+}
+
+.action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.action-btn.primary {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+}
+
+.action-btn.primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
+
+.action-btn.secondary {
+  background: var(--surface-elevated);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.action-btn.secondary:hover:not(:disabled) {
   border-color: var(--primary);
 }
 
