@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { useWallet } from '../context/WalletContext';
 
 /**
@@ -6,11 +7,11 @@ import { useWallet } from '../context/WalletContext';
  * Shows connect/disconnect based on connection state
  */
 export default function ConnectButton() {
-  const { 
-    address, 
-    connecting, 
-    connectWallet, 
-    disconnectWallet 
+  const {
+    address,
+    connecting,
+    connectWallet,
+    disconnectWallet
   } = useWallet();
 
   // Format address for display
@@ -21,10 +22,16 @@ export default function ConnectButton() {
 
   if (connecting) {
     return (
-      <button className="connect-btn connecting" disabled>
+      <motion.button
+        initial={{ opacity: 0.6 }}
+        animate={{ opacity: [0.6, 1, 0.6] }}
+        transition={{ duration: 1.5, repeat: Infinity }}
+        className="connect-btn connecting"
+        disabled
+      >
         <span className="spinner"></span>
         Connecting...
-      </button>
+      </motion.button>
     );
   }
 
@@ -34,20 +41,27 @@ export default function ConnectButton() {
         <span className="wallet-address" title={address}>
           {formatAddress(address)}
         </span>
-        <button 
-          className="disconnect-btn" 
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="disconnect-btn"
           onClick={disconnectWallet}
           title="Disconnect wallet"
         >
           Disconnect
-        </button>
+        </motion.button>
       </div>
     );
   }
 
   return (
-    <button className="connect-btn" onClick={connectWallet}>
+    <motion.button
+      whileHover={{ scale: 1.05, y: -2 }}
+      whileTap={{ scale: 0.95 }}
+      className="connect-btn"
+      onClick={connectWallet}
+    >
       Connect Wallet
-    </button>
+    </motion.button>
   );
 }

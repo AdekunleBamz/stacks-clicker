@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { useWallet } from '../context/WalletContext';
 import { callContract } from '../utils/walletconnect';
+import CountUp from './CountUp';
 
 const DEPLOYER = 'SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N';
 
@@ -29,8 +31,10 @@ export default function TipJar({ onTxSubmit }) {
 
       setTotalTipped(prev => prev + 1000);
       onTxSubmit?.('quick-tip', result.txId);
+      soundEngine.play('success');
     } catch (err) {
       console.error('Quick tip failed:', err);
+      soundEngine.play('error');
     } finally {
       setLoading(false);
     }
@@ -49,8 +53,10 @@ export default function TipJar({ onTxSubmit }) {
       });
 
       onTxSubmit?.('self-ping', result.txId);
+      soundEngine.play('success');
     } catch (err) {
       console.error('Self-ping failed:', err);
+      soundEngine.play('error');
     } finally {
       setLoading(false);
     }
@@ -110,27 +116,34 @@ export default function TipJar({ onTxSubmit }) {
 
       <div className="game-stats">
         <div className="stat">
-          <span className="stat-value">{(totalTipped / 1000000).toFixed(4)}</span>
+          <span className="stat-value">
+            <CountUp value={totalTipped / 1000000} decimals={4} />
+          </span>
           <span className="stat-label">STX Tipped</span>
         </div>
       </div>
 
       <div className="game-actions">
-        <button
-          className="action-btn primary"
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className="action-btn success"
           onClick={handleQuickTip}
           disabled={!isConnected || loading}
+          aria-label="Send a quick tip of 0.001 STX"
         >
           {loading ? '⏳' : '⚡'} Quick Tip (0.001 STX)
-        </button>
+        </motion.button>
 
-        <button
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           className="action-btn secondary"
           onClick={handleSelfPing}
           disabled={!isConnected || loading}
         >
           📡 Self Ping
-        </button>
+        </motion.button>
 
         <div className="tip-custom">
           <input
@@ -152,22 +165,26 @@ export default function TipJar({ onTxSubmit }) {
             />
             <span className="amount-label">uSTX</span>
           </div>
-          <button
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             className="action-btn outline"
             onClick={handleTipUser}
             disabled={!isConnected || loading || !recipientAddress}
           >
             Send Tip
-          </button>
+          </motion.button>
         </div>
 
-        <button
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           className="action-btn outline"
           onClick={handleDonate}
           disabled={!isConnected || loading}
         >
           🎁 Donate {tipAmount} uSTX
-        </button>
+        </motion.button>
       </div>
 
       <p className="game-fee">Fee: 0.001 STX per action</p>
