@@ -28,23 +28,102 @@ export default function App() {
   const [stats, setStats] = useState({ clicks: 0, tips: 0, votes: 0 });
   const [particleTrigger, setParticleTrigger] = useState(0);
 
-  // Add transaction to log
-  const addTxToLog = (action, txId, status = 'success') => {
-    const tx = {
-      id: txId || `pending-${Date.now()}`,
-      action,
-      status,
-      time: new Date().toLocaleTimeString(),
+  // Synchronize SoundEngine with settings
+  useEffect(() => {
+    soundEngine.setSettings(settings);
+  }, [settings]);
+
+  // Global Keyboard Shortcuts
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // Toggle Mute with 'M' key
+      if (e.key.toLowerCase() === 'm' && !isAudioOpen) {
+        const isMuted = settings.masterVolume === 0;
+        updateSetting('masterVolume', isMuted ? 0.5 : 0);
+        showToast(isMuted ? 'Audio Unmuted 🔊' : 'Audio Muted 🔇', 'info');
+        soundEngine.play(isMuted ? 'success' : 'click');
+      }
     };
-    setTxLog((prev) => [tx, ...prev.slice(0, 49)]);
-    setParticleTrigger(prev => prev + 1);
-    toast.success(`${action} submitted!`, {
-      icon: action.split(' ')[0], // Use the emoji from action
-      style: {
-        borderRadius: '12px',
-        background: '#1e1b4b',
-        color: '#fff',
-        border: '1px solid rgba(255,255,255,0.1)'
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [settings.masterVolume, updateSetting, showToast, isAudioOpen]);
+
+  // Mock Social Data
+  const [players] = useState([
+    { address: 'SP1...A2B', clicks: 12500, level: 42 },
+    { address: 'SP3...X9Y', clicks: 8420, level: 28 },
+    { address: 'SP2...K7L', clicks: 5100, level: 19 },
+    { address: 'SP5...M3N', clicks: 3200, level: 12 },
+    { address: 'SP4...Q1P', clicks: 1500, level: 5 }
+  ]);
+
+  const [activities, setActivities] = useState([
+    { id: 1, user: 'SP1...A2B', text: 'just clicked 5 times!', type: 'click', time: 'Just now' },
+    { id: 2, user: 'SP3...X9Y', text: 'sent a 0.5 STX tip!', type: 'tip', time: '2m ago' },
+    { id: 3, user: 'DEGEN', text: 'voted YES on Poll #4!', type: 'poll', time: '5m ago' }
+  ]);
+
+  // Simulate live community activity
+  useEffect(() => {
+    if (!isConnected) return;
+
+    const interval = setInterval(() => {
+      const users = ['SP2...K7L', 'SP4...Q1P', 'DEGEN', 'ANON', 'WHALE'];
+      const actions = [
+        { text: 'is on a clicking spree!', type: 'click' },
+        { text: 'just tipped 0.01 STX', type: 'tip' },
+        { text: 'reached Level 10!', type: 'streak' },
+        { text: 'created a new poll', type: 'poll' }
+      ];
+
+      const user = users[Math.floor(Math.random() * users.length)];
+      const action = actions[Math.floor(Math.random() * actions.length)];
+
+      const newActivity = {
+        id: Date.now(),
+        user,
+        text: action.text,
+        type: action.type,
+        time: 'Just now'
+      };
+
+      setActivities(prev => [newActivity, ...prev.slice(0, 9)]);
+    }, 8000);
+
+    return () => clearInterval(interval);
+  }, [isConnected]);
+
+  // Mock User Data for Progress Dashboard
+  const [userData, setUserData] = useState({
+    level: 12,
+    xp: 2450,
+    nextLevelXP: 5000,
+    stats: {
+      totalTipped: 0.0452,
+      clickRate: 3.4,
+      totalStreaks: 156,
+      rank: '#42'
+    },
+    achievements: [
+      {
+        icon: '🔥',
+        title: 'Hot Streak',
+        description: 'Reached a 100-click streak without stopping',
+        unlocked: true,
+        date: '2025-05-15'
+      },
+      {
+        icon: '💎',
+        title: 'Early Supporter',
+        description: 'Connected your wallet during the alpha phase',
+        unlocked: true,
+        date: '2025-05-10'
+      },
+      {
+        icon: '👑',
+        title: 'Whale Tipper',
+        description: 'Sent more than 1 STX in total tips',
+        unlocked: false
       }
     });
     return tx;
