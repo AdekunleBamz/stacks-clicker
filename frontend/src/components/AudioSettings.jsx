@@ -22,10 +22,19 @@ export default function AudioSettings({ isOpen, onClose, settings, onUpdate }) {
                         animate={{ scale: 1, y: 0 }}
                         exit={{ scale: 0.9, y: 20 }}
                         onClick={(e) => e.stopPropagation()}
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="audio-settings-title"
                     >
                         <div className="panel-header">
-                            <h2>🔊 Audio Settings</h2>
-                            <button className="close-btn" onClick={onClose}>✕</button>
+                            <h2 id="audio-settings-title">🔊 Audio Settings</h2>
+                            <button
+                                className="close-btn"
+                                onClick={onClose}
+                                aria-label="Close settings"
+                            >
+                                ✕
+                            </button>
                         </div>
 
                         <div className="settings-list">
@@ -47,6 +56,7 @@ export default function AudioSettings({ isOpen, onClose, settings, onUpdate }) {
                                     value={settings.masterVolume}
                                     onChange={(e) => onUpdate('masterVolume', parseFloat(e.target.value))}
                                     className="volume-slider"
+                                    aria-label="Master Volume Slider"
                                 />
                             </motion.div>
 
@@ -62,6 +72,8 @@ export default function AudioSettings({ isOpen, onClose, settings, onUpdate }) {
                                     whileTap={{ scale: 0.95 }}
                                     className={`toggle-switch ${settings.sfxEnabled ? 'on' : 'off'}`}
                                     onClick={() => onUpdate('sfxEnabled', !settings.sfxEnabled)}
+                                    aria-label={`Toggle Sound Effects: ${settings.sfxEnabled ? 'On' : 'Off'}`}
+                                    aria-pressed={settings.sfxEnabled}
                                 >
                                     <motion.div
                                         className="toggle-handle"
@@ -83,6 +95,8 @@ export default function AudioSettings({ isOpen, onClose, settings, onUpdate }) {
                                     whileTap={{ scale: 0.95 }}
                                     className={`toggle-switch ${settings.musicEnabled ? 'on' : 'off'}`}
                                     onClick={() => onUpdate('musicEnabled', !settings.musicEnabled)}
+                                    aria-label={`Toggle Ambient Music: ${settings.musicEnabled ? 'On' : 'Off'}`}
+                                    aria-pressed={settings.musicEnabled}
                                 >
                                     <motion.div
                                         className="toggle-handle"
