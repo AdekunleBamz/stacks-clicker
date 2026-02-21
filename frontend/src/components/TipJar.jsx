@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useWallet } from '../context/WalletContext';
 import { callContract } from '../utils/walletconnect';
-import soundEngine from '../utils/SoundEngine';
-import { DEPLOYER } from '../utils/constants';
+import CountUp from './CountUp';
+
+const DEPLOYER = 'SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N';
 
 /**
  * TipJar Component.
@@ -118,8 +119,10 @@ export default function TipJar({ onTxSubmit }) {
 
       <div className="game-stats">
         <div className="stat">
-          <span className="stat-value">{(totalTipped / 1000000).toFixed(4)}</span>
-          <span className="stat-label" aria-hidden="true">STX Tipped</span>
+          <span className="stat-value">
+            <CountUp value={totalTipped / 1000000} decimals={4} />
+          </span>
+          <span className="stat-label">STX Tipped</span>
         </div>
       </div>
 

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useWallet } from '../context/WalletContext';
 import { callContract } from '../utils/walletconnect';
-import soundEngine from '../utils/SoundEngine';
-import { DEPLOYER, QUICKPOLL_CONTRACT } from '../utils/constants';
+import CountUp from './CountUp';
+
+const DEPLOYER = 'SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N';
 
 /**
  * QuickPoll Component
@@ -151,11 +152,15 @@ export default function QuickPoll({ onTxSubmit }) {
 
       <div className="game-stats" tabIndex={0} aria-live="polite" aria-atomic="true">
         <div className="stat">
-          <span className="stat-value">{votes.yes}</span>
-          <span className="stat-label" aria-hidden="true">Yes Votes</span>
+          <span className="stat-value">
+            <CountUp value={votes.yes} />
+          </span>
+          <span className="stat-label">Yes Votes</span>
         </div>
         <div className="stat">
-          <span className="stat-value">{votes.no}</span>
+          <span className="stat-value">
+            <CountUp value={votes.no} />
+          </span>
           <span className="stat-label">No Votes</span>
         </div>
       </div>
