@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useWallet } from '../context/WalletContext';
 import { callContract } from '../utils/walletconnect';
+import CountUp from './CountUp';
 
 const DEPLOYER = 'SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N';
 
@@ -150,11 +151,15 @@ export default function QuickPoll({ onTxSubmit }) {
 
       <div className="game-stats">
         <div className="stat">
-          <span className="stat-value">{votes.yes}</span>
+          <span className="stat-value">
+            <CountUp value={votes.yes} />
+          </span>
           <span className="stat-label">Yes Votes</span>
         </div>
         <div className="stat">
-          <span className="stat-value">{votes.no}</span>
+          <span className="stat-value">
+            <CountUp value={votes.no} />
+          </span>
           <span className="stat-label">No Votes</span>
         </div>
       </div>
