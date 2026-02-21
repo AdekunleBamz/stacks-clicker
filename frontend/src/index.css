@@ -620,6 +620,27 @@ body {
 }
 
 /* Leaderboard */
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.header-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.live-pulse {
+  width: 8px;
+  height: 8px;
+  background: hsl(var(--error));
+  border-radius: 50%;
+  box-shadow: 0 0 10px hsla(var(--error) / 0.5);
+}
+
 .leaderboard-list {
   display: flex;
   flex-direction: column;
@@ -743,6 +764,34 @@ body {
 .activity-time {
   font-size: 0.75rem;
   color: hsl(var(--text-muted));
+}
+
+.activity-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.activity-reactions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.reaction-btn {
+  background: hsla(var(--bg-black) / 0.4);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  padding: 2px 6px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.reaction-btn:hover {
+  background: hsla(var(--bg-black) / 0.6);
+  border-color: hsla(var(--pulse-cyan) / 0.3);
+  transform: scale(1.1);
 }
 
 .game-actions {
