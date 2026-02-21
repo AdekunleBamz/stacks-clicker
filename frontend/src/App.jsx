@@ -36,6 +36,36 @@ function AppContent() {
     { id: 3, user: 'DEGEN', text: 'voted YES on Poll #4!', type: 'poll', time: '5m ago' }
   ]);
 
+  // Simulate live community activity
+  useEffect(() => {
+    if (!isConnected) return;
+
+    const interval = setInterval(() => {
+      const users = ['SP2...K7L', 'SP4...Q1P', 'DEGEN', 'ANON', 'WHALE'];
+      const actions = [
+        { text: 'is on a clicking spree!', type: 'click' },
+        { text: 'just tipped 0.01 STX', type: 'tip' },
+        { text: 'reached Level 10!', type: 'streak' },
+        { text: 'created a new poll', type: 'poll' }
+      ];
+
+      const user = users[Math.floor(Math.random() * users.length)];
+      const action = actions[Math.floor(Math.random() * actions.length)];
+
+      const newActivity = {
+        id: Date.now(),
+        user,
+        text: action.text,
+        type: action.type,
+        time: 'Just now'
+      };
+
+      setActivities(prev => [newActivity, ...prev.slice(0, 9)]);
+    }, 8000);
+
+    return () => clearInterval(interval);
+  }, [isConnected]);
+
   // Mock User Data for Progress Dashboard
   const [userData, setUserData] = useState({
     level: 12,
