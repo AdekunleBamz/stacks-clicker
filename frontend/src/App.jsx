@@ -1,4 +1,5 @@
-import React, { useState, useCallback } from 'react';
+```
+import React, { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { WalletProvider, useWallet } from './context/WalletContext';
 import ConnectButton from './components/ConnectButton';
@@ -12,14 +13,19 @@ import BackgroundParticles from './components/BackgroundParticles';
 import ProgressDashboard from './components/ProgressDashboard';
 import Leaderboard from './components/Leaderboard';
 import SocialFeed from './components/SocialFeed';
+import AudioSettings from './components/AudioSettings';
+import { useAudio } from './context/AudioContext';
+import soundEngine from './utils/SoundEngine';
 
 /**
  * Main App Content (inside WalletProvider)
  */
 function AppContent() {
   const { wcUri, showQRModal, closeQRModal, isConnected } = useWallet();
+  const { settings, updateSetting } = useAudio();
   const [txLog, setTxLog] = useState([]);
   const [toasts, setToasts] = useState([]);
+  const [isAudioOpen, setIsAudioOpen] = useState(false);
 
   // Mock Social Data
   const [players] = useState([
@@ -113,13 +119,13 @@ function AppContent() {
   // Handle transaction submission
   const handleTxSubmit = useCallback((action, txId) => {
     const tx = {
-      id: txId || `pending-${Date.now()}`,
+      id: txId || `pending - ${ Date.now() } `,
       action,
       status: txId ? 'pending' : 'submitted',
       time: new Date().toLocaleTimeString()
     };
     setTxLog(prev => [tx, ...prev.slice(0, 49)]);
-    showToast(`${action} submitted! 🚀`, 'success');
+    showToast(`${ action } submitted! 🚀`, 'success');
   }, [showToast]);
 
   return (
@@ -133,9 +139,27 @@ function AppContent() {
             <span className="logo-icon" aria-hidden="true">🎮</span>
             <h1>StacksClicker</h1>
           </div>
-          <ConnectButton />
+          <div className="header-actions">
+            <motion.button
+              whileHover={{ scale: 1.1, rotate: 10 }}
+              whileTap={{ scale: 0.9 }}
+              className="icon-btn"
+              onClick={() => setIsAudioOpen(true)}
+              aria-label="Open Audio Settings"
+            >
+              ⚙️
+            </motion.button>
+            <ConnectButton />
+          </div>
         </div>
       </header>
+
+      <AudioSettings
+        isOpen={isAudioOpen}
+        onClose={() => setIsAudioOpen(false)}
+        settings={settings}
+        onUpdate={updateSetting}
+      />
 
       {/* Main Content */}
       <main className="main" role="main">
