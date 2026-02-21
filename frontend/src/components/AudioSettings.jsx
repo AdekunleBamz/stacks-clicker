@@ -29,7 +29,12 @@ export default function AudioSettings({ isOpen, onClose, settings, onUpdate }) {
                         </div>
 
                         <div className="settings-list">
-                            <div className="setting-item">
+                            <motion.div
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.1 }}
+                                className="setting-item"
+                            >
                                 <div className="setting-info">
                                     <span className="setting-label">Master Volume</span>
                                     <span className="setting-value">{Math.round(settings.masterVolume * 100)}%</span>
@@ -43,33 +48,49 @@ export default function AudioSettings({ isOpen, onClose, settings, onUpdate }) {
                                     onChange={(e) => onUpdate('masterVolume', parseFloat(e.target.value))}
                                     className="volume-slider"
                                 />
-                            </div>
+                            </motion.div>
 
-                            <div className="setting-item toggle">
+                            <motion.div
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.2 }}
+                                className="setting-item toggle"
+                            >
                                 <span className="setting-label">Sound Effects</span>
-                                <button
+                                <motion.button
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
                                     className={`toggle-switch ${settings.sfxEnabled ? 'on' : 'off'}`}
                                     onClick={() => onUpdate('sfxEnabled', !settings.sfxEnabled)}
                                 >
                                     <motion.div
                                         className="toggle-handle"
                                         animate={{ x: settings.sfxEnabled ? 20 : 0 }}
+                                        transition={{ type: "spring", stiffness: 500, damping: 30 }}
                                     />
-                                </button>
-                            </div>
+                                </motion.button>
+                            </motion.div>
 
-                            <div className="setting-item toggle">
+                            <motion.div
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.3 }}
+                                className="setting-item toggle"
+                            >
                                 <span className="setting-label">Ambient Music</span>
-                                <button
+                                <motion.button
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
                                     className={`toggle-switch ${settings.musicEnabled ? 'on' : 'off'}`}
                                     onClick={() => onUpdate('musicEnabled', !settings.musicEnabled)}
                                 >
                                     <motion.div
                                         className="toggle-handle"
                                         animate={{ x: settings.musicEnabled ? 20 : 0 }}
+                                        transition={{ type: "spring", stiffness: 500, damping: 30 }}
                                     />
-                                </button>
-                            </div>
+                                </motion.button>
+                            </motion.div>
                         </div>
 
                         <div className="panel-footer">
