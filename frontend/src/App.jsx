@@ -12,9 +12,6 @@ import BackgroundParticles from './components/BackgroundParticles';
 import ProgressDashboard from './components/ProgressDashboard';
 import Leaderboard from './components/Leaderboard';
 import SocialFeed from './components/SocialFeed';
-import AudioSettings from './components/AudioSettings';
-import { useAudio } from './context/AudioContext';
-import soundEngine from './utils/SoundEngine';
 
 /**
  * Main application component for the Stacks Clicker v2.
@@ -31,51 +28,31 @@ function AppContent() {
   const [toasts, setToasts] = useState([]);
   const [isAudioOpen, setIsAudioOpen] = useState(false);
 
-  // Theme Management (Persisted via LocalStorage)
-  const [theme, setTheme] = useLocalStorage('theme', 'dark');
+  // Mock Social Data
+  const [players] = useState([
+    { address: 'SP1...A2B', clicks: 12500, level: 42 },
+    { address: 'SP3...X9Y', clicks: 8420, level: 28 },
+    { address: 'SP2...K7L', clicks: 5100, level: 19 },
+    { address: 'SP5...M3N', clicks: 3200, level: 12 },
+    { address: 'SP4...Q1P', clicks: 1500, level: 5 }
+  ]);
 
-  /**
-   * Effect to synchronize the HTML data-theme attribute with the current application theme.
-   */
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
+  const [activities, setActivities] = useState([
+    { id: 1, user: 'SP1...A2B', text: 'just clicked 5 times!', type: 'click', time: 'Just now' },
+    { id: 2, user: 'SP3...X9Y', text: 'sent a 0.5 STX tip!', type: 'tip', time: '2m ago' },
+    { id: 3, user: 'DEGEN', text: 'voted YES on Poll #4!', type: 'poll', time: '5m ago' }
+  ]);
 
-  /**
-   * Toggles between 'light' and 'dark' themes.
-   */
-  const toggleTheme = useCallback(() => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
-  }, [setTheme]);
-
-  /**
-   * Adds a transaction record to the local session log and triggers UI notifications.
-   *
-   * @param {string} action - Human-readable label for the interaction (e.g., '🎯 Click')
-   * @param {string} txId - The unique transaction hash returned from the Stacks network
-   * @param {string} [status='success'] - Current lifecycle state of the transaction
-   * @returns {Object} The formatted transaction object
-   */
-  const addTxToLog = useCallback(
-    (action, txId, status = 'success') => {
-      const submittedAt = new Date();
-      const isPending = !txId || status === 'pending';
-      const tx = {
-        id: txId || `pending-${Date.now()}`,
-        action,
-        status,
-        time: submittedAt.toLocaleTimeString(),
-        submittedAt: submittedAt.toISOString(),
-        network: configuredNetwork,
-        explorerUrl: isPending ? null : `https://explorer.hiro.so/txid/${txId}?chain=${configuredNetwork}`,
-        isPending,
-      };
-      setTxLog((prev) => [tx, ...prev.slice(0, 49)]); // Maintain last 50 TXs
-      setParticleTrigger((prev) => prev + 1);
-      playSound('success');
-
-      notify.custom(`${action} submitted!`);
-      return tx;
+  // Mock User Data for Progress Dashboard
+  const [userData, setUserData] = useState({
+    level: 12,
+    xp: 2450,
+    nextLevelXP: 5000,
+    stats: {
+      totalTipped: 0.0452,
+      clickRate: 3.4,
+      totalStreaks: 156,
+      rank: '#42'
     },
     [playSound]
   );
@@ -247,9 +224,13 @@ function AppContent() {
                 <ProgressDashboard userData={userData} />
               </div>
 
-      <React.Suspense fallback={<SkeletonLoader height="80px" borderRadius="12px" />}>
-        <Header theme={theme} toggleTheme={toggleTheme} currentLang={lang} onLangChange={setLang} />
-      </React.Suspense>
+              <aside className="right-column">
+                <Leaderboard players={players} />
+                <SocialFeed activities={activities} />
+              </aside>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
       <div className="layout-content">
         <React.Suspense fallback={<SkeletonLoader height="300px" borderRadius="24px" />}>
