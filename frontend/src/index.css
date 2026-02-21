@@ -375,7 +375,22 @@ body::before {
 .stat-card .value { font-size: 1.5rem; font-weight: 800; }
 .stat-card .label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; }
 
-/* Transaction Log */
+.tip-custom {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.poll-create {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+/* ============================================
+   Transaction Log
+   ============================================ */
+
 .tx-log {
   background: var(--bg-card);
   border: 1px solid var(--border);
