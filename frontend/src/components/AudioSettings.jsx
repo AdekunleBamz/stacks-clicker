@@ -53,6 +53,7 @@ export default function AudioSettings({ isOpen, onClose, settings, onUpdate }) {
                                     value={settings.masterVolume}
                                     onChange={(e) => onUpdate('masterVolume', parseFloat(e.target.value))}
                                     className="volume-slider"
+                                    aria-label="Master Volume Slider"
                                 />
                             </motion.div>
 
