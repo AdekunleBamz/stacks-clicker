@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { useWallet } from '../context/WalletContext';
 import { callContract } from '../utils/walletconnect';
 import CountUp from './CountUp';
@@ -126,25 +127,28 @@ export default function TipJar({ onTxSubmit }) {
         </div>
       </div>
 
-      <div className="game-actions" role="group" aria-label="Game Tipping Controls">
-        <button
-          type="button"
-          className="action-btn primary"
+      <div className="game-actions">
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className="action-btn success"
           onClick={handleQuickTip}
           disabled={!isConnected || loading}
+          aria-label="Send a quick tip of 0.001 STX"
         >
           {loading ? '⏳' : '⚡'} Quick Tip (0.001 STX)
-        </button>
+        </motion.button>
 
-        <button
-          type="button"
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           className="action-btn secondary"
           onClick={handleSelfPing}
           disabled={!isConnected || loading}
           title="Send a self ping transaction"
         >
-          <span aria-hidden="true">📡</span> Self Ping
-        </button>
+          📡 Self Ping
+        </motion.button>
 
         <div className="tip-custom" role="form" aria-label="Custom Tip Amount Entry">
           <div className="input-group">
@@ -170,25 +174,27 @@ export default function TipJar({ onTxSubmit }) {
               />
             </div>
           </div>
-          <button
-            type="button"
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             className="action-btn outline"
             onClick={handleTipUser}
             disabled={!isConnected || loading || !recipientAddress}
             title="Send the specified amount to the recipient"
           >
             Send Tip
-          </button>
+          </motion.button>
         </div>
 
-        <button
-          type="button"
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           className="action-btn outline"
           onClick={handleDonate}
           disabled={!isConnected || loading}
         >
           🎁 Donate {tipAmount} uSTX
-        </button>
+        </motion.button>
       </div>
 
       <p className="game-fee">Fee: 0.0001 STX per action</p>

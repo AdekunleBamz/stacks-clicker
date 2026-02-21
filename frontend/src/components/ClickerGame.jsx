@@ -115,17 +115,17 @@ export default function ClickerGame({ onTxSubmit }) {
         </div>
       </div>
 
-      <div className="game-actions" role="group" aria-label="Clicker Execution Controls">
-        <button
-          type="button"
-          className="action-btn primary huge"
-          onClick={handleManualClick}
+      <div className="game-actions">
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className="action-btn primary"
           onClick={handleClick}
           disabled={!isConnected || loading}
           title="Click to generate a transaction manually"
         >
-          <span aria-hidden="true">{loading ? '⏳' : '👆'}</span> Click!
-        </button>
+          {loading ? '⏳' : '👆'} Click!
+        </motion.button>
 
         <div className="multi-click-group" role="group" aria-label="Multi-Click Interventions">
           <input
@@ -138,23 +138,27 @@ export default function ClickerGame({ onTxSubmit }) {
             className="multi-input"
             aria-label="Multi-click amount"
           />
-          <button
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             className="action-btn secondary"
             onClick={() => setShowMulti(prev => !prev)}
             title="Toggle bulk click interface dialog"
             disabled={!isConnected || loading}
           >
             Multi-Click ×{multiClickAmount}
-          </button>
+          </motion.button>
         </div>
 
-        <button
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           className="action-btn outline"
           onClick={handlePing}
           disabled={!isConnected || loading}
         >
           📡 Ping
-        </button>
+        </motion.button>
       </div>
 
       <p className="game-fee">Fee: 0.0001 STX per action</p>
