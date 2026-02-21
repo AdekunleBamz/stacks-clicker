@@ -1,13 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
-
-const ACTIVITY_ICONS = Object.freeze({
-    click: '👆',
-    tip: '💰',
-    poll: '🗳️',
-    streak: '🔥',
-});
 
 /**
  * SocialFeed Component
@@ -17,14 +9,7 @@ export default function SocialFeed({ activities }) {
     return (
         <div className="game-card social-feed">
             <div className="game-header">
-                <div className="header-title-group">
-                    <h2>🔥 Live Activity</h2>
-                    <motion.span
-                        animate={{ opacity: [0.4, 1, 0.4] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                        className="live-pulse"
-                    />
-                </div>
+                <h2>🔥 Live Activity</h2>
                 <span className="game-badge">Community</span>
             </div>
 
@@ -36,23 +21,19 @@ export default function SocialFeed({ activities }) {
                             initial={{ opacity: 0, scale: 0.95, y: -10 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, x: 20 }}
-                            whileHover={{ x: 5 }}
-                            className={`activity-item type-${activity.type}`}
+                            className="activity-item"
                         >
                             <span className="activity-icon">
-                                {ACTIVITY_ICONS[activity.type] ?? '📌'}
+                                {activity.type === 'click' && '👆'}
+                                {activity.type === 'tip' && '💰'}
+                                {activity.type === 'poll' && '🗳️'}
+                                {activity.type === 'streak' && '🔥'}
                             </span>
                             <div className="activity-content">
                                 <span className="activity-user">{activity.user}</span>
                                 <span className="activity-text">{activity.text}</span>
-                                <div className="activity-meta">
-                                    <span className="activity-time">{activity.time}</span>
-                                    <div className="activity-reactions">
-                                        <button type="button" className="reaction-btn">❤️</button>
-                                        <button type="button" className="reaction-btn">🙌</button>
-                                    </div>
-                                </div>
                             </div>
+                            <span className="activity-time">{activity.time}</span>
                         </motion.div>
                     ))}
                 </AnimatePresence>
@@ -60,15 +41,3 @@ export default function SocialFeed({ activities }) {
         </div>
     );
 }
-
-SocialFeed.propTypes = {
-    activities: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-            type: PropTypes.string.isRequired,
-            user: PropTypes.string.isRequired,
-            text: PropTypes.string.isRequired,
-            time: PropTypes.string.isRequired,
-        })
-    ).isRequired,
-};
