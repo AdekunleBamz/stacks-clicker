@@ -150,6 +150,7 @@ export default function ClickerGame({ onTxSubmit }) {
             onClick={() => setShowMulti(prev => !prev)}
             title="Toggle bulk click interface dialog"
             disabled={!isConnected || loading}
+            aria-label={`Multi-click ${multiClickAmount} times`}
           >
             Multi-Click ×{multiClickAmount}
           </motion.button>
@@ -162,6 +163,7 @@ export default function ClickerGame({ onTxSubmit }) {
           className="action-btn outline"
           onClick={handlePing}
           disabled={!isConnected || loading}
+          aria-label="Ping the contract"
         >
           📡 Ping
         </motion.button>
