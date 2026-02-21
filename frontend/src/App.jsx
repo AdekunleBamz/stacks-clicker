@@ -75,6 +75,21 @@ export default function App() {
     return () => clearInterval(interval);
   }, [isConnected]);
 
+  // Mock Social Data
+  const [players] = useState([
+    { address: 'SP1...A2B', clicks: 12500, level: 42 },
+    { address: 'SP3...X9Y', clicks: 8420, level: 28 },
+    { address: 'SP2...K7L', clicks: 5100, level: 19 },
+    { address: 'SP5...M3N', clicks: 3200, level: 12 },
+    { address: 'SP4...Q1P', clicks: 1500, level: 5 }
+  ]);
+
+  const [activities, setActivities] = useState([
+    { id: 1, user: 'SP1...A2B', text: 'just clicked 5 times!', type: 'click', time: 'Just now' },
+    { id: 2, user: 'SP3...X9Y', text: 'sent a 0.5 STX tip!', type: 'tip', time: '2m ago' },
+    { id: 3, user: 'DEGEN', text: 'voted YES on Poll #4!', type: 'poll', time: '5m ago' }
+  ]);
+
   // Mock User Data for Progress Dashboard
   const [userData, setUserData] = useState({
     level: 12,
