@@ -1,30 +1,21 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Toaster } from 'react-hot-toast';
-import { notify } from './utils/toast';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import QuickActions from './components/QuickActions';
-import NetworkHeartbeat from './components/NetworkHeartbeat';
-import OnboardingTour from './components/OnboardingTour';
-import FloatingActionButton from './components/FloatingActionButton';
-import { useWallet } from './context/WalletContext';
-import ParticleOverlay from './components/common/ParticleOverlay';
-import PerformanceOverlay from './components/common/PerformanceOverlay';
-import ScrollToTop from './components/common/ScrollToTop';
-import SkeletonLoader from './components/common/SkeletonLoader';
-import { useI18n } from './context/I18nContext';
-import { useInteractions } from './hooks/useInteractions';
-import { useSound } from './hooks/useSound';
-import { useLocalStorage } from './hooks/useLocalStorage';
-import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
-import { STACKS_NETWORK } from './utils/constants';
-
-// Lazy load heavy components for optimized initial paint
-const MainGrid = React.lazy(() => import('./components/MainGrid'));
-const PlayerStats = React.lazy(() => import('./components/PlayerStats'));
-const TransactionHistory = React.lazy(() => import('./components/TransactionHistory'));
-
-const configuredNetwork = STACKS_NETWORK;
+```
+import React, { useState, useCallback, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { WalletProvider, useWallet } from './context/WalletContext';
+import ConnectButton from './components/ConnectButton';
+import WalletConnectQRModal from './components/WalletConnectQRModal';
+import ClickerGame from './components/ClickerGame';
+import TipJar from './components/TipJar';
+import QuickPoll from './components/QuickPoll';
+import TransactionLog from './components/TransactionLog';
+import Toast from './components/Toast';
+import BackgroundParticles from './components/BackgroundParticles';
+import ProgressDashboard from './components/ProgressDashboard';
+import Leaderboard from './components/Leaderboard';
+import SocialFeed from './components/SocialFeed';
+import AudioSettings from './components/AudioSettings';
+import { useAudio } from './context/AudioContext';
+import soundEngine from './utils/SoundEngine';
 
 /**
  * Main application component for the Stacks Clicker v2.
@@ -34,18 +25,12 @@ const configuredNetwork = STACKS_NETWORK;
  * @component
  * @returns {JSX.Element} The root application UI tree
  */
-export default function App() {
-  // Global Contexts
-  const { address } = useWallet();
-  const { lang, setLang } = useI18n();
-  const { playSound } = useSound();
-
-  // Application State
+function AppContent() {
+  const { wcUri, showQRModal, closeQRModal, isConnected } = useWallet();
+  const { settings, updateSetting } = useAudio();
   const [txLog, setTxLog] = useState([]);
-  const [stats, setStats] = useState({ clicks: 0, tips: 0, votes: 0 });
-  const [particleTrigger, setParticleTrigger] = useState(0);
-  const [celebration, setCelebration] = useState(null);
-  const celebrationTimeoutRef = useRef(null);
+  const [toasts, setToasts] = useState([]);
+  const [isAudioOpen, setIsAudioOpen] = useState(false);
 
   // Theme Management (Persisted via LocalStorage)
   const [theme, setTheme] = useLocalStorage('theme', 'dark');
@@ -138,32 +123,17 @@ export default function App() {
     return () => window.removeEventListener('keydown', handleGlobalEsc);
   }, []);
 
-  /**
-   * Effect to monitor interaction milestones and trigger celebrations.
-   * Scales visual feedback (particles) during significant achievements.
-   */
-  useEffect(() => {
-    const milestones = [10, 50, 100, 500];
-    const total = stats.clicks + stats.tips + stats.votes;
-    if (milestones.includes(total) && total > 0) {
-      setCelebration(`Level Up: ${total} Interactions!`);
-      setParticleTrigger((prev) => prev + 5); // Execute a massive burst
-      window.clearTimeout(celebrationTimeoutRef.current);
-      celebrationTimeoutRef.current = window.setTimeout(() => setCelebration(null), 3000);
-    }
-
-    return () => window.clearTimeout(celebrationTimeoutRef.current);
-  }, [stats]);
-
-  /**
-   * Effect to dynamically update the document title based on interaction activity.
-   */
-  useEffect(() => {
-    const total = stats.clicks + stats.tips + stats.votes;
-    document.title = total > 0 ? `(${total}) Stacks Clicker` : 'Stacks Clicker v2';
-  }, [stats]);
-
-  const MilestoneCelebration = React.lazy(() => import('./components/MilestoneCelebration'));
+  // Handle transaction submission
+  const handleTxSubmit = useCallback((action, txId) => {
+    const tx = {
+      id: txId || `pending - ${ Date.now() } `,
+      action,
+      status: txId ? 'pending' : 'submitted',
+      time: new Date().toLocaleTimeString()
+    };
+    setTxLog(prev => [tx, ...prev.slice(0, 49)]);
+    showToast(`${ action } submitted! 🚀`, 'success');
+  }, [showToast]);
 
   return (
     <div
@@ -190,12 +160,84 @@ export default function App() {
       <PerformanceOverlay />
       <ScrollToTop />
 
-      {/* Dedicated Accessibility Announcer for screen readers */}
-      <div className="sr-only" aria-live="polite" aria-atomic="true">
-        {txLog.length > 0 && `Action: ${txLog[0].action} broadcasted.`}
-      </div>
+      {/* Header */}
+      <header className="header" role="banner">
+        <div className="header-content">
+          <div className="logo" aria-label="StacksClicker Logo">
+            <span className="logo-icon" aria-hidden="true">🎮</span>
+            <h1>StacksClicker</h1>
+          </div>
+          <div className="header-actions">
+            <motion.button
+              whileHover={{ scale: 1.1, rotate: 10 }}
+              whileTap={{ scale: 0.9 }}
+              className="icon-btn"
+              onClick={() => setIsAudioOpen(true)}
+              aria-label="Open Audio Settings"
+            >
+              ⚙️
+            </motion.button>
+            <ConnectButton />
+          </div>
+        </div>
+      </header>
 
-      <div id="notification-announcer" role="status" aria-live="polite" className="sr-only"></div>
+      <AudioSettings
+        isOpen={isAudioOpen}
+        onClose={() => setIsAudioOpen(false)}
+        settings={settings}
+        onUpdate={updateSetting}
+      />
+
+      {/* Main Content */}
+      <main className="main" role="main">
+        <AnimatePresence mode="wait">
+          {!isConnected ? (
+            <motion.div
+              key="welcome"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="welcome-screen"
+            >
+              <h2>Welcome to StacksClicker!</h2>
+              <p>Connect your wallet to start playing</p>
+              <div className="features">
+                {[
+                  { icon: '🎮', title: 'Clicker Game', desc: 'Build click streaks and compete for the highest score' },
+                  { icon: '💰', title: 'TipJar', desc: 'Send micro-tips to support your favorite creators' },
+                  { icon: '🗳️', title: 'QuickPoll', desc: 'Create and vote on community polls' }
+                ].map((f, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 + i * 0.1 }}
+                    className="feature"
+                  >
+                    <span>{f.icon}</span>
+                    <h3>{f.title}</h3>
+                    <p>{f.desc}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="games"
+              initial={{ opacity: 0, scale: 1.05 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4 }}
+              className="main-layout-grid"
+            >
+              <div className="left-column">
+                <div className="games-grid">
+                  <ClickerGame onTxSubmit={handleTxSubmit} />
+                  <TipJar onTxSubmit={handleTxSubmit} />
+                  <QuickPoll onTxSubmit={handleTxSubmit} />
+                </div>
+                <ProgressDashboard userData={userData} />
+              </div>
 
       <React.Suspense fallback={<SkeletonLoader height="80px" borderRadius="12px" />}>
         <Header theme={theme} toggleTheme={toggleTheme} currentLang={lang} onLangChange={setLang} />
