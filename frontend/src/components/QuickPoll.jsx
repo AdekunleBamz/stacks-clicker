@@ -52,6 +52,7 @@ export default function QuickPoll({ onTxSubmit }) {
 
       setVotes(prev => ({ ...prev, yes: prev.yes + 1 }));
       onTxSubmit?.('vote-yes', result.txId);
+      soundEngine.play('success');
     } catch (err) {
       console.error('Vote yes failed:', err);
     } finally {
@@ -73,6 +74,7 @@ export default function QuickPoll({ onTxSubmit }) {
 
       setVotes(prev => ({ ...prev, no: prev.no + 1 }));
       onTxSubmit?.('vote-no', result.txId);
+      soundEngine.play('success');
     } catch (err) {
       console.error('Vote no failed:', err);
     } finally {

@@ -31,8 +31,10 @@ export default function TipJar({ onTxSubmit }) {
 
       setTotalTipped(prev => prev + 1000);
       onTxSubmit?.('quick-tip', result.txId);
+      soundEngine.play('success');
     } catch (err) {
       console.error('Quick tip failed:', err);
+      soundEngine.play('error');
     } finally {
       setLoading(false);
     }
@@ -51,8 +53,10 @@ export default function TipJar({ onTxSubmit }) {
       });
 
       onTxSubmit?.('self-ping', result.txId);
+      soundEngine.play('success');
     } catch (err) {
       console.error('Self-ping failed:', err);
+      soundEngine.play('error');
     } finally {
       setLoading(false);
     }
