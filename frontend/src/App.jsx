@@ -10,6 +10,8 @@ import TransactionLog from './components/TransactionLog';
 import Toast from './components/Toast';
 import BackgroundParticles from './components/BackgroundParticles';
 import ProgressDashboard from './components/ProgressDashboard';
+import Leaderboard from './components/Leaderboard';
+import SocialFeed from './components/SocialFeed';
 
 /**
  * Main App Content (inside WalletProvider)
@@ -18,6 +20,21 @@ function AppContent() {
   const { wcUri, showQRModal, closeQRModal, isConnected } = useWallet();
   const [txLog, setTxLog] = useState([]);
   const [toasts, setToasts] = useState([]);
+
+  // Mock Social Data
+  const [players] = useState([
+    { address: 'SP1...A2B', clicks: 12500, level: 42 },
+    { address: 'SP3...X9Y', clicks: 8420, level: 28 },
+    { address: 'SP2...K7L', clicks: 5100, level: 19 },
+    { address: 'SP5...M3N', clicks: 3200, level: 12 },
+    { address: 'SP4...Q1P', clicks: 1500, level: 5 }
+  ]);
+
+  const [activities, setActivities] = useState([
+    { id: 1, user: 'SP1...A2B', text: 'just clicked 5 times!', type: 'click', time: 'Just now' },
+    { id: 2, user: 'SP3...X9Y', text: 'sent a 0.5 STX tip!', type: 'tip', time: '2m ago' },
+    { id: 3, user: 'DEGEN', text: 'voted YES on Poll #4!', type: 'poll', time: '5m ago' }
+  ]);
 
   // Mock User Data for Progress Dashboard
   const [userData, setUserData] = useState({
@@ -129,15 +146,21 @@ function AppContent() {
               initial={{ opacity: 0, scale: 1.05 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4 }}
-              className="dashboard-container"
+              className="main-layout-grid"
             >
-              <div className="games-grid">
-                <ClickerGame onTxSubmit={handleTxSubmit} />
-                <TipJar onTxSubmit={handleTxSubmit} />
-                <QuickPoll onTxSubmit={handleTxSubmit} />
+              <div className="left-column">
+                <div className="games-grid">
+                  <ClickerGame onTxSubmit={handleTxSubmit} />
+                  <TipJar onTxSubmit={handleTxSubmit} />
+                  <QuickPoll onTxSubmit={handleTxSubmit} />
+                </div>
+                <ProgressDashboard userData={userData} />
               </div>
 
-              <ProgressDashboard userData={userData} />
+              <aside className="right-column">
+                <Leaderboard players={players} />
+                <SocialFeed activities={activities} />
+              </aside>
             </motion.div>
           )}
         </AnimatePresence>
