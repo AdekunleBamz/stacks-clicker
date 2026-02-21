@@ -141,35 +141,15 @@ export default function App() {
 
       {/* Main Content */}
       <main className="main" role="main">
-        <AnimatePresence mode="wait">
-          {!isConnected ? (
-            <motion.div
-              key="welcome"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              className="welcome-screen"
-            >
-              <h2>Welcome to StacksClicker!</h2>
-              <p>Connect your wallet to start playing</p>
-              <div className="features">
-                {[
-                  { icon: '🎮', title: 'Clicker Game', desc: 'Build click streaks and compete for the highest score' },
-                  { icon: '💰', title: 'TipJar', desc: 'Send micro-tips to support your favorite creators' },
-                  { icon: '🗳️', title: 'QuickPoll', desc: 'Create and vote on community polls' }
-                ].map((f, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 + i * 0.1 }}
-                    className="feature"
-                  >
-                    <span>{f.icon}</span>
-                    <h3>{f.title}</h3>
-                    <p>{f.desc}</p>
-                  </motion.div>
-                ))}
+        {!isConnected ? (
+          <div className="welcome-screen">
+            <h2>Welcome to StacksClicker!</h2>
+            <p>Connect your wallet to start playing</p>
+            <div className="features">
+              <div className="feature">
+                <span>🎮</span>
+                <h3>Clicker Game</h3>
+                <p>Build click streaks and compete for the highest score</p>
               </div>
             </motion.div>
           ) : (
@@ -192,10 +172,26 @@ export default function App() {
           )}
         </AnimatePresence>
 
-      <div className="layout-content">
-        <React.Suspense fallback={<SkeletonLoader height="300px" borderRadius="24px" />}>
-          <PlayerStats stats={stats} txCount={txLog.length} />
-        </React.Suspense>
+      {/* Footer */}
+      <footer className="footer">
+        <p>Built on Stacks • Powered by Clarity</p>
+        <div className="footer-links">
+          <a
+            href="https://explorer.hiro.so/address/SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N?chain=mainnet"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View Contracts
+          </a>
+          <a
+            href="https://github.com/AdekunleBamz/stacks-clicker"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>
+        </div>
+      </footer>
 
         <main id="main-content" className="app-main" role="main" tabIndex={-1} style={{ outline: 'none' }}>
           <React.Suspense fallback={<SkeletonLoader height="500px" borderRadius="32px" />}>
