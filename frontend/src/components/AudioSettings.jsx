@@ -108,6 +108,15 @@ export default function AudioSettings({ isOpen, onClose, settings, onUpdate }) {
                         </div>
 
                         <div className="panel-footer">
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="action-btn secondary"
+                                onClick={() => soundEngine.play('click')}
+                                style={{ marginRight: '1rem' }}
+                            >
+                                Test Sound 🔊
+                            </motion.button>
                             <button className="action-btn primary" onClick={onClose}>Done</button>
                         </div>
                     </motion.div>
