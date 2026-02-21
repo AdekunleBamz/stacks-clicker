@@ -17,7 +17,7 @@ export default function ClickerGame({ onTxSubmit }) {
 
   const handleClick = async () => {
     if (!isConnected) return;
-    
+
     setLoading(true);
     try {
       const result = await callContract({
@@ -26,7 +26,7 @@ export default function ClickerGame({ onTxSubmit }) {
         functionName: 'click',
         functionArgs: []
       });
-      
+
       setClickCount(prev => prev + 1);
       onTxSubmit?.('click', result.txId);
     } catch (err) {
@@ -38,7 +38,7 @@ export default function ClickerGame({ onTxSubmit }) {
 
   const handleMultiClick = async () => {
     if (!isConnected) return;
-    
+
     setLoading(true);
     try {
       const result = await callContract({
@@ -47,7 +47,7 @@ export default function ClickerGame({ onTxSubmit }) {
         functionName: 'multi-click',
         functionArgs: [{ type: 'uint128', value: multiClickAmount.toString() }]
       });
-      
+
       setClickCount(prev => prev + multiClickAmount);
       onTxSubmit?.('multi-click', result.txId);
     } catch (err) {
@@ -59,7 +59,7 @@ export default function ClickerGame({ onTxSubmit }) {
 
   const handlePing = async () => {
     if (!isConnected) return;
-    
+
     setLoading(true);
     try {
       const result = await callContract({
@@ -68,7 +68,7 @@ export default function ClickerGame({ onTxSubmit }) {
         functionName: 'ping',
         functionArgs: []
       });
-      
+
       onTxSubmit?.('ping', result.txId);
     } catch (err) {
       console.error('Ping failed:', err);
@@ -83,7 +83,7 @@ export default function ClickerGame({ onTxSubmit }) {
         <h2>🎮 Clicker Game</h2>
         <span className="game-badge">Earn Streaks</span>
       </div>
-      
+
       <div className="game-stats">
         <div className="stat">
           <span className="stat-value">{clickCount}</span>
@@ -92,10 +92,11 @@ export default function ClickerGame({ onTxSubmit }) {
       </div>
 
       <div className="game-actions">
-        <button 
+        <button
           className="action-btn primary"
           onClick={handleClick}
           disabled={!isConnected || loading}
+          aria-label="Click to earn streak"
         >
           {loading ? '⏳' : '👆'} Click!
         </button>
@@ -109,19 +110,30 @@ export default function ClickerGame({ onTxSubmit }) {
             onChange={(e) => setMultiClickAmount(parseInt(e.target.value) || 1)}
             className="multi-input"
           />
-          <button 
+          <button
             className="action-btn secondary"
             onClick={handleMultiClick}
             disabled={!isConnected || loading}
+            aria-label={`Multi-click ${multiClickAmount} times`}
           >
             Multi-Click ×{multiClickAmount}
           </button>
         </div>
 
-        <button 
+        <button
+          className="action-btn success"
+          onClick={handleQuickTip}
+          disabled={!isConnected || loading}
+          aria-label="Send a quick tip of 0.001 STX"
+        >
+          {loading ? '⏳' : '⚡'} Quick Tip (0.001 STX)
+        </button>
+
+        <button
           className="action-btn outline"
           onClick={handlePing}
           disabled={!isConnected || loading}
+          aria-label="Ping the contract"
         >
           📡 Ping
         </button>
