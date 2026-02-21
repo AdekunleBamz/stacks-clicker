@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useWallet } from '../context/WalletContext';
 import { callContract } from '../utils/walletconnect';
-import { DEPLOYER } from '../utils/constants';
+import ParticleSystem from './ClickParticle';
+
+// Contract deployer address
+const DEPLOYER = 'SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N';
 
 /**
  * Clicker Game Component
@@ -12,9 +15,24 @@ export default function ClickerGame({ onTxSubmit }) {
   const [loading, setLoading] = useState(false);
   const [clickCount, setClickCount] = useState(0);
   const [multiClickAmount, setMultiClickAmount] = useState(5);
+  const [clickEvents, setClickEvents] = useState([]);
 
-  const handleClick = async () => {
+  const addClickEvent = (e) => {
+    const newEvent = {
+      id: Date.now(),
+      x: e.clientX,
+      y: e.clientY
+    };
+    setClickEvents(prev => [...prev, newEvent]);
+  };
+
+  const removeClickEvent = useCallback((id) => {
+    setClickEvents(prev => prev.filter(event => event.id !== id));
+  }, []);
+
+  const handleClick = async (e) => {
     if (!isConnected) return;
+    addClickEvent(e);
 
     setLoading(true);
     try {
@@ -34,8 +52,9 @@ export default function ClickerGame({ onTxSubmit }) {
     }
   };
 
-  const handleMultiClick = async () => {
+  const handleMultiClick = async (e) => {
     if (!isConnected) return;
+    addClickEvent(e);
 
     setLoading(true);
     try {
@@ -55,8 +74,9 @@ export default function ClickerGame({ onTxSubmit }) {
     }
   };
 
-  const handlePing = async () => {
+  const handlePing = async (e) => {
     if (!isConnected) return;
+    addClickEvent(e);
 
     setLoading(true);
     try {
@@ -77,6 +97,8 @@ export default function ClickerGame({ onTxSubmit }) {
 
   return (
     <div className="game-card clicker-game">
+      <ParticleSystem clickEvents={clickEvents} removeEvent={removeClickEvent} />
+
       <div className="game-header">
         <h2 aria-label="Clicker Game Primary Interface">🎮 Clicker Game</h2>
         <span className="game-badge" title="Gamified operational click interface">Earn Streaks</span>
@@ -110,8 +132,7 @@ export default function ClickerGame({ onTxSubmit }) {
             value={multiClickAmount}
             onChange={(e) => setMultiClickAmount(Number.parseInt(e.target.value, 10) || 1)}
             className="multi-input"
-            aria-label="Number of multi-clicks"
-            title="Choose between 1 and 100 automatic clicks"
+            aria-label="Multi-click amount"
           />
           <button
             className="action-btn secondary"
@@ -124,7 +145,6 @@ export default function ClickerGame({ onTxSubmit }) {
         </div>
 
         <button
-          type="button"
           className="action-btn outline"
           onClick={handlePing}
           disabled={!isConnected || loading}
