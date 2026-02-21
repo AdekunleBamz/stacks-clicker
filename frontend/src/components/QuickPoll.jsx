@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { useWallet } from '../context/WalletContext';
 import { callContract } from '../utils/walletconnect';
 import CountUp from './CountUp';
@@ -174,34 +175,40 @@ export default function QuickPoll({ onTxSubmit }) {
             onChange={(e) => setPollQuestion(e.target.value)}
             className="poll-input"
             maxLength={200}
-            aria-label="Poll Question Input"
+            aria-label="Poll Question"
           />
-          <button
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             className="action-btn primary"
             onClick={handleCreatePoll}
             disabled={!isConnected || loading || !pollQuestion.trim()}
             title="Publish this poll to the network"
           >
             Create Poll
-          </button>
+          </motion.button>
         </div>
 
         <div className="vote-buttons">
-          <button
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             className="action-btn vote-yes"
             onClick={handleQuickVoteYes}
             disabled={!isConnected || loading}
             title="Quick cast Yes vote"
           >
-            <span aria-hidden="true">👍</span> Quick Yes
-          </button>
-          <button
+            👍 Quick Yes
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             className="action-btn vote-no"
             onClick={handleQuickVoteNo}
             disabled={!isConnected || loading}
           >
             👎 Quick No
-          </button>
+          </motion.button>
         </div>
 
         <div className="poll-specific">
@@ -216,29 +223,35 @@ export default function QuickPoll({ onTxSubmit }) {
             placeholder="Poll ID"
             aria-label="Target Poll ID"
           />
-          <button
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             className="action-btn secondary"
             onClick={handleVoteYes}
             disabled={!isConnected || loading}
           >
             Vote Yes #{pollId}
-          </button>
-          <button
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             className="action-btn secondary"
             onClick={handleVoteNo}
             disabled={!isConnected || loading}
           >
             Vote No #{pollId}
-          </button>
+          </motion.button>
         </div>
 
-        <button
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           className="action-btn outline"
           onClick={handlePollPing}
           disabled={!isConnected || loading}
         >
           📡 Poll Ping
-        </button>
+        </motion.button>
       </div>
 
       <p className="game-fee" style={{ color: 'var(--text-muted)', fontWeight: 500 }}>Fee: 0.0001 STX per action</p>
