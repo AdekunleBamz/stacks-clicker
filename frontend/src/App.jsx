@@ -9,6 +9,7 @@ import QuickPoll from './components/QuickPoll';
 import TransactionLog from './components/TransactionLog';
 import Toast from './components/Toast';
 import BackgroundParticles from './components/BackgroundParticles';
+import ProgressDashboard from './components/ProgressDashboard';
 
 /**
  * Main App Content (inside WalletProvider)
@@ -17,6 +18,41 @@ function AppContent() {
   const { wcUri, showQRModal, closeQRModal, isConnected } = useWallet();
   const [txLog, setTxLog] = useState([]);
   const [toasts, setToasts] = useState([]);
+
+  // Mock User Data for Progress Dashboard
+  const [userData, setUserData] = useState({
+    level: 12,
+    xp: 2450,
+    nextLevelXP: 5000,
+    stats: {
+      totalTipped: 0.0452,
+      clickRate: 3.4,
+      totalStreaks: 156,
+      rank: '#42'
+    },
+    achievements: [
+      {
+        icon: '🔥',
+        title: 'Hot Streak',
+        description: 'Reached a 100-click streak without stopping',
+        unlocked: true,
+        date: '2025-05-15'
+      },
+      {
+        icon: '💎',
+        title: 'Early Supporter',
+        description: 'Connected your wallet during the alpha phase',
+        unlocked: true,
+        date: '2025-05-10'
+      },
+      {
+        icon: '👑',
+        title: 'Whale Tipper',
+        description: 'Sent more than 1 STX in total tips',
+        unlocked: false
+      }
+    ]
+  });
 
   // Show toast notification
   const showToast = useCallback((message, type = 'info') => {
@@ -93,11 +129,15 @@ function AppContent() {
               initial={{ opacity: 0, scale: 1.05 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4 }}
-              className="games-grid"
+              className="dashboard-container"
             >
-              <ClickerGame onTxSubmit={handleTxSubmit} />
-              <TipJar onTxSubmit={handleTxSubmit} />
-              <QuickPoll onTxSubmit={handleTxSubmit} />
+              <div className="games-grid">
+                <ClickerGame onTxSubmit={handleTxSubmit} />
+                <TipJar onTxSubmit={handleTxSubmit} />
+                <QuickPoll onTxSubmit={handleTxSubmit} />
+              </div>
+
+              <ProgressDashboard userData={userData} />
             </motion.div>
           )}
         </AnimatePresence>
