@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { useWallet } from '../context/WalletContext';
 import { callContract } from '../utils/walletconnect';
 
@@ -116,21 +117,26 @@ export default function TipJar({ onTxSubmit }) {
       </div>
 
       <div className="game-actions">
-        <button
-          className="action-btn primary"
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className="action-btn success"
           onClick={handleQuickTip}
           disabled={!isConnected || loading}
+          aria-label="Send a quick tip of 0.001 STX"
         >
           {loading ? '⏳' : '⚡'} Quick Tip (0.001 STX)
-        </button>
+        </motion.button>
 
-        <button
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           className="action-btn secondary"
           onClick={handleSelfPing}
           disabled={!isConnected || loading}
         >
           📡 Self Ping
-        </button>
+        </motion.button>
 
         <div className="tip-custom">
           <input
@@ -152,22 +158,26 @@ export default function TipJar({ onTxSubmit }) {
             />
             <span className="amount-label">uSTX</span>
           </div>
-          <button
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             className="action-btn outline"
             onClick={handleTipUser}
             disabled={!isConnected || loading || !recipientAddress}
           >
             Send Tip
-          </button>
+          </motion.button>
         </div>
 
-        <button
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           className="action-btn outline"
           onClick={handleDonate}
           disabled={!isConnected || loading}
         >
           🎁 Donate {tipAmount} uSTX
-        </button>
+        </motion.button>
       </div>
 
       <p className="game-fee">Fee: 0.001 STX per action</p>

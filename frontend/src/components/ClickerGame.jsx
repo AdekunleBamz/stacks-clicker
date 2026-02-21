@@ -112,14 +112,16 @@ export default function ClickerGame({ onTxSubmit }) {
       </div>
 
       <div className="game-actions">
-        <button
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           className="action-btn primary"
           onClick={handleClick}
           disabled={!isConnected || loading}
           aria-label="Click to earn streak"
         >
           {loading ? '⏳' : '👆'} Click!
-        </button>
+        </motion.button>
 
         <div className="multi-click-group">
           <input
@@ -131,24 +133,28 @@ export default function ClickerGame({ onTxSubmit }) {
             className="multi-input"
             aria-label="Multi-click amount"
           />
-          <button
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             className="action-btn secondary"
             onClick={handleMultiClick}
             disabled={!isConnected || loading}
             aria-label={`Multi-click ${multiClickAmount} times`}
           >
             Multi-Click ×{multiClickAmount}
-          </button>
+          </motion.button>
         </div>
 
-        <button
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           className="action-btn outline"
           onClick={handlePing}
           disabled={!isConnected || loading}
           aria-label="Ping the contract"
         >
           📡 Ping
-        </button>
+        </motion.button>
       </div>
 
       <p className="game-fee">Fee: 0.001 STX per action</p>
