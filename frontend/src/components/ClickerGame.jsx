@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { useWallet } from '../context/WalletContext';
 import { callContract } from '../utils/walletconnect';
 import ParticleSystem from './ClickParticle';
+import CountUp from './CountUp';
 
 // Contract deployer address
 const DEPLOYER = 'SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N';
@@ -107,8 +108,10 @@ export default function ClickerGame({ onTxSubmit }) {
 
       <div className="game-stats">
         <div className="stat">
-          <span className="stat-value">{clickCount}</span>
-          <span className="stat-label" aria-hidden="true">Total Clicks</span>
+          <span className="stat-value">
+            <CountUp value={clickCount} />
+          </span>
+          <span className="stat-label">Session Clicks</span>
         </div>
       </div>
 
