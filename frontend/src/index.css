@@ -54,6 +54,15 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.bg-particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* ============================================
@@ -306,13 +315,25 @@ body {
 
 .stat {
   text-align: center;
+  padding: 1rem;
+  background: hsla(var(--bg-black) / 0.3);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--glass-border);
+  transition: all 0.3s ease;
+}
+
+.stat:hover {
+  background: hsla(var(--bg-black) / 0.5);
+  border-color: hsla(var(--pulse-cyan) / 0.3);
+  box-shadow: 0 0 20px hsla(var(--pulse-cyan) / 0.1);
 }
 
 .stat-value {
   display: block;
   font-size: 2rem;
-  font-weight: 700;
-  color: var(--secondary);
+  font-weight: 800;
+  color: hsl(var(--secondary));
+  text-shadow: 0 0 10px hsla(var(--pulse-cyan) / 0.3);
 }
 
 .stat-label {
