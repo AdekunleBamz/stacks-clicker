@@ -224,6 +224,13 @@ body::after {
   overflow-x: hidden;
 }
 
+.bg-particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
 /* Main Layout Grid */
 .main-layout-grid {
   display: grid;
