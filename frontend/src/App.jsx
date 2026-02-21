@@ -40,10 +40,10 @@ function AppContent() {
   return (
     <div className="app">
       {/* Header */}
-      <header className="header">
+      <header className="header" role="banner">
         <div className="header-content">
-          <div className="logo">
-            <span className="logo-icon">🎮</span>
+          <div className="logo" aria-label="StacksClicker Logo">
+            <span className="logo-icon" aria-hidden="true">🎮</span>
             <h1>StacksClicker</h1>
           </div>
           <ConnectButton />
@@ -51,7 +51,7 @@ function AppContent() {
       </header>
 
       {/* Main Content */}
-      <main className="main">
+      <main className="main" role="main">
         {!isConnected ? (
           <div className="welcome-screen">
             <h2>Welcome to StacksClicker!</h2>
@@ -90,16 +90,16 @@ function AppContent() {
       <footer className="footer">
         <p>Built on Stacks • Powered by Clarity</p>
         <div className="footer-links">
-          <a 
-            href="https://explorer.hiro.so/address/SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N?chain=mainnet" 
-            target="_blank" 
+          <a
+            href="https://explorer.hiro.so/address/SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N?chain=mainnet"
+            target="_blank"
             rel="noopener noreferrer"
           >
             View Contracts
           </a>
-          <a 
-            href="https://github.com/AdekunleBamz/stacks-clicker" 
-            target="_blank" 
+          <a
+            href="https://github.com/AdekunleBamz/stacks-clicker"
+            target="_blank"
             rel="noopener noreferrer"
           >
             GitHub
