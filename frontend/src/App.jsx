@@ -1,4 +1,3 @@
-```
 import React, { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { WalletProvider, useWallet } from './context/WalletContext';
@@ -119,13 +118,13 @@ function AppContent() {
   // Handle transaction submission
   const handleTxSubmit = useCallback((action, txId) => {
     const tx = {
-      id: txId || `pending - ${ Date.now() } `,
+      id: txId || `pending - ${Date.now()} `,
       action,
       status: txId ? 'pending' : 'submitted',
       time: new Date().toLocaleTimeString()
     };
     setTxLog(prev => [tx, ...prev.slice(0, 49)]);
-    showToast(`${ action } submitted! 🚀`, 'success');
+    showToast(`${action} submitted! 🚀`, 'success');
   }, [showToast]);
 
   return (

@@ -56,6 +56,7 @@ export default function ClickerGame({ onTxSubmit }) {
   const handleMultiClick = async (e) => {
     if (!isConnected) return;
     addClickEvent(e);
+    soundEngine.play('click');
 
     setLoading(true);
     try {
