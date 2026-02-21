@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { WalletProvider, useWallet } from './context/WalletContext';
 import ConnectButton from './components/ConnectButton';
@@ -9,7 +9,6 @@ import QuickPoll from './components/QuickPoll';
 import TransactionLog from './components/TransactionLog';
 import Toast from './components/Toast';
 import BackgroundParticles from './components/BackgroundParticles';
-import ProgressDashboard from './components/ProgressDashboard';
 
 /**
  * Main application component for the Stacks Clicker v2.
@@ -83,41 +82,17 @@ function AppContent() {
   }, [showToast]);
 
   return (
-    <div className="app-container" data-theme={theme} role="main" aria-label="Stacks Clicker Version 2 Application">
-      <a
-        href="#main-content"
-        className="skip-link"
-        aria-label="Skip navigation and jump to primary content"
-        onClick={(e) => {
-          e.preventDefault();
-          const mainContent = document.getElementById('main-content');
-          if (mainContent) {
-            mainContent.focus();
-            mainContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        }}
-      >
-        Skip to main content
-      </a>
-      <PerformanceOverlay />
-      <ScrollToTop />
+    <div className="app">
+      <BackgroundParticles />
 
-      {/* Dedicated Accessibility Announcer for screen readers */}
-      <div className="sr-only" aria-live="polite" aria-atomic="true">
-        {txLog.length > 0 && `Action: ${txLog[0].action} broadcasted.`}
-      </div>
-
-      <div id="notification-announcer" role="status" aria-live="polite" className="sr-only"></div>
-
-      <React.Suspense fallback={<SkeletonLoader height="80px" borderRadius="12px" />}>
-        <Header theme={theme} toggleTheme={toggleTheme} currentLang={lang} onLangChange={setLang} />
-      </React.Suspense>
-
-      <div className="layout-content" role="presentation">
-        <div className="stats-section-container">
-          <React.Suspense fallback={<SkeletonLoader height="120px" borderRadius="16px" theme={theme} />}>
-            <PlayerStats stats={stats} txCount={txLog.length} />
-          </React.Suspense>
+      {/* Header */}
+      <header className="header" role="banner">
+        <div className="header-content">
+          <div className="logo" aria-label="StacksClicker Logo">
+            <span className="logo-icon" aria-hidden="true">🎮</span>
+            <h1>StacksClicker</h1>
+          </div>
+          <ConnectButton />
         </div>
       </header>
 
@@ -167,13 +142,14 @@ function AppContent() {
               initial={{ opacity: 0, scale: 1.05 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4 }}
-              className="dashboard-container"
+              className="games-grid"
             >
-              <div className="games-grid">
-                <ClickerGame onTxSubmit={handleTxSubmit} />
-                <TipJar onTxSubmit={handleTxSubmit} />
-                <QuickPoll onTxSubmit={handleTxSubmit} />
-              </div>
+              <ClickerGame onTxSubmit={handleTxSubmit} />
+              <TipJar onTxSubmit={handleTxSubmit} />
+              <QuickPoll onTxSubmit={handleTxSubmit} />
+            </motion.div>
+          )}
+        </AnimatePresence>
 
               <ProgressDashboard userData={userData} />
             </motion.div>
