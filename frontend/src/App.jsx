@@ -10,8 +10,6 @@ import TransactionLog from './components/TransactionLog';
 import Toast from './components/Toast';
 import BackgroundParticles from './components/BackgroundParticles';
 import ProgressDashboard from './components/ProgressDashboard';
-import Leaderboard from './components/Leaderboard';
-import SocialFeed from './components/SocialFeed';
 
 /**
  * Main application component for the Stacks Clicker v2.
@@ -28,109 +26,48 @@ function AppContent() {
   const [toasts, setToasts] = useState([]);
   const [isAudioOpen, setIsAudioOpen] = useState(false);
 
-  // Mock Social Data
-  const [players] = useState([
-    { address: 'SP1...A2B', clicks: 12500, level: 42 },
-    { address: 'SP3...X9Y', clicks: 8420, level: 28 },
-    { address: 'SP2...K7L', clicks: 5100, level: 19 },
-    { address: 'SP5...M3N', clicks: 3200, level: 12 },
-    { address: 'SP4...Q1P', clicks: 1500, level: 5 }
-  ]);
-
-  const [activities, setActivities] = useState([
-    { id: 1, user: 'SP1...A2B', text: 'just clicked 5 times!', type: 'click', time: 'Just now' },
-    { id: 2, user: 'SP3...X9Y', text: 'sent a 0.5 STX tip!', type: 'tip', time: '2m ago' },
-    { id: 3, user: 'DEGEN', text: 'voted YES on Poll #4!', type: 'poll', time: '5m ago' }
-  ]);
-
-  /**
-   * Toggles between 'light' and 'dark' themes.
-   */
-  const toggleTheme = useCallback(() => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
-  }, [setTheme]);
-
-  /**
-   * Adds a transaction record to the local session log and triggers UI notifications.
-   *
-   * @param {string} action - Human-readable label for the interaction (e.g., '🎯 Click')
-   * @param {string} txId - The unique transaction hash returned from the Stacks network
-   * @param {string} [status='success'] - Current lifecycle state of the transaction
-   * @returns {Object} The formatted transaction object
-   */
-  const addTxToLog = useCallback(
-    (action, txId, status = 'success') => {
-      const submittedAt = new Date();
-      const isPending = !txId || status === 'pending';
-      const tx = {
-        id: txId || `pending-${Date.now()}`,
-        action,
-        status,
-        time: submittedAt.toLocaleTimeString(),
-        submittedAt: submittedAt.toISOString(),
-        network: configuredNetwork,
-        explorerUrl: isPending ? null : `https://explorer.hiro.so/txid/${txId}?chain=${configuredNetwork}`,
-        isPending,
-      };
-      setTxLog((prev) => [tx, ...prev.slice(0, 49)]); // Maintain last 50 TXs
-      setParticleTrigger((prev) => prev + 1);
-      playSound('success');
-
-      notify.custom(`${action} submitted!`);
-      return tx;
+  // Mock User Data for Progress Dashboard
+  const [userData, setUserData] = useState({
+    level: 12,
+    xp: 2450,
+    nextLevelXP: 5000,
+    stats: {
+      totalTipped: 0.0452,
+      clickRate: 3.4,
+      totalStreaks: 156,
+      rank: '#42'
     },
-    [playSound]
-  );
-
-  /**
-   * Unified interaction interface provided by the useInteractions collector.
-   * Centralizes callbacks for all game-related contract calls.
-   */
-  const { clicker, tipjar, quickpoll, pingAll } = useInteractions({
-    onTxSubmit: (action, txId) => {
-      addTxToLog(action, txId);
-      const normalizedAction = String(action).toLowerCase();
-      
-      // Determine particle intensity based on action
-      let particleCount = 8;
-      if (normalizedAction.includes('multi')) particleCount = 25;
-      if (normalizedAction.includes('tip')) particleCount = 15;
-      
-      setParticleTrigger({ id: Date.now(), count: particleCount });
-
-      // Update local reactive stats for immediate feedback (optimistic logic)
-      if (action.includes('Click')) {
-        setStats((prev) => ({ ...prev, clicks: prev.clicks + 1 }));
-      } else if (action.includes('Tip')) {
-        setStats((prev) => ({ ...prev, tips: prev.tips + 1 }));
-      } else if (action.includes('Vote')) {
-        setStats((prev) => ({ ...prev, votes: prev.votes + 1 }));
+    achievements: [
+      {
+        icon: '🔥',
+        title: 'Hot Streak',
+        description: 'Reached a 100-click streak without stopping',
+        unlocked: true,
+        date: '2025-05-15'
+      },
+      {
+        icon: '💎',
+        title: 'Early Supporter',
+        description: 'Connected your wallet during the alpha phase',
+        unlocked: true,
+        date: '2025-05-10'
+      },
+      {
+        icon: '👑',
+        title: 'Whale Tipper',
+        description: 'Sent more than 1 STX in total tips',
+        unlocked: false
       }
-    },
+    ]
   });
 
-  /**
-   * Global keyboard accessibility shortcuts.
-   * 'C' for Click, 'T' for Quick Tip.
-   */
-  useKeyboardShortcuts({
-    isEnabled: !!address,
-    actions: {
-      click: clicker.click,
-      tip: tipjar.tip,
-    },
-    playSound,
-  });
-
-  useEffect(() => {
-    const handleGlobalEsc = (e) => {
-      if (e.key === 'Escape') {
-        setCelebration(null);
-        document.getElementById('main-content')?.focus();
-      }
-    };
-    window.addEventListener('keydown', handleGlobalEsc);
-    return () => window.removeEventListener('keydown', handleGlobalEsc);
+  // Show toast notification
+  const showToast = useCallback((message, type = 'info') => {
+    const id = Date.now();
+    setToasts(prev => [...prev, { id, message, type }]);
+    setTimeout(() => {
+      setToasts(prev => prev.filter(t => t.id !== id));
+    }, 4000);
   }, []);
 
   // Handle transaction submission
@@ -235,21 +172,15 @@ function AppContent() {
               initial={{ opacity: 0, scale: 1.05 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4 }}
-              className="main-layout-grid"
+              className="dashboard-container"
             >
-              <div className="left-column">
-                <div className="games-grid">
-                  <ClickerGame onTxSubmit={handleTxSubmit} />
-                  <TipJar onTxSubmit={handleTxSubmit} />
-                  <QuickPoll onTxSubmit={handleTxSubmit} />
-                </div>
-                <ProgressDashboard userData={userData} />
+              <div className="games-grid">
+                <ClickerGame onTxSubmit={handleTxSubmit} />
+                <TipJar onTxSubmit={handleTxSubmit} />
+                <QuickPoll onTxSubmit={handleTxSubmit} />
               </div>
 
-              <aside className="right-column">
-                <Leaderboard players={players} />
-                <SocialFeed activities={activities} />
-              </aside>
+              <ProgressDashboard userData={userData} />
             </motion.div>
           )}
         </AnimatePresence>
