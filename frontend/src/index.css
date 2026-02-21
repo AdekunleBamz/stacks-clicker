@@ -399,6 +399,99 @@ body {
   letter-spacing: 0.05em;
 }
 
+/* Level Badge */
+.level-badge-container {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.level-badge-inner {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, hsl(var(--bg-surface)), hsl(var(--bg-black)));
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid hsl(var(--pulse-purple));
+  box-shadow: 0 0 20px hsla(var(--pulse-purple) / 0.3);
+  position: relative;
+  z-index: 2;
+}
+
+.level-badge-glow {
+  position: absolute;
+  inset: -5px;
+  background: radial-gradient(circle, hsla(var(--pulse-purple) / 0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.level-text {
+  font-size: 0.625rem;
+  font-weight: 900;
+  color: hsl(var(--text-muted));
+  letter-spacing: 0.2em;
+  margin-bottom: -2px;
+}
+
+.level-number {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: hsl(var(--text-main));
+  line-height: 1;
+}
+
+.level-particle {
+  pointer-events: none;
+}
+
+/* Stats Grid */
+.stats-grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.stat-card-mini {
+  background: hsla(var(--bg-surface) / 0.5);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: all 0.3s ease;
+}
+
+.stat-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: hsl(var(--text-muted));
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.stat-icon {
+  font-size: 1.25rem;
+}
+
+.stat-card-value {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: hsl(var(--text-main));
+  letter-spacing: -0.02em;
+}
+
 .game-actions {
   display: flex;
   flex-direction: column;
