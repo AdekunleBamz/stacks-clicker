@@ -41,15 +41,14 @@
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: var(--background);
-  color: var(--text);
+  background-color: hsl(var(--bg-black));
+  background-image:
+    radial-gradient(circle at 0% 0%, hsla(var(--pulse-purple) / 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, hsla(var(--pulse-cyan) / 0.1) 0%, transparent 50%);
   min-height: 100vh;
+  color: hsl(var(--text-main));
   line-height: 1.6;
 }
-
-/* ============================================
-   Layout
-   ============================================ */
 
 .app {
   min-height: 100vh;
@@ -57,10 +56,15 @@ body {
   flex-direction: column;
 }
 
+/* ============================================
+   Layout
+   ============================================ */
+
 .header {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  padding: var(--space-md) var(--space-lg);
+  background: hsla(var(--bg-surface) / 0.8);
+  backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid var(--glass-border);
+  padding: var(--space-unit) calc(var(--space-unit) * 2);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -74,20 +78,11 @@ body {
   align-items: center;
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-}
-
-.logo-icon {
-  font-size: 1.75rem;
-}
-
 .logo h1 {
   font-size: 1.5rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  background: linear-gradient(135deg, hsl(var(--pulse-purple)), hsl(var(--pulse-cyan)));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -211,9 +206,12 @@ body {
 }
 
 .welcome-screen h2 {
-  font-size: 2.5rem;
-  margin-bottom: var(--space-md);
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin-bottom: var(--space-unit);
+  background: linear-gradient(135deg, hsl(var(--pulse-purple)), hsl(var(--pulse-pink)));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -268,16 +266,18 @@ body {
 }
 
 .game-card {
-  background: var(--surface);
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--border);
-  padding: var(--space-lg);
-  transition: all 0.2s;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--glass-border);
+  padding: calc(var(--space-unit) * 1.5);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .game-card:hover {
-  border-color: var(--primary);
-  box-shadow: var(--shadow);
+  transform: translateY(-8px);
+  border-color: hsla(var(--pulse-purple) / 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px hsla(var(--pulse-purple) / 0.1);
 }
 
 .game-header {
