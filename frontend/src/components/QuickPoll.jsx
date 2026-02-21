@@ -17,7 +17,7 @@ export default function QuickPoll({ onTxSubmit }) {
 
   const handleCreatePoll = async () => {
     if (!isConnected || !pollQuestion.trim()) return;
-    
+
     setLoading(true);
     try {
       const result = await callContract({
@@ -26,7 +26,7 @@ export default function QuickPoll({ onTxSubmit }) {
         functionName: 'create-poll',
         functionArgs: [{ type: 'string-ascii', value: pollQuestion }]
       });
-      
+
       setPollQuestion('');
       onTxSubmit?.('create-poll', result.txId);
     } catch (err) {
@@ -38,7 +38,7 @@ export default function QuickPoll({ onTxSubmit }) {
 
   const handleVoteYes = async () => {
     if (!isConnected) return;
-    
+
     setLoading(true);
     try {
       const result = await callContract({
@@ -47,7 +47,7 @@ export default function QuickPoll({ onTxSubmit }) {
         functionName: 'vote-yes',
         functionArgs: [{ type: 'uint128', value: pollId.toString() }]
       });
-      
+
       setVotes(prev => ({ ...prev, yes: prev.yes + 1 }));
       onTxSubmit?.('vote-yes', result.txId);
     } catch (err) {
@@ -59,7 +59,7 @@ export default function QuickPoll({ onTxSubmit }) {
 
   const handleVoteNo = async () => {
     if (!isConnected) return;
-    
+
     setLoading(true);
     try {
       const result = await callContract({
@@ -68,7 +68,7 @@ export default function QuickPoll({ onTxSubmit }) {
         functionName: 'vote-no',
         functionArgs: [{ type: 'uint128', value: pollId.toString() }]
       });
-      
+
       setVotes(prev => ({ ...prev, no: prev.no + 1 }));
       onTxSubmit?.('vote-no', result.txId);
     } catch (err) {
@@ -80,7 +80,7 @@ export default function QuickPoll({ onTxSubmit }) {
 
   const handleQuickVoteYes = async () => {
     if (!isConnected) return;
-    
+
     setLoading(true);
     try {
       const result = await callContract({
@@ -89,7 +89,7 @@ export default function QuickPoll({ onTxSubmit }) {
         functionName: 'quick-vote-yes',
         functionArgs: []
       });
-      
+
       setVotes(prev => ({ ...prev, yes: prev.yes + 1 }));
       onTxSubmit?.('quick-vote-yes', result.txId);
     } catch (err) {
@@ -101,7 +101,7 @@ export default function QuickPoll({ onTxSubmit }) {
 
   const handleQuickVoteNo = async () => {
     if (!isConnected) return;
-    
+
     setLoading(true);
     try {
       const result = await callContract({
@@ -110,7 +110,7 @@ export default function QuickPoll({ onTxSubmit }) {
         functionName: 'quick-vote-no',
         functionArgs: []
       });
-      
+
       setVotes(prev => ({ ...prev, no: prev.no + 1 }));
       onTxSubmit?.('quick-vote-no', result.txId);
     } catch (err) {
@@ -122,7 +122,7 @@ export default function QuickPoll({ onTxSubmit }) {
 
   const handlePollPing = async () => {
     if (!isConnected) return;
-    
+
     setLoading(true);
     try {
       const result = await callContract({
@@ -131,7 +131,7 @@ export default function QuickPoll({ onTxSubmit }) {
         functionName: 'poll-ping',
         functionArgs: []
       });
-      
+
       onTxSubmit?.('poll-ping', result.txId);
     } catch (err) {
       console.error('Poll ping failed:', err);
@@ -146,7 +146,7 @@ export default function QuickPoll({ onTxSubmit }) {
         <h2>🗳️ QuickPoll</h2>
         <span className="game-badge">Community Voting</span>
       </div>
-      
+
       <div className="game-stats">
         <div className="stat">
           <span className="stat-value">{votes.yes}</span>
@@ -168,7 +168,7 @@ export default function QuickPoll({ onTxSubmit }) {
             className="poll-input"
             maxLength={200}
           />
-          <button 
+          <button
             className="action-btn primary"
             onClick={handleCreatePoll}
             disabled={!isConnected || loading || !pollQuestion.trim()}
@@ -178,14 +178,14 @@ export default function QuickPoll({ onTxSubmit }) {
         </div>
 
         <div className="vote-buttons">
-          <button 
+          <button
             className="action-btn vote-yes"
             onClick={handleQuickVoteYes}
             disabled={!isConnected || loading}
           >
             👍 Quick Yes
           </button>
-          <button 
+          <button
             className="action-btn vote-no"
             onClick={handleQuickVoteNo}
             disabled={!isConnected || loading}
@@ -202,15 +202,16 @@ export default function QuickPoll({ onTxSubmit }) {
             onChange={(e) => setPollId(parseInt(e.target.value) || 1)}
             className="poll-id-input"
             placeholder="Poll ID"
+            aria-label="Target Poll ID"
           />
-          <button 
+          <button
             className="action-btn secondary"
             onClick={handleVoteYes}
             disabled={!isConnected || loading}
           >
             Vote Yes #{pollId}
           </button>
-          <button 
+          <button
             className="action-btn secondary"
             onClick={handleVoteNo}
             disabled={!isConnected || loading}
@@ -219,7 +220,7 @@ export default function QuickPoll({ onTxSubmit }) {
           </button>
         </div>
 
-        <button 
+        <button
           className="action-btn outline"
           onClick={handlePollPing}
           disabled={!isConnected || loading}
