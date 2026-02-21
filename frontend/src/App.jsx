@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { WalletProvider, useWallet } from './context/WalletContext';
 import ConnectButton from './components/ConnectButton';
 import WalletConnectQRModal from './components/WalletConnectQRModal';
@@ -7,6 +8,7 @@ import TipJar from './components/TipJar';
 import QuickPoll from './components/QuickPoll';
 import TransactionLog from './components/TransactionLog';
 import Toast from './components/Toast';
+import BackgroundParticles from './components/BackgroundParticles';
 
 /**
  * Main App Content (inside WalletProvider)
@@ -39,6 +41,8 @@ function AppContent() {
 
   return (
     <div className="app">
+      <BackgroundParticles />
+
       {/* Header */}
       <header className="header" role="banner">
         <div className="header-content">
@@ -52,35 +56,51 @@ function AppContent() {
 
       {/* Main Content */}
       <main className="main" role="main">
-        {!isConnected ? (
-          <div className="welcome-screen">
-            <h2>Welcome to StacksClicker!</h2>
-            <p>Connect your wallet to start playing</p>
-            <div className="features">
-              <div className="feature">
-                <span>🎮</span>
-                <h3>Clicker Game</h3>
-                <p>Build click streaks and compete for the highest score</p>
+        <AnimatePresence mode="wait">
+          {!isConnected ? (
+            <motion.div
+              key="welcome"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="welcome-screen"
+            >
+              <h2>Welcome to StacksClicker!</h2>
+              <p>Connect your wallet to start playing</p>
+              <div className="features">
+                {[
+                  { icon: '🎮', title: 'Clicker Game', desc: 'Build click streaks and compete for the highest score' },
+                  { icon: '💰', title: 'TipJar', desc: 'Send micro-tips to support your favorite creators' },
+                  { icon: '🗳️', title: 'QuickPoll', desc: 'Create and vote on community polls' }
+                ].map((f, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 + i * 0.1 }}
+                    className="feature"
+                  >
+                    <span>{f.icon}</span>
+                    <h3>{f.title}</h3>
+                    <p>{f.desc}</p>
+                  </motion.div>
+                ))}
               </div>
-              <div className="feature">
-                <span>💰</span>
-                <h3>TipJar</h3>
-                <p>Send micro-tips to support your favorite creators</p>
-              </div>
-              <div className="feature">
-                <span>🗳️</span>
-                <h3>QuickPoll</h3>
-                <p>Create and vote on community polls</p>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className="games-grid">
-            <ClickerGame onTxSubmit={handleTxSubmit} />
-            <TipJar onTxSubmit={handleTxSubmit} />
-            <QuickPoll onTxSubmit={handleTxSubmit} />
-          </div>
-        )}
+            </motion.div>
+          ) : (
+            <motion.div
+              key="games"
+              initial={{ opacity: 0, scale: 1.05 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4 }}
+              className="games-grid"
+            >
+              <ClickerGame onTxSubmit={handleTxSubmit} />
+              <TipJar onTxSubmit={handleTxSubmit} />
+              <QuickPoll onTxSubmit={handleTxSubmit} />
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Transaction Log */}
         <TransactionLog transactions={txLog} />
