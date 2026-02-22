@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { useWallet } from '../context/WalletContext';
 import { callContract } from '../utils/walletconnect';
 
@@ -17,7 +18,7 @@ export default function QuickPoll({ onTxSubmit }) {
 
   const handleCreatePoll = async () => {
     if (!isConnected || !pollQuestion.trim()) return;
-    
+
     setLoading(true);
     try {
       const result = await callContract({
@@ -26,7 +27,7 @@ export default function QuickPoll({ onTxSubmit }) {
         functionName: 'create-poll',
         functionArgs: [{ type: 'string-ascii', value: pollQuestion }]
       });
-      
+
       setPollQuestion('');
       onTxSubmit?.('create-poll', result.txId);
     } catch (err) {
@@ -38,7 +39,7 @@ export default function QuickPoll({ onTxSubmit }) {
 
   const handleVoteYes = async () => {
     if (!isConnected) return;
-    
+
     setLoading(true);
     try {
       const result = await callContract({
@@ -47,7 +48,7 @@ export default function QuickPoll({ onTxSubmit }) {
         functionName: 'vote-yes',
         functionArgs: [{ type: 'uint128', value: pollId.toString() }]
       });
-      
+
       setVotes(prev => ({ ...prev, yes: prev.yes + 1 }));
       onTxSubmit?.('vote-yes', result.txId);
     } catch (err) {
@@ -59,7 +60,7 @@ export default function QuickPoll({ onTxSubmit }) {
 
   const handleVoteNo = async () => {
     if (!isConnected) return;
-    
+
     setLoading(true);
     try {
       const result = await callContract({
@@ -68,7 +69,7 @@ export default function QuickPoll({ onTxSubmit }) {
         functionName: 'vote-no',
         functionArgs: [{ type: 'uint128', value: pollId.toString() }]
       });
-      
+
       setVotes(prev => ({ ...prev, no: prev.no + 1 }));
       onTxSubmit?.('vote-no', result.txId);
     } catch (err) {
@@ -80,7 +81,7 @@ export default function QuickPoll({ onTxSubmit }) {
 
   const handleQuickVoteYes = async () => {
     if (!isConnected) return;
-    
+
     setLoading(true);
     try {
       const result = await callContract({
@@ -89,7 +90,7 @@ export default function QuickPoll({ onTxSubmit }) {
         functionName: 'quick-vote-yes',
         functionArgs: []
       });
-      
+
       setVotes(prev => ({ ...prev, yes: prev.yes + 1 }));
       onTxSubmit?.('quick-vote-yes', result.txId);
     } catch (err) {
@@ -101,7 +102,7 @@ export default function QuickPoll({ onTxSubmit }) {
 
   const handleQuickVoteNo = async () => {
     if (!isConnected) return;
-    
+
     setLoading(true);
     try {
       const result = await callContract({
@@ -110,7 +111,7 @@ export default function QuickPoll({ onTxSubmit }) {
         functionName: 'quick-vote-no',
         functionArgs: []
       });
-      
+
       setVotes(prev => ({ ...prev, no: prev.no + 1 }));
       onTxSubmit?.('quick-vote-no', result.txId);
     } catch (err) {
@@ -122,7 +123,7 @@ export default function QuickPoll({ onTxSubmit }) {
 
   const handlePollPing = async () => {
     if (!isConnected) return;
-    
+
     setLoading(true);
     try {
       const result = await callContract({
@@ -131,7 +132,7 @@ export default function QuickPoll({ onTxSubmit }) {
         functionName: 'poll-ping',
         functionArgs: []
       });
-      
+
       onTxSubmit?.('poll-ping', result.txId);
     } catch (err) {
       console.error('Poll ping failed:', err);
@@ -146,7 +147,7 @@ export default function QuickPoll({ onTxSubmit }) {
         <h2>🗳️ QuickPoll</h2>
         <span className="game-badge">Community Voting</span>
       </div>
-      
+
       <div className="game-stats">
         <div className="stat">
           <span className="stat-value">{votes.yes}</span>
@@ -167,31 +168,38 @@ export default function QuickPoll({ onTxSubmit }) {
             onChange={(e) => setPollQuestion(e.target.value)}
             className="poll-input"
             maxLength={200}
+            aria-label="Poll Question"
           />
-          <button 
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             className="action-btn primary"
             onClick={handleCreatePoll}
             disabled={!isConnected || loading || !pollQuestion.trim()}
           >
             Create Poll
-          </button>
+          </motion.button>
         </div>
 
         <div className="vote-buttons">
-          <button 
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             className="action-btn vote-yes"
             onClick={handleQuickVoteYes}
             disabled={!isConnected || loading}
           >
             👍 Quick Yes
-          </button>
-          <button 
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             className="action-btn vote-no"
             onClick={handleQuickVoteNo}
             disabled={!isConnected || loading}
           >
             👎 Quick No
-          </button>
+          </motion.button>
         </div>
 
         <div className="poll-specific">
@@ -202,30 +210,37 @@ export default function QuickPoll({ onTxSubmit }) {
             onChange={(e) => setPollId(parseInt(e.target.value) || 1)}
             className="poll-id-input"
             placeholder="Poll ID"
+            aria-label="Target Poll ID"
           />
-          <button 
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             className="action-btn secondary"
             onClick={handleVoteYes}
             disabled={!isConnected || loading}
           >
             Vote Yes #{pollId}
-          </button>
-          <button 
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             className="action-btn secondary"
             onClick={handleVoteNo}
             disabled={!isConnected || loading}
           >
             Vote No #{pollId}
-          </button>
+          </motion.button>
         </div>
 
-        <button 
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           className="action-btn outline"
           onClick={handlePollPing}
           disabled={!isConnected || loading}
         >
           📡 Poll Ping
-        </button>
+        </motion.button>
       </div>
 
       <p className="game-fee">Fee: 0.001 STX per action</p>
