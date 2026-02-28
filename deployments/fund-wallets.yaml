@@ -1,0 +1,110 @@
+---
+id: 0
+name: Fund Test Wallets
+network: mainnet
+stacks-node: "https://api.mainnet.hiro.so"
+bitcoin-node: "http://blockstack:blockstacksystem@bitcoin.blockstack.com:8332"
+plan:
+  batches:
+    - id: 0
+      transactions:
+        - stx-transfer:
+            expected-sender: SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT
+            recipient: SP3MBBQCFWAY97JMYRJQ31BRV69QQ4S7YZ875P2WX
+            mstx-amount: 320000
+        - stx-transfer:
+            expected-sender: SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT
+            recipient: SP3B3CX84E1VD9M8Q5YQAV1DVVZ3XJ86NCAD21AJ8
+            mstx-amount: 320000
+        - stx-transfer:
+            expected-sender: SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT
+            recipient: SPAPEBNZ9BZZDJT7G5VCEXDXQCFC3115W9MANDA7
+            mstx-amount: 320000
+        - stx-transfer:
+            expected-sender: SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT
+            recipient: SP374J3DHH2FMZHVE2W08CMNM0KWX4SD2K793Q36Y
+            mstx-amount: 320000
+        - stx-transfer:
+            expected-sender: SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT
+            recipient: SPA14GTABP5TVES5K3WC26NHVJC18M016VQWCPE6
+            mstx-amount: 320000
+        - stx-transfer:
+            expected-sender: SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT
+            recipient: SP1WBPNC633TNF4XNM7KTW1ZXDC1S5ZRKSJT0YZQ3
+            mstx-amount: 320000
+        - stx-transfer:
+            expected-sender: SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT
+            recipient: SP2QDXCZ4DWT0KJSTAQ34Q10B46Z5GSYEW3JXT09X
+            mstx-amount: 320000
+        - stx-transfer:
+            expected-sender: SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT
+            recipient: SP2M65Y53R74V5B5W8KBCXAD6CT5WK8X2MQWK9QMQ
+            mstx-amount: 320000
+        - stx-transfer:
+            expected-sender: SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT
+            recipient: SPXZ3CV6TW2NNJ16VBBQH0YHT7M6EG93Y2ATM2FW
+            mstx-amount: 320000
+        - stx-transfer:
+            expected-sender: SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT
+            recipient: SP28863BF275HFD8SGN9TZM3BJP4YC59N891HV9AS
+            mstx-amount: 320000
+        - stx-transfer:
+            expected-sender: SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT
+            recipient: SP3ET2FGXBY3R2CPFHP89FMG0TMEGXQE5403S3QQ0
+            mstx-amount: 320000
+        - stx-transfer:
+            expected-sender: SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT
+            recipient: SPBFQCDFEPCKWHJ95N5AY3ATJQ72RXN27ZB6GPZJ
+            mstx-amount: 320000
+        - stx-transfer:
+            expected-sender: SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT
+            recipient: SP11SQ3GQ18644HNTJJMK5XK5AS8TYNYRJTBXHSEW
+            mstx-amount: 320000
+        - stx-transfer:
+            expected-sender: SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT
+            recipient: SP2EAF79D71M7SVFVFNBECQTS04JGC7ACGEH05WBV
+            mstx-amount: 320000
+        - stx-transfer:
+            expected-sender: SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT
+            recipient: SP1QKXQ36KSC1YWKFH5TTTHD83H6ACS5A27K3WZGW
+            mstx-amount: 320000
+        - stx-transfer:
+            expected-sender: SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT
+            recipient: SP962A7C0CGCYDSP7HFC5WPDCR8P49Y71AC2Y3CA
+            mstx-amount: 320000
+        - stx-transfer:
+            expected-sender: SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT
+            recipient: SP23Z1HV9JQ655WMSZ5ZQDS4KNGAVJASD4VTAKGD4
+            mstx-amount: 320000
+        - stx-transfer:
+            expected-sender: SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT
+            recipient: SPTS75Q9P6WT2MEY18WG8SSMPQST2428W5FR64BT
+            mstx-amount: 320000
+        - stx-transfer:
+            expected-sender: SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT
+            recipient: SP3Z6QCPZ955C36F43G3P05Z9NGBP4YHWYHBDQSNK
+            mstx-amount: 320000
+        - stx-transfer:
+            expected-sender: SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT
+            recipient: SP8NGH2CEWWD9BV01B69S3G8XTGHCRMH3B33J60Y
+            mstx-amount: 320000
+        - stx-transfer:
+            expected-sender: SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT
+            recipient: SP2K87RV7CG8BYTC5GTPSCP0PDFYGYSSFRHRMP1FX
+            mstx-amount: 320000
+        - stx-transfer:
+            expected-sender: SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT
+            recipient: SP2KBMVX0XEH4E0CAMGWV73Z05ZDMP0W3R6H975XG
+            mstx-amount: 320000
+        - stx-transfer:
+            expected-sender: SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT
+            recipient: SP3T83EEEVVT6301JD7TFDKMKTNB4GKF4M4DC99JT
+            mstx-amount: 320000
+        - stx-transfer:
+            expected-sender: SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT
+            recipient: SP3DPAJX4C7PPEMEWNECB58D5KJS5E9SEA6SYS4NM
+            mstx-amount: 320000
+        - stx-transfer:
+            expected-sender: SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT
+            recipient: SPVNVP3NSXDHMHJ1GT2R560E1W5PW07HHSGZSAJV
+            mstx-amount: 320000

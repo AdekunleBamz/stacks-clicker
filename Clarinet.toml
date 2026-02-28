@@ -27,6 +27,21 @@ path = "contracts/quickpoll-v2n.clar"
 clarity_version = 2
 epoch = 3.0
 
+[contracts.clicker-v2p]
+path = "contracts/clicker-v2p.clar"
+clarity_version = 2
+epoch = 3.0
+
+[contracts.tipjar-v2p]
+path = "contracts/tipjar-v2p.clar"
+clarity_version = 2
+epoch = 3.0
+
+[contracts.quickpoll-v2p]
+path = "contracts/quickpoll-v2p.clar"
+clarity_version = 2
+epoch = 3.0
+
 [repl.analysis]
 passes = ["check_checker"]
 
