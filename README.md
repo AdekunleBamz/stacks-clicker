@@ -29,8 +29,8 @@ showConnect({
 
 // Call smart contract
 openContractCall({
-  contractAddress: 'SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT',
-  contractName: 'clicker-v2m',
+  contractAddress: 'YOUR_DEPLOYER_ADDRESS',
+  contractName: 'clicker-v2p',
   functionName: 'click',
   functionArgs: [],
   network: 'mainnet',
@@ -53,8 +53,8 @@ import {
 
 // Build and broadcast transaction
 const tx = await makeContractCall({
-  contractAddress: 'SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT',
-  contractName: 'clicker-v2m',
+  contractAddress: 'YOUR_DEPLOYER_ADDRESS',
+  contractName: 'clicker-v2p',
   functionName: 'multi-click',
   functionArgs: [uintCV(5)],
   senderKey: privateKey,
@@ -153,18 +153,17 @@ stacks-clicker/
 
 ---
 
-## 🔗 Active Smart Contracts (v2m — Current)
+## 🔗 Active Smart Contracts (v2p — Current)
 
-Deployed on Stacks Mainnet under the new deployer wallet:
+Deploed on Stacks Mainnet:
 
-| Contract | Full Address | Description |
-|----------|-------------|-------------|
-| `clicker-v2m` | `SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT.clicker-v2m` | Click counter with streaks, events & analytics |
-| `tipjar-v2m` | `SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT.tipjar-v2m` | Tipping with largest-tip tracking |
-| `quickpoll-v2m` | `SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT.quickpoll-v2m` | Polls with creator analytics |
-| `quickpoll-v2n` | `SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT.quickpoll-v2n` | Simplified global voting (no poll IDs) |
+| Contract | Description |
+|----------|-------------|
+| `clicker-v2p` | Click counter with streaks, events & analytics |
+| `tipjar-v2p` | Tipping with largest-tip tracking |
+| `quickpoll-v2p` | Polls with creator analytics |
 
-> All v2m/v2n contracts use **Clarity Version 2** and target **Epoch 3.0**.
+> All v2p contracts use **Clarity Version 2** and target **Epoch 3.0**.
 
 ### Contract Functions
 
@@ -196,7 +195,7 @@ Deployed on Stacks Mainnet under the new deployer wallet:
 
 ## 📦 Legacy / Archived Contracts
 
-Previous versions are archived in `contracts/archive/` and remain active on mainnet under the old deployer `SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N`. They are no longer maintained.
+Previous versions are archived in `contracts/archive/` and remain active on mainnet. They are no longer maintained.
 
 | Version | Contracts | Status |
 |---------|-----------|--------|
@@ -287,7 +286,7 @@ MIT License - feel free to use this code for your own projects.
 
 ## 🔗 Links
 
-- [View Deployer on Explorer](https://explorer.hiro.so/address/SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT?chain=mainnet)
+- [Stacks Explorer](https://explorer.hiro.so?chain=mainnet)
 - [Stacks Documentation](https://docs.stacks.co)
 - [Clarity Language](https://clarity-lang.org)
 - [@stacks/connect NPM](https://www.npmjs.com/package/@stacks/connect)
