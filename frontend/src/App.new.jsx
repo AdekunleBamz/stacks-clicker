@@ -90,16 +90,16 @@ function AppContent() {
       <footer className="footer">
         <p>Built on Stacks • Powered by Clarity</p>
         <div className="footer-links">
-          <a 
-            href="https://explorer.hiro.so/address/SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N?chain=mainnet" 
-            target="_blank" 
+          <a
+            href="https://explorer.hiro.so/address/SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT?chain=mainnet"
+            target="_blank"
             rel="noopener noreferrer"
           >
             View Contracts
           </a>
-          <a 
-            href="https://github.com/AdekunleBamz/stacks-clicker" 
-            target="_blank" 
+          <a
+            href="https://github.com/AdekunleBamz/stacks-clicker"
+            target="_blank"
             rel="noopener noreferrer"
           >
             GitHub

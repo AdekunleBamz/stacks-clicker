@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useWallet } from '../context/WalletContext';
 import { callContract } from '../utils/walletconnect';
 
-const DEPLOYER = 'SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N';
+const DEPLOYER = 'SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT';
 
 /**
  * TipJar Component
@@ -17,16 +17,16 @@ export default function TipJar({ onTxSubmit }) {
 
   const handleQuickTip = async () => {
     if (!isConnected) return;
-    
+
     setLoading(true);
     try {
       const result = await callContract({
         contractAddress: DEPLOYER,
-        contractName: 'tipjar',
+        contractName: 'tipjar-v2p',
         functionName: 'quick-tip',
         functionArgs: []
       });
-      
+
       setTotalTipped(prev => prev + 1000);
       onTxSubmit?.('quick-tip', result.txId);
     } catch (err) {
@@ -38,16 +38,16 @@ export default function TipJar({ onTxSubmit }) {
 
   const handleSelfPing = async () => {
     if (!isConnected) return;
-    
+
     setLoading(true);
     try {
       const result = await callContract({
         contractAddress: DEPLOYER,
-        contractName: 'tipjar',
+        contractName: 'tipjar-v2p',
         functionName: 'self-ping',
         functionArgs: []
       });
-      
+
       onTxSubmit?.('self-ping', result.txId);
     } catch (err) {
       console.error('Self-ping failed:', err);
@@ -58,19 +58,19 @@ export default function TipJar({ onTxSubmit }) {
 
   const handleTipUser = async () => {
     if (!isConnected || !recipientAddress) return;
-    
+
     setLoading(true);
     try {
       const result = await callContract({
         contractAddress: DEPLOYER,
-        contractName: 'tipjar',
+        contractName: 'tipjar-v2p',
         functionName: 'tip-user',
         functionArgs: [
           { type: 'principal', value: recipientAddress },
           { type: 'uint128', value: tipAmount.toString() }
         ]
       });
-      
+
       setTotalTipped(prev => prev + tipAmount);
       onTxSubmit?.('tip-user', result.txId);
     } catch (err) {
@@ -82,16 +82,16 @@ export default function TipJar({ onTxSubmit }) {
 
   const handleDonate = async () => {
     if (!isConnected) return;
-    
+
     setLoading(true);
     try {
       const result = await callContract({
         contractAddress: DEPLOYER,
-        contractName: 'tipjar',
+        contractName: 'tipjar-v2p',
         functionName: 'donate',
         functionArgs: [{ type: 'uint128', value: tipAmount.toString() }]
       });
-      
+
       setTotalTipped(prev => prev + tipAmount);
       onTxSubmit?.('donate', result.txId);
     } catch (err) {
@@ -107,7 +107,7 @@ export default function TipJar({ onTxSubmit }) {
         <h2>💰 TipJar</h2>
         <span className="game-badge">Support Creators</span>
       </div>
-      
+
       <div className="game-stats">
         <div className="stat">
           <span className="stat-value">{(totalTipped / 1000000).toFixed(4)}</span>
@@ -116,7 +116,7 @@ export default function TipJar({ onTxSubmit }) {
       </div>
 
       <div className="game-actions">
-        <button 
+        <button
           className="action-btn primary"
           onClick={handleQuickTip}
           disabled={!isConnected || loading}
@@ -124,7 +124,7 @@ export default function TipJar({ onTxSubmit }) {
           {loading ? '⏳' : '⚡'} Quick Tip (0.001 STX)
         </button>
 
-        <button 
+        <button
           className="action-btn secondary"
           onClick={handleSelfPing}
           disabled={!isConnected || loading}
@@ -151,7 +151,7 @@ export default function TipJar({ onTxSubmit }) {
             />
             <span className="amount-label">uSTX</span>
           </div>
-          <button 
+          <button
             className="action-btn outline"
             onClick={handleTipUser}
             disabled={!isConnected || loading || !recipientAddress}
@@ -160,7 +160,7 @@ export default function TipJar({ onTxSubmit }) {
           </button>
         </div>
 
-        <button 
+        <button
           className="action-btn outline"
           onClick={handleDonate}
           disabled={!isConnected || loading}
@@ -169,7 +169,7 @@ export default function TipJar({ onTxSubmit }) {
         </button>
       </div>
 
-      <p className="game-fee">Fee: 0.001 STX per action</p>
+      <p className="game-fee">Fee: 0.0001 STX per action</p>
     </div>
   );
 }

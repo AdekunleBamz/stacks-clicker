@@ -3,7 +3,7 @@ import { useWallet } from '../context/WalletContext';
 import { callContract } from '../utils/walletconnect';
 
 // Contract deployer address
-const DEPLOYER = 'SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N';
+const DEPLOYER = 'SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT';
 
 /**
  * Clicker Game Component
@@ -17,16 +17,16 @@ export default function ClickerGame({ onTxSubmit }) {
 
   const handleClick = async () => {
     if (!isConnected) return;
-    
+
     setLoading(true);
     try {
       const result = await callContract({
         contractAddress: DEPLOYER,
-        contractName: 'clicker',
+        contractName: 'clicker-v2p',
         functionName: 'click',
         functionArgs: []
       });
-      
+
       setClickCount(prev => prev + 1);
       onTxSubmit?.('click', result.txId);
     } catch (err) {
@@ -38,16 +38,16 @@ export default function ClickerGame({ onTxSubmit }) {
 
   const handleMultiClick = async () => {
     if (!isConnected) return;
-    
+
     setLoading(true);
     try {
       const result = await callContract({
         contractAddress: DEPLOYER,
-        contractName: 'clicker',
+        contractName: 'clicker-v2p',
         functionName: 'multi-click',
         functionArgs: [{ type: 'uint128', value: multiClickAmount.toString() }]
       });
-      
+
       setClickCount(prev => prev + multiClickAmount);
       onTxSubmit?.('multi-click', result.txId);
     } catch (err) {
@@ -59,16 +59,16 @@ export default function ClickerGame({ onTxSubmit }) {
 
   const handlePing = async () => {
     if (!isConnected) return;
-    
+
     setLoading(true);
     try {
       const result = await callContract({
         contractAddress: DEPLOYER,
-        contractName: 'clicker',
+        contractName: 'clicker-v2p',
         functionName: 'ping',
         functionArgs: []
       });
-      
+
       onTxSubmit?.('ping', result.txId);
     } catch (err) {
       console.error('Ping failed:', err);
@@ -83,7 +83,7 @@ export default function ClickerGame({ onTxSubmit }) {
         <h2>🎮 Clicker Game</h2>
         <span className="game-badge">Earn Streaks</span>
       </div>
-      
+
       <div className="game-stats">
         <div className="stat">
           <span className="stat-value">{clickCount}</span>
@@ -92,7 +92,7 @@ export default function ClickerGame({ onTxSubmit }) {
       </div>
 
       <div className="game-actions">
-        <button 
+        <button
           className="action-btn primary"
           onClick={handleClick}
           disabled={!isConnected || loading}
@@ -109,7 +109,7 @@ export default function ClickerGame({ onTxSubmit }) {
             onChange={(e) => setMultiClickAmount(parseInt(e.target.value) || 1)}
             className="multi-input"
           />
-          <button 
+          <button
             className="action-btn secondary"
             onClick={handleMultiClick}
             disabled={!isConnected || loading}
@@ -118,7 +118,7 @@ export default function ClickerGame({ onTxSubmit }) {
           </button>
         </div>
 
-        <button 
+        <button
           className="action-btn outline"
           onClick={handlePing}
           disabled={!isConnected || loading}
@@ -127,7 +127,7 @@ export default function ClickerGame({ onTxSubmit }) {
         </button>
       </div>
 
-      <p className="game-fee">Fee: 0.001 STX per action</p>
+      <p className="game-fee">Fee: 0.0001 STX per action</p>
     </div>
   );
 }
