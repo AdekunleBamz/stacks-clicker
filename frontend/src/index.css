@@ -491,7 +491,7 @@ body {
 }
 .toast.error {
   background: var(--danger);
-  color: white;
+  color: #fff4f4;
 }
 .toast.info {
   background: var(--primary);
