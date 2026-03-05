@@ -469,7 +469,7 @@ body {
   align-items: center;
   gap: 10px;
   animation: slideIn 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
-  max-width: 400px;
+  max-width: 420px;
 }
 
 .toast.success {
