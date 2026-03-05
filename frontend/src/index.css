@@ -71,7 +71,7 @@ body {
 .wallet-section {
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 12px;
   margin-bottom: 40px;
   flex-wrap: wrap;
 }
