@@ -120,7 +120,8 @@ body {
 
 .wallet-address {
   font-family: monospace;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  font-weight: 500;
   color: var(--success);
 }
 
