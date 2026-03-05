@@ -481,6 +481,7 @@ body {
 .toast.info {
   background: var(--primary);
   color: white;
+  font-weight: 500;
 }
 
 @keyframes slideIn {
