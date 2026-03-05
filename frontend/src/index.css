@@ -31,7 +31,7 @@ body {
     Ubuntu,
     Cantarell,
     sans-serif;
-  background: radial-gradient(circle at top right, #1a0b2e 0%, #09090e 50%, #050508 100%);
+  background: radial-gradient(circle at top right, #1a0b2e 0%, #07070a 60%, #030305 100%);
   min-height: 100vh;
   color: var(--text);
 }
