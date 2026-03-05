@@ -422,6 +422,7 @@ body {
 .tx-time {
   color: var(--text-muted);
   font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
 }
 
 /* Loading Spinner */
