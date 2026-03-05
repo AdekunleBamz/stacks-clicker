@@ -108,6 +108,11 @@ body {
   filter: brightness(1.15);
 }
 
+.wallet-btn:focus-visible {
+  outline: 2px solid var(--tertiary);
+  outline-offset: 4px;
+}
+
 .wallet-info {
   background: var(--bg-card);
   border-radius: 12px;
