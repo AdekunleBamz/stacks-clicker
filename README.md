@@ -1,6 +1,6 @@
-# 🎮 StacksClicker v2m
+# 🎮 StacksClicker — GameFi dApp
 
-Interactive Stacks dApp featuring Click-to-Earn game, community TipJar, and QuickPoll voting system. Built with Clarity smart contracts and React.
+Interactive Stacks GameFi dApp featuring Click-to-Earn game, community TipJar, and QuickPoll voting system. Built with Clarity smart contracts, React, and Framer Motion.
 
 [![Stacks](https://img.shields.io/badge/Built%20on-Stacks-5546FF?style=flat&logo=stacks)](https://stacks.co)
 [![Clarity](https://img.shields.io/badge/Smart%20Contracts-Clarity-00D4AA?style=flat)](https://clarity-lang.org)
@@ -134,21 +134,33 @@ Open http://localhost:5173
 
 ```
 stacks-clicker/
+├── .github/workflows/          # CI/CD pipelines
+│   ├── frontend-lint.yml       # ESLint on push
+│   ├── frontend-tests.yml      # Vitest on push
+│   └── clarinet-tests.yml      # Clarinet on push
 ├── contracts/
-│   ├── clicker-v2m.clar      # ✅ Active — Click-to-earn game (Clarity 2, Epoch 3.0)
-│   ├── tipjar-v2m.clar       # ✅ Active — Tipping & donations (Clarity 2, Epoch 3.0)
-│   ├── quickpoll-v2m.clar    # ✅ Active — Community voting (Clarity 2, Epoch 3.0)
-│   ├── quickpoll-v2n.clar    # ✅ Active — Simplified voting, no poll IDs (Clarity 2)
-│   └── archive/              # 📦 Legacy contracts (v2i, v2j, v2k, v2l) — retired
+│   ├── clicker-v2p.clar        # ✅ Active — Click-to-earn game
+│   ├── tipjar-v2p.clar         # ✅ Active — Tipping & donations
+│   ├── quickpoll-v2p.clar      # ✅ Active — Community voting
+│   └── archive/                # 📦 Legacy contracts — retired
 ├── frontend/
 │   ├── src/
-│   │   ├── components/       # React components
-│   │   ├── context/          # Wallet context provider
-│   │   ├── utils/            # WalletConnect integration
-│   │   └── App.jsx           # Main application
+│   │   ├── components/         # Modular UI components
+│   │   │   ├── ClickerCard.jsx # 🎯 Clicker contract card
+│   │   │   ├── TipJarCard.jsx  # 💰 TipJar contract card
+│   │   │   ├── QuickPollCard.jsx # 🗳️ QuickPoll contract card
+│   │   │   ├── PlayerStats.jsx # 📊 Stats bar
+│   │   │   └── TransactionHistory.jsx # 📜 TX log
+│   │   ├── context/
+│   │   │   └── WalletContext.jsx # 🔗 Global wallet state
+│   │   ├── tests/              # Unit tests (Vitest)
+│   │   ├── App.jsx             # Main application shell
+│   │   └── index.css           # GameFi neon theme
+│   ├── .prettierrc             # Code formatting config
+│   ├── eslint.config.js        # Linting config
 │   └── package.json
-├── deployments/              # Deployment plan YAMLs
-└── settings/                 # Network settings (Devnet/Simnet only — Mainnet.toml is gitignored)
+├── deployments/                # Deployment plan YAMLs
+└── settings/                   # Network settings
 ```
 
 ---
@@ -234,11 +246,31 @@ See `frontend/src/utils/walletconnect.js` for implementation details.
 
 ## 🧪 Testing
 
-Run Clarinet tests:
+### Frontend Tests (Vitest + React Testing Library)
+
+```bash
+cd frontend
+npm run test        # Watch mode
+npm run test -- --run  # Single run
+```
+
+Currently **18 passing tests** across 3 suites:
+- `WalletContext.test.jsx` — Global state management
+- `ClickerCard.test.jsx` — Clicker UI component
+- `TipJarCard.test.jsx` — TipJar UI component
+
+### Clarity Tests (Clarinet)
 
 ```bash
 clarinet test
 ```
+
+### CI/CD
+
+All tests run automatically on every push to `main` via GitHub Actions:
+- **Frontend Lint** — ESLint + Prettier
+- **Frontend Tests** — Vitest
+- **Clarinet Tests** — Smart contract unit tests
 
 ---
 
