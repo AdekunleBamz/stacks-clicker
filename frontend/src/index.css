@@ -244,6 +244,15 @@ body {
   margin-top: 4px;
 }
 
+.game-fee {
+  margin-top: 24px;
+  text-align: center;
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  opacity: 0.8;
+}
+
 /* Action Buttons */
 .actions {
   display: flex;
