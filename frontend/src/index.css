@@ -267,6 +267,7 @@ body {
   opacity: 0.5;
   cursor: not-allowed;
   filter: grayscale(1);
+  box-shadow: none !important;
 }
 
 .action-btn.primary {
