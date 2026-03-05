@@ -459,6 +459,7 @@ body {
   text-align: center;
   padding: 40px 20px;
   color: rgba(154, 154, 168, 0.7);
+  line-height: 1.6;
 }
 
 /* Toast Notifications */
