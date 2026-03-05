@@ -156,7 +156,7 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  height: 2px;
+  height: 3px;
   background: linear-gradient(90deg, transparent, var(--tertiary), transparent);
   opacity: 0.5;
 }
