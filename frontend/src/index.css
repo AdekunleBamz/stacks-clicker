@@ -372,7 +372,7 @@ body {
   gap: 15px;
   padding: 15px;
   background: rgba(0, 0, 0, 0.2);
-  border-radius: 12px;
+  border-radius: 10px;
   margin-bottom: 12px;
   transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
