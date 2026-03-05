@@ -392,6 +392,7 @@ body {
 
 .tx-status.pending {
   background: var(--warning);
+  box-shadow: 0 0 8px var(--warning);
   animation: pulse 1s infinite;
 }
 .tx-status.success {
