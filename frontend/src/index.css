@@ -360,7 +360,7 @@ body {
 }
 
 .tx-list {
-  max-height: 300px;
+  max-height: 340px;
   overflow-y: auto;
 }
 
