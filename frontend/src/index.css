@@ -420,7 +420,7 @@ body {
 /* Empty State */
 .empty-state {
   text-align: center;
-  padding: 40px;
+  padding: 48px;
   color: var(--text-muted);
 }
 
