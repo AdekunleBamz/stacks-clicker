@@ -461,7 +461,7 @@ body {
 .toast-container {
   position: fixed;
   top: 28px;
-  right: 24px;
+  right: 28px;
   z-index: 1000;
   display: flex;
   flex-direction: column;
