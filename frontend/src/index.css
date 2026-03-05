@@ -419,7 +419,7 @@ body {
 .tx-id {
   font-family: monospace;
   font-size: 0.75rem;
-  color: var(--text-muted);
+  color: #9a9aa8;
 }
 
 .tx-time {
