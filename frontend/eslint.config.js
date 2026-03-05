@@ -29,7 +29,7 @@ export default [
     plugins: {
       react,
       'react-hooks': reactHooks,
-      prettier
+      prettier,
     },
     rules: {
       'prettier/prettier': 'error',
