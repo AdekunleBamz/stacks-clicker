@@ -518,7 +518,7 @@ body {
 
   .contracts-grid {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 20px;
   }
 
   .wallet-section {
