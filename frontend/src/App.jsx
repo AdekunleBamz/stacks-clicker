@@ -8,6 +8,7 @@ import {
   principalCV,
   PostConditionMode
 } from '@stacks/transactions'
+import PlayerStats from './components/PlayerStats'
 
 // ============================================
 // CONFIGURATION - UPDATE THESE AFTER DEPLOYING
@@ -234,24 +235,7 @@ export default function App() {
       </section>
 
       {/* Stats Bar */}
-      <section className="stats-bar">
-        <div className="stat-card">
-          <div className="value">{stats.clicks}</div>
-          <div className="label">Clicks</div>
-        </div>
-        <div className="stat-card">
-          <div className="value">{stats.tips}</div>
-          <div className="label">Tips Sent</div>
-        </div>
-        <div className="stat-card">
-          <div className="value">{stats.votes}</div>
-          <div className="label">Votes Cast</div>
-        </div>
-        <div className="stat-card">
-          <div className="value">{txLog.length}</div>
-          <div className="label">Transactions</div>
-        </div>
-      </section>
+      <PlayerStats stats={stats} txCount={txLog.length} />
 
       {/* Contract Cards */}
       <section className="contracts-grid">
