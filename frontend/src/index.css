@@ -166,6 +166,7 @@ body {
   font-size: 2.5rem;
   font-weight: 800;
   letter-spacing: -1px;
+  font-variant-numeric: tabular-nums;
   background: linear-gradient(135deg, var(--tertiary), var(--primary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
