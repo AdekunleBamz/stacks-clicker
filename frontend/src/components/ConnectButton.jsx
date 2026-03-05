@@ -6,12 +6,7 @@ import { useWallet } from '../context/WalletContext';
  * Shows connect/disconnect based on connection state
  */
 export default function ConnectButton() {
-  const { 
-    address, 
-    connecting, 
-    connectWallet, 
-    disconnectWallet 
-  } = useWallet();
+  const { address, connecting, connectWallet, disconnectWallet } = useWallet();
 
   // Format address for display
   const formatAddress = (addr) => {
@@ -34,11 +29,7 @@ export default function ConnectButton() {
         <span className="wallet-address" title={address}>
           {formatAddress(address)}
         </span>
-        <button 
-          className="disconnect-btn" 
-          onClick={disconnectWallet}
-          title="Disconnect wallet"
-        >
+        <button className="disconnect-btn" onClick={disconnectWallet} title="Disconnect wallet">
           Disconnect
         </button>
       </div>

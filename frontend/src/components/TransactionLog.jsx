@@ -42,9 +42,9 @@ export default function TransactionLog({ transactions = [] }) {
             <span className="tx-action">{tx.action}</span>
             <span className="tx-time">{tx.time}</span>
             {getExplorerLink(tx.id) && (
-              <a 
-                href={getExplorerLink(tx.id)} 
-                target="_blank" 
+              <a
+                href={getExplorerLink(tx.id)}
+                target="_blank"
                 rel="noopener noreferrer"
                 className="tx-link"
                 title="View on Explorer"

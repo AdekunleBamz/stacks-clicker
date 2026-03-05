@@ -24,10 +24,10 @@ export default function TipJar({ onTxSubmit }) {
         contractAddress: DEPLOYER,
         contractName: 'tipjar-v2p',
         functionName: 'quick-tip',
-        functionArgs: []
+        functionArgs: [],
       });
 
-      setTotalTipped(prev => prev + 1000);
+      setTotalTipped((prev) => prev + 1000);
       onTxSubmit?.('quick-tip', result.txId);
     } catch (err) {
       console.error('Quick tip failed:', err);
@@ -45,7 +45,7 @@ export default function TipJar({ onTxSubmit }) {
         contractAddress: DEPLOYER,
         contractName: 'tipjar-v2p',
         functionName: 'self-ping',
-        functionArgs: []
+        functionArgs: [],
       });
 
       onTxSubmit?.('self-ping', result.txId);
@@ -67,11 +67,11 @@ export default function TipJar({ onTxSubmit }) {
         functionName: 'tip-user',
         functionArgs: [
           { type: 'principal', value: recipientAddress },
-          { type: 'uint128', value: tipAmount.toString() }
-        ]
+          { type: 'uint128', value: tipAmount.toString() },
+        ],
       });
 
-      setTotalTipped(prev => prev + tipAmount);
+      setTotalTipped((prev) => prev + tipAmount);
       onTxSubmit?.('tip-user', result.txId);
     } catch (err) {
       console.error('Tip user failed:', err);
@@ -89,10 +89,10 @@ export default function TipJar({ onTxSubmit }) {
         contractAddress: DEPLOYER,
         contractName: 'tipjar-v2p',
         functionName: 'donate',
-        functionArgs: [{ type: 'uint128', value: tipAmount.toString() }]
+        functionArgs: [{ type: 'uint128', value: tipAmount.toString() }],
       });
 
-      setTotalTipped(prev => prev + tipAmount);
+      setTotalTipped((prev) => prev + tipAmount);
       onTxSubmit?.('donate', result.txId);
     } catch (err) {
       console.error('Donate failed:', err);

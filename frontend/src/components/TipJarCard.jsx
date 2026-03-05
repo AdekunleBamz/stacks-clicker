@@ -7,7 +7,7 @@ export default function TipJarCard({
   setTipAmount,
   handleSelfPing,
   handleQuickTip,
-  handleCustomTip
+  handleCustomTip,
 }) {
   return (
     <div className="contract-card">

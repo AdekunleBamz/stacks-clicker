@@ -54,14 +54,10 @@ export function WalletProvider({ children }) {
     connectWallet,
     disconnectWallet,
     appDetails,
-    isConnected: !!address
+    isConnected: !!address,
   };
 
-  return (
-    <WalletContext.Provider value={value}>
-      {children}
-    </WalletContext.Provider>
-  );
+  return <WalletContext.Provider value={value}>{children}</WalletContext.Provider>;
 }
 
 export function useWallet() {

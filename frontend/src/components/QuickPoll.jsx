@@ -24,7 +24,7 @@ export default function QuickPoll({ onTxSubmit }) {
         contractAddress: DEPLOYER,
         contractName: 'quickpoll-v2p',
         functionName: 'create-poll',
-        functionArgs: [{ type: 'string-ascii', value: pollQuestion }]
+        functionArgs: [{ type: 'string-ascii', value: pollQuestion }],
       });
 
       setPollQuestion('');
@@ -45,10 +45,10 @@ export default function QuickPoll({ onTxSubmit }) {
         contractAddress: DEPLOYER,
         contractName: 'quickpoll-v2p',
         functionName: 'vote-yes',
-        functionArgs: [{ type: 'uint128', value: pollId.toString() }]
+        functionArgs: [{ type: 'uint128', value: pollId.toString() }],
       });
 
-      setVotes(prev => ({ ...prev, yes: prev.yes + 1 }));
+      setVotes((prev) => ({ ...prev, yes: prev.yes + 1 }));
       onTxSubmit?.('vote-yes', result.txId);
     } catch (err) {
       console.error('Vote yes failed:', err);
@@ -66,10 +66,10 @@ export default function QuickPoll({ onTxSubmit }) {
         contractAddress: DEPLOYER,
         contractName: 'quickpoll-v2p',
         functionName: 'vote-no',
-        functionArgs: [{ type: 'uint128', value: pollId.toString() }]
+        functionArgs: [{ type: 'uint128', value: pollId.toString() }],
       });
 
-      setVotes(prev => ({ ...prev, no: prev.no + 1 }));
+      setVotes((prev) => ({ ...prev, no: prev.no + 1 }));
       onTxSubmit?.('vote-no', result.txId);
     } catch (err) {
       console.error('Vote no failed:', err);
@@ -87,10 +87,10 @@ export default function QuickPoll({ onTxSubmit }) {
         contractAddress: DEPLOYER,
         contractName: 'quickpoll-v2p',
         functionName: 'quick-vote-yes',
-        functionArgs: []
+        functionArgs: [],
       });
 
-      setVotes(prev => ({ ...prev, yes: prev.yes + 1 }));
+      setVotes((prev) => ({ ...prev, yes: prev.yes + 1 }));
       onTxSubmit?.('quick-vote-yes', result.txId);
     } catch (err) {
       console.error('Quick vote yes failed:', err);
@@ -108,10 +108,10 @@ export default function QuickPoll({ onTxSubmit }) {
         contractAddress: DEPLOYER,
         contractName: 'quickpoll-v2p',
         functionName: 'quick-vote-no',
-        functionArgs: []
+        functionArgs: [],
       });
 
-      setVotes(prev => ({ ...prev, no: prev.no + 1 }));
+      setVotes((prev) => ({ ...prev, no: prev.no + 1 }));
       onTxSubmit?.('quick-vote-no', result.txId);
     } catch (err) {
       console.error('Quick vote no failed:', err);
@@ -129,7 +129,7 @@ export default function QuickPoll({ onTxSubmit }) {
         contractAddress: DEPLOYER,
         contractName: 'quickpoll-v2p',
         functionName: 'poll-ping',
-        functionArgs: []
+        functionArgs: [],
       });
 
       onTxSubmit?.('poll-ping', result.txId);

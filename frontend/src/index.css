@@ -1,9 +1,9 @@
 :root {
-  --primary: #5546FF;
-  --secondary: #FC6432;
-  --success: #00D4AA;
-  --warning: #FFB800;
-  --danger: #FF4757;
+  --primary: #5546ff;
+  --secondary: #fc6432;
+  --success: #00d4aa;
+  --warning: #ffb800;
+  --danger: #ff4757;
   --bg-dark: #1a1a2e;
   --bg-card: rgba(255, 255, 255, 0.05);
   --text: #ffffff;
@@ -17,7 +17,8 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
   min-height: 100vh;
   color: var(--text);
@@ -175,9 +176,15 @@ body {
   font-size: 1.5rem;
 }
 
-.contract-icon.clicker { background: linear-gradient(135deg, #5546FF, #7B68EE); }
-.contract-icon.tipjar { background: linear-gradient(135deg, #FFB800, #FC6432); }
-.contract-icon.poll { background: linear-gradient(135deg, #00D4AA, #00B894); }
+.contract-icon.clicker {
+  background: linear-gradient(135deg, #5546ff, #7b68ee);
+}
+.contract-icon.tipjar {
+  background: linear-gradient(135deg, #ffb800, #fc6432);
+}
+.contract-icon.poll {
+  background: linear-gradient(135deg, #00d4aa, #00b894);
+}
 
 .contract-title {
   font-size: 1.5rem;
@@ -218,22 +225,22 @@ body {
 }
 
 .action-btn.primary {
-  background: linear-gradient(135deg, var(--primary), #7B68EE);
+  background: linear-gradient(135deg, var(--primary), #7b68ee);
   color: white;
 }
 
 .action-btn.secondary {
-  background: linear-gradient(135deg, var(--secondary), #FF6B6B);
+  background: linear-gradient(135deg, var(--secondary), #ff6b6b);
   color: white;
 }
 
 .action-btn.success {
-  background: linear-gradient(135deg, var(--success), #00B894);
+  background: linear-gradient(135deg, var(--success), #00b894);
   color: white;
 }
 
 .action-btn.warning {
-  background: linear-gradient(135deg, var(--warning), #FFA502);
+  background: linear-gradient(135deg, var(--warning), #ffa502);
   color: #1a1a2e;
 }
 
@@ -294,9 +301,16 @@ body {
   border-radius: 50%;
 }
 
-.tx-status.pending { background: var(--warning); animation: pulse 1s infinite; }
-.tx-status.success { background: var(--success); }
-.tx-status.failed { background: var(--danger); }
+.tx-status.pending {
+  background: var(--warning);
+  animation: pulse 1s infinite;
+}
+.tx-status.success {
+  background: var(--success);
+}
+.tx-status.failed {
+  background: var(--danger);
+}
 
 .tx-info {
   flex: 1;
@@ -319,12 +333,19 @@ body {
 
 /* Loading Spinner */
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .spinner {
@@ -364,13 +385,28 @@ body {
   max-width: 400px;
 }
 
-.toast.success { background: var(--success); color: #1a1a2e; }
-.toast.error { background: var(--danger); color: white; }
-.toast.info { background: var(--primary); color: white; }
+.toast.success {
+  background: var(--success);
+  color: #1a1a2e;
+}
+.toast.error {
+  background: var(--danger);
+  color: white;
+}
+.toast.info {
+  background: var(--primary);
+  color: white;
+}
 
 @keyframes slideIn {
-  from { transform: translateX(100%); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 /* Responsive */
@@ -378,11 +414,11 @@ body {
   .header h1 {
     font-size: 2rem;
   }
-  
+
   .contracts-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .wallet-section {
     flex-direction: column;
     align-items: center;

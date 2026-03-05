@@ -1,6 +1,6 @@
 /**
  * WalletConnect / Reown AppKit Integration for Stacks
- * 
+ *
  * This module handles WalletConnect pairing and Stacks JSON-RPC methods:
  * - stx_getAddresses
  * - stx_signTransaction
@@ -21,10 +21,10 @@ const metadata = {
   description: 'Gamified Stacks dApp - Click to earn, tip creators, vote on polls',
   url: typeof window !== 'undefined' ? window.location.origin : 'https://stacks-clicker.vercel.app',
   icons: [
-    typeof window !== 'undefined' 
+    typeof window !== 'undefined'
       ? new URL('/logo.svg', window.location.origin).toString()
-      : 'https://stacks-clicker.vercel.app/logo.svg'
-  ]
+      : 'https://stacks-clicker.vercel.app/logo.svg',
+  ],
 };
 
 // Singleton provider instance
@@ -58,7 +58,7 @@ export async function initProvider() {
   provider = await UniversalProvider.init({
     projectId: PROJECT_ID,
     metadata,
-    relayUrl: 'wss://relay.walletconnect.com'
+    relayUrl: 'wss://relay.walletconnect.com',
   });
 
   // Set up event listeners
@@ -123,21 +123,16 @@ export async function wcConnect(onDisplayUri) {
     requiredNamespaces: {
       stacks: {
         chains: [STACKS_MAINNET_CHAIN],
-        methods: [
-          'stx_getAddresses',
-          'stx_signTransaction',
-          'stx_callContract',
-          'stx_transferStx'
-        ],
-        events: ['accountsChanged', 'chainChanged']
-      }
-    }
+        methods: ['stx_getAddresses', 'stx_signTransaction', 'stx_callContract', 'stx_transferStx'],
+        events: ['accountsChanged', 'chainChanged'],
+      },
+    },
   });
 
   // Wait for both URI and session
   const [, newSession] = await Promise.all([
     uriPromise.catch(() => null), // Don't fail if URI doesn't fire
-    connectPromise
+    connectPromise,
   ]);
 
   session = newSession;
@@ -165,11 +160,14 @@ export async function getAddresses() {
 
   try {
     const result = await Promise.race([
-      provider.request({
-        method: 'stx_getAddresses',
-        params: {}
-      }, STACKS_MAINNET_CHAIN),
-      timeoutPromise
+      provider.request(
+        {
+          method: 'stx_getAddresses',
+          params: {},
+        },
+        STACKS_MAINNET_CHAIN
+      ),
+      timeoutPromise,
     ]);
 
     log('Got addresses:', result);
@@ -177,16 +175,15 @@ export async function getAddresses() {
     // Find STX address (look for symbol === 'STX' or use first)
     const addresses = result?.addresses || result;
     if (Array.isArray(addresses) && addresses.length > 0) {
-      const stxEntry = addresses.find(a => a.symbol === 'STX') || addresses[0];
+      const stxEntry = addresses.find((a) => a.symbol === 'STX') || addresses[0];
       return {
         address: stxEntry.address,
-        publicKey: stxEntry.publicKey || null
+        publicKey: stxEntry.publicKey || null,
       };
     }
 
     // Fallback to parsing session accounts
     return parseSessionAddress();
-
   } catch (err) {
     log('stx_getAddresses failed, falling back to session parse:', err.message);
     return parseSessionAddress();
@@ -210,7 +207,7 @@ function parseSessionAddress() {
 
   return {
     address,
-    publicKey: null
+    publicKey: null,
   };
 }
 
@@ -227,13 +224,16 @@ export async function signTransaction(txHex, broadcast = true) {
 
   log('Requesting stx_signTransaction, broadcast:', broadcast);
 
-  const result = await provider.request({
-    method: 'stx_signTransaction',
-    params: {
-      transaction: txHex,
-      broadcast
-    }
-  }, STACKS_MAINNET_CHAIN);
+  const result = await provider.request(
+    {
+      method: 'stx_signTransaction',
+      params: {
+        transaction: txHex,
+        broadcast,
+      },
+    },
+    STACKS_MAINNET_CHAIN
+  );
 
   log('Transaction result:', result);
 
@@ -244,24 +244,33 @@ export async function signTransaction(txHex, broadcast = true) {
  * Call a contract function via stx_callContract (wallet builds tx)
  * This is a fallback when public key isn't available
  */
-export async function callContract({ contractAddress, contractName, functionName, functionArgs, postConditions }) {
+export async function callContract({
+  contractAddress,
+  contractName,
+  functionName,
+  functionArgs,
+  postConditions,
+}) {
   if (!session || !provider) {
     throw new Error('Not connected');
   }
 
   log('Requesting stx_callContract:', contractName, functionName);
 
-  const result = await provider.request({
-    method: 'stx_callContract',
-    params: {
-      contractAddress,
-      contractName,
-      functionName,
-      functionArgs: functionArgs || [],
-      postConditions: postConditions || [],
-      network: 'mainnet'
-    }
-  }, STACKS_MAINNET_CHAIN);
+  const result = await provider.request(
+    {
+      method: 'stx_callContract',
+      params: {
+        contractAddress,
+        contractName,
+        functionName,
+        functionArgs: functionArgs || [],
+        postConditions: postConditions || [],
+        network: 'mainnet',
+      },
+    },
+    STACKS_MAINNET_CHAIN
+  );
 
   log('Contract call result:', result);
 
@@ -278,14 +287,17 @@ export async function transferStx(recipient, amount, memo) {
 
   log('Requesting stx_transferStx:', recipient, amount);
 
-  const result = await provider.request({
-    method: 'stx_transferStx',
-    params: {
-      recipient,
-      amount: amount.toString(),
-      memo: memo || ''
-    }
-  }, STACKS_MAINNET_CHAIN);
+  const result = await provider.request(
+    {
+      method: 'stx_transferStx',
+      params: {
+        recipient,
+        amount: amount.toString(),
+        memo: memo || '',
+      },
+    },
+    STACKS_MAINNET_CHAIN
+  );
 
   return result;
 }

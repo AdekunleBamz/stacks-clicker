@@ -8,7 +8,7 @@ export default function QuickPollCard({
   handlePollPing,
   handleCreatePoll,
   handleVoteYes,
-  handleVoteNo
+  handleVoteNo,
 }) {
   return (
     <div className="contract-card">

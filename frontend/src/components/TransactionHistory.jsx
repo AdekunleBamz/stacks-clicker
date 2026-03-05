@@ -16,7 +16,9 @@ export default function TransactionHistory({ txLog }) {
               <div className="tx-info">
                 <div className="tx-action">{tx.action}</div>
                 <div className="tx-id">
-                  {tx.id.startsWith('pending') ? 'Awaiting...' : (
+                  {tx.id.startsWith('pending') ? (
+                    'Awaiting...'
+                  ) : (
                     <a
                       href={`https://explorer.hiro.so/txid/${tx.id}?chain=mainnet`}
                       target="_blank"

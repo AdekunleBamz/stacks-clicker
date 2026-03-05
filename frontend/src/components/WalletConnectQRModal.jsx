@@ -4,7 +4,7 @@ import { getWalletConnectLink } from '../utils/walletconnect';
 
 /**
  * WalletConnect QR Modal
- * 
+ *
  * Displays the pairing QR code for WalletConnect.
  * Also shows a camera-friendly link for mobile users.
  */
@@ -16,20 +16,20 @@ export default function WalletConnectQRModal({ uri, onClose }) {
 
   return (
     <div className="qr-modal-overlay" onClick={onClose}>
-      <div className="qr-modal" onClick={e => e.stopPropagation()}>
+      <div className="qr-modal" onClick={(e) => e.stopPropagation()}>
         <div className="qr-modal-header">
           <h3>Connect Wallet</h3>
-          <button className="qr-modal-close" onClick={onClose}>×</button>
+          <button className="qr-modal-close" onClick={onClose}>
+            ×
+          </button>
         </div>
-        
+
         <div className="qr-modal-body">
-          <p className="qr-instructions">
-            Scan this QR code with your Stacks wallet app
-          </p>
-          
+          <p className="qr-instructions">Scan this QR code with your Stacks wallet app</p>
+
           <div className="qr-code-container">
-            <QRCodeSVG 
-              value={uri} 
+            <QRCodeSVG
+              value={uri}
               size={256}
               level="M"
               includeMargin={true}
@@ -39,15 +39,8 @@ export default function WalletConnectQRModal({ uri, onClose }) {
           </div>
 
           <div className="qr-mobile-help">
-            <p className="qr-help-text">
-              📱 On mobile? Open your wallet app and scan the QR, or:
-            </p>
-            <a 
-              href={wcLink} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="qr-mobile-link"
-            >
+            <p className="qr-help-text">📱 On mobile? Open your wallet app and scan the QR, or:</p>
+            <a href={wcLink} target="_blank" rel="noopener noreferrer" className="qr-mobile-link">
               Open in Wallet App →
             </a>
           </div>

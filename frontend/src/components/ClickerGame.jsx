@@ -24,10 +24,10 @@ export default function ClickerGame({ onTxSubmit }) {
         contractAddress: DEPLOYER,
         contractName: 'clicker-v2p',
         functionName: 'click',
-        functionArgs: []
+        functionArgs: [],
       });
 
-      setClickCount(prev => prev + 1);
+      setClickCount((prev) => prev + 1);
       onTxSubmit?.('click', result.txId);
     } catch (err) {
       console.error('Click failed:', err);
@@ -45,10 +45,10 @@ export default function ClickerGame({ onTxSubmit }) {
         contractAddress: DEPLOYER,
         contractName: 'clicker-v2p',
         functionName: 'multi-click',
-        functionArgs: [{ type: 'uint128', value: multiClickAmount.toString() }]
+        functionArgs: [{ type: 'uint128', value: multiClickAmount.toString() }],
       });
 
-      setClickCount(prev => prev + multiClickAmount);
+      setClickCount((prev) => prev + multiClickAmount);
       onTxSubmit?.('multi-click', result.txId);
     } catch (err) {
       console.error('Multi-click failed:', err);
@@ -66,7 +66,7 @@ export default function ClickerGame({ onTxSubmit }) {
         contractAddress: DEPLOYER,
         contractName: 'clicker-v2p',
         functionName: 'ping',
-        functionArgs: []
+        functionArgs: [],
       });
 
       onTxSubmit?.('ping', result.txId);

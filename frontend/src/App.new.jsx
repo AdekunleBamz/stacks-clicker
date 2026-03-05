@@ -19,23 +19,26 @@ function AppContent() {
   // Show toast notification
   const showToast = useCallback((message, type = 'info') => {
     const id = Date.now();
-    setToasts(prev => [...prev, { id, message, type }]);
+    setToasts((prev) => [...prev, { id, message, type }]);
     setTimeout(() => {
-      setToasts(prev => prev.filter(t => t.id !== id));
+      setToasts((prev) => prev.filter((t) => t.id !== id));
     }, 4000);
   }, []);
 
   // Handle transaction submission
-  const handleTxSubmit = useCallback((action, txId) => {
-    const tx = {
-      id: txId || `pending-${Date.now()}`,
-      action,
-      status: txId ? 'pending' : 'submitted',
-      time: new Date().toLocaleTimeString()
-    };
-    setTxLog(prev => [tx, ...prev.slice(0, 49)]);
-    showToast(`${action} submitted! 🚀`, 'success');
-  }, [showToast]);
+  const handleTxSubmit = useCallback(
+    (action, txId) => {
+      const tx = {
+        id: txId || `pending-${Date.now()}`,
+        action,
+        status: txId ? 'pending' : 'submitted',
+        time: new Date().toLocaleTimeString(),
+      };
+      setTxLog((prev) => [tx, ...prev.slice(0, 49)]);
+      showToast(`${action} submitted! 🚀`, 'success');
+    },
+    [showToast]
+  );
 
   return (
     <div className="app">
@@ -108,9 +111,7 @@ function AppContent() {
       </footer>
 
       {/* QR Modal for WalletConnect */}
-      {showQRModal && (
-        <WalletConnectQRModal uri={wcUri} onClose={closeQRModal} />
-      )}
+      {showQRModal && <WalletConnectQRModal uri={wcUri} onClose={closeQRModal} />}
 
       {/* Toast Notifications */}
       <Toast toasts={toasts} />
