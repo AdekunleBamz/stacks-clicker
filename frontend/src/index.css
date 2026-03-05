@@ -56,7 +56,7 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 15px;
+  margin-bottom: 16px;
   text-shadow: 0 0 30px rgba(157, 78, 221, 0.3);
   letter-spacing: -1px;
 }
