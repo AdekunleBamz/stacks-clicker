@@ -451,7 +451,7 @@ body {
 /* Empty State */
 .empty-state {
   text-align: center;
-  padding: 48px;
+  padding: 40px 20px;
   color: rgba(154, 154, 168, 0.7);
 }
 
