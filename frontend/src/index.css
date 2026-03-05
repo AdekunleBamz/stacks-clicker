@@ -478,7 +478,7 @@ body {
 
 .toast.success {
   background: var(--success);
-  color: #0f0f1a;
+  color: #050510;
 }
 .toast.error {
   background: var(--danger);
