@@ -450,7 +450,7 @@ body {
 .empty-state {
   text-align: center;
   padding: 48px;
-  color: var(--text-muted);
+  color: rgba(154, 154, 168, 0.7);
 }
 
 /* Toast Notifications */
