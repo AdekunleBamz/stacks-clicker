@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 export default function TipJarCard({
   address,
@@ -10,7 +11,11 @@ export default function TipJarCard({
   handleCustomTip,
 }) {
   return (
-    <div className="contract-card">
+    <motion.div
+      className="contract-card"
+      whileHover={{ y: -5, boxShadow: '0 20px 40px rgba(85, 70, 255, 0.2)' }}
+      transition={{ type: 'spring', stiffness: 300 }}
+    >
       <div className="contract-header">
         <div className="contract-icon tipjar">💰</div>
         <div>
@@ -19,24 +24,28 @@ export default function TipJarCard({
         </div>
       </div>
       <div className="actions">
-        <button
+        <motion.button
           className="action-btn success"
           onClick={handleSelfPing}
           disabled={!address || isLoading('tipjar-self-ping')}
+          whileHover={address && !isLoading('tipjar-self-ping') ? { scale: 1.02 } : {}}
+          whileTap={address && !isLoading('tipjar-self-ping') ? { scale: 0.95 } : {}}
         >
           {isLoading('tipjar-self-ping') ? <span className="spinner"></span> : '🏓'}
           Self Ping
           <span className="cost">0.001 STX</span>
-        </button>
-        <button
+        </motion.button>
+        <motion.button
           className="action-btn warning"
           onClick={handleQuickTip}
           disabled={!address || isLoading('tipjar-quick-tip')}
+          whileHover={address && !isLoading('tipjar-quick-tip') ? { scale: 1.02 } : {}}
+          whileTap={address && !isLoading('tipjar-quick-tip') ? { scale: 0.95 } : {}}
         >
           {isLoading('tipjar-quick-tip') ? <span className="spinner"></span> : '💰'}
           Quick Tip
           <span className="cost">0.002 STX</span>
-        </button>
+        </motion.button>
         <div className="input-group">
           <input
             type="number"
@@ -47,16 +56,18 @@ export default function TipJarCard({
             placeholder="Amount in STX"
           />
         </div>
-        <button
+        <motion.button
           className="action-btn secondary"
           onClick={handleCustomTip}
           disabled={!address || isLoading('tipjar-tip-jar')}
+          whileHover={address && !isLoading('tipjar-tip-jar') ? { scale: 1.02 } : {}}
+          whileTap={address && !isLoading('tipjar-tip-jar') ? { scale: 0.95 } : {}}
         >
           {isLoading('tipjar-tip-jar') ? <span className="spinner"></span> : '💎'}
           Custom Tip
           <span className="cost">{(parseFloat(tipAmount || 0) + 0.001).toFixed(3)} STX</span>
-        </button>
+        </motion.button>
       </div>
-    </div>
+    </motion.div>
   );
 }

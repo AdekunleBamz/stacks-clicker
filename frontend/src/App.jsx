@@ -9,6 +9,7 @@ import ClickerCard from './components/ClickerCard';
 import TipJarCard from './components/TipJarCard';
 import QuickPollCard from './components/QuickPollCard';
 import { useWallet } from './context/WalletContext';
+import { motion } from 'framer-motion';
 
 // ============================================
 // CONFIGURATION - UPDATE THESE AFTER DEPLOYING
@@ -170,13 +171,23 @@ export default function App() {
       <Toaster position="top-right" />
 
       {/* Header */}
-      <header className="header">
+      <motion.header
+        className="header"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         <h1>⚡ Stacks Transaction Hub</h1>
         <p>Seamless blockchain interactions on the Stacks network</p>
-      </header>
+      </motion.header>
 
       {/* Wallet Section */}
-      <section className="wallet-section">
+      <motion.section
+        className="wallet-section"
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+      >
         {!address ? (
           <button className="wallet-btn connect" onClick={connectWallet}>
             🔗 Connect Wallet
@@ -194,13 +205,24 @@ export default function App() {
             </button>
           </>
         )}
-      </section>
+      </motion.section>
 
       {/* Stats Bar */}
-      <PlayerStats stats={stats} txCount={txLog.length} />
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
+        <PlayerStats stats={stats} txCount={txLog.length} />
+      </motion.div>
 
       {/* Contract Cards */}
-      <section className="contracts-grid">
+      <motion.section
+        className="contracts-grid"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.3, staggerChildren: 0.1 }}
+      >
         {/* CLICKER CONTRACT */}
         <ClickerCard
           address={address}
@@ -232,10 +254,16 @@ export default function App() {
           handleVoteYes={handleVoteYes}
           handleVoteNo={handleVoteNo}
         />
-      </section>
+      </motion.section>
 
       {/* Transaction Log */}
-      <TransactionHistory txLog={txLog} />
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+      >
+        <TransactionHistory txLog={txLog} />
+      </motion.div>
 
       {/* Footer */}
       <footer style={{ textAlign: 'center', marginTop: 40, color: '#a0a0a0' }}>
