@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback } from 'react'
-import { openContractCall, showConnect, disconnect } from '@stacks/connect'
+import { useState } from 'react'
+import { openContractCall } from '@stacks/connect'
 import toast, { Toaster } from 'react-hot-toast'
 import { StacksMainnet } from '@stacks/network'
 import {
@@ -10,6 +10,7 @@ import {
 } from '@stacks/transactions'
 import PlayerStats from './components/PlayerStats'
 import TransactionHistory from './components/TransactionHistory'
+import { useWallet } from './context/WalletContext'
 
 // ============================================
 // CONFIGURATION - UPDATE THESE AFTER DEPLOYING
@@ -25,60 +26,16 @@ const CONTRACTS = {
   quickpoll: `${DEPLOYER}.quickpoll`
 }
 
-// App metadata for wallet connection
-const appDetails = {
-  name: 'StacksClicker',
-  icon: window.location.origin + '/favicon.svg',
-}
-
 export default function App() {
-  // State
-  const [address, setAddress] = useState(null)
+  // Global Wallet State
+  const { address, connectWallet, disconnectWallet, appDetails } = useWallet()
+
+  // App State
   const [txLog, setTxLog] = useState([])
   const [loading, setLoading] = useState({})
   const [stats, setStats] = useState({ clicks: 0, tips: 0, votes: 0 })
   const [pollQuestion, setPollQuestion] = useState('')
   const [tipAmount, setTipAmount] = useState('0.001')
-
-  // Check existing connection on mount
-  useEffect(() => {
-    checkConnection()
-  }, [])
-
-  const checkConnection = () => {
-    try {
-      const stored = localStorage.getItem('stacks-session')
-      if (stored) {
-        const userData = JSON.parse(stored)
-        if (userData?.addresses?.mainnet) {
-          setAddress(userData.addresses.mainnet)
-        }
-      }
-    } catch (e) {
-      console.log('No existing connection')
-    }
-  }
-
-  // Connect wallet using Stacks Connect
-  const connectWallet = () => {
-    showConnect({
-      appDetails,
-      onFinish: () => {
-        checkConnection()
-        toast.success('Wallet connected! 🎉')
-      },
-      onCancel: () => {
-        toast.error('Connection cancelled')
-      },
-    })
-  }
-
-  // Disconnect wallet
-  const disconnectWallet = () => {
-    disconnect()
-    setAddress(null)
-    toast('Wallet disconnected', { icon: '👋' })
-  }
 
   // Add transaction to log
   const addTxToLog = (action, txId, status = 'pending') => {
