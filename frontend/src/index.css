@@ -448,6 +448,7 @@ body {
   border-top-color: currentColor;
   border-radius: 50%;
   animation: spin 0.75s linear infinite;
+  will-change: transform;
 }
 
 /* Empty State */
