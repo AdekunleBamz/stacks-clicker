@@ -1,11 +1,12 @@
 import { useState, useEffect, useCallback } from 'react'
 import { openContractCall, showConnect, disconnect } from '@stacks/connect'
+import toast, { Toaster } from 'react-hot-toast'
 import { StacksMainnet } from '@stacks/network'
-import { 
-  uintCV, 
+import {
+  uintCV,
   stringAsciiCV,
   principalCV,
-  PostConditionMode 
+  PostConditionMode
 } from '@stacks/transactions'
 
 // ============================================
@@ -34,7 +35,6 @@ export default function App() {
   const [txLog, setTxLog] = useState([])
   const [loading, setLoading] = useState({})
   const [stats, setStats] = useState({ clicks: 0, tips: 0, votes: 0 })
-  const [toasts, setToasts] = useState([])
   const [pollQuestion, setPollQuestion] = useState('')
   const [tipAmount, setTipAmount] = useState('0.001')
 
@@ -57,25 +57,16 @@ export default function App() {
     }
   }
 
-  // Toast notifications
-  const showToast = useCallback((message, type = 'info') => {
-    const id = Date.now()
-    setToasts(prev => [...prev, { id, message, type }])
-    setTimeout(() => {
-      setToasts(prev => prev.filter(t => t.id !== id))
-    }, 4000)
-  }, [])
-
   // Connect wallet using Stacks Connect
   const connectWallet = () => {
     showConnect({
       appDetails,
       onFinish: () => {
         checkConnection()
-        showToast('Wallet connected! 🎉', 'success')
+        toast.success('Wallet connected! 🎉')
       },
       onCancel: () => {
-        showToast('Connection cancelled', 'error')
+        toast.error('Connection cancelled')
       },
     })
   }
@@ -84,7 +75,7 @@ export default function App() {
   const disconnectWallet = () => {
     disconnect()
     setAddress(null)
-    showToast('Wallet disconnected', 'info')
+    toast('Wallet disconnected', { icon: '👋' })
   }
 
   // Add transaction to log
@@ -102,7 +93,7 @@ export default function App() {
   // Generic contract call handler
   const callContract = async (contract, functionName, args = [], actionName, onSuccess) => {
     if (!address) {
-      showToast('Connect wallet first!', 'error')
+      toast.error('Connect wallet first!')
       return
     }
 
@@ -121,18 +112,18 @@ export default function App() {
         onFinish: (data) => {
           const txId = data.txId
           addTxToLog(actionName, txId, 'success')
-          showToast(`${actionName} submitted! TX: ${txId.slice(0, 10)}...`, 'success')
+          toast.success(`${actionName} submitted! TX: ${txId.slice(0, 10)}...`)
           if (onSuccess) onSuccess()
           setLoading(prev => ({ ...prev, [loadingKey]: false }))
         },
         onCancel: () => {
-          showToast('Transaction cancelled', 'error')
+          toast.error('Transaction cancelled')
           setLoading(prev => ({ ...prev, [loadingKey]: false }))
         }
       })
     } catch (err) {
       console.error(err)
-      showToast(`Error: ${err.message}`, 'error')
+      toast.error(`Error: ${err.message}`)
       setLoading(prev => ({ ...prev, [loadingKey]: false }))
     }
   }
@@ -172,7 +163,7 @@ export default function App() {
   const handleCustomTip = () => {
     const microStx = Math.floor(parseFloat(tipAmount) * 1000000)
     if (microStx < 1) {
-      showToast('Invalid tip amount', 'error')
+      toast.error('Invalid tip amount')
       return
     }
     callContract('tipjar', 'tip-jar', [uintCV(microStx)], `💎 Tip ${tipAmount} STX`, () => {
@@ -189,7 +180,7 @@ export default function App() {
 
   const handleCreatePoll = () => {
     if (!pollQuestion.trim()) {
-      showToast('Enter a poll question!', 'error')
+      toast.error('Enter a poll question!')
       return
     }
     callContract('quickpoll', 'create-poll', [stringAsciiCV(pollQuestion.slice(0, 100))], '📋 Create Poll', () => {
@@ -213,14 +204,7 @@ export default function App() {
 
   return (
     <div className="app">
-      {/* Toast Notifications */}
-      <div className="toast-container">
-        {toasts.map(toast => (
-          <div key={toast.id} className={`toast ${toast.type}`}>
-            {toast.message}
-          </div>
-        ))}
-      </div>
+      <Toaster position="top-right" />
 
       {/* Header */}
       <header className="header">
@@ -281,8 +265,8 @@ export default function App() {
             </div>
           </div>
           <div className="actions">
-            <button 
-              className="action-btn primary" 
+            <button
+              className="action-btn primary"
               onClick={handleClick}
               disabled={!address || isLoading('clicker-click')}
             >
@@ -290,8 +274,8 @@ export default function App() {
               Click
               <span className="cost">0.001 STX</span>
             </button>
-            <button 
-              className="action-btn secondary" 
+            <button
+              className="action-btn secondary"
               onClick={handleMultiClick}
               disabled={!address || isLoading('clicker-multi-click')}
             >
@@ -299,8 +283,8 @@ export default function App() {
               10x Click
               <span className="cost">0.001 STX</span>
             </button>
-            <button 
-              className="action-btn success" 
+            <button
+              className="action-btn success"
               onClick={handlePing}
               disabled={!address || isLoading('clicker-ping')}
             >
@@ -321,8 +305,8 @@ export default function App() {
             </div>
           </div>
           <div className="actions">
-            <button 
-              className="action-btn success" 
+            <button
+              className="action-btn success"
               onClick={handleSelfPing}
               disabled={!address || isLoading('tipjar-self-ping')}
             >
@@ -330,8 +314,8 @@ export default function App() {
               Self Ping
               <span className="cost">0.001 STX</span>
             </button>
-            <button 
-              className="action-btn warning" 
+            <button
+              className="action-btn warning"
               onClick={handleQuickTip}
               disabled={!address || isLoading('tipjar-quick-tip')}
             >
@@ -340,8 +324,8 @@ export default function App() {
               <span className="cost">0.002 STX</span>
             </button>
             <div className="input-group">
-              <input 
-                type="number" 
+              <input
+                type="number"
                 step="0.001"
                 min="0.001"
                 value={tipAmount}
@@ -349,8 +333,8 @@ export default function App() {
                 placeholder="Amount in STX"
               />
             </div>
-            <button 
-              className="action-btn secondary" 
+            <button
+              className="action-btn secondary"
               onClick={handleCustomTip}
               disabled={!address || isLoading('tipjar-tip-jar')}
             >
@@ -371,8 +355,8 @@ export default function App() {
             </div>
           </div>
           <div className="actions">
-            <button 
-              className="action-btn success" 
+            <button
+              className="action-btn success"
               onClick={handlePollPing}
               disabled={!address || isLoading('quickpoll-poll-ping')}
             >
@@ -381,16 +365,16 @@ export default function App() {
               <span className="cost">0.001 STX</span>
             </button>
             <div className="input-group">
-              <input 
-                type="text" 
+              <input
+                type="text"
                 value={pollQuestion}
                 onChange={(e) => setPollQuestion(e.target.value)}
                 placeholder="Enter poll question..."
                 maxLength={100}
               />
             </div>
-            <button 
-              className="action-btn primary" 
+            <button
+              className="action-btn primary"
               onClick={handleCreatePoll}
               disabled={!address || !pollQuestion.trim() || isLoading('quickpoll-create-poll')}
             >
@@ -399,8 +383,8 @@ export default function App() {
               <span className="cost">0.001 STX</span>
             </button>
             <div className="actions-row">
-              <button 
-                className="action-btn success" 
+              <button
+                className="action-btn success"
                 onClick={handleVoteYes}
                 disabled={!address || isLoading('quickpoll-quick-vote-yes')}
               >
@@ -408,8 +392,8 @@ export default function App() {
                 Yes
                 <span className="cost">0.001</span>
               </button>
-              <button 
-                className="action-btn secondary" 
+              <button
+                className="action-btn secondary"
                 onClick={handleVoteNo}
                 disabled={!address || isLoading('quickpoll-quick-vote-no')}
               >
@@ -438,7 +422,7 @@ export default function App() {
                   <div className="tx-action">{tx.action}</div>
                   <div className="tx-id">
                     {tx.id.startsWith('pending') ? 'Awaiting...' : (
-                      <a 
+                      <a
                         href={`https://explorer.hiro.so/txid/${tx.id}?chain=mainnet`}
                         target="_blank"
                         rel="noopener noreferrer"
