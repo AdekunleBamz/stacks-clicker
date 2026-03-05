@@ -9,7 +9,7 @@
   --bg-card: rgba(15, 15, 22, 0.75);
   --text: #ffffff;
   --text-muted: #8b8b9c;
-  --glow-primary: 0 0 20px rgba(157, 78, 221, 0.6);
+  --glow-primary: 0 0 24px rgba(157, 78, 221, 0.65);
   --glow-secondary: 0 0 20px rgba(255, 0, 127, 0.6);
   --glow-tertiary: 0 0 20px rgba(0, 245, 212, 0.6);
 }
