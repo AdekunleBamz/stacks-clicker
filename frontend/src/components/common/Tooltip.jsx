@@ -10,7 +10,7 @@ export default function Tooltip({ text, children }) {
   return (
     <div
       className="tooltip-wrapper"
-      onMouseEnter={() => setIsVisible(true)}
+      onMouseEnter={() => setTimeout(() => setIsVisible(true), 300)}
       onMouseLeave={() => setIsVisible(false)}
       style={{ position: 'relative', display: 'inline-block', width: '100%' }}
     >

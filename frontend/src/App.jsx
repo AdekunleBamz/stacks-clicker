@@ -124,6 +124,13 @@ export default function App() {
     }
   }, [stats]);
 
+  useEffect(() => {
+    const favicon = document.querySelector('link[rel="icon"]');
+    if (favicon) {
+      favicon.href = `/favicon.svg?state=${Date.now()}`;
+    }
+  }, [stats]);
+
   return (
     <div className="app-container" data-theme={theme}>
       <PullToRefresh onRefresh={async () => {
