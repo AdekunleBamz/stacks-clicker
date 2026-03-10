@@ -11,15 +11,25 @@ export default function ActionButton({
   isLoading,
   disabled,
   className = '',
-  cost
+  cost,
+  isError
 }) {
+  const shakeVariants = {
+    shake: {
+      x: [0, -10, 10, -10, 10, 0],
+      transition: { duration: 0.4 }
+    }
+  };
+
   return (
     <motion.button
       className={`action-btn ${className}`}
       onClick={onClick}
       disabled={disabled || isLoading}
-      whileHover={{ scale: 1.02, translateY: -2 }}
-      whileTap={{ scale: 0.98, translateY: 0 }}
+      whileHover={!disabled && !isLoading ? { scale: 1.02, translateY: -2 } : {}}
+      whileTap={!disabled && !isLoading ? { scale: 0.98, translateY: 0 } : {}}
+      animate={isError ? "shake" : ""}
+      variants={shakeVariants}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
     >
       <div className="btn-content">

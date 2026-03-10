@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ActionCard from './common/ActionCard';
 import ActionButton from './common/ActionButton';
 import Tooltip from './common/Tooltip';
@@ -15,8 +15,15 @@ export default function QuickPollCard({
   handleVoteNo,
 }) {
   const { playSound } = useSound();
+  const [errorField, setErrorField] = useState(null);
 
-  const handleAction = (fn) => {
+  const handleAction = (fn, fieldId, validation = () => true) => {
+    if (!address || !validation()) {
+      playSound('error');
+      setErrorField(fieldId);
+      setTimeout(() => setErrorField(null), 500);
+      return;
+    }
     playSound('click');
     fn();
   };
@@ -35,9 +42,10 @@ export default function QuickPollCard({
             icon="🗳️"
             cost="0.001 STX"
             className="success"
-            onClick={() => handleAction(handlePollPing)}
+            onClick={() => handleAction(handlePollPing, 'poll-ping')}
             isLoading={isLoading('quickpoll-poll-ping')}
-            disabled={!address}
+            isError={errorField === 'poll-ping'}
+            disabled={isLoading('quickpoll-poll-ping')}
           />
         </Tooltip>
 
@@ -59,9 +67,10 @@ export default function QuickPollCard({
             icon="📋"
             cost="0.001 STX"
             className="primary"
-            onClick={() => handleAction(handleCreatePoll)}
+            onClick={() => handleAction(handleCreatePoll, 'create-poll', () => pollQuestion.trim().length > 0)}
             isLoading={isLoading('quickpoll-create-poll')}
-            disabled={!address || !pollQuestion.trim()}
+            isError={errorField === 'create-poll'}
+            disabled={isLoading('quickpoll-create-poll')}
           />
         </Tooltip>
 
@@ -72,9 +81,10 @@ export default function QuickPollCard({
               icon="👍"
               cost="0.001"
               className="success"
-              onClick={() => handleAction(handleVoteYes)}
+              onClick={() => handleAction(handleVoteYes, 'vote-yes')}
               isLoading={isLoading('quickpoll-quick-vote-yes')}
-              disabled={!address}
+              isError={errorField === 'vote-yes'}
+              disabled={isLoading('quickpoll-quick-vote-yes')}
             />
           </Tooltip>
           <Tooltip text="Vote NO on the current poll.">
@@ -83,9 +93,10 @@ export default function QuickPollCard({
               icon="👎"
               cost="0.001"
               className="secondary"
-              onClick={() => handleAction(handleVoteNo)}
+              onClick={() => handleAction(handleVoteNo, 'vote-no')}
               isLoading={isLoading('quickpoll-quick-vote-no')}
-              disabled={!address}
+              isError={errorField === 'vote-no'}
+              disabled={isLoading('quickpoll-quick-vote-no')}
             />
           </Tooltip>
         </div>

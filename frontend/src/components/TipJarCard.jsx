@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ActionCard from './common/ActionCard';
 import ActionButton from './common/ActionButton';
 import Tooltip from './common/Tooltip';
@@ -14,8 +14,15 @@ export default function TipJarCard({
   handleCustomTip,
 }) {
   const { playSound } = useSound();
+  const [errorField, setErrorField] = useState(null);
 
-  const handleAction = (fn) => {
+  const handleAction = (fn, fieldId) => {
+    if (!address) {
+      playSound('error');
+      setErrorField(fieldId);
+      setTimeout(() => setErrorField(null), 500);
+      return;
+    }
     playSound('click');
     fn();
   };
@@ -34,9 +41,10 @@ export default function TipJarCard({
             icon="🏓"
             cost="0.001 STX"
             className="success"
-            onClick={() => handleAction(handleSelfPing)}
+            onClick={() => handleAction(handleSelfPing, 'self-ping')}
             isLoading={isLoading('tipjar-self-ping')}
-            disabled={!address}
+            isError={errorField === 'self-ping'}
+            disabled={isLoading('tipjar-self-ping')}
           />
         </Tooltip>
         <Tooltip text="Send a quick 0.001 STX tip.">
@@ -45,9 +53,10 @@ export default function TipJarCard({
             icon="💰"
             cost="0.002 STX"
             className="warning"
-            onClick={() => handleAction(handleQuickTip)}
+            onClick={() => handleAction(handleQuickTip, 'quick-tip')}
             isLoading={isLoading('tipjar-quick-tip')}
-            disabled={!address}
+            isError={errorField === 'quick-tip'}
+            disabled={isLoading('tipjar-quick-tip')}
           />
         </Tooltip>
 
@@ -70,9 +79,10 @@ export default function TipJarCard({
             icon="💎"
             cost={`${(parseFloat(tipAmount || 0) + 0.001).toFixed(3)} STX`}
             className="secondary"
-            onClick={() => handleAction(handleCustomTip)}
+            onClick={() => handleAction(handleCustomTip, 'custom-tip')}
             isLoading={isLoading('tipjar-tip-jar')}
-            disabled={!address}
+            isError={errorField === 'custom-tip'}
+            disabled={isLoading('tipjar-tip-jar')}
           />
         </Tooltip>
       </div>
