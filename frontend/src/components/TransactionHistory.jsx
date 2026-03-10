@@ -1,535 +1,82 @@
-import React, { useState, memo, useCallback, useMemo } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { notify } from '../utils/toast';
 import SkeletonLoader from './common/SkeletonLoader';
-import SearchInput from './common/SearchInput';
-import TransactionItem from './TransactionItem';
-import BaseModal from './common/BaseModal';
-import { useDebounce } from '../hooks/useDebounce';
-import { useClipboard } from '../hooks/useClipboard';
-import { STACKS_NETWORK as DEFAULT_NETWORK } from '../utils/constants';
-
-function escapeCsvValue(value) {
-  const normalized = String(value ?? '').replace(/"/g, '""');
-  return `"${normalized}"`;
-}
-
-const DEFAULT_NETWORK =
-  String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
-    ? 'testnet'
-    : 'mainnet';
-
-/**
- * Error fallback component for transaction history
- */
-function TransactionHistoryError({ error, onRetry }) {
-  return (
-    <div className="tx-history-error glass-card" role="alert">
-      <div className="error-icon">⚠️</div>
-      <h4>Failed to load transaction history</h4>
-      <p className="error-message">{error?.message || 'An unexpected error occurred'}</p>
-      <button
-        type="button"
-        className="retry-btn primary-button btn-sm"
-        onClick={onRetry}
-        aria-label="Retry loading transaction history"
-      >
-        Retry
-      </button>
-    </div>
-  );
-}
-
-TransactionHistoryError.propTypes = {
-  error: PropTypes.instanceOf(Error),
-  onRetry: PropTypes.func.isRequired,
-};
-
-/**
- * Loading skeleton for transaction history
- */
-function TransactionHistorySkeleton() {
-  return (
-    <section className="tx-log glass-card" aria-label="Loading transaction history">
-      <div className="log-header">
-        <div className="skeleton-title">
-          <SkeletonLoader height="24px" width="180px" borderRadius="8px" />
-        </div>
-        <div className="skeleton-search">
-          <SkeletonLoader height="40px" width="250px" borderRadius="8px" />
-        </div>
-        <div className="skeleton-filters">
-          <SkeletonLoader height="36px" width="120px" borderRadius="6px" />
-          <SkeletonLoader height="36px" width="120px" borderRadius="6px" />
-        </div>
-      </div>
-      <div className="tx-list" role="list">
-        {[...Array(5)].map((_, i) => (
-          <div key={i} className="tx-item-skeleton" role="listitem">
-            <SkeletonLoader height="48px" borderRadius="12px" />
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
 
 /**
  * Component to display a list of recent transactions with status indicators.
- * Includes error boundary, loading states, and comprehensive filtering.
- *
- * @component
- * @param {Object} props - Component props
- * @param {Array} props.txLog - Array of transaction objects
- * @param {boolean} [props.isLoading=false] - Whether the component is in loading state
- * @param {boolean} [props.showError=false] - Whether to show error state
- * @param {Function} [props.onRetry] - Callback to retry loading
- * @returns {JSX.Element} The rendered transaction history section
- *
- * @example
- * ```jsx
- * <TransactionHistory txLog={transactions} isLoading={loading} />
- * ```
+ * @param {Object} props - Component props.
+ * @param {Array} props.txLog - Array of transaction objects.
+ * @returns {JSX.Element} The rendered transaction history section.
  */
-function TransactionHistory({ txLog, isLoading = false, showError = false, onRetry }) {
-  const [searchTerm, setSearchTerm] = useState('');
-  const debouncedSearchTerm = useDebounce(searchTerm, 300);
-  const [selectedTx, setSelectedTx] = useState(null);
-  const [contextMenu, setContextMenu] = useState(null);
-  const [filterStatus, setFilterStatus] = useState('all');
-  const [filterAction, setFilterAction] = useState('all');
-  const [visibleItems, setVisibleItems] = useState(10);
-  const [modalView, setModalView] = useState('summary');
-  const [hasError, setHasError] = useState(false);
-  const { copyToClipboard } = useClipboard();
-
-  const handleModalClose = useCallback(() => {
-    setSelectedTx(null);
-    setModalView('summary');
-  }, []);
-
-  const handleContextMenu = useCallback((e, tx) => {
-    e.preventDefault();
-    setContextMenu({
-      x: e.clientX,
-      y: e.clientY,
-      tx,
-    });
-  }, []);
-
-  const closeContextMenu = useCallback(() => setContextMenu(null), []);
-
-  // Error boundary logic
-  const filteredLog = useMemo(() => {
-    try {
-      return txLog.filter((tx) => {
-        const actionText = String(tx.action ?? '').toLowerCase();
-        const idText = String(tx.id ?? '').toLowerCase();
-        const search = debouncedSearchTerm.toLowerCase();
-        const matchesSearch =
-          actionText.includes(search) ||
-          idText.includes(search);
-        const matchesStatus = filterStatus === 'all' || tx.status === filterStatus;
-        const matchesAction = filterAction === 'all' || tx.action.toLowerCase().includes(filterAction.toLowerCase());
-        return matchesSearch && matchesStatus && matchesAction;
-      });
-    } catch (error) {
-      setHasError(true);
-      notify.error('Error filtering transactions');
-      return [];
-    }
-  }, [txLog, debouncedSearchTerm, filterStatus, filterAction]);
-
-  const highlightText = useCallback((text, highlight) => {
-    if (!highlight.trim()) return text;
-    const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
-    return (
-      <span>
-        {parts.map((part, i) =>
-          part.toLowerCase() === highlight.toLowerCase() ? (
-            <mark key={i} className="search-highlight">
-              {part}
-            </mark>
-          ) : (
-            part
-          )
-        )}
-      </span>
-    );
-  }, []);
-
-  const exportData = useCallback(
-    (format) => {
-      try {
-        let content = '';
-        const filename = `stacks-tx-history-${new Date().toISOString().split('T')[0]}`;
-
-        if (format === 'json') {
-          content = JSON.stringify(txLog, null, 2);
-        } else if (format === 'csv') {
-          const headers = ['Action', 'Time', 'ID', 'Status', 'Network'];
-          const rows = txLog.map((tx) =>
-            [tx.action, tx.time, tx.id, tx.status, tx.network || ''].map(escapeCsvValue).join(',')
-          );
-          content = [headers.join(','), ...rows].join('\n');
-        }
-
-        const blob = new Blob([content], {
-          type: format === 'json' ? 'application/json' : 'text/csv',
-        });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = `${filename}.${format}`;
-        link.click();
-        URL.revokeObjectURL(url);
-        notify.success(`Exported ${txLog.length} transactions as ${format.toUpperCase()}`);
-      } catch (error) {
-        notify.error('Failed to export transactions');
-      }
-    },
-    [txLog]
-  );
-
-  const copyText = useCallback(async (value) => {
-    copyToClipboard(value);
-  }, [copyToClipboard]);
-
-  const openExplorer = useCallback((tx) => {
-    if (!tx.explorerUrl) {
-      notify.error('Pending transactions do not have an explorer link yet');
-      return;
-    }
-
-    window.open(tx.explorerUrl, '_blank', 'noopener,noreferrer');
-  }, []);
-
-  const handleCopy = useCallback((id) => {
-    copyText(id, 'ID');
-  }, [copyText]);
-
-  // Show error state
-  if (showError || hasError) {
-    return <TransactionHistoryError error={new Error('Failed to load transactions')} onRetry={() => { setHasError(false); onRetry?.(); }} />;
-  }
-
-  // Show loading state
-  if (isLoading) {
-    return <TransactionHistorySkeleton />;
-  }
-
+export default function TransactionHistory({ txLog }) {
   return (
-    <section className="tx-log glass-card" aria-labelledby="tx-history-title">
+    <section className="tx-log" aria-labelledby="tx-history-title">
       <div className="log-header">
-        <h3 id="tx-history-title" aria-label="Recent Account Activity Log">📜 Recent Activity</h3>
-        <SearchInput
-          value={searchTerm}
-          onChange={setSearchTerm}
-          onClear={() => setSearchTerm('')}
-          placeholder="Search action or ID..."
-          aria-label="Search transaction history"
-          count={filteredLog.length}
-        />
-        <div className="tx-export-actions" role="toolbar" aria-label="Transaction log controls">
-          <div className="filter-group" role="group" aria-label="Filter transactions">
-            <select
-              className="tx-filter-select input-field"
-              value={filterStatus}
-              onChange={(e) => setFilterStatus(e.target.value)}
-              aria-label="Filter by transaction status"
-            >
-              <option value="all">All Statuses</option>
-              <option value="success">Successful</option>
-              <option value="pending">Processing</option>
-              <option value="failed">Failed</option>
-            </select>
-            <select
-              className="tx-filter-select input-field"
-              value={filterAction}
-              onChange={(e) => setFilterAction(e.target.value)}
-              aria-label="Filter by action type"
-            >
-              <option value="all">All Action Types</option>
-              <option value="Click">Clicks</option>
-              <option value="Tip">Tips</option>
-              <option value="Vote">Votes</option>
-              <option value="Ping">Pings</option>
-            </select>
-          </div>
-          <div className="export-group" role="group" aria-label="Export transaction data">
-            <button
-              type="button"
-              className="export-btn secondary-button btn-sm"
-              onClick={() => exportData('json')}
-              aria-label="Download transaction history as JSON file"
-              title="Export as JSON"
-            >
-              JSON
-            </button>
-            <button
-              type="button"
-              className="export-btn secondary-button btn-sm"
-              onClick={() => exportData('csv')}
-              aria-label="Download transaction history as CSV file"
-              title="Export as CSV"
-            >
-              CSV
-            </button>
-          </div>
-        </div>
+        <h3 id="tx-history-title">📜 Recent Activity</h3>
+        <span className="tx-count-badge">{txLog.length}</span>
       </div>
 
-      <AnimatePresence>
-        {contextMenu && (
-          <div key="ctx-wrapper">
-            <div className="context-menu-backdrop" onClick={closeContextMenu} aria-hidden="true" />
-            <motion.div
-              className="context-menu"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              style={{ top: contextMenu.y, left: contextMenu.x }}
-              role="menu"
-              aria-label="Transaction actions"
-            >
-              <button
-                type="button"
-                role="menuitem"
-                title="View full diagnostics payload"
-                onClick={() => {
-                  setSelectedTx(contextMenu.tx);
-                  closeContextMenu();
-                }}
-              >
-                🔍 View Details
-              </button>
-              <button
-                type="button"
-                role="menuitem"
-                onClick={() => {
-                  copyText(contextMenu.tx.id, 'ID');
-                  closeContextMenu();
-                }}
-              >
-                📋 Copy ID
-              </button>
-              {contextMenu.tx.explorerUrl && (
-                <button
-                  type="button"
-                  role="menuitem"
-                  onClick={() => {
-                    openExplorer(contextMenu.tx);
-                    closeContextMenu();
-                  }}
-                >
-                  🌐 View on Explorer
-                </button>
-              )}
-            </motion.div>
-          </div>
-        )}
-        {selectedTx && (
-          <BaseModal
-            isOpen
-            onClose={handleModalClose}
-            title={
-              <div className="modal-breadcrumbs">
-                <button
-                  type="button"
-                  className={`breadcrumb-item ${modalView === 'summary' ? 'active' : ''}`}
-                  onClick={() => setModalView('summary')}
-                >
-                  Summary
-                </button>
-              </div>
-              <div className="modal-body">
-                {modalView === 'summary' ? (
-                  <div className="summary-view">
-                    <div className="detail-row">
-                      <label>Action Type</label>
-                      <span className="action-value">{selectedTx.action}</span>
-                    </div>
-                    <div className="detail-row">
-                      <label>Time of Action</label>
-                      <span className="time-value">{selectedTx.time}</span>
-                    </div>
-                    <div className="detail-row">
-                      <label>Transaction ID</label>
-                      <code className="tx-id-full" title={selectedTx.id}>
-                        {selectedTx.id}
-                      </code>
-                    </div>
-                    <div className="detail-row">
-                      <label>Transaction Status</label>
-                      <span className={`status-badge ${selectedTx.status}`}>
-                        {selectedTx.status}
-                      </span>
-                    </div>
-                    <div className="detail-row">
-                      <label>Network</label>
-                      <span>{selectedTx.network || DEFAULT_NETWORK}</span>
-                    </div>
-                    <button type="button" className="text-btn mt-2" onClick={() => setModalView('raw')}>
-                      View Technical Raw Data ↗
-                    </button>
-                  </div>
-                ) : (
-                  <div className="detail-row full">
-                    <label>Raw Metadata</label>
-                    <pre className="raw-json">
-                      {JSON.stringify(
-                        {
-                          id: selectedTx.id,
-                          action: selectedTx.action,
-                          status: selectedTx.status,
-                          network: selectedTx.network || DEFAULT_NETWORK,
-                          submittedAt: selectedTx.submittedAt || null,
-                          explorerUrl: selectedTx.explorerUrl || null,
-                          tx_id: selectedTx.id,
-                          timestamp: selectedTx.time,
-                        },
-                        null,
-                        2
-                      )}
-                    </pre>
-                  </div>
-                )}
-              </div>
-            }
-            className="tx-details-modal"
-            footer={
-              selectedTx.explorerUrl ? (
-                <a
-                  href={selectedTx.explorerUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="action-btn primary-button"
-                  style={{ textDecoration: 'none', width: '100%', justifyContent: 'center' }}
-                >
-                  View on Explorer ↗
-                </a>
-              ) : (
-                <button type="button" className="action-btn primary-button" disabled>
-                  Explorer unavailable
-                </button>
-              )
-            }
-          >
-            <div className="modal-body-content">
-              {modalView === 'summary' ? (
-                <div className="summary-view">
-                  <div className="detail-row">
-                    <label>Action Type</label>
-                    <span className="action-value">{selectedTx.action}</span>
-                  </div>
-                  <div className="detail-row">
-                    <label>Time of Action</label>
-                    <span className="time-value">{selectedTx.time}</span>
-                  </div>
-                  <div className="detail-row">
-                    <label>Transaction ID</label>
-                    <code className="tx-id-full" title={selectedTx.id}>
-                      {selectedTx.id}
-                    </code>
-                  </div>
-                  <div className="detail-row">
-                    <label>Transaction Status</label>
-                    <span className={`status-badge ${selectedTx.status}`}>
-                      {selectedTx.status}
-                    </span>
-                  </div>
-                  <div className="detail-row">
-                    <label>Network</label>
-                    <span>{selectedTx.network || DEFAULT_NETWORK}</span>
-                  </div>
-                  <button type="button" className="text-btn mt-2 ghost-button btn-sm" onClick={() => setModalView('raw')}>
-                    View Technical Raw Data ↗
-                  </button>
-                </div>
-              ) : (
-                <div className="detail-row full">
-                  <label>Raw Metadata</label>
-                  <pre className="raw-json">
-                    {JSON.stringify(
-                      {
-                        id: selectedTx.id,
-                        action: selectedTx.action,
-                        status: selectedTx.status,
-                        network: selectedTx.network || DEFAULT_NETWORK,
-                        submittedAt: selectedTx.submittedAt || null,
-                        explorerUrl: selectedTx.explorerUrl || null,
-                        tx_id: selectedTx.id,
-                        timestamp: selectedTx.time,
-                      },
-                      null,
-                      2
-                    )}
-                  </pre>
-                </div>
-              )}
-            </div>
-          </BaseModal>
-        )}
-      </AnimatePresence>
-
-      <div className="tx-list" role="list">
+      <div className="tx-list">
         <AnimatePresence mode="popLayout">
-          {filteredLog.length === 0 ? (
+          {txLog.length === 0 ? (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              key="empty"
               className="empty-state"
-              role="status"
-              aria-live="polite"
             >
-              <div className="empty-icon">{searchTerm ? '🔍' : '📂'}</div>
-              <p className="empty-copy">
-                {searchTerm
-                  ? `No matches for "${searchTerm}".`
-                  : 'No transactions yet. Submit a click, tip, or vote to populate this feed.'}
-              </p>
-              {searchTerm && (
-                <button type="button" className="text-btn mt-2" onClick={() => setSearchTerm('')}>
-                  Reset search
-                </button>
-              )}
-              {!searchTerm && (
-                <div className="skeleton-placeholder" aria-hidden="true">
-                  <SkeletonLoader height="60px" borderRadius="12px" className="mb-2" />
-                  <SkeletonLoader height="60px" borderRadius="12px" opacity={0.5} />
-                </div>
-              )}
-              {!searchTerm && <p className="empty-helper">Tip: Keyboard shortcuts are C for click and T for tip.</p>}
+              <div className="empty-icon">📂</div>
+              <p>No transactions yet.</p>
+              <div className="skeleton-placeholder">
+                <SkeletonLoader height="60px" borderRadius="12px" className="mb-2" />
+                <SkeletonLoader height="60px" borderRadius="12px" opacity={0.5} />
+              </div>
             </motion.div>
           ) : (
-            filteredLog.slice(0, visibleItems).map((tx) => (
-              <TransactionItem
+            txLog.map((tx) => (
+              <motion.div
                 key={tx.id}
-                tx={tx}
-                searchTerm={searchTerm}
-                highlightText={highlightText}
-                onDetails={setSelectedTx}
-                onCopy={handleCopy}
-                onContextMenu={handleContextMenu}
-                onOpenExplorer={openExplorer}
-              />
+                className={`tx-item ${tx.status}`}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                layout
+              >
+                <div className="tx-status-dot" aria-hidden="true" />
+                <div className="tx-main">
+                  <div className="tx-header">
+                    <span className="tx-action-label">{tx.action}</span>
+                    <span className="tx-timestamp">{tx.time}</span>
+                  </div>
+                  <div className="tx-status-visualizer">
+                    <div className="status-steps">
+                      <div className="step active">
+                        <span className="step-dot"></span>
+                        <span className="step-label">Submitted</span>
+                      </div>
+                      <div className={`step ${tx.id.startsWith('pending') ? 'pending' : 'active'}`}>
+                        <span className="step-dot"></span>
+                        <span className="step-label">Mempool</span>
+                      </div>
+                      <div className={`step ${tx.id.startsWith('pending') ? '' : 'active'}`}>
+                        <span className="step-dot"></span>
+                        <span className="step-label">Confirmed</span>
+                      </div>
+                    </div>
+                    {!tx.id.startsWith('pending') && (
+                      <a
+                        href={`https://explorer.hiro.so/txid/${tx.id}?chain=mainnet`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="tx-explorer-link"
+                      >
+                        {tx.id.slice(0, 8)}...{tx.id.slice(-6)} ↗
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
             ))
           )}
         </AnimatePresence>
-        {filteredLog.length > visibleItems && (
-          <button
-            type="button"
-            className="load-more-btn secondary-button"
-            style={{ width: '100%', marginTop: '1rem' }}
-            onClick={() => setVisibleItems((prev) => prev + 10)}
-            aria-label={`Show ${Math.min(10, filteredLog.length - visibleItems)} more transactions`}
-          >
-            Load More Activity ({filteredLog.length - visibleItems} remaining)
-          </button>
-        )}
       </div>
     </section>
   );
