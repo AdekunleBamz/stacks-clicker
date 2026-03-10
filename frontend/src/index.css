@@ -456,6 +456,102 @@ body::before {
   border-color: var(--primary);
 }
 
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.modal-header h4 {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.detail-row.full {
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.detail-row label {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.tx-id-full {
+  font-family: monospace;
+  font-size: 0.75rem;
+  background: var(--bg-input);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  word-break: break-all;
+  max-width: 60%;
+  text-align: right;
+}
+
+.status-badge {
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 10px;
+  text-transform: uppercase;
+}
+
+.status-badge.success { background: rgba(16, 185, 129, 0.2); color: var(--success); }
+.status-badge.pending { background: rgba(245, 158, 11, 0.2); color: var(--warning); }
+
+.raw-json {
+  background: #0a0a0f;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  font-size: 0.7rem;
+  color: #a5b4fc;
+  overflow-x: auto;
+  margin: 0;
+}
+
+.tx-actions-inline {
+  margin: 0.5rem 0;
+}
+
+.text-btn {
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
 .tx-count-badge {
   background: var(--primary);
   padding: 4px 10px;

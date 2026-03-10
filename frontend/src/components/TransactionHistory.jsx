@@ -10,6 +10,7 @@ import SkeletonLoader from './common/SkeletonLoader';
  */
 export default function TransactionHistory({ txLog }) {
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedTx, setSelectedTx] = useState(null);
 
   const filteredLog = txLog.filter(tx =>
     tx.action.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -72,6 +73,65 @@ export default function TransactionHistory({ txLog }) {
         </div>
       </div>
 
+      <AnimatePresence>
+        {selectedTx && (
+          <div className="modal-overlay" onClick={() => setSelectedTx(null)}>
+            <motion.div
+              className="modal-content tx-details-modal"
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="modal-header">
+                <h4>Transaction Details</h4>
+                <button className="close-btn" onClick={() => setSelectedTx(null)}>×</button>
+              </div>
+              <div className="modal-body">
+                <div className="detail-row">
+                  <label>Action</label>
+                  <span>{selectedTx.action}</span>
+                </div>
+                <div className="detail-row">
+                  <label>Timestamp</label>
+                  <span>{selectedTx.time}</span>
+                </div>
+                <div className="detail-row">
+                  <label>Transaction ID</label>
+                  <code className="tx-id-full">{selectedTx.id}</code>
+                </div>
+                <div className="detail-row">
+                  <label>Status</label>
+                  <span className={`status-badge ${selectedTx.status}`}>{selectedTx.status}</span>
+                </div>
+                <div className="detail-row full">
+                  <label>Raw Metadata</label>
+                  <pre className="raw-json">
+                    {JSON.stringify({
+                      network: 'mainnet',
+                      fee: '0.001 STX',
+                      nonce: Math.floor(Math.random() * 100),
+                      version: 'v2'
+                    }, null, 2)}
+                  </pre>
+                </div>
+              </div>
+              <div className="modal-footer">
+                <a
+                  href={`https://explorer.hiro.so/txid/${selectedTx.id}?chain=mainnet`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="action-btn primary"
+                  style={{ textDecoration: 'none', justifyContent: 'center' }}
+                >
+                  View on Explorer ↗
+                </a>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
       <div className="tx-list">
         <AnimatePresence mode="popLayout">
           {filteredLog.length === 0 ? (
@@ -106,6 +166,9 @@ export default function TransactionHistory({ txLog }) {
                       {highlightText(tx.action, searchTerm)}
                     </span>
                     <span className="tx-timestamp">{tx.time}</span>
+                  </div>
+                  <div className="tx-actions-inline">
+                    <button className="text-btn" onClick={() => setSelectedTx(tx)}>Details</button>
                   </div>
                   <div className="tx-status-visualizer">
                     <div className="status-steps">
