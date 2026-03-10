@@ -158,6 +158,7 @@ export default function App() {
           </div>
 
           <div className="wallet-section">
+            <NetworkHeartbeat />
             <button
               className="theme-toggle"
               onClick={toggleTheme}
