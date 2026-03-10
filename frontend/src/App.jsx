@@ -1,230 +1,182 @@
-import React, { useState, useCallback } from 'react';
-import { WalletProvider, useWallet } from './context/WalletContext';
-import ConnectButton from './components/ConnectButton';
-import WalletConnectQRModal from './components/WalletConnectQRModal';
-import ClickerGame from './components/ClickerGame';
-import TipJar from './components/TipJar';
-import QuickPoll from './components/QuickPoll';
-import TransactionLog from './components/TransactionLog';
-import Toast from './components/Toast';
+import { useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
+import PlayerStats from './components/PlayerStats';
+import TransactionHistory from './components/TransactionHistory';
+import ClickerCard from './components/ClickerCard';
+import TipJarCard from './components/TipJarCard';
+import QuickPollCard from './components/QuickPollCard';
+import { useWallet } from './context/WalletContext';
+import { motion, AnimatePresence } from 'framer-motion';
+import ParticleOverlay from './components/common/ParticleOverlay';
+
+// Hooks
+import { useClicker } from './hooks/useClicker';
+import { useTipJar } from './hooks/useTipJar';
+import { useQuickPoll } from './hooks/useQuickPoll';
 
 /**
- * Main App Content (inside WalletProvider)
+ * Main application component for the Stacks Transaction Hub.
+ * Manages global state, contract interaction via custom hooks, and UI layout.
+ * @returns {JSX.Element} The rendered application.
  */
 export default function App() {
-  // Global Contexts
-  const { address } = useWallet();
-  const { lang, setLang } = useI18n();
-  const { playSound } = useSound();
-  const stacksNetwork = (import.meta.env.VITE_STACKS_NETWORK || 'mainnet').toLowerCase();
-  const explorerChain = stacksNetwork === 'testnet' ? 'testnet' : 'mainnet';
+  // Global Wallet State
+  const { address, connectWallet, disconnectWallet } = useWallet();
 
   // Application State
   const [txLog, setTxLog] = useState([]);
-  const [toasts, setToasts] = useState([]);
+  const [stats, setStats] = useState({ clicks: 0, tips: 0, votes: 0 });
+  const [particleTrigger, setParticleTrigger] = useState(0);
 
-  // Show toast notification
-  const showToast = useCallback((message, type = 'info') => {
-    const id = Date.now();
-    setToasts(prev => [...prev, { id, message, type }]);
-    setTimeout(() => {
-      setToasts(prev => prev.filter(t => t.id !== id));
-    }, 4000);
-  }, []);
-
-  /**
-   * Effect to synchronize the HTML data-theme attribute with the current application theme.
-   */
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
-
-  /**
-   * Toggles between 'light' and 'dark' themes.
-   */
-  const toggleTheme = useCallback(() => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
-  }, [setTheme]);
-
-  /**
-   * Adds a transaction record to the local session log and triggers UI notifications.
-   *
-   * @param {string} action - Human-readable label for the interaction (e.g., '🎯 Click')
-   * @param {string} txId - The unique transaction hash returned from the Stacks network
-   * @param {string} [status='success'] - Current lifecycle state of the transaction
-   * @returns {Object} The formatted transaction object
-   */
-  const addTxToLog = useCallback(
-    (action, txId, status = 'success') => {
-      const submittedAt = new Date();
-      const isPending = !txId || status === 'pending';
-      const tx = {
-        id: txId || `pending-${Date.now()}`,
-        action,
-        status,
-        time: submittedAt.toLocaleTimeString(),
-        submittedAt: submittedAt.toISOString(),
-        network: explorerChain,
-        explorerUrl: isPending ? null : `https://explorer.hiro.so/txid/${txId}?chain=${explorerChain}`,
-        isPending,
-      };
-      setTxLog((prev) => [tx, ...prev.slice(0, 49)]); // Maintain last 50 TXs
-      setParticleTrigger((prev) => prev + 1);
-      playSound('success');
-
-      notify.custom(`${action} submitted!`, action.split(' ')[0]);
-      return tx;
-    },
-    [explorerChain, playSound]
-  );
-
-  /**
-   * Unified interaction interface provided by the useInteractions collector.
-   * Centralizes callbacks for all game-related contract calls.
-   */
-  const { clicker, tipjar, quickpoll, pingAll } = useInteractions({
-    onTxSubmit: (action, txId) => {
-      addTxToLog(action, txId);
-      const normalizedAction = String(action).toLowerCase();
-      // Update local reactive stats for immediate feedback (optimistic logic)
-      if (normalizedAction.includes('click')) {
-        setStats((prev) => ({ ...prev, clicks: prev.clicks + 1 }));
-      } else if (normalizedAction.includes('tip')) {
-        setStats((prev) => ({ ...prev, tips: prev.tips + 1 }));
-      } else if (normalizedAction.includes('vote')) {
-        setStats((prev) => ({ ...prev, votes: prev.votes + 1 }));
+  // Add transaction to log
+  const addTxToLog = (action, txId, status = 'success') => {
+    const tx = {
+      id: txId || `pending-${Date.now()}`,
+      action,
+      status,
+      time: new Date().toLocaleTimeString(),
+    };
+    setTxLog((prev) => [tx, ...prev.slice(0, 49)]);
+    setParticleTrigger(prev => prev + 1);
+    toast.success(`${action} submitted!`, {
+      icon: action.split(' ')[0], // Use the emoji from action
+      style: {
+        borderRadius: '12px',
+        background: '#1e1b4b',
+        color: '#fff',
+        border: '1px solid rgba(255,255,255,0.1)'
       }
-    },
+    });
+    return tx;
+  };
+
+  // Initialize Hooks
+  const clicker = useClicker({
+    onTxSubmit: (action, txId) => {
+      addTxToLog('🎯 Click', txId);
+      setStats(prev => ({ ...prev, clicks: prev.clicks + 1 }));
+    }
   });
 
-  /**
-   * Global keyboard accessibility shortcuts.
-   * 'C' for Click, 'T' for Quick Tip.
-   */
-  useKeyboardShortcuts({
-    isEnabled: !!address,
-    actions: {
-      click: clicker.click,
-      tip: tipjar.tip,
-    },
-    playSound,
+  const tipjar = useTipJar({
+    onTxSubmit: (action, txId) => {
+      addTxToLog('💰 Tip', txId);
+      setStats(prev => ({ ...prev, tips: prev.tips + 1 }));
+    }
   });
 
-  useEffect(() => {
-    const handleGlobalEsc = (e) => {
-      if (e.key === 'Escape') {
-        setCelebration(null);
-        document.getElementById('main-content')?.focus();
+  const quickpoll = useQuickPoll({
+    onTxSubmit: (action, txId) => {
+      addTxToLog('🗳️ Vote', txId);
+      setStats(prev => ({ ...prev, votes: prev.votes + 1 }));
+    }
+  });
+
+  // Keyboard Shortcuts
+  useState(() => {
+    const handleKeyDown = (e) => {
+      // Ignore if typing in an input
+      if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') return;
+
+      if (e.key.toLowerCase() === 'c') {
+        clicker.click();
+      }
+      if (e.key.toLowerCase() === 't') {
+        tipjar.quickTip();
       }
     };
-    window.addEventListener('keydown', handleGlobalEsc);
-    return () => window.removeEventListener('keydown', handleGlobalEsc);
-  }, []);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  });
 
-  /**
-   * Effect to monitor interaction milestones and trigger celebrations.
-   * Scales visual feedback (particles) during significant achievements.
-   */
-  useEffect(() => {
-    const milestones = [10, 50, 100, 500];
-    const total = stats.clicks + stats.tips + stats.votes;
-    if (milestones.includes(total) && total > 0) {
-      setCelebration(`Level Up: ${total} Interactions!`);
-      setParticleTrigger((prev) => prev + 5); // Execute a massive burst
-      window.clearTimeout(celebrationTimeoutRef.current);
-      celebrationTimeoutRef.current = window.setTimeout(() => setCelebration(null), 3000);
-    }
-
-    return () => window.clearTimeout(celebrationTimeoutRef.current);
-  }, [stats]);
-
-  /**
-   * Effect to dynamically update the document title based on interaction activity.
-   */
-  useEffect(() => {
-    const total = stats.clicks + stats.tips + stats.votes;
-    document.title = total > 0 ? `(${total}) Stacks Clicker` : 'Stacks Clicker';
-  }, [stats]);
-
-  const MilestoneCelebration = React.lazy(() => import('./components/MilestoneCelebration'));
-
-  // Theme Management
-  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
+  // Milestone Celebration
+  const [celebration, setCelebration] = useState(null);
   useState(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+    const milestones = [10, 50, 100, 500];
+    const checkMilestones = () => {
+      const total = stats.clicks + stats.tips + stats.votes;
+      if (milestones.includes(total)) {
+        setCelebration(`Level Up: ${total} Interactions!`);
+        setParticleTrigger(prev => prev + 5); // Massive burst
+        setTimeout(() => setCelebration(null), 3000);
+      }
+    };
+    checkMilestones();
+  }, [stats]);
 
   return (
-    <div className="app">
-      {/* Header */}
-      <header className="header">
+    <div className="app-container">
+      <Toaster position="top-right" />
+      <ParticleOverlay trigger={particleTrigger} />
+
+      <AnimatePresence>
+        {celebration && (
+          <motion.div
+            className="milestone-celebration"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.5 }}
+          >
+            <div className="milestone-text">{celebration}</div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <header className="app-header">
         <div className="header-content">
           <div className="logo">
-            <span className="logo-icon">🎮</span>
-            <h1>StacksClicker</h1>
+            <motion.div
+              className="logo-glow"
+              animate={{ rotate: [0, 5, -5, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 2L4 16L16 30L28 16L16 2Z" fill="url(#logo-grad)" />
+                <path d="M16 6L8 16L16 26L24 16L16 6Z" fill="white" fillOpacity="0.2" />
+                <defs>
+                  <linearGradient id="logo-grad" x1="4" y1="2" x2="28" y2="30" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="#6366f1" />
+                    <stop offset="1" stopColor="#a855f7" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </motion.div>
+            <span className="logo-text">Stacks Clicker V2</span>
           </div>
-          <ConnectButton />
+
+          <div className="wallet-section">
+            {address ? (
+              <div className="wallet-info">
+                <span className="address-badge">{address.slice(0, 6)}...{address.slice(-4)}</span>
+                <button className="btn-disconnect" onClick={disconnectWallet}>Disconnect</button>
+              </div>
+            ) : (
+              <button className="btn-connect" onClick={connectWallet}>Connect Wallet</button>
+            )}
+          </div>
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="main">
-        {!isConnected ? (
-          <div className="welcome-screen">
-            <h2>Welcome to StacksClicker!</h2>
-            <p>Connect your wallet to start playing</p>
-            <div className="features">
-              <div className="feature">
-                <span>🎮</span>
-                <h3>Clicker Game</h3>
-                <p>Build click streaks and compete for the highest score</p>
-              </div>
-              <div className="feature">
-                <span>💰</span>
-                <h3>TipJar</h3>
-                <p>Send micro-tips to support your favorite creators</p>
-              </div>
-              <div className="feature">
-                <span>🗳️</span>
-                <h3>QuickPoll</h3>
-                <p>Create and vote on community polls</p>
-              </div>
+      <main className="app-main">
+        <div className="main-grid">
+          <section className="interaction-section">
+            <h2 className="section-title">Interactions</h2>
+            <div className="cards-container">
+              <ClickerCard address={address} clicker={clicker} />
+              <TipJarCard address={address} tipjar={tipjar} />
+              <QuickPollCard address={address} quickpoll={quickpoll} />
             </div>
-          </div>
-        ) : (
-          <div className="games-grid">
-            <ClickerGame onTxSubmit={handleTxSubmit} />
-            <TipJar onTxSubmit={handleTxSubmit} />
-            <QuickPoll onTxSubmit={handleTxSubmit} />
-          </div>
-        )}
+          </section>
 
-        {/* Transaction Log */}
-        <TransactionLog transactions={txLog} />
+          <aside className="stats-aside">
+            <PlayerStats stats={stats} />
+            <TransactionHistory txLog={txLog} />
+          </aside>
+        </div>
       </main>
 
-      {/* Footer */}
-      <footer className="footer">
-        <p>Built on Stacks • Powered by Clarity</p>
-        <div className="footer-links">
-          <a 
-            href="https://explorer.hiro.so/address/SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N?chain=mainnet" 
-            target="_blank" 
-            rel="noopener noreferrer"
-          >
-            View Contracts
-          </a>
-          <a 
-            href="https://github.com/AdekunleBamz/stacks-clicker" 
-            target="_blank" 
-            rel="noopener noreferrer"
-          >
-            GitHub
-          </a>
-        </div>
+      <footer className="app-footer">
+        <p>Built with ❤️ on Stacks</p>
       </footer>
 
       {/* QR Modal for WalletConnect */}
