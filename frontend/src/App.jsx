@@ -28,6 +28,15 @@ export default function App() {
   const [stats, setStats] = useState({ clicks: 0, tips: 0, votes: 0 });
   const [particleTrigger, setParticleTrigger] = useState(0);
 
+  // Theme Management
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
+  useState(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+
   // Add transaction to log
   const addTxToLog = (action, txId, status = 'success') => {
     const tx = {
@@ -148,10 +157,27 @@ export default function App() {
             {address ? (
               <div className="wallet-info">
                 <span className="address-badge">{address.slice(0, 6)}...{address.slice(-4)}</span>
+                <button
+                  className="theme-toggle"
+                  onClick={toggleTheme}
+                  title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+                >
+                  {theme === 'dark' ? '☀️' : '🌙'}
+                </button>
                 <button className="btn-disconnect" onClick={disconnectWallet}>Disconnect</button>
               </div>
             ) : (
-              <button className="btn-connect" onClick={connectWallet}>Connect Wallet</button>
+            ) : (
+              <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                <button
+                  className="theme-toggle"
+                  onClick={toggleTheme}
+                  title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+                >
+                  {theme === 'dark' ? '☀️' : '🌙'}
+                </button>
+                <button className="btn-connect" onClick={connectWallet}>Connect Wallet</button>
+              </div>
             )}
           </div>
         </div>
