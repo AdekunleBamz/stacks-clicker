@@ -1,0 +1,48 @@
+import { useState, useCallback } from 'react';
+import { callContract } from '../utils/walletconnect';
+
+const DEPLOYER = 'SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT';
+
+export function useQuickPoll({ onTxSubmit }) {
+  const [loadingStates, setLoadingStates] = useState({});
+
+  const setLoading = (key, val) => {
+    setLoadingStates(prev => ({ ...prev, [key]: val }));
+  };
+
+  const isLoading = useCallback((key) => !!loadingStates[key], [loadingStates]);
+
+  const executeAction = async (name, functionName, functionArgs = []) => {
+    const key = `quickpoll-${functionName}`;
+    setLoading(key, true);
+    try {
+      const result = await callContract({
+        contractAddress: DEPLOYER,
+        contractName: 'quickpoll-v2p',
+        functionName,
+        functionArgs,
+      });
+      onTxSubmit?.(name, result.txId);
+      return result;
+    } catch (err) {
+      console.error(`${name} failed:`, err);
+      throw err;
+    } finally {
+      setLoading(key, false);
+    }
+  };
+
+  const vote = (pollId, option) => executeAction('🗳️ Vote', 'vote', [
+    { type: 'uint128', value: pollId.toString() },
+    { type: 'uint128', value: option.toString() }
+  ]);
+  const createPoll = (question) => executeAction('📝 Create Poll', 'create-poll', [{ type: 'string-ascii', value: question }]);
+  const handlePollPing = () => executeAction('📡 Poll-Ping', 'poll-ping');
+
+  return {
+    isLoading,
+    vote,
+    createPoll,
+    handlePollPing
+  };
+}
