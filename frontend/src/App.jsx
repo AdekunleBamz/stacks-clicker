@@ -5,6 +5,7 @@ import TransactionHistory from './components/TransactionHistory';
 import ClickerCard from './components/ClickerCard';
 import TipJarCard from './components/TipJarCard';
 import QuickPollCard from './components/QuickPollCard';
+import QuickActions from './components/QuickActions';
 import { useWallet } from './context/WalletContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import ParticleOverlay from './components/common/ParticleOverlay';
@@ -189,6 +190,15 @@ export default function App() {
 
           <aside className="stats-aside">
             <PlayerStats stats={stats} />
+            <QuickActions
+              address={address}
+              onClearLog={() => setTxLog([])}
+              onPingAll={() => {
+                clicker.ping();
+                tipjar.handleSelfPing();
+                quickpoll.handlePollPing();
+              }}
+            />
             <TransactionHistory txLog={txLog} />
           </aside>
         </div>
