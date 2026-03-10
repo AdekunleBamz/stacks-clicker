@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import toast from 'react-hot-toast';
 import SkeletonLoader from './common/SkeletonLoader';
 
 /**
@@ -12,6 +13,7 @@ export default function TransactionHistory({ txLog }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTx, setSelectedTx] = useState(null);
   const [contextMenu, setContextMenu] = useState(null);
+  const [filterStatus, setFilterStatus] = useState('all');
 
   const handleContextMenu = (e, tx) => {
     e.preventDefault();
@@ -24,10 +26,12 @@ export default function TransactionHistory({ txLog }) {
 
   const closeContextMenu = () => setContextMenu(null);
 
-  const filteredLog = txLog.filter(tx =>
-    tx.action.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    tx.id.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredLog = txLog.filter(tx => {
+    const matchesSearch = tx.action.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         tx.id.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesStatus = filterStatus === 'all' || tx.status === filterStatus;
+    return matchesSearch && matchesStatus;
+  });
 
   const highlightText = (text, highlight) => {
     if (!highlight.trim()) return text;
@@ -80,6 +84,16 @@ export default function TransactionHistory({ txLog }) {
           <span className="tx-count-badge">{filteredLog.length}</span>
         </div>
         <div className="tx-export-actions">
+          <select
+            className="tx-filter-select"
+            value={filterStatus}
+            onChange={(e) => setFilterStatus(e.target.value)}
+          >
+            <option value="all">All Status</option>
+            <option value="success">Success</option>
+            <option value="pending">Pending</option>
+            <option value="failed">Failed</option>
+          </select>
           <button className="export-btn" onClick={() => exportData('json')} title="Export as JSON">JSON</button>
           <button className="export-btn" onClick={() => exportData('csv')} title="Export as CSV">CSV</button>
         </div>
@@ -87,7 +101,7 @@ export default function TransactionHistory({ txLog }) {
 
       <AnimatePresence>
         {contextMenu && (
-          <>
+          <div key="ctx-wrapper">
             <div className="context-menu-backdrop" onClick={closeContextMenu} />
             <motion.div
               className="context-menu"
@@ -108,10 +122,10 @@ export default function TransactionHistory({ txLog }) {
                 </button>
               )}
             </motion.div>
-          </>
+          </div>
         )}
         {selectedTx && (
-          <div className="modal-overlay" onClick={() => setSelectedTx(null)}>
+          <div className="modal-overlay" key="modal-wrapper" onClick={() => setSelectedTx(null)}>
             <motion.div
               className="modal-content tx-details-modal"
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -174,6 +188,7 @@ export default function TransactionHistory({ txLog }) {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               key="empty"
               className="empty-state"
             >
@@ -188,53 +203,59 @@ export default function TransactionHistory({ txLog }) {
             </motion.div>
           ) : (
             filteredLog.map((tx) => (
-              <motion.div
-                key={tx.id}
-                className={`tx-item ${tx.status}`}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                layout
-                onContextMenu={(e) => handleContextMenu(e, tx)}
-              >
-                <div className="tx-status-dot" aria-hidden="true" />
-                <div className="tx-main">
-                  <div className="tx-header">
-                    <span className="tx-action-label">
-                      {highlightText(tx.action, searchTerm)}
-                    </span>
-                    <span className="tx-timestamp">{tx.time}</span>
-                  </div>
-                  <div className="tx-actions-inline">
-                    <button className="text-btn" onClick={() => setSelectedTx(tx)}>Details</button>
-                  </div>
-                  <div className="tx-status-visualizer">
-                    <div className="status-steps">
-                      <div className="step active">
-                        <span className="step-dot"></span>
-                        <span className="step-label">Submitted</span>
-                      </div>
-                      <div className={`step ${tx.id.startsWith('pending') ? 'pending' : 'active'}`}>
-                        <span className="step-dot"></span>
-                        <span className="step-label">Mempool</span>
-                      </div>
-                      <div className={`step ${tx.id.startsWith('pending') ? '' : 'active'}`}>
-                        <span className="step-dot"></span>
-                        <span className="step-label">Confirmed</span>
-                      </div>
-                    </div>
-                    {!tx.id.startsWith('pending') && (
-                      <a
-                        href={`https://explorer.hiro.so/txid/${tx.id}?chain=mainnet`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="tx-explorer-link"
-                      >
-                        {highlightText(tx.id.slice(0, 8), searchTerm)}...{highlightText(tx.id.slice(-6), searchTerm)} ↗
-                      </a>
-                    )}
-                  </div>
+              <div className="tx-item-wrapper" key={tx.id}>
+                <div className="tx-swipe-actions">
+                  <button className="swipe-btn copy" onClick={() => { navigator.clipboard.writeText(tx.id); toast.success('ID Copied'); }}>📋</button>
+                  <button className="swipe-btn details" onClick={() => setSelectedTx(tx)}>🔍</button>
                 </div>
-              </motion.div>
+                <motion.div
+                  className={`tx-item ${tx.status}`}
+                  drag="x"
+                  dragConstraints={{ left: -120, right: 0 }}
+                  dragElastic={0.1}
+                  whileDrag={{ scale: 1.02 }}
+                  onContextMenu={(e) => handleContextMenu(e, tx)}
+                >
+                  <div className="tx-status-dot" aria-hidden="true" />
+                  <div className="tx-main">
+                    <div className="tx-header">
+                      <span className="tx-action-label">
+                        {highlightText(tx.action, searchTerm)}
+                      </span>
+                      <span className="tx-timestamp">{tx.time}</span>
+                    </div>
+                    <div className="tx-actions-inline">
+                      <button className="text-btn" onClick={() => setSelectedTx(tx)}>Details</button>
+                    </div>
+                    <div className="tx-status-visualizer">
+                      <div className="status-steps">
+                        <div className="step active">
+                          <span className="step-dot"></span>
+                          <span className="step-label">Submitted</span>
+                        </div>
+                        <div className={`step ${tx.id.startsWith('pending') ? 'pending' : 'active'}`}>
+                          <span className="step-dot"></span>
+                          <span className="step-label">Mempool</span>
+                        </div>
+                        <div className={`step ${tx.id.startsWith('pending') ? '' : 'active'}`}>
+                          <span className="step-dot"></span>
+                          <span className="step-label">Confirmed</span>
+                        </div>
+                      </div>
+                      {!tx.id.startsWith('pending') && (
+                        <a
+                          href={`https://explorer.hiro.so/txid/${tx.id}?chain=mainnet`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="tx-explorer-link"
+                        >
+                          {highlightText(tx.id.slice(0, 8), searchTerm)}...{highlightText(tx.id.slice(-6), searchTerm)} ↗
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
             ))
           )}
         </AnimatePresence>
