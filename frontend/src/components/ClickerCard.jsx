@@ -1,61 +1,60 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import ActionCard from './common/ActionCard';
+import ActionButton from './common/ActionButton';
+import Tooltip from './common/Tooltip';
 
-export default function ClickerCard({
-  address,
-  isLoading,
-  handleClick,
-  handleMultiClick,
-  handlePing,
-}) {
+/**
+ * Component for the Clicker game interaction card.
+ * @param {Object} props - Component props.
+ * @param {string} props.address - Connected wallet address.
+ * @param {Object} props.clicker - Clicker hook object containing actions and loading state.
+ */
+export default function ClickerCard({ address, clicker }) {
+  const { isLoading, click, multiClick, ping } = clicker;
+
   return (
-    <motion.div
-      className="contract-card"
-      whileHover={{ y: -5, boxShadow: '0 20px 40px rgba(85, 70, 255, 0.2)' }}
-      transition={{ type: 'spring', stiffness: 300 }}
+    <ActionCard
+      id="clicker-card"
+      title="🎯 Power Clicker"
+      subtitle="Click to generate on-chain activity."
+      icon="🚀"
+      accentColor="#5546FF"
     >
-      <div className="contract-header">
-        <div className="contract-icon clicker">🎯</div>
-        <div>
-          <div className="contract-title">Clicker</div>
-          <div className="contract-subtitle">Click to generate transactions</div>
-        </div>
-      </div>
       <div className="actions">
-        <motion.button
-          className="action-btn primary"
-          onClick={handleClick}
-          disabled={!address || isLoading('clicker-click')}
-          whileHover={address && !isLoading('clicker-click') ? { scale: 1.02 } : {}}
-          whileTap={address && !isLoading('clicker-click') ? { scale: 0.95 } : {}}
-        >
-          {isLoading('clicker-click') ? <span className="spinner"></span> : '🎯'}
-          Click
-          <span className="cost">0.001 STX</span>
-        </motion.button>
-        <motion.button
-          className="action-btn secondary"
-          onClick={handleMultiClick}
-          disabled={!address || isLoading('clicker-multi-click')}
-          whileHover={address && !isLoading('clicker-multi-click') ? { scale: 1.02 } : {}}
-          whileTap={address && !isLoading('clicker-multi-click') ? { scale: 0.95 } : {}}
-        >
-          {isLoading('clicker-multi-click') ? <span className="spinner"></span> : '🔥'}
-          10x Click
-          <span className="cost">0.001 STX</span>
-        </motion.button>
-        <motion.button
-          className="action-btn success"
-          onClick={handlePing}
-          disabled={!address || isLoading('clicker-ping')}
-          whileHover={address && !isLoading('clicker-ping') ? { scale: 1.02 } : {}}
-          whileTap={address && !isLoading('clicker-ping') ? { scale: 0.95 } : {}}
-        >
-          {isLoading('clicker-ping') ? <span className="spinner"></span> : '📡'}
-          Ping
-          <span className="cost">0.001 STX</span>
-        </motion.button>
+        <Tooltip text="Perform a single on-chain click interaction instantly.">
+          <ActionButton
+            label="Express Click"
+            icon="⚡"
+            cost="0.001 STX"
+            onClick={click}
+            isLoading={isLoading('clicker-click')}
+            disabled={!address}
+            className="primary"
+          />
+        </Tooltip>
+        <Tooltip text="Boost your activity by performing 10 clicks in one batch.">
+          <ActionButton
+            label="Turbo 10x"
+            icon="🔥"
+            cost="0.005 STX"
+            className="secondary"
+            onClick={() => multiClick(10)}
+            isLoading={isLoading('clicker-multi-click')}
+            disabled={!address}
+          />
+        </Tooltip>
+        <Tooltip text="Ping the network to verify connection and contract state.">
+          <ActionButton
+            label="Network Ping"
+            icon="📡"
+            cost="0.001 STX"
+            className="success"
+            onClick={ping}
+            isLoading={isLoading('clicker-ping')}
+            disabled={!address}
+          />
+        </Tooltip>
       </div>
-    </motion.div>
+    </ActionCard>
   );
 }
