@@ -1,60 +1,20 @@
-# Security Policy 🛡️
+# 🔐 Security Policy — StacksClicker
 
-We take the security of our users and the Stacks ecosystem seriously.
+We take the security of the StacksClicker project and its users very seriously. This document outlines our policy for reporting and addressing potential security vulnerabilities.
 
-## Supported Versions
+## 🛡️ Reporting a Vulnerability
+If you discover a security vulnerability within this project, please **do not open a public issue**. Instead, report it privately via the project maintainer's contact details or by submitting a security advisory if available on GitHub.
 
-| Version | Status |
-| ------- | ------ |
-| v2.x    | ✅ Supported |
-| < v2.0  | ❌ Not Supported |
+## 🏗️ Security Best Practices
+- **Local Keys**: Always keep your private keys and mnemonics local. Never commit files like `Mainnet.toml` or `settings.json` that may contain sensitive information.
+- **Verified Contracts**: Review smart contract code before interacting. Our contracts are documented with NatSpec to aid in code clarity.
+- **Official SDKs**: Only use official Stacks SDKs for blockchain interactions to ensure secure transaction building and signing.
 
-## Reporting a Vulnerability
+## 🚀 Scope
+This policy applies to all components of the StacksClicker project, including:
+- Smart contracts (`contracts/`)
+- Frontend application (`frontend/`)
+- Deployment scripts and configuration files
 
-If you find a security vulnerability, please contact us:
-
-| Method | Contact |
-| :--- | :--- |
-| Email | `security@stacksclicker.io` |
-| GitHub | [Private security advisory](https://github.com/AdekunleBamz/stacks-clicker/security/advisories/new) |
-
-We aim to acknowledge valid reports within 72 hours.
-
-### Response Timeline
-
-| Stage | Target |  
-| :--- | :--- |
-| Acknowledgement | 72 hours |
-| Initial Assessment | 5 business days |
-| Fix / Patch Release | 14 business days |
-
-### What to Include
-
-- Type of vulnerability
-- Location in source code (file and line number)
-- Steps to reproduce
-- Impact assessment
-- Any potential exploits or attack vectors
-
-## Security Best Practices
-
-### For Users
-
-- **Private Keys**: We will NEVER ask for your seed phrase.
-- **Official Domain**: Only interact with `stacksclicker.io`.
-- **Review Transactions**: Always check Hiro/Leather wallet popups for detailed transaction context.
-- **Verify URLs**: Bookmark the official site to avoid phishing.
-
-### For Developers
-
-- **GPG Signing**: All commits must be signed before merging to main.
-- **Dependency Updates**: Review security advisories for dependencies regularly.
-- **Code Review**: Security-sensitive changes require additional review.
-
-## Security Audit
-
-For detailed security review procedures, see [SECURITY_REVIEW_CHECKLIST.md](docs/operations/SECURITY_REVIEW_CHECKLIST.md).
-
-## Incident Response
-
-In the event of a security incident, follow the procedures outlined in [INCIDENT_RESPONSE.md](docs/operations/INCIDENT_RESPONSE.md).
+## 📜 Disclaimer
+StacksClicker is provided "as is" without warranty of any kind. Users are responsible for their own security and the safety of their funds when interacting with the Stacks blockchain.

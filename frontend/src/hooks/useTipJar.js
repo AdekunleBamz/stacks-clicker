@@ -1,89 +1,50 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
+import { useWallet } from '../context/WalletContext';
 import { callContract } from '../utils/walletconnect';
-import { useNotifications } from './useNotifications';
-import { DEPLOYER, TIPJAR_CONTRACT as CONTRACT_NAME } from '../utils/constants';
-import { stacksClickerSdk } from '../utils/sdk';
+
+const DEPLOYER = 'SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT';
 
 /**
- * Custom hook for interacting with the TipJar smart contract.
- * Manages tipping and contract pings with centralized loading state.
- *
- * @param {Object} options - Hook options
- * @param {Function} options.onTxSubmit - Shared callback triggered when a transaction is broadcasted
- * @returns {Object} { isLoading, tip, handleSelfPing }
- * @property {Function} isLoading - Checks if a specific function is loading: (actionKey) => boolean
- * @property {Function} tip - Sends a tip transaction: (amount: number) => void
- * @property {Function} handleSelfPing - Triggers a self-ping heartbeat for the user
+ * Custom hook for TipJar contract interactions.
+ * @param {Object} options - Hook options.
+ * @param {Function} [options.onTxSubmit] - Callback for transaction submission.
+ * @returns {Object} TipJar actions and loading state.
  */
-export function useTipJar({ onTxSubmit }) {
+export function useTipJar({ onTxSubmit } = {}) {
+  const { isConnected } = useWallet();
   const [loadingStates, setLoadingStates] = useState({});
-  const { showError, showLoading } = useNotifications();
-  const STX_TO_MICROSTX = 1_000_000;
 
-  /**
-   * Internal helper to update loading state for a specific action key.
-   */
-  const setLoading = useCallback((key, val) => {
-    setLoadingStates((prev) => {
-      if (prev[key] === val) return prev;
-      return { ...prev, [key]: val };
-    });
-  }, []);
+  const setLoading = (key, val) => {
+    setLoadingStates((prev) => ({ ...prev, [key]: val }));
+  };
 
-  /**
-   * Checks if a specific contract function is currently loading.
-   * @param {string} functionName - Name of the contract function
-   * @returns {boolean} True if loading
-   */
-  const isLoading = useCallback((functionName) => !!loadingStates[`tipjar-${functionName}`], [loadingStates]);
-
-  /**
-   * Core executor for contract calls.
-   * @param {string} displayName - Human readable name for the action
-   * @param {string} functionName - Contract function name
-   * @param {Array} functionArgs - Arguments for the contract call
-   */
-  const executeAction = useCallback(async (displayName, functionName, functionArgs = [], actionKey = functionName) => {
-    const key = `tipjar-${actionKey}`;
+  const executeAction = async (key, functionName, functionArgs = []) => {
+    if (!isConnected) return;
     setLoading(key, true);
     try {
-      showLoading(`Broadcasting ${displayName}...`);
       const result = await callContract({
         contractAddress: DEPLOYER,
-        contractName: CONTRACT_NAME,
+        contractName: 'tipjar-v2p',
         functionName,
         functionArgs,
       });
-      onTxSubmit?.(displayName, result.txId);
+      onTxSubmit?.(key, result.txId);
       return result;
     } catch (err) {
-      const userFriendlyError = parseContractError(err);
-      showError(userFriendlyError);
-      console.error(`${displayName} failed:`, err);
+      console.error(`TipJar action ${key} failed:`, err);
       throw err;
     } finally {
       setLoading(key, false);
     }
-  }, [onTxSubmit, setLoading, showError, showLoading]);
-
-  const tip = useCallback((amount = 1000) => {
-    const payload = stacksClickerSdk.tip(amount);
-    return executeAction('💰 Tip', payload.functionName, payload.functionArgs);
-  }, [executeAction]);
-
-  const withdraw = useCallback(() => {
-    const payload = stacksClickerSdk.withdrawTip();
-    return executeAction('💸 Withdraw', payload.functionName, payload.functionArgs);
-  }, [executeAction]);
-
-  const handleSelfPing = useCallback(
-    () => executeAction('📡 Self-Ping', 'ping', [], 'self-ping'),
-    [executeAction]
-  );
+  };
 
   return {
-    isLoading,
-    tip,
-    handleSelfPing
+    isLoading: (key) => !!loadingStates[key],
+    quickTip: () => executeAction('tipjar-quick-tip', 'quick-tip'),
+    tipUser: (recipient, amount) => executeAction('tipjar-tip-user', 'tip-user', [
+      { type: 'principal', value: recipient },
+      { type: 'uint128', value: (parseFloat(amount) * 1000000).toString() }
+    ]),
+    selfPing: () => executeAction('tipjar-ping', 'self-ping'),
   };
 }

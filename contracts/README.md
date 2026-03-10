@@ -1,42 +1,36 @@
-# Smart Contracts
+# 📜 StacksClicker Contracts
 
-This directory contains the Clarity smart contracts for the Stacks Clicker application.
+This directory contains the Clarity smart contracts for the StacksClicker dApp.
 
-## Contract Overview
+## 🚀 Active Contracts (v2p)
 
-| Contract | Version | Description |
-|----------|---------|-------------|
-| `clicker-v2p.clar` | 2p | Main clicker game contract with multi-click support |
-| `quickpoll-v2p.clar` | 2p | Decentralized polling/voting contract |
-| `tipjar-v2p.clar` | 2p | Creator tipping contract |
+| File | Contract Name | Description |
+|------|---------------|-------------|
+| `clicker-v2p.clar` | `clicker-v2p` | Click-to-earn game logic with streaks and fees. |
+| `tipjar-v2p.clar` | `tipjar-v2p` | Tipping system for developers and users. |
+| `quickpoll-v2p.clar` | `quickpoll-v2p` | Decentralized community voting system. |
 
-## Development
+## 🛠️ Development
 
-### Run Tests
+### Prerequisites
+- [Clarinet](https://github.com/hirosystems/clarinet)
 
+### Testing
+To run the Clarity unit tests:
 ```bash
-make test
+clarinet test
 ```
 
-### Check Contract Syntax
-
+### Console
+To interact with contracts in a local environment:
 ```bash
-make check
+clarinet console
 ```
 
-### Deploy to Devnet
+## 📂 Structure
+- `contracts/`: Active smart contracts.
+- `contracts/archive/`: Legacy versions of contracts for historical reference.
 
-```bash
-make deploy-devnet
-```
-
-## Contract Features
-
-- **Interaction Fees**: Each contract call requires a small fee (0.0001 STX)
-- **Pause Mechanism**: Owner can pause/unpause contracts for maintenance
-- **Event Emission**: All actions emit events for tracking and analytics
-- **User Tracking**: Tracks unique users, streaks, and first interaction block
-
-## Archive
-
-Older contract versions are stored in the `archive/` directory for reference.
+## 🔐 Standards
+- All contracts use **Clarity 2**.
+- NatSpec documentation is included for all public/read-only functions and data variables.

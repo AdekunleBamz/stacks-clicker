@@ -1,68 +1,49 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
+import { useWallet } from '../context/WalletContext';
 import { callContract } from '../utils/walletconnect';
-import { useNotifications } from './useNotifications';
-import { DEPLOYER, CLICKER_CONTRACT as CONTRACT_NAME } from '../utils/constants';
-import { stacksClickerSdk } from '../utils/sdk';
+
+const DEPLOYER = 'SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT';
 
 /**
- * Custom hook for interacting with the Clicker smart contract.
- * Provides functions for single click, multi-click, and network ping with centralized loading state.
- *
- * @param {Object} options - Hook options
- * @param {Function} options.onTxSubmit - Shared callback triggered when a transaction is broadcasted
- * @returns {Object} { isLoading, click, multiClick, ping }
+ * Custom hook for Clicker contract interactions.
+ * @param {Object} options - Hook options.
+ * @param {Function} [options.onTxSubmit] - Callback for transaction submission.
+ * @returns {Object} Clicker actions and loading state.
  */
-export function useClicker({ onTxSubmit }) {
+export function useClicker({ onTxSubmit } = {}) {
+  const { isConnected } = useWallet();
   const [loadingStates, setLoadingStates] = useState({});
-  const [lastActionName, setLastActionName] = useState(null);
-  const { showError, showLoading } = useNotifications();
 
-  const setLoading = useCallback((key, val) => {
-    setLoadingStates((prev) => {
-      if (prev[key] === val) return prev;
-      return { ...prev, [key]: val };
-    });
-  }, []);
+  const setLoading = (key, val) => {
+    setLoadingStates((prev) => ({ ...prev, [key]: val }));
+  };
 
-  const isLoading = useCallback(
-    (functionName) => !!loadingStates[`clicker-${functionName}`],
-    [loadingStates]
-  );
-
-  /**
-   * Core executor for contract calls.
-   * @param {string} displayName - Human readable name for the action
-   * @param {string} functionName - Contract function name
-   * @param {Array} functionArgs - Arguments for the contract call
-   */
-  const executeAction = useCallback(async (displayName, functionName, functionArgs = []) => {
-    if (!DEPLOYER) {
-      throw new Error('VITE_DEPLOYER_ADDRESS is not set');
+  const executeAction = async (key, functionName, functionArgs = []) => {
+    if (!isConnected) return;
+    setLoading(key, true);
+    try {
+      const result = await callContract({
+        contractAddress: DEPLOYER,
+        contractName: 'clicker-v2p',
+        functionName,
+        functionArgs,
+      });
+      onTxSubmit?.(key, result.txId);
+      return result;
+    } catch (err) {
+      console.error(`Clicker action ${key} failed:`, err);
+      throw err;
+    } finally {
+      setLoading(key, false);
     }
-
-  const click = useCallback(() => {
-    const payload = stacksClickerSdk.click();
-    return executeAction('🎯 Click', payload.functionName, payload.functionArgs);
-  }, [executeAction]);
-
-  const multiClick = useCallback(
-    (amount = 1) => {
-      const payload = stacksClickerSdk.multiClick(amount);
-      return executeAction('🔥 Multi-Click', payload.functionName, payload.functionArgs);
-    },
-    [executeAction]
-  );
-  const ping = useCallback(() => {
-    const payload = stacksClickerSdk.ping();
-    return executeAction('📡 Ping', payload.functionName, payload.functionArgs);
-  }, [executeAction]);
+  };
 
   return {
-    isLoading,
-    lastActionName,
-    click,
-    multiClick,
-    ping,
-    resetStreak,
+    isLoading: (key) => !!loadingStates[key],
+    click: () => executeAction('clicker-click', 'click'),
+    multiClick: (count = 10) => executeAction('clicker-multi-click', 'multi-click', [
+      { type: 'uint128', value: count.toString() }
+    ]),
+    ping: () => executeAction('clicker-ping', 'ping'),
   };
 }
