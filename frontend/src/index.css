@@ -1054,6 +1054,27 @@ body::before {
   background: var(--primary);
 }
 
+/* Modal Breadcrumbs */
+.modal-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.breadcrumb-item {
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.breadcrumb-item:hover { color: var(--text-main); }
+.breadcrumb-item.active { color: var(--primary); font-weight: 600; cursor: default; }
+.breadcrumb-separator { opacity: 0.5; }
+
+.mt-2 { margin-top: 0.5rem; }
+
 /* i18n */
 .lang-select {
   background: var(--bg-input);
@@ -1235,3 +1256,16 @@ body::before {
 }
 
 .tx-item:active { cursor: grabbing; }
+
+/* High-Contrast Focus Rings (Task 48) */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.4);
+}
