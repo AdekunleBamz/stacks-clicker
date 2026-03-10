@@ -1129,3 +1129,30 @@ body::before {
 .perf-value.good { color: #00ff00; }
 .perf-value.warn { color: #ffff00; }
 .perf-value.bad { color: #ff0000; }
+
+/* Pull to Refresh */
+.ptr-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.ptr-indicator {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+}
+
+.ptr-spinner {
+  font-size: 1.5rem;
+  color: var(--primary);
+}
+
+.ptr-spinner.spinning {
+  animation: spin 1s linear infinite;
+}

@@ -14,6 +14,7 @@ import { useWallet } from './context/WalletContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import ParticleOverlay from './components/common/ParticleOverlay';
 import PerformanceOverlay from './components/common/PerformanceOverlay';
+import PullToRefresh from './components/common/PullToRefresh';
 import { useI18n } from './context/I18nContext';
 
 // Hooks
@@ -124,7 +125,14 @@ export default function App() {
   }, [stats]);
 
   return (
-    <div className="app-container">
+    <div className="app-container" data-theme={theme}>
+      <PullToRefresh onRefresh={async () => {
+          // Mock refresh logic
+          return new Promise(resolve => setTimeout(resolve, 2000));
+      }} />
+      <PerformanceOverlay />
+      <OnboardingTour />
+      <a href="#main-content" className="skip-link">Skip to Content</a>
       <Toaster position="top-right" />
       <ParticleOverlay trigger={particleTrigger} />
 
@@ -224,6 +232,18 @@ export default function App() {
       <footer className="app-footer">
         <p>Built with ❤️ on Stacks</p>
       </footer>
+
+      <FloatingActionButton
+        onAction={(type) => {
+          if (type === 'ping') {
+            clicker.ping();
+            tipjar.handleSelfPing();
+            quickpoll.handlePollPing();
+          } else if (type === 'clear') {
+            setTxLog([]);
+          }
+        }}
+      />
     </div>
   );
 }
