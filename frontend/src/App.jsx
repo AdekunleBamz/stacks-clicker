@@ -148,6 +148,15 @@ export default function App() {
 
   const MilestoneCelebration = React.lazy(() => import('./components/MilestoneCelebration'));
 
+  // Theme Management
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
+  useState(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+
   return (
     <div className="app">
       {/* Header */}
