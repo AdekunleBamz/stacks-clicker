@@ -5,8 +5,11 @@ import { callContract } from '../utils/walletconnect';
 const DEPLOYER = 'SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT';
 
 /**
- * TipJar Component
- * Send tips to support creators
+ * TipJar Component.
+ * Facilitates sending tips to developers and other users.
+ * @param {Object} props - Component props.
+ * @param {Function} [props.onTxSubmit] - Optional callback triggered after a transaction is submitted.
+ * @returns {JSX.Element} The rendered tip jar interaction area.
  */
 export default function TipJar({ onTxSubmit }) {
   const { address, isConnected } = useWallet();
@@ -133,23 +136,28 @@ export default function TipJar({ onTxSubmit }) {
         </button>
 
         <div className="tip-custom">
-          <input
-            type="text"
-            placeholder="Recipient SP address"
-            value={recipientAddress}
-            onChange={(e) => setRecipientAddress(e.target.value)}
-            className="address-input"
-          />
-          <div className="tip-amount-group">
+          <div className="input-group">
+            <label className="input-label">Recipient Address</label>
             <input
-              type="number"
-              min="1000"
-              step="1000"
-              value={tipAmount}
-              onChange={(e) => setTipAmount(parseInt(e.target.value) || 1000)}
-              className="amount-input"
+              type="text"
+              placeholder="SP..."
+              value={recipientAddress}
+              onChange={(e) => setRecipientAddress(e.target.value)}
+              className="address-input"
             />
-            <span className="amount-label">uSTX</span>
+          </div>
+          <div className="input-group">
+            <label className="input-label">Amount (uSTX)</label>
+            <div className="tip-amount-group">
+              <input
+                type="number"
+                min="1000"
+                step="1000"
+                value={tipAmount}
+                onChange={(e) => setTipAmount(parseInt(e.target.value) || 1000)}
+                className="amount-input"
+              />
+            </div>
           </div>
           <button
             className="action-btn outline"
