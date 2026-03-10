@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { motion, useSpring, useTransform, animate } from 'framer-motion';
+import { motion, animate } from 'framer-motion';
+import { usePrice } from '../hooks/usePrice';
 
 /**
  * Animated number component for smooth counting transitions.
@@ -26,11 +27,16 @@ function AnimatedNumber({ value }) {
  * @returns {JSX.Element} The rendered stats bar.
  */
 export default function PlayerStats({ stats, txCount }) {
+  const { price } = usePrice();
+  const totalInteractions = stats.clicks + stats.tips + stats.votes;
+  const estStxSpent = totalInteractions * 0.0012;
+  const estUsdValue = price ? (estStxSpent * price).toFixed(2) : '--';
+
   const statItems = [
     { label: 'Clicks', value: stats.clicks, icon: '🎯', color: '#6366f1' },
     { label: 'Tips Sent', value: stats.tips, icon: '💰', color: '#10b981' },
     { label: 'Votes Cast', value: stats.votes, icon: '🗳️', color: '#f59e0b' },
-    { label: 'Transactions', value: txCount, icon: '⚡', color: '#ec4899' },
+    { label: 'Est. Value ($)', value: estUsdValue, icon: '💵', color: '#10b981', isPrice: true },
   ];
 
   return (
@@ -59,7 +65,11 @@ export default function PlayerStats({ stats, txCount }) {
           </div>
           <div className="stat-content">
             <div className="value">
-              <AnimatedNumber value={item.value} />
+              {item.isPrice ? (
+                <span>{item.value}</span>
+              ) : (
+                <AnimatedNumber value={item.value} />
+              )}
             </div>
             <div className="label">{item.label}</div>
           </div>
