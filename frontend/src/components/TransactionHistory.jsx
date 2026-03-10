@@ -14,6 +14,7 @@ export default function TransactionHistory({ txLog }) {
   const [selectedTx, setSelectedTx] = useState(null);
   const [contextMenu, setContextMenu] = useState(null);
   const [filterStatus, setFilterStatus] = useState('all');
+  const [modalView, setModalView] = useState('summary'); // 'summary' or 'raw'
 
   const handleContextMenu = (e, tx) => {
     e.preventDefault();
@@ -134,14 +135,29 @@ export default function TransactionHistory({ txLog }) {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="modal-header">
-                <h4>Transaction Details</h4>
-                <button className="close-btn" onClick={() => setSelectedTx(null)}>×</button>
+                <div className="modal-breadcrumbs">
+                  <button
+                    className={`breadcrumb-item ${modalView === 'summary' ? 'active' : ''}`}
+                    onClick={() => setModalView('summary')}
+                  >
+                    Summary
+                  </button>
+                  {modalView === 'raw' && (
+                    <>
+                      <span className="breadcrumb-separator">/</span>
+                      <button className="breadcrumb-item active">Raw Data</button>
+                    </>
+                  )}
+                </div>
+                <button className="close-btn" onClick={() => { setSelectedTx(null); setModalView('summary'); }}>×</button>
               </div>
               <div className="modal-body">
-                <div className="detail-row">
-                  <label>Action</label>
-                  <span>{selectedTx.action}</span>
-                </div>
+                {modalView === 'summary' ? (
+                  <div className="summary-view">
+                    <div className="detail-row">
+                      <label>Action</label>
+                      <span>{selectedTx.action}</span>
+                    </div>
                 <div className="detail-row">
                   <label>Timestamp</label>
                   <span>{selectedTx.time}</span>
@@ -150,21 +166,29 @@ export default function TransactionHistory({ txLog }) {
                   <label>Transaction ID</label>
                   <code className="tx-id-full">{selectedTx.id}</code>
                 </div>
-                <div className="detail-row">
-                  <label>Status</label>
-                  <span className={`status-badge ${selectedTx.status}`}>{selectedTx.status}</span>
-                </div>
-                <div className="detail-row full">
-                  <label>Raw Metadata</label>
-                  <pre className="raw-json">
-                    {JSON.stringify({
-                      network: 'mainnet',
-                      fee: '0.001 STX',
-                      nonce: Math.floor(Math.random() * 100),
-                      version: 'v2'
-                    }, null, 2)}
-                  </pre>
-                </div>
+                    <div className="detail-row">
+                      <label>Status</label>
+                      <span className={`status-badge ${selectedTx.status}`}>{selectedTx.status}</span>
+                    </div>
+                    <button className="text-btn mt-2" onClick={() => setModalView('raw')}>
+                      View Technical Raw Data ↗
+                    </button>
+                  </div>
+                ) : (
+                  <div className="detail-row full">
+                    <label>Raw Metadata</label>
+                    <pre className="raw-json">
+                      {JSON.stringify({
+                        network: 'mainnet',
+                        fee: '0.001 STX',
+                        nonce: Math.floor(Math.random() * 100),
+                        version: 'v2',
+                        tx_id: selectedTx.id,
+                        timestamp: selectedTx.time
+                      }, null, 2)}
+                    </pre>
+                  </div>
+                )}
               </div>
               <div className="modal-footer">
                 <a

@@ -1065,7 +1065,13 @@ body::before {
 }
 
 .breadcrumb-item {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--text-muted);
   cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
   transition: color 0.2s;
 }
 
