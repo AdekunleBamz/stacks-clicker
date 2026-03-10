@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import PlayerStats from './components/PlayerStats';
 import TransactionHistory from './components/TransactionHistory';
@@ -30,7 +30,7 @@ export default function App() {
 
   // Theme Management
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
-  useState(() => {
+  useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
   }, [theme]);
@@ -82,7 +82,7 @@ export default function App() {
   });
 
   // Keyboard Shortcuts
-  useState(() => {
+  useEffect(() => {
     const handleKeyDown = (e) => {
       // Ignore if typing in an input
       if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') return;
@@ -96,21 +96,18 @@ export default function App() {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  });
+  }, [clicker, tipjar]);
 
   // Milestone Celebration
   const [celebration, setCelebration] = useState(null);
-  useState(() => {
+  useEffect(() => {
     const milestones = [10, 50, 100, 500];
-    const checkMilestones = () => {
-      const total = stats.clicks + stats.tips + stats.votes;
-      if (milestones.includes(total)) {
-        setCelebration(`Level Up: ${total} Interactions!`);
-        setParticleTrigger(prev => prev + 5); // Massive burst
-        setTimeout(() => setCelebration(null), 3000);
-      }
-    };
-    checkMilestones();
+    const total = stats.clicks + stats.tips + stats.votes;
+    if (milestones.includes(total)) {
+      setCelebration(`Level Up: ${total} Interactions!`);
+      setParticleTrigger(prev => prev + 5); // Massive burst
+      setTimeout(() => setCelebration(null), 3000);
+    }
   }, [stats]);
 
   return (
@@ -154,30 +151,21 @@ export default function App() {
           </div>
 
           <div className="wallet-section">
+            <button
+              className="theme-toggle"
+              onClick={toggleTheme}
+              title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+            >
+              {theme === 'dark' ? '☀️' : '🌙'}
+            </button>
+
             {address ? (
               <div className="wallet-info">
                 <span className="address-badge">{address.slice(0, 6)}...{address.slice(-4)}</span>
-                <button
-                  className="theme-toggle"
-                  onClick={toggleTheme}
-                  title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-                >
-                  {theme === 'dark' ? '☀️' : '🌙'}
-                </button>
                 <button className="btn-disconnect" onClick={disconnectWallet}>Disconnect</button>
               </div>
             ) : (
-            ) : (
-              <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                <button
-                  className="theme-toggle"
-                  onClick={toggleTheme}
-                  title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-                >
-                  {theme === 'dark' ? '☀️' : '🌙'}
-                </button>
-                <button className="btn-connect" onClick={connectWallet}>Connect Wallet</button>
-              </div>
+              <button className="btn-connect" onClick={connectWallet}>Connect Wallet</button>
             )}
           </div>
         </div>
