@@ -110,7 +110,6 @@ export default function TransactionHistory({ txLog }) {
             </motion.div>
           </>
         )}
-      </AnimatePresence>
         {selectedTx && (
           <div className="modal-overlay" onClick={() => setSelectedTx(null)}>
             <motion.div
