@@ -991,3 +991,41 @@ body::before {
 }
 
 .fab-icon { font-size: 1.2rem; }
+
+/* Context Menu */
+.context-menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 5999;
+}
+
+.context-menu {
+  position: fixed;
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.5rem;
+  z-index: 6000;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  min-width: 160px;
+  display: flex;
+  flex-direction: column;
+}
+
+.context-menu button {
+  background: none;
+  border: none;
+  color: var(--text-main);
+  padding: 0.8rem 1rem;
+  text-align: left;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.context-menu button:hover {
+  background: var(--primary);
+}

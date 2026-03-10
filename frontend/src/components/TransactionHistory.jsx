@@ -11,6 +11,18 @@ import SkeletonLoader from './common/SkeletonLoader';
 export default function TransactionHistory({ txLog }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTx, setSelectedTx] = useState(null);
+  const [contextMenu, setContextMenu] = useState(null);
+
+  const handleContextMenu = (e, tx) => {
+    e.preventDefault();
+    setContextMenu({
+      x: e.clientX,
+      y: e.clientY,
+      tx
+    });
+  };
+
+  const closeContextMenu = () => setContextMenu(null);
 
   const filteredLog = txLog.filter(tx =>
     tx.action.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -74,6 +86,31 @@ export default function TransactionHistory({ txLog }) {
       </div>
 
       <AnimatePresence>
+        {contextMenu && (
+          <>
+            <div className="context-menu-backdrop" onClick={closeContextMenu} />
+            <motion.div
+              className="context-menu"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              style={{ top: contextMenu.y, left: contextMenu.x }}
+            >
+              <button onClick={() => { setSelectedTx(contextMenu.tx); closeContextMenu(); }}>
+                🔍 View Details
+              </button>
+              <button onClick={() => { navigator.clipboard.writeText(contextMenu.tx.id); closeContextMenu(); }}>
+                📋 Copy ID
+              </button>
+              {!contextMenu.tx.id.startsWith('pending') && (
+                <button onClick={() => { window.open(`https://explorer.hiro.so/txid/${contextMenu.tx.id}?chain=mainnet`, '_blank'); closeContextMenu(); }}>
+                  🌐 View on Explorer
+                </button>
+              )}
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
         {selectedTx && (
           <div className="modal-overlay" onClick={() => setSelectedTx(null)}>
             <motion.div
@@ -158,6 +195,7 @@ export default function TransactionHistory({ txLog }) {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 layout
+                onContextMenu={(e) => handleContextMenu(e, tx)}
               >
                 <div className="tx-status-dot" aria-hidden="true" />
                 <div className="tx-main">
