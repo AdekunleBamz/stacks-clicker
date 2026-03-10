@@ -36,7 +36,9 @@ export default function PlayerStats({ stats, txCount }) {
     { label: 'Clicks', value: stats.clicks, icon: '🎯', color: '#6366f1' },
     { label: 'Tips Sent', value: stats.tips, icon: '💰', color: '#10b981' },
     { label: 'Votes Cast', value: stats.votes, icon: '🗳️', color: '#f59e0b' },
+    { label: 'Total Spent', value: estStxSpent.toFixed(4) + ' STX', icon: '📉', color: '#ec4899' },
     { label: 'Est. Value ($)', value: estUsdValue, icon: '💵', color: '#10b981', isPrice: true },
+    { label: 'Last Active', value: txCount > 0 ? 'Just now' : 'Never', icon: '⏱️', color: '#94a3b8' },
   ];
 
   return (
