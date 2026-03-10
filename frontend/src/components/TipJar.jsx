@@ -143,13 +143,12 @@ export default function TipJar({ onTxSubmit }) {
           <span aria-hidden="true">📡</span> Self Ping
         </button>
 
-        <div className="tip-custom" role="form" aria-label="Custom Tip Amount Entry">
+        <div className="tip-custom">
           <div className="input-group">
             <label className="input-label">Recipient Address</label>
             <input
-              id="tip-recipient-input"
               type="text"
-              placeholder="SP123..."
+              placeholder="SP..."
               value={recipientAddress}
               onChange={(e) => setRecipientAddress(e.target.value)}
               className="address-input"
@@ -159,18 +158,12 @@ export default function TipJar({ onTxSubmit }) {
             <label className="input-label">Amount (uSTX)</label>
             <div className="tip-amount-group">
               <input
-                id="tip-amount-input-primary"
                 type="number"
-                min="1"
-                max="1000000"
+                min="1000"
+                step="1000"
                 value={tipAmount}
-                onChange={(e) => {
-                  const nextAmount = Number.parseInt(e.target.value, 10) || 1000;
-                  setTipAmount(Math.min(1000000, Math.max(1, nextAmount)));
-                }}
+                onChange={(e) => setTipAmount(parseInt(e.target.value) || 1000)}
                 className="amount-input"
-                aria-label="Tip Amount in microstacks"
-                title="Enter the tip amount in uSTX"
               />
             </div>
           </div>
