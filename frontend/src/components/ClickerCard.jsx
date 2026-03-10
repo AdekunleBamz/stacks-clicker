@@ -1,59 +1,16 @@
-import React, { memo, useCallback } from 'react';
-import PropTypes from 'prop-types';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
 import ActionCard from './common/ActionCard';
 import ActionButton from './common/ActionButton';
 import Tooltip from './common/Tooltip';
-import { useSound } from '../hooks/useSound';
-import { COMBO_TIMEOUT_MS } from '../utils/constants';
 
 /**
  * Component for the Clicker game interaction card.
- * Provides a user interface for single clicks, batch clicks (Turbo), and network pings.
- *
- * @component
- * @param {Object} props - Component props
- * @param {string|null} [props.address] - Currently connected wallet address; required for actions
- * @param {Object} props.clicker - Interaction API from useClicker hook
- * @param {Function} props.clicker.click - Function to trigger a single click
- * @param {Function} props.clicker.multiClick - Function to trigger a multi-click (10x)
- * @param {Function} props.clicker.ping - Function to trigger a network ping
- * @param {Function} props.clicker.isLoading - Function to check loading state by action name
- * @returns {JSX.Element} The rendered Clicker interaction card
+ * @param {Object} props - Component props.
+ * @param {string} props.address - Connected wallet address.
+ * @param {Object} props.clicker - Clicker hook object containing actions and loading state.
  */
-function ClickerCard({ address, clicker }) {
+export default function ClickerCard({ address, clicker }) {
   const { isLoading, click, multiClick, ping } = clicker;
-  const { playSound } = useSound();
-  const [activeError, setActiveError] = React.useState(null);
-  const [combo, setCombo] = React.useState(0);
-  const comboTimerRef = React.useRef(null);
-
-  /**
-   * Internal wrapper to play acoustic feedback before executing a contract action.
-   * @param {Function} actionFn - The interaction function to execute
-   * @param {...*} args - Optional arguments for the interaction function
-   */
-  const handleAction = useCallback(
-    (actionFn, ...args) => {
-      if (!address) {
-        playSound('error');
-        setActiveError(actionFn.name || 'action');
-        setTimeout(() => setActiveError(null), 500);
-        return;
-      }
-
-      // Combo management
-      setCombo((prev) => prev + 1);
-      if (comboTimerRef.current) clearTimeout(comboTimerRef.current);
-      comboTimerRef.current = setTimeout(() => {
-        setCombo(0);
-      }, COMBO_TIMEOUT_MS);
-
-      playSound('click');
-      actionFn(...args);
-    },
-    [address, playSound]
-  );
 
   return (
     <ActionCard
@@ -61,63 +18,40 @@ function ClickerCard({ address, clicker }) {
       title="🎯 Power Clicker"
       subtitle="Click to generate on-chain activity."
       icon="🚀"
-      iconClass="bg-indigo-500/20 text-indigo-400"
+      accentColor="#5546FF"
     >
-      <div className="clicker-header">
-        <AnimatePresence>
-          {combo > 1 && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.5, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 1.5, y: -20 }}
-              aria-label={`Combo ${combo}x active`}
-            >
-              <div className="combo-inner glass-card">
-                <span className="combo-number">{combo}x</span>
-                <span className="combo-text">COMBO!</span>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-        {/* The following div is added based on the instruction to mount a conditional shimmer class
-            onto a balance display node. It's placed here as a plausible location within the header,
-            assuming 'loading' and 'balance' would be available in this scope. */}
-        <div className={`stats-value ${loading ? 'shimmer' : ''}`} aria-live="polite">
-          {loading ? '...' : (address ? balance : '—')} STX
-        </div>
-      </div>
-      <div className="actions" role="group" aria-label="Clicker Contract Controls">
-        <Tooltip content="Perform a single on-chain click interaction instantly (fixed cost).">
+      <div className="actions">
+        <Tooltip text="Perform a single on-chain click interaction instantly.">
           <ActionButton
             label="Express Click"
             icon="⚡"
             cost="0.001 STX"
-            onClick={() => handleAction(click)}
-            isLoading={isLoading('click')}
-            isError={activeError === 'click'}
+            onClick={click}
+            isLoading={isLoading('clicker-click')}
+            disabled={!address}
             className="primary"
           />
         </Tooltip>
-        <Tooltip content="Boost your activity by performing 10 clicks in one batch for better efficiency.">
+        <Tooltip text="Boost your activity by performing 10 clicks in one batch.">
           <ActionButton
             label="Turbo 10x"
             icon="🔥"
             cost="0.005 STX"
             className="secondary"
-            onClick={() => handleAction(multiClick, 10)}
-            isLoading={isLoading('multi-click')}
-            isError={activeError === 'multiClick'}
+            onClick={() => multiClick(10)}
+            isLoading={isLoading('clicker-multi-click')}
+            disabled={!address}
           />
         </Tooltip>
-        <Tooltip content="Ping the network to verify connection and emit a heartbeat event.">
+        <Tooltip text="Ping the network to verify connection and contract state.">
           <ActionButton
             label="Network Ping"
             icon="📡"
             cost="0.001 STX"
             className="success"
-            onClick={() => handleAction(ping)}
-            isLoading={isLoading('ping')}
-            isError={activeError === 'ping'}
+            onClick={ping}
+            isLoading={isLoading('clicker-ping')}
+            disabled={!address}
           />
         </Tooltip>
       </div>
