@@ -13,6 +13,7 @@ import InteractionStreaks from './components/InteractionStreaks';
 import { useWallet } from './context/WalletContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import ParticleOverlay from './components/common/ParticleOverlay';
+import PerformanceOverlay from './components/common/PerformanceOverlay';
 import { useI18n } from './context/I18nContext';
 
 // Hooks
