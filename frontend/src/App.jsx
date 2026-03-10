@@ -1,43 +1,35 @@
 import { useState } from 'react';
-import { openContractCall } from '@stacks/connect';
 import toast, { Toaster } from 'react-hot-toast';
-import { StacksMainnet } from '@stacks/network';
-import { uintCV, stringAsciiCV, principalCV, PostConditionMode } from '@stacks/transactions';
 import PlayerStats from './components/PlayerStats';
 import TransactionHistory from './components/TransactionHistory';
 import ClickerCard from './components/ClickerCard';
 import TipJarCard from './components/TipJarCard';
 import QuickPollCard from './components/QuickPollCard';
 import { useWallet } from './context/WalletContext';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import ParticleOverlay from './components/common/ParticleOverlay';
 
-// ============================================
-// CONFIGURATION - UPDATE THESE AFTER DEPLOYING
-// ============================================
-const WALLETCONNECT_PROJECT_ID = import.meta.env.VITE_WALLETCONNECT_PROJECT_ID || '';
-const DEPLOYER = 'SP_YOUR_ADDRESS_HERE'; // ⚠️ Replace with your deployed address
-const NETWORK = new StacksMainnet();
+// Hooks
+import { useClicker } from './hooks/useClicker';
+import { useTipJar } from './hooks/useTipJar';
+import { useQuickPoll } from './hooks/useQuickPoll';
 
-// Contract addresses
-const CONTRACTS = {
-  clicker: `${DEPLOYER}.clicker`,
-  tipjar: `${DEPLOYER}.tipjar`,
-  quickpoll: `${DEPLOYER}.quickpoll`,
-};
-
+/**
+ * Main application component for the Stacks Transaction Hub.
+ * Manages global state, contract interaction via custom hooks, and UI layout.
+ * @returns {JSX.Element} The rendered application.
+ */
 export default function App() {
   // Global Wallet State
-  const { address, connectWallet, disconnectWallet, appDetails } = useWallet();
+  const { address, connectWallet, disconnectWallet } = useWallet();
 
   // App State
   const [txLog, setTxLog] = useState([]);
-  const [loading, setLoading] = useState({});
   const [stats, setStats] = useState({ clicks: 0, tips: 0, votes: 0 });
-  const [pollQuestion, setPollQuestion] = useState('');
-  const [tipAmount, setTipAmount] = useState('0.001');
+  const [particleTrigger, setParticleTrigger] = useState(0);
 
   // Add transaction to log
-  const addTxToLog = (action, txId, status = 'pending') => {
+  const addTxToLog = (action, txId, status = 'success') => {
     const tx = {
       id: txId || `pending-${Date.now()}`,
       action,
@@ -45,232 +37,146 @@ export default function App() {
       time: new Date().toLocaleTimeString(),
     };
     setTxLog((prev) => [tx, ...prev.slice(0, 49)]);
+    setParticleTrigger(prev => prev + 1);
+    toast.success(`${action} submitted!`, {
+      icon: action.split(' ')[0], // Use the emoji from action
+      style: {
+        borderRadius: '12px',
+        background: '#1e1b4b',
+        color: '#fff',
+        border: '1px solid rgba(255,255,255,0.1)'
+      }
+    });
     return tx;
   };
 
-  // Generic contract call handler
-  const callContract = async (contract, functionName, args = [], actionName, onSuccess) => {
-    if (!address) {
-      toast.error('Connect wallet first!');
-      return;
+  // Initialize Hooks
+  const clicker = useClicker({
+    onTxSubmit: (action, txId) => {
+      addTxToLog('🎯 Click', txId);
+      setStats(prev => ({ ...prev, clicks: prev.clicks + 1 }));
     }
+  });
 
-    const loadingKey = `${contract}-${functionName}`;
-    setLoading((prev) => ({ ...prev, [loadingKey]: true }));
-
-    try {
-      await openContractCall({
-        network: NETWORK,
-        contractAddress: DEPLOYER,
-        contractName: contract,
-        functionName,
-        functionArgs: args,
-        postConditionMode: PostConditionMode.Allow,
-        appDetails,
-        onFinish: (data) => {
-          const txId = data.txId;
-          addTxToLog(actionName, txId, 'success');
-          toast.success(`${actionName} submitted! TX: ${txId.slice(0, 10)}...`);
-          if (onSuccess) onSuccess();
-          setLoading((prev) => ({ ...prev, [loadingKey]: false }));
-        },
-        onCancel: () => {
-          toast.error('Transaction cancelled');
-          setLoading((prev) => ({ ...prev, [loadingKey]: false }));
-        },
-      });
-    } catch (err) {
-      console.error(err);
-      toast.error(`Error: ${err.message}`);
-      setLoading((prev) => ({ ...prev, [loadingKey]: false }));
+  const tipjar = useTipJar({
+    onTxSubmit: (action, txId) => {
+      addTxToLog('💰 Tip', txId);
+      setStats(prev => ({ ...prev, tips: prev.tips + 1 }));
     }
-  };
+  });
 
-  // ===============================
-  // CLICKER CONTRACT ACTIONS
-  // ===============================
-  const handleClick = () => {
-    callContract('clicker', 'click', [], '🎯 Click', () => {
-      setStats((prev) => ({ ...prev, clicks: prev.clicks + 1 }));
-    });
-  };
-
-  const handleMultiClick = () => {
-    callContract('clicker', 'multi-click', [uintCV(10)], '🔥 10x Click', () => {
-      setStats((prev) => ({ ...prev, clicks: prev.clicks + 10 }));
-    });
-  };
-
-  const handlePing = () => {
-    callContract('clicker', 'ping', [], '📡 Ping');
-  };
-
-  // ===============================
-  // TIPJAR CONTRACT ACTIONS
-  // ===============================
-  const handleSelfPing = () => {
-    callContract('tipjar', 'self-ping', [], '🏓 Self Ping');
-  };
-
-  const handleQuickTip = () => {
-    callContract('tipjar', 'quick-tip', [], '💰 Quick Tip (0.001 STX)', () => {
-      setStats((prev) => ({ ...prev, tips: prev.tips + 1 }));
-    });
-  };
-
-  const handleCustomTip = () => {
-    const microStx = Math.floor(parseFloat(tipAmount) * 1000000);
-    if (microStx < 1) {
-      toast.error('Invalid tip amount');
-      return;
+  const quickpoll = useQuickPoll({
+    onTxSubmit: (action, txId) => {
+      addTxToLog('🗳️ Vote', txId);
+      setStats(prev => ({ ...prev, votes: prev.votes + 1 }));
     }
-    callContract('tipjar', 'tip-jar', [uintCV(microStx)], `💎 Tip ${tipAmount} STX`, () => {
-      setStats((prev) => ({ ...prev, tips: prev.tips + 1 }));
-    });
-  };
+  });
 
-  // ===============================
-  // QUICKPOLL CONTRACT ACTIONS
-  // ===============================
-  const handlePollPing = () => {
-    callContract('quickpoll', 'poll-ping', [], '🗳️ Poll Ping');
-  };
+  // Keyboard Shortcuts
+  useState(() => {
+    const handleKeyDown = (e) => {
+      // Ignore if typing in an input
+      if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') return;
 
-  const handleCreatePoll = () => {
-    if (!pollQuestion.trim()) {
-      toast.error('Enter a poll question!');
-      return;
-    }
-    callContract(
-      'quickpoll',
-      'create-poll',
-      [stringAsciiCV(pollQuestion.slice(0, 100))],
-      '📋 Create Poll',
-      () => {
-        setPollQuestion('');
+      if (e.key.toLowerCase() === 'c') {
+        clicker.click();
       }
-    );
-  };
+      if (e.key.toLowerCase() === 't') {
+        tipjar.quickTip();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  });
 
-  const handleVoteYes = () => {
-    callContract('quickpoll', 'quick-vote-yes', [], '👍 Vote Yes', () => {
-      setStats((prev) => ({ ...prev, votes: prev.votes + 1 }));
-    });
-  };
-
-  const handleVoteNo = () => {
-    callContract('quickpoll', 'quick-vote-no', [], '👎 Vote No', () => {
-      setStats((prev) => ({ ...prev, votes: prev.votes + 1 }));
-    });
-  };
-
-  const isLoading = (key) => loading[key] || false;
+  // Milestone Celebration
+  const [celebration, setCelebration] = useState(null);
+  useState(() => {
+    const milestones = [10, 50, 100, 500];
+    const checkMilestones = () => {
+      const total = stats.clicks + stats.tips + stats.votes;
+      if (milestones.includes(total)) {
+        setCelebration(`Level Up: ${total} Interactions!`);
+        setParticleTrigger(prev => prev + 5); // Massive burst
+        setTimeout(() => setCelebration(null), 3000);
+      }
+    };
+    checkMilestones();
+  }, [stats]);
 
   return (
-    <div className="app">
+    <div className="app-container">
       <Toaster position="top-right" />
+      <ParticleOverlay trigger={particleTrigger} />
 
-      {/* Header */}
-      <motion.header
-        className="header"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <h1>⚡ Stacks Transaction Hub</h1>
-        <p>Seamless blockchain interactions on the Stacks network</p>
-      </motion.header>
-
-      {/* Wallet Section */}
-      <motion.section
-        className="wallet-section"
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, delay: 0.1 }}
-      >
-        {!address ? (
-          <button className="wallet-btn connect" onClick={connectWallet}>
-            🔗 Connect Wallet
-          </button>
-        ) : (
-          <>
-            <div className="wallet-info">
-              <span>🟢</span>
-              <span className="wallet-address">
-                {address.slice(0, 8)}...{address.slice(-6)}
-              </span>
-            </div>
-            <button className="wallet-btn disconnect" onClick={disconnectWallet}>
-              Disconnect
-            </button>
-          </>
+      <AnimatePresence>
+        {celebration && (
+          <motion.div
+            className="milestone-celebration"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.5 }}
+          >
+            <div className="milestone-text">{celebration}</div>
+          </motion.div>
         )}
-      </motion.section>
+      </AnimatePresence>
 
-      {/* Stats Bar */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-      >
-        <PlayerStats stats={stats} txCount={txLog.length} />
-      </motion.div>
+      <header className="app-header">
+        <div className="header-content">
+          <div className="logo">
+            <motion.div
+              className="logo-glow"
+              animate={{ rotate: [0, 5, -5, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 2L4 16L16 30L28 16L16 2Z" fill="url(#logo-grad)" />
+                <path d="M16 6L8 16L16 26L24 16L16 6Z" fill="white" fillOpacity="0.2" />
+                <defs>
+                  <linearGradient id="logo-grad" x1="4" y1="2" x2="28" y2="30" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="#6366f1" />
+                    <stop offset="1" stopColor="#a855f7" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </motion.div>
+            <span className="logo-text">Stacks Clicker V2</span>
+          </div>
 
-      {/* Contract Cards */}
-      <motion.section
-        className="contracts-grid"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.3, staggerChildren: 0.1 }}
-      >
-        {/* CLICKER CONTRACT */}
-        <ClickerCard
-          address={address}
-          isLoading={isLoading}
-          handleClick={handleClick}
-          handleMultiClick={handleMultiClick}
-          handlePing={handlePing}
-        />
+          <div className="wallet-section">
+            {address ? (
+              <div className="wallet-info">
+                <span className="address-badge">{address.slice(0, 6)}...{address.slice(-4)}</span>
+                <button className="btn-disconnect" onClick={disconnectWallet}>Disconnect</button>
+              </div>
+            ) : (
+              <button className="btn-connect" onClick={connectWallet}>Connect Wallet</button>
+            )}
+          </div>
+        </div>
+      </header>
 
-        {/* TIPJAR CONTRACT */}
-        <TipJarCard
-          address={address}
-          isLoading={isLoading}
-          tipAmount={tipAmount}
-          setTipAmount={setTipAmount}
-          handleSelfPing={handleSelfPing}
-          handleQuickTip={handleQuickTip}
-          handleCustomTip={handleCustomTip}
-        />
+      <main className="app-main">
+        <div className="main-grid">
+          <section className="interaction-section">
+            <h2 className="section-title">Interactions</h2>
+            <div className="cards-container">
+              <ClickerCard address={address} clicker={clicker} />
+              <TipJarCard address={address} tipjar={tipjar} />
+              <QuickPollCard address={address} quickpoll={quickpoll} />
+            </div>
+          </section>
 
-        {/* QUICKPOLL CONTRACT */}
-        <QuickPollCard
-          address={address}
-          isLoading={isLoading}
-          pollQuestion={pollQuestion}
-          setPollQuestion={setPollQuestion}
-          handlePollPing={handlePollPing}
-          handleCreatePoll={handleCreatePoll}
-          handleVoteYes={handleVoteYes}
-          handleVoteNo={handleVoteNo}
-        />
-      </motion.section>
+          <aside className="stats-aside">
+            <PlayerStats stats={stats} />
+            <TransactionHistory txLog={txLog} />
+          </aside>
+        </div>
+      </main>
 
-      {/* Transaction Log */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.4 }}
-      >
-        <TransactionHistory txLog={txLog} />
-      </motion.div>
-
-      {/* Footer */}
-      <footer style={{ textAlign: 'center', marginTop: 40, color: '#a0a0a0' }}>
-        <p>Powered by Stacks Blockchain • Secure & Decentralized</p>
-        <p style={{ marginTop: 10, fontSize: '0.9rem' }}>
-          All transactions are recorded on-chain for transparency and immutability
-        </p>
+      <footer className="app-footer">
+        <p>Built with ❤️ on Stacks</p>
       </footer>
     </div>
   );
