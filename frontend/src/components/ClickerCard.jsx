@@ -2,6 +2,7 @@ import React from 'react';
 import ActionCard from './common/ActionCard';
 import ActionButton from './common/ActionButton';
 import Tooltip from './common/Tooltip';
+import { useSound } from '../hooks/useSound';
 
 /**
  * Component for the Clicker game interaction card.
@@ -11,6 +12,12 @@ import Tooltip from './common/Tooltip';
  */
 export default function ClickerCard({ address, clicker }) {
   const { isLoading, click, multiClick, ping } = clicker;
+  const { playSound } = useSound();
+
+  const handleAction = (fn, ...args) => {
+    playSound('click');
+    fn(...args);
+  };
 
   return (
     <ActionCard
@@ -26,7 +33,7 @@ export default function ClickerCard({ address, clicker }) {
             label="Express Click"
             icon="⚡"
             cost="0.001 STX"
-            onClick={click}
+            onClick={() => handleAction(click)}
             isLoading={isLoading('clicker-click')}
             disabled={!address}
             className="primary"
@@ -38,7 +45,7 @@ export default function ClickerCard({ address, clicker }) {
             icon="🔥"
             cost="0.005 STX"
             className="secondary"
-            onClick={() => multiClick(10)}
+            onClick={() => handleAction(multiClick, 10)}
             isLoading={isLoading('clicker-multi-click')}
             disabled={!address}
           />
@@ -49,7 +56,7 @@ export default function ClickerCard({ address, clicker }) {
             icon="📡"
             cost="0.001 STX"
             className="success"
-            onClick={ping}
+            onClick={() => handleAction(ping)}
             isLoading={isLoading('clicker-ping')}
             disabled={!address}
           />
