@@ -7,6 +7,7 @@ import TipJarCard from './components/TipJarCard';
 import QuickPollCard from './components/QuickPollCard';
 import QuickActions from './components/QuickActions';
 import NetworkHeartbeat from './components/NetworkHeartbeat';
+import OnboardingTour from './components/OnboardingTour';
 import { useWallet } from './context/WalletContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import ParticleOverlay from './components/common/ParticleOverlay';
