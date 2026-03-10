@@ -31,6 +31,27 @@ export default function TransactionHistory({ txLog }) {
       </span>
     );
   };
+
+  const exportData = (format) => {
+    let content = '';
+    const filename = `stacks-tx-history-${new Date().toISOString().split('T')[0]}`;
+
+    if (format === 'json') {
+      content = JSON.stringify(txLog, null, 2);
+    } else if (format === 'csv') {
+      const headers = ['Action', 'Time', 'ID', 'Status'];
+      const rows = txLog.map(tx => [tx.action, tx.time, tx.id, tx.status].join(','));
+      content = [headers.join(','), ...rows].join('\n');
+    }
+
+    const blob = new Blob([content], { type: format === 'json' ? 'application/json' : 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${filename}.${format}`;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
   return (
     <section className="tx-log" aria-labelledby="tx-history-title">
       <div className="log-header">
@@ -44,6 +65,10 @@ export default function TransactionHistory({ txLog }) {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           <span className="tx-count-badge">{filteredLog.length}</span>
+        </div>
+        <div className="tx-export-actions">
+          <button className="export-btn" onClick={() => exportData('json')} title="Export as JSON">JSON</button>
+          <button className="export-btn" onClick={() => exportData('csv')} title="Export as CSV">CSV</button>
         </div>
       </div>
 

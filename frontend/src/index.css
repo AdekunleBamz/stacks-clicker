@@ -432,6 +432,30 @@ body::before {
   padding: 0 2px;
 }
 
+.tx-export-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.export-btn {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.3rem 0.6rem;
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+}
+
+.export-btn:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
 .tx-count-badge {
   background: var(--primary);
   padding: 4px 10px;
