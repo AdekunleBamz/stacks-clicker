@@ -12,6 +12,7 @@ import FloatingActionButton from './components/FloatingActionButton';
 import { useWallet } from './context/WalletContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import ParticleOverlay from './components/common/ParticleOverlay';
+import { useI18n } from './context/I18nContext';
 
 // Hooks
 import { useClicker } from './hooks/useClicker';
@@ -25,8 +26,9 @@ import { useSound } from './hooks/useSound';
  * @returns {JSX.Element} The rendered application.
  */
 export default function App() {
-  // Global Wallet State
+  // Global State
   const { address, connectWallet, disconnectWallet } = useWallet();
+  const { lang, setLang, t } = useI18n();
   const { playSound } = useSound();
 
   // App State
@@ -161,6 +163,14 @@ export default function App() {
 
           <div className="wallet-section">
             <NetworkHeartbeat />
+            <select
+              className="lang-select"
+              value={lang}
+              onChange={(e) => setLang(e.target.value)}
+            >
+              <option value="en">EN</option>
+              <option value="es">ES</option>
+            </select>
             <button
               className="theme-toggle"
               onClick={toggleTheme}
