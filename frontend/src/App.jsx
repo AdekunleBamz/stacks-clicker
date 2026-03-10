@@ -179,7 +179,7 @@ export default function App() {
         </div>
       </header>
 
-      <main className="app-main">
+      <main className="app-main" id="main-content" tabIndex="-1">
         <div className="main-grid">
           <section className="interaction-section">
             <h2 className="section-title">Interactions</h2>

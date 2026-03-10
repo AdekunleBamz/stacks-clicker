@@ -69,19 +69,35 @@ body::before {
   100% { transform: scale(1.1); }
 }
 
-/* Custom Scrollbar */
+/* Premium Scrollbars */
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
+
 ::-webkit-scrollbar-track {
-  background: var(--bg-dark);
+  background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  border: 2px solid transparent;
+  background-clip: content-box;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--text-muted);
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+[data-theme='light'] ::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='light'] ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .app-container {
