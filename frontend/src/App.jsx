@@ -13,6 +13,7 @@ import ParticleOverlay from './components/common/ParticleOverlay';
 import { useClicker } from './hooks/useClicker';
 import { useTipJar } from './hooks/useTipJar';
 import { useQuickPoll } from './hooks/useQuickPoll';
+import { useSound } from './hooks/useSound';
 
 /**
  * Main application component for the Stacks Transaction Hub.
@@ -22,6 +23,7 @@ import { useQuickPoll } from './hooks/useQuickPoll';
 export default function App() {
   // Global Wallet State
   const { address, connectWallet, disconnectWallet } = useWallet();
+  const { playSound } = useSound();
 
   // App State
   const [txLog, setTxLog] = useState([]);
@@ -47,6 +49,7 @@ export default function App() {
     };
     setTxLog((prev) => [tx, ...prev.slice(0, 49)]);
     setParticleTrigger(prev => prev + 1);
+    playSound('success');
     toast.success(`${action} submitted!`, {
       icon: action.split(' ')[0], // Use the emoji from action
       style: {
@@ -88,9 +91,11 @@ export default function App() {
       if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') return;
 
       if (e.key.toLowerCase() === 'c') {
+        playSound('click');
         clicker.click();
       }
       if (e.key.toLowerCase() === 't') {
+        playSound('click');
         tipjar.quickTip();
       }
     };
