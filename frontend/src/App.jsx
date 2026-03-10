@@ -196,6 +196,7 @@ export default function App() {
         <div className="main-grid">
           <section className="interaction-section">
             <h2 className="section-title">Interactions</h2>
+            <InteractionStreaks totalInteractions={stats.clicks + stats.tips + stats.votes} />
             <div className="cards-container">
               <ClickerCard address={address} clicker={clicker} />
               <TipJarCard address={address} tipjar={tipjar} />
