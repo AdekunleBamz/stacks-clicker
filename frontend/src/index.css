@@ -1263,6 +1263,60 @@ body::before {
 
 .tx-item:active { cursor: grabbing; }
 
+/* Roadmap Board (Task 55) */
+.roadmap-board {
+  margin-top: 4rem;
+  padding: 2rem;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+}
+
+.roadmap-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.roadmap-item {
+  padding: 1.5rem;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  transition: transform 0.3s;
+}
+
+.roadmap-item:hover { transform: translateY(-5px); }
+.roadmap-item.completed { border-color: var(--success); }
+.roadmap-item.in-progress { border-color: var(--primary); }
+
+.roadmap-quarter {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.roadmap-title {
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.roadmap-status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.completed .roadmap-status-badge { background: var(--success); color: white; }
+.in-progress .roadmap-status-badge { background: var(--primary); color: white; }
+
 /* High-Contrast Focus Rings (Task 48) */
 :focus-visible {
   outline: 2px solid var(--primary);

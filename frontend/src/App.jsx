@@ -152,6 +152,7 @@ export default function App() {
       <header className="app-header">
         <div className="header-content">
           <div className="logo">
+            <NetworkHeartbeat />
             <motion.div
               className="logo-glow"
               animate={{ rotate: [0, 5, -5, 0] }}
