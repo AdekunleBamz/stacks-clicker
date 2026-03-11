@@ -1,3 +1,4 @@
+```
 import { useState, useEffect } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 import Header from './components/Header';
@@ -25,6 +26,7 @@ import { useTipJar } from './hooks/useTipJar';
 import { useQuickPoll } from './hooks/useQuickPoll';
 import { useInteractions } from './hooks/useInteractions';
 import { useSound } from './hooks/useSound';
+import { useLocalStorage } from './hooks/useLocalStorage';
 
 /**
  * Main application component for the Stacks Transaction Hub.
@@ -43,10 +45,9 @@ export default function App() {
   const [particleTrigger, setParticleTrigger] = useState(0);
 
   // Theme Management
-  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
+  const [theme, setTheme] = useLocalStorage('theme', 'dark');
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
   }, [theme]);
 
   const toggleTheme = () => setTheme(prev => prev === 'dark' ? 'light' : 'dark');
@@ -145,18 +146,7 @@ export default function App() {
       <Toaster position="top-right" />
       <ParticleOverlay trigger={particleTrigger} />
 
-      <AnimatePresence>
-        {celebration && (
-          <motion.div
-            className="milestone-celebration"
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.5 }}
-          >
-            <div className="milestone-text">{celebration}</div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <MilestoneCelebration celebration={celebration} />
 
       <Header theme={theme} toggleTheme={toggleTheme} />
 
