@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 
 /**
@@ -59,3 +60,12 @@ export default function TransactionLog({ transactions = [] }) {
     </div>
   );
 }
+
+TransactionLog.propTypes = {
+  transactions: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    status: PropTypes.string,
+    action: PropTypes.string,
+    time: PropTypes.string
+  }))
+};
