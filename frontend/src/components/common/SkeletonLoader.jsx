@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 
 /**
@@ -38,3 +39,10 @@ export default function SkeletonLoader({ width = '100%', height = '20px', border
     </div>
   );
 }
+
+SkeletonLoader.propTypes = {
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  borderRadius: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  className: PropTypes.string
+};
