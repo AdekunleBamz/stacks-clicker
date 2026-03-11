@@ -1,11 +1,19 @@
+import { useCallback } from 'react';
+
 /**
  * Custom hook for synthesized acoustic feedback using the Web Audio API.
- * Generates dynamic waveforms (sine, triangle, sawtooth) without external assets.
+ * Generates dynamic waveforms (sine, triangle, sawtooth) without requiring external audio assets,
+ * ensuring zero latency and zero bundle overhead for sound effects.
  *
- * @returns {Object} { playSound } - Function to trigger a sound effect by type.
+ * @returns {Object} { playSound }
+ * @property {Function} playSound - Function to trigger a sound effect: (type: 'click' | 'success' | 'error') => void
  */
 export function useSound() {
-  const playSound = (type) => {
+  /**
+   * Triggers a specific synthesized sound effect.
+   * @param {'click'|'success'|'error'} type - The category of sound to play
+   */
+  const playSound = useCallback((type) => {
     const AudioContext = window.AudioContext || window.webkitAudioContext;
     if (!AudioContext) return;
 
@@ -50,7 +58,7 @@ export function useSound() {
       default:
         break;
     }
-  };
+  }, []);
 
   return { playSound };
 }
