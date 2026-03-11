@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 
 /**
@@ -61,3 +62,14 @@ export default function ActionButton({
     </motion.button>
   );
 }
+
+ActionButton.propTypes = {
+  label: PropTypes.string.isRequired,
+  icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  onClick: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
+  disabled: PropTypes.bool,
+  className: PropTypes.string,
+  cost: PropTypes.string,
+  isError: PropTypes.bool
+};
