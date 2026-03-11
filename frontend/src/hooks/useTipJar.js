@@ -3,6 +3,14 @@ import { callContract } from '../utils/walletconnect';
 
 const DEPLOYER = 'SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT';
 
+/**
+ * Custom hook for interacting with the TipJar smart contract.
+ * Manages tipping, withdrawals, and contract pings.
+ *
+ * @param {Object} options - Hook options.
+ * @param {Function} options.onTxSubmit - Callback triggered when a transaction is broadcasted.
+ * @returns {Object} Hook exports including action handlers and loading state.
+ */
 export function useTipJar({ onTxSubmit }) {
   const [loadingStates, setLoadingStates] = useState({});
 
