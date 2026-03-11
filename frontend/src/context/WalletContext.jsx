@@ -29,7 +29,7 @@ export function WalletProvider({ children }) {
         }
       }
     } catch (e) {
-      console.log('No existing connection');
+      // No existing connection
     }
   }, []);
 
