@@ -33,6 +33,21 @@
   --border: rgba(255, 255, 255, 0.08);
   --radius-lg: 24px;
 
+  /* Semantic Tokens */
+  --color-primary: var(--primary);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+  --color-bg: var(--bg-dark);
+  --color-text: var(--text-main);
+  --color-text-dim: var(--text-muted);
+
+  /* Glassmorphism Tokens */
+  --glass-bg: rgba(15, 15, 25, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-blur: blur(12px);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
   /* Typography - 8pt Grid */
   --font-xs: 0.75rem;   /* 12px */
   --font-sm: 0.875rem;  /* 14px */
