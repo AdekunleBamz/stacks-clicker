@@ -14,6 +14,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ParticleOverlay from './components/common/ParticleOverlay';
 import PerformanceOverlay from './components/common/PerformanceOverlay';
 import PullToRefresh from './components/common/PullToRefresh';
+import ScrollToTop from './components/common/ScrollToTop';
 import { useI18n } from './context/I18nContext';
 
 // Hooks
@@ -136,8 +137,6 @@ export default function App() {
           // Mock refresh logic
           return new Promise(resolve => setTimeout(resolve, 2000));
       }} />
-import ScrollToTop from './components/common/ScrollToTop';
-...
       <PerformanceOverlay />
       <ScrollToTop />
       <OnboardingTour />
