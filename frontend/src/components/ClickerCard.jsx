@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import ActionCard from './common/ActionCard';
 import ActionButton from './common/ActionButton';
@@ -11,7 +11,7 @@ import { useSound } from '../hooks/useSound';
  * @param {string} props.address - Connected wallet address.
  * @param {Object} props.clicker - Clicker hook object containing actions and loading state.
  */
-export default function ClickerCard({ address, clicker }) {
+function ClickerCard({ address, clicker }) {
   const { isLoading, click, multiClick, ping } = clicker;
   const { playSound } = useSound();
 
@@ -20,10 +20,10 @@ export default function ClickerCard({ address, clicker }) {
    * @param {Function} fn - The clicker function to execute.
    * @param {...*} args - Arguments to pass to the function.
    */
-  const handleAction = (fn, ...args) => {
+  const handleAction = useCallback((fn, ...args) => {
     playSound('click');
     fn(...args);
-  };
+  }, [playSound]);
 
   return (
     <ActionCard
@@ -34,7 +34,7 @@ export default function ClickerCard({ address, clicker }) {
       accentColor="#5546FF"
     >
       <div className="actions">
-        <Tooltip text="Perform a single on-chain click interaction instantly.">
+        <Tooltip content="Perform a single on-chain click interaction instantly.">
           <ActionButton
             label="Express Click"
             icon="⚡"
@@ -45,7 +45,7 @@ export default function ClickerCard({ address, clicker }) {
             className="primary"
           />
         </Tooltip>
-        <Tooltip text="Boost your activity by performing 10 clicks in one batch.">
+        <Tooltip content="Boost your activity by performing 10 clicks in one batch.">
           <ActionButton
             label="Turbo 10x"
             icon="🔥"
@@ -56,7 +56,7 @@ export default function ClickerCard({ address, clicker }) {
             disabled={!address}
           />
         </Tooltip>
-        <Tooltip text="Ping the network to verify connection and contract state.">
+        <Tooltip content="Ping the network to verify connection and contract state.">
           <ActionButton
             label="Network Ping"
             icon="📡"
@@ -81,3 +81,5 @@ ClickerCard.propTypes = {
     isLoading: PropTypes.func.isRequired
   }).isRequired
 };
+
+export default memo(ClickerCard);
