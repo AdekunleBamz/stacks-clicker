@@ -9,6 +9,13 @@ const appDetails = {
   icon: window.location.origin + '/favicon.svg',
 };
 
+/**
+ * Provider component for global Stacks wallet state.
+ * Manages connection status, authentication, and session persistence.
+ * @param {Object} props - Component props.
+ * @param {React.ReactNode} props.children - Child components to be wrapped.
+ * @returns {JSX.Element} The WalletContext provider.
+ */
 export function WalletProvider({ children }) {
   const [address, setAddress] = useState(null);
 
