@@ -161,7 +161,31 @@ export default function TransactionHistory({ txLog }) {
                     </>
                   )}
                 </div>
-                <button className="close-btn" onClick={() => { setSelectedTx(null); setModalView('summary'); }}>×</button>
+  const closeBtnRef = React.useRef(null);
+
+  React.useEffect(() => {
+    if (selectedTx) {
+      // Focus the close button when modal opens
+      setTimeout(() => closeBtnRef.current?.focus(), 100);
+    }
+  }, [selectedTx]);
+
+  const handleModalClose = () => {
+    setSelectedTx(null);
+    setModalView('summary');
+  };
+
+  return (
+    <section className="tx-log" aria-labelledby="tx-history-title">
+...
+                <button
+                  className="close-btn"
+                  onClick={handleModalClose}
+                  ref={closeBtnRef}
+                  aria-label="Close modal"
+                >
+                  ×
+                </button>
               </div>
               <div className="modal-body">
                 {modalView === 'summary' ? (
