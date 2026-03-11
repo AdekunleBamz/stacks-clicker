@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 
 /**
- * Premium skeleton loader component with shimmer effect.
+ * Premium skeleton loader component with shimmer effect for improved perceived performance.
+ *
+ * @component
+ * @param {Object} props - Component props
+ * @param {string|number} [props.width='100%'] - Width of the skeleton block
+ * @param {string|number} [props.height='20px'] - Height of the skeleton block
+ * @param {string|number} [props.borderRadius='8px'] - Border radius for the block
+ * @param {string} [props.className=''] - Additional CSS classes
+ * @returns {JSX.Element} The rendered skeleton loader
  */
-export default function SkeletonLoader({ width = '100%', height = '20px', borderRadius = '8px', className = '' }) {
+function SkeletonLoader({ width = '100%', height = '20px', borderRadius = '8px', className = '' }) {
   return (
     <div
       className={`skeleton-wrapper ${className}`}
@@ -46,3 +54,5 @@ SkeletonLoader.propTypes = {
   borderRadius: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   className: PropTypes.string
 };
+
+export default memo(SkeletonLoader);
