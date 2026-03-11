@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ActionCard from './common/ActionCard';
 import ActionButton from './common/ActionButton';
 import Tooltip from './common/Tooltip';
@@ -70,3 +71,13 @@ export default function ClickerCard({ address, clicker }) {
     </ActionCard>
   );
 }
+
+ClickerCard.propTypes = {
+  address: PropTypes.string,
+  clicker: PropTypes.shape({
+    click: PropTypes.func.isRequired,
+    multiClick: PropTypes.func.isRequired,
+    ping: PropTypes.func.isRequired,
+    isLoading: PropTypes.func.isRequired
+  }).isRequired
+};
