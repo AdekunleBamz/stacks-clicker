@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 
 /**
@@ -34,3 +35,11 @@ export default function ActionCard({ title, subtitle, icon, iconClass, children 
     </motion.div>
   );
 }
+
+ActionCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string,
+  icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  iconClass: PropTypes.string,
+  children: PropTypes.node
+};
