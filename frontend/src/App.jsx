@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -7,7 +7,6 @@ import NetworkHeartbeat from './components/NetworkHeartbeat';
 import OnboardingTour from './components/OnboardingTour';
 import FloatingActionButton from './components/FloatingActionButton';
 import InteractionStreaks from './components/InteractionStreaks';
-import MainGrid from './components/MainGrid';
 import MilestoneCelebration from './components/MilestoneCelebration';
 import { useWallet } from './context/WalletContext';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -139,6 +138,19 @@ export default function App() {
       }} />
       <PerformanceOverlay />
       <ScrollToTop />
+      <React.Suspense fallback={<SkeletonLoader height="300px" borderRadius="24px" />}>
+              <PlayerStats />
+            </React.Suspense>
+
+            <main id="main-content" className="app-main">
+              <React.Suspense fallback={<SkeletonLoader height="500px" borderRadius="32px" />}>
+                <MainGrid />
+              </React.Suspense>
+
+              <React.Suspense fallback={<SkeletonLoader height="400px" borderRadius="32px" />}>
+                <TransactionHistory txLog={txLog} />
+              </React.Suspense>
+            </main>
       <OnboardingTour />
       <a
         href="#main-content"
