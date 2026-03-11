@@ -1379,3 +1379,23 @@ select:focus-visible {
   from { transform: translateY(-20px) scale(0.9); opacity: 0; }
   to { transform: translateY(0) scale(1); opacity: 1; }
 }
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: 50%;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 90;
+  box-shadow: var(--glass-shadow);
+  font-size: 1.25rem;
+}
