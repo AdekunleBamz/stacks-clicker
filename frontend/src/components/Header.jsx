@@ -1,8 +1,7 @@
-import React from 'react';
-import { motion } from 'framer-motion';
 import NetworkHeartbeat from './NetworkHeartbeat';
 import NetworkLogo from './NetworkLogo';
 import AddressBadge from './common/AddressBadge';
+import Tooltip from './common/Tooltip';
 import { useWallet } from '../context/WalletContext';
 import { useI18n } from '../context/I18nContext';
 
@@ -37,14 +36,15 @@ export default function Header({ theme, toggleTheme }) {
             <option value="en">English (EN)</option>
             <option value="es">Español (ES)</option>
           </select>
-          <button
-            className="theme-toggle"
-            onClick={toggleTheme}
-            title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-            aria-label={`Toggle to ${theme === 'dark' ? 'light' : 'dark'} theme`}
-          >
-            {theme === 'dark' ? '☀️' : '🌙'}
-          </button>
+          <Tooltip content={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}>
+            <button
+              className="theme-toggle"
+              onClick={toggleTheme}
+              aria-label={`Toggle to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+            >
+              {theme === 'dark' ? '☀️' : '🌙'}
+            </button>
+          </Tooltip>
 
           {address ? (
             <AddressBadge address={address} onDisconnect={disconnectWallet} />
