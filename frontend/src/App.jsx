@@ -136,6 +136,15 @@ export default function App() {
     }
   }, [stats]);
 
+  return (
+    <div className="app-container" data-theme={theme}>
+      <PullToRefresh onRefresh={async () => {
+          // Mock refresh logic
+          return new Promise(resolve => setTimeout(resolve, 2000));
+      }} />
+      <PerformanceOverlay />
+      <ScrollToTop />
+
       <React.Suspense fallback={<SkeletonLoader height="80px" borderRadius="12px" />}>
         <Header theme={theme} toggleTheme={toggleTheme} currentLang={lang} onLangChange={setLang} />
       </React.Suspense>
@@ -147,7 +156,18 @@ export default function App() {
 
         <main id="main-content" className="app-main">
           <React.Suspense fallback={<SkeletonLoader height="500px" borderRadius="32px" />}>
-            <MainGrid stats={stats} setStats={setStats} addTxToLog={addTxToLog} />
+            <MainGrid
+              address={address}
+              stats={stats}
+              txLog={txLog}
+              clicker={clicker}
+              tipjar={tipjar}
+              quickpoll={quickpoll}
+              pingAll={pingAll}
+              setTxLog={setTxLog}
+              setStats={setStats}
+              addTxToLog={addTxToLog}
+            />
           </React.Suspense>
 
           <React.Suspense fallback={<SkeletonLoader height="400px" borderRadius="32px" />}>
@@ -155,7 +175,17 @@ export default function App() {
           </React.Suspense>
         </main>
       </div>
+
+      <Footer />
       <OnboardingTour />
+      <FloatingActionButton />
+      <NetworkHeartbeat />
+      <QuickActions
+        address={address}
+        onClearLog={() => setTxLog([])}
+        onPingAll={pingAll}
+      />
+
       <a
         href="#main-content"
         className="skip-link"
@@ -163,32 +193,10 @@ export default function App() {
       >
         Skip to Content
       </a>
+
       <Toaster position="top-right" />
       <ParticleOverlay trigger={particleTrigger} />
-
       <MilestoneCelebration celebration={celebration} />
-
-      <Header theme={theme} toggleTheme={toggleTheme} />
-
-      <MainGrid
-        address={address}
-        stats={stats}
-        txLog={txLog}
-        clicker={clicker}
-        tipjar={tipjar}
-        quickpoll={quickpoll}
-        pingAll={pingAll}
-        setTxLog={setTxLog}
-      />
-
-      <Footer />
-
-      <QuickActions
-        address={address}
-        onClearLog={() => setTxLog([])}
-        onPingAll={pingAll}
-      />
     </div>
   );
 }
-
