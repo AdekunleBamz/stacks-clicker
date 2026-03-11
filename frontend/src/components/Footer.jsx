@@ -5,8 +5,8 @@ import React from 'react';
  */
 export default function Footer() {
   return (
-    <footer className="app-footer">
-      <p>Built with ❤️ on Stacks</p>
+    <footer className="app-footer" aria-label="Application Footer">
+      <p>Built with <span role="img" aria-label="love">❤️</span> on Stacks</p>
     </footer>
   );
 }
