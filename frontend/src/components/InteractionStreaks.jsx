@@ -1,23 +1,33 @@
-import React, { useState, useEffect, memo, useMemo } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 
 /**
- * Component to track and display user interaction streaks and badges.
+ * Component to track and display user interaction streaks and achievement badges.
+ * Provides visual feedback on user engagement levels through animated fire icons and tiered badges.
+ *
+ * @component
+ * @param {Object} props - Component props
+ * @param {number} props.totalInteractions - The total count of verified on-chain interactions
+ * @returns {JSX.Element} The rendered interaction streaks and badges panel
  */
 function InteractionStreaks({ totalInteractions }) {
   const [streak, setStreak] = useState(0);
-  const [lastActivity, setLastActivity] = useState(Date.now());
   const [badges, setBadges] = useState([]);
 
-  // Mock streak logic based on total interactions for simplicity
+  /**
+   * Internal effect to increment streak based on interaction activity.
+   * In a production environment, this would ideally be calculated from timestamped transaction logs.
+   */
   useEffect(() => {
     if (totalInteractions > 0) {
       setStreak(prev => prev + 1);
-      setLastActivity(Date.now());
     }
   }, [totalInteractions]);
 
+  /**
+   * Effect to calculate and update earned badges based on total interaction milestones.
+   */
   useEffect(() => {
     const newBadges = [];
     if (totalInteractions >= 10) newBadges.push({ id: 'bronze', label: '🥉 Novice', color: '#cd7f32' });
@@ -35,6 +45,8 @@ function InteractionStreaks({ totalInteractions }) {
             style={{ willChange: 'transform, filter' }}
             animate={{ scale: [1, 1.2, 1], filter: ["drop-shadow(0 0 0px #ff4500)", "drop-shadow(0 0 10px #ff4500)", "drop-shadow(0 0 0px #ff4500)"] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            role="img"
+            aria-label="Streak Fire"
           >
             🔥
           </motion.span>
