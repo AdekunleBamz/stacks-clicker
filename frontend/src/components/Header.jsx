@@ -1,6 +1,9 @@
+```javascript
 import React from 'react';
 import { motion } from 'framer-motion';
 import NetworkHeartbeat from './NetworkHeartbeat';
+import NetworkLogo from './NetworkLogo';
+import AddressBadge from './common/AddressBadge';
 import { useWallet } from '../context/WalletContext';
 import { useI18n } from '../context/I18nContext';
 
@@ -43,10 +46,7 @@ export default function Header({ theme, toggleTheme }) {
           </button>
 
           {address ? (
-            <div className="wallet-info">
-              <span className="address-badge">{address.slice(0, 6)}...{address.slice(-4)}</span>
-              <button className="btn-disconnect" onClick={disconnectWallet}>Disconnect</button>
-            </div>
+            <AddressBadge address={address} onDisconnect={disconnectWallet} />
           ) : (
             <button className="btn-connect" onClick={connectWallet}>Connect Wallet</button>
           )}
