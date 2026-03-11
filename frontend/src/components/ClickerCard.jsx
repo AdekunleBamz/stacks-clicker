@@ -14,6 +14,11 @@ export default function ClickerCard({ address, clicker }) {
   const { isLoading, click, multiClick, ping } = clicker;
   const { playSound } = useSound();
 
+  /**
+   * Helper to play sound and execute a clicker action.
+   * @param {Function} fn - The clicker function to execute.
+   * @param {...*} args - Arguments to pass to the function.
+   */
   const handleAction = (fn, ...args) => {
     playSound('click');
     fn(...args);
