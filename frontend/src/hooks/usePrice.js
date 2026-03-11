@@ -1,32 +1,52 @@
 import { useState, useEffect } from 'react';
 
 /**
- * Custom hook to fetch and keep track of the STX price in USD.
- * Uses the CoinGecko API with auto-refresh every 60 seconds.
+ * Custom hook to fetch and monitor the live STX (Stacks) price in USD.
+ * Utilizes the CoinGecko public API with an automatic 60-second refresh cycle.
  *
  * @returns {Object} { price, loading, error }
+ * @property {number|null} price - The current STX price in USD, or null if not yet fetched
+ * @property {boolean} loading - True if the initial price fetch is in progress
+ * @property {Error|null} error - Contains any error object encountered during the fetch
  */
 export function usePrice() {
   const [price, setPrice] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
+    let isMounted = true;
+
     const fetchPrice = async () => {
       try {
         const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=blockstack&vs_currencies=usd');
+        if (!response.ok) throw new Error('Network response was not ok');
         const data = await response.json();
-        setPrice(data.blockstack.usd);
+
+        if (isMounted) {
+          setPrice(data.blockstack?.usd || null);
+          setError(null);
+        }
       } catch (err) {
-        console.error('Failed to fetch STX price:', err);
+        if (isMounted) {
+          console.error('Failed to fetch STX price:', err);
+          setError(err);
+        }
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     };
 
     fetchPrice();
     const interval = setInterval(fetchPrice, 60000); // Update every minute
-    return () => clearInterval(interval);
+
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
   }, []);
 
-  return { price, loading };
+  return { price, loading, error };
 }
