@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 
 /**
  * Individual transaction item with swipe actions and status visualization.
  */
-export default function TransactionItem({
+function TransactionItem({
   tx,
   searchTerm,
   highlightText,
@@ -95,3 +95,5 @@ TransactionItem.propTypes = {
   onCopy: PropTypes.func.isRequired,
   onContextMenu: PropTypes.func.isRequired
 };
+
+export default memo(TransactionItem);
