@@ -159,14 +159,9 @@ export default function App() {
             <MainGrid
               address={address}
               stats={stats}
-              txLog={txLog}
               clicker={clicker}
               tipjar={tipjar}
               quickpoll={quickpoll}
-              pingAll={pingAll}
-              setTxLog={setTxLog}
-              setStats={setStats}
-              addTxToLog={addTxToLog}
             />
           </React.Suspense>
 
