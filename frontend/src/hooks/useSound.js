@@ -18,6 +18,7 @@ export function useSound() {
 
     const now = ctx.currentTime;
 
+    // Synthesize different waveforms based on the required feedback type
     switch (type) {
       case 'click':
         osc.type = 'sine';
