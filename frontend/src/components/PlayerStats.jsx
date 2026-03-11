@@ -1,23 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { motion, animate } from 'framer-motion';
+import React from 'react';
 import { usePrice } from '../hooks/usePrice';
-
-/**
- * Animated number component for smooth counting transitions.
- */
-function AnimatedNumber({ value }) {
-  const [displayValue, setDisplayValue] = useState(value);
-
-  useEffect(() => {
-    const controls = animate(displayValue, value, {
-      duration: 1,
-      onUpdate: (latest) => setDisplayValue(Math.floor(latest)),
-    });
-    return () => controls.stop();
-  }, [value]);
-
-  return <span>{displayValue.toLocaleString()}</span>;
-}
+import StatsCard from './common/StatsCard';
 
 /**
  * Component to display aggregate player statistics with premium animations.
@@ -44,38 +27,7 @@ export default function PlayerStats({ stats, txCount }) {
   return (
     <section className="stats-bar" aria-label="Player Statistics">
       {statItems.map((item, index) => (
-        <motion.div
-          key={item.label}
-          className="stat-card"
-          initial={{ opacity: 0, scale: 0.9, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{
-            type: "spring",
-            stiffness: 260,
-            damping: 20,
-            delay: index * 0.1
-          }}
-          whileHover={{
-            scale: 1.05,
-            boxShadow: "0 10px 30px -10px rgba(0,0,0,0.5)",
-            borderColor: item.color + "44"
-          }}
-          style={{ '--accent-color': item.color }}
-        >
-          <div className="stat-icon" style={{ filter: `drop-shadow(0 0 8px ${item.color}44)` }}>
-            {item.icon}
-          </div>
-          <div className="stat-content">
-            <div className="value">
-              {item.isPrice ? (
-                <span>{item.value}</span>
-              ) : (
-                <AnimatedNumber value={item.value} />
-              )}
-            </div>
-            <div className="label">{item.label}</div>
-          </div>
-        </motion.div>
+        <StatsCard key={item.label} {...item} index={index} />
       ))}
     </section>
   );
