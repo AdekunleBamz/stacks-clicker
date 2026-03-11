@@ -7,28 +7,41 @@ import { useSound } from '../hooks/useSound';
 
 /**
  * Component for the TipJar interaction card.
- * @param {Object} props - Component props.
- * @param {string} props.address - Connected wallet address.
- * @param {Function} props.isLoading - Function to check if an action is loading.
- * @param {string} props.tipAmount - Current custom tip amount.
- * @param {Function} props.setTipAmount - Setter for tip amount.
- * @param {Function} props.handleSelfPing - Handler for ping action.
- * @param {Function} props.handleQuickTip - Handler for quick tip action.
- * @param {Function} props.handleCustomTip - Handler for custom tip action.
+ * Allows users to send tips (quick or custom) and trigger contract pings.
+ *
+ * @component
+ * @param {Object} props - Component props
+ * @param {string|null} [props.address] - Connected wallet address; required for actions
+ * @param {Object} props.tipjar - Interaction API from useTipJar hook
+ * @param {Function} props.tipjar.tip - Function to send a tip (amount: number)
+ * @param {Function} props.tipjar.handleSelfPing - Function to trigger a self-ping
+ * @param {Function} props.tipjar.isLoading - Function to check loading state by action name
+ * @returns {JSX.Element} The rendered TipJar interaction card
  */
-function TipJarCard({
-  address,
-  tipjar
-}) {
+function TipJarCard({ address, tipjar }) {
   const { isLoading, tip, handleSelfPing } = tipjar;
   const [tipAmount, setTipAmount] = useState('0.001');
   const { playSound } = useSound();
   const [errorField, setErrorField] = useState(null);
 
+  /**
+   * Triggers a fixed 0.001 STX tip transaction.
+   */
   const handleQuickTip = useCallback(() => tip(0.001), [tip]);
+
+  /**
+   * Triggers a tip transaction with the user-defined custom amount.
+   */
   const handleCustomTip = useCallback(() => tip(parseFloat(tipAmount)), [tip, tipAmount]);
 
-  const handleAction = useCallback((fn, fieldId) => {
+  /**
+   * Internal wrapper to check connection and play sound before executing an action.
+   * If not connected, triggers an error sound and visual feedback.
+   *
+   * @param {Function} actionFn - The interaction function to execute
+   * @param {string} fieldId - ID of the button for error highlighting
+   */
+  const handleAction = useCallback((actionFn, fieldId) => {
     if (!address) {
       playSound('error');
       setErrorField(fieldId);
@@ -36,7 +49,7 @@ function TipJarCard({
       return;
     }
     playSound('click');
-    fn();
+    actionFn();
   }, [address, playSound]);
 
   return (
@@ -45,31 +58,31 @@ function TipJarCard({
       title="💰 TipJar"
       subtitle="Send tips to generate transactions."
       icon="💎"
-      accentColor="#F59E0B"
+      iconClass="bg-amber-500/20 text-amber-500"
     >
       <div className="actions">
-        <Tooltip content="Ping the TipJar contract.">
+        <Tooltip content="Ping the TipJar contract to verify connectivity.">
           <ActionButton
             label="Self Ping"
             icon="🏓"
             cost="0.001 STX"
             className="success"
             onClick={() => handleAction(handleSelfPing, 'self-ping')}
-            isLoading={isLoading('tipjar-self-ping')}
+            isLoading={isLoading('self-ping')}
             isError={errorField === 'self-ping'}
-            disabled={isLoading('tipjar-self-ping')}
+            disabled={isLoading('self-ping')}
           />
         </Tooltip>
-        <Tooltip content="Send a quick 0.001 STX tip.">
+        <Tooltip content="Send a quick 0.001 STX tip instantly.">
           <ActionButton
             label="Quick Tip"
             icon="💰"
             cost="0.002 STX"
             className="warning"
             onClick={() => handleAction(handleQuickTip, 'quick-tip')}
-            isLoading={isLoading('tipjar-quick-tip')}
+            isLoading={isLoading('tip')}
             isError={errorField === 'quick-tip'}
-            disabled={isLoading('tipjar-quick-tip')}
+            disabled={isLoading('tip')}
           />
         </Tooltip>
 
@@ -93,9 +106,9 @@ function TipJarCard({
             cost={`${(parseFloat(tipAmount || 0) + 0.001).toFixed(3)} STX`}
             className="secondary"
             onClick={() => handleAction(handleCustomTip, 'custom-tip')}
-            isLoading={isLoading('tipjar-tip-jar')}
+            isLoading={isLoading('tip')}
             isError={errorField === 'custom-tip'}
-            disabled={isLoading('tipjar-tip-jar')}
+            disabled={isLoading('tip')}
           />
         </Tooltip>
       </div>
