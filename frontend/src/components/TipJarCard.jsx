@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import ActionCard from './common/ActionCard';
 import ActionButton from './common/ActionButton';
@@ -16,7 +16,7 @@ import { useSound } from '../hooks/useSound';
  * @param {Function} props.handleQuickTip - Handler for quick tip action.
  * @param {Function} props.handleCustomTip - Handler for custom tip action.
  */
-export default function TipJarCard({
+function TipJarCard({
   address,
   isLoading,
   tipAmount,
@@ -28,7 +28,7 @@ export default function TipJarCard({
   const { playSound } = useSound();
   const [errorField, setErrorField] = useState(null);
 
-  const handleAction = (fn, fieldId) => {
+  const handleAction = useCallback((fn, fieldId) => {
     if (!address) {
       playSound('error');
       setErrorField(fieldId);
@@ -37,7 +37,8 @@ export default function TipJarCard({
     }
     playSound('click');
     fn();
-  };
+  }, [address, playSound]);
+
   return (
     <ActionCard
       id="tipjar-card"
@@ -47,7 +48,7 @@ export default function TipJarCard({
       accentColor="#F59E0B"
     >
       <div className="actions">
-        <Tooltip text="Ping the TipJar contract.">
+        <Tooltip content="Ping the TipJar contract.">
           <ActionButton
             label="Self Ping"
             icon="🏓"
@@ -59,7 +60,7 @@ export default function TipJarCard({
             disabled={isLoading('tipjar-self-ping')}
           />
         </Tooltip>
-        <Tooltip text="Send a quick 0.001 STX tip.">
+        <Tooltip content="Send a quick 0.001 STX tip.">
           <ActionButton
             label="Quick Tip"
             icon="💰"
@@ -85,7 +86,7 @@ export default function TipJarCard({
           />
         </div>
 
-        <Tooltip text={`Send a custom tip of ${tipAmount} STX.`}>
+        <Tooltip content={`Send a custom tip of ${tipAmount} STX.`}>
           <ActionButton
             label="Custom Tip"
             icon="💎"
@@ -104,10 +105,12 @@ export default function TipJarCard({
 
 TipJarCard.propTypes = {
   address: PropTypes.string,
-  tipjar: PropTypes.shape({
-    quickTip: PropTypes.func.isRequired,
-    withdraw: PropTypes.func.isRequired,
-    handleSelfPing: PropTypes.func.isRequired,
-    isLoading: PropTypes.func.isRequired
-  }).isRequired
+  isLoading: PropTypes.func.isRequired,
+  tipAmount: PropTypes.string.isRequired,
+  setTipAmount: PropTypes.func.isRequired,
+  handleSelfPing: PropTypes.func.isRequired,
+  handleQuickTip: PropTypes.func.isRequired,
+  handleCustomTip: PropTypes.func.isRequired,
 };
+
+export default memo(TipJarCard);
