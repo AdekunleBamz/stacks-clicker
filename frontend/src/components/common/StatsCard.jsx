@@ -1,9 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import { motion, animate } from 'framer-motion';
 import PropTypes from 'prop-types';
 
 /**
- * Animated number component for smooth counting transitions.
+ * Animated number component for smooth counting transitions between values.
+ *
+ * @component
+ * @param {Object} props - Component props
+ * @param {number|string} props.value - The target numeric value to animate towards
+ * @returns {JSX.Element} The rendered animated number
  */
 function AnimatedNumber({ value }) {
   const [displayValue, setDisplayValue] = useState(value);
@@ -25,9 +30,19 @@ AnimatedNumber.propTypes = {
 };
 
 /**
- * Individual card for displaying a single statistic.
+ * Individual card for displaying a single statistic with animations and thematic coloring.
+ *
+ * @component
+ * @param {Object} props - Component props
+ * @param {string} props.label - Descriptive label for the statistic
+ * @param {number|string} props.value - Numeric or string value to display
+ * @param {React.ReactNode} props.icon - Icon element or emoji representing the stat
+ * @param {string} props.color - Theme color used for accents and glows
+ * @param {boolean} [props.isPrice=false] - If true, treats the value as a price (no counting animation)
+ * @param {number} [props.index=0] - Index in the grid for staggered entrance animation
+ * @returns {JSX.Element} The rendered stats card
  */
-export default function StatsCard({ label, value, icon, color, isPrice, index }) {
+function StatsCard({ label, value, icon, color, isPrice = false, index = 0 }) {
   return (
     <motion.div
       className="stat-card"
@@ -71,3 +86,5 @@ StatsCard.propTypes = {
   isPrice: PropTypes.bool,
   index: PropTypes.number
 };
+
+export default memo(StatsCard);
