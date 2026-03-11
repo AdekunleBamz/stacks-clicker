@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useClicker } from './useClicker';
 import { useTipJar } from './useTipJar';
 import { useQuickPoll } from './useQuickPoll';
@@ -15,11 +16,11 @@ export function useInteractions({ onTxSubmit }) {
   const tipjar = useTipJar({ onTxSubmit });
   const quickpoll = useQuickPoll({ onTxSubmit });
 
-  const pingAll = () => {
+  const pingAll = useCallback(() => {
     clicker.ping();
     tipjar.handleSelfPing();
     quickpoll.handlePollPing();
-  };
+  }, [clicker, tipjar, quickpoll]);
 
   return {
     clicker,
