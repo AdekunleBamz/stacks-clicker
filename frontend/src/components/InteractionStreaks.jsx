@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 
 /**
  * Component to track and display user interaction streaks and badges.
  */
-export default function InteractionStreaks({ totalInteractions }) {
+function InteractionStreaks({ totalInteractions }) {
   const [streak, setStreak] = useState(0);
   const [lastActivity, setLastActivity] = useState(Date.now());
   const [badges, setBadges] = useState([]);
@@ -32,6 +32,7 @@ export default function InteractionStreaks({ totalInteractions }) {
         <div className="streak-count">
           <motion.span
             className="streak-fire"
+            style={{ willChange: 'transform, filter' }}
             animate={{ scale: [1, 1.2, 1], filter: ["drop-shadow(0 0 0px #ff4500)", "drop-shadow(0 0 10px #ff4500)", "drop-shadow(0 0 0px #ff4500)"] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
           >
@@ -64,3 +65,5 @@ export default function InteractionStreaks({ totalInteractions }) {
 InteractionStreaks.propTypes = {
   totalInteractions: PropTypes.number.isRequired
 };
+
+export default memo(InteractionStreaks);
