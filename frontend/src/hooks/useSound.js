@@ -1,6 +1,8 @@
 /**
- * useSound hook for synthesized acoustic feedback.
- * Uses Web Audio API to generate sounds without external assets.
+ * Custom hook for synthesized acoustic feedback using the Web Audio API.
+ * Generates dynamic waveforms (sine, triangle, sawtooth) without external assets.
+ *
+ * @returns {Object} { playSound } - Function to trigger a sound effect by type.
  */
 export function useSound() {
   const playSound = (type) => {
