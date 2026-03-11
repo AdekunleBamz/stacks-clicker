@@ -1,39 +1,62 @@
 import { useState, useCallback } from 'react';
 import { callContract } from '../utils/walletconnect';
 
+/** @constant {string} Smart contract deployer address */
 const DEPLOYER = 'SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT';
+/** @constant {string} TipJar contract name */
+const CONTRACT_NAME = 'tipjar-v2p';
 
 /**
  * Custom hook for interacting with the TipJar smart contract.
- * Manages tipping, withdrawals, and contract pings.
+ * Manages tipping, withdrawals, and contract pings with centralized loading state.
  *
- * @param {Object} options - Hook options.
- * @param {Function} options.onTxSubmit - Callback triggered when a transaction is broadcasted.
- * @returns {Object} Hook exports including action handlers and loading state.
+ * @param {Object} options - Hook options
+ * @param {Function} options.onTxSubmit - Shared callback triggered when a transaction is broadcasted
+ * @returns {Object} { isLoading, tip, withdraw, handleSelfPing }
+ * @property {Function} isLoading - Checks if a specific function is loading: (actionKey) => boolean
+ * @property {Function} tip - Sends a tip transaction: (amount: number) => void
+ * @property {Function} withdraw - Triggers a withdrawal transaction for the user
+ * @property {Function} handleSelfPing - Triggers a self-ping heartbeat for the user
  */
 export function useTipJar({ onTxSubmit }) {
   const [loadingStates, setLoadingStates] = useState({});
 
+  /**
+   * Internal helper to update loading state for a specific action key.
+   * @param {string} key - Unique key for the action
+   * @param {boolean} val - Loading state value
+   */
   const setLoading = (key, val) => {
     setLoadingStates(prev => ({ ...prev, [key]: val }));
   };
 
-  const isLoading = useCallback((key) => !!loadingStates[key], [loadingStates]);
+  /**
+   * Checks if a specific contract function is currently loading.
+   * @param {string} functionName - Name of the contract function
+   * @returns {boolean} True if loading
+   */
+  const isLoading = useCallback((functionName) => !!loadingStates[`tipjar-${functionName}`], [loadingStates]);
 
-  const executeAction = useCallback(async (name, functionName, functionArgs = []) => {
+  /**
+   * Core executor for contract calls.
+   * @param {string} displayName - Human readable name for the action
+   * @param {string} functionName - Contract function name
+   * @param {Array} functionArgs - Arguments for the contract call
+   */
+  const executeAction = useCallback(async (displayName, functionName, functionArgs = []) => {
     const key = `tipjar-${functionName}`;
     setLoading(key, true);
     try {
       const result = await callContract({
         contractAddress: DEPLOYER,
-        contractName: 'tipjar-v2p',
+        contractName: CONTRACT_NAME,
         functionName,
         functionArgs,
       });
-      onTxSubmit?.(name, result.txId);
+      onTxSubmit?.(displayName, result.txId);
       return result;
     } catch (err) {
-      console.error(`${name} failed:`, err);
+      console.error(`${displayName} failed:`, err);
       throw err;
     } finally {
       setLoading(key, false);
