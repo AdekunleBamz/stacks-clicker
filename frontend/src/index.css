@@ -103,6 +103,9 @@ body {
   overflow-x: hidden;
   position: relative;
   transition: background-color 0.4s ease, color 0.4s ease;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .layout-content {
