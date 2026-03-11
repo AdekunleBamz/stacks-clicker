@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 
 /**
@@ -53,3 +54,7 @@ export default function InteractionStreaks({ totalInteractions }) {
     </div>
   );
 }
+
+InteractionStreaks.propTypes = {
+  totalInteractions: PropTypes.number.isRequired
+};
