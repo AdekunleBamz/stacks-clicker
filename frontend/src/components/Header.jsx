@@ -32,14 +32,16 @@ export default function Header({ theme, toggleTheme }) {
             className="lang-select"
             value={lang}
             onChange={(e) => setLang(e.target.value)}
+            aria-label="Select Language"
           >
-            <option value="en">EN</option>
-            <option value="es">ES</option>
+            <option value="en">English (EN)</option>
+            <option value="es">Español (ES)</option>
           </select>
           <button
             className="theme-toggle"
             onClick={toggleTheme}
             title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+            aria-label={`Toggle to ${theme === 'dark' ? 'light' : 'dark'} theme`}
           >
             {theme === 'dark' ? '☀️' : '🌙'}
           </button>
