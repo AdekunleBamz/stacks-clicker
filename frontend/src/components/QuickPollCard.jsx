@@ -4,6 +4,18 @@ import ActionButton from './common/ActionButton';
 import Tooltip from './common/Tooltip';
 import { useSound } from '../hooks/useSound';
 
+/**
+ * Component for the QuickPoll interaction card.
+ * @param {Object} props - Component props.
+ * @param {string} props.address - Connected wallet address.
+ * @param {Function} props.isLoading - Function to check if an action is loading.
+ * @param {string} props.pollQuestion - Current poll question text.
+ * @param {Function} props.setPollQuestion - Setter for poll question text.
+ * @param {Function} props.handlePollPing - Handler for poll ping action.
+ * @param {Function} props.handleCreatePoll - Handler for creating a new poll.
+ * @param {Function} props.handleVoteYes - Handler for voting YES.
+ * @param {Function} props.handleVoteNo - Handler for voting NO.
+ */
 export default function QuickPollCard({
   address,
   isLoading,
