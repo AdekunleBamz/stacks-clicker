@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
@@ -12,7 +12,7 @@ import TransactionItem from './TransactionItem';
  * @param {Array} props.txLog - Array of transaction objects.
  * @returns {JSX.Element} The rendered transaction history section.
  */
-export default function TransactionHistory({ txLog }) {
+function TransactionHistory({ txLog }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTx, setSelectedTx] = useState(null);
   const [contextMenu, setContextMenu] = useState(null);
@@ -26,30 +26,32 @@ export default function TransactionHistory({ txLog }) {
     }
   }, [selectedTx]);
 
-  const handleModalClose = () => {
+  const handleModalClose = useCallback(() => {
     setSelectedTx(null);
     setModalView('summary');
-  };
+  }, []);
 
-  const handleContextMenu = (e, tx) => {
+  const handleContextMenu = useCallback((e, tx) => {
     e.preventDefault();
     setContextMenu({
       x: e.clientX,
       y: e.clientY,
       tx
     });
-  };
+  }, []);
 
-  const closeContextMenu = () => setContextMenu(null);
+  const closeContextMenu = useCallback(() => setContextMenu(null), []);
 
-  const filteredLog = txLog.filter(tx => {
-    const matchesSearch = tx.action.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         tx.id.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus = filterStatus === 'all' || tx.status === filterStatus;
-    return matchesSearch && matchesStatus;
-  });
+  const filteredLog = useMemo(() => {
+    return txLog.filter(tx => {
+      const matchesSearch = tx.action.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           tx.id.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesStatus = filterStatus === 'all' || tx.status === filterStatus;
+      return matchesSearch && matchesStatus;
+    });
+  }, [txLog, searchTerm, filterStatus]);
 
-  const highlightText = (text, highlight) => {
+  const highlightText = useCallback((text, highlight) => {
     if (!highlight.trim()) return text;
     const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
     return (
@@ -63,9 +65,9 @@ export default function TransactionHistory({ txLog }) {
         )}
       </span>
     );
-  };
+  }, []);
 
-  const exportData = (format) => {
+  const exportData = useCallback((format) => {
     let content = '';
     const filename = `stacks-tx-history-${new Date().toISOString().split('T')[0]}`;
 
@@ -84,7 +86,8 @@ export default function TransactionHistory({ txLog }) {
     link.download = `${filename}.${format}`;
     link.click();
     URL.revokeObjectURL(url);
-  };
+  }, [txLog]);
+
   return (
     <section className="tx-log" aria-labelledby="tx-history-title">
       <div className="log-header">
@@ -172,6 +175,7 @@ export default function TransactionHistory({ txLog }) {
                       <button className="breadcrumb-item active">Raw Data</button>
                     </>
                   )}
+                </div>
                 <button
                   className="close-btn"
                   onClick={handleModalClose}
@@ -182,6 +186,7 @@ export default function TransactionHistory({ txLog }) {
                 </button>
               </div>
               <div className="modal-body">
+                {modalView === 'summary' ? (
                   <div className="summary-view">
                     <div className="detail-row">
                       <label>Action Type</label>
@@ -292,3 +297,5 @@ TransactionHistory.propTypes = {
     time: PropTypes.string.isRequired
   })).isRequired
 };
+
+export default memo(TransactionHistory);
