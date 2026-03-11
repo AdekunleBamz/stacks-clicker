@@ -3,6 +3,14 @@ import { callContract } from '../utils/walletconnect';
 
 const DEPLOYER = 'SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT';
 
+/**
+ * Custom hook for interacting with the Clicker smart contract.
+ * Provides functions for single click, multi-click, and network ping.
+ *
+ * @param {Object} options - Hook options.
+ * @param {Function} options.onTxSubmit - Callback triggered when a transaction is broadcasted.
+ * @returns {Object} Hook exports including isLoading and action functions.
+ */
 export function useClicker({ onTxSubmit }) {
   const [loadingStates, setLoadingStates] = useState({});
 
