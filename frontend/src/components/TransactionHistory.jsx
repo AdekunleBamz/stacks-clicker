@@ -172,16 +172,6 @@ export default function TransactionHistory({ txLog }) {
                       <button className="breadcrumb-item active">Raw Data</button>
                     </>
                   )}
-                </div>
-                </div>
-                <button
-                  className="close-btn"
-                  onClick={handleModalClose}
-                  ref={closeBtnRef}
-                  aria-label="Close modal"
-                >
-                  ×
-                </button>
                 <button
                   className="close-btn"
                   onClick={handleModalClose}
