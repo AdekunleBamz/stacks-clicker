@@ -105,6 +105,16 @@ body {
   transition: background-color 0.4s ease, color 0.4s ease;
 }
 
+.layout-content {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 1000px;
+}
+
+.stats-aside {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 500px;
+}
+
 body::before {
   content: "";
   position: fixed;
