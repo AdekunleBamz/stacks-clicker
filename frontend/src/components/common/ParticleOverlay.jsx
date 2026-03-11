@@ -14,6 +14,7 @@ export default function ParticleOverlay({ trigger }) {
       y: Math.random() * 100 - 50,
       scale: Math.random() * 0.5 + 0.5,
       color: ['#6366f1', '#10b981', '#f59e0b', '#ec4899'][Math.floor(Math.random() * 4)],
+      emoji: ['💎', '✨', '🚀', '🔥', '🎨'][Math.floor(Math.random() * 5)]
     }));
     setParticles((prev) => [...prev, ...newParticles]);
 
@@ -47,13 +48,13 @@ export default function ParticleOverlay({ trigger }) {
             transition={{ duration: 0.8, ease: "easeOut" }}
             style={{
               position: 'absolute',
-              width: 8,
-              height: 8,
-              borderRadius: '50%',
-              backgroundColor: particle.color,
-              boxShadow: `0 0 10px ${particle.color}`,
+              fontSize: `${particle.scale * 20}px`,
+              textShadow: `0 0 10px ${particle.color}`,
+              userSelect: 'none'
             }}
-          />
+          >
+            {particle.emoji}
+          </motion.div>
         ))}
       </AnimatePresence>
     </div>
