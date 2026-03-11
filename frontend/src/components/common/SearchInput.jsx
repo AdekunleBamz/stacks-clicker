@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 
 /**
- * Reusable search input with clear functionality and animated focus.
+ * Reusable search input component with clear functionality, animated focus, and result count badge.
+ *
+ * @component
+ * @param {Object} props - Component props
+ * @param {string} props.value - Current search query value
+ * @param {Function} props.onChange - Callback fired when input value changes
+ * @param {Function} props.onClear - Callback fired when clear button is clicked
+ * @param {string} [props.placeholder='Search...'] - Input placeholder text
+ * @param {number} [props.count] - Optional match count to display in a badge
+ * @returns {JSX.Element} The rendered search input
  */
-export default function SearchInput({ value, onChange, onClear, placeholder, count }) {
+function SearchInput({ value, onChange, onClear, placeholder = 'Search...', count }) {
   return (
     <div className="search-wrapper">
       <div className="search-relative">
@@ -46,3 +55,5 @@ SearchInput.propTypes = {
   placeholder: PropTypes.string,
   count: PropTypes.number
 };
+
+export default memo(SearchInput);
