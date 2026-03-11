@@ -42,6 +42,9 @@ export function useClicker({ onTxSubmit }) {
 
   const click = () => executeAction('🎯 Click', 'click');
   const multiClick = (amount) => executeAction('🔥 Multi-Click', 'multi-click', [{ type: 'uint128', value: amount.toString() }]);
+  /**
+   * Pings the contract to verify network connectivity and emit an on-chain heartbeat event.
+   */
   const ping = () => executeAction('📡 Ping', 'ping');
 
   return {
