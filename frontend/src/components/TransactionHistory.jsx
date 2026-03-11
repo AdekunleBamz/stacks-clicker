@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
 import SkeletonLoader from './common/SkeletonLoader';
@@ -287,3 +288,12 @@ export default function TransactionHistory({ txLog }) {
     </section>
   );
 }
+
+TransactionHistory.propTypes = {
+  txLog: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    action: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    time: PropTypes.string.isRequired
+  })).isRequired
+};
