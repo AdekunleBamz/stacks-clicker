@@ -48,7 +48,13 @@ export default function App() {
 
   const toggleTheme = () => setTheme(prev => prev === 'dark' ? 'light' : 'dark');
 
-  // Add transaction to log
+  /**
+   * Adds a transaction record to the local transaction log and triggers UI notifications.
+   * @param {string} action - Description of the action (e.g., '🎯 Click').
+   * @param {string} txId - Transaction ID from the blockchain.
+   * @param {string} [status='success'] - Current status of the transaction.
+   * @returns {Object} The created transaction object.
+   */
   const addTxToLog = (action, txId, status = 'success') => {
     const tx = {
       id: txId || `pending-${Date.now()}`,
