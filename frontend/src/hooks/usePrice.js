@@ -1,5 +1,11 @@
 import { useState, useEffect } from 'react';
 
+/**
+ * Custom hook to fetch and keep track of the STX price in USD.
+ * Uses the CoinGecko API with auto-refresh every 60 seconds.
+ *
+ * @returns {Object} { price, loading, error }
+ */
 export function usePrice() {
   const [price, setPrice] = useState(null);
   const [loading, setLoading] = useState(true);
