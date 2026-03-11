@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
 import SkeletonLoader from './common/SkeletonLoader';
+import SearchInput from './common/SearchInput';
 
 /**
  * Component to display a list of recent transactions with status indicators.
@@ -75,16 +76,13 @@ export default function TransactionHistory({ txLog }) {
     <section className="tx-log" aria-labelledby="tx-history-title">
       <div className="log-header">
         <h3 id="tx-history-title">📜 Recent Activity</h3>
-        <div className="tx-search-container">
-          <input
-            type="text"
-            placeholder="Search action or ID..."
-            className="tx-search-input"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <span className="tx-count-badge">{filteredLog.length}</span>
-        </div>
+        <SearchInput
+          value={searchTerm}
+          onChange={setSearchTerm}
+          onClear={() => setSearchTerm('')}
+          placeholder="Search action or ID..."
+          count={filteredLog.length}
+        />
         <div className="tx-export-actions">
           <select
             className="tx-filter-select"
