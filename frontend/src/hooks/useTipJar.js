@@ -20,7 +20,7 @@ export function useTipJar({ onTxSubmit }) {
 
   const isLoading = useCallback((key) => !!loadingStates[key], [loadingStates]);
 
-  const executeAction = async (name, functionName, functionArgs = []) => {
+  const executeAction = useCallback(async (name, functionName, functionArgs = []) => {
     const key = `tipjar-${functionName}`;
     setLoading(key, true);
     try {
@@ -38,11 +38,11 @@ export function useTipJar({ onTxSubmit }) {
     } finally {
       setLoading(key, false);
     }
-  };
+  }, [onTxSubmit]);
 
-  const tip = (amount) => executeAction('💰 Tip', 'tip', [{ type: 'uint128', value: amount.toString() }]);
-  const withdraw = () => executeAction('💸 Withdraw', 'withdraw');
-  const handleSelfPing = () => executeAction('📡 Self-Ping', 'self-ping');
+  const tip = useCallback((amount) => executeAction('💰 Tip', 'tip', [{ type: 'uint128', value: amount.toString() }]), [executeAction]);
+  const withdraw = useCallback(() => executeAction('💸 Withdraw', 'withdraw'), [executeAction]);
+  const handleSelfPing = useCallback(() => executeAction('📡 Self-Ping', 'self-ping'), [executeAction]);
 
   return {
     isLoading,
