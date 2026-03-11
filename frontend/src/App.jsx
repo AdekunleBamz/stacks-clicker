@@ -14,7 +14,13 @@ import ParticleOverlay from './components/common/ParticleOverlay';
 import PerformanceOverlay from './components/common/PerformanceOverlay';
 import PullToRefresh from './components/common/PullToRefresh';
 import ScrollToTop from './components/common/ScrollToTop';
+import SkeletonLoader from './components/common/SkeletonLoader';
 import { useI18n } from './context/I18nContext';
+
+// Lazy load heavy components
+const MainGrid = React.lazy(() => import('./components/MainGrid'));
+const PlayerStats = React.lazy(() => import('./components/PlayerStats'));
+const TransactionHistory = React.lazy(() => import('./components/TransactionHistory'));
 
 // Hooks
 import { useClicker } from './hooks/useClicker';
@@ -130,27 +136,25 @@ export default function App() {
     }
   }, [stats]);
 
-  return (
-    <div className="app-container" data-theme={theme}>
-      <PullToRefresh onRefresh={async () => {
-          // Mock refresh logic
-          return new Promise(resolve => setTimeout(resolve, 2000));
-      }} />
-      <PerformanceOverlay />
-      <ScrollToTop />
-      <React.Suspense fallback={<SkeletonLoader height="300px" borderRadius="24px" />}>
-              <PlayerStats />
-            </React.Suspense>
+      <React.Suspense fallback={<SkeletonLoader height="80px" borderRadius="12px" />}>
+        <Header theme={theme} toggleTheme={toggleTheme} currentLang={lang} onLangChange={setLang} />
+      </React.Suspense>
 
-            <main id="main-content" className="app-main">
-              <React.Suspense fallback={<SkeletonLoader height="500px" borderRadius="32px" />}>
-                <MainGrid />
-              </React.Suspense>
+      <div className="layout-content">
+        <React.Suspense fallback={<SkeletonLoader height="300px" borderRadius="24px" />}>
+          <PlayerStats stats={stats} txCount={txLog.length} />
+        </React.Suspense>
 
-              <React.Suspense fallback={<SkeletonLoader height="400px" borderRadius="32px" />}>
-                <TransactionHistory txLog={txLog} />
-              </React.Suspense>
-            </main>
+        <main id="main-content" className="app-main">
+          <React.Suspense fallback={<SkeletonLoader height="500px" borderRadius="32px" />}>
+            <MainGrid stats={stats} setStats={setStats} addTxToLog={addTxToLog} />
+          </React.Suspense>
+
+          <React.Suspense fallback={<SkeletonLoader height="400px" borderRadius="32px" />}>
+            <TransactionHistory txLog={txLog} />
+          </React.Suspense>
+        </main>
+      </div>
       <OnboardingTour />
       <a
         href="#main-content"
