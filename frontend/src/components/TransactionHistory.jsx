@@ -228,8 +228,16 @@ export default function TransactionHistory({ txLog }) {
               key="empty"
               className="empty-state"
             >
-              <div className="empty-icon">📂</div>
-              <p>{searchTerm ? 'No matches found.' : 'No transactions yet.'}</p>
+              <div className="empty-icon">{searchTerm ? '🔍' : '📂'}</div>
+              <p>{searchTerm ? `No matches for "${searchTerm}"` : 'No transactions yet.'}</p>
+              {searchTerm && (
+                <button
+                  className="text-btn mt-2"
+                  onClick={() => setSearchTerm('')}
+                >
+                  Clear search terms
+                </button>
+              )}
               {!searchTerm && (
                 <div className="skeleton-placeholder">
                   <SkeletonLoader height="60px" borderRadius="12px" className="mb-2" />
