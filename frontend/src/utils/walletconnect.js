@@ -273,6 +273,9 @@ export async function callContract({
         contractName,
         functionName,
         functionArgs: functionArgs || [],
+        // Post-conditions are essential for security.
+        // they ensure that the smart contract doesn't transfer more assets
+        // than authorized by the user.
         postConditions: postConditions || [],
         network: 'mainnet',
       },
