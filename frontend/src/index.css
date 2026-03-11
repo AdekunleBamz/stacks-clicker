@@ -1,3 +1,21 @@
+/*
+ * StacksClicker Design System & Theme Engine
+ *
+ * This file defines the core visual identity of the application.
+ * It uses CSS Variables (Custom Properties) to manage design tokens
+ * for consistency across the dApp.
+ *
+ * Theme Engine:
+ * - Default: Dark Mode ([data-theme='dark']) - A neon-noir GameFi aesthetic.
+ * - Optional: Light Mode ([data-theme='light']) - A clean, high-contrast interface.
+ *
+ * Design Tokens include:
+ * - Color Palette (Primary, Success, Warning, Error)
+ * - Typography (Inter for body, Outfit for headings)
+ * - Spacing & Radius (8pt grid system)
+ * - Effects (Glows, Mesh gradients, Glassmorphism)
+ */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
 
 :root {
