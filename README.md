@@ -98,6 +98,19 @@ Fast, decentralized voting without the complexity of traditional DAOs.
 
 ---
 
+## 📸 Visual Guide
+
+| Feature | Interface Preview | Description |
+|---------|-------------------|-------------|
+| **Dashboard** | `[ 🖥️ UI Dashboard ]` | High-fidelity GameFi interface with glassmorphism. |
+| **Clicker** | `[ 🎯 Click Card ]` | Real-time on-chain interaction card. |
+| **TipJar** | `[ 💰 Tip Interface ]` | Seamless micro-transaction module. |
+| **QuickPoll** | `[ 🗳️ Voting Card ]` | Low-latency polling and sentiment tracking. |
+
+> _Screenshots coming soon to the official documentation._
+
+---
+
 ## 🚀 Quick Start
 
 ### Prerequisites
