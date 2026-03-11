@@ -4,6 +4,17 @@ import ActionButton from './common/ActionButton';
 import Tooltip from './common/Tooltip';
 import { useSound } from '../hooks/useSound';
 
+/**
+ * Component for the TipJar interaction card.
+ * @param {Object} props - Component props.
+ * @param {string} props.address - Connected wallet address.
+ * @param {Function} props.isLoading - Function to check if an action is loading.
+ * @param {string} props.tipAmount - Current custom tip amount.
+ * @param {Function} props.setTipAmount - Setter for tip amount.
+ * @param {Function} props.handleSelfPing - Handler for ping action.
+ * @param {Function} props.handleQuickTip - Handler for quick tip action.
+ * @param {Function} props.handleCustomTip - Handler for custom tip action.
+ */
 export default function TipJarCard({
   address,
   isLoading,
