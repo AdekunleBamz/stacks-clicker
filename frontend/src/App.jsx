@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster, toast } from 'react-hot-toast';
+import Header from './components/Header';
+import Footer from './components/Footer';
 import PlayerStats from './components/PlayerStats';
 import TransactionHistory from './components/TransactionHistory';
 import ClickerCard from './components/ClickerCard';
@@ -170,90 +172,13 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      <header className="app-header">
-        <div className="header-content">
-          <div className="logo">
-            <NetworkHeartbeat />
-            <motion.div
-              className="logo-glow"
-              animate={{ rotate: [0, 5, -5, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M16 2L4 16L16 30L28 16L16 2Z" fill="url(#logo-grad)" />
-                <path d="M16 6L8 16L16 26L24 16L16 6Z" fill="white" fillOpacity="0.2" />
-                <defs>
-                  <linearGradient id="logo-grad" x1="4" y1="2" x2="28" y2="30" gradientUnits="userSpaceOnUse">
-                    <stop stopColor="#6366f1" />
-                    <stop offset="1" stopColor="#a855f7" />
-                  </linearGradient>
-                </defs>
-              </svg>
-            </motion.div>
-            <span className="logo-text">Stacks Clicker V2</span>
-          </div>
+      <Header theme={theme} toggleTheme={toggleTheme} />
 
-          <div className="wallet-section">
-            <NetworkHeartbeat />
-            <select
-              className="lang-select"
-              value={lang}
-              onChange={(e) => setLang(e.target.value)}
-            >
-              <option value="en">EN</option>
-              <option value="es">ES</option>
-            </select>
-            <button
-              className="theme-toggle"
-              onClick={toggleTheme}
-              title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-            >
-              {theme === 'dark' ? '☀️' : '🌙'}
-            </button>
+       <main className="app-main" id="main-content" tabIndex="-1">
+...
+       </main>
 
-            {address ? (
-              <div className="wallet-info">
-                <span className="address-badge">{address.slice(0, 6)}...{address.slice(-4)}</span>
-                <button className="btn-disconnect" onClick={disconnectWallet}>Disconnect</button>
-              </div>
-            ) : (
-              <button className="btn-connect" onClick={connectWallet}>Connect Wallet</button>
-            )}
-          </div>
-        </div>
-      </header>
-
-      <main className="app-main" id="main-content" tabIndex="-1">
-        <div className="main-grid">
-          <section className="interaction-section">
-            <h2 className="section-title">Interactions</h2>
-            <InteractionStreaks totalInteractions={stats.clicks + stats.tips + stats.votes} />
-            <div className="cards-container">
-              <ClickerCard address={address} clicker={clicker} />
-              <TipJarCard address={address} tipjar={tipjar} />
-              <QuickPollCard address={address} quickpoll={quickpoll} />
-            </div>
-          </section>
-
-          <aside className="stats-aside">
-            <PlayerStats stats={stats} />
-            <QuickActions
-              address={address}
-              onClearLog={() => setTxLog([])}
-              onPingAll={() => {
-                clicker.ping();
-                tipjar.handleSelfPing();
-                quickpoll.handlePollPing();
-              }}
-            />
-            <TransactionHistory txLog={txLog} />
-          </aside>
-        </div>
-      </main>
-
-      <footer className="app-footer">
-        <p>Built with ❤️ on Stacks</p>
-      </footer>
+      <Footer />
 
       <FloatingActionButton
         onAction={(type) => {
