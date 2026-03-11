@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
 import SkeletonLoader from './common/SkeletonLoader';
 import SearchInput from './common/SearchInput';
+import TransactionItem from './TransactionItem';
 
 /**
  * Component to display a list of recent transactions with status indicators.
@@ -226,59 +227,18 @@ export default function TransactionHistory({ txLog }) {
             </motion.div>
           ) : (
             filteredLog.map((tx) => (
-              <div className="tx-item-wrapper" key={tx.id}>
-                <div className="tx-swipe-actions">
-                  <button className="swipe-btn copy" onClick={() => { navigator.clipboard.writeText(tx.id); toast.success('ID Copied'); }}>📋</button>
-                  <button className="swipe-btn details" onClick={() => setSelectedTx(tx)}>🔍</button>
-                </div>
-                <motion.div
-                  className={`tx-item ${tx.status}`}
-                  drag="x"
-                  dragConstraints={{ left: -120, right: 0 }}
-                  dragElastic={0.1}
-                  whileDrag={{ scale: 1.02 }}
-                  onContextMenu={(e) => handleContextMenu(e, tx)}
-                >
-                  <div className="tx-status-dot" aria-hidden="true" />
-                  <div className="tx-main">
-                    <div className="tx-header">
-                      <span className="tx-action-label">
-                        {highlightText(tx.action, searchTerm)}
-                      </span>
-                      <span className="tx-timestamp">{tx.time}</span>
-                    </div>
-                    <div className="tx-actions-inline">
-                      <button className="text-btn" onClick={() => setSelectedTx(tx)}>Details</button>
-                    </div>
-                    <div className="tx-status-visualizer">
-                      <div className="status-steps">
-                        <div className="step active">
-                          <span className="step-dot"></span>
-                          <span className="step-label">Submitted</span>
-                        </div>
-                        <div className={`step ${tx.id.startsWith('pending') ? 'pending' : 'active'}`}>
-                          <span className="step-dot"></span>
-                          <span className="step-label">Mempool</span>
-                        </div>
-                        <div className={`step ${tx.id.startsWith('pending') ? '' : 'active'}`}>
-                          <span className="step-dot"></span>
-                          <span className="step-label">Confirmed</span>
-                        </div>
-                      </div>
-                      {!tx.id.startsWith('pending') && (
-                        <a
-                          href={`https://explorer.hiro.so/txid/${tx.id}?chain=mainnet`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="tx-explorer-link"
-                        >
-                          {highlightText(tx.id.slice(0, 8), searchTerm)}...{highlightText(tx.id.slice(-6), searchTerm)} ↗
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
+              <TransactionItem
+                key={tx.id}
+                tx={tx}
+                searchTerm={searchTerm}
+                highlightText={highlightText}
+                onDetails={setSelectedTx}
+                onCopy={(id) => {
+                  navigator.clipboard.writeText(id);
+                  toast.success('ID Copied');
+                }}
+                onContextMenu={handleContextMenu}
+              />
             ))
           )}
         </AnimatePresence>
