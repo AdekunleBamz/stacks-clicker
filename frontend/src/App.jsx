@@ -3,16 +3,13 @@ import { useState, useEffect } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import PlayerStats from './components/PlayerStats';
-import TransactionHistory from './components/TransactionHistory';
-import ClickerCard from './components/ClickerCard';
-import TipJarCard from './components/TipJarCard';
-import QuickPollCard from './components/QuickPollCard';
 import QuickActions from './components/QuickActions';
 import NetworkHeartbeat from './components/NetworkHeartbeat';
 import OnboardingTour from './components/OnboardingTour';
 import FloatingActionButton from './components/FloatingActionButton';
 import InteractionStreaks from './components/InteractionStreaks';
+import MainGrid from './components/MainGrid';
+import MilestoneCelebration from './components/MilestoneCelebration';
 import { useWallet } from './context/WalletContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import ParticleOverlay from './components/common/ParticleOverlay';
@@ -150,9 +147,16 @@ export default function App() {
 
       <Header theme={theme} toggleTheme={toggleTheme} />
 
-       <main className="app-main" id="main-content" tabIndex="-1">
-...
-       </main>
+      <MainGrid
+        address={address}
+        stats={stats}
+        txLog={txLog}
+        clicker={clicker}
+        tipjar={tipjar}
+        quickpoll={quickpoll}
+        pingAll={pingAll}
+        setTxLog={setTxLog}
+      />
 
       <Footer />
 
@@ -164,3 +168,4 @@ export default function App() {
     </div>
   );
 }
+```
