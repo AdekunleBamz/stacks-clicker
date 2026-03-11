@@ -89,14 +89,15 @@ export default function TransactionHistory({ txLog }) {
             className="tx-filter-select"
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
+            aria-label="Filter transactions by status"
           >
             <option value="all">All Status</option>
             <option value="success">Success</option>
             <option value="pending">Pending</option>
             <option value="failed">Failed</option>
           </select>
-          <button className="export-btn" onClick={() => exportData('json')} title="Export as JSON">JSON</button>
-          <button className="export-btn" onClick={() => exportData('csv')} title="Export as CSV">CSV</button>
+          <button className="export-btn" onClick={() => exportData('json')} aria-label="Export history as JSON" title="Export as JSON">JSON</button>
+          <button className="export-btn" onClick={() => exportData('csv')} aria-label="Export history as CSV" title="Export as CSV">CSV</button>
         </div>
       </div>
 
