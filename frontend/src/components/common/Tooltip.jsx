@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 
 /**
  * A custom tooltip component for accessible and premium descriptions.
  */
-export default function Tooltip({ text, children }) {
+export default function Tooltip({ content, children }) {
   const [isVisible, setIsVisible] = useState(false);
 
   return (
@@ -23,7 +24,7 @@ export default function Tooltip({ text, children }) {
             exit={{ opacity: 0, y: 5, scale: 0.95 }}
             className="tooltip-content"
           >
-            {text}
+            {content}
             <div className="tooltip-arrow" />
           </motion.div>
         )}
@@ -31,3 +32,8 @@ export default function Tooltip({ text, children }) {
     </div>
   );
 }
+
+Tooltip.propTypes = {
+  content: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired
+};
