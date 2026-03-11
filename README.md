@@ -1,348 +1,65 @@
-# 🎮 StacksClicker — GameFi dApp
+# Stacks Clicker v2 🚀
 
-Interactive Stacks GameFi dApp featuring Click-to-Earn game, community TipJar, and QuickPoll voting system. Built with Clarity smart contracts, React, and Framer Motion.
+A premium, high-performance decentralized interaction hub on the Stacks blockchain. Built for speed, aesthetics, and seamless on-chain activity.
 
-[![Stacks](https://img.shields.io/badge/Built%20on-Stacks-5546FF?style=flat&logo=stacks)](https://stacks.co)
-[![Clarity](https://img.shields.io/badge/Smart%20Contracts-Clarity-00D4AA?style=flat)](https://clarity-lang.org)
-[![WalletConnect](https://img.shields.io/badge/WalletConnect-v2-3B99FC?style=flat)](https://walletconnect.com)
-[![Version](https://img.shields.io/badge/Version-2m-green?style=flat)](https://github.com/AdekunleBamz/stacks-clicker)
+![App Screenshot](frontend/public/favicon.svg) <!-- Replace with actual screenshot logic if available -->
 
----
+## Features 🌟
 
-## 🛠️ Built With Stacks SDKs
+- **🎯 Power Clicker**: High-frequency on-chain clicker with "Turbo 10x" batching.
+- **💰 TipJar**: Support creators and generate activity with quick and custom tips.
+- **🗳️ QuickPoll**: Decentralized voting and poll creation for community engagement.
+- **🔥 Interaction Streaks**: Gamified engagement tracking with earned achievement badges.
+- **🌍 Multi-language**: Full I18n support including localization for Yoruba and English.
+- **🛡️ Secure Wallet**: Seamless integration with the Stacks/Hiro wallet.
+- **⚡ Performance First**: Zero-lag UI with glassmorphism, lazy loading, and memoized components.
 
-This project extensively uses the official **Stacks JavaScript libraries** for all blockchain interactions — wallet authentication, transaction signing, contract calls, and key management.
-
-### [@stacks/connect](https://www.npmjs.com/package/@stacks/connect)
-> **Wallet Authentication & Transaction Signing**
-
-Used in the frontend to connect user wallets (Xverse, Leather) and prompt transaction signing via the browser extension or mobile wallet.
-
-```javascript
-import { openContractCall, showConnect, disconnect } from '@stacks/connect';
-
-// Connect wallet
-showConnect({
-  appDetails: { name: 'StacksClicker', icon: '/logo.svg' },
-  onFinish: () => console.log('Connected!'),
-});
-
-// Call smart contract
-openContractCall({
-  contractAddress: 'YOUR_DEPLOYER_ADDRESS',
-  contractName: 'clicker-v2p',
-  functionName: 'click',
-  functionArgs: [],
-  network: 'mainnet',
-});
-```
-
-### [@stacks/transactions](https://www.npmjs.com/package/@stacks/transactions)
-> **Transaction Building, Clarity Values & Broadcasting**
-
-Used in deployment and interaction scripts to build, sign, and broadcast contract-call and STX-transfer transactions programmatically.
-
-```javascript
-import {
-  makeContractCall,
-  broadcastTransaction,
-  uintCV,
-  PostConditionMode,
-  AnchorMode,
-} from '@stacks/transactions';
-
-// Build and broadcast transaction
-const tx = await makeContractCall({
-  contractAddress: 'YOUR_DEPLOYER_ADDRESS',
-  contractName: 'clicker-v2p',
-  functionName: 'multi-click',
-  functionArgs: [uintCV(5)],
-  senderKey: privateKey,
-  network: 'mainnet',
-  anchorMode: AnchorMode.Any,
-  postConditionMode: PostConditionMode.Allow,
-  fee: 1000,
-});
-
-const result = await broadcastTransaction(tx, network);
-```
-
-### Other Stacks Libraries Used
-
-| Package | Purpose |
-|---------|---------|
-| `@stacks/network` | Mainnet/Testnet network configuration |
-| `@stacks/wallet-sdk` | Wallet generation & HD key derivation |
-
----
-
-## ✨ Features
-
-### 🎮 Clicker Game
-The core GameFi experience. Build click streaks and compete for the highest score!
-- **On-Chain Recording**: Every click (or multi-click) is a verified transaction.
-- **Dynamic Streaks**: Maintain daily activity to boost your multiplier.
-- **Live Analytics**: View global click counts and unique player density in real-time.
-
-### 💰 TipJar
-A decentralized tipping protocol for the Stacks ecosystem.
-- **Micro-Tipping**: Send as little as 0.001 STX with a single click.
-- **Custom Donations**: Support creators with precise amounts via a glass-themed UI.
-- **Top Tipper tracking**: Publicly visible leaderboards (coming soon) based on on-chain events.
-
-### 🗳️ QuickPoll
-Fast, decentralized voting without the complexity of traditional DAOs.
-- **One-Click Voting**: Cast "Yes" or "No" votes instantly.
-- **Creator Analytics**: Track poll engagement and sentiment directly on the Stacks blockchain.
-- **Gas Optimized**: Uses minimal contract storage to keep interaction costs low.
-
----
-
-## 📸 Visual Guide
-
-| Feature | Interface Preview | Description |
-|---------|-------------------|-------------|
-| **Dashboard** | `[ 🖥️ UI Dashboard ]` | High-fidelity GameFi interface with glassmorphism. |
-| **Clicker** | `[ 🎯 Click Card ]` | Real-time on-chain interaction card. |
-| **TipJar** | `[ 💰 Tip Interface ]` | Seamless micro-transaction module. |
-| **QuickPoll** | `[ 🗳️ Voting Card ]` | Low-latency polling and sentiment tracking. |
-
-> _Screenshots coming soon to the official documentation._
-
----
-
-## 🚀 Quick Start
+## Getting Started 🛠️
 
 ### Prerequisites
+- Node.js (v18+)
+- Stacks Wallet (Hiro/Leather)
 
-- Node.js 18+
-- [Clarinet](https://github.com/hirosystems/clarinet) (for contract development)
-- A Stacks wallet (Xverse or Leather)
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/AdekunleBamz/stacks-clicker.git
+   ```
+2. Install dependencies:
+   ```bash
+   cd stacks-clicker/frontend
+   npm install
+   ```
+3. Configure environment variables:
+   Create a `.env` file in the `frontend` directory:
+   ```env
+   VITE_STACKS_NETWORK=mainnet
+   VITE_COINGECKO_API_KEY=your_api_key_here
+   ```
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-### 1. Clone & Install
+## Technical Architecture 🏗️
 
-```bash
-git clone https://github.com/AdekunleBamz/stacks-clicker.git
-cd stacks-clicker
+Refer to [ARCHITECTURE.md](ARCHITECTURE.md) for a deep dive into the system design, provider hierarchy, and interaction patterns.
 
-# Install frontend dependencies
-cd frontend
-npm install
-```
+## Development & Performance 📈
 
-### 2. Environment Setup
+This project includes a built-in performance monitor for developers. To activate it, add `?dev=true` to your local URL.
 
-Create `frontend/.env`:
+- **FPS Tracking**: Real-time frame rate monitoring.
+- **Memory Profiling**: Heap usage tracking.
+- **Interaction Logs**: Session-based transaction history.
 
-```dotenv
-VITE_WALLETCONNECT_PROJECT_ID=your_project_id_here
-VITE_DEBUG=true
-```
+## Security & Verification 🔑
 
-Get a project ID from [WalletConnect Cloud](https://cloud.walletconnect.com/).
+All commits to this repository are **SSH Signed and Verified** to ensure the highest standard of code integrity and authenticity.
 
-### 3. Run Development Server
+## License 📄
 
-```bash
-cd frontend
-npm run dev
-```
-
-Open http://localhost:5173
-
----
-
-## 📦 Project Structure
-
-```
-stacks-clicker/
-├── .github/workflows/          # CI/CD pipelines
-│   ├── frontend-lint.yml       # ESLint on push
-│   ├── frontend-tests.yml      # Vitest on push
-│   └── clarinet-tests.yml      # Clarinet on push
-├── contracts/
-│   ├── clicker-v2p.clar        # ✅ Active — Click-to-earn game
-│   ├── tipjar-v2p.clar         # ✅ Active — Tipping & donations
-│   ├── quickpoll-v2p.clar      # ✅ Active — Community voting
-│   └── archive/                # 📦 Legacy contracts — retired
-├── frontend/
-│   ├── src/
-│   │   ├── components/         # Modular UI components
-│   │   │   ├── ClickerCard.jsx # 🎯 Clicker contract card
-│   │   │   ├── TipJarCard.jsx  # 💰 TipJar contract card
-│   │   │   ├── QuickPollCard.jsx # 🗳️ QuickPoll contract card
-│   │   │   ├── PlayerStats.jsx # 📊 Stats bar
-│   │   │   └── TransactionHistory.jsx # 📜 TX log
-│   │   ├── context/
-│   │   │   └── WalletContext.jsx # 🔗 Global wallet state
-│   │   ├── tests/              # Unit tests (Vitest)
-│   │   ├── App.jsx             # Main application shell
-│   │   └── index.css           # GameFi neon theme
-│   ├── .prettierrc             # Code formatting config
-│   ├── eslint.config.js        # Linting config
-│   └── package.json
-├── deployments/                # Deployment plan YAMLs
-└── settings/                   # Network settings
-```
+MIT License. See [LICENSE](LICENSE) for details.
 
 ---
-
-## 🔗 Active Smart Contracts (v2p — Current)
-
-Deploed on Stacks Mainnet:
-
-| Contract | Description |
-|----------|-------------|
-| `clicker-v2p` | Click counter with streaks, events & analytics |
-| `tipjar-v2p` | Tipping with largest-tip tracking |
-| `quickpoll-v2p` | Polls with creator analytics |
-
-> All v2p contracts use **Clarity Version 2** and target **Epoch 3.0**.
-
-### Contract Functions
-
-#### Clicker (v2m)
-- `click` — Single click (0.001 STX fee) + emits event
-- `multi-click (count)` — Multiple clicks + emits event
-- `ping` — Heartbeat transaction + emits event
-- `reset-streak` — Resets click streak
-- `get-user-clicks (user)` — Read click count
-- `get-contract-info` — Returns version, total clicks, unique users, fees collected
-
-#### TipJar (v2m)
-- `quick-tip` — Quick 0.001 STX tip + emits event
-- `ping` — Activity heartbeat
-- `get-contract-info` — Returns version, total tips, unique tippers, largest tip
-
-#### QuickPoll (v2m)
-- `vote-yes (poll-id)` — Vote yes on a poll
-- `vote-no (poll-id)` — Vote no on a poll
-- `ping` — Activity heartbeat
-- `get-contract-info` — Returns version, total polls, votes, unique voters
-
-#### QuickPoll (v2n — Simplified)
-- `vote-yes` — Vote yes (global, no poll ID)
-- `vote-no` — Vote no (global, no poll ID)
-- `ping` — Activity heartbeat
-
----
-
-## 📦 Legacy / Archived Contracts
-
-Previous versions are archived in `contracts/archive/` and remain active on mainnet. They are no longer maintained.
-
-| Version | Contracts | Status |
-|---------|-----------|--------|
-| v2i | clicker, tipjar, quickpoll | 🗄️ Archived |
-| v2j | clicker, tipjar, quickpoll | 🗄️ Archived |
-| v2k | clicker, tipjar, quickpoll | 🗄️ Archived (failed deploy) |
-| v2l | clicker, tipjar, quickpoll | 🗄️ Archived |
-
----
-
-## 🔌 WalletConnect Integration
-
-This app uses WalletConnect v2 (via Reown AppKit) for wallet connections:
-
-- **Required namespaces** for Stacks chain pairing
-- **stx_getAddresses** for address discovery
-- **stx_signTransaction** for transaction signing
-- **stx_callContract** as fallback for contract calls
-
-See `frontend/src/utils/walletconnect.js` for implementation details.
-
-### Supported Wallets
-- Xverse (Mobile & Extension)
-- Leather (Mobile & Extension)
-
----
-
-## 🔐 Security
-
-- `settings/Mainnet.toml` is **gitignored** — never committed
-- `internal/` directory is **gitignored** — all wallet keys stay local
-- `wallets.json` is **gitignored** — private keys never leave your machine
-- Only public test mnemonics (`zoo zoo zoo...`) appear in `Devnet.toml` / `Simnet.toml`
-
----
-
-## 🧪 Testing
-
-### Frontend Tests (Vitest + React Testing Library)
-
-```bash
-cd frontend
-npm run test        # Watch mode
-npm run test -- --run  # Single run
-```
-
-Currently **18 passing tests** across 3 suites:
-- `WalletContext.test.jsx` — Global state management
-- `ClickerCard.test.jsx` — Clicker UI component
-- `TipJarCard.test.jsx` — TipJar UI component
-
-### Clarity Tests (Clarinet)
-
-```bash
-clarinet test
-```
-
-### CI/CD
-
-All tests run automatically on every push to `main` via GitHub Actions:
-- **Frontend Lint** — ESLint + Prettier
-- **Frontend Tests** — Vitest
-- **Clarinet Tests** — Smart contract unit tests
-
----
-
-## 🚢 Deployment
-
-### Deploy Contracts
-
-1. Configure `settings/Mainnet.toml` with your mnemonic (never commit this file)
-2. Generate deployment plan:
-
-```bash
-clarinet deployments generate --mainnet --low-cost
-```
-
-3. Apply deployment:
-
-```bash
-clarinet deployments apply -p deployments/your-plan.yaml
-```
-
-### Deploy Frontend
-
-The frontend can be deployed to Vercel:
-
-```bash
-cd frontend
-npm run build
-# Deploy dist/ to Vercel
-```
-
-Add environment variables in Vercel dashboard:
-- `VITE_WALLETCONNECT_PROJECT_ID`
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 📄 License
-
-MIT License - feel free to use this code for your own projects.
-
----
-
-## 🔗 Links
-
-- [Stacks Explorer](https://explorer.hiro.so?chain=mainnet)
-- [Stacks Documentation](https://docs.stacks.co)
-- [Clarity Language](https://clarity-lang.org)
-- [@stacks/connect NPM](https://www.npmjs.com/package/@stacks/connect)
-- [@stacks/transactions NPM](https://www.npmjs.com/package/@stacks/transactions)
-- [WalletConnect Docs](https://docs.walletconnect.com)
+*Built with ❤️ by Antigravity - Advanced Agentic Coding @ Google DeepMind*
