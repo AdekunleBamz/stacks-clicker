@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 
 /**
- * Common Action Card layout component.
- * @param {Object} props - Component props.
- * @param {string} props.title - Card title.
- * @param {string} props.subtitle - Card subtitle.
- * @param {string} props.icon - Card icon (emoji or SVG).
- * @param {string} props.iconClass - CSS class for the icon container.
- * @param {React.ReactNode} props.children - Card actions and content.
- * @returns {JSX.Element} The rendered action card.
+ * Common Action Card layout component that provides a consistent container for contract interactions.
+ *
+ * @component
+ * @param {Object} props - Component props
+ * @param {string} props.title - Main title of the card
+ * @param {string} [props.subtitle] - Brief description or secondary text
+ * @param {React.ReactNode} [props.icon] - Icon or emoji to represent the action
+ * @param {string} [props.iconClass=''] - Additional CSS class for the icon container (e.g., for color)
+ * @param {React.ReactNode} props.children - Action buttons and inputs to be rendered inside the card
+ * @returns {JSX.Element} The rendered action card
  */
-export default function ActionCard({ title, subtitle, icon, iconClass, children }) {
+function ActionCard({ title, subtitle, icon, iconClass = '', children }) {
   return (
     <motion.div
       className="action-card"
@@ -43,3 +45,5 @@ ActionCard.propTypes = {
   iconClass: PropTypes.string,
   children: PropTypes.node
 };
+
+export default memo(ActionCard);
