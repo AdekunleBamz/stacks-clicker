@@ -1,63 +1,39 @@
-# Contributing to StacksClicker
+# Contributing to Stacks Clicker
 
-Thanks for considering contributing to StacksClicker! 🎉
+First off, thank you for considering contributing to Stacks Clicker! It's people like you that make the open-source community such an amazing place.
 
-## Getting Started
+## Code of Conduct
 
-1. **Fork** the repository
-2. **Clone** your fork: `git clone https://github.com/YOUR_USERNAME/stacks-clicker.git`
-3. **Install** dependencies: `cd frontend && npm install`
-4. Create a **branch**: `git checkout -b feature/your-feature`
+Help us keep this project open and inclusive. Please read and follow our [Code of Conduct](CODE_OF_CONDUCT.md).
 
-## Development Workflow
+## How Can I Contribute?
 
-```bash
-# Start dev server
-cd frontend && npm run dev
+### Reporting Bugs
+If you find a bug, please create an issue. Include as much detail as possible, such as steps to reproduce and your environment details.
 
-# Run tests
-npm run test
+### Suggesting Enhancements
+Enchancment suggestions are tracked as GitHub issues. When creating an enhancement issue, please provide a clear description and any mockups if applicable.
 
-# Lint code
-npm run lint
+### Pull Requests
+1. Fork the repo and create your branch from `main`.
+2. If you've added code that should be tested, add tests.
+3. If you've changed APIs, update the documentation.
+4. Ensure the test suite passes (`npm run test` in frontend).
+5. Make sure your code lints (`npm run lint` in frontend).
 
-# Format code
-npm run format
-```
+## Development Setup
 
-## Commit Convention
+1. Install dependencies: `cd frontend && npm install`
+2. Set up environment: `cp .env.example .env`
+3. Start dev server: `npm run dev`
 
-We use [Conventional Commits](https://www.conventionalcommits.org/):
+## Style Guide
 
-| Prefix | Purpose |
-|--------|---------|
-| `feat:` | New feature |
-| `fix:` | Bug fix |
-| `refactor:` | Code restructuring |
-| `style:` | Formatting, CSS changes |
-| `test:` | Adding/updating tests |
-| `ci:` | CI/CD changes |
-| `docs:` | Documentation |
-| `chore:` | Maintenance tasks |
+- Use functional components and hooks.
+- Follow the existing folder structure.
+- Document new components with JSDoc.
+- Use CSS variables for all design tokens.
 
-Example: `feat(ui): add animation to clicker button`
+## License
 
-## Pull Request Process
-
-1. Ensure all tests pass (`npm run test -- --run`)
-2. Ensure code is linted (`npm run lint`)
-3. Write a clear PR description
-4. Reference any related issues
-
-## Project Structure
-
-- **`frontend/src/components/`** — Modular React components
-- **`frontend/src/context/`** — Global state (WalletContext)
-- **`frontend/src/tests/`** — Unit tests (Vitest)
-- **`contracts/`** — Clarity smart contracts
-
-## Code Style
-
-- **Prettier** enforces formatting (`.prettierrc`)
-- **ESLint** enforces code quality (`eslint.config.js`)
-- Both run automatically via GitHub Actions on every push
+By contributing, you agree that your contributions will be licensed under its MIT License.
