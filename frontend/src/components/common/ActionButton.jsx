@@ -26,8 +26,8 @@ export default function ActionButton({
       className={`action-btn ${className}`}
       onClick={onClick}
       disabled={disabled || isLoading}
-      whileHover={!disabled && !isLoading ? { scale: 1.02, translateY: -2 } : {}}
-      whileTap={!disabled && !isLoading ? { scale: 0.98, translateY: 0 } : {}}
+      whileHover={!disabled && !isLoading ? { scale: 1.05, translateY: -4 } : {}}
+      whileTap={!disabled && !isLoading ? { scale: 0.95, translateY: 0 } : {}}
       animate={isError ? "shake" : ""}
       variants={shakeVariants}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
