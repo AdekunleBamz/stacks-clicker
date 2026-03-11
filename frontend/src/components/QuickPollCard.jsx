@@ -7,30 +7,48 @@ import { useSound } from '../hooks/useSound';
 
 /**
  * Component for the QuickPoll interaction card.
- * @param {Object} props - Component props.
- * @param {string} props.address - Connected wallet address.
- * @param {Function} props.isLoading - Function to check if an action is loading.
- * @param {string} props.pollQuestion - Current poll question text.
- * @param {Function} props.setPollQuestion - Setter for poll question text.
- * @param {Function} props.handlePollPing - Handler for poll ping action.
- * @param {Function} props.handleCreatePoll - Handler for creating a new poll.
- * @param {Function} props.handleVoteYes - Handler for voting YES.
- * @param {Function} props.handleVoteNo - Handler for voting NO.
+ * Enables users to create new polls and vote (Yes/No) on existing on-chain polls.
+ *
+ * @component
+ * @param {Object} props - Component props
+ * @param {string|null} [props.address] - Connected wallet address; required for actions
+ * @param {Object} props.quickpoll - Interaction API from useQuickPoll hook
+ * @param {Function} props.quickpoll.vote - Function to cast a vote (pollId: number, option: number)
+ * @param {Function} props.quickpoll.createPoll - Function to create a new poll (question: string)
+ * @param {Function} props.quickpoll.handlePollPing - Function to trigger a poll heartbeat ping
+ * @param {Function} props.quickpoll.isLoading - Function to check loading state by action name
+ * @returns {JSX.Element} The rendered QuickPoll interaction card
  */
-function QuickPollCard({
-  address,
-  quickpoll
-}) {
+function QuickPollCard({ address, quickpoll }) {
   const { isLoading, vote, createPoll, handlePollPing } = quickpoll;
   const [pollQuestion, setPollQuestion] = useState('');
   const { playSound } = useSound();
   const [errorField, setErrorField] = useState(null);
 
+  /**
+   * Triggers a 'YES' vote transaction for the current poll.
+   */
   const handleVoteYes = useCallback(() => vote(1, 1), [vote]);
+
+  /**
+   * Triggers a 'NO' vote transaction for the current poll.
+   */
   const handleVoteNo = useCallback(() => vote(1, 0), [vote]);
+
+  /**
+   * Triggers a transaction to create a new poll with the entered question.
+   */
   const handleCreateNewPoll = useCallback(() => createPoll(pollQuestion), [createPoll, pollQuestion]);
 
-  const handleAction = useCallback((fn, fieldId, validation = () => true) => {
+  /**
+   * Internal wrapper to check connection and validation before executing a contract action.
+   * Provides acoustic and visual feedback for errors.
+   *
+   * @param {Function} actionFn - The interaction function to execute
+   * @param {string} fieldId - ID of the button for error highlighting
+   * @param {Function} [validation=()=>true] - Optional pre-check function for action validity
+   */
+  const handleAction = useCallback((actionFn, fieldId, validation = () => true) => {
     if (!address || !validation()) {
       playSound('error');
       setErrorField(fieldId);
@@ -38,7 +56,7 @@ function QuickPollCard({
       return;
     }
     playSound('click');
-    fn();
+    actionFn();
   }, [address, playSound]);
 
   return (
@@ -47,19 +65,19 @@ function QuickPollCard({
       title="🗳️ QuickPoll"
       subtitle="Vote to generate transactions."
       icon="🗳️"
-      accentColor="#10B981"
+      iconClass="bg-emerald-500/20 text-emerald-400"
     >
       <div className="actions">
-        <Tooltip content="Ping the QuickPoll contract.">
+        <Tooltip content="Ping the QuickPoll contract to verify connection state.">
           <ActionButton
             label="Poll Ping"
             icon="🗳️"
             cost="0.001 STX"
             className="success"
             onClick={() => handleAction(handlePollPing, 'poll-ping')}
-            isLoading={isLoading('quickpoll-poll-ping')}
+            isLoading={isLoading('poll-ping')}
             isError={errorField === 'poll-ping'}
-            disabled={isLoading('quickpoll-poll-ping')}
+            disabled={isLoading('poll-ping')}
           />
         </Tooltip>
 
@@ -75,42 +93,42 @@ function QuickPollCard({
           />
         </div>
 
-        <Tooltip content="Create a new poll on the blockchain.">
+        <Tooltip content="Create a new poll on the Stacks blockchain.">
           <ActionButton
             label="Create Poll"
             icon="📋"
             cost="0.001 STX"
             className="primary"
             onClick={() => handleAction(handleCreateNewPoll, 'create-poll', () => pollQuestion.trim().length > 0)}
-            isLoading={isLoading('quickpoll-create-poll')}
+            isLoading={isLoading('create-poll')}
             isError={errorField === 'create-poll'}
-            disabled={isLoading('quickpoll-create-poll')}
+            disabled={isLoading('create-poll')}
           />
         </Tooltip>
 
         <div className="actions-row">
-          <Tooltip content="Vote YES on the current poll.">
+          <Tooltip content="Vote YES on the active community poll.">
             <ActionButton
               label="Yes"
               icon="👍"
               cost="0.001"
               className="success"
               onClick={() => handleAction(handleVoteYes, 'vote-yes')}
-              isLoading={isLoading('quickpoll-quick-vote-yes')}
+              isLoading={isLoading('vote')}
               isError={errorField === 'vote-yes'}
-              disabled={isLoading('quickpoll-quick-vote-yes')}
+              disabled={isLoading('vote')}
             />
           </Tooltip>
-          <Tooltip content="Vote NO on the current poll.">
+          <Tooltip content="Vote NO on the active community poll.">
             <ActionButton
               label="No"
               icon="👎"
               cost="0.001"
               className="secondary"
               onClick={() => handleAction(handleVoteNo, 'vote-no')}
-              isLoading={isLoading('quickpoll-quick-vote-no')}
+              isLoading={isLoading('vote')}
               isError={errorField === 'vote-no'}
-              disabled={isLoading('quickpoll-quick-vote-no')}
+              disabled={isLoading('vote')}
             />
           </Tooltip>
         </div>
