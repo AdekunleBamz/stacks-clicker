@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import ActionCard from './common/ActionCard';
 import ActionButton from './common/ActionButton';
 import Tooltip from './common/Tooltip';
@@ -100,3 +101,13 @@ export default function TipJarCard({
     </ActionCard>
   );
 }
+
+TipJarCard.propTypes = {
+  address: PropTypes.string,
+  tipjar: PropTypes.shape({
+    quickTip: PropTypes.func.isRequired,
+    withdraw: PropTypes.func.isRequired,
+    handleSelfPing: PropTypes.func.isRequired,
+    isLoading: PropTypes.func.isRequired
+  }).isRequired
+};
