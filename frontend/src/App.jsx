@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -6,74 +6,82 @@ import QuickActions from './components/QuickActions';
 import NetworkHeartbeat from './components/NetworkHeartbeat';
 import OnboardingTour from './components/OnboardingTour';
 import FloatingActionButton from './components/FloatingActionButton';
-import InteractionStreaks from './components/InteractionStreaks';
-import MilestoneCelebration from './components/MilestoneCelebration';
 import { useWallet } from './context/WalletContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import ParticleOverlay from './components/common/ParticleOverlay';
 import PerformanceOverlay from './components/common/PerformanceOverlay';
-import PullToRefresh from './components/common/PullToRefresh';
 import ScrollToTop from './components/common/ScrollToTop';
 import SkeletonLoader from './components/common/SkeletonLoader';
 import { useI18n } from './context/I18nContext';
 
-// Lazy load heavy components
+// Lazy load heavy components for optimized initial paint
 const MainGrid = React.lazy(() => import('./components/MainGrid'));
 const PlayerStats = React.lazy(() => import('./components/PlayerStats'));
 const TransactionHistory = React.lazy(() => import('./components/TransactionHistory'));
 
-// Hooks
-import { useClicker } from './hooks/useClicker';
-import { useTipJar } from './hooks/useTipJar';
-import { useQuickPoll } from './hooks/useQuickPoll';
+// Interaction Hooks
 import { useInteractions } from './hooks/useInteractions';
 import { useSound } from './hooks/useSound';
 import { useLocalStorage } from './hooks/useLocalStorage';
 
 /**
- * Main application component for the Stacks Transaction Hub.
- * Manages global state, contract interaction via custom hooks, and UI layout.
- * @returns {JSX.Element} The rendered application.
+ * Main application component for the Stacks Clicker v2.
+ * Orchestrates global state, blockchain interactions, theme management, and responsive layout.
+ * Acts as the centralized hub for transaction logging and aesthetic feedback.
+ *
+ * @component
+ * @returns {JSX.Element} The root application UI tree
  */
 export default function App() {
-  // Global State
-  const { address, connectWallet, disconnectWallet } = useWallet();
-  const { lang, setLang, t } = useI18n();
+  // Global Contexts
+  const { address } = useWallet();
+  const { lang, setLang } = useI18n();
   const { playSound } = useSound();
 
-  // App State
+  // Application State
   const [txLog, setTxLog] = useState([]);
   const [stats, setStats] = useState({ clicks: 0, tips: 0, votes: 0 });
   const [particleTrigger, setParticleTrigger] = useState(0);
+  const [celebration, setCelebration] = useState(null);
 
-  // Theme Management
+  // Theme Management (Persisted via LocalStorage)
   const [theme, setTheme] = useLocalStorage('theme', 'dark');
+
+  /**
+   * Effect to synchronize the HTML data-theme attribute with the current application theme.
+   */
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
-  const toggleTheme = () => setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+  /**
+   * Toggles between 'light' and 'dark' themes.
+   */
+  const toggleTheme = useCallback(() => {
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+  }, [setTheme]);
 
   /**
-   * Adds a transaction record to the local transaction log and triggers UI notifications.
-   * Note: The log is currently session-based and does not persist across page reloads.
-   * @param {string} action - Description of the action (e.g., '🎯 Click').
-   * @param {string} txId - Transaction ID from the blockchain.
-   * @param {string} [status='success'] - Current status of the transaction.
-   * @returns {Object} The created transaction object.
+   * Adds a transaction record to the local session log and triggers UI notifications.
+   *
+   * @param {string} action - Human-readable label for the interaction (e.g., '🎯 Click')
+   * @param {string} txId - The unique transaction hash returned from the Stacks network
+   * @param {string} [status='success'] - Current lifecycle state of the transaction
+   * @returns {Object} The formatted transaction object
    */
-  const addTxToLog = (action, txId, status = 'success') => {
+  const addTxToLog = useCallback((action, txId, status = 'success') => {
     const tx = {
       id: txId || `pending-${Date.now()}`,
       action,
       status,
       time: new Date().toLocaleTimeString(),
     };
-    setTxLog((prev) => [tx, ...prev.slice(0, 49)]);
+    setTxLog((prev) => [tx, ...prev.slice(0, 49)]); // Maintain last 50 TXs
     setParticleTrigger(prev => prev + 1);
     playSound('success');
+
     toast.success(`${action} submitted!`, {
-      icon: action.split(' ')[0], // Use the emoji from action
+      icon: action.split(' ')[0],
       style: {
         borderRadius: '12px',
         background: '#1e1b4b',
@@ -82,26 +90,33 @@ export default function App() {
       }
     });
     return tx;
-  };
+  }, [playSound]);
 
-  // Interaction Hooks
+  /**
+   * Unified interaction interface provided by the useInteractions collector.
+   * Centralizes callbacks for all game-related contract calls.
+   */
   const { clicker, tipjar, quickpoll, pingAll } = useInteractions({
     onTxSubmit: (action, txId) => {
       addTxToLog(action, txId);
-      if (action === '🎯 Click') {
+      // Update local reactive stats for immediate feedback (optimistic logic)
+      if (action.includes('Click')) {
         setStats(prev => ({ ...prev, clicks: prev.clicks + 1 }));
-      } else if (action === '💰 Tip') {
+      } else if (action.includes('Tip')) {
         setStats(prev => ({ ...prev, tips: prev.tips + 1 }));
-      } else if (action === '🗳️ Vote') {
+      } else if (action.includes('Vote')) {
         setStats(prev => ({ ...prev, votes: prev.votes + 1 }));
       }
     }
   });
 
-  // Keyboard Shortcuts
+  /**
+   * Effect to handle global keyboard accessibility shortcuts.
+   * 'C' for Click, 'T' for Quick Tip.
+   */
   useEffect(() => {
     const handleKeyDown = (e) => {
-      // Ignore if typing in an input
+      // Prevent shortcut interference while typing
       if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') return;
 
       if (e.key.toLowerCase() === 'c') {
@@ -110,25 +125,30 @@ export default function App() {
       }
       if (e.key.toLowerCase() === 't') {
         playSound('click');
-        tipjar.quickTip();
+        tipjar.tip(0.001); // Standard quick tip amount
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [clicker, tipjar]);
+  }, [clicker, tipjar, playSound]);
 
-  // Milestone Celebration
-  const [celebration, setCelebration] = useState(null);
+  /**
+   * Effect to monitor interaction milestones and trigger celebrations.
+   * Scales visual feedback (particles) during significant achievements.
+   */
   useEffect(() => {
     const milestones = [10, 50, 100, 500];
     const total = stats.clicks + stats.tips + stats.votes;
-    if (milestones.includes(total)) {
+    if (milestones.includes(total) && total > 0) {
       setCelebration(`Level Up: ${total} Interactions!`);
-      setParticleTrigger(prev => prev + 5); // Massive burst
+      setParticleTrigger(prev => prev + 5); // Execute a massive burst
       setTimeout(() => setCelebration(null), 3000);
     }
   }, [stats]);
 
+  /**
+   * Effect to dynamically update the favicon state based on interaction activity.
+   */
   useEffect(() => {
     const favicon = document.querySelector('link[rel="icon"]');
     if (favicon) {
@@ -136,12 +156,10 @@ export default function App() {
     }
   }, [stats]);
 
+  const MilestoneCelebration = React.lazy(() => import('./components/MilestoneCelebration'));
+
   return (
     <div className="app-container" data-theme={theme}>
-      <PullToRefresh onRefresh={async () => {
-          // Mock refresh logic
-          return new Promise(resolve => setTimeout(resolve, 2000));
-      }} />
       <PerformanceOverlay />
       <ScrollToTop />
 
@@ -191,7 +209,9 @@ export default function App() {
 
       <Toaster position="top-right" />
       <ParticleOverlay trigger={particleTrigger} />
-      <MilestoneCelebration celebration={celebration} />
+      <React.Suspense fallback={null}>
+        <MilestoneCelebration celebration={celebration} />
+      </React.Suspense>
     </div>
   );
 }
