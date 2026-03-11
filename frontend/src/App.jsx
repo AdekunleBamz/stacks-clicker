@@ -77,24 +77,31 @@ export default function App() {
     return tx;
   };
 
-  // Initialize Hooks
+  // Initialize interaction hooks with success callbacks
+  // These hooks manage contract communication and state updates
   const clicker = useClicker({
     onTxSubmit: (action, txId) => {
+      // Record transaction in local history log
       addTxToLog('🎯 Click', txId);
+      // Increment local session stats for immediate UI feedback
       setStats(prev => ({ ...prev, clicks: prev.clicks + 1 }));
     }
   });
 
   const tipjar = useTipJar({
     onTxSubmit: (action, txId) => {
+      // Record tip in local history log
       addTxToLog('💰 Tip', txId);
+      // Increment local session stats
       setStats(prev => ({ ...prev, tips: prev.tips + 1 }));
     }
   });
 
   const quickpoll = useQuickPoll({
     onTxSubmit: (action, txId) => {
+      // Record vote in local history log
       addTxToLog('🗳️ Vote', txId);
+      // Increment local session stats
       setStats(prev => ({ ...prev, votes: prev.votes + 1 }));
     }
   });
