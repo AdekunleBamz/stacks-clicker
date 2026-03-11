@@ -140,7 +140,13 @@ export default function App() {
       <PerformanceOverlay />
       <ScrollToTop />
       <OnboardingTour />
-      <a href="#main-content" className="skip-link">Skip to Content</a>
+      <a
+        href="#main-content"
+        className="skip-link"
+        aria-label="Skip to main content"
+      >
+        Skip to Content
+      </a>
       <Toaster position="top-right" />
       <ParticleOverlay trigger={particleTrigger} />
 
