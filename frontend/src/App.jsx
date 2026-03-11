@@ -23,6 +23,7 @@ import { useI18n } from './context/I18nContext';
 import { useClicker } from './hooks/useClicker';
 import { useTipJar } from './hooks/useTipJar';
 import { useQuickPoll } from './hooks/useQuickPoll';
+import { useInteractions } from './hooks/useInteractions';
 import { useSound } from './hooks/useSound';
 
 /**
@@ -80,32 +81,17 @@ export default function App() {
     return tx;
   };
 
-  // Initialize interaction hooks with success callbacks
-  // These hooks manage contract communication and state updates
-  const clicker = useClicker({
+  // Interaction Hooks
+  const { clicker, tipjar, quickpoll, pingAll } = useInteractions({
     onTxSubmit: (action, txId) => {
-      // Record transaction in local history log
-      addTxToLog('🎯 Click', txId);
-      // Increment local session stats for immediate UI feedback
-      setStats(prev => ({ ...prev, clicks: prev.clicks + 1 }));
-    }
-  });
-
-  const tipjar = useTipJar({
-    onTxSubmit: (action, txId) => {
-      // Record tip in local history log
-      addTxToLog('💰 Tip', txId);
-      // Increment local session stats
-      setStats(prev => ({ ...prev, tips: prev.tips + 1 }));
-    }
-  });
-
-  const quickpoll = useQuickPoll({
-    onTxSubmit: (action, txId) => {
-      // Record vote in local history log
-      addTxToLog('🗳️ Vote', txId);
-      // Increment local session stats
-      setStats(prev => ({ ...prev, votes: prev.votes + 1 }));
+      addTxToLog(action, txId);
+      if (action === '🎯 Click') {
+        setStats(prev => ({ ...prev, clicks: prev.clicks + 1 }));
+      } else if (action === '💰 Tip') {
+        setStats(prev => ({ ...prev, tips: prev.tips + 1 }));
+      } else if (action === '🗳️ Vote') {
+        setStats(prev => ({ ...prev, votes: prev.votes + 1 }));
+      }
     }
   });
 
@@ -180,16 +166,10 @@ export default function App() {
 
       <Footer />
 
-      <FloatingActionButton
-        onAction={(type) => {
-          if (type === 'ping') {
-            clicker.ping();
-            tipjar.handleSelfPing();
-            quickpoll.handlePollPing();
-          } else if (type === 'clear') {
-            setTxLog([]);
-          }
-        }}
+      <QuickActions
+        address={address}
+        onClearLog={() => setTxLog([])}
+        onPingAll={pingAll}
       />
     </div>
   );
