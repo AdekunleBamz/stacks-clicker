@@ -1,30 +1,55 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 /**
  * Custom hook for synchronizing state with window.localStorage.
+ * Provides a reactive state that persists across page reloads and synchronizes across multiple tabs/windows.
  *
- * @param {string} key - The localStorage key.
- * @param {any} initialValue - Default value if no key is found.
- * @returns {[any, Function]} - State and setter.
+ * @param {string} key - The localStorage key to subscribe to
+ * @param {any} initialValue - Default value if no existing value is found in storage
+ * @returns {[any, Function]} A stateful value and a function to update it.
  */
 export function useLocalStorage(key, initialValue) {
-  const [value, setValue] = useState(() => {
+  // Get initial value from localStorage or fallback
+  const readValue = useCallback(() => {
+    if (typeof window === 'undefined') return initialValue;
+
     try {
       const item = window.localStorage.getItem(key);
       return item ? JSON.parse(item) : initialValue;
     } catch (error) {
-      console.error(`Error reading localStorage key "${key}":`, error);
+      console.warn(`Error reading localStorage key "${key}":`, error);
       return initialValue;
     }
-  });
+  }, [key, initialValue]);
 
-  useEffect(() => {
+  const [storedValue, setStoredValue] = useState(readValue);
+
+  // Return a wrapped version of useState's setter function that persists the new value to localStorage.
+  const setValue = useCallback((value) => {
     try {
-      window.localStorage.setItem(key, JSON.stringify(value));
+      const valueToStore = value instanceof Function ? value(storedValue) : value;
+      setStoredValue(valueToStore);
+      if (typeof window !== 'undefined') {
+        window.localStorage.setItem(key, JSON.stringify(valueToStore));
+      }
     } catch (error) {
       console.error(`Error setting localStorage key "${key}":`, error);
     }
-  }, [key, value]);
+  }, [key, storedValue]);
 
-  return [value, setValue];
+  useEffect(() => {
+    setStoredValue(readValue());
+
+    // Listen for changes in other tabs
+    const handleStorageChange = (e) => {
+      if (e.key === key && e.newValue !== null) {
+        setStoredValue(JSON.parse(e.newValue));
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, [key, readValue]);
+
+  return [storedValue, setValue];
 }
