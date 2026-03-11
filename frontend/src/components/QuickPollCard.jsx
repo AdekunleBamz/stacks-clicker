@@ -19,16 +19,16 @@ import { useSound } from '../hooks/useSound';
  */
 function QuickPollCard({
   address,
-  isLoading,
-  pollQuestion,
-  setPollQuestion,
-  handlePollPing,
-  handleCreatePoll,
-  handleVoteYes,
-  handleVoteNo,
+  quickpoll
 }) {
+  const { isLoading, vote, createPoll, handlePollPing } = quickpoll;
+  const [pollQuestion, setPollQuestion] = useState('');
   const { playSound } = useSound();
   const [errorField, setErrorField] = useState(null);
+
+  const handleVoteYes = useCallback(() => vote(1, 1), [vote]);
+  const handleVoteNo = useCallback(() => vote(1, 0), [vote]);
+  const handleCreateNewPoll = useCallback(() => createPoll(pollQuestion), [createPoll, pollQuestion]);
 
   const handleAction = useCallback((fn, fieldId, validation = () => true) => {
     if (!address || !validation()) {
@@ -81,7 +81,7 @@ function QuickPollCard({
             icon="📋"
             cost="0.001 STX"
             className="primary"
-            onClick={() => handleAction(handleCreatePoll, 'create-poll', () => pollQuestion.trim().length > 0)}
+            onClick={() => handleAction(handleCreateNewPoll, 'create-poll', () => pollQuestion.trim().length > 0)}
             isLoading={isLoading('quickpoll-create-poll')}
             isError={errorField === 'create-poll'}
             disabled={isLoading('quickpoll-create-poll')}
@@ -121,13 +121,12 @@ function QuickPollCard({
 
 QuickPollCard.propTypes = {
   address: PropTypes.string,
-  isLoading: PropTypes.func.isRequired,
-  pollQuestion: PropTypes.string.isRequired,
-  setPollQuestion: PropTypes.func.isRequired,
-  handlePollPing: PropTypes.func.isRequired,
-  handleCreatePoll: PropTypes.func.isRequired,
-  handleVoteYes: PropTypes.func.isRequired,
-  handleVoteNo: PropTypes.func.isRequired,
+  quickpoll: PropTypes.shape({
+    vote: PropTypes.func.isRequired,
+    createPoll: PropTypes.func.isRequired,
+    handlePollPing: PropTypes.func.isRequired,
+    isLoading: PropTypes.func.isRequired
+  }).isRequired
 };
 
 export default memo(QuickPollCard);
