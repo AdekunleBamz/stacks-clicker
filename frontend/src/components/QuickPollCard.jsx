@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import ActionCard from './common/ActionCard';
 import ActionButton from './common/ActionButton';
 import Tooltip from './common/Tooltip';
@@ -116,3 +117,13 @@ export default function QuickPollCard({
     </ActionCard>
   );
 }
+
+QuickPollCard.propTypes = {
+  address: PropTypes.string,
+  quickpoll: PropTypes.shape({
+    vote: PropTypes.func.isRequired,
+    createPoll: PropTypes.func.isRequired,
+    handlePollPing: PropTypes.func.isRequired,
+    isLoading: PropTypes.func.isRequired
+  }).isRequired
+};
