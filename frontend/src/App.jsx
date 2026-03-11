@@ -136,7 +136,10 @@ export default function App() {
           // Mock refresh logic
           return new Promise(resolve => setTimeout(resolve, 2000));
       }} />
+import ScrollToTop from './components/common/ScrollToTop';
+...
       <PerformanceOverlay />
+      <ScrollToTop />
       <OnboardingTour />
       <a href="#main-content" className="skip-link">Skip to Content</a>
       <Toaster position="top-right" />
