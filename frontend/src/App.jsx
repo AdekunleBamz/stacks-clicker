@@ -50,6 +50,7 @@ export default function App() {
 
   /**
    * Adds a transaction record to the local transaction log and triggers UI notifications.
+   * Note: The log is currently session-based and does not persist across page reloads.
    * @param {string} action - Description of the action (e.g., '🎯 Click').
    * @param {string} txId - Transaction ID from the blockchain.
    * @param {string} [status='success'] - Current status of the transaction.
