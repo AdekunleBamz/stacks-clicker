@@ -3,6 +3,14 @@ import { callContract } from '../utils/walletconnect';
 
 const DEPLOYER = 'SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT';
 
+/**
+ * Custom hook for interacting with the QuickPoll smart contract.
+ * Enables creating polls, voting on existing polls, and contract pings.
+ *
+ * @param {Object} options - Hook options.
+ * @param {Function} options.onTxSubmit - Callback triggered when a transaction is broadcasted.
+ * @returns {Object} Hook exports including vote/create functions and loading state.
+ */
 export function useQuickPoll({ onTxSubmit }) {
   const [loadingStates, setLoadingStates] = useState({});
 
