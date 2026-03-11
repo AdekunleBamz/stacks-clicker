@@ -111,15 +111,26 @@ export default function TransactionHistory({ txLog }) {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               style={{ top: contextMenu.y, left: contextMenu.x }}
+              role="menu"
+              aria-label="Transaction actions"
             >
-              <button onClick={() => { setSelectedTx(contextMenu.tx); closeContextMenu(); }}>
+              <button
+                role="menuitem"
+                onClick={() => { setSelectedTx(contextMenu.tx); closeContextMenu(); }}
+              >
                 🔍 View Details
               </button>
-              <button onClick={() => { navigator.clipboard.writeText(contextMenu.tx.id); closeContextMenu(); }}>
+              <button
+                role="menuitem"
+                onClick={() => { navigator.clipboard.writeText(contextMenu.tx.id); closeContextMenu(); }}
+              >
                 📋 Copy ID
               </button>
               {!contextMenu.tx.id.startsWith('pending') && (
-                <button onClick={() => { window.open(`https://explorer.hiro.so/txid/${contextMenu.tx.id}?chain=mainnet`, '_blank'); closeContextMenu(); }}>
+                <button
+                  role="menuitem"
+                  onClick={() => { window.open(`https://explorer.hiro.so/txid/${contextMenu.tx.id}?chain=mainnet`, '_blank'); closeContextMenu(); }}
+                >
                   🌐 View on Explorer
                 </button>
               )}
