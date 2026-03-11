@@ -21,6 +21,13 @@ const translations = {
 
 const I18nContext = createContext();
 
+/**
+ * Provider component for internationalization (i18n).
+ * Manages language selection and provides a translation function.
+ * @param {Object} props - Component props.
+ * @param {React.ReactNode} props.children - Child components to be wrapped.
+ * @returns {JSX.Element} The I18nContext provider.
+ */
 export function I18nProvider({ children }) {
   const [lang, setLang] = useState(localStorage.getItem('lang') || 'en');
 
