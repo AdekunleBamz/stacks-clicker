@@ -1,4 +1,6 @@
+```javascript
 import React from 'react';
+import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import ActionButton from './common/ActionButton';
 import { useSound } from '../hooks/useSound';
@@ -41,3 +43,9 @@ export default function QuickActions({ address, onClearLog, onPingAll }) {
     </div>
   );
 }
+
+QuickActions.propTypes = {
+  onClearLog: PropTypes.func.isRequired,
+  onPingAll: PropTypes.func.isRequired,
+  address: PropTypes.string
+};
