@@ -30,7 +30,13 @@ export default function InteractionStreaks({ totalInteractions }) {
     <div className="streak-panel">
       <div className="streak-stats">
         <div className="streak-count">
-          <span className="streak-fire">🔥</span>
+          <motion.span
+            className="streak-fire"
+            animate={{ scale: [1, 1.2, 1], filter: ["drop-shadow(0 0 0px #ff4500)", "drop-shadow(0 0 10px #ff4500)", "drop-shadow(0 0 0px #ff4500)"] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            🔥
+          </motion.span>
           <span className="streak-value">{streak}</span>
           <span className="streak-label">Streak</span>
         </div>
