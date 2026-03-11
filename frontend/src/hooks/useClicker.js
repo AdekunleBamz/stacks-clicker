@@ -20,7 +20,7 @@ export function useClicker({ onTxSubmit }) {
 
   const isLoading = useCallback((key) => !!loadingStates[key], [loadingStates]);
 
-  const executeAction = async (name, functionName, functionArgs = []) => {
+  const executeAction = useCallback(async (name, functionName, functionArgs = []) => {
     const key = `clicker-${functionName}`;
     setLoading(key, true);
     try {
@@ -38,14 +38,14 @@ export function useClicker({ onTxSubmit }) {
     } finally {
       setLoading(key, false);
     }
-  };
+  }, [onTxSubmit]);
 
-  const click = () => executeAction('🎯 Click', 'click');
-  const multiClick = (amount) => executeAction('🔥 Multi-Click', 'multi-click', [{ type: 'uint128', value: amount.toString() }]);
+  const click = useCallback(() => executeAction('🎯 Click', 'click'), [executeAction]);
+  const multiClick = useCallback((amount) => executeAction('🔥 Multi-Click', 'multi-click', [{ type: 'uint128', value: amount.toString() }]), [executeAction]);
   /**
    * Pings the contract to verify network connectivity and emit an on-chain heartbeat event.
    */
-  const ping = () => executeAction('📡 Ping', 'ping');
+  const ping = useCallback(() => executeAction('📡 Ping', 'ping'), [executeAction]);
 
   return {
     isLoading,
