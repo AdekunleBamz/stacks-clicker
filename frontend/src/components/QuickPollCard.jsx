@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import ActionCard from './common/ActionCard';
 import ActionButton from './common/ActionButton';
@@ -17,7 +17,7 @@ import { useSound } from '../hooks/useSound';
  * @param {Function} props.handleVoteYes - Handler for voting YES.
  * @param {Function} props.handleVoteNo - Handler for voting NO.
  */
-export default function QuickPollCard({
+function QuickPollCard({
   address,
   isLoading,
   pollQuestion,
@@ -30,7 +30,7 @@ export default function QuickPollCard({
   const { playSound } = useSound();
   const [errorField, setErrorField] = useState(null);
 
-  const handleAction = (fn, fieldId, validation = () => true) => {
+  const handleAction = useCallback((fn, fieldId, validation = () => true) => {
     if (!address || !validation()) {
       playSound('error');
       setErrorField(fieldId);
@@ -39,7 +39,8 @@ export default function QuickPollCard({
     }
     playSound('click');
     fn();
-  };
+  }, [address, playSound]);
+
   return (
     <ActionCard
       id="quickpoll-card"
@@ -49,7 +50,7 @@ export default function QuickPollCard({
       accentColor="#10B981"
     >
       <div className="actions">
-        <Tooltip text="Ping the QuickPoll contract.">
+        <Tooltip content="Ping the QuickPoll contract.">
           <ActionButton
             label="Poll Ping"
             icon="🗳️"
@@ -74,7 +75,7 @@ export default function QuickPollCard({
           />
         </div>
 
-        <Tooltip text="Create a new poll on the blockchain.">
+        <Tooltip content="Create a new poll on the blockchain.">
           <ActionButton
             label="Create Poll"
             icon="📋"
@@ -88,7 +89,7 @@ export default function QuickPollCard({
         </Tooltip>
 
         <div className="actions-row">
-          <Tooltip text="Vote YES on the current poll.">
+          <Tooltip content="Vote YES on the current poll.">
             <ActionButton
               label="Yes"
               icon="👍"
@@ -100,7 +101,7 @@ export default function QuickPollCard({
               disabled={isLoading('quickpoll-quick-vote-yes')}
             />
           </Tooltip>
-          <Tooltip text="Vote NO on the current poll.">
+          <Tooltip content="Vote NO on the current poll.">
             <ActionButton
               label="No"
               icon="👎"
@@ -120,10 +121,13 @@ export default function QuickPollCard({
 
 QuickPollCard.propTypes = {
   address: PropTypes.string,
-  quickpoll: PropTypes.shape({
-    vote: PropTypes.func.isRequired,
-    createPoll: PropTypes.func.isRequired,
-    handlePollPing: PropTypes.func.isRequired,
-    isLoading: PropTypes.func.isRequired
-  }).isRequired
+  isLoading: PropTypes.func.isRequired,
+  pollQuestion: PropTypes.string.isRequired,
+  setPollQuestion: PropTypes.func.isRequired,
+  handlePollPing: PropTypes.func.isRequired,
+  handleCreatePoll: PropTypes.func.isRequired,
+  handleVoteYes: PropTypes.func.isRequired,
+  handleVoteNo: PropTypes.func.isRequired,
 };
+
+export default memo(QuickPollCard);
