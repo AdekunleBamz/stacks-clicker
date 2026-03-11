@@ -1,19 +1,31 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 
 /**
- * Reusable action button component with motion effects.
+ * Reusable action button component with motion effects, loading states, and error animations.
+ *
+ * @component
+ * @param {Object} props - Component props
+ * @param {string} props.label - Text label to display on the button
+ * @param {React.ReactNode} [props.icon] - Icon element or emoji to display next to the label
+ * @param {Function} props.onClick - Handler function for button click events
+ * @param {boolean} [props.isLoading=false] - Whether the button is in a loading/processing state
+ * @param {boolean} [props.disabled=false] - Whether the button is interactively disabled
+ * @param {string} [props.className=''] - Additional CSS classes for styling
+ * @param {string} [props.cost] - Optional cost string (e.g., "0.001 STX") to display below the label
+ * @param {boolean} [props.isError=false] - Triggers a shake animation if true to indicate validation error
+ * @returns {JSX.Element} The rendered action button
  */
-export default function ActionButton({
+function ActionButton({
   label,
   icon,
   onClick,
-  isLoading,
-  disabled,
+  isLoading = false,
+  disabled = false,
   className = '',
   cost,
-  isError
+  isError = false
 }) {
   const shakeVariants = {
     shake: {
@@ -36,9 +48,8 @@ export default function ActionButton({
       <div className="btn-content">
         <AnimatePresence mode="wait">
           {isLoading ? (
-            <div className="loading-progress-container">
+            <div className="loading-progress-container" key="loader">
               <motion.div
-                key="loader"
                 initial={{ width: 0 }}
                 animate={{ width: "100%" }}
                 transition={{ duration: 2, ease: "linear" }}
@@ -73,3 +84,5 @@ ActionButton.propTypes = {
   cost: PropTypes.string,
   isError: PropTypes.bool
 };
+
+export default memo(ActionButton);
