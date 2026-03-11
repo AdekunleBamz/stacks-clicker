@@ -182,22 +182,21 @@ export default function TransactionHistory({ txLog }) {
                 </button>
               </div>
               <div className="modal-body">
-                {modalView === 'summary' ? (
                   <div className="summary-view">
                     <div className="detail-row">
-                      <label>Action</label>
-                      <span>{selectedTx.action}</span>
+                      <label>Action Type</label>
+                      <span className="action-value">{selectedTx.action}</span>
                     </div>
-                <div className="detail-row">
-                  <label>Timestamp</label>
-                  <span>{selectedTx.time}</span>
-                </div>
-                <div className="detail-row">
-                  <label>Transaction ID</label>
-                  <code className="tx-id-full">{selectedTx.id}</code>
-                </div>
                     <div className="detail-row">
-                      <label>Status</label>
+                      <label>Time of Action</label>
+                      <span className="time-value">{selectedTx.time}</span>
+                    </div>
+                    <div className="detail-row">
+                      <label>Blockchain ID</label>
+                      <code className="tx-id-full" title={selectedTx.id}>{selectedTx.id}</code>
+                    </div>
+                    <div className="detail-row">
+                      <label>Transaction Status</label>
                       <span className={`status-badge ${selectedTx.status}`}>{selectedTx.status}</span>
                     </div>
                     <button className="text-btn mt-2" onClick={() => setModalView('raw')}>
