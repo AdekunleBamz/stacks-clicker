@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useClicker } from './useClicker';
 import { useTipJar } from './useTipJar';
 import { useQuickPoll } from './useQuickPoll';
@@ -22,10 +22,10 @@ export function useInteractions({ onTxSubmit }) {
     quickpoll.handlePollPing();
   }, [clicker, tipjar, quickpoll]);
 
-  return {
+  return useMemo(() => ({
     clicker,
     tipjar,
     quickpoll,
     pingAll
-  };
+  }), [clicker, tipjar, quickpoll, pingAll]);
 }
