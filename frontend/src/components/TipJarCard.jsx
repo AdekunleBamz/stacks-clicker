@@ -18,15 +18,15 @@ import { useSound } from '../hooks/useSound';
  */
 function TipJarCard({
   address,
-  isLoading,
-  tipAmount,
-  setTipAmount,
-  handleSelfPing,
-  handleQuickTip,
-  handleCustomTip,
+  tipjar
 }) {
+  const { isLoading, tip, handleSelfPing } = tipjar;
+  const [tipAmount, setTipAmount] = useState('0.001');
   const { playSound } = useSound();
   const [errorField, setErrorField] = useState(null);
+
+  const handleQuickTip = useCallback(() => tip(0.001), [tip]);
+  const handleCustomTip = useCallback(() => tip(parseFloat(tipAmount)), [tip, tipAmount]);
 
   const handleAction = useCallback((fn, fieldId) => {
     if (!address) {
@@ -105,12 +105,11 @@ function TipJarCard({
 
 TipJarCard.propTypes = {
   address: PropTypes.string,
-  isLoading: PropTypes.func.isRequired,
-  tipAmount: PropTypes.string.isRequired,
-  setTipAmount: PropTypes.func.isRequired,
-  handleSelfPing: PropTypes.func.isRequired,
-  handleQuickTip: PropTypes.func.isRequired,
-  handleCustomTip: PropTypes.func.isRequired,
+  tipjar: PropTypes.shape({
+    tip: PropTypes.func.isRequired,
+    handleSelfPing: PropTypes.func.isRequired,
+    isLoading: PropTypes.func.isRequired
+  }).isRequired
 };
 
 export default memo(TipJarCard);
