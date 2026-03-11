@@ -23,10 +23,10 @@ export default function MainGrid({
   setTxLog
 }) {
   return (
-    <main className="app-main" id="main-content" tabIndex="-1">
+    <main className="app-main" id="main-content" tabIndex="-1" aria-label="Main Content">
       <div className="main-grid">
-        <section className="interaction-section">
-          <h2 className="section-title">Interactions</h2>
+        <section className="interaction-section" aria-labelledby="interactions-title">
+          <h2 className="section-title" id="interactions-title">Interactions</h2>
           <InteractionStreaks totalInteractions={stats.clicks + stats.tips + stats.votes} />
           <div className="cards-container">
             <ClickerCard address={address} clicker={clicker} />
@@ -35,7 +35,7 @@ export default function MainGrid({
           </div>
         </section>
 
-        <aside className="stats-aside">
+        <aside className="stats-aside" aria-label="Statistics and History">
           <PlayerStats stats={stats} />
           <QuickActions
             address={address}
