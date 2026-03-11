@@ -79,13 +79,22 @@ const result = await broadcastTransaction(tx, network);
 ## ✨ Features
 
 ### 🎮 Clicker Game
-Build click streaks and compete for the highest score! Every click is recorded on-chain with full event emission.
+The core GameFi experience. Build click streaks and compete for the highest score!
+- **On-Chain Recording**: Every click (or multi-click) is a verified transaction.
+- **Dynamic Streaks**: Maintain daily activity to boost your multiplier.
+- **Live Analytics**: View global click counts and unique player density in real-time.
 
 ### 💰 TipJar
-Send micro-tips to support your favorite creators. Quick-tip with one click or send custom amounts.
+A decentralized tipping protocol for the Stacks ecosystem.
+- **Micro-Tipping**: Send as little as 0.001 STX with a single click.
+- **Custom Donations**: Support creators with precise amounts via a glass-themed UI.
+- **Top Tipper tracking**: Publicly visible leaderboards (coming soon) based on on-chain events.
 
 ### 🗳️ QuickPoll
-Create and vote on community polls. Decentralized voting for any topic — no poll IDs needed in v2n.
+Fast, decentralized voting without the complexity of traditional DAOs.
+- **One-Click Voting**: Cast "Yes" or "No" votes instantly.
+- **Creator Analytics**: Track poll engagement and sentiment directly on the Stacks blockchain.
+- **Gas Optimized**: Uses minimal contract storage to keep interaction costs low.
 
 ---
 
