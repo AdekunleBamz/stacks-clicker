@@ -1,9 +1,17 @@
 /**
  * WalletConnect / Reown AppKit Integration for Stacks
  *
- * This module handles WalletConnect pairing and Stacks JSON-RPC methods:
- * - stx_getAddresses
- * - stx_signTransaction
+ * This module handles WalletConnect pairing and Stacks JSON-RPC methods.
+ * It provides a unified interface for connecting to Stacks wallets (Xverse, Leather)
+ * using the @walletconnect/universal-provider.
+ *
+ * Supported RPC Methods:
+ * - stx_getAddresses: Discovery of account addresses and public keys.
+ * - stx_signTransaction: Signing serialized transaction payloads.
+ * - stx_callContract: Simplified contract call triggering.
+ * - stx_transferStx: Native STX token transfers.
+ *
+ * @module utils/walletconnect
  */
 
 import UniversalProvider from '@walletconnect/universal-provider';
