@@ -51,8 +51,10 @@ Stacks Clicker aims to be more than just a game; it is a gateway for users to ex
    ```
    ```env
    VITE_WALLETCONNECT_PROJECT_ID=your_project_id_here
+   VITE_DEPLOYER_ADDRESS=SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT
    VITE_DEBUG=true
    ```
+   Set `VITE_DEPLOYER_ADDRESS` to the principal that deployed the app contracts.
    Optional values such as `VITE_STACKS_NETWORK` and `VITE_COINGECKO_API_KEY` are documented in `frontend/.env.example`.
 4. Start the development server:
    ```bash
