@@ -1,5 +1,28 @@
 import { useCallback } from 'react';
 
+let audioContext = null;
+
+function getAudioContext() {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
+  const AudioContextCtor = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContextCtor) {
+    return null;
+  }
+
+  if (!audioContext) {
+    audioContext = new AudioContextCtor();
+  }
+
+  if (audioContext.state === 'suspended') {
+    audioContext.resume().catch(() => {});
+  }
+
+  return audioContext;
+}
+
 /**
  * Custom hook for synthesized acoustic feedback using the Web Audio API.
  * Generates dynamic waveforms (sine, triangle, sawtooth) without requiring external audio assets,
@@ -14,10 +37,9 @@ export function useSound() {
    * @param {'click'|'success'|'error'} type - The category of sound to play
    */
   const playSound = useCallback((type) => {
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    if (!AudioContext) return;
+    const ctx = getAudioContext();
+    if (!ctx) return;
 
-    const ctx = new AudioContext();
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
 
