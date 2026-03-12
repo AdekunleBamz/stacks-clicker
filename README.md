@@ -34,8 +34,10 @@ A premium, high-performance decentralized interaction hub on the Stacks blockcha
    Create a `.env` file in the `frontend` directory:
    ```env
    VITE_STACKS_NETWORK=mainnet
+   VITE_DEPLOYER_ADDRESS=SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT
    VITE_COINGECKO_API_KEY=your_api_key_here
    ```
+   Set `VITE_DEPLOYER_ADDRESS` to the principal that deployed the app contracts.
 4. Start the development server:
    ```bash
    npm run dev
