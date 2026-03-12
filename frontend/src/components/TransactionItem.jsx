@@ -11,16 +11,15 @@ function TransactionItem({
   highlightText,
   onDetails,
   onCopy,
-  onContextMenu
+  onContextMenu,
+  onOpenExplorer,
 }) {
+  const isPending = tx.isPending ?? tx.id.startsWith('pending');
+
   return (
     <div className="tx-item-wrapper">
       <div className="tx-swipe-actions">
-        <button
-          className="swipe-btn copy"
-          onClick={() => onCopy(tx.id)}
-          aria-label="Copy ID"
-        >
+        <button className="swipe-btn copy" onClick={() => onCopy(tx.id)} aria-label="Copy ID">
           📋
         </button>
         <button
@@ -42,13 +41,13 @@ function TransactionItem({
         <div className="tx-status-dot" aria-hidden="true" />
         <div className="tx-main">
           <div className="tx-header">
-            <span className="tx-action-label">
-              {highlightText(tx.action, searchTerm)}
-            </span>
+            <span className="tx-action-label">{highlightText(tx.action, searchTerm)}</span>
             <span className="tx-timestamp">{tx.time}</span>
           </div>
           <div className="tx-actions-inline">
-            <button className="text-btn" onClick={() => onDetails(tx)}>Details</button>
+            <button className="text-btn" onClick={() => onDetails(tx)}>
+              Details
+            </button>
           </div>
           <div className="tx-status-visualizer">
             <div className="status-steps">
@@ -56,24 +55,20 @@ function TransactionItem({
                 <span className="step-dot"></span>
                 <span className="step-label">Submitted</span>
               </div>
-              <div className={`step ${tx.id.startsWith('pending') ? 'pending' : 'active'}`}>
+              <div className={`step ${isPending ? 'pending' : 'active'}`}>
                 <span className="step-dot"></span>
                 <span className="step-label">Mempool</span>
               </div>
-              <div className={`step ${tx.id.startsWith('pending') ? '' : 'active'}`}>
+              <div className={`step ${isPending ? '' : 'active'}`}>
                 <span className="step-dot"></span>
                 <span className="step-label">Confirmed</span>
               </div>
             </div>
-            {!tx.id.startsWith('pending') && (
-              <a
-                href={`https://explorer.hiro.so/txid/${tx.id}?chain=mainnet`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="tx-explorer-link"
-              >
-                {highlightText(tx.id.slice(0, 8), searchTerm)}...{highlightText(tx.id.slice(-6), searchTerm)} ↗
-              </a>
+            {tx.explorerUrl && (
+              <button type="button" onClick={() => onOpenExplorer(tx)} className="tx-explorer-link">
+                {highlightText(tx.id.slice(0, 8), searchTerm)}...
+                {highlightText(tx.id.slice(-6), searchTerm)} ↗
+              </button>
             )}
           </div>
         </div>
@@ -87,13 +82,14 @@ TransactionItem.propTypes = {
     id: PropTypes.string.isRequired,
     action: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
-    time: PropTypes.string.isRequired
+    time: PropTypes.string.isRequired,
   }).isRequired,
   searchTerm: PropTypes.string,
   highlightText: PropTypes.func.isRequired,
   onDetails: PropTypes.func.isRequired,
   onCopy: PropTypes.func.isRequired,
-  onContextMenu: PropTypes.func.isRequired
+  onContextMenu: PropTypes.func.isRequired,
+  onOpenExplorer: PropTypes.func.isRequired,
 };
 
 export default memo(TransactionItem);
