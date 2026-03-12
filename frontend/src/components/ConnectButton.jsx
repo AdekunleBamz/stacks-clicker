@@ -6,22 +6,13 @@ import { useWallet } from '../context/WalletContext';
  * Shows connect/disconnect based on connection state
  */
 export default function ConnectButton() {
-  const { address, connecting, connectWallet, disconnectWallet } = useWallet();
+  const { address, connectWallet, disconnectWallet } = useWallet();
 
   // Format address for display
   const formatAddress = (addr) => {
     if (!addr) return '';
     return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
   };
-
-  if (connecting) {
-    return (
-      <button className="connect-btn connecting" disabled>
-        <span className="spinner"></span>
-        Connecting...
-      </button>
-    );
-  }
 
   if (address) {
     return (
