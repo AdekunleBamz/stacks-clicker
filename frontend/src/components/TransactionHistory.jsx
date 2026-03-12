@@ -6,6 +6,11 @@ import SkeletonLoader from './common/SkeletonLoader';
 import SearchInput from './common/SearchInput';
 import TransactionItem from './TransactionItem';
 
+function escapeCsvValue(value) {
+  const normalized = String(value ?? '').replace(/"/g, '""');
+  return `"${normalized}"`;
+}
+
 /**
  * Component to display a list of recent transactions with status indicators.
  * @param {Object} props - Component props.
@@ -36,16 +41,17 @@ function TransactionHistory({ txLog }) {
     setContextMenu({
       x: e.clientX,
       y: e.clientY,
-      tx
+      tx,
     });
   }, []);
 
   const closeContextMenu = useCallback(() => setContextMenu(null), []);
 
   const filteredLog = useMemo(() => {
-    return txLog.filter(tx => {
-      const matchesSearch = tx.action.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           tx.id.toLowerCase().includes(searchTerm.toLowerCase());
+    return txLog.filter((tx) => {
+      const matchesSearch =
+        tx.action.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        tx.id.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesStatus = filterStatus === 'all' || tx.status === filterStatus;
       return matchesSearch && matchesStatus;
     });
@@ -58,7 +64,9 @@ function TransactionHistory({ txLog }) {
       <span>
         {parts.map((part, i) =>
           part.toLowerCase() === highlight.toLowerCase() ? (
-            <mark key={i} className="search-highlight">{part}</mark>
+            <mark key={i} className="search-highlight">
+              {part}
+            </mark>
           ) : (
             part
           )
@@ -67,26 +75,51 @@ function TransactionHistory({ txLog }) {
     );
   }, []);
 
-  const exportData = useCallback((format) => {
-    let content = '';
-    const filename = `stacks-tx-history-${new Date().toISOString().split('T')[0]}`;
+  const exportData = useCallback(
+    (format) => {
+      let content = '';
+      const filename = `stacks-tx-history-${new Date().toISOString().split('T')[0]}`;
 
-    if (format === 'json') {
-      content = JSON.stringify(txLog, null, 2);
-    } else if (format === 'csv') {
-      const headers = ['Action', 'Time', 'ID', 'Status'];
-      const rows = txLog.map(tx => [tx.action, tx.time, tx.id, tx.status].join(','));
-      content = [headers.join(','), ...rows].join('\n');
+      if (format === 'json') {
+        content = JSON.stringify(txLog, null, 2);
+      } else if (format === 'csv') {
+        const headers = ['Action', 'Time', 'ID', 'Status', 'Network'];
+        const rows = txLog.map((tx) =>
+          [tx.action, tx.time, tx.id, tx.status, tx.network || ''].map(escapeCsvValue).join(',')
+        );
+        content = [headers.join(','), ...rows].join('\n');
+      }
+
+      const blob = new Blob([content], {
+        type: format === 'json' ? 'application/json' : 'text/csv',
+      });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `${filename}.${format}`;
+      link.click();
+      URL.revokeObjectURL(url);
+    },
+    [txLog]
+  );
+
+  const copyText = useCallback(async (value, label = 'Value') => {
+    try {
+      await navigator.clipboard.writeText(value);
+      toast.success(`${label} copied`);
+    } catch (error) {
+      toast.error(`Unable to copy ${label.toLowerCase()}`);
+    }
+  }, []);
+
+  const openExplorer = useCallback((tx) => {
+    if (!tx.explorerUrl) {
+      toast.error('Pending transactions do not have an explorer link yet');
+      return;
     }
 
-    const blob = new Blob([content], { type: format === 'json' ? 'application/json' : 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `${filename}.${format}`;
-    link.click();
-    URL.revokeObjectURL(url);
-  }, [txLog]);
+    window.open(tx.explorerUrl, '_blank', 'noopener,noreferrer');
+  }, []);
 
   return (
     <section className="tx-log" aria-labelledby="tx-history-title">
@@ -111,8 +144,22 @@ function TransactionHistory({ txLog }) {
             <option value="pending">Pending</option>
             <option value="failed">Failed</option>
           </select>
-          <button className="export-btn" onClick={() => exportData('json')} aria-label="Export history as JSON" title="Export as JSON">JSON</button>
-          <button className="export-btn" onClick={() => exportData('csv')} aria-label="Export history as CSV" title="Export as CSV">CSV</button>
+          <button
+            className="export-btn"
+            onClick={() => exportData('json')}
+            aria-label="Export history as JSON"
+            title="Export as JSON"
+          >
+            JSON
+          </button>
+          <button
+            className="export-btn"
+            onClick={() => exportData('csv')}
+            aria-label="Export history as CSV"
+            title="Export as CSV"
+          >
+            CSV
+          </button>
         </div>
       </div>
 
@@ -131,20 +178,29 @@ function TransactionHistory({ txLog }) {
             >
               <button
                 role="menuitem"
-                onClick={() => { setSelectedTx(contextMenu.tx); closeContextMenu(); }}
+                onClick={() => {
+                  setSelectedTx(contextMenu.tx);
+                  closeContextMenu();
+                }}
               >
                 🔍 View Details
               </button>
               <button
                 role="menuitem"
-                onClick={() => { navigator.clipboard.writeText(contextMenu.tx.id); closeContextMenu(); }}
+                onClick={() => {
+                  copyText(contextMenu.tx.id, 'ID');
+                  closeContextMenu();
+                }}
               >
                 📋 Copy ID
               </button>
-              {!contextMenu.tx.id.startsWith('pending') && (
+              {contextMenu.tx.explorerUrl && (
                 <button
                   role="menuitem"
-                  onClick={() => { window.open(`https://explorer.hiro.so/txid/${contextMenu.tx.id}?chain=mainnet`, '_blank'); closeContextMenu(); }}
+                  onClick={() => {
+                    openExplorer(contextMenu.tx);
+                    closeContextMenu();
+                  }}
                 >
                   🌐 View on Explorer
                 </button>
@@ -197,12 +253,20 @@ function TransactionHistory({ txLog }) {
                       <span className="time-value">{selectedTx.time}</span>
                     </div>
                     <div className="detail-row">
-                      <label>Blockchain ID</label>
-                      <code className="tx-id-full" title={selectedTx.id}>{selectedTx.id}</code>
+                      <label>Transaction ID</label>
+                      <code className="tx-id-full" title={selectedTx.id}>
+                        {selectedTx.id}
+                      </code>
                     </div>
                     <div className="detail-row">
                       <label>Transaction Status</label>
-                      <span className={`status-badge ${selectedTx.status}`}>{selectedTx.status}</span>
+                      <span className={`status-badge ${selectedTx.status}`}>
+                        {selectedTx.status}
+                      </span>
+                    </div>
+                    <div className="detail-row">
+                      <label>Network</label>
+                      <span>{selectedTx.network || 'mainnet'}</span>
                     </div>
                     <button className="text-btn mt-2" onClick={() => setModalView('raw')}>
                       View Technical Raw Data ↗
@@ -212,28 +276,40 @@ function TransactionHistory({ txLog }) {
                   <div className="detail-row full">
                     <label>Raw Metadata</label>
                     <pre className="raw-json">
-                      {JSON.stringify({
-                        network: 'mainnet',
-                        fee: '0.001 STX',
-                        nonce: Math.floor(Math.random() * 100),
-                        version: 'v2',
-                        tx_id: selectedTx.id,
-                        timestamp: selectedTx.time
-                      }, null, 2)}
+                      {JSON.stringify(
+                        {
+                          id: selectedTx.id,
+                          action: selectedTx.action,
+                          status: selectedTx.status,
+                          network: selectedTx.network || 'mainnet',
+                          submittedAt: selectedTx.submittedAt || null,
+                          explorerUrl: selectedTx.explorerUrl || null,
+                          tx_id: selectedTx.id,
+                          timestamp: selectedTx.time,
+                        },
+                        null,
+                        2
+                      )}
                     </pre>
                   </div>
                 )}
               </div>
               <div className="modal-footer">
-                <a
-                  href={`https://explorer.hiro.so/txid/${selectedTx.id}?chain=mainnet`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="action-btn primary"
-                  style={{ textDecoration: 'none', justifyContent: 'center' }}
-                >
-                  View on Explorer ↗
-                </a>
+                {selectedTx.explorerUrl ? (
+                  <a
+                    href={selectedTx.explorerUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="action-btn primary"
+                    style={{ textDecoration: 'none', justifyContent: 'center' }}
+                  >
+                    View on Explorer ↗
+                  </a>
+                ) : (
+                  <button className="action-btn primary" disabled>
+                    Explorer unavailable
+                  </button>
+                )}
               </div>
             </motion.div>
           </div>
@@ -253,10 +329,7 @@ function TransactionHistory({ txLog }) {
               <div className="empty-icon">{searchTerm ? '🔍' : '📂'}</div>
               <p>{searchTerm ? `No matches for "${searchTerm}"` : 'No transactions yet.'}</p>
               {searchTerm && (
-                <button
-                  className="text-btn mt-2"
-                  onClick={() => setSearchTerm('')}
-                >
+                <button className="text-btn mt-2" onClick={() => setSearchTerm('')}>
                   Clear search terms
                 </button>
               )}
@@ -275,11 +348,9 @@ function TransactionHistory({ txLog }) {
                 searchTerm={searchTerm}
                 highlightText={highlightText}
                 onDetails={setSelectedTx}
-                onCopy={(id) => {
-                  navigator.clipboard.writeText(id);
-                  toast.success('ID Copied');
-                }}
+                onCopy={(id) => copyText(id, 'ID')}
                 onContextMenu={handleContextMenu}
+                onOpenExplorer={openExplorer}
               />
             ))
           )}
@@ -290,12 +361,18 @@ function TransactionHistory({ txLog }) {
 }
 
 TransactionHistory.propTypes = {
-  txLog: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    action: PropTypes.string.isRequired,
-    status: PropTypes.string.isRequired,
-    time: PropTypes.string.isRequired
-  })).isRequired
+  txLog: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      action: PropTypes.string.isRequired,
+      status: PropTypes.string.isRequired,
+      time: PropTypes.string.isRequired,
+      network: PropTypes.string,
+      submittedAt: PropTypes.string,
+      explorerUrl: PropTypes.string,
+      isPending: PropTypes.bool,
+    })
+  ).isRequired,
 };
 
 export default memo(TransactionHistory);
