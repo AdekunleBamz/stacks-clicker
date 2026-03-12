@@ -1,8 +1,10 @@
 import { useState, useCallback } from 'react';
 import { callContract } from '../utils/walletconnect';
-import { useNotifications } from './useNotifications';
-import { useThrottle } from './useThrottle';
-import { DEPLOYER, CLICKER_CONTRACT as CONTRACT_NAME } from '../utils/constants';
+
+/** @constant {string} Smart contract deployer address */
+const DEPLOYER = (import.meta.env.VITE_DEPLOYER_ADDRESS || '').trim();
+/** @constant {string} Clicker contract name */
+const CONTRACT_NAME = 'click-v2p';
 
 /**
  * Custom hook for interacting with the Clicker smart contract.
@@ -29,48 +31,35 @@ export function useClicker({ onTxSubmit }) {
     [loadingStates]
   );
 
-  const executeAction = useCallback(
-    async (displayName, functionName, functionArgs = []) => {
-      const key = `clicker-${functionName}`;
-      setLoading(key, true);
-      try {
-        showLoading(`Broadcasting ${displayName}...`);
-        setLastActionName(displayName);
-        const result = await callContract({
-          contractAddress: DEPLOYER,
-          contractName: CONTRACT_NAME,
-          functionName,
-          functionArgs,
-        });
-        onTxSubmit?.(displayName, result.txId);
-        return result;
-      } catch (err) {
-        const userFriendlyError = parseContractError(err);
-        showError(userFriendlyError);
-        console.error(`${displayName} failed:`, err);
-        throw err;
-      } finally {
-        setLoading(key, false);
-      }
-    },
-    [onTxSubmit, setLoading, showError, showLoading]
-  );
+  /**
+   * Core executor for contract calls.
+   * @param {string} displayName - Human readable name for the action
+   * @param {string} functionName - Contract function name
+   * @param {Array} functionArgs - Arguments for the contract call
+   */
+  const executeAction = useCallback(async (displayName, functionName, functionArgs = []) => {
+    if (!DEPLOYER) {
+      throw new Error('VITE_DEPLOYER_ADDRESS is not set');
+    }
 
-  const click = useThrottle(
-    useCallback(() => executeAction('🎯 Click', 'click'), [executeAction]),
-    1000
-  );
-
-  const multiClick = useThrottle(
-    useCallback(
-      (amount = 1) =>
-        executeAction('🔥 Multi-Click', 'multi-click', [
-          { type: 'uint128', value: amount.toString() },
-        ]),
-      [executeAction]
-    ),
-    1000
-  );
+    const key = `clicker-${functionName}`;
+    setLoading(key, true);
+    try {
+      const result = await callContract({
+        contractAddress: DEPLOYER,
+        contractName: CONTRACT_NAME,
+        functionName,
+        functionArgs,
+      });
+      onTxSubmit?.(displayName, result.txId);
+      return result;
+    } catch (err) {
+      console.error(`${displayName} failed:`, err);
+      throw err;
+    } finally {
+      setLoading(key, false);
+    }
+  }, [onTxSubmit]);
 
   const ping = useCallback(() => executeAction('📡 Ping', 'ping'), [executeAction]);
   const resetStreak = useCallback(

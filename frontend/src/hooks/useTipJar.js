@@ -1,8 +1,10 @@
 import { useState, useCallback } from 'react';
 import { callContract } from '../utils/walletconnect';
-import { useNotifications } from './useNotifications';
-import { parseContractError } from '../utils/errors';
-import { DEPLOYER, TIPJAR_CONTRACT as CONTRACT_NAME, MIN_TIP_MICRO_STX } from '../utils/constants';
+
+/** @constant {string} Smart contract deployer address */
+const DEPLOYER = (import.meta.env.VITE_DEPLOYER_ADDRESS || '').trim();
+/** @constant {string} TipJar contract name */
+const CONTRACT_NAME = 'tipjar-v2p';
 
 /**
  * Custom hook for interacting with the TipJar smart contract.
@@ -44,6 +46,10 @@ export function useTipJar({ onTxSubmit }) {
    * @param {Array} functionArgs - Arguments for the contract call
    */
   const executeAction = useCallback(async (displayName, functionName, functionArgs = []) => {
+    if (!DEPLOYER) {
+      throw new Error('VITE_DEPLOYER_ADDRESS is not set');
+    }
+
     const key = `tipjar-${functionName}`;
     setLoading(key, true);
     try {
