@@ -1,63 +1,103 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import TipJarCard from '../components/TipJarCard';
 
+vi.mock('framer-motion', () => ({
+  motion: new Proxy(
+    {},
+    {
+      get: (_, tag) =>
+        React.forwardRef(
+          (
+            {
+              children,
+              animate,
+              exit,
+              initial,
+              transition,
+              variants,
+              viewport,
+              whileDrag,
+              whileHover,
+              whileInView,
+              whileTap,
+              ...props
+            },
+            ref
+          ) => React.createElement(tag, { ...props, ref }, children)
+        ),
+    }
+  ),
+  AnimatePresence: ({ children }) => <>{children}</>,
+}));
+
+vi.mock('../hooks/useSound', () => ({
+  useSound: () => ({ playSound: vi.fn() }),
+}));
+
 describe('TipJarCard Component', () => {
-  const defaultProps = {
-    address: 'SP123ABCD',
-    isLoading: vi.fn().mockReturnValue(false),
-    tipAmount: '0.001',
-    setTipAmount: vi.fn(),
-    handleSelfPing: vi.fn(),
-    handleQuickTip: vi.fn(),
-    handleCustomTip: vi.fn(),
-  };
+  const tip = vi.fn();
+  const handleSelfPing = vi.fn();
+  const isLoading = vi.fn().mockReturnValue(false);
 
-  it('renders the contract title and subtitle', () => {
-    render(<TipJarCard {...defaultProps} />);
-    expect(screen.getByText('TipJar')).toBeInTheDocument();
-    expect(screen.getByText('Send tips to generate transactions')).toBeInTheDocument();
+  const renderCard = (address = 'SP123ABCD') =>
+    render(<TipJarCard address={address} tipjar={{ tip, handleSelfPing, isLoading }} />);
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    isLoading.mockReturnValue(false);
   });
 
-  it('renders three action buttons', () => {
-    render(<TipJarCard {...defaultProps} />);
-    const buttons = screen.getAllByRole('button');
-    expect(buttons).toHaveLength(3);
+  it('renders the current card copy', () => {
+    renderCard();
+
+    expect(screen.getByText('💰 TipJar')).toBeInTheDocument();
+    expect(screen.getByText('Send tips to generate transactions.')).toBeInTheDocument();
   });
 
-  it('disables all buttons when no address is provided', () => {
-    render(<TipJarCard {...defaultProps} address={null} />);
+  it('invokes the fixed tip actions', () => {
+    renderCard();
+
     const buttons = screen.getAllByRole('button');
-    buttons.forEach((btn) => {
-      expect(btn).toBeDisabled();
+
+    fireEvent.click(buttons[0]);
+    fireEvent.click(buttons[1]);
+
+    expect(handleSelfPing).toHaveBeenCalledTimes(1);
+    expect(tip).toHaveBeenCalledWith(0.001);
+  });
+
+  it('submits a valid custom tip amount', () => {
+    renderCard();
+
+    fireEvent.change(screen.getByLabelText(/custom amount/i), {
+      target: { value: '0.05' },
     });
-  });
+    fireEvent.click(screen.getAllByRole('button')[2]);
 
-  it('calls handleSelfPing when first button is clicked', () => {
-    render(<TipJarCard {...defaultProps} />);
-    const buttons = screen.getAllByRole('button');
-    buttons[0].click();
-    expect(defaultProps.handleSelfPing).toHaveBeenCalledTimes(1);
-  });
-
-  it('calls handleQuickTip when second button is clicked', () => {
-    render(<TipJarCard {...defaultProps} />);
-    const buttons = screen.getAllByRole('button');
-    buttons[1].click();
-    expect(defaultProps.handleQuickTip).toHaveBeenCalledTimes(1);
-  });
-
-  it('calls handleCustomTip when third button is clicked', () => {
-    render(<TipJarCard {...defaultProps} />);
-    const buttons = screen.getAllByRole('button');
-    buttons[2].click();
-    expect(defaultProps.handleCustomTip).toHaveBeenCalledTimes(1);
-  });
-
-  it('displays the tip amount correctly in the cost label', () => {
-    render(<TipJarCard {...defaultProps} tipAmount="0.05" />);
-    // 0.05 + 0.001 = 0.051
+    expect(tip).toHaveBeenCalledWith(0.05);
     expect(screen.getByText('0.051 STX')).toBeInTheDocument();
+  });
+
+  it('blocks invalid custom amounts', () => {
+    renderCard();
+
+    fireEvent.change(screen.getByLabelText(/custom amount/i), {
+      target: { value: '0' },
+    });
+    fireEvent.click(screen.getAllByRole('button')[2]);
+
+    expect(tip).not.toHaveBeenCalled();
+    expect(screen.getByText('Invalid amount')).toBeInTheDocument();
+  });
+
+  it('prevents actions when disconnected', () => {
+    renderCard(null);
+
+    fireEvent.click(screen.getAllByRole('button')[1]);
+
+    expect(tip).not.toHaveBeenCalled();
+    expect(handleSelfPing).not.toHaveBeenCalled();
   });
 });

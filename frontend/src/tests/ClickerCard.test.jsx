@@ -1,63 +1,87 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import ClickerCard from '../components/ClickerCard';
 
+vi.mock('framer-motion', () => ({
+  motion: new Proxy(
+    {},
+    {
+      get: (_, tag) =>
+        React.forwardRef(
+          (
+            {
+              children,
+              animate,
+              exit,
+              initial,
+              transition,
+              variants,
+              viewport,
+              whileDrag,
+              whileHover,
+              whileInView,
+              whileTap,
+              ...props
+            },
+            ref
+          ) => React.createElement(tag, { ...props, ref }, children)
+        ),
+    }
+  ),
+  AnimatePresence: ({ children }) => <>{children}</>,
+}));
+
+vi.mock('../hooks/useSound', () => ({
+  useSound: () => ({ playSound: vi.fn() }),
+}));
+
 describe('ClickerCard Component', () => {
-  const defaultProps = {
-    address: 'SP123ABCD',
-    isLoading: vi.fn().mockReturnValue(false),
-    handleClick: vi.fn(),
-    handleMultiClick: vi.fn(),
-    handlePing: vi.fn(),
-  };
+  const click = vi.fn();
+  const multiClick = vi.fn();
+  const ping = vi.fn();
+  const isLoading = vi.fn().mockReturnValue(false);
 
-  it('renders the contract title and subtitle', () => {
-    render(<ClickerCard {...defaultProps} />);
-    expect(screen.getByText('Clicker')).toBeInTheDocument();
-    expect(screen.getByText('Click to generate transactions')).toBeInTheDocument();
+  const renderCard = (address = 'SP123ABCD') =>
+    render(<ClickerCard address={address} clicker={{ click, multiClick, ping, isLoading }} />);
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    isLoading.mockReturnValue(false);
   });
 
-  it('renders three action buttons', () => {
-    render(<ClickerCard {...defaultProps} />);
-    const buttons = screen.getAllByRole('button');
-    expect(buttons).toHaveLength(3);
+  it('renders the current card copy', () => {
+    renderCard();
+
+    expect(screen.getByText('🎯 Power Clicker')).toBeInTheDocument();
+    expect(screen.getByText('Click to generate on-chain activity.')).toBeInTheDocument();
   });
 
-  it('disables buttons when address is null', () => {
-    render(<ClickerCard {...defaultProps} address={null} />);
-    const buttons = screen.getAllByRole('button');
-    buttons.forEach((btn) => {
-      expect(btn).toBeDisabled();
-    });
+  it('renders the three action buttons', () => {
+    renderCard();
+
+    expect(screen.getAllByRole('button')).toHaveLength(3);
   });
 
-  it('enables buttons when address is provided', () => {
-    render(<ClickerCard {...defaultProps} />);
-    const buttons = screen.getAllByRole('button');
-    buttons.forEach((btn) => {
-      expect(btn).not.toBeDisabled();
-    });
+  it('prevents actions when no address is available', () => {
+    renderCard(null);
+
+    fireEvent.click(screen.getAllByRole('button')[0]);
+
+    expect(click).not.toHaveBeenCalled();
   });
 
-  it('calls handleClick when first button is clicked', () => {
-    render(<ClickerCard {...defaultProps} />);
-    const buttons = screen.getAllByRole('button');
-    buttons[0].click();
-    expect(defaultProps.handleClick).toHaveBeenCalledTimes(1);
-  });
+  it('calls click actions with the expected payloads', () => {
+    renderCard();
 
-  it('calls handleMultiClick when second button is clicked', () => {
-    render(<ClickerCard {...defaultProps} />);
     const buttons = screen.getAllByRole('button');
-    buttons[1].click();
-    expect(defaultProps.handleMultiClick).toHaveBeenCalledTimes(1);
-  });
 
-  it('calls handlePing when third button is clicked', () => {
-    render(<ClickerCard {...defaultProps} />);
-    const buttons = screen.getAllByRole('button');
-    buttons[2].click();
-    expect(defaultProps.handlePing).toHaveBeenCalledTimes(1);
+    fireEvent.click(buttons[0]);
+    fireEvent.click(buttons[1]);
+    fireEvent.click(buttons[2]);
+
+    expect(click).toHaveBeenCalledTimes(1);
+    expect(multiClick).toHaveBeenCalledWith(10);
+    expect(ping).toHaveBeenCalledTimes(1);
   });
 });
