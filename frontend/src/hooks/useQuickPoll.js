@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { callContract } from '../utils/walletconnect';
 
 /** @constant {string} Smart contract deployer address */
-const DEPLOYER = 'SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT';
+const DEPLOYER = (import.meta.env.VITE_DEPLOYER_ADDRESS || '').trim();
 /** @constant {string} QuickPoll contract name */
 const CONTRACT_NAME = 'quickpoll-v2p';
 
@@ -44,6 +44,10 @@ export function useQuickPoll({ onTxSubmit }) {
    * @param {Array} functionArgs - Arguments for the contract call
    */
   const executeAction = useCallback(async (displayName, functionName, functionArgs = []) => {
+    if (!DEPLOYER) {
+      throw new Error('VITE_DEPLOYER_ADDRESS is not set');
+    }
+
     const key = `quickpoll-${functionName}`;
     setLoading(key, true);
     try {
