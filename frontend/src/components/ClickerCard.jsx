@@ -22,16 +22,27 @@ import { useSound } from '../hooks/useSound';
 function ClickerCard({ address, clicker }) {
   const { isLoading, click, multiClick, ping } = clicker;
   const { playSound } = useSound();
+  const [errorField, setErrorField] = React.useState(null);
 
   /**
    * Internal wrapper to play acoustic feedback before executing a contract action.
    * @param {Function} actionFn - The interaction function to execute
    * @param {...*} args - Optional arguments for the interaction function
    */
-  const handleAction = useCallback((actionFn, ...args) => {
-    playSound('click');
-    actionFn(...args);
-  }, [playSound]);
+  const handleAction = useCallback(
+    (actionFn, ...args) => {
+      if (!address) {
+        playSound('error');
+        setErrorField(actionFn.name || 'action');
+        setTimeout(() => setErrorField(null), 500);
+        return;
+      }
+
+      playSound('click');
+      actionFn(...args);
+    },
+    [address, playSound]
+  );
 
   return (
     <ActionCard
@@ -49,7 +60,7 @@ function ClickerCard({ address, clicker }) {
             cost="0.001 STX"
             onClick={() => handleAction(click)}
             isLoading={isLoading('click')}
-            disabled={!address}
+            isError={errorField === 'click'}
             className="primary"
           />
         </Tooltip>
@@ -61,7 +72,7 @@ function ClickerCard({ address, clicker }) {
             className="secondary"
             onClick={() => handleAction(multiClick, 10)}
             isLoading={isLoading('multi-click')}
-            disabled={!address}
+            isError={errorField === 'multiClick'}
           />
         </Tooltip>
         <Tooltip content="Ping the network to verify connection and emit a heartbeat event.">
@@ -72,7 +83,7 @@ function ClickerCard({ address, clicker }) {
             className="success"
             onClick={() => handleAction(ping)}
             isLoading={isLoading('ping')}
-            disabled={!address}
+            isError={errorField === 'ping'}
           />
         </Tooltip>
       </div>
@@ -86,8 +97,8 @@ ClickerCard.propTypes = {
     click: PropTypes.func.isRequired,
     multiClick: PropTypes.func.isRequired,
     ping: PropTypes.func.isRequired,
-    isLoading: PropTypes.func.isRequired
-  }).isRequired
+    isLoading: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default memo(ClickerCard);

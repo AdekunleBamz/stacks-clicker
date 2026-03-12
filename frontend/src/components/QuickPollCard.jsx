@@ -24,6 +24,7 @@ function QuickPollCard({ address, quickpoll }) {
   const [pollQuestion, setPollQuestion] = useState('');
   const { playSound } = useSound();
   const [errorField, setErrorField] = useState(null);
+  const trimmedQuestion = pollQuestion.trim();
 
   /**
    * Triggers a 'YES' vote transaction for the current poll.
@@ -38,7 +39,14 @@ function QuickPollCard({ address, quickpoll }) {
   /**
    * Triggers a transaction to create a new poll with the entered question.
    */
-  const handleCreateNewPoll = useCallback(() => createPoll(pollQuestion), [createPoll, pollQuestion]);
+  const handleCreateNewPoll = useCallback(() => {
+    if (!trimmedQuestion) {
+      return;
+    }
+
+    createPoll(trimmedQuestion);
+    setPollQuestion('');
+  }, [createPoll, trimmedQuestion]);
 
   /**
    * Internal wrapper to check connection and validation before executing a contract action.
@@ -48,16 +56,19 @@ function QuickPollCard({ address, quickpoll }) {
    * @param {string} fieldId - ID of the button for error highlighting
    * @param {Function} [validation=()=>true] - Optional pre-check function for action validity
    */
-  const handleAction = useCallback((actionFn, fieldId, validation = () => true) => {
-    if (!address || !validation()) {
-      playSound('error');
-      setErrorField(fieldId);
-      setTimeout(() => setErrorField(null), 500);
-      return;
-    }
-    playSound('click');
-    actionFn();
-  }, [address, playSound]);
+  const handleAction = useCallback(
+    (actionFn, fieldId, validation = () => true) => {
+      if (!address || !validation()) {
+        playSound('error');
+        setErrorField(fieldId);
+        setTimeout(() => setErrorField(null), 500);
+        return;
+      }
+      playSound('click');
+      actionFn();
+    },
+    [address, playSound]
+  );
 
   return (
     <ActionCard
@@ -82,15 +93,20 @@ function QuickPollCard({ address, quickpoll }) {
         </Tooltip>
 
         <div className="input-group">
-          <label className="input-label">Poll Question</label>
+          <label className="input-label" htmlFor="poll-question-input">
+            Poll Question
+          </label>
           <input
+            id="poll-question-input"
             type="text"
             className="poll-input"
             value={pollQuestion}
             onChange={(e) => setPollQuestion(e.target.value)}
             placeholder="Enter poll question..."
             maxLength={100}
+            aria-invalid={!trimmedQuestion && errorField === 'create-poll'}
           />
+          <span className="input-help-text">{trimmedQuestion.length}/100</span>
         </div>
 
         <Tooltip content="Create a new poll on the Stacks blockchain.">
@@ -99,7 +115,9 @@ function QuickPollCard({ address, quickpoll }) {
             icon="📋"
             cost="0.001 STX"
             className="primary"
-            onClick={() => handleAction(handleCreateNewPoll, 'create-poll', () => pollQuestion.trim().length > 0)}
+            onClick={() =>
+              handleAction(handleCreateNewPoll, 'create-poll', () => trimmedQuestion.length > 0)
+            }
             isLoading={isLoading('create-poll')}
             isError={errorField === 'create-poll'}
             disabled={isLoading('create-poll')}
@@ -143,8 +161,8 @@ QuickPollCard.propTypes = {
     vote: PropTypes.func.isRequired,
     createPoll: PropTypes.func.isRequired,
     handlePollPing: PropTypes.func.isRequired,
-    isLoading: PropTypes.func.isRequired
-  }).isRequired
+    isLoading: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default memo(QuickPollCard);

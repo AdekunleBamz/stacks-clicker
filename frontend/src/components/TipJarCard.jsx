@@ -23,6 +23,8 @@ function TipJarCard({ address, tipjar }) {
   const [tipAmount, setTipAmount] = useState('0.001');
   const { playSound } = useSound();
   const [errorField, setErrorField] = useState(null);
+  const parsedTipAmount = Number.parseFloat(tipAmount);
+  const isTipAmountValid = Number.isFinite(parsedTipAmount) && parsedTipAmount >= 0.001;
 
   /**
    * Triggers a fixed 0.001 STX tip transaction.
@@ -32,7 +34,13 @@ function TipJarCard({ address, tipjar }) {
   /**
    * Triggers a tip transaction with the user-defined custom amount.
    */
-  const handleCustomTip = useCallback(() => tip(parseFloat(tipAmount)), [tip, tipAmount]);
+  const handleCustomTip = useCallback(() => {
+    if (!isTipAmountValid) {
+      return;
+    }
+
+    tip(parsedTipAmount);
+  }, [isTipAmountValid, parsedTipAmount, tip]);
 
   /**
    * Internal wrapper to check connection and play sound before executing an action.
@@ -41,16 +49,19 @@ function TipJarCard({ address, tipjar }) {
    * @param {Function} actionFn - The interaction function to execute
    * @param {string} fieldId - ID of the button for error highlighting
    */
-  const handleAction = useCallback((actionFn, fieldId) => {
-    if (!address) {
-      playSound('error');
-      setErrorField(fieldId);
-      setTimeout(() => setErrorField(null), 500);
-      return;
-    }
-    playSound('click');
-    actionFn();
-  }, [address, playSound]);
+  const handleAction = useCallback(
+    (actionFn, fieldId, validation = () => true) => {
+      if (!address || !validation()) {
+        playSound('error');
+        setErrorField(fieldId);
+        setTimeout(() => setErrorField(null), 500);
+        return;
+      }
+      playSound('click');
+      actionFn();
+    },
+    [address, playSound]
+  );
 
   return (
     <ActionCard
@@ -87,8 +98,11 @@ function TipJarCard({ address, tipjar }) {
         </Tooltip>
 
         <div className="input-group">
-          <label className="input-label">Custom Amount (STX)</label>
+          <label className="input-label" htmlFor="tip-amount-input">
+            Custom Amount (STX)
+          </label>
           <input
+            id="tip-amount-input"
             type="number"
             step="0.001"
             min="0.001"
@@ -96,16 +110,25 @@ function TipJarCard({ address, tipjar }) {
             value={tipAmount}
             onChange={(e) => setTipAmount(e.target.value)}
             placeholder="0.001"
+            aria-invalid={!isTipAmountValid}
           />
         </div>
 
-        <Tooltip content={`Send a custom tip of ${tipAmount} STX.`}>
+        <Tooltip
+          content={
+            isTipAmountValid
+              ? `Send a custom tip of ${tipAmount} STX.`
+              : 'Enter an amount of at least 0.001 STX.'
+          }
+        >
           <ActionButton
             label="Custom Tip"
             icon="💎"
-            cost={`${(parseFloat(tipAmount || 0) + 0.001).toFixed(3)} STX`}
+            cost={
+              isTipAmountValid ? `${(parsedTipAmount + 0.001).toFixed(3)} STX` : 'Invalid amount'
+            }
             className="secondary"
-            onClick={() => handleAction(handleCustomTip, 'custom-tip')}
+            onClick={() => handleAction(handleCustomTip, 'custom-tip', () => isTipAmountValid)}
             isLoading={isLoading('tip')}
             isError={errorField === 'custom-tip'}
             disabled={isLoading('tip')}
@@ -121,8 +144,8 @@ TipJarCard.propTypes = {
   tipjar: PropTypes.shape({
     tip: PropTypes.func.isRequired,
     handleSelfPing: PropTypes.func.isRequired,
-    isLoading: PropTypes.func.isRequired
-  }).isRequired
+    isLoading: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default memo(TipJarCard);
