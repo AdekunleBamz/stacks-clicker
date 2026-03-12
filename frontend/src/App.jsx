@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -7,7 +7,6 @@ import NetworkHeartbeat from './components/NetworkHeartbeat';
 import OnboardingTour from './components/OnboardingTour';
 import FloatingActionButton from './components/FloatingActionButton';
 import { useWallet } from './context/WalletContext';
-import { motion, AnimatePresence } from 'framer-motion';
 import ParticleOverlay from './components/common/ParticleOverlay';
 import PerformanceOverlay from './components/common/PerformanceOverlay';
 import ScrollToTop from './components/common/ScrollToTop';
@@ -43,6 +42,7 @@ export default function App() {
   const [stats, setStats] = useState({ clicks: 0, tips: 0, votes: 0 });
   const [particleTrigger, setParticleTrigger] = useState(0);
   const [celebration, setCelebration] = useState(null);
+  const celebrationTimeoutRef = useRef(null);
 
   // Theme Management (Persisted via LocalStorage)
   const [theme, setTheme] = useLocalStorage('theme', 'dark');
@@ -58,7 +58,7 @@ export default function App() {
    * Toggles between 'light' and 'dark' themes.
    */
   const toggleTheme = useCallback(() => {
-    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
   }, [setTheme]);
 
   /**
@@ -69,28 +69,37 @@ export default function App() {
    * @param {string} [status='success'] - Current lifecycle state of the transaction
    * @returns {Object} The formatted transaction object
    */
-  const addTxToLog = useCallback((action, txId, status = 'success') => {
-    const tx = {
-      id: txId || `pending-${Date.now()}`,
-      action,
-      status,
-      time: new Date().toLocaleTimeString(),
-    };
-    setTxLog((prev) => [tx, ...prev.slice(0, 49)]); // Maintain last 50 TXs
-    setParticleTrigger(prev => prev + 1);
-    playSound('success');
+  const addTxToLog = useCallback(
+    (action, txId, status = 'success') => {
+      const submittedAt = new Date();
+      const isPending = !txId || status === 'pending';
+      const tx = {
+        id: txId || `pending-${Date.now()}`,
+        action,
+        status,
+        time: submittedAt.toLocaleTimeString(),
+        submittedAt: submittedAt.toISOString(),
+        network: 'mainnet',
+        explorerUrl: isPending ? null : `https://explorer.hiro.so/txid/${txId}?chain=mainnet`,
+        isPending,
+      };
+      setTxLog((prev) => [tx, ...prev.slice(0, 49)]); // Maintain last 50 TXs
+      setParticleTrigger((prev) => prev + 1);
+      playSound('success');
 
-    toast.success(`${action} submitted!`, {
-      icon: action.split(' ')[0],
-      style: {
-        borderRadius: '12px',
-        background: '#1e1b4b',
-        color: '#fff',
-        border: '1px solid rgba(255,255,255,0.1)'
-      }
-    });
-    return tx;
-  }, [playSound]);
+      toast.success(`${action} submitted!`, {
+        icon: action.split(' ')[0],
+        style: {
+          borderRadius: '12px',
+          background: '#1e1b4b',
+          color: '#fff',
+          border: '1px solid rgba(255,255,255,0.1)',
+        },
+      });
+      return tx;
+    },
+    [playSound]
+  );
 
   /**
    * Unified interaction interface provided by the useInteractions collector.
@@ -101,13 +110,13 @@ export default function App() {
       addTxToLog(action, txId);
       // Update local reactive stats for immediate feedback (optimistic logic)
       if (action.includes('Click')) {
-        setStats(prev => ({ ...prev, clicks: prev.clicks + 1 }));
+        setStats((prev) => ({ ...prev, clicks: prev.clicks + 1 }));
       } else if (action.includes('Tip')) {
-        setStats(prev => ({ ...prev, tips: prev.tips + 1 }));
+        setStats((prev) => ({ ...prev, tips: prev.tips + 1 }));
       } else if (action.includes('Vote')) {
-        setStats(prev => ({ ...prev, votes: prev.votes + 1 }));
+        setStats((prev) => ({ ...prev, votes: prev.votes + 1 }));
       }
-    }
+    },
   });
 
   /**
@@ -116,8 +125,15 @@ export default function App() {
    */
   useEffect(() => {
     const handleKeyDown = (e) => {
-      // Prevent shortcut interference while typing
-      if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') return;
+      const activeElement = document.activeElement;
+      const isTyping =
+        activeElement?.tagName === 'INPUT' ||
+        activeElement?.tagName === 'TEXTAREA' ||
+        activeElement?.isContentEditable;
+
+      if (isTyping || e.metaKey || e.ctrlKey || e.altKey || !address) {
+        return;
+      }
 
       if (e.key.toLowerCase() === 'c') {
         playSound('click');
@@ -130,7 +146,7 @@ export default function App() {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [clicker, tipjar, playSound]);
+  }, [address, clicker, tipjar, playSound]);
 
   /**
    * Effect to monitor interaction milestones and trigger celebrations.
@@ -141,9 +157,12 @@ export default function App() {
     const total = stats.clicks + stats.tips + stats.votes;
     if (milestones.includes(total) && total > 0) {
       setCelebration(`Level Up: ${total} Interactions!`);
-      setParticleTrigger(prev => prev + 5); // Execute a massive burst
-      setTimeout(() => setCelebration(null), 3000);
+      setParticleTrigger((prev) => prev + 5); // Execute a massive burst
+      window.clearTimeout(celebrationTimeoutRef.current);
+      celebrationTimeoutRef.current = window.setTimeout(() => setCelebration(null), 3000);
     }
+
+    return () => window.clearTimeout(celebrationTimeoutRef.current);
   }, [stats]);
 
   /**
@@ -193,17 +212,9 @@ export default function App() {
       <OnboardingTour />
       <FloatingActionButton />
       <NetworkHeartbeat />
-      <QuickActions
-        address={address}
-        onClearLog={() => setTxLog([])}
-        onPingAll={pingAll}
-      />
+      <QuickActions address={address} onClearLog={() => setTxLog([])} onPingAll={pingAll} />
 
-      <a
-        href="#main-content"
-        className="skip-link"
-        aria-label="Skip to main content"
-      >
+      <a href="#main-content" className="skip-link" aria-label="Skip to main content">
         Skip to Content
       </a>
 
