@@ -23,13 +23,19 @@ const TestComponent = () => {
 };
 
 // Mock localStorage
-const localStorageMock = (function() {
+const localStorageMock = (function () {
   let store = {};
   return {
-    getItem: vi.fn(key => store[key] || null),
-    setItem: vi.fn((key, value) => { store[key] = value.toString(); }),
-    clear: vi.fn(() => { store = {}; }),
-    removeItem: vi.fn(key => { delete store[key]; })
+    getItem: vi.fn((key) => store[key] || null),
+    setItem: vi.fn((key, value) => {
+      store[key] = value.toString();
+    }),
+    clear: vi.fn(() => {
+      store = {};
+    }),
+    removeItem: vi.fn((key) => {
+      delete store[key];
+    }),
   };
 })();
 Object.defineProperty(window, 'localStorage', { value: localStorageMock });
@@ -52,7 +58,7 @@ describe('WalletContext', () => {
 
   it('restores connection from localStorage if available', () => {
     const mockStorage = {
-      addresses: { mainnet: 'SP123ABCD' }
+      addresses: { mainnet: 'SP123ABCD' },
     };
     localStorage.setItem('stacks-session', JSON.stringify(mockStorage));
 
@@ -89,6 +95,13 @@ describe('WalletContext', () => {
   });
 
   it('calls disconnect when disconnectWallet is triggered', () => {
+    localStorage.setItem(
+      'stacks-session',
+      JSON.stringify({
+        addresses: { mainnet: 'SP123ABCD' },
+      })
+    );
+
     render(
       <WalletProvider>
         <TestComponent />
@@ -101,6 +114,34 @@ describe('WalletContext', () => {
     });
 
     expect(stacksConnect.disconnect).toHaveBeenCalledTimes(1);
+    expect(localStorage.removeItem).toHaveBeenCalledWith('stacks-session');
     expect(screen.getByTestId('status')).toHaveTextContent('Disconnected');
+  });
+
+  it('reacts to storage updates from another tab', () => {
+    render(
+      <WalletProvider>
+        <TestComponent />
+      </WalletProvider>
+    );
+
+    localStorage.setItem(
+      'stacks-session',
+      JSON.stringify({
+        addresses: { mainnet: 'SP9UPDATED' },
+      })
+    );
+
+    act(() => {
+      window.dispatchEvent(
+        new StorageEvent('storage', {
+          key: 'stacks-session',
+          newValue: JSON.stringify({ addresses: { mainnet: 'SP9UPDATED' } }),
+        })
+      );
+    });
+
+    expect(screen.getByTestId('status')).toHaveTextContent('Connected');
+    expect(screen.getByTestId('address')).toHaveTextContent('SP9UPDATED');
   });
 });

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { showConnect, disconnect } from '@stacks/connect';
 import toast from 'react-hot-toast';
@@ -15,10 +15,13 @@ import toast from 'react-hot-toast';
 /** @type {React.Context<WalletContextValue|null>} */
 const WalletContext = createContext(null);
 
-const appDetails = {
-  name: 'StacksClicker',
-  icon: window.location.origin + '/favicon.svg',
-};
+function getAppDetails() {
+  const origin = typeof window !== 'undefined' ? window.location.origin : '';
+  return {
+    name: 'StacksClicker',
+    icon: `${origin}/favicon.svg`,
+  };
+}
 
 /**
  * Provider component that manages the global Stacks wallet state and authentication lifecycle.
@@ -32,21 +35,25 @@ const appDetails = {
 export function WalletProvider({ children }) {
   const [address, setAddress] = useState(null);
 
-  /**
-   * Synchronizes internal state with the persistent Stacks session in localStorage.
-   */
   const checkConnection = useCallback(() => {
+    if (typeof window === 'undefined') {
+      setAddress(null);
+      return;
+    }
+
     try {
-      const stored = localStorage.getItem('stacks-session');
+      const stored = window.localStorage.getItem('stacks-session');
       if (stored) {
         const userData = JSON.parse(stored);
         if (userData?.addresses?.mainnet) {
           setAddress(userData.addresses.mainnet);
+          return;
         }
       }
     } catch (e) {
       // No existing connection or parse error
     }
+    setAddress(null);
   }, []);
 
   useEffect(() => {
@@ -56,9 +63,9 @@ export function WalletProvider({ children }) {
   /**
    * Opens the Stacks wallet connection modal and handles authentication callbacks.
    */
-  const connectWallet = () => {
+  const connectWallet = useCallback(() => {
     showConnect({
-      appDetails,
+      appDetails: getAppDetails(),
       onFinish: () => {
         checkConnection();
         toast.success('Wallet connected! 🎉');
@@ -67,30 +74,48 @@ export function WalletProvider({ children }) {
         toast.error('Connection cancelled');
       },
     });
-  };
+  }, [checkConnection]);
 
-  /**
-   * Clears the Stacks session and resets local address state.
-   */
-  const disconnectWallet = () => {
+  const disconnectWallet = useCallback(() => {
     disconnect();
+    if (typeof window !== 'undefined') {
+      window.localStorage.removeItem('stacks-session');
+    }
     setAddress(null);
     toast('Wallet disconnected', { icon: '👋' });
-  };
+  }, []);
 
-  const value = {
-    address,
-    connectWallet,
-    disconnectWallet,
-    appDetails,
-    isConnected: !!address,
-  };
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return undefined;
+    }
+
+    const handleStorage = (event) => {
+      if (event.key === 'stacks-session') {
+        checkConnection();
+      }
+    };
+
+    window.addEventListener('storage', handleStorage);
+    return () => window.removeEventListener('storage', handleStorage);
+  }, [checkConnection]);
+
+  const value = useMemo(
+    () => ({
+      address,
+      connectWallet,
+      disconnectWallet,
+      appDetails: getAppDetails(),
+      isConnected: !!address,
+    }),
+    [address, connectWallet, disconnectWallet]
+  );
 
   return <WalletContext.Provider value={value}>{children}</WalletContext.Provider>;
 }
 
 WalletProvider.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 /**
