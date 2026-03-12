@@ -66,17 +66,13 @@ If you wish to modify, test, or deploy the Stacks smart contracts locally:
    ```
    Note: `npm ci` is recommended for deterministic installs. Use `npm install` for manual package updates.
 3. Configure environment variables:
-   Copy the example file in the `frontend` directory and update the required values:
-   ```bash
-   cp frontend/.env.example frontend/.env
-   ```
+   Create a `.env` file in the `frontend` directory:
    ```env
-   VITE_WALLETCONNECT_PROJECT_ID=your_project_id_here
+   VITE_STACKS_NETWORK=mainnet
    VITE_DEPLOYER_ADDRESS=SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT
-   VITE_DEBUG=true
+   VITE_COINGECKO_API_KEY=your_api_key_here
    ```
    Set `VITE_DEPLOYER_ADDRESS` to the principal that deployed the app contracts.
-   Optional values such as `VITE_STACKS_NETWORK` and `VITE_COINGECKO_API_KEY` are documented in `frontend/.env.example`.
 4. Start the development server:
    ```bash
    npm run frontend:dev
