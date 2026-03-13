@@ -179,6 +179,9 @@ export default function App() {
 
   return (
     <div className="app-container" data-theme={theme}>
+      <a href="#main-content" className="skip-link" aria-label="Skip to main content">
+        Skip to Content
+      </a>
       <PerformanceOverlay />
       <ScrollToTop />
 
@@ -191,7 +194,7 @@ export default function App() {
           <PlayerStats stats={stats} txCount={txLog.length} />
         </React.Suspense>
 
-        <main id="main-content" className="app-main">
+        <main id="main-content" className="app-main" tabIndex={-1}>
           <React.Suspense fallback={<SkeletonLoader height="500px" borderRadius="32px" />}>
             <MainGrid
               address={address}
@@ -213,10 +216,6 @@ export default function App() {
       <FloatingActionButton />
       <NetworkHeartbeat />
       <QuickActions address={address} onClearLog={() => setTxLog([])} onPingAll={pingAll} />
-
-      <a href="#main-content" className="skip-link" aria-label="Skip to main content">
-        Skip to Content
-      </a>
 
       <Toaster position="top-right" />
       <ParticleOverlay trigger={particleTrigger} />
