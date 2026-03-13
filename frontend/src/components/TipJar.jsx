@@ -12,7 +12,7 @@ const DEPLOYER = 'SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT';
  * @returns {JSX.Element} The rendered tip jar interaction area.
  */
 export default function TipJar({ onTxSubmit }) {
-  const { address, isConnected } = useWallet();
+  const { isConnected } = useWallet();
   const [loading, setLoading] = useState(false);
   const [tipAmount, setTipAmount] = useState(1000); // 1000 uSTX = 0.001 STX
   const [recipientAddress, setRecipientAddress] = useState('');
@@ -120,6 +120,7 @@ export default function TipJar({ onTxSubmit }) {
 
       <div className="game-actions">
         <button
+          type="button"
           className="action-btn primary"
           onClick={handleQuickTip}
           disabled={!isConnected || loading}
@@ -128,6 +129,7 @@ export default function TipJar({ onTxSubmit }) {
         </button>
 
         <button
+          type="button"
           className="action-btn secondary"
           onClick={handleSelfPing}
           disabled={!isConnected || loading}
@@ -154,12 +156,13 @@ export default function TipJar({ onTxSubmit }) {
                 min="1000"
                 step="1000"
                 value={tipAmount}
-                onChange={(e) => setTipAmount(parseInt(e.target.value) || 1000)}
+                onChange={(e) => setTipAmount(Number.parseInt(e.target.value, 10) || 1000)}
                 className="amount-input"
               />
             </div>
           </div>
           <button
+            type="button"
             className="action-btn outline"
             onClick={handleTipUser}
             disabled={!isConnected || loading || !recipientAddress}
@@ -169,6 +172,7 @@ export default function TipJar({ onTxSubmit }) {
         </div>
 
         <button
+          type="button"
           className="action-btn outline"
           onClick={handleDonate}
           disabled={!isConnected || loading}
