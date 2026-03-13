@@ -9,7 +9,7 @@ const DEPLOYER = 'SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT';
  * Create and vote on community polls
  */
 export default function QuickPoll({ onTxSubmit }) {
-  const { address, isConnected } = useWallet();
+  const { isConnected } = useWallet();
   const [loading, setLoading] = useState(false);
   const [pollQuestion, setPollQuestion] = useState('');
   const [pollId, setPollId] = useState(1);
@@ -169,6 +169,7 @@ export default function QuickPoll({ onTxSubmit }) {
             maxLength={200}
           />
           <button
+            type="button"
             className="action-btn primary"
             onClick={handleCreatePoll}
             disabled={!isConnected || loading || !pollQuestion.trim()}
@@ -179,6 +180,7 @@ export default function QuickPoll({ onTxSubmit }) {
 
         <div className="vote-buttons">
           <button
+            type="button"
             className="action-btn vote-yes"
             onClick={handleQuickVoteYes}
             disabled={!isConnected || loading}
@@ -186,6 +188,7 @@ export default function QuickPoll({ onTxSubmit }) {
             👍 Quick Yes
           </button>
           <button
+            type="button"
             className="action-btn vote-no"
             onClick={handleQuickVoteNo}
             disabled={!isConnected || loading}
@@ -199,11 +202,12 @@ export default function QuickPoll({ onTxSubmit }) {
             type="number"
             min="1"
             value={pollId}
-            onChange={(e) => setPollId(parseInt(e.target.value) || 1)}
+            onChange={(e) => setPollId(Number.parseInt(e.target.value, 10) || 1)}
             className="poll-id-input"
             placeholder="Poll ID"
           />
           <button
+            type="button"
             className="action-btn secondary"
             onClick={handleVoteYes}
             disabled={!isConnected || loading}
@@ -211,6 +215,7 @@ export default function QuickPoll({ onTxSubmit }) {
             Vote Yes #{pollId}
           </button>
           <button
+            type="button"
             className="action-btn secondary"
             onClick={handleVoteNo}
             disabled={!isConnected || loading}
@@ -220,6 +225,7 @@ export default function QuickPoll({ onTxSubmit }) {
         </div>
 
         <button
+          type="button"
           className="action-btn outline"
           onClick={handlePollPing}
           disabled={!isConnected || loading}
