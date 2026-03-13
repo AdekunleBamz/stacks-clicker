@@ -107,6 +107,10 @@ function TransactionHistory({ txLog }) {
   );
 
   const copyText = useCallback(async (value, label = 'Value') => {
+    if (!navigator?.clipboard?.writeText) {
+      toast.error('Clipboard access is not available');
+      return;
+    }
     try {
       await navigator.clipboard.writeText(value);
       toast.success(`${label} copied`);
