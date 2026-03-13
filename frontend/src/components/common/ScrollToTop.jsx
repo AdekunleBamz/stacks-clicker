@@ -31,6 +31,7 @@ export default function ScrollToTop() {
     <AnimatePresence>
       {isVisible && (
         <motion.button
+          type="button"
           className="scroll-to-top"
           onClick={scrollToTop}
           initial={{ opacity: 0, y: 20 }}
