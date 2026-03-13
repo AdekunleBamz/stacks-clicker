@@ -12,7 +12,7 @@ Help us keep this project open and inclusive. Please read and follow our [Code o
 If you find a bug, please create an issue. Include as much detail as possible, such as steps to reproduce and your environment details.
 
 ### Suggesting Enhancements
-Enchancment suggestions are tracked as GitHub issues. When creating an enhancement issue, please provide a clear description and any mockups if applicable.
+Enhancement suggestions are tracked as GitHub issues. When creating an enhancement issue, please provide a clear description and any mockups if applicable.
 
 ### Pull Requests
 1. Fork the repo and create your branch from `main`.
