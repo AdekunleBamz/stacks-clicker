@@ -5,6 +5,7 @@ First off, thank you for considering contributing to Stacks Clicker! It's people
 ## Code of Conduct
 
 Help us keep this project open and inclusive. Please read and follow our [Code of Conduct](CODE_OF_CONDUCT.md).
+If you need to report conduct concerns, email `security@stacksclicker.io`.
 
 ## How Can I Contribute?
 
