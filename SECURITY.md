@@ -12,7 +12,8 @@ We currently support the following versions with security updates:
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability within this project, please send an e-mail to security@stacksclicker.io (placeholder). All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within this project, please email `security@stacksclicker.io`.
+If email delivery fails, open a private GitHub security advisory draft instead of filing a public issue.
 
 Please include the following in your report:
 - Type of issue (e.g., buffer overflow, SQL injection, cross-site scripting)
