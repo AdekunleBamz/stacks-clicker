@@ -35,6 +35,7 @@ Create a `.env` file in the `frontend` directory:
 VITE_WALLETCONNECT_PROJECT_ID=893... # Your Project ID
 VITE_DEBUG=true
 ```
+Keep `.env` local and never commit secrets to source control.
 
 ### 4. Start Development Server
 ```bash
