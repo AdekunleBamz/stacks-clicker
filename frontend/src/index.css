@@ -201,6 +201,26 @@ body::before {
   outline: none;
 }
 
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--secondary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(0, 212, 170, 0.2);
+}
+
+.btn-connect:focus-visible,
+.btn-disconnect:focus-visible,
+.theme-toggle:focus-visible,
+.lang-select:focus-visible,
+.action-btn:focus-visible,
+.export-btn:focus-visible,
+.text-btn:focus-visible {
+  border-color: var(--secondary);
+}
+
 .app-header {
   height: 80px;
   background: rgba(10, 10, 15, 0.8);
