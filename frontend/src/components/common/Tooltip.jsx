@@ -30,6 +30,8 @@ function Tooltip({ content, children }) {
       className="tooltip-wrapper"
       onMouseEnter={() => setShouldShow(true)}
       onMouseLeave={() => setShouldShow(false)}
+      onFocus={() => setShouldShow(true)}
+      onBlur={() => setShouldShow(false)}
       style={{ position: 'relative', display: 'inline-block', width: '100%' }}
     >
       {children}
