@@ -36,9 +36,11 @@ function ActionButton({
 
   return (
     <motion.button
+      type="button"
       className={`action-btn ${className}`}
       onClick={onClick}
       disabled={disabled || isLoading}
+      aria-busy={isLoading}
       whileHover={!disabled && !isLoading ? { scale: 1.05, translateY: -4 } : {}}
       whileTap={!disabled && !isLoading ? { scale: 0.95, translateY: 0 } : {}}
       animate={isError ? "shake" : ""}
