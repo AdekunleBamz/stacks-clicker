@@ -145,6 +145,7 @@ function TransactionHistory({ txLog }) {
             <option value="failed">Failed</option>
           </select>
           <button
+            type="button"
             className="export-btn"
             onClick={() => exportData('json')}
             aria-label="Export history as JSON"
@@ -153,6 +154,7 @@ function TransactionHistory({ txLog }) {
             JSON
           </button>
           <button
+            type="button"
             className="export-btn"
             onClick={() => exportData('csv')}
             aria-label="Export history as CSV"
@@ -177,6 +179,7 @@ function TransactionHistory({ txLog }) {
               aria-label="Transaction actions"
             >
               <button
+                type="button"
                 role="menuitem"
                 onClick={() => {
                   setSelectedTx(contextMenu.tx);
@@ -186,6 +189,7 @@ function TransactionHistory({ txLog }) {
                 🔍 View Details
               </button>
               <button
+                type="button"
                 role="menuitem"
                 onClick={() => {
                   copyText(contextMenu.tx.id, 'ID');
@@ -196,6 +200,7 @@ function TransactionHistory({ txLog }) {
               </button>
               {contextMenu.tx.explorerUrl && (
                 <button
+                  type="button"
                   role="menuitem"
                   onClick={() => {
                     openExplorer(contextMenu.tx);
@@ -220,6 +225,7 @@ function TransactionHistory({ txLog }) {
               <div className="modal-header">
                 <div className="modal-breadcrumbs">
                   <button
+                    type="button"
                     className={`breadcrumb-item ${modalView === 'summary' ? 'active' : ''}`}
                     onClick={() => setModalView('summary')}
                   >
@@ -228,11 +234,14 @@ function TransactionHistory({ txLog }) {
                   {modalView === 'raw' && (
                     <>
                       <span className="breadcrumb-separator">/</span>
-                      <button className="breadcrumb-item active">Raw Data</button>
+                      <button type="button" className="breadcrumb-item active">
+                        Raw Data
+                      </button>
                     </>
                   )}
                 </div>
                 <button
+                  type="button"
                   className="close-btn"
                   onClick={handleModalClose}
                   ref={closeBtnRef}
@@ -268,7 +277,7 @@ function TransactionHistory({ txLog }) {
                       <label>Network</label>
                       <span>{selectedTx.network || 'mainnet'}</span>
                     </div>
-                    <button className="text-btn mt-2" onClick={() => setModalView('raw')}>
+                    <button type="button" className="text-btn mt-2" onClick={() => setModalView('raw')}>
                       View Technical Raw Data ↗
                     </button>
                   </div>
@@ -306,7 +315,7 @@ function TransactionHistory({ txLog }) {
                     View on Explorer ↗
                   </a>
                 ) : (
-                  <button className="action-btn primary" disabled>
+                  <button type="button" className="action-btn primary" disabled>
                     Explorer unavailable
                   </button>
                 )}
