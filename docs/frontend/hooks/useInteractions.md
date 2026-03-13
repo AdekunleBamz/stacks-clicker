@@ -1,0 +1,9 @@
+# useInteractions
+
+`useInteractions` aggregates domain hooks into one interface:
+- `clicker`
+- `tipjar`
+- `quickpoll`
+- `pingAll()`
+
+Use this hook in `App.jsx` to avoid scattered transaction callback wiring.
