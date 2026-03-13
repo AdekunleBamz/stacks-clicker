@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import PropTypes from 'prop-types';
 
 /**
  * Modern pull-to-refresh component for mobile.
@@ -29,10 +30,12 @@ export default function PullToRefresh({ onRefresh }) {
   const handleTouchEnd = () => {
     if (pullDistance > PULL_THRESHOLD) {
       setRefreshing(true);
-      onRefresh().then(() => {
-        setRefreshing(false);
-        setPullDistance(0);
-      });
+      Promise.resolve(onRefresh())
+        .catch(() => null)
+        .finally(() => {
+          setRefreshing(false);
+          setPullDistance(0);
+        });
     } else {
       setPullDistance(0);
     }
@@ -60,3 +63,7 @@ export default function PullToRefresh({ onRefresh }) {
     </div>
   );
 }
+
+PullToRefresh.propTypes = {
+  onRefresh: PropTypes.func.isRequired,
+};
