@@ -18,8 +18,13 @@ export function usePrice() {
     let isMounted = true;
 
     const fetchPrice = async () => {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 10000);
       try {
-        const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=blockstack&vs_currencies=usd');
+        const response = await fetch(
+          'https://api.coingecko.com/api/v3/simple/price?ids=blockstack&vs_currencies=usd',
+          { signal: controller.signal }
+        );
         if (!response.ok) throw new Error('Network response was not ok');
         const data = await response.json();
 
@@ -33,6 +38,7 @@ export function usePrice() {
           setError(err);
         }
       } finally {
+        clearTimeout(timeout);
         if (isMounted) {
           setLoading(false);
         }
