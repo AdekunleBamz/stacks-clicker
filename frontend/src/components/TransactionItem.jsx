@@ -14,7 +14,8 @@ function TransactionItem({
   onContextMenu,
   onOpenExplorer,
 }) {
-  const isPending = tx.isPending ?? tx.id.startsWith('pending');
+  const txId = String(tx.id ?? '');
+  const isPending = tx.isPending ?? txId.startsWith('pending');
 
   return (
     <div className="tx-item-wrapper">
@@ -67,8 +68,8 @@ function TransactionItem({
             </div>
             {tx.explorerUrl && (
               <button type="button" onClick={() => onOpenExplorer(tx)} className="tx-explorer-link">
-                {highlightText(tx.id.slice(0, 8), searchTerm)}...
-                {highlightText(tx.id.slice(-6), searchTerm)} ↗
+                {highlightText(txId.slice(0, 8), searchTerm)}...
+                {highlightText(txId.slice(-6), searchTerm)} ↗
               </button>
             )}
           </div>
