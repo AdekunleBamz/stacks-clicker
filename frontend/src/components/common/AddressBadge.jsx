@@ -20,10 +20,19 @@ function AddressBadge({ address, onDisconnect }) {
    */
   const handleCopy = useCallback(() => {
     if (!address) return;
-    navigator.clipboard.writeText(address);
-    setCopied(true);
-    toast.success('Address copied!');
-    setTimeout(() => setCopied(false), 2000);
+    if (!navigator?.clipboard?.writeText) {
+      toast.error('Clipboard not available');
+      return;
+    }
+
+    navigator.clipboard
+      .writeText(address)
+      .then(() => {
+        setCopied(true);
+        toast.success('Address copied!');
+        setTimeout(() => setCopied(false), 2000);
+      })
+      .catch(() => toast.error('Unable to copy address'));
   }, [address]);
 
   if (!address) return null;
