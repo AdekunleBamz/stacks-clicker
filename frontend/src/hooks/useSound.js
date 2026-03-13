@@ -37,6 +37,10 @@ export function useSound() {
    * @param {'click'|'success'|'error'} type - The category of sound to play
    */
   const playSound = useCallback((type) => {
+    if (!['click', 'success', 'error'].includes(type)) {
+      return;
+    }
+
     const ctx = getAudioContext();
     if (!ctx) return;
 
@@ -76,8 +80,6 @@ export function useSound() {
         gain.gain.linearRampToValueAtTime(0.01, now + 0.2);
         osc.start(now);
         osc.stop(now + 0.2);
-        break;
-      default:
         break;
     }
   }, []);
