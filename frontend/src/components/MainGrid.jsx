@@ -36,9 +36,23 @@ MainGrid.propTypes = {
     tips: PropTypes.number.isRequired,
     votes: PropTypes.number.isRequired,
   }).isRequired,
-  clicker: PropTypes.object.isRequired,
-  tipjar: PropTypes.object.isRequired,
-  quickpoll: PropTypes.object.isRequired
+  clicker: PropTypes.shape({
+    click: PropTypes.func.isRequired,
+    multiClick: PropTypes.func.isRequired,
+    ping: PropTypes.func.isRequired,
+    isLoading: PropTypes.func.isRequired,
+  }).isRequired,
+  tipjar: PropTypes.shape({
+    tip: PropTypes.func.isRequired,
+    handleSelfPing: PropTypes.func.isRequired,
+    isLoading: PropTypes.func.isRequired,
+  }).isRequired,
+  quickpoll: PropTypes.shape({
+    vote: PropTypes.func.isRequired,
+    createPoll: PropTypes.func.isRequired,
+    handlePollPing: PropTypes.func.isRequired,
+    isLoading: PropTypes.func.isRequired,
+  }).isRequired
 };
 
 export default memo(MainGrid);
