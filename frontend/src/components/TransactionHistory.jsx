@@ -325,20 +325,27 @@ function TransactionHistory({ txLog }) {
               exit={{ opacity: 0 }}
               key="empty"
               className="empty-state"
+              role="status"
+              aria-live="polite"
             >
               <div className="empty-icon">{searchTerm ? '🔍' : '📂'}</div>
-              <p>{searchTerm ? `No matches for "${searchTerm}"` : 'No transactions yet.'}</p>
+              <p className="empty-copy">
+                {searchTerm
+                  ? `No matches for "${searchTerm}".`
+                  : 'No transactions yet. Submit a click, tip, or vote to populate this feed.'}
+              </p>
               {searchTerm && (
                 <button className="text-btn mt-2" onClick={() => setSearchTerm('')}>
-                  Clear search terms
+                  Reset search
                 </button>
               )}
               {!searchTerm && (
-                <div className="skeleton-placeholder">
+                <div className="skeleton-placeholder" aria-hidden="true">
                   <SkeletonLoader height="60px" borderRadius="12px" className="mb-2" />
                   <SkeletonLoader height="60px" borderRadius="12px" opacity={0.5} />
                 </div>
               )}
+              {!searchTerm && <p className="empty-helper">Tip: Keyboard shortcuts are C for click and T for tip.</p>}
             </motion.div>
           ) : (
             filteredLog.map((tx) => (
