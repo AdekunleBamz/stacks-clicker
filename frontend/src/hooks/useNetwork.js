@@ -18,8 +18,12 @@ export function useNetwork() {
     let isMounted = true;
 
     const fetchStatus = async () => {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 10000);
       try {
-        const response = await fetch('https://api.mainnet.hiro.so/v2/info');
+        const response = await fetch('https://api.mainnet.hiro.so/v2/info', {
+          signal: controller.signal,
+        });
         if (!response.ok) throw new Error('Network offline');
 
         const data = await response.json();
@@ -34,6 +38,8 @@ export function useNetwork() {
           console.warn('Stacks Network Status Check Failed:', error);
           setIsConnected(false);
         }
+      } finally {
+        clearTimeout(timeout);
       }
     };
 
