@@ -2,7 +2,7 @@
 
 A premium, high-performance decentralized interaction hub on the Stacks blockchain. Built for speed, aesthetics, and seamless on-chain activity.
 
-![App Screenshot](frontend/public/favicon.svg) <!-- Replace with actual screenshot logic if available -->
+![App Icon](frontend/public/favicon.svg)
 
 ## Features 🌟
 
