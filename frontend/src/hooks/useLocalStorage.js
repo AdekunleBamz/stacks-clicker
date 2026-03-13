@@ -30,6 +30,7 @@ export function useLocalStorage(key, initialValue) {
           const valueToStore = value instanceof Function ? value(currentValue) : value;
           if (typeof window !== 'undefined') {
             window.localStorage.setItem(key, JSON.stringify(valueToStore));
+            window.dispatchEvent(new CustomEvent('local-storage', { detail: { key } }));
           }
           return valueToStore;
         });
@@ -48,24 +49,33 @@ export function useLocalStorage(key, initialValue) {
     }
 
     const handleStorageChange = (e) => {
-      if (e.key !== key) {
+      const changedKey = e.key ?? e.detail?.key;
+      if (changedKey !== key) {
         return;
       }
 
-      if (e.newValue === null) {
+      if (e.newValue === null && e.type === 'storage') {
         setStoredValue(initialValue);
         return;
       }
 
       try {
-        setStoredValue(JSON.parse(e.newValue));
+        if (e.type === 'storage') {
+          setStoredValue(JSON.parse(e.newValue));
+          return;
+        }
+        setStoredValue(readValue());
       } catch (error) {
         console.warn(`Error parsing storage event for key "${key}":`, error);
       }
     };
 
     window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
+    window.addEventListener('local-storage', handleStorageChange);
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('local-storage', handleStorageChange);
+    };
   }, [initialValue, key, readValue]);
 
   return [storedValue, setValue];
