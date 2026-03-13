@@ -49,9 +49,12 @@ function TransactionHistory({ txLog }) {
 
   const filteredLog = useMemo(() => {
     return txLog.filter((tx) => {
+      const actionText = String(tx.action ?? '').toLowerCase();
+      const idText = String(tx.id ?? '').toLowerCase();
+      const search = searchTerm.toLowerCase();
       const matchesSearch =
-        tx.action.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        tx.id.toLowerCase().includes(searchTerm.toLowerCase());
+        actionText.includes(search) ||
+        idText.includes(search);
       const matchesStatus = filterStatus === 'all' || tx.status === filterStatus;
       return matchesSearch && matchesStatus;
     });
