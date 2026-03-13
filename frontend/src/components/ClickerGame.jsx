@@ -10,7 +10,7 @@ const DEPLOYER = 'SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT';
  * Click to earn streaks and compete!
  */
 export default function ClickerGame({ onTxSubmit }) {
-  const { address, isConnected } = useWallet();
+  const { isConnected } = useWallet();
   const [loading, setLoading] = useState(false);
   const [clickCount, setClickCount] = useState(0);
   const [multiClickAmount, setMultiClickAmount] = useState(5);
@@ -93,6 +93,7 @@ export default function ClickerGame({ onTxSubmit }) {
 
       <div className="game-actions">
         <button
+          type="button"
           className="action-btn primary"
           onClick={handleClick}
           disabled={!isConnected || loading}
@@ -106,10 +107,11 @@ export default function ClickerGame({ onTxSubmit }) {
             min="1"
             max="100"
             value={multiClickAmount}
-            onChange={(e) => setMultiClickAmount(parseInt(e.target.value) || 1)}
+            onChange={(e) => setMultiClickAmount(Number.parseInt(e.target.value, 10) || 1)}
             className="multi-input"
           />
           <button
+            type="button"
             className="action-btn secondary"
             onClick={handleMultiClick}
             disabled={!isConnected || loading}
@@ -119,6 +121,7 @@ export default function ClickerGame({ onTxSubmit }) {
         </div>
 
         <button
+          type="button"
           className="action-btn outline"
           onClick={handlePing}
           disabled={!isConnected || loading}
