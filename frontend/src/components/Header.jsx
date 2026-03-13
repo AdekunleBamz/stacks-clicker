@@ -38,6 +38,7 @@ export default function Header({ theme, toggleTheme }) {
           </select>
           <Tooltip content={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}>
             <button
+              type="button"
               className="theme-toggle"
               onClick={toggleTheme}
               aria-label={`Toggle to ${theme === 'dark' ? 'light' : 'dark'} theme`}
@@ -49,7 +50,9 @@ export default function Header({ theme, toggleTheme }) {
           {address ? (
             <AddressBadge address={address} onDisconnect={disconnectWallet} />
           ) : (
-            <button className="btn-connect" onClick={connectWallet}>Connect Wallet</button>
+            <button type="button" className="btn-connect" onClick={connectWallet}>
+              Connect Wallet
+            </button>
           )}
         </div>
       </div>
