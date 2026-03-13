@@ -20,7 +20,12 @@ export default function ConnectButton() {
         <span className="wallet-address" title={address}>
           {formatAddress(address)}
         </span>
-        <button className="disconnect-btn" onClick={disconnectWallet} title="Disconnect wallet">
+        <button
+          type="button"
+          className="disconnect-btn"
+          onClick={disconnectWallet}
+          title="Disconnect wallet"
+        >
           Disconnect
         </button>
       </div>
@@ -28,7 +33,7 @@ export default function ConnectButton() {
   }
 
   return (
-    <button className="connect-btn" onClick={connectWallet}>
+    <button type="button" className="connect-btn" onClick={connectWallet}>
       Connect Wallet
     </button>
   );
