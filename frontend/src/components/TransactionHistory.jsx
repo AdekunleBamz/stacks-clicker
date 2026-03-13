@@ -221,7 +221,7 @@ function TransactionHistory({ txLog }) {
           </div>
         )}
         {selectedTx && (
-          <div className="modal-overlay" key="modal-wrapper" onClick={() => setSelectedTx(null)}>
+          <div className="modal-overlay" key="modal-wrapper" onClick={handleModalClose}>
             <motion.div
               className="modal-content tx-details-modal"
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
