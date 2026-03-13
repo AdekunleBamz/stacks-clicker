@@ -49,6 +49,10 @@ To run the automated test suite:
 npm run test
 ```
 
+## 🧰 Troubleshooting
+- If wallet connection does not appear, verify `VITE_WALLETCONNECT_PROJECT_ID` is set.
+- If UI changes do not reflect, restart `npm run dev` after editing `.env`.
+
 ## 📜 Contract Interaction
 The dApp interacts with pre-deployed contracts on Stacks Mainnet. You can find the contract source code in the `contracts/` directory for reference.
 
