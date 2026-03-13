@@ -24,9 +24,9 @@ export function useInteractions({ onTxSubmit }) {
    * Triggers heartbeat/ping transactions for all active smart contracts simultaneously.
    */
   const pingAll = useCallback(() => {
-    clicker.ping();
-    tipjar.handleSelfPing();
-    quickpoll.handlePollPing();
+    clicker?.ping?.();
+    tipjar?.handleSelfPing?.();
+    quickpoll?.handlePollPing?.();
   }, [clicker, tipjar, quickpoll]);
 
   return useMemo(() => ({
