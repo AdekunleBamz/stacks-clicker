@@ -16,10 +16,10 @@ export default function WalletConnectQRModal({ uri, onClose }) {
 
   return (
     <div className="qr-modal-overlay" onClick={onClose}>
-      <div className="qr-modal" onClick={(e) => e.stopPropagation()}>
+      <div className="qr-modal" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true">
         <div className="qr-modal-header">
           <h3>Connect Wallet</h3>
-          <button className="qr-modal-close" onClick={onClose}>
+          <button type="button" className="qr-modal-close" onClick={onClose} aria-label="Close QR modal">
             ×
           </button>
         </div>
