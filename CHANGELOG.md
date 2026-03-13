@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+### Changed
+- Improved contributor and setup documentation quality.
+
 ## [v2p] - 2026-03-11
 ### Added
 - Comprehensive documentation improvements (Batch 1).
