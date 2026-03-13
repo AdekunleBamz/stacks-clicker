@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { motion } from 'framer-motion';
 import ActionButton from './common/ActionButton';
 import { useSound } from '../hooks/useSound';
 
@@ -36,7 +35,9 @@ export default function QuickActions({ address, onClearLog, onPingAll }) {
           label="Support"
           icon="💬"
           className="secondary btn-sm"
-          onClick={() => handleAction(() => window.open('https://stacks.org', '_blank'))}
+          onClick={() =>
+            handleAction(() => window.open('https://stacks.org', '_blank', 'noopener,noreferrer'))
+          }
         />
       </div>
     </div>
