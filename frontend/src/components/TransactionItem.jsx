@@ -19,10 +19,11 @@ function TransactionItem({
   return (
     <div className="tx-item-wrapper">
       <div className="tx-swipe-actions">
-        <button className="swipe-btn copy" onClick={() => onCopy(tx.id)} aria-label="Copy ID">
+        <button type="button" className="swipe-btn copy" onClick={() => onCopy(tx.id)} aria-label="Copy ID">
           📋
         </button>
         <button
+          type="button"
           className="swipe-btn details"
           onClick={() => onDetails(tx)}
           aria-label="View Details"
@@ -45,7 +46,7 @@ function TransactionItem({
             <span className="tx-timestamp">{tx.time}</span>
           </div>
           <div className="tx-actions-inline">
-            <button className="text-btn" onClick={() => onDetails(tx)}>
+            <button type="button" className="text-btn" onClick={() => onDetails(tx)}>
               Details
             </button>
           </div>
