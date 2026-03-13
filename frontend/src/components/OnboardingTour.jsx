@@ -13,11 +13,15 @@ export default function OnboardingTour() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    if (typeof window === 'undefined') {
+      return undefined;
+    }
     const hasSeenTour = localStorage.getItem('hasSeenTour');
     if (!hasSeenTour) {
       const timer = setTimeout(() => setIsVisible(true), 1500);
       return () => clearTimeout(timer);
     }
+    return undefined;
   }, []);
 
   const handleNext = () => {
@@ -30,6 +34,9 @@ export default function OnboardingTour() {
 
   const dismiss = () => {
     setIsVisible(false);
+    if (typeof window === 'undefined') {
+      return;
+    }
     localStorage.setItem('hasSeenTour', 'true');
   };
 
@@ -37,7 +44,7 @@ export default function OnboardingTour() {
 
   return (
     <AnimatePresence>
-      <div className="tour-overlay" onClick={dismiss}>
+      <div className="tour-overlay" onClick={dismiss} role="presentation">
         <motion.div
           className="tour-card"
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -48,8 +55,10 @@ export default function OnboardingTour() {
           <div className="tour-progress">Step {currentStep + 1} of {steps.length}</div>
           <p className="tour-content">{steps[currentStep].content}</p>
           <div className="tour-footer">
-            <button className="tour-skip" onClick={dismiss}>Skip Tour</button>
-            <button className="tour-next" onClick={handleNext}>
+            <button type="button" className="tour-skip" onClick={dismiss}>
+              Skip Tour
+            </button>
+            <button type="button" className="tour-next" onClick={handleNext}>
               {currentStep === steps.length - 1 ? 'Get Started' : 'Next'}
             </button>
           </div>
