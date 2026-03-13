@@ -30,6 +30,7 @@ A premium, high-performance decentralized interaction hub on the Stacks blockcha
    cd stacks-clicker/frontend
    npm install
    ```
+   For reproducible CI/local parity, you can use `npm ci` instead.
 3. Configure environment variables:
    Create a `.env` file in the `frontend` directory:
    ```env
