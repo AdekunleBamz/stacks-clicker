@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -40,6 +41,7 @@ export default class ErrorBoundary extends React.Component {
             {this.state.error?.message || 'An unexpected error occurred.'}
           </p>
           <button
+            type="button"
             onClick={() => this.setState({ hasError: false, error: null })}
             style={{
               padding: '12px 24px',
@@ -60,3 +62,7 @@ export default class ErrorBoundary extends React.Component {
     return this.props.children;
   }
 }
+
+ErrorBoundary.propTypes = {
+  children: PropTypes.node.isRequired,
+};
