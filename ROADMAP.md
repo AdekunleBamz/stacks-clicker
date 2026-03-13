@@ -15,4 +15,4 @@ Our vision is to build the premier GameFi intersection for the Stacks ecosystem.
 ## 🔴 Q4 2026: Multi-Contract Synergy
 - [ ] **Governance Hub**: Use QuickPoll results to trigger automated contract parameter updates.
 - [ ] **Cross-Chain Bridging**: Interact with other Bitcoin L2s from the same UI.
-- [ ] **Developer SDK**: Allow other dApps to integrate the StacksClicker activity feed.
+- [ ] **Developer SDK**: Allow other dApps to integrate the Stacks Clicker activity feed.
