@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useWallet } from '../context/WalletContext';
 import { callContract } from '../utils/walletconnect';
+import { DEPLOYER_ADDRESS, CONTRACT_NAMES } from '../config/contracts';
 
-const DEPLOYER = 'SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT';
+/** @constant {string} QuickPoll contract name */
+const CONTRACT_NAME = CONTRACT_NAMES.quickpoll;
 
 /**
  * Custom hook for QuickPoll contract interactions.
@@ -23,8 +25,8 @@ export function useQuickPoll({ onTxSubmit } = {}) {
     setLoading(key, true);
     try {
       const result = await callContract({
-        contractAddress: DEPLOYER,
-        contractName: 'quickpoll-v2p',
+        contractAddress: DEPLOYER_ADDRESS,
+        contractName: CONTRACT_NAME,
         functionName,
         functionArgs,
       });
