@@ -63,6 +63,7 @@ If you wish to modify, test, or deploy the Stacks smart contracts locally:
 2. Install dependencies:
    ```bash
    cd stacks-clicker
+   npm install
    npm run frontend:install
    ```
    Note: `npm ci` is recommended for deterministic installs. Use `npm install` for manual package updates.

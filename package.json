@@ -1,26 +1,11 @@
 {
-  "name": "stacks-clicker-root",
   "private": true,
-  "version": "1.0.0",
-  "description": "A high-performance decentralized interaction hub on Stacks",
-  "author": "AdekunleBamz",
-  "license": "MIT",
-  "homepage": "https://github.com/AdekunleBamz/stacks-clicker#readme",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/AdekunleBamz/stacks-clicker.git"
+  "scripts": {
+    "frontend:install": "npm --prefix frontend install",
+    "frontend:dev": "npm --prefix frontend run dev",
+    "frontend:build": "npm --prefix frontend run build",
+    "frontend:lint": "npm --prefix frontend run lint"
   },
-  "bugs": {
-    "url": "https://github.com/AdekunleBamz/stacks-clicker/issues"
-  },
-  "keywords": [
-    "stacks",
-    "blockchain",
-    "clarity",
-    "gamefi",
-    "clicker",
-    "bitcoin-l2"
-  ],
   "dependencies": {
     "@stacks/network": "^7.3.1",
     "@stacks/transactions": "^7.3.1",
