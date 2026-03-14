@@ -27,8 +27,9 @@ A premium, high-performance decentralized interaction hub on the Stacks blockcha
    ```
 2. Install dependencies:
    ```bash
-   cd stacks-clicker/frontend
+   cd stacks-clicker
    npm install
+   npm run frontend:install
    ```
    For reproducible CI/local parity, you can use `npm ci` instead.
 3. Configure environment variables:
@@ -39,7 +40,7 @@ A premium, high-performance decentralized interaction hub on the Stacks blockcha
    ```
 4. Start the development server:
    ```bash
-   npm run dev
+   npm run frontend:dev
    ```
 
 ## Technical Architecture 🏗️
