@@ -32,11 +32,15 @@ A premium, high-performance decentralized interaction hub on the Stacks blockcha
    ```
    For reproducible CI/local parity, you can use `npm ci` instead.
 3. Configure environment variables:
-   Create a `.env` file in the `frontend` directory:
-   ```env
-   VITE_STACKS_NETWORK=mainnet
-   VITE_COINGECKO_API_KEY=your_api_key_here
+   Copy the example file in the `frontend` directory and update the required values:
+   ```bash
+   cp .env.example .env
    ```
+   ```env
+   VITE_WALLETCONNECT_PROJECT_ID=your_project_id_here
+   VITE_DEBUG=true
+   ```
+   Optional values such as `VITE_STACKS_NETWORK` and `VITE_COINGECKO_API_KEY` are documented in `frontend/.env.example`.
 4. Start the development server:
    ```bash
    npm run dev
@@ -56,7 +60,7 @@ This project includes a built-in performance monitor for developers. To activate
 
 ## Security & Verification 🔑
 
-All commits to this repository are **SSH Signed and Verified** to ensure the highest standard of code integrity and authenticity.
+Shared branch commits should be SSH signed before they are pushed. You can confirm the latest signature locally with `git log -1 --show-signature` and verify the pushed commit through GitHub's `Verified` badge.
 
 ## License 📄
 
