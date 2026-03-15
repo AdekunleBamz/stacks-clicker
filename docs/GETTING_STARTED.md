@@ -28,14 +28,20 @@ cd stacks-clicker
 cd frontend
 npm install
 ```
+For cleaner CI parity, `npm ci` also works when you do not need to refresh the lockfile.
 
 ### 3. Configure Environment
-Create a `.env` file in the `frontend` directory:
+Copy the checked-in example file before editing local values:
 ```bash
+cp .env.example .env
+```
+Update the required variables in `frontend/.env`:
+```env
 VITE_WALLETCONNECT_PROJECT_ID=893... # Your Project ID
 VITE_DEBUG=true
 ```
 Keep `.env` local and never commit secrets to source control.
+Optional values such as `VITE_STACKS_NETWORK` and `VITE_COINGECKO_API_KEY` are documented in `.env.example`.
 
 ### 4. Start Development Server
 ```bash
@@ -44,10 +50,11 @@ npm run dev
 Visit `http://localhost:5173` to interact with the dApp.
 
 ## 🧪 Testing
-To run the automated test suite:
+From the `frontend` directory, run the automated test suite:
 ```bash
 npm run test
 ```
+Use `npm run lint` before opening a pull request if you touched application code.
 
 ## 🧰 Troubleshooting
 - If wallet connection does not appear, verify `VITE_WALLETCONNECT_PROJECT_ID` is set.
