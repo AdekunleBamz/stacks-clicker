@@ -7,7 +7,7 @@ This document outlines the high-level architecture, data flow, and design patter
 Stacks Clicker v2 is a decentralized interaction hub built on the Stacks blockchain. It provides a gamified interface for performing on-chain transactions (clicks, tips, votes) with real-time feedback and premium UI/UX.
 
 ### Core Technologies
-- **Frontend**: React (Vite), Framer Motion (Animations), Tailwind CSS (Theming)
+- **Frontend**: React (Vite), Framer Motion (Animations), CSS variables and global stylesheets
 - **Blockchain**: Stacks (Clarity Smart Contracts)
 - **State Management**: React Context (Wallet, I18n) + Custom Hooks
 - **Persistence**: LocalStorage with cross-tab synchronization
@@ -53,8 +53,8 @@ We use a **Collector Pattern** to aggregate contract interactions:
 ## Design Patterns
 
 ### 1. Memoization Strategy
-- All common components (`ActionButton`, `ActionCard`, etc.) are wrapped in `React.memo` to prevent unnecessary re-renders during high-frequency interactions.
-- Complex hooks use `useCallback` for stable function references.
+- Many interactive card and shared UI components use `React.memo` to reduce avoidable re-renders during high-frequency interactions.
+- Hooks and event handlers lean on `useCallback` where stable function references help downstream components.
 
 ### 2. Loading State Management
 - `loadingStates` are managed as an object/map in each hook, allowing independent loading indicators for different contract functions within the same card.
