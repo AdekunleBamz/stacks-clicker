@@ -21,12 +21,14 @@ Enhancement suggestions are tracked as GitHub issues. When creating an enhanceme
 3. If you've changed APIs, update the documentation.
 4. Ensure the test suite passes (`npm run test` in frontend).
 5. Make sure your code lints (`npm run lint` in frontend).
+6. Sign commits that will be pushed to shared branches (`git commit -S`).
 
 ## Development Setup
 
 1. Install dependencies: `cd frontend && npm install`
-2. Set up environment: `cp .env.example .env`
-3. Start dev server: `npm run dev`
+2. Set up environment: `cd frontend && cp .env.example .env`
+3. Add your WalletConnect project ID to `frontend/.env`
+4. Start dev server: `cd frontend && npm run dev`
 
 ## Style Guide
 
