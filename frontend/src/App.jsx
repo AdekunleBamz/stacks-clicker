@@ -147,24 +147,34 @@ export default function App() {
   }, [stats]);
 
   /**
-   * Effect to dynamically update the favicon state based on interaction activity.
+   * Effect to dynamically update the document title based on interaction activity.
    */
   useEffect(() => {
-    const favicon = document.querySelector('link[rel="icon"]');
-    if (favicon) {
-      favicon.href = `/favicon.svg?state=${Date.now()}`;
-    }
+    const total = stats.clicks + stats.tips + stats.votes;
+    document.title = total > 0 ? `(${total}) Stacks Clicker` : 'Stacks Clicker v2';
   }, [stats]);
 
   const MilestoneCelebration = React.lazy(() => import('./components/MilestoneCelebration'));
 
   return (
     <div className="app-container" data-theme={theme}>
-      <a href="#main-content" className="skip-link" aria-label="Skip to main content">
+      <a
+        href="#main-content"
+        className="skip-link"
+        onClick={(e) => {
+          e.preventDefault();
+          document.getElementById('main-content')?.focus();
+        }}
+      >
         Skip to Content
       </a>
       <PerformanceOverlay />
       <ScrollToTop />
+
+      {/* Screen reader only announcement for high-frequency updates */}
+      <div className="sr-only" aria-live="polite" aria-atomic="true">
+        {txLog.length > 0 ? `Latest action: ${txLog[0].action}` : ''}
+      </div>
 
       <React.Suspense fallback={<SkeletonLoader height="80px" borderRadius="12px" />}>
         <Header theme={theme} toggleTheme={toggleTheme} currentLang={lang} onLangChange={setLang} />
