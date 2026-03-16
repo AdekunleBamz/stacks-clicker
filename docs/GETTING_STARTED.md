@@ -68,6 +68,11 @@ Current active contract names used by the frontend:
 - `tipjar-v2p`
 - `quickpoll-v2m`
 
+Current active contract names used by the frontend:
+- `clicker-v2p`
+- `tipjar-v2p`
+- `quickpoll-v2p`
+
 ---
 Need help? Open an issue on [GitHub](https://github.com/AdekunleBamz/stacks-clicker/issues).
 
