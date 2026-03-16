@@ -46,17 +46,25 @@ A premium, high-performance decentralized interaction hub on the Stacks blockcha
    npm run dev
    ```
 
+### ⚡ Quick Setup
+
+```bash
+# Clone
+git clone https://github.com/AdekunleBamz/stacks-clicker.git && cd stacks-clicker/frontend
+
+# Install & Run
+npm install && cp .env.example .env && npm run dev
+```
+
+## Key Interactions 🎮
+
+| Feature | Action | Reward | Shortcut |
+| :--- | :--- | :--- | :--- |
+| **Power Clicker** | On-chain Click | Clicks + Streaks | `C` |
+| **TipJar** | STX Donation | Karma + Activity | `T` |
+| **QuickPoll** | Governance Vote | Voice + Influence | - |
+
 ## Technical Architecture 🏗️
-
-Refer to [ARCHITECTURE.md](ARCHITECTURE.md) for a deep dive into the system design, provider hierarchy, and interaction patterns.
-
-## Development & Performance 📈
-
-This project includes a built-in performance monitor for developers. To activate it, add `?dev=true` to your local URL.
-
-- **FPS Tracking**: Real-time frame rate monitoring.
-- **Memory Profiling**: Heap usage tracking.
-- **Interaction Logs**: Session-based transaction history.
 
 ## Security & Verification 🔑
 
