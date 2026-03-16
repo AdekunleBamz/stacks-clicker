@@ -18,10 +18,7 @@ const MainGrid = React.lazy(() => import('./components/MainGrid'));
 const PlayerStats = React.lazy(() => import('./components/PlayerStats'));
 const TransactionHistory = React.lazy(() => import('./components/TransactionHistory'));
 
-// Interaction Hooks
-import { useInteractions } from './hooks/useInteractions';
-import { useSound } from './hooks/useSound';
-import { useLocalStorage } from './hooks/useLocalStorage';
+import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 
 /**
  * Main application component for the Stacks Clicker v2.
@@ -120,33 +117,17 @@ export default function App() {
   });
 
   /**
-   * Effect to handle global keyboard accessibility shortcuts.
+   * Global keyboard accessibility shortcuts.
    * 'C' for Click, 'T' for Quick Tip.
    */
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      const activeElement = document.activeElement;
-      const isTyping =
-        activeElement?.tagName === 'INPUT' ||
-        activeElement?.tagName === 'TEXTAREA' ||
-        activeElement?.isContentEditable;
-
-      if (isTyping || e.metaKey || e.ctrlKey || e.altKey || !address) {
-        return;
-      }
-
-      if (e.key.toLowerCase() === 'c') {
-        playSound('click');
-        clicker.click();
-      }
-      if (e.key.toLowerCase() === 't') {
-        playSound('click');
-        tipjar.tip(0.001); // Standard quick tip amount
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [address, clicker, tipjar, playSound]);
+  useKeyboardShortcuts({
+    isEnabled: !!address,
+    actions: {
+      click: clicker.click,
+      tip: tipjar.tip,
+    },
+    playSound,
+  });
 
   /**
    * Effect to monitor interaction milestones and trigger celebrations.
