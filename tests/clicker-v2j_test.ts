@@ -5,14 +5,14 @@ import { assertEquals, assertNotEquals } from 'https://deno.land/std@0.170.0/tes
 // Clicker v2j Tests - Enhanced with event testing and analytics
 
 Clarinet.test({
-  name: "clicker-v2j: click increments counter and tracks user",
+  name: "clicker-v2p: click increments counter and tracks user",
   async fn(chain: Chain, accounts: Map<string, Account>) {
     const wallet1 = accounts.get('wallet_1')!;
     
     let block = chain.mineBlock([
-      Tx.contractCall('clicker-v2j', 'click', [], wallet1.address),
-      Tx.contractCall('clicker-v2j', 'click', [], wallet1.address),
-      Tx.contractCall('clicker-v2j', 'click', [], wallet1.address),
+      Tx.contractCall('clicker-v2p', 'click', [], wallet1.address),
+      Tx.contractCall('clicker-v2p', 'click', [], wallet1.address),
+      Tx.contractCall('clicker-v2p', 'click', [], wallet1.address),
     ]);
     
     assertEquals(block.receipts.length, 3);
@@ -28,7 +28,7 @@ Clarinet.test({
 });
 
 Clarinet.test({
-  name: "clicker-v2j: tracks unique users correctly",
+  name: "clicker-v2p: tracks unique users correctly",
   async fn(chain: Chain, accounts: Map<string, Account>) {
     const deployer = accounts.get('deployer')!;
     const wallet1 = accounts.get('wallet_1')!;
@@ -37,33 +37,33 @@ Clarinet.test({
     
     // Three different users click
     let block = chain.mineBlock([
-      Tx.contractCall('clicker-v2j', 'click', [], wallet1.address),
-      Tx.contractCall('clicker-v2j', 'click', [], wallet2.address),
-      Tx.contractCall('clicker-v2j', 'click', [], wallet3.address),
+      Tx.contractCall('clicker-v2p', 'click', [], wallet1.address),
+      Tx.contractCall('clicker-v2p', 'click', [], wallet2.address),
+      Tx.contractCall('clicker-v2p', 'click', [], wallet3.address),
     ]);
     
     // Check unique users count
-    let result = chain.callReadOnlyFn('clicker-v2j', 'get-unique-users', [], deployer.address);
+    let result = chain.callReadOnlyFn('clicker-v2p', 'get-unique-users', [], deployer.address);
     result.result.expectUint(3);
     
     // Same user clicking again shouldn't increase count
     block = chain.mineBlock([
-      Tx.contractCall('clicker-v2j', 'click', [], wallet1.address),
+      Tx.contractCall('clicker-v2p', 'click', [], wallet1.address),
     ]);
     
-    result = chain.callReadOnlyFn('clicker-v2j', 'get-unique-users', [], deployer.address);
+    result = chain.callReadOnlyFn('clicker-v2p', 'get-unique-users', [], deployer.address);
     result.result.expectUint(3);
   },
 });
 
 Clarinet.test({
-  name: "clicker-v2j: multi-click caps at 100",
+  name: "clicker-v2p: multi-click caps at 100",
   async fn(chain: Chain, accounts: Map<string, Account>) {
     const wallet1 = accounts.get('wallet_1')!;
     
     // Try to multi-click 500 (should cap at 100)
     let block = chain.mineBlock([
-      Tx.contractCall('clicker-v2j', 'multi-click', [types.uint(500)], wallet1.address),
+      Tx.contractCall('clicker-v2p', 'multi-click', [types.uint(500)], wallet1.address),
     ]);
     
     block.receipts[0].result.expectOk().expectUint(100);
@@ -71,27 +71,27 @@ Clarinet.test({
 });
 
 Clarinet.test({
-  name: "clicker-v2j: get-version returns correct version",
+  name: "clicker-v2p: get-version returns correct version",
   async fn(chain: Chain, accounts: Map<string, Account>) {
     const deployer = accounts.get('deployer')!;
     
-    let result = chain.callReadOnlyFn('clicker-v2j', 'get-version', [], deployer.address);
+    let result = chain.callReadOnlyFn('clicker-v2p', 'get-version', [], deployer.address);
     result.result.expectUint(2);
   },
 });
 
 Clarinet.test({
-  name: "clicker-v2j: get-contract-info returns complete info",
+  name: "clicker-v2p: get-contract-info returns complete info",
   async fn(chain: Chain, accounts: Map<string, Account>) {
     const deployer = accounts.get('deployer')!;
     const wallet1 = accounts.get('wallet_1')!;
     
     // Do some clicks first
     chain.mineBlock([
-      Tx.contractCall('clicker-v2j', 'click', [], wallet1.address),
+      Tx.contractCall('clicker-v2p', 'click', [], wallet1.address),
     ]);
     
-    let result = chain.callReadOnlyFn('clicker-v2j', 'get-contract-info', [], deployer.address);
+    let result = chain.callReadOnlyFn('clicker-v2p', 'get-contract-info', [], deployer.address);
     const info = result.result.expectTuple();
     
     assertEquals(info['version'].expectUint(2), 2n);
@@ -102,80 +102,80 @@ Clarinet.test({
 });
 
 Clarinet.test({
-  name: "clicker-v2j: ping updates last activity block",
+  name: "clicker-v2p: ping updates last activity block",
   async fn(chain: Chain, accounts: Map<string, Account>) {
     const deployer = accounts.get('deployer')!;
     const wallet1 = accounts.get('wallet_1')!;
     
     let block = chain.mineBlock([
-      Tx.contractCall('clicker-v2j', 'ping', [], wallet1.address),
+      Tx.contractCall('clicker-v2p', 'ping', [], wallet1.address),
     ]);
     
     block.receipts[0].result.expectOk();
     
     // Check last activity was updated
-    let result = chain.callReadOnlyFn('clicker-v2j', 'get-last-activity-block', [], deployer.address);
+    let result = chain.callReadOnlyFn('clicker-v2p', 'get-last-activity-block', [], deployer.address);
     assertNotEquals(result.result.expectUint(0), 0n);
   },
 });
 
 Clarinet.test({
-  name: "clicker-v2j: tracks first click block height",
+  name: "clicker-v2p: tracks first click block height",
   async fn(chain: Chain, accounts: Map<string, Account>) {
     const deployer = accounts.get('deployer')!;
     const wallet1 = accounts.get('wallet_1')!;
     
     let block = chain.mineBlock([
-      Tx.contractCall('clicker-v2j', 'click', [], wallet1.address),
+      Tx.contractCall('clicker-v2p', 'click', [], wallet1.address),
     ]);
     
-    let result = chain.callReadOnlyFn('clicker-v2j', 'get-user-first-click', [types.principal(wallet1.address)], deployer.address);
+    let result = chain.callReadOnlyFn('clicker-v2p', 'get-user-first-click', [types.principal(wallet1.address)], deployer.address);
     // Should have a value (not none)
     assertNotEquals(result.result, 'none');
   },
 });
 
 Clarinet.test({
-  name: "clicker-v2j: reset-streak works correctly",
+  name: "clicker-v2p: reset-streak works correctly",
   async fn(chain: Chain, accounts: Map<string, Account>) {
     const deployer = accounts.get('deployer')!;
     const wallet1 = accounts.get('wallet_1')!;
     
     // Build up streak
     chain.mineBlock([
-      Tx.contractCall('clicker-v2j', 'click', [], wallet1.address),
-      Tx.contractCall('clicker-v2j', 'click', [], wallet1.address),
-      Tx.contractCall('clicker-v2j', 'click', [], wallet1.address),
+      Tx.contractCall('clicker-v2p', 'click', [], wallet1.address),
+      Tx.contractCall('clicker-v2p', 'click', [], wallet1.address),
+      Tx.contractCall('clicker-v2p', 'click', [], wallet1.address),
     ]);
     
     // Check streak exists
-    let result = chain.callReadOnlyFn('clicker-v2j', 'get-user-streak', [types.principal(wallet1.address)], deployer.address);
+    let result = chain.callReadOnlyFn('clicker-v2p', 'get-user-streak', [types.principal(wallet1.address)], deployer.address);
     result.result.expectUint(3);
     
     // Reset streak
     let block = chain.mineBlock([
-      Tx.contractCall('clicker-v2j', 'reset-streak', [], wallet1.address),
+      Tx.contractCall('clicker-v2p', 'reset-streak', [], wallet1.address),
     ]);
     block.receipts[0].result.expectOk();
     
     // Verify streak is 0
-    result = chain.callReadOnlyFn('clicker-v2j', 'get-user-streak', [types.principal(wallet1.address)], deployer.address);
+    result = chain.callReadOnlyFn('clicker-v2p', 'get-user-streak', [types.principal(wallet1.address)], deployer.address);
     result.result.expectUint(0);
   },
 });
 
 Clarinet.test({
-  name: "clicker-v2j: get-stats returns accurate statistics",
+  name: "clicker-v2p: get-stats returns accurate statistics",
   async fn(chain: Chain, accounts: Map<string, Account>) {
     const deployer = accounts.get('deployer')!;
     const wallet1 = accounts.get('wallet_1')!;
     
     chain.mineBlock([
-      Tx.contractCall('clicker-v2j', 'click', [], wallet1.address),
-      Tx.contractCall('clicker-v2j', 'multi-click', [types.uint(5)], wallet1.address),
+      Tx.contractCall('clicker-v2p', 'click', [], wallet1.address),
+      Tx.contractCall('clicker-v2p', 'multi-click', [types.uint(5)], wallet1.address),
     ]);
     
-    let result = chain.callReadOnlyFn('clicker-v2j', 'get-stats', [types.principal(wallet1.address)], deployer.address);
+    let result = chain.callReadOnlyFn('clicker-v2p', 'get-stats', [types.principal(wallet1.address)], deployer.address);
     const stats = result.result.expectTuple();
     
     assertEquals(stats['total'].expectUint(6), 6n);

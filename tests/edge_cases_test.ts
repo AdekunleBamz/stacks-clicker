@@ -10,7 +10,7 @@ Clarinet.test({
     const wallet1 = accounts.get('wallet_1')!;
     
     let block = chain.mineBlock([
-      Tx.contractCall('clicker-v2j', 'multi-click', [types.uint(0)], wallet1.address),
+      Tx.contractCall('clicker-v2p', 'multi-click', [types.uint(0)], wallet1.address),
     ]);
     
     block.receipts[0].result.expectOk().expectUint(0);
@@ -24,7 +24,7 @@ Clarinet.test({
     
     // Max is capped at 100
     let block = chain.mineBlock([
-      Tx.contractCall('clicker-v2j', 'multi-click', [types.uint(999999999)], wallet1.address),
+      Tx.contractCall('clicker-v2p', 'multi-click', [types.uint(999999999)], wallet1.address),
     ]);
     
     block.receipts[0].result.expectOk().expectUint(100);
@@ -37,7 +37,7 @@ Clarinet.test({
     const wallet1 = accounts.get('wallet_1')!;
     
     let block = chain.mineBlock([
-      Tx.contractCall('tipjar-v2j', 'tip-jar', [types.uint(0)], wallet1.address),
+      Tx.contractCall('tipjar-v2p', 'tip-jar', [types.uint(0)], wallet1.address),
     ]);
     
     // Should still succeed (0 STX transfer is valid)
@@ -51,7 +51,7 @@ Clarinet.test({
     const wallet1 = accounts.get('wallet_1')!;
     
     let block = chain.mineBlock([
-      Tx.contractCall('tipjar-v2j', 'tip-user', [types.principal(wallet1.address), types.uint(1000)], wallet1.address),
+      Tx.contractCall('tipjar-v2p', 'tip-user', [types.principal(wallet1.address), types.uint(1000)], wallet1.address),
     ]);
     
     // Tipping yourself should work
@@ -65,7 +65,7 @@ Clarinet.test({
     const wallet1 = accounts.get('wallet_1')!;
     
     let block = chain.mineBlock([
-      Tx.contractCall('quickpoll-v2j', 'create-poll', [types.ascii("")], wallet1.address),
+      Tx.contractCall('quickpoll-v2p', 'create-poll', [types.ascii("")], wallet1.address),
     ]);
     
     // Empty string is valid ASCII
@@ -80,7 +80,7 @@ Clarinet.test({
     const maxQuestion = "A".repeat(100);
     
     let block = chain.mineBlock([
-      Tx.contractCall('quickpoll-v2j', 'create-poll', [types.ascii(maxQuestion)], wallet1.address),
+      Tx.contractCall('quickpoll-v2p', 'create-poll', [types.ascii(maxQuestion)], wallet1.address),
     ]);
     
     block.receipts[0].result.expectOk().expectUint(0);
@@ -93,7 +93,7 @@ Clarinet.test({
     const wallet1 = accounts.get('wallet_1')!;
     
     let block = chain.mineBlock([
-      Tx.contractCall('quickpoll-v2j', 'vote-yes', [types.uint(999)], wallet1.address),
+      Tx.contractCall('quickpoll-v2p', 'vote-yes', [types.uint(999)], wallet1.address),
     ]);
     
     block.receipts[0].result.expectErr().expectUint(101);
@@ -106,7 +106,7 @@ Clarinet.test({
     const wallet1 = accounts.get('wallet_1')!;
     
     let block = chain.mineBlock([
-      Tx.contractCall('quickpoll-v2j', 'quick-vote-yes', [], wallet1.address),
+      Tx.contractCall('quickpoll-v2p', 'quick-vote-yes', [], wallet1.address),
     ]);
     
     block.receipts[0].result.expectErr().expectUint(104);
@@ -127,7 +127,7 @@ Clarinet.test({
     
     // All 5 users click in same block
     let block = chain.mineBlock(
-      wallets.map(w => Tx.contractCall('clicker-v2j', 'click', [], w.address))
+      wallets.map(w => Tx.contractCall('clicker-v2p', 'click', [], w.address))
     );
     
     // All should succeed
@@ -136,11 +136,11 @@ Clarinet.test({
     });
     
     // Total should be 5
-    let result = chain.callReadOnlyFn('clicker-v2j', 'get-total-clicks', [], deployer.address);
+    let result = chain.callReadOnlyFn('clicker-v2p', 'get-total-clicks', [], deployer.address);
     result.result.expectUint(5);
     
     // Unique users should be 5
-    result = chain.callReadOnlyFn('clicker-v2j', 'get-unique-users', [], deployer.address);
+    result = chain.callReadOnlyFn('clicker-v2p', 'get-unique-users', [], deployer.address);
     result.result.expectUint(5);
   },
 });
@@ -153,10 +153,10 @@ Clarinet.test({
     
     // Multiple operations in single block
     let block = chain.mineBlock([
-      Tx.contractCall('clicker-v2j', 'click', [], wallet1.address),
-      Tx.contractCall('clicker-v2j', 'click', [], wallet1.address),
-      Tx.contractCall('clicker-v2j', 'multi-click', [types.uint(10)], wallet1.address),
-      Tx.contractCall('clicker-v2j', 'ping', [], wallet1.address),
+      Tx.contractCall('clicker-v2p', 'click', [], wallet1.address),
+      Tx.contractCall('clicker-v2p', 'click', [], wallet1.address),
+      Tx.contractCall('clicker-v2p', 'multi-click', [types.uint(10)], wallet1.address),
+      Tx.contractCall('clicker-v2p', 'ping', [], wallet1.address),
     ]);
     
     // All should succeed
@@ -165,7 +165,7 @@ Clarinet.test({
     });
     
     // User should have 12 clicks (1 + 1 + 10)
-    let result = chain.callReadOnlyFn('clicker-v2j', 'get-user-clicks', [types.principal(wallet1.address)], deployer.address);
+    let result = chain.callReadOnlyFn('clicker-v2p', 'get-user-clicks', [types.principal(wallet1.address)], deployer.address);
     result.result.expectUint(12);
   },
 });
