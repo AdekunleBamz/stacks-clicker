@@ -8,12 +8,12 @@ requirements = []
 
 # ── Active contracts (deployed to new wallet SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT) ──
 [contracts.clicker-v2m]
-path = "contracts/clicker-v2m.clar"
+path = "contracts/archive/clicker-v2m.clar"
 clarity_version = 2
 epoch = 3.0
 
 [contracts.tipjar-v2m]
-path = "contracts/tipjar-v2m.clar"
+path = "contracts/archive/tipjar-v2m.clar"
 clarity_version = 2
 epoch = 3.0
 
@@ -23,7 +23,7 @@ clarity_version = 2
 epoch = 3.0
 
 [contracts.quickpoll-v2n]
-path = "contracts/quickpoll-v2n.clar"
+path = "contracts/archive/quickpoll-v2n.clar"
 clarity_version = 2
 epoch = 3.0
 
