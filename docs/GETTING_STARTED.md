@@ -63,6 +63,11 @@ Use `npm run lint` before opening a pull request if you touched application code
 ## 📜 Contract Interaction
 The dApp interacts with pre-deployed contracts on Stacks Mainnet. You can find the contract source code in the `contracts/` directory for reference.
 
+Current active contract names used by the frontend:
+- `clicker-v2p`
+- `tipjar-v2p`
+- `quickpoll-v2p`
+
 ---
 Need help? Open an issue on [GitHub](https://github.com/AdekunleBamz/stacks-clicker/issues).
 

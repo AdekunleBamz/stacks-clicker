@@ -9,23 +9,23 @@ plan:
     - id: 0
       transactions:
         - contract-publish:
-            contract-name: clicker
+            contract-name: clicker-v2p
             expected-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
             cost: 10000
-            path: contracts/clicker.clar
+            path: contracts/clicker-v2p.clar
             anchor-block-only: true
             clarity-version: 2
         - contract-publish:
-            contract-name: tipjar
+            contract-name: tipjar-v2p
             expected-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
             cost: 10000
-            path: contracts/tipjar.clar
+            path: contracts/tipjar-v2p.clar
             anchor-block-only: true
             clarity-version: 2
         - contract-publish:
-            contract-name: quickpoll
+            contract-name: quickpoll-v2p
             expected-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
             cost: 10000
-            path: contracts/quickpoll.clar
+            path: contracts/quickpoll-v2p.clar
             anchor-block-only: true
             clarity-version: 2
