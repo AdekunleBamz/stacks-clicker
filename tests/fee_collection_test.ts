@@ -18,10 +18,10 @@ Clarinet.test({
     ];
 
     chain.mineBlock(actions);
-
-    // 4 actions × 100 microSTX = 400
+    
+    // 4 actions × 1000 microSTX = 4000
     let result = chain.callReadOnlyFn('clicker-v2p', 'get-total-fees-collected', [], deployer.address);
-    result.result.expectUint(400);
+    result.result.expectUint(4000);
   },
 });
 
@@ -32,15 +32,15 @@ Clarinet.test({
     const wallet1 = accounts.get('wallet_1')!;
 
     chain.mineBlock([
-      Tx.contractCall('tipjar-v2p', 'quick-tip', [], wallet1.address), // 100 fee + 1000 tip
-      Tx.contractCall('tipjar-v2p', 'tip-jar', [types.uint(5000)], wallet1.address), // 100 fee + 5000 tip
-      Tx.contractCall('tipjar-v2p', 'self-ping', [], wallet1.address), // 100 fee only
+      Tx.contractCall('tipjar-v2p', 'quick-tip', [], wallet1.address), // 1000 fee + 1000 tip
+      Tx.contractCall('tipjar-v2p', 'tip-jar', [types.uint(5000)], wallet1.address), // 1000 fee + 5000 tip
+      Tx.contractCall('tipjar-v2p', 'self-ping', [], wallet1.address), // 1000 fee only
     ]);
-
-    // 3 actions × 100 microSTX fee = 300
+    
+    // 3 actions × 1000 microSTX fee = 3000
     let result = chain.callReadOnlyFn('tipjar-v2p', 'get-total-fees-collected', [], deployer.address);
-    result.result.expectUint(300);
-
+    result.result.expectUint(3000);
+    
     // Total tips: 1000 + 5000 = 6000
     result = chain.callReadOnlyFn('tipjar-v2p', 'get-total-tips', [], deployer.address);
     result.result.expectUint(6000);
@@ -64,10 +64,10 @@ Clarinet.test({
       Tx.contractCall('quickpoll-v2p', 'poll-ping', [], wallet1.address),
       Tx.contractCall('quickpoll-v2p', 'close-poll', [types.uint(0)], wallet1.address),
     ]);
-
-    // 4 actions × 100 = 400
+    
+    // 4 actions × 1000 = 4000
     let result = chain.callReadOnlyFn('quickpoll-v2p', 'get-total-fees-collected', [], deployer.address);
-    result.result.expectUint(400);
+    result.result.expectUint(4000);
   },
 });
 
@@ -75,14 +75,14 @@ Clarinet.test({
   name: "fees: fee is consistent across all contracts",
   async fn(chain: Chain, accounts: Map<string, Account>) {
     const deployer = accounts.get('deployer')!;
-
+    
     let clickerFee = chain.callReadOnlyFn('clicker-v2p', 'get-interaction-fee', [], deployer.address);
     let tipjarFee = chain.callReadOnlyFn('tipjar-v2p', 'get-interaction-fee', [], deployer.address);
     let pollFee = chain.callReadOnlyFn('quickpoll-v2p', 'get-interaction-fee', [], deployer.address);
-
-    assertEquals(clickerFee.result.expectUint(100), 100n);
-    assertEquals(tipjarFee.result.expectUint(100), 100n);
-    assertEquals(pollFee.result.expectUint(100), 100n);
+    
+    assertEquals(clickerFee.result.expectUint(1000), 1000n);
+    assertEquals(tipjarFee.result.expectUint(1000), 1000n);
+    assertEquals(pollFee.result.expectUint(1000), 1000n);
   },
 });
 
@@ -97,20 +97,20 @@ Clarinet.test({
       Tx.contractCall('clicker-v2p', 'click', [], wallet1.address),
     ]);
     let fees = chain.callReadOnlyFn('clicker-v2p', 'get-total-fees-collected', [], deployer.address);
-    assertEquals(fees.result.expectUint(100), 100n);
-
+    assertEquals(fees.result.expectUint(1000), 1000n);
+    
     // Second action
     chain.mineBlock([
       Tx.contractCall('clicker-v2p', 'click', [], wallet1.address),
     ]);
     fees = chain.callReadOnlyFn('clicker-v2p', 'get-total-fees-collected', [], deployer.address);
-    assertEquals(fees.result.expectUint(200), 200n);
-
+    assertEquals(fees.result.expectUint(2000), 2000n);
+    
     // Third action
     chain.mineBlock([
       Tx.contractCall('clicker-v2p', 'click', [], wallet1.address),
     ]);
     fees = chain.callReadOnlyFn('clicker-v2p', 'get-total-fees-collected', [], deployer.address);
-    assertEquals(fees.result.expectUint(300), 300n);
+    assertEquals(fees.result.expectUint(3000), 3000n);
   },
 });

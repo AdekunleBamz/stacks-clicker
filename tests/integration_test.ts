@@ -39,10 +39,10 @@ Clarinet.test({
     // Verify final states
     let result = chain.callReadOnlyFn('clicker-v2p', 'get-user-clicks', [types.principal(user1.address)], deployer.address);
     result.result.expectUint(6);
-
+    
     result = chain.callReadOnlyFn('tipjar-v2p', 'get-user-tips-received', [types.principal(user2.address)], deployer.address);
     result.result.expectUint(5000);
-
+    
     result = chain.callReadOnlyFn('quickpoll-v2p', 'get-poll', [types.uint(0)], deployer.address);
     const poll = result.result.expectSome().expectTuple();
     assertEquals(poll['yes-votes'].expectUint(1), 1n);
@@ -91,10 +91,10 @@ Clarinet.test({
     // Verify stats
     let result = chain.callReadOnlyFn('clicker-v2p', 'get-unique-users', [], deployer.address);
     result.result.expectUint(4);
-
+    
     result = chain.callReadOnlyFn('tipjar-v2p', 'get-unique-tippers', [], deployer.address);
     result.result.expectUint(4);
-
+    
     result = chain.callReadOnlyFn('quickpoll-v2p', 'get-unique-voters', [], deployer.address);
     result.result.expectUint(4);
   },
@@ -118,16 +118,16 @@ Clarinet.test({
 
     // All should succeed
     block.receipts.forEach(r => r.result.expectOk());
-
-    // Verify fees collected (6 actions x 100 microSTX = 600)
+    
+    // Verify fees collected (6 actions x 1000 microSTX = 6000)
     let clickerFees = chain.callReadOnlyFn('clicker-v2p', 'get-total-fees-collected', [], deployer.address);
-    clickerFees.result.expectUint(300); // 3 clicker actions
-
+    clickerFees.result.expectUint(3000); // 3 clicker actions
+    
     let tipjarFees = chain.callReadOnlyFn('tipjar-v2p', 'get-total-fees-collected', [], deployer.address);
-    tipjarFees.result.expectUint(200); // 2 tipjar actions
-
+    tipjarFees.result.expectUint(2000); // 2 tipjar actions
+    
     let pollFees = chain.callReadOnlyFn('quickpoll-v2p', 'get-total-fees-collected', [], deployer.address);
-    pollFees.result.expectUint(100); // 1 quickpoll action
+    pollFees.result.expectUint(1000); // 1 quickpoll action
   },
 });
 
@@ -140,7 +140,7 @@ Clarinet.test({
     let clickerInfo = chain.callReadOnlyFn('clicker-v2p', 'get-contract-info', [], deployer.address);
     let tipjarInfo = chain.callReadOnlyFn('tipjar-v2p', 'get-contract-info', [], deployer.address);
     let pollInfo = chain.callReadOnlyFn('quickpoll-v2p', 'get-contract-info', [], deployer.address);
-
+    
     const clickerData = clickerInfo.result.expectTuple();
     const tipjarData = tipjarInfo.result.expectTuple();
     const pollData = pollInfo.result.expectTuple();
