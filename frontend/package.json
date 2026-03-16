@@ -40,9 +40,15 @@
     "vite": "^6.0.5",
     "vitest": "^4.0.18"
   },
-  "description": "",
+  "description": "Premium decentralized interaction hub for the Stacks blockchain",
   "main": "vite.config.js",
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "keywords": [
+    "stacks",
+    "blockchain",
+    "clicker",
+    "web3",
+    "react"
+  ],
+  "author": "AdekunleBamz",
+  "license": "MIT"
 }
