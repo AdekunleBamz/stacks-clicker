@@ -24,3 +24,11 @@ Please include the following in your report:
 - Impact of the issue, including how an attacker might exploit it
 
 Your help is greatly appreciated in keeping the Stacks ecosystem safe!
+
+## User Security Best Practices
+
+To ensure a safe experience while using Stacks Clicker v2, we recommend:
+- **Never share your mnemonic phrase**: We will never ask for your recovery phrase or private keys.
+- **Verify URLs**: Always ensure you are on the official `stacksclicker.io` domain before connecting your wallet.
+- **Review Permissions**: When signing transactions, always review the details in your Stacks wallet popup (Hiro/Leather).
+- **Use Official Wallets**: Only use trusted, well-known Stacks wallets.
