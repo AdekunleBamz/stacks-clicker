@@ -1,8 +1,17 @@
-# Stacks Clicker v2 🚀
+# Stacks Clicker v2j 🚀
 
 A premium, high-performance decentralized interaction hub on the Stacks blockchain. Built for speed, aesthetics, and seamless on-chain activity.
 
 ![App Icon](frontend/public/favicon.svg)
+
+## Project Structure 📁
+
+- `contracts/`: Clarity smart contracts for the Stacks blockchain.
+- `frontend/`: React-based web application (Vite, Framer Motion).
+- `deployments/`: Network-specific deployment plans.
+- `docs/`: Additional technical documentation and guides.
+- `tests/`: Clarinet test suites for smart contracts.
+- `Makefile`: Root-level automation for development and deployment.
 
 ## Features 🌟
 
