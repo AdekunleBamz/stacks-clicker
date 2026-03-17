@@ -44,6 +44,23 @@ We use a **Collector Pattern** to aggregate contract interactions:
 
 ## Data Flow: On-Chain Interaction
 
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant F as Frontend (React)
+    participant W as Stacks Wallet
+    participant B as Blockchain (Clarity)
+
+    U->>F: Click Interaction
+    F->>F: Play Sound & Optimistic Update
+    F->>W: Trigger Contract Call
+    W->>U: Request Approval
+    U->>W: Approve Transaction
+    W->>B: Broadcast Transaction
+    W->>F: onFinish Callback
+    F->>F: Update UI & Transaction History
+```
+
 1. **User Action**: User clicks a button in `ClickerCard`.
 2. **Hook Execution**: `handleAction` plays sound and calls `clicker.click()`.
 3. **Contract Call**: `useClicker` triggers `@stacks/connect` with optimistic loading.
