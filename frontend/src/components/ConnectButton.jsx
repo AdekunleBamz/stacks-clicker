@@ -33,7 +33,12 @@ export default function ConnectButton() {
   }
 
   return (
-    <button type="button" className="connect-btn" onClick={connectWallet}>
+    <button
+      type="button"
+      className="connect-btn"
+      onClick={connectWallet}
+      aria-label="Connect Stacks Wallet"
+    >
       Connect Wallet
     </button>
   );

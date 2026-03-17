@@ -50,7 +50,12 @@ export default function Header({ theme, toggleTheme }) {
           {address ? (
             <AddressBadge address={address} onDisconnect={disconnectWallet} />
           ) : (
-            <button type="button" className="btn-connect" onClick={connectWallet}>
+            <button
+              type="button"
+              className="btn-connect"
+              onClick={connectWallet}
+              aria-label="Connect Stacks Wallet"
+            >
               Connect Wallet
             </button>
           )}
