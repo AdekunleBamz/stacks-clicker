@@ -12,7 +12,12 @@ help:
 	@echo "  make deploy-mainnet - Deploy to mainnet"
 	@echo "  make clean          - Clean build artifacts"
 	@echo "  make lint:all       - Run linting for root and frontend"
+	@echo "  make security-audit - Run npm audit for frontend"
 	@echo ""
+
+# Security
+security-audit:
+	cd frontend && npm audit
 
 # Linting
 lint:all:
