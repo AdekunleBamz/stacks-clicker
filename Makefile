@@ -1,4 +1,4 @@
-.PHONY: check test console deploy-devnet deploy-mainnet clean help
+.PHONY: check test console deploy-devnet deploy-mainnet clean help lint:all
 
 # Default target
 help:
@@ -11,7 +11,13 @@ help:
 	@echo "  make deploy-devnet  - Deploy to devnet"
 	@echo "  make deploy-mainnet - Deploy to mainnet"
 	@echo "  make clean          - Clean build artifacts"
+	@echo "  make lint:all       - Run linting for root and frontend"
 	@echo ""
+
+# Linting
+lint:all:
+	cd frontend && npm run lint
+
 
 # Check contract syntax
 check:
