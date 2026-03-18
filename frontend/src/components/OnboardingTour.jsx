@@ -32,6 +32,12 @@ export default function OnboardingTour() {
     }
   };
 
+  const handleBack = () => {
+    if (currentStep > 0) {
+      setCurrentStep(prev => prev - 1);
+    }
+  };
+
   const dismiss = () => {
     setIsVisible(false);
     if (typeof window === 'undefined') {
@@ -52,12 +58,27 @@ export default function OnboardingTour() {
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
           onClick={(e) => e.stopPropagation()}
         >
+          <div className="tour-header">
+            <div className="tour-step-dots">
+              {steps.map((_, i) => (
+                <div key={i} className={`step-dot ${i === currentStep ? 'active' : ''}`} />
+              ))}
+            </div>
+            <button type="button" className="tour-close-top" onClick={dismiss}>×</button>
+          </div>
           <div className="tour-progress">Step {currentStep + 1} of {steps.length}</div>
           <p className="tour-content">{steps[currentStep].content}</p>
           <div className="tour-footer">
-            <button type="button" className="tour-skip" onClick={dismiss}>
-              Skip Tour
-            </button>
+            <div className="footer-left">
+              <button type="button" className="tour-skip" onClick={dismiss}>
+                Skip
+              </button>
+              {currentStep > 0 && (
+                <button type="button" className="tour-back" onClick={handleBack}>
+                  Back
+                </button>
+              )}
+            </div>
             <button type="button" className="tour-next" onClick={handleNext}>
               {currentStep === steps.length - 1 ? 'Get Started' : 'Next'}
             </button>

@@ -1253,6 +1253,43 @@ textarea:focus-visible {
   width: 100%;
   box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 40px var(--primary-glow);
   text-align: center;
+  position: relative;
+}
+
+.tour-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.tour-step-dots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.step-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.step-dot.active {
+  background: var(--primary);
+  box-shadow: 0 0 10px var(--primary-glow);
+  width: 24px;
+  border-radius: 4px;
+}
+
+.tour-close-top {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.5rem;
+  cursor: pointer;
+  line-height: 1;
 }
 
 .tour-progress {
@@ -1262,6 +1299,7 @@ textarea:focus-visible {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin-bottom: 1.5rem;
+  opacity: 0.8;
 }
 
 .tour-content {
@@ -1277,13 +1315,23 @@ textarea:focus-visible {
   align-items: center;
 }
 
-.tour-skip {
+.footer-left {
+  display: flex;
+  gap: 1rem;
+}
+
+.tour-skip, .tour-back {
   background: none;
   border: none;
   color: var(--text-muted);
   cursor: pointer;
   font-weight: 600;
   font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.tour-skip:hover, .tour-back:hover {
+  color: var(--text-main);
 }
 
 .tour-next {
