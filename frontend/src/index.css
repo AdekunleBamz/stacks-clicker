@@ -60,10 +60,10 @@
   --lh-tight: 1.25;
   --lh-base: 1.5;
   --lh-relaxed: 1.75;
-  --radius-md: 16px;
-  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.6);
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-heading: 'Outfit', var(--font-sans);
+
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 [data-theme='light'] {
