@@ -41,11 +41,19 @@ function ActionButton({
       onClick={onClick}
       disabled={disabled || isLoading}
       aria-busy={isLoading}
-      whileHover={!disabled && !isLoading ? { scale: 1.05, translateY: -4 } : {}}
-      whileTap={!disabled && !isLoading ? { scale: 0.95, translateY: 0 } : {}}
-      animate={isError ? "shake" : ""}
+      whileHover={!disabled && !isLoading ? { 
+        scale: 1.02, 
+        translateY: -2,
+        boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)"
+      } : {}}
+      whileTap={!disabled && !isLoading ? { 
+        scale: 0.98, 
+        translateY: 0,
+        filter: "brightness(0.9)"
+      } : {}}
+      animate={isError ? "shake" : {}}
       variants={shakeVariants}
-      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+      transition={{ type: "spring", stiffness: 500, damping: 15 }}
     >
       <div className="btn-content">
         <AnimatePresence mode="wait">
