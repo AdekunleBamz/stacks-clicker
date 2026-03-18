@@ -13,13 +13,15 @@ import PerformanceOverlay from './components/common/PerformanceOverlay';
 import ScrollToTop from './components/common/ScrollToTop';
 import SkeletonLoader from './components/common/SkeletonLoader';
 import { useI18n } from './context/I18nContext';
+import { useInteractions } from './hooks/useInteractions';
+import { useSound } from './hooks/useSound';
+import { useLocalStorage } from './hooks/useLocalStorage';
+import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 
 // Lazy load heavy components for optimized initial paint
 const MainGrid = React.lazy(() => import('./components/MainGrid'));
 const PlayerStats = React.lazy(() => import('./components/PlayerStats'));
 const TransactionHistory = React.lazy(() => import('./components/TransactionHistory'));
-
-import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 
 /**
  * Main application component for the Stacks Clicker v2.
