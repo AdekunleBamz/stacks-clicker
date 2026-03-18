@@ -1,6 +1,7 @@
 import React, { useEffect, useState, memo } from 'react';
 import { motion, animate } from 'framer-motion';
 import PropTypes from 'prop-types';
+import Tooltip from './Tooltip';
 
 /**
  * Animated number component for smooth counting transitions between values.
@@ -40,10 +41,11 @@ AnimatedNumber.propTypes = {
  * @param {string} props.color - Theme color used for accents and glows
  * @param {boolean} [props.isPrice=false] - If true, treats the value as a price (no counting animation)
  * @param {number} [props.index=0] - Index in the grid for staggered entrance animation
+ * @param {string} [props.tooltip] - Optional description for the tooltip
  * @returns {JSX.Element} The rendered stats card
  */
-function StatsCard({ label, value, icon, color, isPrice = false, index = 0 }) {
-  return (
+function StatsCard({ label, value, icon, color, isPrice = false, index = 0, tooltip }) {
+  const cardContent = (
     <motion.div
       className="stat-card"
       initial={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -87,6 +89,8 @@ function StatsCard({ label, value, icon, color, isPrice = false, index = 0 }) {
       </div>
     </motion.div>
   );
+
+  return tooltip ? <Tooltip content={tooltip}>{cardContent}</Tooltip> : cardContent;
 }
 
 StatsCard.propTypes = {
@@ -95,7 +99,8 @@ StatsCard.propTypes = {
   icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
   color: PropTypes.string.isRequired,
   isPrice: PropTypes.bool,
-  index: PropTypes.number
+  index: PropTypes.number,
+  tooltip: PropTypes.string
 };
 
 export default memo(StatsCard);

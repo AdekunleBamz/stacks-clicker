@@ -14,10 +14,10 @@ import StatsCard from './common/StatsCard';
  */
 function PlayerStats({ stats, txCount }) {
   const statItems = useMemo(() => [
-    { label: 'Total Clicks', value: stats.clicks, icon: '🎯', color: 'indigo' },
-    { label: 'Total Tips', value: stats.tips, icon: '💰', color: 'amber' },
-    { label: 'Total Votes', value: stats.votes, icon: '🗳️', color: 'emerald' },
-    { label: 'Session TXs', value: txCount, icon: '📦', color: 'pink' }
+    { label: 'Total Clicks', value: stats.clicks, icon: '🎯', color: 'indigo', tooltip: 'Total number of on-chain click operations performed by your address.' },
+    { label: 'Total Tips', value: stats.tips, icon: '💰', color: 'amber', tooltip: 'Total amount of STX tokens you have tipped to the community.' },
+    { label: 'Total Votes', value: stats.votes, icon: '🗳️', color: 'emerald', tooltip: 'Number of unique votes you have cast in community polls.' },
+    { label: 'Session TXs', value: txCount, icon: '📦', color: 'pink', tooltip: 'Total number of transactions initiated in this browsing session.' }
   ], [stats, txCount]);
 
   return (
