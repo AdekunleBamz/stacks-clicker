@@ -1737,6 +1737,50 @@ textarea:focus-visible {
 
 .tx-item:active { cursor: grabbing; }
 
+/* TipJar Improvements */
+.predefined-amounts {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.predefined-btn {
+  flex: 1;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 0.5rem;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.predefined-btn:hover:not(:disabled) {
+  border-color: var(--warning);
+  color: var(--warning);
+  background: rgba(245, 158, 11, 0.05);
+  transform: translateY(-1px);
+}
+
+.predefined-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tip-success-msg {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid var(--success);
+  color: var(--success);
+  padding: 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
 /* Roadmap Board (Task 55) */
 .roadmap-board {
   margin-top: 4rem;

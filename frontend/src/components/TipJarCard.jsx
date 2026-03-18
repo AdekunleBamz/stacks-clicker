@@ -4,6 +4,8 @@ import ActionCard from './common/ActionCard';
 import ActionButton from './common/ActionButton';
 import Tooltip from './common/Tooltip';
 import { useSound } from '../hooks/useSound';
+import { notify } from '../utils/toast';
+import { motion, AnimatePresence } from 'framer-motion';
 
 /**
  * Component for the TipJar interaction card.
@@ -23,6 +25,8 @@ function TipJarCard({ address, tipjar }) {
   const [tipAmount, setTipAmount] = useState('0.001');
   const { playSound } = useSound();
   const [errorField, setErrorField] = useState(null);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const predefinedAmounts = [1, 5, 10];
   const parsedTipAmount = Number.parseFloat(tipAmount);
   const isTipAmountValid = Number.isFinite(parsedTipAmount) && parsedTipAmount >= 0.001;
 
@@ -36,11 +40,23 @@ function TipJarCard({ address, tipjar }) {
    */
   const handleCustomTip = useCallback(() => {
     if (!isTipAmountValid) {
+      playSound('error');
+      setErrorField('custom-tip');
+      setTimeout(() => setErrorField(null), 500);
       return;
     }
 
     tip(parsedTipAmount);
-  }, [isTipAmountValid, parsedTipAmount, tip]);
+    setShowSuccess(true);
+    setTimeout(() => setShowSuccess(false), 5000);
+  }, [isTipAmountValid, parsedTipAmount, tip, playSound]);
+
+  const handlePredefinedTip = useCallback((amount) => {
+    tip(amount);
+    setShowSuccess(true);
+    setTimeout(() => setShowSuccess(false), 5000);
+    notify.success(`Tipping ${amount} STX...`);
+  }, [tip]);
 
   /**
    * Internal wrapper to check connection and play sound before executing an action.
@@ -101,18 +117,44 @@ function TipJarCard({ address, tipjar }) {
           <label className="input-label" htmlFor="tip-amount-input">
             Custom Amount (STX)
           </label>
+          <div className="predefined-amounts">
+            {predefinedAmounts.map((amt) => (
+              <button
+                key={amt}
+                type="button"
+                className="predefined-btn"
+                onClick={() => handlePredefinedTip(amt)}
+                disabled={isLoading('tip')}
+              >
+                {amt} STX
+              </button>
+            ))}
+          </div>
           <input
             id="tip-amount-input"
             type="number"
-            step="0.001"
+            step="1"
             min="0.001"
             className="amount-input"
             value={tipAmount}
             onChange={(e) => setTipAmount(e.target.value)}
-            placeholder="0.001"
+            placeholder="Min 0.001"
             aria-invalid={!isTipAmountValid}
           />
         </div>
+
+        <AnimatePresence>
+          {showSuccess && (
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              className="tip-success-msg"
+            >
+              🎉 Thank you for your generous tip!
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <Tooltip
           content={
