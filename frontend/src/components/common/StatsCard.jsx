@@ -73,6 +73,17 @@ function StatsCard({ label, value, icon, color, isPrice = false, index = 0 }) {
           )}
         </div>
         <div className="label">{label}</div>
+        {!isPrice && typeof value === 'number' && (
+          <div className="progress-container">
+            <motion.div 
+              className="progress-bar"
+              initial={{ width: 0 }}
+              animate={{ width: `${Math.min(((value % 100) / 100) * 100, 100)}%` }}
+              style={{ background: color }}
+              transition={{ duration: 1, ease: "easeOut" }}
+            />
+          </div>
+        )}
       </div>
     </motion.div>
   );
