@@ -18,43 +18,33 @@ export default class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div
-          style={{
-            padding: '40px',
-            textAlign: 'center',
-            background: 'rgba(255, 71, 87, 0.05)',
-            borderRadius: '24px',
-            border: '1px solid rgba(255, 71, 87, 0.2)',
-            margin: '20px',
-            maxWidth: '500px',
-            marginLeft: 'auto',
-            marginRight: 'auto',
-          }}
-        >
-          <img
-            src="/error_illustration.png"
-            alt="Error Robot"
-            style={{ width: '200px', height: 'auto', marginBottom: '20px' }}
-          />
-          <h2 style={{ color: '#ff4757', marginBottom: '10px' }}>⚠️ Something went wrong</h2>
-          <p style={{ color: '#a0a0a0', marginBottom: '20px' }}>
-            {this.state.error?.message || 'An unexpected error occurred.'}
-          </p>
-          <button
-            type="button"
-            onClick={() => this.setState({ hasError: false, error: null })}
-            style={{
-              padding: '12px 24px',
-              background: 'linear-gradient(135deg, #9d4edd, #ff007f)',
-              color: 'white',
-              border: 'none',
-              borderRadius: '12px',
-              cursor: 'pointer',
-              fontWeight: 700,
-            }}
-          >
-            🔄 Retry
-          </button>
+        <div className="error-boundary-container">
+          <div className="error-content">
+            <div className="error-icon">⚠️</div>
+            <h2 className="error-title">Something went wrong</h2>
+            <p className="error-message">
+              {this.state.error?.message || 'An unexpected error occurred.'}
+            </p>
+            <div className="error-actions">
+              <button
+                type="button"
+                className="error-btn retry"
+                onClick={() => this.setState({ hasError: false, error: null })}
+              >
+                🔄 Try Again
+              </button>
+              <button
+                type="button"
+                className="error-btn reload"
+                onClick={() => window.location.reload()}
+              >
+                🌐 Reload App
+              </button>
+            </div>
+            <p className="error-helper">
+              If the problem persists, please contact support or check the network status.
+            </p>
+          </div>
         </div>
       );
     }
