@@ -50,6 +50,10 @@ function TransactionItem({
             <button type="button" className="text-btn" onClick={() => onDetails(tx)}>
               Details
             </button>
+            <span className="tx-action-separator">•</span>
+            <button type="button" className="text-btn" onClick={() => onCopy(tx.id)}>
+              Copy ID
+            </button>
           </div>
           <div className="tx-status-visualizer">
             <div className="status-steps">
