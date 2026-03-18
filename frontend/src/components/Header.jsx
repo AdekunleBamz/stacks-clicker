@@ -48,7 +48,18 @@ export default function Header({ theme, toggleTheme }) {
           </Tooltip>
 
           {address ? (
-            <AddressBadge address={address} onDisconnect={disconnectWallet} />
+            <div className="wallet-connected">
+              <AddressBadge address={address} />
+              <button
+                type="button"
+                className="btn-logout"
+                onClick={disconnectWallet}
+                aria-label="Logout"
+                title="Logout"
+              >
+                <span className="logout-icon">🚪</span>
+              </button>
+            </div>
           ) : (
             <button
               type="button"
