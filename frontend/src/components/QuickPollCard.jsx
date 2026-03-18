@@ -1,9 +1,11 @@
-import React, { useState, memo, useCallback } from 'react';
+import React, { useState, memo, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { motion, AnimatePresence } from 'framer-motion';
 import ActionCard from './common/ActionCard';
 import ActionButton from './common/ActionButton';
 import Tooltip from './common/Tooltip';
 import { useSound } from '../hooks/useSound';
+import { notify } from '../utils/toast';
 
 /**
  * Component for the QuickPoll interaction card.
@@ -25,6 +27,20 @@ function QuickPollCard({ address, quickpoll }) {
   const { playSound } = useSound();
   const [errorField, setErrorField] = useState(null);
   const trimmedQuestion = pollQuestion.trim();
+  const [timeLeft, setTimeLeft] = useState(3600); // 1 hour in seconds
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 3600));
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatTime = (seconds) => {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return `${m}:${s.toString().padStart(2, '0')}`;
+  };
 
   /**
    * Triggers a 'YES' vote transaction for the current poll.
@@ -137,18 +153,23 @@ function QuickPollCard({ address, quickpoll }) {
               disabled={isLoading('vote')}
             />
           </Tooltip>
-          <Tooltip content="Vote NO on the active community poll.">
-            <ActionButton
-              label="No"
-              icon="👎"
-              cost="0.001"
-              className="secondary"
-              onClick={() => handleAction(handleVoteNo, 'vote-no')}
-              isLoading={isLoading('vote')}
-              isError={errorField === 'vote-no'}
-              disabled={isLoading('vote')}
-            />
-          </Tooltip>
+        </div>
+
+        <div className="poll-footer">
+          <div className="poll-timer">
+            <span className="timer-icon">⏳</span>
+            <span className="timer-text">Ends in: {formatTime(timeLeft)}</span>
+          </div>
+          <button 
+            type="button" 
+            className="share-poll-btn"
+            onClick={() => {
+              notify.success('Results link copied to clipboard!');
+              navigator.clipboard.writeText(window.location.href);
+            }}
+          >
+            ↗ Share Results
+          </button>
         </div>
       </div>
     </ActionCard>

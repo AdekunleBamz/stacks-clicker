@@ -468,8 +468,43 @@ textarea:focus-visible {
 .poll-input:focus, .address-input:focus, .amount-input:focus, .poll-id-input:focus {
   outline: none;
   border-color: var(--primary);
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 0 0 4px var(--primary-glow);
+  background: var(--bg-input);
+  box-shadow: 0 0 10px var(--primary-glow);
+}
+
+.poll-footer {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.poll-timer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--warning);
+  font-weight: 600;
+}
+
+.share-poll-btn {
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.share-poll-btn:hover {
+  background: var(--primary-glow);
+  color: #fff;
 }
 
 .input-group {
