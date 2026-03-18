@@ -22,6 +22,7 @@ function TransactionHistory({ txLog }) {
   const [selectedTx, setSelectedTx] = useState(null);
   const [contextMenu, setContextMenu] = useState(null);
   const [filterStatus, setFilterStatus] = useState('all');
+  const [filterAction, setFilterAction] = useState('all');
   const [modalView, setModalView] = useState('summary'); // 'summary' or 'raw'
   const closeBtnRef = React.useRef(null);
 
@@ -56,9 +57,10 @@ function TransactionHistory({ txLog }) {
         actionText.includes(search) ||
         idText.includes(search);
       const matchesStatus = filterStatus === 'all' || tx.status === filterStatus;
-      return matchesSearch && matchesStatus;
+      const matchesAction = filterAction === 'all' || tx.action.toLowerCase().includes(filterAction.toLowerCase());
+      return matchesSearch && matchesStatus && matchesAction;
     });
-  }, [txLog, searchTerm, filterStatus]);
+  }, [txLog, searchTerm, filterStatus, filterAction]);
 
   const highlightText = useCallback((text, highlight) => {
     if (!highlight.trim()) return text;
@@ -150,6 +152,18 @@ function TransactionHistory({ txLog }) {
             <option value="success">Success</option>
             <option value="pending">Pending</option>
             <option value="failed">Failed</option>
+          </select>
+          <select
+            className="tx-filter-select"
+            value={filterAction}
+            onChange={(e) => setFilterAction(e.target.value)}
+            aria-label="Filter transactions by action type"
+          >
+            <option value="all">All Types</option>
+            <option value="Click">Clicks</option>
+            <option value="Tip">Tips</option>
+            <option value="Vote">Votes</option>
+            <option value="Ping">Pings</option>
           </select>
           <button
             type="button"
