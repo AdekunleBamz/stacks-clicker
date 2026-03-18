@@ -1,6 +1,6 @@
 import React, { useState, memo, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { toast } from 'react-hot-toast';
+import { notify } from '../../utils/toast';
 
 /**
  * Component for displaying a truncated Stacks wallet address with copy-to-clipboard functionality.
@@ -21,7 +21,7 @@ function AddressBadge({ address, onDisconnect }) {
   const handleCopy = useCallback(() => {
     if (!address) return;
     if (!navigator?.clipboard?.writeText) {
-      toast.error('Clipboard not available');
+      notify.error('Clipboard not available');
       return;
     }
 
@@ -29,10 +29,10 @@ function AddressBadge({ address, onDisconnect }) {
       .writeText(address)
       .then(() => {
         setCopied(true);
-        toast.success('Address copied!');
+        notify.success('Address copied!');
         setTimeout(() => setCopied(false), 2000);
       })
-      .catch(() => toast.error('Unable to copy address'));
+      .catch(() => notify.error('Unable to copy address'));
   }, [address]);
 
   if (!address) return null;

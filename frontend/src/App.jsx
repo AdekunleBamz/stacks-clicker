@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Toaster, toast } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
+import { notify } from './utils/toast';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import QuickActions from './components/QuickActions';
@@ -84,15 +85,7 @@ export default function App() {
       setParticleTrigger((prev) => prev + 1);
       playSound('success');
 
-      toast.success(`${action} submitted!`, {
-        icon: action.split(' ')[0],
-        style: {
-          borderRadius: '12px',
-          background: '#1e1b4b',
-          color: '#fff',
-          border: '1px solid rgba(255,255,255,0.1)',
-        },
-      });
+      notify.custom(`${action} submitted!`, action.split(' ')[0]);
       return tx;
     },
     [playSound]

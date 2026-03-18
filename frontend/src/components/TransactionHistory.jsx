@@ -1,7 +1,7 @@
 import React, { useState, memo, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
-import toast from 'react-hot-toast';
+import { notify } from '../utils/toast';
 import SkeletonLoader from './common/SkeletonLoader';
 import SearchInput from './common/SearchInput';
 import TransactionItem from './TransactionItem';
@@ -108,20 +108,20 @@ function TransactionHistory({ txLog }) {
 
   const copyText = useCallback(async (value, label = 'Value') => {
     if (!navigator?.clipboard?.writeText) {
-      toast.error('Clipboard access is not available');
+      notify.error('Clipboard access is not available');
       return;
     }
     try {
       await navigator.clipboard.writeText(value);
-      toast.success(`${label} copied`);
+      notify.success(`${label} copied`);
     } catch (error) {
-      toast.error(`Unable to copy ${label.toLowerCase()}`);
+      notify.error(`Unable to copy ${label.toLowerCase()}`);
     }
   }, []);
 
   const openExplorer = useCallback((tx) => {
     if (!tx.explorerUrl) {
-      toast.error('Pending transactions do not have an explorer link yet');
+      notify.error('Pending transactions do not have an explorer link yet');
       return;
     }
 
