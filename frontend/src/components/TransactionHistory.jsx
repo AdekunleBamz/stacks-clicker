@@ -23,6 +23,7 @@ function TransactionHistory({ txLog }) {
   const [contextMenu, setContextMenu] = useState(null);
   const [filterStatus, setFilterStatus] = useState('all');
   const [filterAction, setFilterAction] = useState('all');
+  const [visibleItems, setVisibleItems] = useState(10);
   const [modalView, setModalView] = useState('summary'); // 'summary' or 'raw'
   const closeBtnRef = React.useRef(null);
 
@@ -378,7 +379,7 @@ function TransactionHistory({ txLog }) {
               {!searchTerm && <p className="empty-helper">Tip: Keyboard shortcuts are C for click and T for tip.</p>}
             </motion.div>
           ) : (
-            filteredLog.map((tx) => (
+            filteredLog.slice(0, visibleItems).map((tx) => (
               <TransactionItem
                 key={tx.id}
                 tx={tx}
@@ -392,6 +393,15 @@ function TransactionHistory({ txLog }) {
             ))
           )}
         </AnimatePresence>
+        {filteredLog.length > visibleItems && (
+          <button
+            type="button"
+            className="load-more-btn"
+            onClick={() => setVisibleItems((prev) => prev + 10)}
+          >
+            Load More Activity ({filteredLog.length - visibleItems} remaining)
+          </button>
+        )}
       </div>
     </section>
   );
