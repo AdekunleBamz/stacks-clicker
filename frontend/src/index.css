@@ -489,11 +489,59 @@ textarea:focus-visible {
 }
 
 /* Modal Overlay Enhancement */
+.qr-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 1.5rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.qr-copy-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  width: 100%;
+}
+
+.qr-copy-btn:hover {
+  background: var(--bg-input);
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+
+.qr-mobile-link {
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.qr-mobile-link:hover {
+  text-decoration: underline;
+}
+
 .modal-overlay {
   position: fixed;
   inset: 0;
   background: rgba(3, 0, 20, 0.8);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
   z-index: 1000;
   display: flex;
   align-items: center;

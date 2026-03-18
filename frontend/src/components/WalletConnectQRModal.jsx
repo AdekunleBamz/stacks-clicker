@@ -1,6 +1,7 @@
 import React from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import { getWalletConnectLink } from '../utils/walletconnect';
+import { notify } from '../utils/toast';
 
 /**
  * WalletConnect QR Modal
@@ -43,6 +44,16 @@ export default function WalletConnectQRModal({ uri, onClose }) {
             <a href={wcLink} target="_blank" rel="noopener noreferrer" className="qr-mobile-link">
               Open in Wallet App →
             </a>
+            <button 
+              type="button" 
+              className="qr-copy-btn" 
+              onClick={() => {
+                navigator.clipboard.writeText(uri);
+                notify.success('Pairing URI copied!');
+              }}
+            >
+              📋 Copy Pairing URI
+            </button>
           </div>
 
           <div className="qr-supported-wallets">
