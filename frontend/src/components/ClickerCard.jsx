@@ -1,5 +1,6 @@
 import React, { memo, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { motion, AnimatePresence } from 'framer-motion';
 import ActionCard from './common/ActionCard';
 import ActionButton from './common/ActionButton';
 import Tooltip from './common/Tooltip';
@@ -23,6 +24,8 @@ function ClickerCard({ address, clicker }) {
   const { isLoading, click, multiClick, ping } = clicker;
   const { playSound } = useSound();
   const [errorField, setErrorField] = React.useState(null);
+  const [combo, setCombo] = React.useState(0);
+  const comboTimerRef = React.useRef(null);
 
   /**
    * Internal wrapper to play acoustic feedback before executing a contract action.
@@ -38,6 +41,13 @@ function ClickerCard({ address, clicker }) {
         return;
       }
 
+      // Combo management
+      setCombo((prev) => prev + 1);
+      if (comboTimerRef.current) clearTimeout(comboTimerRef.current);
+      comboTimerRef.current = setTimeout(() => {
+        setCombo(0);
+      }, 2000);
+
       playSound('click');
       actionFn(...args);
     },
@@ -52,6 +62,21 @@ function ClickerCard({ address, clicker }) {
       icon="🚀"
       iconClass="bg-indigo-500/20 text-indigo-400"
     >
+      <div className="clicker-header">
+        <AnimatePresence>
+          {combo > 1 && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 1.5, y: -20 }}
+              className="combo-badge"
+            >
+              <span className="combo-number">{combo}x</span>
+              <span className="combo-text">COMBO!</span>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
       <div className="actions">
         <Tooltip content="Perform a single on-chain click interaction instantly (fixed cost).">
           <ActionButton

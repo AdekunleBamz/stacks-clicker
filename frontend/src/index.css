@@ -504,6 +504,39 @@ textarea:focus-visible {
   position: relative;
 }
 
+/* Clicker Header & Combo */
+.clicker-header {
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.combo-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, var(--warning), #f59e0b);
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
+  color: #000;
+  font-weight: 800;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.combo-number {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.combo-text {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
 .action-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -511,6 +544,8 @@ textarea:focus-visible {
   padding: 1.5rem;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
+  position: relative;
+  overflow: hidden;
 }
 
 .action-card:hover {
