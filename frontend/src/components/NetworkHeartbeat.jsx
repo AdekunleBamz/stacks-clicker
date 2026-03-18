@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNetwork } from '../hooks/useNetwork';
+import Tooltip from './common/Tooltip';
 
 /**
  * Visual indicator for network synchronization and state.
@@ -11,9 +12,14 @@ export default function NetworkHeartbeat() {
     : 'Stacks network unavailable';
 
   return (
-    <div className="heartbeat-container" title={heartbeatTitle} aria-live="polite">
-      <div className="heartbeat-pulse"></div>
-      <span className="block-height">{isConnected ? `#${blockHeight}` : 'Offline'}</span>
-    </div>
+    <Tooltip content={heartbeatTitle}>
+      <div className="heartbeat-container" aria-live="polite">
+        <div className={`heartbeat-pulse ${isConnected ? 'online' : 'offline'}`}></div>
+        <div className="heartbeat-info">
+          <span className="network-name">{isConnected ? network : 'Disconnected'}</span>
+          <span className="block-height">{isConnected ? `#${blockHeight}` : 'Offline'}</span>
+        </div>
+      </div>
+    </Tooltip>
   );
 }
