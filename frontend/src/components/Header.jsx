@@ -28,13 +28,14 @@ export default function Header({ theme, toggleTheme }) {
 
         <div className="wallet-section">
           <select
-            className="lang-select"
+            className="language-select"
             value={lang}
             onChange={(e) => setLang(e.target.value)}
-            aria-label="Select Language"
+            aria-label="Select application language"
           >
-            <option value="en">English (EN)</option>
-            <option value="es">Español (ES)</option>
+            <option value="en">EN</option>
+            <option value="es">ES</option>
+            <option value="fr">FR</option>
           </select>
           <Tooltip content={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}>
             <button

@@ -84,6 +84,13 @@
   -webkit-font-smoothing: antialiased;
 }
 
+/* Accessibility - Focus Styles */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 4px var(--primary-glow);
+}
+
 /* Smooth View Transitions */
 @view-transition {
   navigation: auto;

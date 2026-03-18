@@ -14,16 +14,34 @@ export default function Footer() {
           <span className="app-version">v{version}</span>
         </div>
         <div className="footer-links">
-          <a href="https://twitter.com/Stacks" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-            𝕏
-          </a>
-          <a href="https://discord.gg/stacks" target="_blank" rel="noopener noreferrer" aria-label="Discord">
-            👾
-          </a>
-          <a href="https://github.com/AdekunleBamz/stacks-clicker" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-            🐙
-          </a>
-        </div>
+        <a 
+          href="https://twitter.com/stacks" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="social-link"
+          aria-label="Follow Stacks on Twitter"
+        >
+          <span aria-hidden="true">🐦</span> Twitter
+        </a>
+        <a 
+          href="https://discord.gg/stacks" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="social-link"
+          aria-label="Join Stacks Discord"
+        >
+          <span aria-hidden="true">💬</span> Discord
+        </a>
+        <a 
+          href="https://github.com/stacks-network" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="social-link"
+          aria-label="View Stacks Clicker Source on GitHub"
+        >
+          <span aria-hidden="true">🐙</span> GitHub
+        </a>
+      </div>
       </div>
     </footer>
   );
