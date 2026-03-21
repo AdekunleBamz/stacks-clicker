@@ -134,7 +134,7 @@ function TransactionHistory({ txLog }) {
   return (
     <section className="tx-log" aria-labelledby="tx-history-title">
       <div className="log-header">
-        <h3 id="tx-history-title">📜 Recent Activity</h3>
+        <h3 id="tx-history-title" aria-label="Recent Account Activity Log">📜 Recent Activity</h3>
         <SearchInput
           value={searchTerm}
           onChange={setSearchTerm}
