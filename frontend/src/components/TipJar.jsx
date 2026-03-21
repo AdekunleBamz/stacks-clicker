@@ -133,6 +133,7 @@ export default function TipJar({ onTxSubmit }) {
           className="action-btn secondary"
           onClick={handleSelfPing}
           disabled={!isConnected || loading}
+          title="Send a self ping transaction"
         >
           📡 Self Ping
         </button>
