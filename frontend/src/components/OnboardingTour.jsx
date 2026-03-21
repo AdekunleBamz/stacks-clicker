@@ -71,7 +71,7 @@ export default function OnboardingTour() {
           </div>
           <div className="tour-progress" aria-live="polite">Step {currentStep + 1} of {steps.length}</div>
           <p className="tour-content">{steps[currentStep].content}</p>
-          <div className="tour-footer">
+          <div className="tour-footer" role="navigation" aria-label="Tour Navigation">
             <div className="footer-left">
               <button type="button" className="tour-skip" onClick={dismiss}>
                 Skip
