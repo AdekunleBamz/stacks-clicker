@@ -37,7 +37,7 @@ function InteractionStreaks({ totalInteractions }) {
   }, [totalInteractions]);
 
   return (
-    <div className="streak-panel">
+    <div className="streak-panel" role="status" aria-live="polite" aria-atomic="true">
       <div className="streak-stats">
         <div className="streak-count">
           <motion.span
