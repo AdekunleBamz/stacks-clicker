@@ -64,7 +64,7 @@ export default function Header({ theme, toggleTheme }) {
                 aria-label="Logout"
                 title="Logout"
               >
-                <span className="logout-icon">🚪</span>
+                <span className="logout-icon" aria-hidden="true">🚪</span>
               </button>
             </div>
           ) : (
