@@ -51,6 +51,7 @@ function Tooltip({ content, children }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 5, scale: 0.95 }}
             className="tooltip-content"
+            style={{ fontWeight: 500, letterSpacing: '0.01em' }}
             role="tooltip"
             aria-atomic="true"
             aria-live="polite"
