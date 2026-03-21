@@ -80,7 +80,7 @@ export default function ClickerGame({ onTxSubmit }) {
   return (
     <div className="game-card clicker-game">
       <div className="game-header">
-        <h2>🎮 Clicker Game</h2>
+        <h2 aria-label="Clicker Game Primary Interface">🎮 Clicker Game</h2>
         <span className="game-badge">Earn Streaks</span>
       </div>
 
