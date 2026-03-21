@@ -25,13 +25,14 @@ export default function ActionButton({
       <div className="btn-content">
         <AnimatePresence mode="wait">
           {isLoading ? (
-            <motion.div
-              key="loader"
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.5 }}
-              className="spinner"
-            />
+            <div className="loading-progress-container" key="loader">
+              <motion.div
+                initial={{ width: 0 }}
+                animate={{ width: "100%", opacity: [0.6, 1, 0.6] }}
+                transition={{ duration: 2, ease: "linear", opacity: { duration: 1, repeat: Infinity } }}
+                className="loading-progress-bar pulse"
+              />
+            </div>
           ) : (
             <motion.span
               key="icon"
