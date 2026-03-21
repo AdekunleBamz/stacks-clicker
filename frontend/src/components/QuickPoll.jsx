@@ -150,7 +150,7 @@ export default function QuickPoll({ onTxSubmit }) {
       <div className="game-stats">
         <div className="stat">
           <span className="stat-value">{votes.yes}</span>
-          <span className="stat-label">Yes Votes</span>
+          <span className="stat-label" aria-hidden="true">Yes Votes</span>
         </div>
         <div className="stat">
           <span className="stat-value">{votes.no}</span>
