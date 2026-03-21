@@ -87,7 +87,7 @@ function TipJarCard({ address, tipjar }) {
       icon="💎"
       iconClass="bg-amber-500/20 text-amber-500"
     >
-      <div className="actions">
+      <div className="actions" role="group" aria-label="Tipping Controls">
         <Tooltip content="Ping the TipJar contract to verify active connectivity.">
           <ActionButton
             label="Self Ping"
