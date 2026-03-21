@@ -20,7 +20,12 @@ export default function Header({ theme, toggleTheme }) {
   return (
     <header className="app-header">
       <div className="header-content">
-        <div className="logo">
+        <div 
+          className="logo" 
+          role="banner" 
+          aria-label="Application Logo"
+          title="Stacks Clicker V2 Logo"
+        >
           <NetworkHeartbeat />
           <NetworkLogo />
           <span className="logo-text">Stacks Clicker V2</span>
