@@ -94,12 +94,12 @@ export default function ClickerGame({ onTxSubmit }) {
       <div className="game-actions">
         <button
           type="button"
-          className="action-btn primary"
-          onClick={handleClick}
+          className="action-btn primary huge"
+          onClick={handleManualClick}
           disabled={!isConnected || loading}
           title="Click to generate a transaction manually"
         >
-          {loading ? '⏳' : '👆'} Click!
+          <span aria-hidden="true">{loading ? '⏳' : '👆'}</span> Click!
         </button>
 
         <div className="multi-click-group">
