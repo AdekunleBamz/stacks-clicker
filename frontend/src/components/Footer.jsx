@@ -11,7 +11,7 @@ export default function Footer() {
       <div className="footer-content">
         <div className="footer-left">
           <p>Built with <span role="img" aria-label="love">❤️</span> on Stacks</p>
-          <span className="app-version">v{version}</span>
+          <span className="app-version" title="Current Interface Version">v{version}</span>
         </div>
         <div className="footer-links">
         <a 
