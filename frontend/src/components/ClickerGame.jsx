@@ -116,10 +116,10 @@ export default function ClickerGame({ onTxSubmit }) {
       </div>
 
       <div className="game-actions">
-        <motion.button
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          className="action-btn primary"
+        <button
+          type="button"
+          className="action-btn primary huge"
+          onClick={handleManualClick}
           onClick={handleClick}
           disabled={!isConnected || loading}
           title="Click to generate a transaction manually"
