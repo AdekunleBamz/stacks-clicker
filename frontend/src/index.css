@@ -19,7 +19,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
 
 :root {
-  /* Global Design Tokens (Shared) */
+  --primary: #6366f1;
+  --primary-glow: rgba(99, 102, 241, 0.5);
+  --success: #10b981;
+  --success-glow: rgba(16, 185, 129, 0.4);
+  --app-bg: #0b0b13; /* darkened base app background for heightened card contrast */
+  --warning: #f59e0b;
+  --error: #ef4444;
+  --bg-dark: #030014;
+  --bg-card: rgba(15, 15, 25, 0.6);
+  --bg-input: rgba(255, 255, 255, 0.03);
+  --text-main: #f8fafc;
+  --text-muted: #cbd5e1; /* upping contrast of subdued text */
+  --border: rgba(255, 255, 255, 0.12);
   --radius-lg: 24px;
   --radius-xl: 32px;
   --radius-full: 9999px;
