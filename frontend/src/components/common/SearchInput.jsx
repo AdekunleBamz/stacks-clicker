@@ -1,4 +1,4 @@
-import React, { useId, memo } from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -15,22 +15,17 @@ import { motion, AnimatePresence } from 'framer-motion';
  * @returns {JSX.Element} The rendered search input
  */
 function SearchInput({ value, onChange, onClear, placeholder = 'Search...', count }) {
-  const id = useId();
-  const searchId = `search-input-${id}`;
-
   return (
-    <div className="search-wrapper" role="search">
+    <div className="search-wrapper">
       <div className="search-relative">
-        <span className="search-icon" aria-hidden="true" style={{ willChange: 'transform' }}>🔍</span>
+        <span className="search-icon" aria-hidden="true">🔍</span>
         <input
-          id={searchId}
           type="text"
           placeholder={placeholder}
-          className="search-input input-field glass-card"
+          className="search-input"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          aria-label={placeholder}
-          aria-describedby={count !== undefined ? `search-count-${id}` : undefined}
+          aria-label="Transaction search input stream"
         />
         <AnimatePresence>
           {value && (
@@ -49,7 +44,7 @@ function SearchInput({ value, onChange, onClear, placeholder = 'Search...', coun
         </AnimatePresence>
       </div>
       {count !== undefined && (
-        <span id={`search-count-${id}`} className="search-count-badge glass-card" role="status" aria-live="polite" aria-label={`${count} results found`}>{count}</span>
+        <span className="search-count-badge" aria-live="polite" title="Matching items found">{count}</span>
       )}
     </div>
   );
@@ -62,7 +57,5 @@ SearchInput.propTypes = {
   placeholder: PropTypes.string,
   count: PropTypes.number
 };
-
-SearchInput.displayName = 'SearchInput';
 
 export default memo(SearchInput);
