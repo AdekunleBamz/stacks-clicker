@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Toaster } from 'react-hot-toast';
+import { notify } from './utils/toast';
 import Header from './components/Header';
 import Footer from './components/Footer';
-// import QuickActions from './components/QuickActions';
-// import NetworkHeartbeat from './components/NetworkHeartbeat';
-// import OnboardingTour from './components/OnboardingTour';
-// import FloatingActionButton from './components/FloatingActionButton';
+import QuickActions from './components/QuickActions';
+import NetworkHeartbeat from './components/NetworkHeartbeat';
+import OnboardingTour from './components/OnboardingTour';
+import FloatingActionButton from './components/FloatingActionButton';
 import { useWallet } from './context/WalletContext';
 import ParticleOverlay from './components/common/ParticleOverlay';
 import PerformanceOverlay from './components/common/PerformanceOverlay';
@@ -14,23 +15,13 @@ import SkeletonLoader from './components/common/SkeletonLoader';
 import { useI18n } from './context/I18nContext';
 import { useInteractions } from './hooks/useInteractions';
 import { useSound } from './hooks/useSound';
-import { useTheme } from './hooks/useTheme';
-import { useTransactionHistory } from './hooks/useTransactionHistory';
-import { useMilestones } from './hooks/useMilestones';
-import { useDocumentTitle } from './hooks/useDocumentTitle';
-import { useKeydown } from './hooks/useKeydown';
-import { useBattery } from './hooks/useBattery';
-import { useNetworkStatus } from './hooks/useNetworkStatus';
-import { usePrefersReducedMotion } from './hooks/usePrefersReducedMotion';
+import { useLocalStorage } from './hooks/useLocalStorage';
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 
 // Lazy load heavy components for optimized initial paint
 const MainGrid = React.lazy(() => import('./components/MainGrid'));
 const PlayerStats = React.lazy(() => import('./components/PlayerStats'));
-const QuickActions = React.lazy(() => import('./components/QuickActions'));
-const NetworkHeartbeat = React.lazy(() => import('./components/NetworkHeartbeat'));
-const OnboardingTour = React.lazy(() => import('./components/OnboardingTour'));
-const FloatingActionButton = React.lazy(() => import('./components/FloatingActionButton'));
+const TransactionHistory = React.lazy(() => import('./components/TransactionHistory'));
 
 /**
  * Main application component for the Stacks Clicker v2.
@@ -47,22 +38,60 @@ export default function App() {
   const { playSound } = useSound();
 
   // Application State
-  const { txLog, addTxToLog, setTxLog, clearLog } = useTransactionHistory({
-    playSound,
-    onTxAdded: () => setParticleTrigger((prev) => prev + 1),
-  });
+  const [txLog, setTxLog] = useState([]);
   const [stats, setStats] = useState({ clicks: 0, tips: 0, votes: 0 });
-  const { celebration } = useMilestones({
-    stats,
-    onMilestone: (total) => {
-      setParticleTrigger((prev) => prev + 5);
-    },
-  });
   const [particleTrigger, setParticleTrigger] = useState(0);
+  const [celebration, setCelebration] = useState(null);
+  const celebrationTimeoutRef = useRef(null);
 
-  // Theme Management
-  const { theme, toggleTheme } = useTheme();
+  // Theme Management (Persisted via LocalStorage)
+  const [theme, setTheme] = useLocalStorage('theme', 'dark');
 
+  /**
+   * Effect to synchronize the HTML data-theme attribute with the current application theme.
+   */
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
+  /**
+   * Toggles between 'light' and 'dark' themes.
+   */
+  const toggleTheme = useCallback(() => {
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  }, [setTheme]);
+
+  /**
+   * Adds a transaction record to the local session log and triggers UI notifications.
+   *
+   * @param {string} action - Human-readable label for the interaction (e.g., '🎯 Click')
+   * @param {string} txId - The unique transaction hash returned from the Stacks network
+   * @param {string} [status='success'] - Current lifecycle state of the transaction
+   * @returns {Object} The formatted transaction object
+   */
+  const addTxToLog = useCallback(
+    (action, txId, status = 'success') => {
+      const submittedAt = new Date();
+      const isPending = !txId || status === 'pending';
+      const tx = {
+        id: txId || `pending-${Date.now()}`,
+        action,
+        status,
+        time: submittedAt.toLocaleTimeString(),
+        submittedAt: submittedAt.toISOString(),
+        network: 'mainnet',
+        explorerUrl: isPending ? null : `https://explorer.hiro.so/txid/${txId}?chain=mainnet`,
+        isPending,
+      };
+      setTxLog((prev) => [tx, ...prev.slice(0, 49)]); // Maintain last 50 TXs
+      setParticleTrigger((prev) => prev + 1);
+      playSound('success');
+
+      notify.custom(`${action} submitted!`, action.split(' ')[0]);
+      return tx;
+    },
+    [playSound]
+  );
 
   /**
    * Unified interaction interface provided by the useInteractions collector.
@@ -71,13 +100,12 @@ export default function App() {
   const { clicker, tipjar, quickpoll, pingAll } = useInteractions({
     onTxSubmit: (action, txId) => {
       addTxToLog(action, txId);
-      const normalizedAction = String(action).toLowerCase();
       // Update local reactive stats for immediate feedback (optimistic logic)
-      if (normalizedAction.includes('click')) {
+      if (action.includes('Click')) {
         setStats((prev) => ({ ...prev, clicks: prev.clicks + 1 }));
-      } else if (normalizedAction.includes('tip')) {
+      } else if (action.includes('Tip')) {
         setStats((prev) => ({ ...prev, tips: prev.tips + 1 }));
-      } else if (normalizedAction.includes('vote')) {
+      } else if (action.includes('Vote')) {
         setStats((prev) => ({ ...prev, votes: prev.votes + 1 }));
       }
     },
@@ -96,29 +124,41 @@ export default function App() {
     playSound,
   });
 
+  useEffect(() => {
+    const handleGlobalEsc = (e) => {
+      if (e.key === 'Escape') {
+        setCelebration(null);
+        document.getElementById('main-content')?.focus();
+      }
+    };
+    window.addEventListener('keydown', handleGlobalEsc);
+    return () => window.removeEventListener('keydown', handleGlobalEsc);
+  }, []);
 
   /**
-   * Global Tab Feedback
+   * Effect to monitor interaction milestones and trigger celebrations.
+   * Scales visual feedback (particles) during significant achievements.
    */
-  useDocumentTitle({
-    title: 'Stacks Clicker',
-    count: stats.clicks + stats.tips + stats.votes,
-  });
+  useEffect(() => {
+    const milestones = [10, 50, 100, 500];
+    const total = stats.clicks + stats.tips + stats.votes;
+    if (milestones.includes(total) && total > 0) {
+      setCelebration(`Level Up: ${total} Interactions!`);
+      setParticleTrigger((prev) => prev + 5); // Execute a massive burst
+      window.clearTimeout(celebrationTimeoutRef.current);
+      celebrationTimeoutRef.current = window.setTimeout(() => setCelebration(null), 3000);
+    }
 
-  // Global shortcuts
-  useKeydown('Escape', () => {
-    // Reset any open UI states if Escape is pressed
-    console.debug('[App] Escape key pressed: Resetting UI states');
-  });
+    return () => window.clearTimeout(celebrationTimeoutRef.current);
+  }, [stats]);
 
-  const { isLowBattery } = useBattery();
-
-  if (isLowBattery) {
-    console.debug('[App] Low battery detected: Enabling power-saving mode');
-  }
-
-  const isOnline = useNetworkStatus();
-  const prefersReducedMotion = usePrefersReducedMotion();
+  /**
+   * Effect to dynamically update the document title based on interaction activity.
+   */
+  useEffect(() => {
+    const total = stats.clicks + stats.tips + stats.votes;
+    document.title = total > 0 ? `(${total}) Stacks Clicker` : 'Stacks Clicker v2';
+  }, [stats]);
 
   const MilestoneCelebration = React.lazy(() => import('./components/MilestoneCelebration'));
 
@@ -147,15 +187,12 @@ export default function App() {
         <Header theme={theme} toggleTheme={toggleTheme} currentLang={lang} onLangChange={setLang} />
       </React.Suspense>
 
-      <div className="layout-content" role="presentation">
-        <div className="stats-section-container">
-          <React.Suspense fallback={<SkeletonLoader height="120px" borderRadius="16px" theme={theme} />}>
-            <PlayerStats stats={stats} txCount={txLog.length} />
-          </React.Suspense>
-        </div>
+      <div className="layout-content">
+        <React.Suspense fallback={<SkeletonLoader height="300px" borderRadius="24px" />}>
+          <PlayerStats stats={stats} txCount={txLog.length} />
+        </React.Suspense>
 
-
-        <main id="main-content" className="app-main" role="main" tabIndex={-1} style={{ outline: 'none' }}>
+        <main id="main-content" className="app-main" tabIndex={-1} style={{ outline: 'none' }}>
           <React.Suspense fallback={<SkeletonLoader height="500px" borderRadius="32px" />}>
             <MainGrid
               address={address}
@@ -173,21 +210,13 @@ export default function App() {
       </div>
 
       <Footer />
-      <React.Suspense fallback={null}>
-        <OnboardingTour />
-      </React.Suspense>
-      <React.Suspense fallback={null}>
-        <FloatingActionButton />
-      </React.Suspense>
-      <React.Suspense fallback={null}>
-        <NetworkHeartbeat />
-      </React.Suspense>
-      <React.Suspense fallback={null}>
-        <QuickActions address={address} onClearLog={clearLog} onPingAll={pingAll} />
-      </React.Suspense>
+      <OnboardingTour />
+      <FloatingActionButton />
+      <NetworkHeartbeat />
+      <QuickActions address={address} onClearLog={() => setTxLog([])} onPingAll={pingAll} />
 
       <Toaster position="top-right" />
-      {!prefersReducedMotion && <ParticleOverlay trigger={particleTrigger} />}
+      <ParticleOverlay trigger={particleTrigger} />
       <React.Suspense fallback={null}>
         <MilestoneCelebration celebration={celebration} />
       </React.Suspense>
