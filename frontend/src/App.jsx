@@ -156,6 +156,7 @@ export default function App() {
       <a
         href="#main-content"
         className="skip-link"
+        aria-label="Skip to main application content"
         onClick={(e) => {
           e.preventDefault();
           document.getElementById('main-content')?.focus();
