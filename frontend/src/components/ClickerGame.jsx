@@ -109,6 +109,8 @@ export default function ClickerGame({ onTxSubmit }) {
             value={multiClickAmount}
             onChange={(e) => setMultiClickAmount(Number.parseInt(e.target.value, 10) || 1)}
             className="multi-input"
+            aria-label="Number of multi-clicks"
+            title="Choose between 1 and 100 automatic clicks"
           />
           <button
             type="button"
