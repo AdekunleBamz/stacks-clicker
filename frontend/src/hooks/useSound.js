@@ -37,6 +37,7 @@ export function useSound() {
    * @param {'click'|'success'|'error'} type - The category of sound to play
    */
   const playSound = useCallback((type) => {
+    // Graceful acoustic degraded safety fallback for rigid browser autoplay policies
     if (!['click', 'success', 'error'].includes(type)) {
       return;
     }
