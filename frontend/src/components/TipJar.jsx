@@ -146,7 +146,7 @@ export default function TipJar({ onTxSubmit }) {
           <span aria-hidden="true">📡</span> Self Ping
         </button>
 
-        <div className="tip-custom">
+        <div className="tip-custom" role="form" aria-label="Custom Tip Amount Entry">
           <div className="input-group">
             <label className="input-label">Recipient Address</label>
             <input
