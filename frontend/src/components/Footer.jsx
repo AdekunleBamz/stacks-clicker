@@ -14,14 +14,15 @@ export default function Footer() {
           <span className="app-version" title="Current Interface Version" style={{ opacity: 0.9 }}>v{version}</span>
         </div>
         <div className="footer-links">
-        <a 
-          href="https://twitter.com/stacks" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="social-link"
-          aria-label="Follow Stacks on Twitter"
-          title="Follow Stacks on Twitter"
-        >
+          <a 
+            href="https://twitter.com/stacks" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="social-link"
+            aria-label="Follow Stacks on Twitter"
+            title="Follow Stacks on Twitter"
+            tabIndex={0}
+          >
           <span aria-hidden="true">🐦</span> Twitter
         </a>
         <a 
