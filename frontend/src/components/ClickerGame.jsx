@@ -14,13 +14,11 @@ export default function ClickerGame({ onTxSubmit }) {
   const [loading, setLoading] = useState(false);
   const [clickCount, setClickCount] = useState(0);
   const [multiClickAmount, setMultiClickAmount] = useState(5);
-  const [feedbackMessage, setFeedbackMessage] = useState('');
 
   const handleClick = async () => {
     if (!isConnected) return;
 
     setLoading(true);
-    setFeedbackMessage('Initiating click transaction...');
     try {
       const result = await callContract({
         contractAddress: DEPLOYER,
@@ -30,11 +28,9 @@ export default function ClickerGame({ onTxSubmit }) {
       });
 
       setClickCount((prev) => prev + 1);
-      setFeedbackMessage('Click successful! Streak increased.');
       onTxSubmit?.('click', result.txId);
     } catch (err) {
       console.error('Click failed:', err);
-      setFeedbackMessage('Click transaction failed. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -44,7 +40,6 @@ export default function ClickerGame({ onTxSubmit }) {
     if (!isConnected) return;
 
     setLoading(true);
-    setFeedbackMessage(`Initiating ${multiClickAmount} multi-clicks...`);
     try {
       const result = await callContract({
         contractAddress: DEPLOYER,
@@ -54,11 +49,9 @@ export default function ClickerGame({ onTxSubmit }) {
       });
 
       setClickCount((prev) => prev + multiClickAmount);
-      setFeedbackMessage(`${multiClickAmount} clicks confirmed! Big streak jump.`);
       onTxSubmit?.('multi-click', result.txId);
     } catch (err) {
       console.error('Multi-click failed:', err);
-      setFeedbackMessage('Multi-click failed. Check your balance or network.');
     } finally {
       setLoading(false);
     }
@@ -68,7 +61,6 @@ export default function ClickerGame({ onTxSubmit }) {
     if (!isConnected) return;
 
     setLoading(true);
-    setFeedbackMessage('Sending network ping...');
     try {
       const result = await callContract({
         contractAddress: DEPLOYER,
@@ -77,62 +69,56 @@ export default function ClickerGame({ onTxSubmit }) {
         functionArgs: [],
       });
 
-      setFeedbackMessage('Ping transaction submitted successfully.');
       onTxSubmit?.('ping', result.txId);
     } catch (err) {
       console.error('Ping failed:', err);
-      setFeedbackMessage('Ping failed to broadcast.');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="game-card clicker-game glass-card" role="region" aria-labelledby="clicker-game-title">
+    <div className="game-card clicker-game">
       <div className="game-header">
-        <h2 id="clicker-game-title">🎮 Clicker Game</h2>
+        <h2 aria-label="Clicker Game Primary Interface">🎮 Clicker Game</h2>
         <span className="game-badge" title="Gamified operational click interface">Earn Streaks</span>
-        <span className="sr-only" role="status" aria-live="polite">{feedbackMessage}</span>
       </div>
 
-      <div className="game-stats" role="group" aria-label="Game progress summary">
+      <div className="game-stats">
         <div className="stat">
-          <span className="stat-value" aria-live="polite" aria-atomic="true">{clickCount}</span>
-          <span className="stat-label">Total Clicks</span>
+          <span className="stat-value">{clickCount}</span>
+          <span className="stat-label" aria-hidden="true">Total Clicks</span>
         </div>
       </div>
 
       <div className="game-actions">
         <button
           type="button"
-          className="action-btn primary-button huge"
+          className="action-btn primary huge"
+          onClick={handleManualClick}
           onClick={handleClick}
           disabled={!isConnected || loading}
           title="Click to generate a transaction manually"
-          aria-label={loading ? "Processing click..." : "Click to earn streaks"}
-          aria-busy={loading}
         >
           <span aria-hidden="true">{loading ? '⏳' : '👆'}</span> Click!
         </button>
 
-        <div className="multi-click-group">
+        <div className="multi-click-group" role="group" aria-label="Multi-Click Interventions">
           <input
             type="number"
             min="1"
             max="100"
             value={multiClickAmount}
             onChange={(e) => setMultiClickAmount(Number.parseInt(e.target.value, 10) || 1)}
-            className="multi-input input-field"
+            className="multi-input"
             aria-label="Number of multi-clicks"
             title="Choose between 1 and 100 automatic clicks"
           />
           <button
-            type="button"
-            className="action-btn secondary-button"
-            onClick={handleMultiClick}
-            title={`Submit a transaction for ${multiClickAmount} clicks at once`}
+            className="action-btn secondary"
+            onClick={() => setShowMulti(prev => !prev)}
+            title="Toggle bulk click interface dialog"
             disabled={!isConnected || loading}
-            aria-label={`Submit ${multiClickAmount} multi-clicks`}
           >
             Multi-Click ×{multiClickAmount}
           </button>
@@ -140,11 +126,9 @@ export default function ClickerGame({ onTxSubmit }) {
 
         <button
           type="button"
-          className="action-btn secondary-button outline glass-card"
+          className="action-btn outline"
           onClick={handlePing}
           disabled={!isConnected || loading}
-          aria-label="Send a network ping transaction"
-          aria-busy={loading}
         >
           📡 Ping
         </button>
