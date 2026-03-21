@@ -54,9 +54,9 @@ export default function WalletConnectQRModal({ uri, onClose }) {
             </button>
           </div>
 
-          <div className="qr-supported-wallets">
-            <p>Supported wallets:</p>
-            <div className="wallet-icons">
+          <div className="qr-supported-wallets" role="region" aria-label="Supported Wallets List">
+            <p id="qr-wallet-desc">Supported wallets:</p>
+            <div className="wallet-icons" aria-labelledby="qr-wallet-desc">
               <span className="wallet-badge">Xverse</span>
               <span className="wallet-badge">Leather</span>
             </div>
