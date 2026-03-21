@@ -29,7 +29,7 @@
   --bg-card: rgba(15, 15, 25, 0.6);
   --bg-input: rgba(255, 255, 255, 0.03);
   --text-main: #f8fafc;
-  --text-muted: #94a3b8;
+  --text-muted: #cbd5e1; /* upping contrast of subdued text */
   --border: rgba(255, 255, 255, 0.08);
   --radius-lg: 24px;
 
