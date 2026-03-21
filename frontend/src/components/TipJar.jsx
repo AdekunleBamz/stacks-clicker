@@ -135,7 +135,7 @@ export default function TipJar({ onTxSubmit }) {
           disabled={!isConnected || loading}
           title="Send a self ping transaction"
         >
-          📡 Self Ping
+          <span aria-hidden="true">📡</span> Self Ping
         </button>
 
         <div className="tip-custom">
