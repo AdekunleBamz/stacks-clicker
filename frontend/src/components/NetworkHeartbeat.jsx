@@ -9,7 +9,7 @@ export default function NetworkHeartbeat() {
   const { blockHeight, isConnected, network } = useNetwork();
   const heartbeatTitle = isConnected
     ? `Stacks ${network} live at block ${blockHeight}`
-    : 'Stacks network unavailable';
+    : 'Stacks interactive network currently unavailable';
 
   return (
     <Tooltip content={heartbeatTitle}>
