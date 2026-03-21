@@ -23,8 +23,8 @@ export default function QuickActions({ address, onClearLog, onPingAll }) {
           icon="📡"
           className="secondary btn-sm"
           onClick={() => handleAction(onPingAll)}
-          disabled={!address}
-          isLoading={!address}
+          disabled={!address || isLoading}
+          isLoading={isLoading}
         />
         <ActionButton
           label="Clear Log"
