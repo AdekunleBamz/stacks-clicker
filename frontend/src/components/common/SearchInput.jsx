@@ -20,13 +20,13 @@ function SearchInput({ value, onChange, onClear, placeholder = 'Search...', coun
       <div className="search-relative">
         <span className="search-icon" aria-hidden="true">🔍</span>
         <input
+          id="global-transaction-search"
           type="text"
           placeholder={placeholder}
           className="search-input"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          aria-label="Transaction search input stream"
-          aria-autocomplete="list"
+          aria-label="Global transaction search"
         />
         <AnimatePresence>
           {value && (
