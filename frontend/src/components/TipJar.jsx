@@ -169,6 +169,7 @@ export default function TipJar({ onTxSubmit }) {
             className="action-btn outline"
             onClick={handleTipUser}
             disabled={!isConnected || loading || !recipientAddress}
+            title="Send the specified amount to the recipient"
           >
             Send Tip
           </button>
