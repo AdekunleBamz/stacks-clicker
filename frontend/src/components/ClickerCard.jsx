@@ -70,6 +70,8 @@ function ClickerCard({ address, clicker }) {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 1.5, y: -20 }}
               className="combo-badge"
+              role="status"
+              aria-label={`Combo ${combo}x active`}
             >
               <span className="combo-number">{combo}x</span>
               <span className="combo-text">COMBO!</span>
