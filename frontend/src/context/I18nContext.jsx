@@ -12,6 +12,7 @@ const translations = {
   },
   es: {
     welcome: 'Bienvenido a Stacks Clicker V2',
+    accessibility_mode: 'Modo de Accesibilidad',
     interactions: 'Interacciones',
     stats: 'Estadísticas',
     recent_activity: 'Actividad Reciente',
