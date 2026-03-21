@@ -174,6 +174,7 @@ export default function QuickPoll({ onTxSubmit }) {
             className="action-btn primary"
             onClick={handleCreatePoll}
             disabled={!isConnected || loading || !pollQuestion.trim()}
+            title="Publish this poll to the network"
           >
             Create Poll
           </button>
