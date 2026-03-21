@@ -34,9 +34,9 @@ export default class ErrorBoundary extends React.Component {
                 🔄 Try Again
               </button>
               <button
-                type="button"
-                className="error-btn reload"
+                className="action-btn secondary"
                 onClick={() => window.location.reload()}
+                title="Reload the application completely"
               >
                 🌐 Reload App
               </button>
