@@ -13,7 +13,7 @@ export default function NetworkHeartbeat() {
 
   return (
     <Tooltip content={heartbeatTitle}>
-      <div className="heartbeat-container" aria-live="polite">
+      <div className="heartbeat-container" aria-live="polite" aria-label={heartbeatTitle}>
         <div className={`heartbeat-pulse ${isConnected ? 'online' : 'offline'}`}></div>
         <div className="heartbeat-info">
           <span className="network-name">{isConnected ? network : 'Disconnected'}</span>
