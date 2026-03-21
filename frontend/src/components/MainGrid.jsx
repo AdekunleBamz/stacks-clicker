@@ -20,7 +20,7 @@ function MainGrid({
     <section className="interaction-section" aria-labelledby="interactions-title">
       <h2 className="section-title" id="interactions-title">Interactions</h2>
       <InteractionStreaks totalInteractions={stats.clicks + stats.tips + stats.votes} />
-      <div className="cards-container">
+      <div className="cards-container" role="group" aria-label="Interaction Cards">
         <ClickerCard address={address} clicker={clicker} />
         <TipJarCard address={address} tipjar={tipjar} />
         <QuickPollCard address={address} quickpoll={quickpoll} />
