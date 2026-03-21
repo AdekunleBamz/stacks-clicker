@@ -31,7 +31,7 @@ const Card = ({
           <div className="card-title-group">
             {icon && <span className="card-icon">{icon}</span>}
             <div className="card-text">
-              {title && <h3 className="card-title">{title}</h3>}
+              {title && <h3 className="card-title" title={`Card Section: ${title}`}>{title}</h3>}
               {subtitle && <p className="card-subtitle">{subtitle}</p>}
             </div>
           </div>
