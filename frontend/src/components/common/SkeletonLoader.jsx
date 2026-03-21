@@ -17,6 +17,8 @@ function SkeletonLoader({ width = '100%', height = '20px', borderRadius = '8px',
   return (
     <div
       className={`skeleton-wrapper ${className}`}
+      role="status"
+      aria-label="Loading content..."
       style={{
         width,
         height,
