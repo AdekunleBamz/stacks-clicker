@@ -16,7 +16,7 @@ export default function OnboardingTour() {
     if (typeof window === 'undefined') {
       return undefined;
     }
-    const hasSeenTour = window.localStorage.getItem('hasSeenTour');
+    const hasSeenTour = localStorage.getItem('hasSeenTour');
     if (!hasSeenTour) {
       const timer = setTimeout(() => setIsVisible(true), 1500);
       return () => clearTimeout(timer);
@@ -43,7 +43,7 @@ export default function OnboardingTour() {
     if (typeof window === 'undefined') {
       return;
     }
-    window.localStorage.setItem('hasSeenTour', 'true');
+    localStorage.setItem('hasSeenTour', 'true');
   };
 
   if (!isVisible) return null;
@@ -53,32 +53,24 @@ export default function OnboardingTour() {
       <div className="tour-overlay-backdrop" onClick={dismiss} aria-hidden="true" role="presentation">
         <motion.div
           className="tour-card"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Application Onboarding Tour"
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
           onClick={(e) => e.stopPropagation()}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="tour-step-title"
-          aria-describedby="tour-step-content"
         >
-          <h2 id="tour-step-title" className="sr-only">Onboarding Tour - Step {currentStep + 1}</h2>
           <div className="tour-header">
-            <div className="tour-step-dots" role="tablist" aria-label="Tour progress dots">
+            <div className="tour-step-dots">
               {steps.map((_, i) => (
-                <div 
-                  key={i} 
-                  className={`step-dot ${i === currentStep ? 'active' : ''}`} 
-                  role="tab"
-                  aria-selected={i === currentStep}
-                  aria-label={`Step ${i + 1}`}
-                />
+                <div key={i} className={`step-dot ${i === currentStep ? 'active' : ''}`} />
               ))}
             </div>
             <button type="button" className="tour-close-top" onClick={dismiss} aria-label="Close tour overlay" title="Close tour">×</button>
           </div>
           <div className="tour-progress" aria-live="polite">Step {currentStep + 1} of {steps.length}</div>
-          <p className="tour-content" id="tour-step-content">{steps[currentStep].content}</p>
+          <p className="tour-content">{steps[currentStep].content}</p>
           <div className="tour-footer">
             <div className="footer-left">
               <button type="button" className="tour-skip" onClick={dismiss}>
