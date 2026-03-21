@@ -23,6 +23,7 @@
   --primary-glow: rgba(99, 102, 241, 0.5);
   --success: #10b981;
   --success-glow: rgba(16, 185, 129, 0.4);
+  --app-bg: #0b0b13; /* darkened base app background for heightened card contrast */
   --warning: #f59e0b;
   --error: #ef4444;
   --bg-dark: #030014;
