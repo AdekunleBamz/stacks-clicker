@@ -79,7 +79,7 @@ function ClickerCard({ address, clicker }) {
           )}
         </AnimatePresence>
       </div>
-      <div className="actions">
+      <div className="actions" role="group" aria-label="Clicker Contract Controls">
         <Tooltip content="Perform a single on-chain click interaction instantly (fixed cost).">
           <ActionButton
             label="Express Click"
