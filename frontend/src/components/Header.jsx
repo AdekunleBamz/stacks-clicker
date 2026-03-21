@@ -49,6 +49,7 @@ export default function Header({ theme, toggleTheme }) {
               className="theme-toggle"
               onClick={toggleTheme}
               aria-label={`Toggle to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+              aria-pressed={theme === 'dark'}
               title="Toggle application display theme"
             >
               {theme === 'dark' ? '☀️' : '🌙'}
