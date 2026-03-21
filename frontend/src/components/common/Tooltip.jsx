@@ -25,6 +25,8 @@ function Tooltip({ content, children }) {
     return () => clearTimeout(timer);
   }, [shouldShow]);
 
+  const tooltipId = React.useId();
+
   return (
     <div
       className="tooltip-wrapper"
@@ -32,16 +34,17 @@ function Tooltip({ content, children }) {
       onMouseLeave={() => setShouldShow(false)}
       onFocus={() => setShouldShow(true)}
       onBlur={() => setShouldShow(false)}
+      aria-describedby={isVisible ? tooltipId : undefined}
       style={{ position: 'relative', display: 'inline-block', width: '100%' }}
     >
       {children}
       <AnimatePresence>
         {isVisible && (
           <motion.div
-            initial={{ opacity: 0, y: 5, scale: 0.95 }}
+            id={tooltipId}
+            initial={{ opacity: 0, y: 10, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 5, scale: 0.95 }}
-            transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
             className="tooltip-content"
             role="tooltip"
             aria-atomic="true"
