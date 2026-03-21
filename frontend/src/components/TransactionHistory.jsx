@@ -146,10 +146,9 @@ function TransactionHistory({ txLog }) {
         <div className="tx-export-actions" role="toolbar" aria-label="Export and Filter Data">
           <select
             className="tx-filter-select"
-            aria-label="Filter transaction stream by status category"
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            aria-label="Filter transactions by status"
+            aria-label="Filter transaction history list by specific processing status"
           >
             <option value="all">All Status</option>
             <option value="success">Success</option>
