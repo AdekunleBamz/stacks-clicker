@@ -147,10 +147,10 @@ export default function QuickPoll({ onTxSubmit }) {
         <span className="game-badge" title="Live decentralized community voting portal">Community Voting</span>
       </div>
 
-      <div className="game-stats" aria-label="Live Polling Statistics">
-        <div className="stat-row">
-          <span className="stat-label">Yes Votes</span>
+      <div className="game-stats" aria-live="polite" aria-atomic="true">
+        <div className="stat">
           <span className="stat-value">{votes.yes}</span>
+          <span className="stat-label" aria-hidden="true">Yes Votes</span>
         </div>
         <div className="stat">
           <span className="stat-value">{votes.no}</span>
@@ -158,7 +158,7 @@ export default function QuickPoll({ onTxSubmit }) {
         </div>
       </div>
 
-      <div className="game-actions" role="group" aria-label="Game Polling Controls">
+      <div className="game-actions">
         <div className="poll-create">
           <input
             type="text"
@@ -202,11 +202,9 @@ export default function QuickPoll({ onTxSubmit }) {
 
         <div className="poll-specific">
           <input
-            id="poll-id-input"
             type="number"
             min="1"
             value={pollId}
-            aria-label="Specific poll ID lookup string"
             onChange={(e) => setPollId(Number.parseInt(e.target.value, 10) || 1)}
             className="poll-id-input"
             placeholder="Poll ID"
@@ -239,7 +237,7 @@ export default function QuickPoll({ onTxSubmit }) {
         </button>
       </div>
 
-      <p className="game-fee" style={{ color: 'var(--text-muted)', fontWeight: 500 }}>Fee: 0.0001 STX per action</p>
+      <p className="game-fee">Fee: 0.0001 STX per action</p>
     </div>
   );
 }
