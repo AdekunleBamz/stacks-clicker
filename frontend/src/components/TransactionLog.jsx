@@ -37,7 +37,7 @@ export default function TransactionLog({ transactions = [] }) {
   return (
     <div className="tx-log">
       <h3>📋 Transaction Log</h3>
-      <div className="tx-list">
+      <div className="tx-list" role="log" aria-live="polite" aria-relevant="additions">
         {transactions.map((tx, index) => (
           <div key={tx.id || index} className={`tx-item ${tx.status}`}>
             <span className="tx-status">{getStatusIcon(tx.status)}</span>
