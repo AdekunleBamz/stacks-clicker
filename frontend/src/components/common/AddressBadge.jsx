@@ -41,10 +41,10 @@ function AddressBadge({ address, onDisconnect }) {
     <div className="wallet-info" role="region" aria-label="Wallet Connection Status">
       <button
         type="button"
-        className="address-badge-btn"
-        aria-keyshortcuts="c"
+        className="address-badge"
         onClick={handleCopy}
-        title="Copy full wallet address to clipboard"
+        title="Copy address to clipboard"
+        tabIndex={0}
         aria-label="Copy wallet address"
       >
         <span className="address-text">
