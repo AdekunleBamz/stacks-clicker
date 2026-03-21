@@ -13,7 +13,7 @@ export default function Footer() {
           <p>Built with <span role="img" aria-label="developer love and care">❤️</span> on Stacks</p>
           <span className="app-version" title="Current Interface Version">v{version}</span>
         </div>
-        <div className="footer-links">
+        <div className="footer-links" role="navigation" aria-label="Footer Secondary Architecture">
         <a 
           href="https://twitter.com/stacks" 
           target="_blank" 
