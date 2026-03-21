@@ -48,6 +48,9 @@ function StatsCard({ label, value, icon, color, isPrice = false, index = 0, tool
   const cardContent = (
     <motion.div
       className="stat-card"
+      tabIndex={0}
+      role="group"
+      aria-label={`${label} statistic: ${value}`}
       initial={{ opacity: 0, scale: 0.9, y: 20 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{
