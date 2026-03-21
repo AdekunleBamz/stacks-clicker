@@ -16,8 +16,7 @@ export default function QuickPoll({ onTxSubmit }) {
   const [votes, setVotes] = useState({ yes: 0, no: 0 });
 
   const handleCreatePoll = async () => {
-    const trimmedQuestion = pollQuestion.trim();
-    if (!isConnected || !trimmedQuestion) return;
+    if (!isConnected || !pollQuestion.trim()) return;
 
     setLoading(true);
     try {
@@ -25,7 +24,7 @@ export default function QuickPoll({ onTxSubmit }) {
         contractAddress: DEPLOYER,
         contractName: 'quickpoll-v2p',
         functionName: 'create-poll',
-        functionArgs: [{ type: 'string-ascii', value: trimmedQuestion }],
+        functionArgs: [{ type: 'string-ascii', value: pollQuestion }],
       });
 
       setPollQuestion('');
@@ -142,20 +141,20 @@ export default function QuickPoll({ onTxSubmit }) {
   };
 
   return (
-    <div className="game-card quickpoll glass-card" role="region" aria-labelledby="poll-main-title">
+    <div className="game-card quickpoll">
       <div className="game-header">
-        <h2 id="poll-main-title" aria-label="QuickPoll Interactive Component">🗳️ QuickPoll</h2>
+        <h2 aria-label="QuickPoll Interactive Component">🗳️ QuickPoll</h2>
         <span className="game-badge" title="Live decentralized community voting portal">Community Voting</span>
       </div>
 
-      <div className="game-stats" aria-live="polite">
-        <div className="stat">
+      <div className="game-stats" aria-label="Live Polling Statistics">
+        <div className="stat-row">
+          <span className="stat-label">Yes Votes</span>
           <span className="stat-value">{votes.yes}</span>
-          <span className="stat-label" aria-label="Yes Votes count">Yes Votes</span>
         </div>
         <div className="stat">
           <span className="stat-value">{votes.no}</span>
-          <span className="stat-label" aria-label="No Votes count">No Votes</span>
+          <span className="stat-label">No Votes</span>
         </div>
       </div>
 
