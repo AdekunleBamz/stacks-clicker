@@ -43,7 +43,8 @@ function InteractionStreaks({ totalInteractions }) {
       <div className="streak-stats">
         <div className="streak-count">
           <motion.span
-            className="streak-fire"
+            className="streak-value"
+            aria-live="polite"
             style={{ willChange: 'transform, filter' }}
             animate={{ scale: [1, 1.2, 1], filter: ["drop-shadow(0 0 0px #ff4500)", "drop-shadow(0 0 10px #ff4500)", "drop-shadow(0 0 0px #ff4500)"] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
