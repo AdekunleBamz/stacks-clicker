@@ -22,7 +22,7 @@ export default function RoadmapBoard() {
   return (
     <section className="roadmap-board">
       <div className="roadmap-header">
-        <h2 className="section-title">🚀 Project Roadmap</h2>
+        <h2 className="section-title" aria-label="Upcoming Project Roadmap">🚀 Project Roadmap</h2>
         <p className="section-desc">Vote on upcoming features you want to see most.</p>
       </div>
       <div className="roadmap-items" role="feed" aria-label="Roadmap Items">
