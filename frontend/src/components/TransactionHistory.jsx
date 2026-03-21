@@ -204,6 +204,7 @@ function TransactionHistory({ txLog }) {
               <button
                 type="button"
                 role="menuitem"
+                title="View full diagnostics payload"
                 onClick={() => {
                   setSelectedTx(contextMenu.tx);
                   closeContextMenu();
