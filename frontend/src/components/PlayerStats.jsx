@@ -52,21 +52,10 @@ export default function PlayerStats({ stats, txCount }) {
       tabIndex={0}
       title="Your Personal Player Statistics Overview"
     >
-      <h3 id="stats-bar-title" className="sr-only">Your Player Statistics Overview</h3>
-      <div className="stats-cards-wrapper">
-        <motion.div 
-          className="stats-cards stats-grid" 
-          role="group" 
-          aria-label="Aggregate Player Performance Metrics"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          {statItems.map((item, index) => (
-            <StatsCard key={item.label} {...item} index={index} />
-          ))}
-        </motion.div>
+      <div className={`stats-cards ${txCount === 0 && stats.clicks === 0 ? 'shimmer' : ''}`} role="group" aria-label="Aggregate Player Performance Metrics">
+        {statItems.map((item, index) => (
+          <StatsCard key={item.label} {...item} index={index} />
+        ))}
       </div>
     </section>
   );
