@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import ActionButton from './common/ActionButton';
 import { useSound } from '../hooks/useSound';
@@ -6,41 +6,39 @@ import { useSound } from '../hooks/useSound';
 /**
  * QuickActions component for common utility tasks.
  */
-function QuickActions({ address, onClearLog, onPingAll }) {
+export default function QuickActions({ address, onClearLog, onPingAll }) {
   const { playSound } = useSound();
 
-  const handleAction = useCallback((fn) => {
-    if (typeof fn !== 'function') return;
-    playSound?.('click');
+  const handleAction = (fn) => {
+    playSound('click');
     fn();
-  }, [playSound]);
+  };
 
   return (
-    <div className="quick-actions-panel glass-card" role="region" aria-labelledby="quick-actions-heading">
-      <h4 className="panel-title" id="quick-actions-heading">⚡ Quick Actions</h4>
-      <div className="actions-stack" role="group" aria-labelledby="quick-actions-heading">
+    <div className="quick-actions-panel" role="region" aria-label="Quick manual actions">
+      <h4 className="panel-title">⚡ Quick Actions</h4>
+      <div className="actions-stack">
         <ActionButton
           label="Ping All"
           icon="📡"
-          className="secondary-button btn-sm"
+          className="secondary btn-sm"
           onClick={() => handleAction(onPingAll)}
-          disabled={!address || isLoading}
-          isLoading={isLoading}
+          disabled={!address}
+          isLoading={!address}
         />
         <ActionButton
           label="Clear Log"
           icon="🗑️"
-          className="secondary-button btn-sm"
+          className="secondary btn-sm"
           onClick={() => handleAction(onClearLog)}
         />
         <ActionButton
           label="Support"
           icon="💬"
-          className="secondary-button btn-sm"
+          className="secondary btn-sm"
           onClick={() =>
             handleAction(() => window.open('https://stacks.org', '_blank', 'noopener,noreferrer'))
           }
-          aria-label="Open Stacks support in new tab"
         />
       </div>
     </div>
@@ -52,6 +50,3 @@ QuickActions.propTypes = {
   onPingAll: PropTypes.func.isRequired,
   address: PropTypes.string
 };
-QuickActions.displayName = 'QuickActions';
-
-export default memo(QuickActions);
