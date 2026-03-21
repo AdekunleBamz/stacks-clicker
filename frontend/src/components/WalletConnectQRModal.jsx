@@ -47,13 +47,10 @@ export default function WalletConnectQRModal({ uri, onClose }) {
             <button 
               type="button" 
               className="qr-copy-btn" 
-              onClick={() => {
-                navigator.clipboard.writeText(uri);
-                notify.success('Pairing URI copied!');
-              }}
+              onClick={handleCopy}
               title="Copy pairing link"
             >
-              📋 Copy Pairing URI
+              <span aria-hidden="true">📋</span> Copy Pairing URI
             </button>
           </div>
 
