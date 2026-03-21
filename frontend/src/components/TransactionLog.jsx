@@ -28,7 +28,7 @@ export default function TransactionLog({ transactions = [] }) {
   if (transactions.length === 0) {
     return (
       <div className="tx-log empty">
-        <h3>📋 Transaction Log</h3>
+        <h3 aria-label="Detailed Transaction Log">📋 Transaction Log</h3>
         <p className="empty-message">No transactions yet. Start playing!</p>
       </div>
     );
