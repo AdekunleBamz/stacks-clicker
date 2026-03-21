@@ -5,9 +5,6 @@ import ActionCard from './common/ActionCard';
 import ActionButton from './common/ActionButton';
 import Tooltip from './common/Tooltip';
 import { useSound } from '../hooks/useSound';
-import { useCombo } from '../hooks/useCombo';
-import { useThrottle } from '../hooks/useThrottle';
-import { useKeydown } from '../hooks/useKeydown';
 
 /**
  * Component for the Clicker game interaction card.
@@ -27,7 +24,8 @@ function ClickerCard({ address, clicker }) {
   const { isLoading, click, multiClick, ping } = clicker;
   const { playSound } = useSound();
   const [errorField, setErrorField] = React.useState(null);
-  const { combo, incrementCombo } = useCombo();
+  const [combo, setCombo] = React.useState(0);
+  const comboTimerRef = React.useRef(null);
 
   /**
    * Internal wrapper to play acoustic feedback before executing a contract action.
@@ -44,19 +42,17 @@ function ClickerCard({ address, clicker }) {
       }
 
       // Combo management
-      incrementCombo();
+      setCombo((prev) => prev + 1);
+      if (comboTimerRef.current) clearTimeout(comboTimerRef.current);
+      comboTimerRef.current = setTimeout(() => {
+        setCombo(0);
+      }, 2000);
 
       playSound('click');
       actionFn(...args);
     },
-    [address, playSound, incrementCombo]
+    [address, playSound]
   );
-
-  const throttledClick = useThrottle(() => handleAction(click), 1000);
-
-  // Keyboard shortcut for clicking
-  useKeydown('c', throttledClick);
-  useKeydown('C', throttledClick);
 
   return (
     <ActionCard
@@ -64,18 +60,18 @@ function ClickerCard({ address, clicker }) {
       title="🎯 Power Clicker"
       subtitle="Click to generate on-chain activity."
       icon="🚀"
-      iconClass="bg-indigo-500/20 text-indigo-400 glass-card-premium"
+      iconClass="bg-indigo-500/20 text-indigo-400"
     >
       <div className="clicker-header">
         <AnimatePresence>
           {combo > 1 && (
             <motion.div
-              style={{ willChange: 'transform, opacity' }}
-              initial={{ opacity: 0, scale: 0.5, y: 20 }}
-
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 1.5, y: -20 }}
-              className="combo-badge"
+              key={combo}
+              initial={{ scale: 1.5, opacity: 0, y: -20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.5 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              className="floating-click-indicator"
               role="status"
               aria-label={`Combo ${combo}x active`}
             >
@@ -84,9 +80,6 @@ function ClickerCard({ address, clicker }) {
             </motion.div>
           )}
         </AnimatePresence>
-        <div className="stat" aria-live="polite">
-          <span className="stat-label">Total Clicks</span>
-        </div>
       </div>
       <div className="actions" role="group" aria-label="Clicker Contract Controls">
         <Tooltip content="Perform a single on-chain click interaction instantly (fixed cost).">
@@ -94,11 +87,10 @@ function ClickerCard({ address, clicker }) {
             label="Express Click"
             icon="⚡"
             cost="0.001 STX"
-            onClick={throttledClick}
+            onClick={() => handleAction(click)}
             isLoading={isLoading('click')}
             isError={errorField === 'click'}
             className="primary"
-            aria-keyshortcuts="C"
           />
         </Tooltip>
         <Tooltip content="Boost your activity by performing 10 clicks in one batch for better efficiency.">
@@ -137,7 +129,5 @@ ClickerCard.propTypes = {
     isLoading: PropTypes.func.isRequired,
   }).isRequired,
 };
-
-ClickerCard.displayName = 'ClickerCard';
 
 export default memo(ClickerCard);
