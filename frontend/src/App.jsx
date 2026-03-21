@@ -105,7 +105,58 @@ export default function App() {
   }, [stats]);
 
   return (
-    <div className="app-container">
+    <div className="app-container" data-theme={theme} role="application" aria-roledescription="web application">
+      <a
+        href="#main-content"
+        className="skip-link"
+        aria-label="Skip navigation and jump to primary content"
+        onClick={(e) => {
+          e.preventDefault();
+          document.getElementById('main-content')?.focus();
+        }}
+      >
+        Skip to main content
+      </a>
+      <PerformanceOverlay />
+      <ScrollToTop />
+
+      {/* Screen reader only announcement for high-frequency updates */}
+      <div className="sr-only" aria-live="polite" aria-atomic="true">
+        {txLog.length > 0 ? `Latest action: ${txLog[0].action}` : ''}
+      </div>
+
+      <React.Suspense fallback={<SkeletonLoader height="80px" borderRadius="12px" />}>
+        <Header theme={theme} toggleTheme={toggleTheme} currentLang={lang} onLangChange={setLang} />
+      </React.Suspense>
+
+      <div className="layout-content">
+        <React.Suspense fallback={<SkeletonLoader height="300px" borderRadius="24px" />}>
+          <PlayerStats stats={stats} txCount={txLog.length} />
+        </React.Suspense>
+
+        <main id="main-content" className="app-main" role="main" tabIndex={-1} style={{ outline: 'none' }}>
+          <React.Suspense fallback={<SkeletonLoader height="500px" borderRadius="32px" />}>
+            <MainGrid
+              address={address}
+              stats={stats}
+              clicker={clicker}
+              tipjar={tipjar}
+              quickpoll={quickpoll}
+            />
+          </React.Suspense>
+
+          <React.Suspense fallback={<SkeletonLoader height="400px" borderRadius="32px" />}>
+            <TransactionHistory txLog={txLog} />
+          </React.Suspense>
+        </main>
+      </div>
+
+      <Footer />
+      <OnboardingTour />
+      <FloatingActionButton />
+      <NetworkHeartbeat />
+      <QuickActions address={address} onClearLog={() => setTxLog([])} onPingAll={pingAll} />
+
       <Toaster position="top-right" />
       <ParticleOverlay trigger={particleTrigger} />
 
