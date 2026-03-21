@@ -118,7 +118,7 @@ export default function TipJar({ onTxSubmit }) {
         </div>
       </div>
 
-      <div className="game-actions">
+      <div className="game-actions" role="group" aria-label="Game Tipping Controls">
         <button
           type="button"
           className="action-btn primary"
