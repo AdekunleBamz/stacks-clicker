@@ -37,12 +37,12 @@ function ActionButton({
   return (
     <motion.button
       type="button"
-      className={`action-btn primary-button glass-card ${className}`}
+      className={`action-btn ${className}`}
       onClick={onClick}
       disabled={disabled || isLoading}
       aria-busy={isLoading}
-      aria-label={`${label}${cost ? ` - Cost: ${cost}` : ''}`}
-      aria-live="polite"
+      aria-live="assertive"
+      title={label}
       whileHover={!disabled && !isLoading ? { 
         scale: 1.02, 
         translateY: -2,
@@ -53,12 +53,6 @@ function ActionButton({
         translateY: 0,
         filter: "brightness(0.9)"
       } : {}}
-      whileFocus={!disabled && !isLoading ? {
-        scale: 1.02,
-        borderColor: 'var(--primary)',
-        boxShadow: '0 0 0 4px var(--primary-glow)',
-        outline: 'none'
-      } : {}}
       animate={isError ? "shake" : {}}
       variants={shakeVariants}
       transition={{ type: "spring", stiffness: 500, damping: 15 }}
@@ -66,7 +60,7 @@ function ActionButton({
       <div className="btn-content">
         <AnimatePresence mode="wait">
           {isLoading ? (
-            <div className="loading-progress-container" key="loader" role="progressbar" aria-label="Processing action">
+            <div className="loading-progress-container" key="loader">
               <motion.div
                 initial={{ width: 0 }}
                 animate={{ width: "100%" }}
@@ -102,7 +96,5 @@ ActionButton.propTypes = {
   cost: PropTypes.string,
   isError: PropTypes.bool
 };
-
-ActionButton.displayName = 'ActionButton';
 
 export default memo(ActionButton);
