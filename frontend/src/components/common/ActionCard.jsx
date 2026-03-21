@@ -18,8 +18,8 @@ export default function ActionCard({ title, subtitle, icon, iconClass, children 
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      whileHover={{ y: -5, boxShadow: '0 25px 50px -12px rgba(99, 102, 241, 0.2)' }}
-      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+      whileHover={{ y: -8, boxShadow: '0 25px 50px -12px rgba(99, 102, 241, 0.4)', borderColor: 'rgba(99, 102, 241, 0.5)' }}
+      transition={{ type: 'spring', stiffness: 350, damping: 20 }}
     >
       <div className="contract-header">
         <div className={`contract-icon ${iconClass}`}>{icon}</div>
