@@ -147,7 +147,7 @@ export default function QuickPoll({ onTxSubmit }) {
         <span className="game-badge" title="Live decentralized community voting portal">Community Voting</span>
       </div>
 
-      <div className="game-stats" aria-live="polite" aria-atomic="true">
+      <div className="game-stats" tabIndex={0} aria-live="polite" aria-atomic="true">
         <div className="stat">
           <span className="stat-value">{votes.yes}</span>
           <span className="stat-label" aria-hidden="true">Yes Votes</span>
