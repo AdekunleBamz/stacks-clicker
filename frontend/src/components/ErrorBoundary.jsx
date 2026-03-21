@@ -25,7 +25,7 @@ export default class ErrorBoundary extends React.Component {
             <p className="error-message" aria-describedby="error-boundary-title">
               {this.state.error?.message || 'An unexpected error occurred.'}
             </p>
-            <div className="error-actions">
+            <div className="error-actions" role="group" aria-label="Error Recovery Actions">
               <button
                 type="button"
                 className="action-btn primary"
