@@ -158,7 +158,7 @@ export default function QuickPoll({ onTxSubmit }) {
         </div>
       </div>
 
-      <div className="game-actions">
+      <div className="game-actions" role="group" aria-label="Game Polling Controls">
         <div className="poll-create">
           <input
             type="text"
