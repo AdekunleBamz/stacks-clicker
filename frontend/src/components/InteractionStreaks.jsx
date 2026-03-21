@@ -46,7 +46,7 @@ function InteractionStreaks({ totalInteractions }) {
             animate={{ scale: [1, 1.2, 1], filter: ["drop-shadow(0 0 0px #ff4500)", "drop-shadow(0 0 10px #ff4500)", "drop-shadow(0 0 0px #ff4500)"] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
             role="img"
-            aria-label="Streak Fire"
+            aria-label="Current Streak Status Fire"
           >
             🔥
           </motion.span>
