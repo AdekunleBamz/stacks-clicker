@@ -158,6 +158,8 @@ export default function TipJar({ onTxSubmit }) {
                 value={tipAmount}
                 onChange={(e) => setTipAmount(Number.parseInt(e.target.value, 10) || 1000)}
                 className="amount-input"
+                aria-label="Tip Amount in microstacks"
+                title="Enter the tip amount in uSTX"
               />
             </div>
           </div>
