@@ -1,8 +1,6 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
-import { useLongPress } from '../hooks/useLongPress';
-import { truncateAddress } from '../utils/format';
 
 /**
  * Individual transaction item with swipe actions and status visualization.
@@ -19,11 +17,9 @@ function TransactionItem({
   const txId = String(tx.id ?? '');
   const isPending = tx.isPending ?? txId.startsWith('pending');
 
-  const longPressHandlers = useLongPress(() => onDetails(tx), { delay: 600 });
-
   return (
-    <div className="tx-item-wrapper" role="listitem">
-      <div className="tx-swipe-actions" aria-label="Quick transaction actions">
+    <div className="tx-item-wrapper">
+      <div className="tx-swipe-actions">
         <button type="button" className="swipe-btn copy" onClick={() => onCopy(tx.id)} aria-label="Copy transaction ID" title="Copy transaction ID">
           📋
         </button>
@@ -31,35 +27,26 @@ function TransactionItem({
           type="button"
           className="swipe-btn details"
           onClick={() => onDetails(tx)}
-          aria-label="View transaction diagnostics"
+          aria-label="View Details"
           title="View Details"
         >
           🔍
         </button>
       </div>
       <motion.div
-        className={`tx-item ${tx.status}`}
-        tabIndex={0}
+        layout
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, height: 0 }}
+        transition={{ duration: 0.3, ease: 'easeOut' }}
+        className={`tx-card ${tx.tx_status}`}
         drag="x"
-        dragConstraints={{ left: -140, right: 0 }}
-        dragElastic={0.05}
-
+        dragConstraints={{ left: -120, right: 0 }}
+        dragElastic={0.1}
         whileDrag={{ scale: 1.02 }}
-        whileFocus={{
-          scale: 1.01,
-          borderColor: 'var(--primary)',
-          boxShadow: '0 0 0 2px var(--primary-glow)',
-          outline: 'none'
-        }}
         onContextMenu={(e) => onContextMenu(e, tx)}
-        style={{ willChange: 'transform' }}
-        {...longPressHandlers}
       >
-        <div 
-          className="tx-status-dot" 
-          aria-label={`Status: ${tx.status}`} 
-          role="img"
-        />
+        <div className="tx-status-dot" aria-hidden="true" />
         <div className="tx-main">
           <div className="tx-header">
             <span className="tx-action-label">{highlightText(tx.action, searchTerm)}</span>
@@ -70,7 +57,7 @@ function TransactionItem({
               View Details <span>→</span>
             </button>
             <span className="tx-action-separator">•</span>
-            <button type="button" className="text-btn" onClick={() => onCopy(tx.id)} aria-label={`Copy transaction ID ${tx.id}`}>
+            <button type="button" className="text-btn" onClick={() => onCopy(tx.id)}>
               Copy ID
             </button>
           </div>
@@ -89,14 +76,12 @@ function TransactionItem({
                 <span className="step-label">Confirmed</span>
               </div>
             </div>
-              <button 
-                type="button" 
-                onClick={() => onOpenExplorer(tx)} 
-                className="tx-explorer-link ghost-button btn-xs"
-                aria-label={`View transaction ${txId} on Explorer`}
-              >
-                {highlightText(truncateAddress(txId, 8), searchTerm)} ↗
+            {tx.explorerUrl && (
+              <button type="button" onClick={() => onOpenExplorer(tx)} className="tx-explorer-link">
+                {highlightText(txId.slice(0, 8), searchTerm)}...
+                {highlightText(txId.slice(-6), searchTerm)} ↗
               </button>
+            )}
           </div>
         </div>
       </motion.div>
@@ -110,8 +95,6 @@ TransactionItem.propTypes = {
     action: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
     time: PropTypes.string.isRequired,
-    isPending: PropTypes.bool,
-    explorerUrl: PropTypes.string,
   }).isRequired,
   searchTerm: PropTypes.string,
   highlightText: PropTypes.func.isRequired,
@@ -120,7 +103,5 @@ TransactionItem.propTypes = {
   onContextMenu: PropTypes.func.isRequired,
   onOpenExplorer: PropTypes.func.isRequired,
 };
-
-TransactionItem.displayName = 'TransactionItem';
 
 export default memo(TransactionItem);
