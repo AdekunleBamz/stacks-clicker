@@ -239,7 +239,7 @@ export default function QuickPoll({ onTxSubmit }) {
         </button>
       </div>
 
-      <p className="game-fee">Fee: 0.0001 STX per action</p>
+      <p className="game-fee" style={{ color: 'var(--text-muted)', fontWeight: 500 }}>Fee: 0.0001 STX per action</p>
     </div>
   );
 }
