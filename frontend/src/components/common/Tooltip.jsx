@@ -1,6 +1,4 @@
-import React, { useState, useEffect, useId, memo } from 'react';
-import { useHover } from '../../hooks/useHover';
-import { useFocus } from '../../hooks/useFocus';
+import React, { useState, useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -15,11 +13,7 @@ import { motion, AnimatePresence } from 'framer-motion';
  */
 function Tooltip({ content, children }) {
   const [isVisible, setIsVisible] = useState(false);
-  const [hoverRef, isHovered] = useHover();
-  const [focusRef, isFocused] = useFocus();
-  const id = useId();
-  const tooltipId = `tooltip-${id}`;
-  const shouldShow = isHovered || isFocused;
+  const [shouldShow, setShouldShow] = useState(false);
 
   useEffect(() => {
     let timer;
@@ -33,25 +27,22 @@ function Tooltip({ content, children }) {
 
   return (
     <div
-      ref={(node) => {
-        hoverRef.current = node;
-        focusRef.current = node;
-      }}
       className="tooltip-wrapper"
+      onMouseEnter={() => setShouldShow(true)}
+      onMouseLeave={() => setShouldShow(false)}
+      onFocus={() => setShouldShow(true)}
+      onBlur={() => setShouldShow(false)}
       style={{ position: 'relative', display: 'inline-block', width: '100%' }}
     >
-      {React.cloneElement(children, {
-        'aria-describedby': isVisible ? tooltipId : undefined
-      })}
+      {children}
       <AnimatePresence>
         {isVisible && (
           <motion.div
-            id={tooltipId}
-            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+            initial={{ opacity: 0, y: 5, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 5, scale: 0.95 }}
+            transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
             className="tooltip-content"
-            style={{ fontWeight: 500, letterSpacing: '0.01em' }}
             role="tooltip"
             aria-atomic="true"
             aria-live="polite"
@@ -69,7 +60,5 @@ Tooltip.propTypes = {
   content: PropTypes.node.isRequired,
   children: PropTypes.node.isRequired
 };
-
-Tooltip.displayName = 'Tooltip';
 
 export default memo(Tooltip);
