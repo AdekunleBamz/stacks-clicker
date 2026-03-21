@@ -114,7 +114,7 @@ export default function TipJar({ onTxSubmit }) {
       <div className="game-stats">
         <div className="stat">
           <span className="stat-value">{(totalTipped / 1000000).toFixed(4)}</span>
-          <span className="stat-label">STX Tipped</span>
+          <span className="stat-label" aria-hidden="true">STX Tipped</span>
         </div>
       </div>
 
