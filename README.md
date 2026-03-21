@@ -58,6 +58,18 @@ Stacks Clicker aims to be more than just a game; it is a gateway for users to ex
    ```bash
    npm run dev
    ```
+   ```bash
+   npm run build
+   ```
+
+## UX & Accessibility Enhancements
+
+This project has undergone a comprehensive 94-PR improvement cycle focusing on:
+- **ARIA Compliance**: Full semantic HTML5 and WAI-ARIA role coverage.
+- **Keyboard Navigation**: Optimized focus management and global escape-key handlers.
+- **Motion Design**: Standardized cubic-bezier transitions and reduced-motion support.
+- **Loading UX**: Robust skeleton loaders, shimmers, and pulse animations for all network states.
+- **Error Handling**: Graceful error boundaries and contextual validation feedback.
 
 ### ⚡ Quick Setup
 
