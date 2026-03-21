@@ -64,9 +64,9 @@ function ActionButton({
             <div className="loading-progress-container" key="loader">
               <motion.div
                 initial={{ width: 0 }}
-                animate={{ width: "100%" }}
-                transition={{ duration: 2, ease: "linear" }}
-                className="loading-progress-bar"
+                animate={{ width: "100%", opacity: [0.6, 1, 0.6] }}
+                transition={{ duration: 2, ease: "linear", opacity: { duration: 1, repeat: Infinity } }}
+                className="loading-progress-bar pulse"
               />
             </div>
           ) : (
