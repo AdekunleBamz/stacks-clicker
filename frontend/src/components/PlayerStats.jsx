@@ -26,7 +26,7 @@ function PlayerStats({ stats, txCount }) {
       aria-label="Player Statistics"
       role="region"
       tabIndex={0}
-      title="Your Player Statistics Overview"
+      title="Your Personal Player Statistics Overview"
     >
       <div className="stats-cards" role="group" aria-label="Player Performance Metrics">
         {statItems.map((item, index) => (
