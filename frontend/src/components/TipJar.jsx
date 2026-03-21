@@ -108,7 +108,7 @@ export default function TipJar({ onTxSubmit }) {
     <div className="game-card tipjar">
       <div className="game-header">
         <h2 aria-label="TipJar Tipping Component">💰 TipJar</h2>
-        <span className="game-badge">Support Creators</span>
+        <span className="game-badge" title="Direct peer-to-peer creator tips interface">Support Creators</span>
       </div>
 
       <div className="game-stats">
