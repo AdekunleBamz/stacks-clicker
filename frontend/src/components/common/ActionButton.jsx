@@ -41,6 +41,7 @@ function ActionButton({
       onClick={onClick}
       disabled={disabled || isLoading}
       aria-busy={isLoading}
+      title={label}
       whileHover={!disabled && !isLoading ? { 
         scale: 1.02, 
         translateY: -2,
