@@ -47,11 +47,12 @@ function InteractionStreaks({ totalInteractions }) {
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", opacity: { duration: 0.2 } }}
             role="img"
             aria-label="Current Streak Status Fire"
+            aria-describedby="streak-label-desc"
           >
             🔥
           </motion.span>
           <span className="streak-value">{streak}</span>
-          <span className="streak-label" aria-hidden="true">Streak</span>
+          <span className="streak-label" id="streak-label-desc" aria-hidden="true">Streak</span>
         </div>
       </div>
       <div className="badges-grid">
