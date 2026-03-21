@@ -92,6 +92,9 @@ function ClickerCard({ address, clicker }) {
             </motion.div>
           )}
         </AnimatePresence>
+        <div className="stat" aria-live="polite">
+          <span className="stat-label">Total Clicks</span>
+        </div>
       </div>
       <div className="actions" role="group" aria-label="Clicker Contract Controls">
         <Tooltip content="Perform a single on-chain click interaction instantly (fixed cost).">
