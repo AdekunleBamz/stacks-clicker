@@ -38,7 +38,7 @@ function AddressBadge({ address, onDisconnect }) {
   if (!address) return null;
 
   return (
-    <div className="wallet-info">
+    <div className="wallet-info" role="region" aria-label="Wallet Connection Status">
       <button
         type="button"
         className="address-badge-btn"
