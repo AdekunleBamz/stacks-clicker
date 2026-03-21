@@ -192,7 +192,7 @@ function TransactionHistory({ txLog }) {
       <AnimatePresence>
         {contextMenu && (
           <div key="ctx-wrapper">
-            <div className="context-menu-backdrop" onClick={closeContextMenu} />
+            <div className="context-menu-backdrop" onClick={closeContextMenu} aria-hidden="true" />
             <motion.div
               className="context-menu"
               initial={{ opacity: 0, scale: 0.95 }}
