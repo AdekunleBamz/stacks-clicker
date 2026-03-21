@@ -347,5 +347,6 @@ export function getSession() {
  * Phone cameras can't open wc: URIs directly
  */
 export function getWalletConnectLink(wcUri) {
+  if (!wcUri) return '';
   return `https://walletconnect.com/wc?uri=${encodeURIComponent(wcUri)}`;
 }
