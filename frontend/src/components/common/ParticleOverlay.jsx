@@ -20,7 +20,8 @@ export default function ParticleOverlay({ trigger }) {
    *
    * @param {number} [count=12] - Number of particles to generate in a single burst
    */
-  const createParticles = useCallback((count = 12) => {
+    const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const createParticles = useCallback((count = isReduced ? 4 : 12) => {
     const batchId = Date.now();
     const newParticles = Array.from({ length: count }).map((_, i) => ({
       id: `${batchId}-${i}`,
