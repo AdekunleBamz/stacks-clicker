@@ -124,6 +124,9 @@ function TipJarCard({ address, tipjar }) {
           />
         </Tooltip>
 
+        <div className="stat" aria-live="polite">
+          <span className="stat-label">Total Tipped</span>
+        </div>
         <div className="input-group">
           <label className="input-label" htmlFor="tip-amount-input">
             Custom Amount (STX)
