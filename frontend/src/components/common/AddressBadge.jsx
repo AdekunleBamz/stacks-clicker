@@ -48,7 +48,7 @@ function AddressBadge({ address, onDisconnect }) {
         <span className="address-text">
           {address.slice(0, 6)}...{address.slice(-4)}
         </span>
-        <span className="copy-icon" aria-hidden="true">
+        <span className="copy-icon" aria-hidden="true" aria-live="polite">
           {copied ? '✅' : '📋'}
         </span>
       </button>
