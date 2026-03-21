@@ -64,7 +64,7 @@ function TransactionItem({
               </div>
               <div className={`step ${isPending ? 'pending' : 'active'}`}>
                 <span className="step-dot"></span>
-                <span className="step-label">Mempool</span>
+                <span className="step-label" title="Transaction is awaiting confirmation in the mempool">Mempool</span>
               </div>
               <div className={`step ${isPending ? '' : 'active'}`}>
                 <span className="step-dot"></span>
