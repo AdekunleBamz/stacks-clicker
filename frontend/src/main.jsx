@@ -17,6 +17,7 @@ import './index.css';
 const rootElement = document.getElementById('root');
 
 if (rootElement) {
+  document.documentElement.lang = document.documentElement.lang || 'en';
   ReactDOM.createRoot(rootElement).render(
     <React.StrictMode>
       <ErrorBoundary>
