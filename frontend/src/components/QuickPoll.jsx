@@ -188,7 +188,7 @@ export default function QuickPoll({ onTxSubmit }) {
             disabled={!isConnected || loading}
             title="Quick cast Yes vote"
           >
-            👍 Quick Yes
+            <span aria-hidden="true">👍</span> Quick Yes
           </button>
           <button
             type="button"
