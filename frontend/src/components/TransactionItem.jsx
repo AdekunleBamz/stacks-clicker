@@ -48,8 +48,8 @@ function TransactionItem({
             <span className="tx-timestamp">{tx.time}</span>
           </div>
           <div className="tx-actions-inline">
-            <button type="button" className="text-btn" onClick={() => onDetails(tx)}>
-              Details
+            <button type="button" className="text-btn" onClick={() => onDetails(tx)} title="View full transaction details">
+              View Details <span>→</span>
             </button>
             <span className="tx-action-separator">•</span>
             <button type="button" className="text-btn" onClick={() => onCopy(tx.id)}>
