@@ -28,7 +28,7 @@ function PlayerStats({ stats, txCount }) {
       tabIndex={0}
       title="Your Personal Player Statistics Overview"
     >
-      <div className="stats-cards" role="group" aria-label="Aggregate Player Performance Metrics" aria-live="polite" aria-atomic="false">
+      <div className={`stats-cards ${txCount === 0 && stats.clicks === 0 ? 'shimmer' : ''}`} role="group" aria-label="Aggregate Player Performance Metrics">
         {statItems.map((item, index) => (
           <StatsCard key={item.label} {...item} index={index} />
         ))}
