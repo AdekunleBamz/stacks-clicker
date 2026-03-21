@@ -1,7 +1,6 @@
 import React, { useState, useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
-import { usePrevious } from '../hooks/usePrevious';
 
 /**
  * Component to track and display user interaction streaks and achievement badges.
@@ -15,16 +14,16 @@ import { usePrevious } from '../hooks/usePrevious';
 function InteractionStreaks({ totalInteractions }) {
   const [streak, setStreak] = useState(0);
   const [badges, setBadges] = useState([]);
-  const prevTotal = usePrevious(totalInteractions);
 
   /**
    * Internal effect to increment streak based on interaction activity.
+   * In a production environment, this would ideally be calculated from timestamped transaction logs.
    */
   useEffect(() => {
-    if (totalInteractions > (prevTotal ?? 0)) {
+    if (totalInteractions > 0) {
       setStreak(prev => prev + 1);
     }
-  }, [totalInteractions, prevTotal]);
+  }, [totalInteractions]);
 
   /**
    * Effect to calculate and update earned badges based on total interaction milestones.
@@ -38,13 +37,11 @@ function InteractionStreaks({ totalInteractions }) {
   }, [totalInteractions]);
 
   return (
-    <div className="streak-panel glass-card" role="region" aria-labelledby="streak-heading">
-      <h3 id="streak-heading" className="sr-only">Interaction Streaks and Achievements</h3>
-      <div className="streak-stats">
+    <div className="streak-panel" role="status" aria-live="polite" aria-atomic="true">
+      <div className="streak-stats" role="group" aria-label="Current Interaction Streaks">
         <div className="streak-count">
           <motion.span
-            className="streak-value"
-            aria-live="polite"
+            className="streak-fire"
             style={{ willChange: 'transform, filter' }}
             animate={{ scale: [1, 1.2, 1], filter: ["drop-shadow(0 0 0px #ff4500)", "drop-shadow(0 0 10px #ff4500)", "drop-shadow(0 0 0px #ff4500)"] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
@@ -53,24 +50,22 @@ function InteractionStreaks({ totalInteractions }) {
           >
             🔥
           </motion.span>
-          <span className="streak-value" aria-live="polite" aria-atomic="true">{streak}</span>
-          <span className="streak-label">Streak</span>
+          <span className="streak-value">{streak}</span>
+          <span className="streak-label" aria-hidden="true">Streak</span>
         </div>
       </div>
-      <div className="badges-grid" role="list" aria-label="Earned achievement badges">
+      <div className="badges-grid">
         <AnimatePresence>
           {badges.map(badge => (
             <motion.div
               key={badge.id}
-              className="badge-item glass-card"
-              role="listitem"
+              className="badge-item"
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               whileHover={{ y: -5 }}
               style={{ borderColor: badge.color }}
-              aria-label={`Achievement badge: ${badge.label}`}
             >
-              <span className="badge-text" aria-hidden="true">{badge.label}</span>
+              <span className="badge-text" title={`Achievement Badge: ${badge.label}`}>{badge.label}</span>
             </motion.div>
           ))}
         </AnimatePresence>
@@ -82,7 +77,5 @@ function InteractionStreaks({ totalInteractions }) {
 InteractionStreaks.propTypes = {
   totalInteractions: PropTypes.number.isRequired
 };
-
-InteractionStreaks.displayName = 'InteractionStreaks';
 
 export default memo(InteractionStreaks);
