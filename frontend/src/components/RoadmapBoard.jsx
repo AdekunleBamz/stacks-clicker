@@ -25,7 +25,7 @@ export default function RoadmapBoard() {
         <h2 className="section-title" id="roadmap-title" aria-label="Upcoming Project Roadmap">🚀 Project Roadmap</h2>
         <p className="section-desc">Vote on upcoming features you want to see most.</p>
       </div>
-      <div className="roadmap-items" role="feed" aria-live="polite" aria-label="Dynamically Updating Roadmap Feed">
+      <div className="roadmap-items" role="feed" aria-live="polite" aria-busy="false" aria-label="Dynamically Updating Roadmap Feed">
         {items.map((item, index) => (
           <motion.div
             key={item.title}
