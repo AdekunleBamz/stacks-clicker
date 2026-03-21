@@ -1,10 +1,9 @@
-import React, { memo } from 'react';
+import NetworkHeartbeat from './NetworkHeartbeat';
 import NetworkLogo from './NetworkLogo';
 import AddressBadge from './common/AddressBadge';
 import Tooltip from './common/Tooltip';
 import { useWallet } from '../context/WalletContext';
 import { useI18n } from '../context/I18nContext';
-import { useScrollPosition } from '../hooks/useScrollPosition';
 
 /**
  * Main application header component.
@@ -14,42 +13,31 @@ import { useScrollPosition } from '../hooks/useScrollPosition';
  * @param {string} props.theme - Current theme ('dark' or 'light').
  * @param {Function} props.toggleTheme - Function to toggle between themes.
  */
-function Header({ theme, toggleTheme }) {
+export default function Header({ theme, toggleTheme }) {
   const { address, connectWallet, disconnectWallet } = useWallet();
   const { lang, setLang } = useI18n();
-  const { y } = useScrollPosition();
-  const isScrolled = y > 20;
-
-  const handleLangChange = React.useCallback(
-    (e) => setLang(e.target.value),
-    [setLang]
-  );
-
-
 
   return (
-    <header 
-      className={`app-header ${isScrolled ? 'header-scrolled' : ''}`}
-      role="banner"
-    >
+    <header className="app-header">
       <div className="header-content">
         <div 
           className="logo" 
-          aria-label="Stacks Clicker Logo"
-          title="Stacks Clicker Logo"
+          role="banner" 
+          aria-label="Application Logo"
+          title="Stacks Clicker V2 Logo"
         >
+          <div className="header-left">
           <NetworkLogo />
-          <h1 className="header-title text-gradient" aria-label="Stacks Clicker Dashboard">Stacks Clicker</h1>
+          <h1 className="header-title" aria-label="Stacks Clicker Version 2 Dashboard">Stacks Clicker V2</h1>
+        </div>
         </div>
 
-
-        <div className="wallet-section">
+        <div className="wallet-section" role="group" aria-label="Wallet Connection Utilities">
           <select
-            className="language-select input-field"
+            className="language-select"
             value={lang}
-            onChange={handleLangChange}
+            onChange={(e) => setLang(e.target.value)}
             aria-label="Select application language"
-
           >
             <option value="en">EN</option>
             <option value="es">ES</option>
@@ -62,21 +50,20 @@ function Header({ theme, toggleTheme }) {
               onClick={toggleTheme}
               aria-label={`Toggle to ${theme === 'dark' ? 'light' : 'dark'} theme`}
               title="Toggle application display theme"
-              style={{ transition: 'all 0.2s ease' }}
             >
               {theme === 'dark' ? '☀️' : '🌙'}
             </button>
           </Tooltip>
 
           {address ? (
-            <div className="wallet-connected" role="group" aria-label="Wallet connection options">
+            <div className="wallet-connected">
               <AddressBadge address={address} />
               <button
                 type="button"
                 className="btn-logout"
                 onClick={disconnectWallet}
-                aria-label="Disconnect wallet session"
-                title="Disconnect wallet"
+                aria-label="Logout"
+                title="Logout"
               >
                 <span className="logout-icon" aria-hidden="true">🚪</span>
               </button>
@@ -86,8 +73,7 @@ function Header({ theme, toggleTheme }) {
               type="button"
               className="btn-connect"
               onClick={connectWallet}
-              aria-label="Connect Stacks Wallet to begin playing"
-              title="Connect Wallet"
+              aria-label="Connect Stacks Wallet"
             >
               Connect Wallet
             </button>
@@ -97,6 +83,3 @@ function Header({ theme, toggleTheme }) {
     </header>
   );
 }
-Header.displayName = 'Header';
-
-export default memo(Header);
