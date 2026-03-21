@@ -143,7 +143,7 @@ function TransactionHistory({ txLog }) {
           aria-label="Search transaction history"
           count={filteredLog.length}
         />
-        <div className="tx-export-actions">
+        <div className="tx-export-actions" role="toolbar" aria-label="Export and Filter Data">
           <select
             className="tx-filter-select"
             value={filterStatus}
