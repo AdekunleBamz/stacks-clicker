@@ -38,6 +38,7 @@ export default function ConnectButton() {
       className="connect-btn"
       onClick={connectWallet}
       aria-label="Connect Stacks Wallet"
+      title="Connect Stacks Wallet"
     >
       Connect Wallet
     </button>
