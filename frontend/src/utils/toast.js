@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 
 const toastStyle = {
   borderRadius: '16px',
+  cursor: 'default',
   background: 'var(--bg-card)',
   color: 'var(--text-main)',
   border: '1px solid var(--border)',
