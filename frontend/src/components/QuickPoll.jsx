@@ -167,6 +167,7 @@ export default function QuickPoll({ onTxSubmit }) {
             onChange={(e) => setPollQuestion(e.target.value)}
             className="poll-input"
             maxLength={200}
+            aria-label="Poll Question Input"
           />
           <button
             type="button"
