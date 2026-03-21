@@ -22,7 +22,8 @@ const Card = ({
 
   return (
     <motion.div
-      className={`app-card ${depthClass} ${interactiveClass} ${className}`}
+      className={`card-wrapper ${depthClass} ${interactiveClass} ${className}`}
+      role="article"
       whileHover={interactive ? { y: -5, boxShadow: 'var(--shadow-lg)' } : {}}
       {...props}
     >
