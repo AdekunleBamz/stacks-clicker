@@ -43,6 +43,7 @@ function Tooltip({ content, children }) {
             exit={{ opacity: 0, y: 5, scale: 0.95 }}
             className="tooltip-content"
             role="tooltip"
+            aria-atomic="true"
             aria-live="polite"
           >
             {content}
