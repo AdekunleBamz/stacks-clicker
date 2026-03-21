@@ -144,7 +144,7 @@ export default function QuickPoll({ onTxSubmit }) {
     <div className="game-card quickpoll">
       <div className="game-header">
         <h2 aria-label="QuickPoll Interactive Component">🗳️ QuickPoll</h2>
-        <span className="game-badge">Community Voting</span>
+        <span className="game-badge" title="Live decentralized community voting portal">Community Voting</span>
       </div>
 
       <div className="game-stats">
