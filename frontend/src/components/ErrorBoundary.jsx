@@ -28,10 +28,10 @@ export default class ErrorBoundary extends React.Component {
             <div className="error-actions">
               <button
                 type="button"
-                className="error-btn retry"
-                onClick={() => this.setState({ hasError: false, error: null })}
+                className="action-btn primary"
+                onClick={() => this.setState({ hasError: false })}
               >
-                🔄 Try Again
+                <span aria-hidden="true">🔄</span> Try Again
               </button>
               <button
                 className="action-btn secondary"
