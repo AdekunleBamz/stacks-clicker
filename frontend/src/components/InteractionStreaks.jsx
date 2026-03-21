@@ -65,7 +65,7 @@ function InteractionStreaks({ totalInteractions }) {
               whileHover={{ y: -5 }}
               style={{ borderColor: badge.color }}
             >
-              <span className="badge-text">{badge.label}</span>
+              <span className="badge-text" title={`Achievement Badge: ${badge.label}`}>{badge.label}</span>
             </motion.div>
           ))}
         </AnimatePresence>
