@@ -63,9 +63,11 @@ function TransactionItem({
                 <span className="step-dot"></span>
                 <span className="step-label">Submitted</span>
               </div>
-              <div className={`step ${isPending ? 'pending' : 'active'}`}>
+              <div className={`step ${isPending ? 'pending' : (tx.status === 'failed' ? 'error' : 'active')}`}>
                 <span className="step-dot"></span>
-                <span className="step-label" title="Transaction is awaiting confirmation in the mempool">Mempool</span>
+                <span className="step-label" title={tx.status === 'failed' ? 'Transaction execution failed' : 'Transaction is awaiting confirmation in the mempool'}>
+                  {tx.status === 'failed' ? 'Failed' : 'Mempool'}
+                </span>
               </div>
               <div className={`step ${isPending ? '' : 'active'}`}>
                 <span className="step-dot"></span>
