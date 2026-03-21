@@ -21,14 +21,12 @@ function PlayerStats({ stats, txCount }) {
   ], [stats, txCount]);
 
   return (
-    <section 
-      className="stats-bar" 
-      aria-label="Player Statistics" 
-      role="region" 
+    <section
+      aria-label="Player Statistics"
+      role="region"
       tabIndex={0}
       title="Your Player Statistics Overview"
     >
-      {statItems.map((item, index) => (
         <StatsCard key={item.label} {...item} index={index} />
       ))}
     </section>
