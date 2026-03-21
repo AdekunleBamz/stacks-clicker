@@ -1,9 +1,6 @@
 import React, { useState, memo, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useMedia } from '../../hooks/useMedia';
-import { useClipboard } from '../../hooks/useClipboard';
-import { truncateAddress } from '../../utils/format';
+import { notify } from '../../utils/toast';
 
 /**
  * Component for displaying a truncated Stacks wallet address with copy-to-clipboard functionality.
@@ -16,68 +13,52 @@ import { truncateAddress } from '../../utils/format';
  * @returns {JSX.Element|null} The rendered address badge or null if no address is provided
  */
 function AddressBadge({ address, onDisconnect }) {
-  const isMobile = useMedia('(max-width: 480px)');
-  const { copied, copyToClipboard } = useClipboard();
+  const [copied, setCopied] = useState(false);
 
   /**
    * Copies the full address to the system clipboard and provides visual feedback.
    */
   const handleCopy = useCallback(() => {
-    copyToClipboard(address);
-  }, [address, copyToClipboard]);
+    if (!address) return;
+    if (!navigator?.clipboard?.writeText) {
+      notify.error('Clipboard not available');
+      return;
+    }
+
+    navigator.clipboard
+      .writeText(address)
+      .then(() => {
+        setCopied(true);
+        notify.success('Address copied!');
+        setTimeout(() => setCopied(false), 2000);
+      })
+      .catch(() => notify.error('Unable to copy address'));
+  }, [address]);
 
   if (!address) return null;
 
   return (
     <div className="wallet-info" role="region" aria-label="Wallet Connection Status">
-      <motion.button
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
+      <button
         type="button"
-        className="address-badge-btn secondary-button glass-card"
+        className="address-badge-btn"
+        aria-keyshortcuts="c"
         onClick={handleCopy}
-        title={`Copy full Stacks address: ${address}`}
-        aria-label={`Copy wallet address ${truncateAddress(address, 4)}`}
-        style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', willChange: 'transform' }}
-
+        title="Copy full wallet address to clipboard"
+        aria-label="Copy wallet address"
       >
-        <span className="address-text" aria-hidden="true">
-          {truncateAddress(address, isMobile ? 4 : 6)}
+        <span className="address-text">
+          {address.slice(0, 6)}...{address.slice(-4)}
         </span>
-        <div className="copy-status-container" style={{ width: '20px', display: 'flex', justifyContent: 'center' }}>
-          <AnimatePresence mode="wait">
-            {copied ? (
-              <motion.span
-                key="check"
-                initial={{ opacity: 0, scale: 0.5, rotate: -45 }}
-                animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                exit={{ opacity: 0, scale: 0.5 }}
-                role="status"
-                aria-live="polite"
-              >
-                ✅
-                <span className="sr-only">Address copied to clipboard</span>
-              </motion.span>
-            ) : (
-              <motion.span
-                key="copy"
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.5 }}
-                aria-hidden="true"
-              >
-                📋
-              </motion.span>
-            )}
-          </AnimatePresence>
-        </div>
-      </motion.button>
+        <span className="copy-icon" aria-live="polite">
+          {copied ? '✅' : '📋'}
+        </span>
+      </button>
       {onDisconnect && (
         <button
-          type="button"
-          className="btn-disconnect ghost-button btn-sm"
+          className="btn-disconnect"
           onClick={onDisconnect}
-          aria-label="Disconnect wallet session"
+          aria-label="Disconnect wallet"
         >
           Disconnect
         </button>
