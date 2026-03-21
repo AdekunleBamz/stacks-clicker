@@ -154,6 +154,7 @@ function TipJarCard({ address, tipjar }) {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
+              transition={{ ease: "easeOut", duration: 0.25 }}
               className="tip-success-msg"
             >
               🎉 Thank you for your generous tip!
