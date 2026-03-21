@@ -9,20 +9,19 @@ export default function Footer() {
   return (
     <footer className="app-footer" role="contentinfo" aria-label="Global Application Footer">
       <div className="footer-content">
-        <div className="footer-left">
-          <p>Built with <span role="img" aria-label="love">❤️</span> on Stacks</p>
-          <span className="app-version" title="Current Interface Version" style={{ opacity: 0.9 }}>v{version}</span>
+        <div className="footer-left" id="footer-copyright-zone">
+          <p>© {new Date().getFullYear()} Stacks Clicker • Built with <span role="img" aria-label="love">❤️</span> on Stacks</p>
+          <span className="app-version" title="Current Interface Version">v{version}</span>
         </div>
         <div className="footer-links">
-          <a 
-            href="https://twitter.com/stacks" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="social-link"
-            aria-label="Follow Stacks on Twitter"
-            title="Follow Stacks on Twitter"
-            tabIndex={0}
-          >
+        <a 
+          href="https://twitter.com/stacks" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="social-link"
+          aria-label="Follow Stacks on Twitter"
+          title="Follow Stacks on Twitter"
+        >
           <span aria-hidden="true">🐦</span> Twitter
         </a>
         <a 
