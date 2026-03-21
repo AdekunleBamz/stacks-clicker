@@ -194,7 +194,7 @@ export default function App() {
           <PlayerStats stats={stats} txCount={txLog.length} />
         </React.Suspense>
 
-        <main id="main-content" className="app-main" tabIndex={-1} style={{ outline: 'none' }}>
+        <main id="main-content" className="app-main" role="main" tabIndex={-1} style={{ outline: 'none' }}>
           <React.Suspense fallback={<SkeletonLoader height="500px" borderRadius="32px" />}>
             <MainGrid
               address={address}
