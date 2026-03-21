@@ -17,13 +17,11 @@ export default function TipJar({ onTxSubmit }) {
   const [tipAmount, setTipAmount] = useState(1000); // 1000 uSTX = 0.001 STX
   const [recipientAddress, setRecipientAddress] = useState('');
   const [totalTipped, setTotalTipped] = useState(0);
-  const [feedbackMessage, setFeedbackMessage] = useState('');
 
   const handleQuickTip = async () => {
     if (!isConnected) return;
 
     setLoading(true);
-    setFeedbackMessage('Processing quick tip...');
     try {
       const result = await callContract({
         contractAddress: DEPLOYER,
@@ -33,11 +31,9 @@ export default function TipJar({ onTxSubmit }) {
       });
 
       setTotalTipped((prev) => prev + 1000);
-      setFeedbackMessage('Quick tip of 0.001 STX sent! Thank you.');
       onTxSubmit?.('quick-tip', result.txId);
     } catch (err) {
       console.error('Quick tip failed:', err);
-      setFeedbackMessage('Quick tip transaction failed.');
     } finally {
       setLoading(false);
     }
@@ -47,7 +43,6 @@ export default function TipJar({ onTxSubmit }) {
     if (!isConnected) return;
 
     setLoading(true);
-    setFeedbackMessage('Sending self-ping...');
     try {
       const result = await callContract({
         contractAddress: DEPLOYER,
@@ -56,39 +51,33 @@ export default function TipJar({ onTxSubmit }) {
         functionArgs: [],
       });
 
-      setFeedbackMessage('Self-ping confirmed on network.');
       onTxSubmit?.('self-ping', result.txId);
     } catch (err) {
       console.error('Self-ping failed:', err);
-      setFeedbackMessage('Self-ping failed.');
     } finally {
       setLoading(false);
     }
   };
 
   const handleTipUser = async () => {
-    const normalizedRecipient = recipientAddress.trim();
-    if (!isConnected || !normalizedRecipient) return;
+    if (!isConnected || !recipientAddress) return;
 
     setLoading(true);
-    setFeedbackMessage(`Sending ${tipAmount} uSTX to ${normalizedRecipient}...`);
     try {
       const result = await callContract({
         contractAddress: DEPLOYER,
         contractName: 'tipjar-v2p',
         functionName: 'tip-user',
         functionArgs: [
-          { type: 'principal', value: normalizedRecipient },
+          { type: 'principal', value: recipientAddress },
           { type: 'uint128', value: tipAmount.toString() },
         ],
       });
 
       setTotalTipped((prev) => prev + tipAmount);
-      setFeedbackMessage(`Successfully tipped ${tipAmount} uSTX to ${normalizedRecipient}!`);
       onTxSubmit?.('tip-user', result.txId);
     } catch (err) {
       console.error('Tip user failed:', err);
-      setFeedbackMessage('Failed to send tip to user.');
     } finally {
       setLoading(false);
     }
@@ -98,7 +87,6 @@ export default function TipJar({ onTxSubmit }) {
     if (!isConnected) return;
 
     setLoading(true);
-    setFeedbackMessage(`Donating ${tipAmount} uSTX to developers...`);
     try {
       const result = await callContract({
         contractAddress: DEPLOYER,
@@ -108,78 +96,71 @@ export default function TipJar({ onTxSubmit }) {
       });
 
       setTotalTipped((prev) => prev + tipAmount);
-      setFeedbackMessage('Thank you for your generous donation!');
       onTxSubmit?.('donate', result.txId);
     } catch (err) {
       console.error('Donate failed:', err);
-      setFeedbackMessage('Donation transaction failed.');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="game-card tipjar glass-card" role="region" aria-labelledby="tipjar-title">
+    <div className="game-card tipjar">
       <div className="game-header">
-        <h2 id="tipjar-title">💰 TipJar</h2>
+        <h2 aria-label="TipJar Tipping Component">💰 TipJar</h2>
         <span className="game-badge" title="Direct peer-to-peer creator tips interface">Support Creators</span>
-        <span className="sr-only" role="status" aria-live="polite">{feedbackMessage}</span>
       </div>
 
-      <div className="game-stats" role="group" aria-label="Tipping statistics">
+      <div className="game-stats">
         <div className="stat">
-          <span className="stat-value" aria-live="polite" aria-atomic="true">{(totalTipped / 1000000).toFixed(4)}</span>
-          <span className="stat-label">STX Tipped</span>
+          <span className="stat-value">{(totalTipped / 1000000).toFixed(4)}</span>
+          <span className="stat-label" aria-hidden="true">STX Tipped</span>
         </div>
       </div>
 
       <div className="game-actions">
         <button
           type="button"
-          className="action-btn primary-button"
+          className="action-btn primary"
           onClick={handleQuickTip}
           disabled={!isConnected || loading}
-          aria-label={loading ? "Sending quick tip..." : "Send quick tip of 0.001 STX"}
         >
           {loading ? '⏳' : '⚡'} Quick Tip (0.001 STX)
         </button>
 
         <button
           type="button"
-          className="action-btn secondary-button glass-card"
+          className="action-btn secondary"
           onClick={handleSelfPing}
           disabled={!isConnected || loading}
           title="Send a self ping transaction"
-          aria-label="Send self ping transaction"
-          aria-busy={loading}
         >
           <span aria-hidden="true">📡</span> Self Ping
         </button>
 
-        <div className="tip-custom" role="form" aria-label="Custom Tip Amount Entry">
+        <div className="tip-custom">
           <div className="input-group">
-            <label className="input-label" htmlFor="recipient-address">Recipient Address</label>
+            <label className="input-label">Recipient Address</label>
             <input
-              id="recipient-address"
+              id="tip-recipient-input"
               type="text"
-              placeholder="SP..."
+              placeholder="SP123..."
               value={recipientAddress}
               onChange={(e) => setRecipientAddress(e.target.value)}
-              className="address-input input-field"
-              aria-required="true"
+              className="address-input"
             />
           </div>
           <div className="input-group">
-            <label className="input-label" htmlFor="tip-amount">Amount (uSTX)</label>
+            <label className="input-label">Amount (uSTX)</label>
             <div className="tip-amount-group">
               <input
-                id="tip-amount"
+                id="tip-amount-input-primary"
                 type="number"
-                min="1000"
-                step="1000"
+                min="1"
+                max="100"0"
                 value={tipAmount}
                 onChange={(e) => setTipAmount(Number.parseInt(e.target.value, 10) || 1000)}
-                className="amount-input input-field"
+                className="amount-input"
                 aria-label="Tip Amount in microstacks"
                 title="Enter the tip amount in uSTX"
               />
@@ -187,11 +168,10 @@ export default function TipJar({ onTxSubmit }) {
           </div>
           <button
             type="button"
-            className="action-btn secondary-button outline"
+            className="action-btn outline"
             onClick={handleTipUser}
             disabled={!isConnected || loading || !recipientAddress}
-            title={`Send ${tipAmount} uSTX to ${recipientAddress}`}
-            aria-label={`Send tip to user ${recipientAddress}`}
+            title="Send the specified amount to the recipient"
           >
             Send Tip
           </button>
@@ -199,10 +179,9 @@ export default function TipJar({ onTxSubmit }) {
 
         <button
           type="button"
-          className="action-btn secondary-button outline"
+          className="action-btn outline"
           onClick={handleDonate}
           disabled={!isConnected || loading}
-          aria-label={`Donate ${tipAmount} uSTX to developer`}
         >
           🎁 Donate {tipAmount} uSTX
         </button>
