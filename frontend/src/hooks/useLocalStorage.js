@@ -35,7 +35,7 @@ export function useLocalStorage(key, initialValue) {
           return valueToStore;
         });
       } catch (error) {
-        console.error(`Error setting localStorage key "${key}":`, error);
+        console.error(`[StorageSync] Unable to persist data due to privacy blocking:`, error);
       }
     },
     [key]
