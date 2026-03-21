@@ -91,7 +91,7 @@ export default function ClickerGame({ onTxSubmit }) {
         </div>
       </div>
 
-      <div className="game-actions">
+      <div className="game-actions" role="group" aria-label="Clicker Execution Controls">
         <button
           type="button"
           className="action-btn primary huge"
