@@ -17,8 +17,8 @@ const Footer = memo(function Footer() {
     <footer className="app-footer" role="contentinfo" aria-label="Global Application Footer">
       <div className="footer-content">
         <div className="footer-left">
-          <p>Built with <span role="img" aria-label="developer love and care">❤️</span> on Stacks</p>
-          <span className="app-version" title="Current Interface Version">v{version}</span>
+          <p>Built with <span role="img" aria-label="love">❤️</span> on Stacks</p>
+          <span className="app-version" title="Current Interface Version" style={{ opacity: 0.9 }}>v{version}</span>
         </div>
         <div className="footer-links">
         <a 
