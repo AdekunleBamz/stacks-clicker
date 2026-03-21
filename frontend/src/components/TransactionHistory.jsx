@@ -140,6 +140,7 @@ function TransactionHistory({ txLog }) {
           onChange={setSearchTerm}
           onClear={() => setSearchTerm('')}
           placeholder="Search action or ID..."
+          aria-label="Search transaction history"
           count={filteredLog.length}
         />
         <div className="tx-export-actions">
