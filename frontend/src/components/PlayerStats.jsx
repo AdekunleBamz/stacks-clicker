@@ -34,37 +34,18 @@ export default function PlayerStats({ stats, txCount }) {
   ];
 
   return (
-    <section className="stats-bar" aria-label="Player Statistics">
-      {statItems.map((item, index) => (
-        <motion.div
-          key={item.label}
-          className="stat-card"
-          initial={{ opacity: 0, scale: 0.9, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{
-            type: "spring",
-            stiffness: 260,
-            damping: 20,
-            delay: index * 0.1
-          }}
-          whileHover={{
-            scale: 1.05,
-            boxShadow: "0 10px 30px -10px rgba(0,0,0,0.5)",
-            borderColor: item.color + "44"
-          }}
-          style={{ '--accent-color': item.color }}
-        >
-          <div className="stat-icon" style={{ filter: `drop-shadow(0 0 8px ${item.color}44)` }}>
-            {item.icon}
-          </div>
-          <div className="stat-content">
-            <div className="value">
-              <AnimatedNumber value={item.value} />
-            </div>
-            <div className="label">{item.label}</div>
-          </div>
-        </motion.div>
-      ))}
+    <section
+      className="stats-bar"
+      aria-label="Player Statistics"
+      role="region"
+      tabIndex={0}
+      title="Your Personal Player Statistics Overview"
+    >
+      <div className="stats-cards" role="group" aria-label="Aggregate Player Performance Metrics" aria-live="polite" aria-atomic="false">
+        {statItems.map((item, index) => (
+          <StatsCard key={item.label} {...item} index={index} />
+        ))}
+      </div>
     </section>
   );
 }
