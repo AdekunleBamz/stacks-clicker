@@ -51,7 +51,7 @@ function InteractionStreaks({ totalInteractions }) {
             🔥
           </motion.span>
           <span className="streak-value">{streak}</span>
-          <span className="streak-label">Streak</span>
+          <span className="streak-label" aria-hidden="true">Streak</span>
         </div>
       </div>
       <div className="badges-grid">
