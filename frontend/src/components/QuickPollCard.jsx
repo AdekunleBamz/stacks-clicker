@@ -94,7 +94,7 @@ function QuickPollCard({ address, quickpoll }) {
       icon="🗳️"
       iconClass="bg-emerald-500/20 text-emerald-400"
     >
-      <div className="actions">
+      <div className="actions" role="group" aria-label="Polling Controls">
         <Tooltip content="Ping the QuickPoll network contract to test live connection state.">
           <ActionButton
             label="Poll Ping"
