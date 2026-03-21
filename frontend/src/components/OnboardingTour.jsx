@@ -50,7 +50,7 @@ export default function OnboardingTour() {
 
   return (
     <AnimatePresence>
-      <div className="tour-overlay" onClick={dismiss} role="presentation">
+      <div className="tour-overlay-backdrop" onClick={dismiss} aria-hidden="true" role="presentation">
         <motion.div
           className="tour-card"
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
