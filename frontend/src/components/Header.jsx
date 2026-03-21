@@ -26,9 +26,10 @@ export default function Header({ theme, toggleTheme }) {
           aria-label="Application Logo"
           title="Stacks Clicker V2 Logo"
         >
-          <NetworkHeartbeat />
+          <div className="header-left">
           <NetworkLogo />
-          <span className="logo-text">Stacks Clicker V2</span>
+          <h1 className="header-title" aria-label="Stacks Clicker Version 2 Dashboard">Stacks Clicker V2</h1>
+        </div>
         </div>
 
         <div className="wallet-section">
