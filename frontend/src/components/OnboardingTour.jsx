@@ -19,7 +19,7 @@ export default function OnboardingTour() {
       // Initial focus on the tour modal
       // Note: The selector '.tour-btn.primary' is used as per instruction.
       // If no element matches, focus will not be set.
-      const firstBtn = document.querySelector('.tour-next');
+      const firstBtn = document.querySelector('.tour-btn.primary');
       firstBtn?.focus();
     } else {
       document.body.style.overflow = 'unset';
