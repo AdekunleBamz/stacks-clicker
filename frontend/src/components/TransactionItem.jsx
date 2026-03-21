@@ -20,7 +20,7 @@ function TransactionItem({
   return (
     <div className="tx-item-wrapper">
       <div className="tx-swipe-actions">
-        <button type="button" className="swipe-btn copy" onClick={() => onCopy(tx.id)} aria-label="Copy ID">
+        <button type="button" className="swipe-btn copy" onClick={() => onCopy(tx.id)} aria-label="Copy ID" title="Copy ID">
           📋
         </button>
         <button
@@ -28,6 +28,7 @@ function TransactionItem({
           className="swipe-btn details"
           onClick={() => onDetails(tx)}
           aria-label="View Details"
+          title="View Details"
         >
           🔍
         </button>
