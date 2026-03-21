@@ -4,7 +4,6 @@ import ActionCard from './common/ActionCard';
 import ActionButton from './common/ActionButton';
 import Tooltip from './common/Tooltip';
 import { useSound } from '../hooks/useSound';
-import { useKeydown } from '../hooks/useKeydown';
 import { notify } from '../utils/toast';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -59,36 +58,26 @@ function TipJarCard({ address, tipjar }) {
     notify.success(`Tipping ${amount} STX...`);
   }, [tip]);
 
+  /**
+   * Internal wrapper to check connection and play sound before executing an action.
+   * If not connected, triggers an error sound and visual feedback.
+   *
+   * @param {Function} actionFn - The interaction function to execute
+   * @param {string} fieldId - ID of the button for error highlighting
+   */
   const handleAction = useCallback(
-    (actionFn, fieldId, validationFn = () => true) => {
-      if (!address) {
+    (actionFn, fieldId, validation = () => true) => {
+      if (!address || !validation()) {
         playSound('error');
         setErrorField(fieldId);
         setTimeout(() => setErrorField(null), 500);
         return;
       }
-
-      if (!validationFn()) {
-        playSound('error');
-        setErrorField(fieldId);
-        setTimeout(() => setErrorField(null), 500);
-        return;
-      }
-
       playSound('click');
       actionFn();
     },
     [address, playSound]
   );
-
-  // Keyboard shortcuts for tipping and pinging
-  const quickTipAction = useCallback(() => handleAction(handleQuickTip, 'quick-tip'), [handleAction, handleQuickTip]);
-  const pingAction = useCallback(() => handleAction(handleSelfPing, 'self-ping'), [handleAction, handleSelfPing]);
-
-  useKeydown('t', quickTipAction);
-  useKeydown('T', quickTipAction);
-  useKeydown('p', pingAction);
-  useKeydown('P', pingAction);
 
   return (
     <ActionCard
@@ -96,7 +85,7 @@ function TipJarCard({ address, tipjar }) {
       title="💰 TipJar"
       subtitle="Send tips to generate transactions."
       icon="💎"
-      iconClass="bg-amber-500/20 text-amber-500 glass-card"
+      iconClass="bg-amber-500/20 text-amber-500"
     >
       <div className="actions" role="group" aria-label="Tipping Controls">
         <Tooltip content="Ping the TipJar contract to verify active connectivity.">
@@ -105,7 +94,7 @@ function TipJarCard({ address, tipjar }) {
             icon="🏓"
             cost="0.001 STX"
             className="success"
-            onClick={pingAction}
+            onClick={() => handleAction(handleSelfPing, 'self-ping')}
             isLoading={isLoading('self-ping')}
             isError={errorField === 'self-ping'}
             disabled={isLoading('self-ping')}
@@ -117,16 +106,13 @@ function TipJarCard({ address, tipjar }) {
             icon="💰"
             cost="0.002 STX"
             className="warning"
-            onClick={quickTipAction}
+            onClick={() => handleAction(handleQuickTip, 'quick-tip')}
             isLoading={isLoading('tip')}
             isError={errorField === 'quick-tip'}
             disabled={isLoading('tip')}
           />
         </Tooltip>
 
-        <div className="stat" aria-live="polite">
-          <span className="stat-label">Total Tipped</span>
-        </div>
         <div className="input-group">
           <label className="input-label" htmlFor="tip-amount-input">
             Custom Amount (STX)
@@ -148,28 +134,24 @@ function TipJarCard({ address, tipjar }) {
           <input
             id="tip-amount-input"
             type="number"
-            step="0.001"
+            step="1"
             min="0.001"
-            className="amount-input input-field"
+            className={`amount-input ${errorField === 'custom-tip' ? 'input-error' : ''}`}
             value={tipAmount}
             onChange={(e) => setTipAmount(e.target.value)}
             placeholder="Min 0.001"
-            aria-invalid={!isTipAmountValid}
-            aria-describedby="tip-amount-label"
+            aria-invalid={!isTipAmountValid || errorField === 'custom-tip'}
+            aria-errormessage="tip-amount-error"
           />
         </div>
 
         <AnimatePresence>
           {showSuccess && (
             <motion.div 
-              id="tip-success-notification"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              transition={{ ease: "easeOut", duration: 0.25 }}
               className="tip-success-msg"
-              role="status"
-              aria-live="polite"
             >
               🎉 Thank you for your generous tip!
             </motion.div>
@@ -209,7 +191,5 @@ TipJarCard.propTypes = {
     isLoading: PropTypes.func.isRequired,
   }).isRequired,
 };
-
-TipJarCard.displayName = 'TipJarCard';
 
 export default memo(TipJarCard);

@@ -13,21 +13,18 @@ import { motion } from 'framer-motion';
  * @param {string} [props.className=''] - Additional CSS classes
  * @returns {JSX.Element} The rendered skeleton loader
  */
-function SkeletonLoader({ width = '100%', height = '20px', borderRadius = '8px', className = '', label = 'content' }) {
+function SkeletonLoader({ width = '100%', height = '20px', borderRadius = '8px', className = '' }) {
   return (
     <div
       className={`skeleton-wrapper ${className}`}
-      aria-busy="true"
       role="status"
-      aria-busy="true"
-      aria-label={`Loading ${label}...`}
-      title={`Loading ${label}...`}
+      aria-live="polite"
+      aria-label="Loading content..."
       style={{
         width,
         height,
         borderRadius,
-        borderRadius,
-        backgroundColor: 'var(--skeleton-base, rgba(255, 255, 255, 0.05))',
+        backgroundColor: 'rgba(255, 255, 255, 0.05)',
         overflow: 'hidden',
         position: 'relative'
       }}
@@ -37,21 +34,18 @@ function SkeletonLoader({ width = '100%', height = '20px', borderRadius = '8px',
           x: ['-100%', '100%']
         }}
         transition={{
-          duration: 1.2,
+          duration: 1.5,
           repeat: Infinity,
           ease: "linear"
         }}
-        aria-hidden="true"
         style={{
           position: 'absolute',
           top: 0,
           left: 0,
           width: '100%',
           height: '100%',
-          background: 'linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.05) 50%, transparent 100%)',
-          willChange: 'transform'
+          background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent)',
         }}
-
       />
     </div>
   );
@@ -63,7 +57,5 @@ SkeletonLoader.propTypes = {
   borderRadius: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   className: PropTypes.string
 };
-
-SkeletonLoader.displayName = 'SkeletonLoader';
 
 export default memo(SkeletonLoader);
