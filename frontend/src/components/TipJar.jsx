@@ -142,8 +142,9 @@ export default function TipJar({ onTxSubmit }) {
           <div className="input-group">
             <label className="input-label">Recipient Address</label>
             <input
+              id="tip-recipient-input"
               type="text"
-              placeholder="SP..."
+              placeholder="SP123..."
               value={recipientAddress}
               onChange={(e) => setRecipientAddress(e.target.value)}
               className="address-input"
@@ -153,9 +154,10 @@ export default function TipJar({ onTxSubmit }) {
             <label className="input-label">Amount (uSTX)</label>
             <div className="tip-amount-group">
               <input
+                id="tip-amount-input-primary"
                 type="number"
-                min="1000"
-                step="1000"
+                min="1"
+                max="100"0"
                 value={tipAmount}
                 onChange={(e) => setTipAmount(Number.parseInt(e.target.value, 10) || 1000)}
                 className="amount-input"
