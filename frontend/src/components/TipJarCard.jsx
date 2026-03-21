@@ -156,6 +156,8 @@ function TipJarCard({ address, tipjar }) {
               exit={{ opacity: 0 }}
               transition={{ ease: "easeOut", duration: 0.25 }}
               className="tip-success-msg"
+              role="status"
+              aria-live="polite"
             >
               🎉 Thank you for your generous tip!
             </motion.div>
