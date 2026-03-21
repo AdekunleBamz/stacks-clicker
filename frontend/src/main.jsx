@@ -18,6 +18,7 @@ const rootElement = document.getElementById('root');
 
 if (rootElement) {
   document.documentElement.lang = document.documentElement.lang || 'en';
+  document.documentElement.dir = 'ltr';
   ReactDOM.createRoot(rootElement).render(
     <React.StrictMode>
       <ErrorBoundary>
