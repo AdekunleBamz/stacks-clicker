@@ -1,27 +1,16 @@
-import React, { memo } from 'react';
-import packageJson from '../../package.json';
-import versionData from '../version.json';
-import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
-
+import React from 'react';
 
 /**
  * Standard application footer.
  */
-function Footer() {
-  const version = versionData.version;
-  const currentYear = new Date().getFullYear();
-  const [ref, isVisible] = useIntersectionObserver({ threshold: 0.5 });
+export default function Footer() {
+  const version = '1.0.0'; // Could be imported from package.json if needed
 
   return (
-    <footer 
-      ref={ref}
-      className={`app-footer ${isVisible ? 'footer-visible' : ''}`} 
-      role="contentinfo" 
-      aria-label="Global Application Footer"
-    >
-      <div className="footer-content glass-card" style={{ willChange: 'transform' }}>
+    <footer className="app-footer" role="contentinfo" aria-label="Global Application Footer">
+      <div className="footer-content">
         <div className="footer-left">
-          <p>© {currentYear} • Stacks Clicker • Built with <span role="img" aria-label="love">❤️</span> on Stacks</p>
+          <p>Built with <span role="img" aria-label="developer love and care">❤️</span> on Stacks</p>
           <span className="app-version" title="Current Interface Version">v{version}</span>
         </div>
         <div className="footer-links">
@@ -60,7 +49,3 @@ function Footer() {
     </footer>
   );
 }
-
-Footer.displayName = 'Footer';
-
-export default memo(Footer);
