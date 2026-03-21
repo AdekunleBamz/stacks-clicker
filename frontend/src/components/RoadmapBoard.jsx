@@ -49,6 +49,8 @@ export default function RoadmapBoard() {
                   type="button" 
                   className="roadmap-vote-btn"
                   onClick={() => handleVote(item.title)}
+                  aria-label={`Vote for ${item.title}`}
+                  title="Cast a vote for this feature"
                 >
                   Vote
                 </button>
