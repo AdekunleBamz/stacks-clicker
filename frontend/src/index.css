@@ -32,6 +32,7 @@
   --text-muted: #cbd5e1; /* upping contrast of subdued text */
   --border: rgba(255, 255, 255, 0.08);
   --radius-lg: 24px;
+  --radius-xl: 32px;
 
   /* Semantic Tokens */
   --color-primary: var(--primary);
