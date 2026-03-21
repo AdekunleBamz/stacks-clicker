@@ -7,7 +7,7 @@ export default function Footer() {
   const version = '1.0.0'; // Could be imported from package.json if needed
 
   return (
-    <footer className="app-footer" aria-label="Application Footer">
+    <footer className="app-footer" role="contentinfo" aria-label="Global Application Footer">
       <div className="footer-content">
         <div className="footer-left">
           <p>Built with <span role="img" aria-label="love">❤️</span> on Stacks</p>
