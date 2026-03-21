@@ -1,12 +1,11 @@
-import React, { useState, useCallback, memo } from 'react';
+import React, { useState, memo, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { motion, AnimatePresence } from 'framer-motion';
 import ActionCard from './common/ActionCard';
 import ActionButton from './common/ActionButton';
 import Tooltip from './common/Tooltip';
 import { useSound } from '../hooks/useSound';
-import { useKeydown } from '../hooks/useKeydown';
-import { useClipboard } from '../hooks/useClipboard';
-import { useInterval } from '../hooks/useInterval';
+import { notify } from '../utils/toast';
 
 /**
  * Component for the QuickPoll interaction card.
@@ -23,18 +22,19 @@ import { useInterval } from '../hooks/useInterval';
  * @returns {JSX.Element} The rendered QuickPoll interaction card
  */
 function QuickPollCard({ address, quickpoll }) {
-  const { vote, createPoll, handlePollPing, isLoading } = quickpoll;
+  const { isLoading, vote, createPoll, handlePollPing } = quickpoll;
   const [pollQuestion, setPollQuestion] = useState('');
-  const [errorField, setErrorField] = useState(null);
   const { playSound } = useSound();
-  const { copyToClipboard } = useClipboard();
+  const [errorField, setErrorField] = useState(null);
+  const trimmedQuestion = pollQuestion.trim();
   const [timeLeft, setTimeLeft] = useState(3600); // 1 hour in seconds
 
-  const trimmedQuestion = pollQuestion.trim();
-
-  useInterval(() => {
-    setTimeLeft((prev) => (prev > 0 ? prev - 1 : 3600));
-  }, 1000);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 3600));
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   const formatTime = (seconds) => {
     const m = Math.floor(seconds / 60);
@@ -43,52 +43,48 @@ function QuickPollCard({ address, quickpoll }) {
   };
 
   /**
-   * Internal wrapper to check connection and validation before executing a contract action.
-   * Provides acoustic and visual feedback for errors.
+   * Triggers a 'YES' vote transaction for the current poll.
    */
-  const handleAction = useCallback(
-    async (actionFn, fieldId, validation = () => true) => {
-      if (!address) {
-        playSound('error');
-        setErrorField(fieldId);
-        setTimeout(() => setErrorField(null), 1000);
-        return;
-      }
-
-      if (!validation()) {
-        playSound('error');
-        setErrorField(fieldId);
-        setTimeout(() => setErrorField(null), 1000);
-        return;
-      }
-
-      try {
-        playSound('click');
-        await actionFn();
-      } catch (err) {
-        setErrorField(fieldId);
-        setTimeout(() => setErrorField(null), 1000);
-      }
-    },
-    [address, playSound]
-  );
-
   const handleVoteYes = useCallback(() => vote(1, 1), [vote]);
+
+  /**
+   * Triggers a 'NO' vote transaction for the current poll.
+   */
   const handleVoteNo = useCallback(() => vote(1, 0), [vote]);
+
+  /**
+   * Triggers a transaction to create a new poll with the entered question.
+   */
   const handleCreateNewPoll = useCallback(() => {
-    if (!trimmedQuestion) return;
+    if (!trimmedQuestion) {
+      return;
+    }
+
     createPoll(trimmedQuestion);
     setPollQuestion('');
   }, [createPoll, trimmedQuestion]);
 
-  // Keyboard shortcuts
-  const voteYesAction = useCallback(() => handleAction(handleVoteYes, 'vote-yes'), [handleAction, handleVoteYes]);
-  const pollPingAction = useCallback(() => handleAction(handlePollPing, 'poll-ping'), [handleAction, handlePollPing]);
-
-  useKeydown('v', voteYesAction);
-  useKeydown('V', voteYesAction);
-  useKeydown('q', pollPingAction);
-  useKeydown('Q', pollPingAction);
+  /**
+   * Internal wrapper to check connection and validation before executing a contract action.
+   * Provides acoustic and visual feedback for errors.
+   *
+   * @param {Function} actionFn - The interaction function to execute
+   * @param {string} fieldId - ID of the button for error highlighting
+   * @param {Function} [validation=()=>true] - Optional pre-check function for action validity
+   */
+  const handleAction = useCallback(
+    (actionFn, fieldId, validation = () => true) => {
+      if (!address || !validation()) {
+        playSound('error');
+        setErrorField(fieldId);
+        setTimeout(() => setErrorField(null), 500);
+        return;
+      }
+      playSound('click');
+      actionFn();
+    },
+    [address, playSound]
+  );
 
   return (
     <ActionCard
@@ -104,12 +100,11 @@ function QuickPollCard({ address, quickpoll }) {
             label="Poll Ping"
             icon="🗳️"
             cost="0.001 STX"
-            className="secondary-button success"
-            onClick={pollPingAction}
+            className="success"
+            onClick={() => handleAction(handlePollPing, 'poll-ping')}
             isLoading={isLoading('poll-ping')}
             isError={errorField === 'poll-ping'}
             disabled={isLoading('poll-ping')}
-            aria-label="Send poll network ping"
           />
         </Tooltip>
 
@@ -120,15 +115,14 @@ function QuickPollCard({ address, quickpoll }) {
           <input
             id="poll-question-input"
             type="text"
-            className="poll-input input-field"
+            className="poll-input"
             value={pollQuestion}
             onChange={(e) => setPollQuestion(e.target.value)}
             placeholder="Enter poll question..."
             maxLength={100}
             aria-invalid={!trimmedQuestion && errorField === 'create-poll'}
-            aria-required="true"
           />
-          <span className="input-help-text" aria-hidden="true">{trimmedQuestion.length}/100</span>
+          <span className="input-help-text">{trimmedQuestion.length}/100</span>
         </div>
 
         <Tooltip content="Create a new poll on the Stacks blockchain.">
@@ -136,47 +130,44 @@ function QuickPollCard({ address, quickpoll }) {
             label="Create Poll"
             icon="📋"
             cost="0.001 STX"
-            className="primary-button"
+            className="primary"
             onClick={() =>
               handleAction(handleCreateNewPoll, 'create-poll', () => trimmedQuestion.length > 0)
             }
             isLoading={isLoading('create-poll')}
             isError={errorField === 'create-poll'}
             disabled={isLoading('create-poll')}
-            aria-label="Create new poll on-chain"
           />
         </Tooltip>
 
         <div className="actions-row">
           <Tooltip content="Vote YES on the active community poll.">
             <ActionButton
-              label="Vote Yes"
+              label="Yes"
               icon="👍"
-              cost="0.001 STX"
-              className="secondary-button success"
-              onClick={voteYesAction}
+              cost="0.001"
+              className="success"
+              onClick={() => handleAction(handleVoteYes, 'vote-yes')}
               isLoading={isLoading('vote')}
               isError={errorField === 'vote-yes'}
               disabled={isLoading('vote')}
-              aria-label="Submit Yes vote"
-              aria-keyshortcuts="V"
             />
           </Tooltip>
         </div>
 
         <div className="poll-footer">
-          <div className="poll-timer" role="timer" aria-live="polite">
-            <span className="timer-icon" aria-hidden="true">⏳</span>
+          <div className="stat" aria-live="polite">
+          <span className="stat-label">Total Votes</span>
             <span className="timer-text">Ends in: {formatTime(timeLeft)}</span>
           </div>
           <button 
             type="button" 
-            className="share-poll-btn secondary-button btn-sm"
-            aria-label="Share current poll results URL"
+            className="share-poll-btn"
+            aria-label="Share Poll Results"
             title="Copy Results Link"
             onClick={() => {
-              playSound('click');
-              copyToClipboard(window.location.href);
+              notify.success('Results link copied to clipboard!');
+              navigator.clipboard.writeText(window.location.href);
             }}
           >
             ↗ Share Results
