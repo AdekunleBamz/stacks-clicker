@@ -17,7 +17,7 @@ export default function WalletConnectQRModal({ uri, onClose }) {
 
   return (
     <div className="qr-modal-overlay" onClick={onClose} aria-hidden="true">
-      <div className="qr-modal" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="qr-modal-title">
+      <div className="qr-modal" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="qr-modal-title" tabIndex="-1">
         <div className="qr-modal-header">
           <h3 id="qr-modal-title" aria-label="Connect Wallet Modal Header" style={{ letterSpacing: '-0.02em', fontWeight: 800 }}>Connect Wallet</h3>
           <button type="button" className="qr-modal-close" onClick={onClose} aria-label="Close URI Pairing Modal">
