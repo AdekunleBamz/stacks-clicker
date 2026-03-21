@@ -20,13 +20,13 @@ function SearchInput({ value, onChange, onClear, placeholder = 'Search...', coun
       <div className="search-relative">
         <span className="search-icon" aria-hidden="true">🔍</span>
         <input
-          id="global-transaction-search"
           type="text"
           placeholder={placeholder}
           className="search-input"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          aria-label="Global transaction search"
+          aria-label="Transaction search input stream"
+          aria-autocomplete="list"
         />
         <AnimatePresence>
           {value && (
@@ -38,6 +38,7 @@ function SearchInput({ value, onChange, onClear, placeholder = 'Search...', coun
               className="search-clear"
               onClick={onClear}
               aria-label="Clear search"
+              aria-controls="global-transaction-search"
             >
               ✕
             </motion.button>
@@ -45,7 +46,7 @@ function SearchInput({ value, onChange, onClear, placeholder = 'Search...', coun
         </AnimatePresence>
       </div>
       {count !== undefined && (
-        <span className="search-count-badge" aria-live="polite" title="Matching items found">{count}</span>
+        <span className="search-count-badge">{count}</span>
       )}
     </div>
   );
