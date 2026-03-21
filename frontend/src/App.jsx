@@ -83,12 +83,7 @@ function AppContent() {
   }, [showToast]);
 
   return (
-    <div
-      className="app-container"
-      data-theme={theme}
-      role="application"
-      aria-label="Stacks Clicker Version 2 Application"
-    >
+    <div className="app-container" data-theme={theme} role="main" aria-label="Stacks Clicker Version 2 Application">
       <a
         href="#main-content"
         className="skip-link"
