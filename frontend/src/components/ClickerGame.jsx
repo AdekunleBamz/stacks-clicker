@@ -105,6 +105,7 @@ export default function ClickerGame({ onTxSubmit }) {
 
         <div className="multi-click-group" role="group" aria-label="Multi-Click Interventions">
           <input
+            id="rapid-clicker-amount"
             type="number"
             min="1"
             max="100"
