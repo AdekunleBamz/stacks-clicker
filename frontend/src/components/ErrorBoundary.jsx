@@ -18,7 +18,7 @@ export default class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="error-boundary-container">
+        <div className="error-boundary-container" role="alert" aria-live="assertive">
           <div className="error-content">
             <div className="error-icon">⚠️</div>
             <h2 className="error-title">Something went wrong</h2>
