@@ -156,13 +156,13 @@ export default function App() {
       <a
         href="#main-content"
         className="skip-link"
-        aria-label="Skip to main application content"
+        aria-label="Skip navigation and jump to primary content"
         onClick={(e) => {
           e.preventDefault();
           document.getElementById('main-content')?.focus();
         }}
       >
-        Skip to Content
+        Skip to main content
       </a>
       <PerformanceOverlay />
       <ScrollToTop />
