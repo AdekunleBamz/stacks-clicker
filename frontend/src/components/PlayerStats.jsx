@@ -27,6 +27,7 @@ function PlayerStats({ stats, txCount }) {
       role="region"
       tabIndex={0}
       title="Your Personal Player Statistics Overview"
+      style={{ textRendering: 'optimizeLegibility' }}
     >
       <div className="stats-cards" role="group" aria-label="Aggregate Player Performance Metrics" aria-live="polite">
         {statItems.map((item, index) => (
