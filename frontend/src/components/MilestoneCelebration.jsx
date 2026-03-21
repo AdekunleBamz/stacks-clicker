@@ -14,7 +14,7 @@ export default function MilestoneCelebration({ celebration }) {
       {celebration && (
         <motion.div
           className="milestone-celebration"
-          role="alert"
+          role="status"
           aria-live="assertive"
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
