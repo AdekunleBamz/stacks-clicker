@@ -69,7 +69,7 @@ export default function OnboardingTour() {
             </div>
             <button type="button" className="tour-close-top" onClick={dismiss} aria-label="Close tour overlay" title="Close tour">×</button>
           </div>
-          <div className="tour-progress" aria-live="polite">Step {currentStep + 1} of {steps.length}</div>
+          <div className="tour-progress" aria-live="polite" style={{ fontVariantNumeric: 'tabular-nums' }}>Step {currentStep + 1} of {steps.length}</div>
           <p className="tour-content">{steps[currentStep].content}</p>
           <div className="tour-footer" role="navigation" aria-label="Tour Navigation">
             <div className="footer-left">
