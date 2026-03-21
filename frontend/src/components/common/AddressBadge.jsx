@@ -42,6 +42,7 @@ function AddressBadge({ address, onDisconnect }) {
       <button
         type="button"
         className="address-badge-btn"
+        aria-keyshortcuts="c"
         onClick={handleCopy}
         title="Copy full wallet address to clipboard"
         aria-label="Copy wallet address"
