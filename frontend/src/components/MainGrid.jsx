@@ -4,8 +4,6 @@ import InteractionStreaks from './InteractionStreaks';
 import ClickerCard from './ClickerCard';
 import TipJarCard from './TipJarCard';
 import QuickPollCard from './QuickPollCard';
-import { useTrace } from '../hooks/useTrace';
-import { useMedia } from '../hooks/useMedia';
 
 /**
  * Main layout grid for the application.
@@ -18,20 +16,11 @@ function MainGrid({
   tipjar,
   quickpoll
 }) {
-  const isCompact = useMedia('(max-width: 768px)');
-
-  if (process.env.NODE_ENV === 'development') {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useTrace('MainGrid', { address, stats, clicker, tipjar, quickpoll, isCompact });
-  }
   return (
-    <section 
-      className={`interaction-section ${isCompact ? 'compact-layout' : ''}`} 
-      aria-labelledby="interactions-title"
-    >
+    <section className="interaction-section" aria-labelledby="interactions-title" aria-live="polite">
       <h2 className="section-title" id="interactions-title" aria-label="Available Interactions Dashboard">Interactions</h2>
       <InteractionStreaks totalInteractions={stats.clicks + stats.tips + stats.votes} />
-      <div className="cards-container main-interaction-grid" role="group" aria-label="Available Interaction Panels">
+      <div className="cards-container" role="group" aria-label="Available Interaction Panels">
         <ClickerCard address={address} clicker={clicker} />
         <TipJarCard address={address} tipjar={tipjar} />
         <QuickPollCard address={address} quickpoll={quickpoll} />
@@ -65,7 +54,5 @@ MainGrid.propTypes = {
     isLoading: PropTypes.func.isRequired,
   }).isRequired
 };
-
-MainGrid.displayName = 'MainGrid';
 
 export default memo(MainGrid);
