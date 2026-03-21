@@ -18,7 +18,7 @@ function SearchInput({ value, onChange, onClear, placeholder = 'Search...', coun
   return (
     <div className="search-wrapper">
       <div className="search-relative">
-        <span className="search-icon">🔍</span>
+        <span className="search-icon" aria-hidden="true">🔍</span>
         <input
           type="text"
           placeholder={placeholder}
