@@ -10,6 +10,8 @@ export default function Tooltip({ text, content, children }) {
   const tooltipId = useId();
   const tooltipText = text ?? content;
 
+  const tooltipId = React.useId();
+
   return (
     <div
       className="tooltip-wrapper"
