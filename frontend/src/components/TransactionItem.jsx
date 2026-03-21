@@ -34,12 +34,8 @@ function TransactionItem({
         </button>
       </div>
       <motion.div
-        layout
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, height: 0 }}
-        transition={{ duration: 0.3, ease: 'easeOut' }}
         className={`tx-card ${tx.tx_status}`}
+        tabIndex={0}
         drag="x"
         dragConstraints={{ left: -120, right: 0 }}
         dragElastic={0.1}
