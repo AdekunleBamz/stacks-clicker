@@ -51,6 +51,7 @@ export default function WalletConnectQRModal({ uri, onClose }) {
                 navigator.clipboard.writeText(uri);
                 notify.success('Pairing URI copied!');
               }}
+              title="Copy pairing link"
             >
               📋 Copy Pairing URI
             </button>
