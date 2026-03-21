@@ -14,23 +14,11 @@ export default function WalletConnectQRModal({ uri, onClose }) {
 
   // Camera-friendly link (wc: URIs don't work with phone cameras)
   const wcLink = getWalletConnectLink(uri);
-  const handleCopy = async () => {
-    if (!navigator?.clipboard?.writeText) {
-      notify.error('Clipboard access is unavailable.');
-      return;
-    }
-    try {
-      await navigator.clipboard.writeText(uri);
-      notify.success('Pairing URI copied.');
-    } catch {
-      notify.error('Could not copy pairing URI.');
-    }
-  };
 
   return (
     <div className="qr-modal-overlay" onClick={onClose} aria-hidden="true">
-      <div className="qr-modal" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="qr-modal-title" tabIndex="-1">
-        <div className="qr-modal-header">
+      <div className="qr-modal" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="qr-modal-title">
+        <div className="qr-modal-header" role="group" aria-label="Modal Header Controls">
           <h3 id="qr-modal-title" aria-label="Connect Wallet Modal Header">Connect Wallet</h3>
           <button type="button" className="qr-modal-close" onClick={onClose} aria-label="Close URI Pairing Modal">
             ×
@@ -40,7 +28,7 @@ export default function WalletConnectQRModal({ uri, onClose }) {
         <div className="qr-modal-body">
           <p className="qr-instructions">Scan this QR code with your Stacks wallet app</p>
 
-          <div className="qr-code-container" role="img" aria-label="WalletConnect pairing QR code. Scan this with your Stacks wallet app.">
+          <div className="qr-code-container">
             <QRCodeSVG
               value={uri}
               size={256}
