@@ -110,6 +110,17 @@ export default function App() {
     playSound,
   });
 
+  useEffect(() => {
+    const handleGlobalEsc = (e) => {
+      if (e.key === 'Escape') {
+        setCelebration(null);
+        document.getElementById('main-content')?.focus();
+      }
+    };
+    window.addEventListener('keydown', handleGlobalEsc);
+    return () => window.removeEventListener('keydown', handleGlobalEsc);
+  }, []);
+
   /**
    * Effect to monitor interaction milestones and trigger celebrations.
    * Scales visual feedback (particles) during significant achievements.
