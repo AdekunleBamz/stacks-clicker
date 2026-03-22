@@ -17,7 +17,7 @@ export default function ConnectButton() {
   if (address) {
     return (
       <div className="wallet-connected">
-        <span className="wallet-address" title={address}>
+        <span className="wallet-address" title={address} aria-label={`Connected address ${address}`}>
           {formatAddress(address)}
         </span>
         <button
