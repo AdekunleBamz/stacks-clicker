@@ -6,4 +6,5 @@ Covers:
 - unsupported language fallback behavior
 - translation lookup fallback when a key is missing
 
-Source file: `frontend/src/tests/I18nContext.test.jsx`.
+## Maintenance Note
+- Keep fallback-locale test cases updated when language packs are added.
