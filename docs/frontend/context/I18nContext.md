@@ -10,4 +10,5 @@ Exposed values:
 Language selection persists via `useLocalStorage`.
 Keep translation keys stable to prevent runtime fallback churn.
 
-Source file: `frontend/src/context/I18nContext.jsx`.
+## Maintenance Note
+- Reconfirm provider boundary guidance when new locale-loading layers are introduced.
