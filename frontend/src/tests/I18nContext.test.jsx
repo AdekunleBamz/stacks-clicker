@@ -10,7 +10,7 @@ function TestComponent() {
     <div>
       <span data-testid="lang">{lang}</span>
       <span data-testid="message">{t('welcome')}</span>
-      <button onClick={() => setLang('es')}>Switch</button>
+      <button type="button" onClick={() => setLang('es')}>Switch</button>
     </div>
   );
 }
