@@ -7,4 +7,7 @@
 Signature: `const [value, setValue] = useLocalStorage(key, initialValue)`.
 Prefer JSON-safe values to keep parsing and migration predictable.
 
+## Maintenance Note
+- Keep key versioning notes updated when persisted shape or migration logic changes.
+
 Source file: `frontend/src/hooks/useLocalStorage.js`.
