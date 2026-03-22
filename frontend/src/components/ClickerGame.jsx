@@ -95,7 +95,7 @@ export default function ClickerGame({ onTxSubmit }) {
         <button
           type="button"
           className="action-btn primary huge"
-          onClick={handleManualClick}
+          onClick={handleClick}
           disabled={!isConnected || loading}
           title="Click to generate a transaction manually"
         >
