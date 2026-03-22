@@ -9,4 +9,5 @@
 Amounts are handled in micro-STX for contract calls.
 Keep recipient validation strict to avoid malformed address submissions.
 
-Source file: `frontend/src/components/TipJar.jsx`.
+## Maintenance Note
+- Keep displayed fee caveats aligned with current network fee behavior.
