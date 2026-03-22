@@ -9,4 +9,4 @@ States:
 Address display uses first 6 and last 4 characters.
 Preserve clear focus styling because this control is primary for onboarding.
 
-Source file: `frontend/src/components/ConnectButton.jsx`.
+- Keep connected-state copy short so wallet status remains readable on narrow screens.
