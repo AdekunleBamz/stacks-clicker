@@ -8,4 +8,5 @@
 Expected props: `value`, `onChange`, and `onClear`.
 Keep placeholder text action-oriented to improve discoverability.
 
-Source file: `frontend/src/components/common/SearchInput.jsx`.
+## Maintenance Note
+- Revalidate empty-query and clear-action behavior notes after search UX updates.
