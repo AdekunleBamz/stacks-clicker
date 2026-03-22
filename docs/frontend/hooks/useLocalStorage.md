@@ -5,3 +5,4 @@
 - `local-storage` (same-tab custom updates)
 
 Signature: `const [value, setValue] = useLocalStorage(key, initialValue)`.
+Prefer JSON-safe values to keep parsing and migration predictable.
