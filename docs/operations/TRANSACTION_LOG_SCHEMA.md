@@ -7,3 +7,4 @@ Common tx-log fields:
 - `time`
 - `submittedAt`
 - `explorerUrl`
+- `network`
