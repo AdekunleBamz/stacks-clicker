@@ -8,5 +8,3 @@
 
 ## Maintenance Note
 - Reconfirm QR session-expiry wording when walletconnect timeout defaults are updated.
-
-Source file: `frontend/src/components/WalletConnectQRModal.jsx`.
