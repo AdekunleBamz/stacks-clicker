@@ -1,10 +1,11 @@
 import React from 'react';
+import packageJson from '../../package.json';
 
 /**
  * Standard application footer.
  */
 export default function Footer() {
-  const version = '1.0.0'; // Could be imported from package.json if needed
+  const version = packageJson.version;
 
   return (
     <footer className="app-footer" role="contentinfo" aria-label="Global Application Footer">
