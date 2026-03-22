@@ -6,3 +6,4 @@
 - open Stacks support site
 
 All actions route through a sound-enabled wrapper for consistent interaction feedback.
+Keep external support links reviewed to avoid stale destinations.
