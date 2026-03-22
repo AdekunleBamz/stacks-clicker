@@ -7,3 +7,4 @@
 - modal detail view (summary/raw)
 
 It expects `txLog` entries with at least `id`, `action`, `status`, and `time`.
+Treat unknown status values as neutral badges instead of dropping entries.
