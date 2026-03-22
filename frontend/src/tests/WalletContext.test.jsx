@@ -16,8 +16,8 @@ const TestComponent = () => {
     <div>
       <div data-testid="status">{isConnected ? 'Connected' : 'Disconnected'}</div>
       <div data-testid="address">{address || 'No Address'}</div>
-      <button onClick={connectWallet}>Connect</button>
-      <button onClick={disconnectWallet}>Disconnect</button>
+      <button type="button" onClick={connectWallet}>Connect</button>
+      <button type="button" onClick={disconnectWallet}>Disconnect</button>
     </div>
   );
 };
