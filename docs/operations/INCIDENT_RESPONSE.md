@@ -6,4 +6,5 @@
 - Publish a short post-incident summary.
 - Track customer-facing status updates in a single incident thread.
 
-Companion index: [Operations docs](README.md).
+## Maintenance Note
+- Reconfirm escalation contacts and communication channels each release cycle.
