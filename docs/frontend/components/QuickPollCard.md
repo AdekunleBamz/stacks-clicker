@@ -10,4 +10,4 @@ Important behavior:
 - disconnected state blocks all actions with inline error feedback
 - keep optimistic UI labels in sync with final transaction status updates
 
-Source file: `frontend/src/components/QuickPollCard.jsx`.
+- Document clipboard fallback messaging for environments where copy APIs are unavailable.
