@@ -147,7 +147,7 @@ export default function App() {
    */
   useEffect(() => {
     const total = stats.clicks + stats.tips + stats.votes;
-    document.title = total > 0 ? `(${total}) Stacks Clicker` : 'Stacks Clicker v2';
+    document.title = total > 0 ? `(${total}) Stacks Clicker` : 'Stacks Clicker';
   }, [stats]);
 
   const MilestoneCelebration = React.lazy(() => import('./components/MilestoneCelebration'));
