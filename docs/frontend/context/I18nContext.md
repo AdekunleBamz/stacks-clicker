@@ -8,3 +8,4 @@ Exposed values:
 - `t(key)`
 
 Language selection persists via `useLocalStorage`.
+Keep translation keys stable to prevent runtime fallback churn.
