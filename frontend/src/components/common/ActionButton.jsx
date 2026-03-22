@@ -96,4 +96,6 @@ ActionButton.propTypes = {
   isError: PropTypes.bool
 };
 
+ActionButton.displayName = 'ActionButton';
+
 export default memo(ActionButton);
