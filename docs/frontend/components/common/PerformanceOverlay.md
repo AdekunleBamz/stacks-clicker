@@ -5,4 +5,5 @@
 It is a developer-only runtime diagnostics layer.
 Keep this overlay disabled in production builds to avoid noisy metrics output.
 
-Source file: `frontend/src/components/common/PerformanceOverlay.jsx`.
+## Maintenance Note
+- Reconfirm metric sampling frequency notes when profiling defaults are updated.
