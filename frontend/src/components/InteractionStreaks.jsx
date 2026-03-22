@@ -78,4 +78,6 @@ InteractionStreaks.propTypes = {
   totalInteractions: PropTypes.number.isRequired
 };
 
+InteractionStreaks.displayName = 'InteractionStreaks';
+
 export default memo(InteractionStreaks);
