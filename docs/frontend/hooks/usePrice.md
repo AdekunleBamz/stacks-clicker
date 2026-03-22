@@ -10,4 +10,7 @@ Returned state:
 Fetches are timeout-protected with `AbortController`.
 Render fallbacks when `price` is unavailable instead of blocking interactions.
 
+## Maintenance Note
+- Reconfirm staleness threshold guidance when price source refresh cadence changes.
+
 Source file: `frontend/src/hooks/usePrice.js`.
