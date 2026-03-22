@@ -106,4 +106,6 @@ StatsCard.propTypes = {
   tooltip: PropTypes.string
 };
 
+StatsCard.displayName = 'StatsCard';
+
 export default memo(StatsCard);
