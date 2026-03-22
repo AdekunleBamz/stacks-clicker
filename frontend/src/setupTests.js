@@ -6,6 +6,7 @@ class MockIntersectionObserver {
   observe() {}
   unobserve() {}
   disconnect() {}
+  takeRecords() { return []; }
 }
 
 if (!window.IntersectionObserver) {
