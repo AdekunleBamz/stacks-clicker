@@ -63,7 +63,7 @@ export function useTipJar({ onTxSubmit }) {
     }
   }, [onTxSubmit]);
 
-  const tip = useCallback((amount) => executeAction('💰 Tip', 'tip', [{ type: 'uint128', value: amount.toString() }]), [executeAction]);
+  const tip = useCallback((amount = 1000) => executeAction('💰 Tip', 'tip', [{ type: 'uint128', value: amount.toString() }]), [executeAction]);
   const withdraw = useCallback(() => executeAction('💸 Withdraw', 'withdraw'), [executeAction]);
   const handleSelfPing = useCallback(() => executeAction('📡 Self-Ping', 'self-ping'), [executeAction]);
 
