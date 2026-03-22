@@ -368,7 +368,7 @@ function TransactionHistory({ txLog }) {
                   : 'No transactions yet. Submit a click, tip, or vote to populate this feed.'}
               </p>
               {searchTerm && (
-                <button className="text-btn mt-2" onClick={() => setSearchTerm('')}>
+                <button type="button" className="text-btn mt-2" onClick={() => setSearchTerm('')}>
                   Reset search
                 </button>
               )}
