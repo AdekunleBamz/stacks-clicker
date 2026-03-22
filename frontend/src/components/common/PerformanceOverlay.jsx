@@ -14,6 +14,8 @@ export default function PerformanceOverlay() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return undefined;
+
     // Only show if explicitly enabled via query param or env
     const isDev = new URLSearchParams(window.location.search).has('dev');
     if (!isDev) return;
