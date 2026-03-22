@@ -5,4 +5,5 @@
 Prefer concise copy and action-oriented language for all toast notifications.
 Include recovery hints for failures that users can immediately retry.
 
-Source file: `frontend/src/components/Toast.jsx`.
+## Maintenance Note
+- Revalidate timeout durations with accessibility guidance whenever toast variants change.
