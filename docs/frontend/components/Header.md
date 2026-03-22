@@ -9,3 +9,4 @@
 Props:
 - `theme`: current theme string
 - `toggleTheme`: callback that flips theme state
+- keep wallet state text concise so header remains scannable on mobile
