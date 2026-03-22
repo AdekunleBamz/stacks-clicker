@@ -6,5 +6,3 @@ The parent component controls the `celebration` message and visibility timing.
 Respect reduced-motion preferences when tuning celebration animation intensity.
 
 - Keep celebration copy short enough for quick screen-reader announcements.
-
-Source file: `frontend/src/components/MilestoneCelebration.jsx`.
