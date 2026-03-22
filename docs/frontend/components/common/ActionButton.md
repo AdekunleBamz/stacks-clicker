@@ -12,5 +12,3 @@ Provide an accessible label when icon-only variants are introduced.
 
 ## Maintenance Note
 - Keep loading/disabled state guidance synchronized with async action patterns.
-
-Source file: `frontend/src/components/common/ActionButton.jsx`.
