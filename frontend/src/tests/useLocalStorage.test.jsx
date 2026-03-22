@@ -9,7 +9,7 @@ function TestComponent() {
   return (
     <div>
       <span data-testid="count">{value.count}</span>
-      <button onClick={() => setValue((current) => ({ count: current.count + 1 }))}>
+      <button type="button" onClick={() => setValue((current) => ({ count: current.count + 1 }))}>
         Increment
       </button>
     </div>
