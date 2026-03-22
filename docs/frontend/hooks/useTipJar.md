@@ -13,6 +13,3 @@ Input guard:
 
 ## Maintenance Note
 - Update retry and rate-limit notes whenever tip submission behavior changes.
-- Keep broadcast backoff messaging clear when provider quotas are hit.
-
-Source file: `frontend/src/hooks/useTipJar.js`.
