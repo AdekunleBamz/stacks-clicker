@@ -6,3 +6,4 @@
 - `network`
 
 Requests use abort timeouts to avoid hanging fetch calls.
+Treat unknown network responses as degraded state instead of hard failure.
