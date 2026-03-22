@@ -5,3 +5,4 @@
 - status progression indicator
 - optional explorer deep-link
 - context menu callback integration
+- keep swipe gestures optional on desktop-focused interaction paths
