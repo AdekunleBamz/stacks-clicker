@@ -55,4 +55,6 @@ MainGrid.propTypes = {
   }).isRequired
 };
 
+MainGrid.displayName = 'MainGrid';
+
 export default memo(MainGrid);
