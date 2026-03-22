@@ -7,4 +7,5 @@ Checks:
 - click/multiclick/ping callback invocation
 - loading-state disable behavior for each action button
 
-Source file: `frontend/src/tests/ClickerCard.test.jsx`.
+## Maintenance Note
+- Revalidate timer-related assertions whenever click cooldown semantics are adjusted.
