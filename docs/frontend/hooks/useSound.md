@@ -6,3 +6,4 @@ Supported sound types:
 - `click`
 - `success`
 - `error`
+- Skip playback gracefully when the browser blocks audio autoplay.
