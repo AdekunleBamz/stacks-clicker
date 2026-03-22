@@ -7,12 +7,7 @@ Exposed methods:
 - `createPoll(question)`
 - `handlePollPing()`
 - `isLoading(functionName)`
-
-Input guard:
-- Validate question length before calling `createPoll` to avoid rejected transactions.
+- Validate question length before `createPoll` to avoid rejected transactions.
 
 ## Maintenance Note
 - Revisit poll expiry/window assumptions when backend polling cadence is adjusted.
-- Keep user-facing error copy aligned with parser output for rate-limit/backoff failures.
-
-Source file: `frontend/src/hooks/useQuickPoll.js`.
