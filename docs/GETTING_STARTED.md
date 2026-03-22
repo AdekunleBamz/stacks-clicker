@@ -82,3 +82,5 @@ Current active contract names used by the frontend:
 
 ---
 Need help? Open an issue on [GitHub](https://github.com/AdekunleBamz/stacks-clicker/issues).
+
+- Keep local env values network-specific when switching between test and main environments.
