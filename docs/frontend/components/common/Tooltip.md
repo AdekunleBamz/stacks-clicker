@@ -5,4 +5,5 @@
 It supports keyboard accessibility by opening on focus and closing on blur.
 Keep tooltip content short enough to avoid obscuring nearby controls.
 
-Source file: `frontend/src/components/common/Tooltip.jsx`.
+## Maintenance Note
+- Recheck hover/focus delay values whenever interaction timing is tuned globally.
