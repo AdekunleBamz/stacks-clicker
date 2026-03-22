@@ -128,4 +128,6 @@ ClickerCard.propTypes = {
   }).isRequired,
 };
 
+ClickerCard.displayName = 'ClickerCard';
+
 export default memo(ClickerCard);
