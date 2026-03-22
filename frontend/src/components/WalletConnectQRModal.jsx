@@ -14,6 +14,18 @@ export default function WalletConnectQRModal({ uri, onClose }) {
 
   // Camera-friendly link (wc: URIs don't work with phone cameras)
   const wcLink = getWalletConnectLink(uri);
+  const handleCopy = async () => {
+    if (!navigator?.clipboard?.writeText) {
+      notify.error('Clipboard access is unavailable.');
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(uri);
+      notify.success('Pairing URI copied.');
+    } catch {
+      notify.error('Could not copy pairing URI.');
+    }
+  };
 
   return (
     <div className="qr-modal-overlay" onClick={onClose} aria-hidden="true">
