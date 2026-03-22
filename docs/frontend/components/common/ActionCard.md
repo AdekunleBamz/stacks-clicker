@@ -5,4 +5,5 @@
 Use it to keep card chrome consistent across clicker, tipjar, and polling surfaces.
 Avoid embedding unrelated layout concerns so this wrapper stays reusable.
 
-Source file: `frontend/src/components/common/ActionCard.jsx`.
+## Maintenance Note
+- Keep spacing-density notes current when card content slots are expanded.
