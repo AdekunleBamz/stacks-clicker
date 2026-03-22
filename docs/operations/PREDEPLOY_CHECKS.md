@@ -4,3 +4,4 @@
 - Ensure deployer wallet balance is sufficient.
 - Verify latest commit hash and changelog alignment.
 - Keep rollback commit reference prepared.
+- Confirm environment variables match the intended target network.
