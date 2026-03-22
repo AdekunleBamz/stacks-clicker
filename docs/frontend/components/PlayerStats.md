@@ -9,3 +9,4 @@ Current card set:
 - session transaction count
 
 `useMemo` is used to keep card definitions stable between renders.
+Keep stat labels consistent with transaction history terminology.
