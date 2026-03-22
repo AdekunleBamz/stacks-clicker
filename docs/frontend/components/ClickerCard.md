@@ -8,3 +8,4 @@ Primary actions:
 - `Network Ping` -> `clicker.ping()`
 
 A connected address is required; disconnected actions trigger error feedback.
+Keep button disabled/loading state tied to hook-level function keys.
