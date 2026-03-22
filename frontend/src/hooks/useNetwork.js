@@ -30,7 +30,9 @@ export function useNetwork() {
 
         if (isMounted) {
           setBlockHeight(data.stacks_tip_height);
-          setNetwork(data.network_id === 1 ? 'mainnet' : 'testnet');
+          setNetwork(
+            data.network_id === 1 ? 'mainnet' : data.network_id === 2147483648 ? 'testnet' : 'unknown'
+          );
           setIsConnected(true);
         }
       } catch (error) {
