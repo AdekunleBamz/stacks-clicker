@@ -7,4 +7,5 @@ Checks:
 - disconnected action blocking
 - minimum amount boundary validation (`0.001` STX)
 
-Source file: `frontend/src/tests/TipJarCard.test.jsx`.
+## Maintenance Note
+- Revisit minimum-tip validation test notes whenever fee assumptions are updated.
