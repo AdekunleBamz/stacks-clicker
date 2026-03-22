@@ -8,3 +8,4 @@ Returned state:
 - `error`
 
 Fetches are timeout-protected with `AbortController`.
+Render fallbacks when `price` is unavailable instead of blocking interactions.
