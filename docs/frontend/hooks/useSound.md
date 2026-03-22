@@ -8,4 +8,7 @@ Supported sound types:
 - `error`
 - Skip playback gracefully when the browser blocks audio autoplay.
 
+## Maintenance Note
+- Revalidate browser autoplay handling whenever audio asset paths or playback defaults change.
+
 Source file: `frontend/src/hooks/useSound.js`.
