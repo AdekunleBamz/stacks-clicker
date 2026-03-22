@@ -45,7 +45,7 @@ export default function FloatingActionButton({ onAction }) {
       <motion.button
         type="button"
         className={`fab-main ${isOpen ? 'active' : ''}`}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => setIsOpen((prev) => !prev)}
         aria-expanded={isOpen}
         aria-label={isOpen ? 'Close quick actions menu' : 'Open quick actions menu'}
         whileHover={{ scale: 1.1 }}
