@@ -8,3 +8,4 @@
 Important behavior:
 - poll question input enforces max length and trimmed non-empty validation
 - disconnected state blocks all actions with inline error feedback
+- keep optimistic UI labels in sync with final transaction status updates
