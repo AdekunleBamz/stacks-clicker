@@ -7,3 +7,4 @@
 - `pingAll()`
 
 Use this hook in `App.jsx` to avoid scattered transaction callback wiring.
+Surface transaction callbacks from this level to keep card components lean.
