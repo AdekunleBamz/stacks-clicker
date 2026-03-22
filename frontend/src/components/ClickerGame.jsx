@@ -114,9 +114,10 @@ export default function ClickerGame({ onTxSubmit }) {
             title="Choose between 1 and 100 automatic clicks"
           />
           <button
+            type="button"
             className="action-btn secondary"
-            onClick={() => setShowMulti(prev => !prev)}
-            title="Toggle bulk click interface dialog"
+            onClick={handleMultiClick}
+            title="Submit a multi-click transaction"
             disabled={!isConnected || loading}
           >
             Multi-Click ×{multiClickAmount}
