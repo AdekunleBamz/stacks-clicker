@@ -4,3 +4,4 @@
 - Prefer short entries that explain outcome instead of implementation details.
 - Link any follow-up work when a release ships with a known limitation.
 - Draft notes before deployment so the release summary is ready once checks pass.
+- Mention contract names when an entry changes on-chain behavior.
