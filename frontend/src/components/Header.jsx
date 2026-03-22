@@ -1,4 +1,3 @@
-import NetworkHeartbeat from './NetworkHeartbeat';
 import NetworkLogo from './NetworkLogo';
 import AddressBadge from './common/AddressBadge';
 import Tooltip from './common/Tooltip';
@@ -24,11 +23,11 @@ export default function Header({ theme, toggleTheme }) {
           className="logo" 
           role="banner" 
           aria-label="Application Logo"
-          title="Stacks Clicker V2 Logo"
+          title="Stacks Clicker Logo"
         >
           <div className="header-left">
           <NetworkLogo />
-          <h1 className="header-title" aria-label="Stacks Clicker Version 2 Dashboard">Stacks Clicker V2</h1>
+          <h1 className="header-title" aria-label="Stacks Clicker Dashboard">Stacks Clicker</h1>
         </div>
         </div>
 
