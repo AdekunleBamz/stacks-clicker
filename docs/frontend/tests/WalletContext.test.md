@@ -7,4 +7,5 @@ Covers:
 - cross-tab storage event synchronization
 - malformed persisted session payload fallback handling
 
-Source file: `frontend/src/tests/WalletContext.test.jsx`.
+## Maintenance Note
+- Recheck reconnect-path assertions when wallet session bootstrap logic changes.
