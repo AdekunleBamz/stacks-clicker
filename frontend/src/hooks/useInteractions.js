@@ -24,6 +24,7 @@ export function useInteractions({ onTxSubmit }) {
    * Triggers heartbeat/ping transactions for all active smart contracts simultaneously.
    */
   const pingAll = useCallback(() => {
+    // Fire-and-forget keeps each domain hook responsible for its own loading and error handling.
     clicker?.ping?.();
     tipjar?.handleSelfPing?.();
     quickpoll?.handlePollPing?.();
