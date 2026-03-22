@@ -9,5 +9,3 @@ Milestones currently award:
 - keep thresholds synced with any future gamification copy changes
 
 - Re-validate streak thresholds whenever gamification rewards are rebalanced.
-
-Source file: `frontend/src/components/InteractionStreaks.jsx`.
