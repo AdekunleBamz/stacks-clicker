@@ -16,7 +16,8 @@ export default function QuickPoll({ onTxSubmit }) {
   const [votes, setVotes] = useState({ yes: 0, no: 0 });
 
   const handleCreatePoll = async () => {
-    if (!isConnected || !pollQuestion.trim()) return;
+    const trimmedQuestion = pollQuestion.trim();
+    if (!isConnected || !trimmedQuestion) return;
 
     setLoading(true);
     try {
@@ -24,7 +25,7 @@ export default function QuickPoll({ onTxSubmit }) {
         contractAddress: DEPLOYER,
         contractName: 'quickpoll-v2p',
         functionName: 'create-poll',
-        functionArgs: [{ type: 'string-ascii', value: pollQuestion }],
+        functionArgs: [{ type: 'string-ascii', value: trimmedQuestion }],
       });
 
       setPollQuestion('');
