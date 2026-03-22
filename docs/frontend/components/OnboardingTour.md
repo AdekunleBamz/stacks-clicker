@@ -8,4 +8,4 @@ Interaction model:
 - auto-opens after a short delay for first-time users
 - keep step copy stable to preserve screenshot-based help docs
 
-Source file: `frontend/src/components/OnboardingTour.jsx`.
+- Persist dismissal state only after explicit user intent to avoid hiding first-run guidance accidentally.
