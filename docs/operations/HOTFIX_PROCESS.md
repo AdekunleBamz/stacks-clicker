@@ -6,4 +6,5 @@
 - Follow up with root-cause and cleanup tasks.
 - Document the exact commit hash used for hotfix deployment.
 
-Companion index: [Operations docs](README.md).
+## Maintenance Note
+- Verify rollback-link references whenever hotfix approval flow is updated.
