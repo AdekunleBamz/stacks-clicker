@@ -5,4 +5,5 @@
 Configurable props include width, height, border radius, and extra class names.
 Match skeleton dimensions to final content to reduce layout shifts.
 
-Source file: `frontend/src/components/common/SkeletonLoader.jsx`.
+## Maintenance Note
+- Validate shimmer duration against motion-budget guidance during design refreshes.
