@@ -7,3 +7,4 @@ Exposed methods:
 - `withdraw()`
 - `handleSelfPing()`
 - `isLoading(functionName)`
+- Normalize amount input to micro-STX before calling `tip(amount)`.
