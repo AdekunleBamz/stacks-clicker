@@ -6,3 +6,4 @@ Milestones currently award:
 - bronze at 10
 - silver at 50
 - gold at 100
+- keep thresholds synced with any future gamification copy changes
