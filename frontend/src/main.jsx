@@ -7,7 +7,7 @@ import ErrorBoundary from './components/ErrorBoundary.jsx';
 import './index.css';
 
 /**
- * Entry point for the Stacks Clicker v2 Frontend.
+ * Entry point for the Stacks Clicker frontend.
  * Initializes the React root and wraps the application in essential global providers:
  * 1. React.StrictMode for non-legacy lifecycle checks
  * 2. ErrorBoundary for graceful failure UI
