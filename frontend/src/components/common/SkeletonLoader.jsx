@@ -57,4 +57,6 @@ SkeletonLoader.propTypes = {
   className: PropTypes.string
 };
 
+SkeletonLoader.displayName = 'SkeletonLoader';
+
 export default memo(SkeletonLoader);
