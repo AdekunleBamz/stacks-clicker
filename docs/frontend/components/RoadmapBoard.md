@@ -7,5 +7,3 @@ Prefer status labels that map directly to your release checklist states.
 
 ## Maintenance Note
 - Keep status legend definitions synchronized with roadmap card badge states.
-
-Source file: `frontend/src/components/RoadmapBoard.jsx`.
