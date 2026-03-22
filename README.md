@@ -1,4 +1,4 @@
-# Stacks Clicker v2j 🚀
+# Stacks Clicker 🚀
 
 A premium, high-performance decentralized interaction hub on the Stacks blockchain. Built for speed, aesthetics, and seamless on-chain activity.
 
