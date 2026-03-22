@@ -6,4 +6,5 @@
 - Route sensitive reports through private channels.
 - Check that debug flags do not leak sensitive payload details in production.
 
-Companion index: [Operations docs](README.md).
+## Maintenance Note
+- Refresh threat-model references when authentication or wallet flows are modified.
