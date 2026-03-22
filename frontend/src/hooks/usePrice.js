@@ -29,7 +29,7 @@ export function usePrice() {
         const data = await response.json();
 
         if (isMounted) {
-          setPrice(data.blockstack?.usd || null);
+          setPrice(data.blockstack?.usd ?? null);
           setError(null);
         }
       } catch (err) {
