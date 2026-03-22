@@ -9,6 +9,3 @@ It remains useful as a fallback or experimentation surface.
 Treat this module as non-primary UI unless parity tests are updated.
 
 - Mark legacy-only behavior changes clearly in release notes when this fallback view is touched.
-- Keep interaction copy aligned with the primary clicker card to avoid support confusion.
-
-Source file: `frontend/src/components/ClickerGame.jsx`.
