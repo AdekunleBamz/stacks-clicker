@@ -9,3 +9,4 @@ Frontend variables currently in use:
 - `VITE_COINGECKO_API_KEY`: optional key for price lookup integrations.
 
 Keep secrets in local `.env` files and never commit sensitive values.
+Document new variables in `frontend/.env.example` as soon as they are introduced.
