@@ -4,3 +4,4 @@
 - Reinstall dependencies when lockfiles change.
 - Confirm `.env` variables are present before wallet tests.
 - Restart dev server after env changes.
+- Clear cached browser wallet sessions when connect state appears stale.
