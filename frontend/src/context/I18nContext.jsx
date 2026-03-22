@@ -37,7 +37,7 @@ export function I18nProvider({ children }) {
     () => ({
       lang: activeLang,
       setLang,
-      t: (key) => translations[activeLang][key] || key,
+      t: (key) => translations[activeLang][key] ?? key,
     }),
     [activeLang, setLang]
   );
