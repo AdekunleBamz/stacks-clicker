@@ -46,5 +46,6 @@ PlayerStats.propTypes = {
   txCount: PropTypes.number.isRequired
 };
 
-export default memo(PlayerStats);
+PlayerStats.displayName = 'PlayerStats';
 
+export default memo(PlayerStats);
