@@ -7,5 +7,3 @@ Keep tooltip content short enough to avoid obscuring nearby controls.
 
 ## Maintenance Note
 - Recheck hover/focus delay values whenever interaction timing is tuned globally.
-
-Source file: `frontend/src/components/common/Tooltip.jsx`.
