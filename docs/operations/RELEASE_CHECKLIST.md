@@ -6,3 +6,4 @@
 - Push only reviewed commits to `origin/main`.
 - After pushing, confirm GitHub marks the release commits as `Verified`.
 - Validate production links after deployment.
+- Record the release timestamp and operator in deployment notes.
