@@ -7,3 +7,4 @@
 - lazy-loaded primary sections and overlays
 
 Use `useInteractions` for chain actions and pass its sub-APIs to `MainGrid`.
+Keep global side effects centralized here to minimize prop drilling complexity.
