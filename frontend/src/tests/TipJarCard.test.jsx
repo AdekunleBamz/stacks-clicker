@@ -65,6 +65,7 @@ describe('TipJarCard Component', () => {
     fireEvent.click(buttons[1]);
 
     expect(handleSelfPing).toHaveBeenCalledTimes(1);
+    expect(tip).toHaveBeenCalledTimes(1);
     expect(tip).toHaveBeenCalledWith(0.001);
   });
 
