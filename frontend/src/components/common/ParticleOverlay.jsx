@@ -59,6 +59,7 @@ export default function ParticleOverlay({ trigger }) {
   return (
     <div
       className="particle-container"
+      aria-hidden="true"
       style={{
         position: 'fixed',
         top: '50%',
