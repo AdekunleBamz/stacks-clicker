@@ -50,8 +50,8 @@ export function WalletProvider({ children }) {
           return;
         }
       }
-    } catch (e) {
-      // No existing connection or parse error
+    } catch (error) {
+      console.warn('Failed to parse stored wallet session:', error);
     }
     setAddress(null);
   }, []);
