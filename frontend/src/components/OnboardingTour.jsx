@@ -16,7 +16,7 @@ export default function OnboardingTour() {
     if (typeof window === 'undefined') {
       return undefined;
     }
-    const hasSeenTour = localStorage.getItem('hasSeenTour');
+    const hasSeenTour = window.localStorage.getItem('hasSeenTour');
     if (!hasSeenTour) {
       const timer = setTimeout(() => setIsVisible(true), 1500);
       return () => clearTimeout(timer);
@@ -43,7 +43,7 @@ export default function OnboardingTour() {
     if (typeof window === 'undefined') {
       return;
     }
-    localStorage.setItem('hasSeenTour', 'true');
+    window.localStorage.setItem('hasSeenTour', 'true');
   };
 
   if (!isVisible) return null;
