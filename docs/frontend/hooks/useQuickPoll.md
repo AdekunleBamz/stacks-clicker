@@ -7,3 +7,4 @@ Exposed methods:
 - `createPoll(question)`
 - `handlePollPing()`
 - `isLoading(functionName)`
+- Validate question length before `createPoll` to avoid rejected transactions.
