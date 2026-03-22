@@ -191,4 +191,6 @@ TipJarCard.propTypes = {
   }).isRequired,
 };
 
+TipJarCard.displayName = 'TipJarCard';
+
 export default memo(TipJarCard);
