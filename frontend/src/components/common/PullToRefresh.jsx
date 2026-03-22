@@ -27,6 +27,11 @@ export default function PullToRefresh({ onRefresh }) {
   };
 
   const handleTouchEnd = () => {
+    if (refreshing) {
+      setStartY(0);
+      return;
+    }
+
     if (pullDistance > PULL_THRESHOLD) {
       setRefreshing(true);
       Promise.resolve(onRefresh())
