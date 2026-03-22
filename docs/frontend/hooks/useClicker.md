@@ -9,4 +9,5 @@ Exposed methods:
 - `isLoading(functionName)`
 - `isLoading` expects contract function keys like `click` and `multi-click`.
 
-Source file: `frontend/src/hooks/useClicker.js`.
+## Maintenance Note
+- Confirm cooldown math notes stay aligned with contract-side click throttling updates.
