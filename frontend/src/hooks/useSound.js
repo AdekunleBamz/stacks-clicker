@@ -16,6 +16,10 @@ function getAudioContext() {
     audioContext = new AudioContextCtor();
   }
 
+  if (audioContext.state === 'closed') {
+    audioContext = new AudioContextCtor();
+  }
+
   if (audioContext.state === 'suspended') {
     audioContext.resume().catch(() => {});
   }
