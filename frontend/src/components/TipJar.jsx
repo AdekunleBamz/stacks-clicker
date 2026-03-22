@@ -60,7 +60,8 @@ export default function TipJar({ onTxSubmit }) {
   };
 
   const handleTipUser = async () => {
-    if (!isConnected || !recipientAddress) return;
+    const normalizedRecipient = recipientAddress.trim();
+    if (!isConnected || !normalizedRecipient) return;
 
     setLoading(true);
     try {
@@ -69,7 +70,7 @@ export default function TipJar({ onTxSubmit }) {
         contractName: 'tipjar-v2p',
         functionName: 'tip-user',
         functionArgs: [
-          { type: 'principal', value: recipientAddress },
+          { type: 'principal', value: normalizedRecipient },
           { type: 'uint128', value: tipAmount.toString() },
         ],
       });
