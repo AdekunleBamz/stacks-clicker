@@ -6,3 +6,4 @@ Current content is intentionally minimal and can be extended with:
 - legal links
 - docs links
 - build metadata
+- release hash and timestamp for easier support triage
