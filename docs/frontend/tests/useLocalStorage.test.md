@@ -6,4 +6,5 @@ Validates:
 - malformed storage payloads are handled safely
 - same-tab custom event synchronization behavior
 
-Source file: `frontend/src/tests/useLocalStorage.test.jsx`.
+## Maintenance Note
+- Add migration-case assertions whenever persisted storage schema evolves.
