@@ -9,3 +9,4 @@ Validation rule:
 - minimum accepted amount is `0.001` STX
 
 Invalid or disconnected attempts surface error state and sound feedback.
+Display amount formatting help near the input to reduce invalid submissions.
