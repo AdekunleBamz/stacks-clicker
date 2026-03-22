@@ -7,4 +7,5 @@
 - context menu callback integration
 - keep swipe gestures optional on desktop-focused interaction paths
 
-Source file: `frontend/src/components/TransactionItem.jsx`.
+## Maintenance Note
+- Revalidate status-badge wording when transaction lifecycle states are expanded.
