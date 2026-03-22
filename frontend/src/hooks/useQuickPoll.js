@@ -68,7 +68,10 @@ export function useQuickPoll({ onTxSubmit }) {
     { type: 'uint128', value: option.toString() }
   ]), [executeAction]);
 
-  const createPoll = useCallback((question) => executeAction('📝 Create Poll', 'create-poll', [{ type: 'string-ascii', value: question }]), [executeAction]);
+  const createPoll = useCallback((question) => {
+    const normalizedQuestion = String(question).trim();
+    return executeAction('📝 Create Poll', 'create-poll', [{ type: 'string-ascii', value: normalizedQuestion }]);
+  }, [executeAction]);
   const handlePollPing = useCallback(() => executeAction('📡 Poll-Ping', 'poll-ping'), [executeAction]);
 
   return {
