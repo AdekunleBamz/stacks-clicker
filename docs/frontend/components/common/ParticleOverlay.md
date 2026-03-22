@@ -5,4 +5,5 @@
 It should remain decorative and non-blocking (`pointer-events: none`).
 Throttle repeated triggers during rapid success events to avoid render spikes.
 
-Source file: `frontend/src/components/common/ParticleOverlay.jsx`.
+## Maintenance Note
+- Reassess particle density defaults when performance budgets are tightened.
