@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * Toast notification component
@@ -22,3 +23,13 @@ export default function Toast({ toasts = [] }) {
     </div>
   );
 }
+
+Toast.propTypes = {
+  toasts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      type: PropTypes.string,
+      message: PropTypes.string,
+    })
+  ),
+};
