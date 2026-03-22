@@ -81,6 +81,7 @@ describe('ClickerCard Component', () => {
     fireEvent.click(buttons[2]);
 
     expect(click).toHaveBeenCalledTimes(1);
+    expect(multiClick).toHaveBeenCalledTimes(1);
     expect(multiClick).toHaveBeenCalledWith(10);
     expect(ping).toHaveBeenCalledTimes(1);
   });
