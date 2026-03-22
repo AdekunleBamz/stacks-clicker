@@ -100,12 +100,13 @@ export default function App() {
   const { clicker, tipjar, quickpoll, pingAll } = useInteractions({
     onTxSubmit: (action, txId) => {
       addTxToLog(action, txId);
+      const normalizedAction = String(action).toLowerCase();
       // Update local reactive stats for immediate feedback (optimistic logic)
-      if (action.includes('Click')) {
+      if (normalizedAction.includes('click')) {
         setStats((prev) => ({ ...prev, clicks: prev.clicks + 1 }));
-      } else if (action.includes('Tip')) {
+      } else if (normalizedAction.includes('tip')) {
         setStats((prev) => ({ ...prev, tips: prev.tips + 1 }));
-      } else if (action.includes('Vote')) {
+      } else if (normalizedAction.includes('vote')) {
         setStats((prev) => ({ ...prev, votes: prev.votes + 1 }));
       }
     },
