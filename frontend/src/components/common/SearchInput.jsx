@@ -58,4 +58,6 @@ SearchInput.propTypes = {
   count: PropTypes.number
 };
 
+SearchInput.displayName = 'SearchInput';
+
 export default memo(SearchInput);
