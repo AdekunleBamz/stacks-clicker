@@ -27,7 +27,7 @@ export function useKeyboardShortcuts({ isEnabled, actions, playSound }) {
       }
       if (e.key.toLowerCase() === 't' && actions.tip) {
         playSound('click');
-        actions.tip(0.001); // Standard quick tip amount
+        actions.tip(1000); // Standard quick tip amount (micro-STX)
       }
     };
 
