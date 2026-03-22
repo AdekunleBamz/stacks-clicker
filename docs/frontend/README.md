@@ -9,4 +9,4 @@ This folder contains focused references for frontend components, hooks, and cont
 - `context/`: Global provider responsibilities and state ownership.
 - `tests/`: Suite intent summaries for key frontend behaviors.
 
-Source root: `frontend/src/`.
+- Add links to newly introduced feature docs in this index as part of the same pull request.
