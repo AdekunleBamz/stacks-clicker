@@ -4,3 +4,4 @@
 - Validate click, tip, and poll transactions with the default wallet path.
 - Retry the same actions after a page refresh to confirm session recovery.
 - Record any wallet-specific warnings so support can reuse known workarounds.
+- Include at least one low-balance wallet scenario in matrix coverage.
