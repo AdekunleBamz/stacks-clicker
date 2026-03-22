@@ -24,6 +24,7 @@ const Card = ({
     <motion.div
       className={`card-wrapper ${depthClass} ${interactiveClass} ${className}`}
       role="article"
+      aria-label={title ? `${title} card` : undefined}
       whileHover={interactive ? { y: -5, boxShadow: 'var(--shadow-lg)' } : {}}
       {...props}
     >
