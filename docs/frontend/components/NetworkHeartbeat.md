@@ -6,5 +6,3 @@ It should remain non-blocking and decorative while still exposing readable statu
 Avoid flashing animations during reconnect loops to reduce visual noise.
 
 - Prefer plain status wording that matches wallet/network troubleshooting language.
-
-Source file: `frontend/src/components/NetworkHeartbeat.jsx`.
