@@ -71,7 +71,7 @@ export function useClicker({ onTxSubmit }) {
 
   const click = useCallback(() => executeAction('🎯 Click', 'click'), [executeAction]);
   const multiClick = useCallback(
-    (amount) =>
+    (amount = 1) =>
       executeAction('🔥 Multi-Click', 'multi-click', [
         { type: 'uint128', value: amount.toString() },
       ]),
