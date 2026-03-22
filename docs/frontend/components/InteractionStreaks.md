@@ -8,4 +8,4 @@ Milestones currently award:
 - gold at 100
 - keep thresholds synced with any future gamification copy changes
 
-Source file: `frontend/src/components/InteractionStreaks.jsx`.
+- Re-validate streak thresholds whenever gamification rewards are rebalanced.
