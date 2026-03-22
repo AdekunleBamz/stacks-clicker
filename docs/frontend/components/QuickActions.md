@@ -8,4 +8,4 @@
 All actions route through a sound-enabled wrapper for consistent interaction feedback.
 Keep external support links reviewed to avoid stale destinations.
 
-Source file: `frontend/src/components/QuickActions.jsx`.
+- Keep support destination URLs reviewed during release prep to avoid stale help links.
