@@ -99,4 +99,6 @@ TransactionItem.propTypes = {
   onOpenExplorer: PropTypes.func.isRequired,
 };
 
+TransactionItem.displayName = 'TransactionItem';
+
 export default memo(TransactionItem);
