@@ -8,3 +8,4 @@
 - `appDetails`
 
 It also listens for storage changes to stay in sync across tabs.
+Treat missing provider state as disconnected and recover on next explicit connect.
