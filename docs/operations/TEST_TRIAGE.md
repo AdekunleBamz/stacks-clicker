@@ -4,3 +4,4 @@
 - Separate flaky environment issues from logic regressions.
 - Fix root cause before adjusting assertions.
 - Document recurring failures for maintainers.
+- Record failing commit hash when triage starts for reproducibility.
