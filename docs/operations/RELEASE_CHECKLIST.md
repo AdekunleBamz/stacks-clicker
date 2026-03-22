@@ -8,4 +8,5 @@
 - Validate production links after deployment.
 - Record the release timestamp and operator in deployment notes.
 
-Companion index: [Operations docs](README.md).
+## Maintenance Note
+- Re-audit this checklist whenever release gate criteria are updated.
