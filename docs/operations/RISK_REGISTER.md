@@ -5,5 +5,6 @@ Track active risks with:
 - impact scope
 - mitigation owner
 - current status
+- next review date
 
 Update this register during incident and release reviews.
