@@ -11,4 +11,4 @@ Props:
 - `toggleTheme`: callback that flips theme state
 - keep wallet state text concise so header remains scannable on mobile
 
-Source file: `frontend/src/components/Header.jsx`.
+- Keep language selector defaults aligned with i18n fallback settings to avoid mismatched initial state.
