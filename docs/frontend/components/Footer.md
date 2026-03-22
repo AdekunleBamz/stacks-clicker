@@ -8,4 +8,4 @@ Current content is intentionally minimal and can be extended with:
 - build metadata
 - release hash and timestamp for easier support triage
 
-Source file: `frontend/src/components/Footer.jsx`.
+- Prefer stable support and status links here so users always have a reliable fallback path.
