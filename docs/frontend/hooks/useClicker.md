@@ -7,3 +7,4 @@ Exposed methods:
 - `multiClick(amount)`
 - `ping()`
 - `isLoading(functionName)`
+- `isLoading` expects contract function keys like `click` and `multi-click`.
