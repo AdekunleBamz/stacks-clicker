@@ -48,4 +48,6 @@ ActionCard.propTypes = {
   children: PropTypes.node
 };
 
+ActionCard.displayName = 'ActionCard';
+
 export default memo(ActionCard);
