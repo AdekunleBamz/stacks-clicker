@@ -17,4 +17,4 @@ This Code of Conduct applies in project spaces, including issues, pull requests,
 
 If you experience or witness unacceptable behavior, report it to `security@stacksclicker.io`.
 Reports will be reviewed and handled in confidence where possible.
-
+If email is unavailable, open a private GitHub security advisory with the same details.
