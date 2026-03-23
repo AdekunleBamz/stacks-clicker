@@ -4,3 +4,5 @@
 
 Use it for in-app transparency of planned features and delivery phases.
 Prefer status labels that map directly to your release checklist states.
+
+Source file: `frontend/src/components/RoadmapBoard.jsx`.
