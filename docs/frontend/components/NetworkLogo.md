@@ -4,3 +4,5 @@
 
 Keep assets lightweight and SVG-first for sharp rendering and low bundle cost.
 Provide descriptive `alt` text when this component is wrapped in an image tag.
+
+Source file: `frontend/src/components/NetworkLogo.jsx`.
