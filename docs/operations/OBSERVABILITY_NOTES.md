@@ -5,3 +5,5 @@ Track these signals during runtime checks:
 - transaction submission feedback accuracy
 - frontend error boundary trigger frequency
 - transaction confirmation latency from submit to on-chain success
+
+Companion index: [Operations docs](README.md).
