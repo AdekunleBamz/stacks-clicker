@@ -6,3 +6,5 @@
 - optional explorer deep-link
 - context menu callback integration
 - keep swipe gestures optional on desktop-focused interaction paths
+
+Source file: `frontend/src/components/TransactionItem.jsx`.
