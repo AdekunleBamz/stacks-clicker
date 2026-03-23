@@ -5,3 +5,5 @@
 - Keep QR modal path available as pairing fallback.
 - Log only non-sensitive session diagnostics.
 - Re-test reconnect behavior after wallet app version upgrades.
+
+Companion index: [Operations docs](README.md).
