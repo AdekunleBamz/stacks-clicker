@@ -5,3 +5,5 @@
 - Apply mitigation, then prepare root-cause notes.
 - Publish a short post-incident summary.
 - Track customer-facing status updates in a single incident thread.
+
+Companion index: [Operations docs](README.md).
