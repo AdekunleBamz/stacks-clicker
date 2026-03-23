@@ -4,3 +4,5 @@
 
 It should remain non-blocking and decorative while still exposing readable status text for assistive technologies.
 Avoid flashing animations during reconnect loops to reduce visual noise.
+
+Source file: `frontend/src/components/NetworkHeartbeat.jsx`.
