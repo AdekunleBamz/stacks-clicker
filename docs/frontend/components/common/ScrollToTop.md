@@ -4,3 +4,5 @@
 
 It uses passive scroll listening for lower main-thread overhead.
 Keep reveal threshold high enough to avoid showing the button on minor scrolls.
+
+Source file: `frontend/src/components/common/ScrollToTop.jsx`.
