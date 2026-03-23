@@ -5,3 +5,5 @@
 - Check explorer links and transaction history updates.
 - Announce deploy status to contributors.
 - Confirm telemetry dashboards show expected traffic after release.
+
+Companion index: [Operations docs](README.md).
