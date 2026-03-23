@@ -307,7 +307,7 @@ export async function callContract({
         // they ensure that the smart contract doesn't transfer more assets
         // than authorized by the user.
         postConditions: postConditions || [],
-        network: (import.meta.env.VITE_STACKS_NETWORK || 'mainnet').toLowerCase(),
+        network: import.meta.env.VITE_STACKS_NETWORK || 'mainnet',
       },
       STACKS_CHAIN
     );
