@@ -4,3 +4,5 @@
 
 Use `isPrice` for raw text values that should skip count-up animation.
 Avoid animating rapidly changing values to keep motion readable.
+
+Source file: `frontend/src/components/common/StatsCard.jsx`.
