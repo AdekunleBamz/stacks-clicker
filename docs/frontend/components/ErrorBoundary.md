@@ -6,3 +6,5 @@ Fallback behavior:
 - shows captured error message
 - offers a retry action that resets boundary state
 - avoid exposing sensitive stack details in user-facing copy
+
+Source file: `frontend/src/components/ErrorBoundary.jsx`.
