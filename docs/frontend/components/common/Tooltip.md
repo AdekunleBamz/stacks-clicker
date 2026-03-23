@@ -4,3 +4,5 @@
 
 It supports keyboard accessibility by opening on focus and closing on blur.
 Keep tooltip content short enough to avoid obscuring nearby controls.
+
+Source file: `frontend/src/components/common/Tooltip.jsx`.
