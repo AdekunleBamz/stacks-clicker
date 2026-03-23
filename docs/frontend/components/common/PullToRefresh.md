@@ -4,3 +4,5 @@
 
 The refresh callback may be sync or async.
 Debounce repeated pulls while an async refresh is already in progress.
+
+Source file: `frontend/src/components/common/PullToRefresh.jsx`.
