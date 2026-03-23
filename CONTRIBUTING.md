@@ -17,6 +17,7 @@ Enhancement suggestions are tracked as GitHub issues. When creating an enhanceme
 
 ### Pull Requests
 1. Fork the repo and create your branch from `main`.
+   Use descriptive branch names such as `fix/wallet-timeout` or `docs/release-checklist`.
 2. If you've added code that should be tested, add tests.
 3. If you've changed APIs, update the documentation.
 4. Ensure the test suite passes (`npm run test` in frontend).
