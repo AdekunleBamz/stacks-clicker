@@ -7,3 +7,5 @@ Interaction model:
 - skip or next through predefined steps
 - auto-opens after a short delay for first-time users
 - keep step copy stable to preserve screenshot-based help docs
+
+Source file: `frontend/src/components/OnboardingTour.jsx`.
