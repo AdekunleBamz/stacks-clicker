@@ -5,3 +5,5 @@
 - Fix root cause before adjusting assertions.
 - Document recurring failures for maintainers.
 - Record failing commit hash when triage starts for reproducibility.
+
+Companion index: [Operations docs](README.md).
