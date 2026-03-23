@@ -5,3 +5,5 @@
 - Capture notable upgrade risks in PR/commit notes.
 - Avoid broad version jumps without rollback plans.
 - Review lockfile diffs for unexpected transitive package changes.
+
+Companion index: [Operations docs](README.md).
