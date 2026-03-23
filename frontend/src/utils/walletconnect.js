@@ -295,21 +295,19 @@ export async function callContract({
 
   log('Requesting stx_callContract:', contractName, functionName);
 
-  try {
-    const result = await provider.request(
-      {
-        method: 'stx_callContract',
-        params: {
-          contractAddress,
-          contractName,
-          functionName,
-          functionArgs: functionArgs || [],
-          // Post-conditions are essential for security.
-          // they ensure that the smart contract doesn't transfer more assets
-          // than authorized by the user.
-          postConditions: postConditions || [],
-          network: STACKS_NETWORK,
-        },
+  const result = await provider.request(
+    {
+      method: 'stx_callContract',
+      params: {
+        contractAddress,
+        contractName,
+        functionName,
+        functionArgs: functionArgs || [],
+        // Post-conditions are essential for security.
+        // they ensure that the smart contract doesn't transfer more assets
+        // than authorized by the user.
+        postConditions: postConditions || [],
+        network: (import.meta.env.VITE_STACKS_NETWORK || 'mainnet').toLowerCase(),
       },
       STACKS_CHAIN
     );
