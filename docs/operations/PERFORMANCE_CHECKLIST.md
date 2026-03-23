@@ -5,3 +5,5 @@
 - Keep expensive listeners passive where possible.
 - Verify mobile scrolling and animation smoothness.
 - Re-check performance after enabling debug logging flags.
+
+Companion index: [Operations docs](README.md).
