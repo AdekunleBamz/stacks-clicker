@@ -22,8 +22,7 @@ const PROJECT_ID = import.meta.env.VITE_WALLETCONNECT_PROJECT_ID;
 const DEBUG = import.meta.env.VITE_DEBUG === 'true';
 
 // Stacks chain ID for mainnet (CAIP-2 format)
-const STACKS_MAINNET_CHAIN = 'stacks:1';
-const STACKS_NETWORK = STACKS_MAINNET_CHAIN === 'stacks:2147483648' ? 'testnet' : 'mainnet';
+const STACKS_MAINNET_CHAIN = (import.meta.env.VITE_STACKS_NETWORK === 'testnet') ? 'stacks:2147483648' : 'stacks:1';
 
 // App metadata - MUST have valid icons array
 const metadata = {
