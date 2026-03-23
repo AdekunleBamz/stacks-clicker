@@ -5,3 +5,5 @@ Build command:
 
 If build hangs locally, kill stale vite processes before retrying.
 Capture the failing package/version from terminal output before clearing caches.
+
+Companion index: [Operations docs](README.md).
