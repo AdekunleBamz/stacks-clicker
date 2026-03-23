@@ -10,3 +10,5 @@ Frontend variables currently in use:
 
 Keep secrets in local `.env` files and never commit sensitive values.
 Document new variables in `frontend/.env.example` as soon as they are introduced.
+
+Companion index: [Operations docs](README.md).
