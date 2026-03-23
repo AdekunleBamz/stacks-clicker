@@ -8,3 +8,5 @@ Exposed methods:
 - `ping()`
 - `isLoading(functionName)`
 - `isLoading` expects contract function keys like `click` and `multi-click`.
+
+Source file: `frontend/src/hooks/useClicker.js`.
