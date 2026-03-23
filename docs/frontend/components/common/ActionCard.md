@@ -4,3 +4,5 @@
 
 Use it to keep card chrome consistent across clicker, tipjar, and polling surfaces.
 Avoid embedding unrelated layout concerns so this wrapper stays reusable.
+
+Source file: `frontend/src/components/common/ActionCard.jsx`.
