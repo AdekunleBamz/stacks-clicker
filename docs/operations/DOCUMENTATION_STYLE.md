@@ -5,3 +5,5 @@
 - Include exact command examples when possible.
 - Update docs in the same change as behavior updates.
 - Replace outdated contract or component names during doc updates.
+
+Companion index: [Operations docs](README.md).
