@@ -29,9 +29,9 @@ export default function TransactionLog({ transactions = [] }) {
     }
   };
 
-  const getExplorerLink = (txId) => {
+  const getExplorerLink = (txId, network = 'mainnet') => {
     if (!txId || txId.startsWith('pending-')) return null;
-    return `https://explorer.hiro.so/txid/${txId}?chain=${STACKS_NETWORK}`;
+    return `https://explorer.hiro.so/txid/${txId}?chain=${network}`;
   };
 
   if (transactions.length === 0) {
@@ -52,9 +52,9 @@ export default function TransactionLog({ transactions = [] }) {
             <span className="tx-status">{getStatusIcon(tx.status)}</span>
             <span className="tx-action">{tx.action}</span>
             <span className="tx-time">{tx.time}</span>
-            {getExplorerLink(tx.id) && (
+            {getExplorerLink(tx.id, tx.network) && (
               <a
-                href={getExplorerLink(tx.id)}
+                href={getExplorerLink(tx.id, tx.network)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="tx-link"
