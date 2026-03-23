@@ -5,3 +5,5 @@
 - Expected result: describe the intended clicker, tip, or poll behavior.
 - Evidence: attach screenshots, console errors, and transaction IDs when available.
 - Impact scope: note whether only one wallet type or network is affected.
+
+Companion index: [Operations docs](README.md).
