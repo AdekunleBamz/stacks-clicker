@@ -7,3 +7,5 @@ Supported sound types:
 - `success`
 - `error`
 - Skip playback gracefully when the browser blocks audio autoplay.
+
+Source file: `frontend/src/hooks/useSound.js`.
