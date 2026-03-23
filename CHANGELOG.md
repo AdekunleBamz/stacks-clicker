@@ -1,6 +1,7 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+Use `YYYY-MM-DD` release dates and move shipped entries out of `Unreleased`.
 
 ## [Unreleased]
 ### Changed
