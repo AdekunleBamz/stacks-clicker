@@ -14,6 +14,7 @@ We currently support the following versions with security updates:
 
 If you discover a security vulnerability within this project, please email `security@stacksclicker.io`.
 If email delivery fails, open a private GitHub security advisory draft instead of filing a public issue.
+We aim to acknowledge credible reports within 48 hours.
 
 Please include the following in your report:
 - Type of issue (e.g., buffer overflow, SQL injection, cross-site scripting)
