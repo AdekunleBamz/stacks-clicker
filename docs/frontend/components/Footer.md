@@ -7,3 +7,5 @@ Current content is intentionally minimal and can be extended with:
 - docs links
 - build metadata
 - release hash and timestamp for easier support triage
+
+Source file: `frontend/src/components/Footer.jsx`.
