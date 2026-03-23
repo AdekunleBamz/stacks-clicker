@@ -74,6 +74,9 @@ npm install && cp .env.example .env && npm run dev
 | **QuickPoll** | Governance Vote | Voice + Influence | - |
 
 ## Technical Architecture 🏗️
+- Frontend state is coordinated through `WalletContext`, `I18nContext`, and domain hooks.
+- Smart contract interactions are routed through `useClicker`, `useTipJar`, and `useQuickPoll`.
+- See [ARCHITECTURE.md](ARCHITECTURE.md) for end-to-end interaction flow details.
 
 ## Security & Verification 🔑
 
