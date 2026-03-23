@@ -19,11 +19,11 @@ const HIRO_INFO_ENDPOINT = `${CONFIG.API_URL}/v2/info`;
 export function useNetwork() {
   const [blockHeight, setBlockHeight] = useState(840000); // Realistic baseline
   const [isConnected, setIsConnected] = useState(true);
-  const [network, setNetwork] = useState(CONFIGURED_NETWORK);
-  const [isUpdating, setIsUpdating] = useState(false);
-  const [lastUpdated, setLastUpdated] = useState(null);
-  const isFocused = useWindowFocus();
-  const isVisible = useDocumentVisibility();
+  const [network, setNetwork] = useState('mainnet');
+  const networkApiBase =
+    (import.meta.env.VITE_STACKS_NETWORK || 'mainnet').toLowerCase() === 'testnet'
+      ? 'https://api.testnet.hiro.so'
+      : 'https://api.mainnet.hiro.so';
 
   const fetchStatus = useCallback(async () => {
     setIsUpdating(true);
@@ -35,9 +35,14 @@ export function useNetwork() {
       });
       if (!response.ok) throw new Error('Network offline');
 
-      const data = await response.json();
-      const parsedHeight = Number(data.stacks_tip_height);
-      const safeHeight = Number.isFinite(parsedHeight) ? parsedHeight : 0;
+    const fetchStatus = async () => {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 10000);
+      try {
+        const response = await fetch(`${networkApiBase}/v2/info`, {
+          signal: controller.signal,
+        });
+        if (!response.ok) throw new Error('Network offline');
 
       setBlockHeight(safeHeight);
       setNetwork(
@@ -49,12 +54,16 @@ export function useNetwork() {
       if (error?.name !== 'AbortError') {
         console.warn('Stacks Network Status Check Failed:', error);
       }
-      setIsConnected(false);
-    } finally {
-      clearTimeout(timeout);
-      setIsUpdating(false);
-    }
-  }, []);
+    };
+
+    fetchStatus();
+    const interval = setInterval(fetchStatus, 30000); // Update every 30s
+
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
+  }, [networkApiBase]);
 
   useEffect(() => {
     if (isFocused && isVisible) {
