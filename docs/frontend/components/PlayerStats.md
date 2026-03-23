@@ -10,3 +10,5 @@ Current card set:
 
 `useMemo` is used to keep card definitions stable between renders.
 Keep stat labels consistent with transaction history terminology.
+
+Source file: `frontend/src/components/PlayerStats.jsx`.
