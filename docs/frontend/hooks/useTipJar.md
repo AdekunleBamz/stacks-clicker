@@ -8,3 +8,5 @@ Exposed methods:
 - `handleSelfPing()`
 - `isLoading(functionName)`
 - Normalize amount input to micro-STX before calling `tip(amount)`.
+
+Source file: `frontend/src/hooks/useTipJar.js`.
