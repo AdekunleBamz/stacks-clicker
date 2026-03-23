@@ -1,8 +1,8 @@
-.PHONY: check test console deploy-devnet deploy-mainnet clean help lint:all
+.PHONY: help check test coverage console deploy-devnet deploy-mainnet clean security-audit lint:all install dev build
 
 # Default target
 help:
-	@echo "StacksClicker v2j - Available commands:"
+	@echo "StacksClicker v2p - Available commands:"
 	@echo ""
 	@echo "  make check          - Check contract syntax"
 	@echo "  make test           - Run all Clarinet tests"
