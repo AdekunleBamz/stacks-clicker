@@ -115,29 +115,6 @@ npm run test:run
 | **TipJar** | STX Donation | Karma + Activity | `T` |
 | **QuickPoll** | Governance Vote | Voice + Influence | - |
 
-## Known Limitations ⚠️
-
-- **Network Latency**: High traffic on the Stacks network can lead to delayed transaction confirmation.
-- **Wallet Compatibility**: Optimized for Hiro and Leather; other Stacks-compatible wallets may vary in experience.
-- **Testnet Focus**: Some features are currently tuned for mock/testnet environments and may require adjustments for high-value mainnet usage.
-
-## Technical Architecture 🏗️
-
-```mermaid
-graph TD
-    User((User)) -->|Hiro Wallet| Frontend[React Frontend]
-    Frontend -->|useInteractions| Hooks[Domain Hooks]
-    Hooks -->|callContract| Utils[Wallet Utils]
-    Utils -->|Stacks API| BC[Stacks Blockchain]
-    BC -->|Events| Indexer[Hiro Indexer]
-    Indexer -->|Block Height| Hooks
-```
-
-- **Frontend**: Vite + React + Framer Motion for a 60fps glassmorphic UI.
-- **State Management**: Context API for global wallet and I18n state; custom hooks for domain logic.
-- **On-chain**: Integrated with Stacks Connect tooling and Hiro API for real-time blockchain telemetry.
-- See [ARCHITECTURE.md](ARCHITECTURE.md) for full end-to-end interaction flow details.
-
 ## Security & Verification 🔑
 
 Shared branch commits should be signed (SSH or GPG) before they are pushed. You can confirm the latest signature locally with `git log -1 --show-signature` and verify the pushed commit through GitHub's `Verified` badge.
