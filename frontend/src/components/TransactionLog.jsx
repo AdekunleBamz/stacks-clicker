@@ -71,6 +71,7 @@ TransactionLog.propTypes = {
     id: PropTypes.string,
     status: PropTypes.string,
     action: PropTypes.string,
-    time: PropTypes.string
+    time: PropTypes.string,
+    network: PropTypes.string
   }))
 };
