@@ -10,3 +10,5 @@ Validation rule:
 
 Invalid or disconnected attempts surface error state and sound feedback.
 Display amount formatting help near the input to reduce invalid submissions.
+
+Source file: `frontend/src/components/TipJarCard.jsx`.
