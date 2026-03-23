@@ -4,3 +4,5 @@
 
 Optional `onDisconnect` adds a secondary disconnect control beside the badge.
 Confirm copy success feedback is visible for keyboard-only users.
+
+Source file: `frontend/src/components/common/AddressBadge.jsx`.
