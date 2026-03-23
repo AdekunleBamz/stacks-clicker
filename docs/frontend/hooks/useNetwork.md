@@ -7,3 +7,5 @@
 
 Requests use abort timeouts to avoid hanging fetch calls.
 Treat unknown network responses as degraded state instead of hard failure.
+
+Source file: `frontend/src/hooks/useNetwork.js`.
