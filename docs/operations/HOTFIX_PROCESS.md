@@ -5,3 +5,5 @@
 - Validate key paths and release quickly.
 - Follow up with root-cause and cleanup tasks.
 - Document the exact commit hash used for hotfix deployment.
+
+Companion index: [Operations docs](README.md).
