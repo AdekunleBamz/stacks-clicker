@@ -10,3 +10,5 @@ It composes:
 
 Expected props include wallet address, aggregate stats, and the three hook APIs (`clicker`, `tipjar`, `quickpoll`).
 Prefer adding new cards through this layout to keep dashboard ordering explicit.
+
+Source file: `frontend/src/components/MainGrid.jsx`.
