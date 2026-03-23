@@ -85,5 +85,9 @@ sequenceDiagram
 - **Asset Optimization**: SVGs are used for icons to ensure sharpness and small bundle size.
 - **Telemetry**: `PerformanceOverlay` provides real-time FPS and MEM monitoring during development (`?dev=true`).
 
+## Related References
+- [README.md](README.md) for onboarding and local setup.
+- [docs/frontend/README.md](docs/frontend/README.md) for component and hook documentation.
+
 ---
 *Created by Antigravity - Advanced Agentic Coding @ Google DeepMind*
