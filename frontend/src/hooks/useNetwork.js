@@ -19,11 +19,7 @@ const HIRO_INFO_ENDPOINT = `${CONFIG.API_URL}/v2/info`;
 export function useNetwork() {
   const [blockHeight, setBlockHeight] = useState(null);
   const [isConnected, setIsConnected] = useState(true);
-  const [network, setNetwork] = useState('mainnet');
-  const networkApiBase =
-    (import.meta.env.VITE_STACKS_NETWORK || 'mainnet').toLowerCase() === 'testnet'
-      ? 'https://api.testnet.hiro.so'
-      : 'https://api.mainnet.hiro.so';
+  const [network, setNetwork] = useState((import.meta.env.VITE_STACKS_NETWORK || 'mainnet').toLowerCase());
 
   const fetchStatus = useCallback(async () => {
     setIsUpdating(true);
