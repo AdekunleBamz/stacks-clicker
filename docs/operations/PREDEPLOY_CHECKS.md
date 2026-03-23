@@ -5,3 +5,5 @@
 - Verify latest commit hash and changelog alignment.
 - Keep rollback commit reference prepared.
 - Confirm environment variables match the intended target network.
+
+Companion index: [Operations docs](README.md).
