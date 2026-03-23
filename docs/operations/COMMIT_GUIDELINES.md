@@ -7,3 +7,5 @@
 - Sign commits before pushing to shared branches with `git commit -S`.
 - Spot-check the latest signature locally with `git log -1 --show-signature`.
 - Keep subject lines specific to the user-visible or operational outcome.
+
+Companion index: [Operations docs](README.md).
