@@ -8,3 +8,5 @@
 
 Use `useInteractions` for chain actions and pass its sub-APIs to `MainGrid`.
 Keep global side effects centralized here to minimize prop drilling complexity.
+
+Source file: `frontend/src/App.jsx`.
