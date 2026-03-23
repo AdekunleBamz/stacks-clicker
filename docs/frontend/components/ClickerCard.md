@@ -9,3 +9,5 @@ Primary actions:
 
 A connected address is required; disconnected actions trigger error feedback.
 Keep button disabled/loading state tied to hook-level function keys.
+
+Source file: `frontend/src/components/ClickerCard.jsx`.
