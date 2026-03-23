@@ -8,3 +8,5 @@ Common tx-log fields:
 - `submittedAt`
 - `explorerUrl`
 - `network`
+
+Companion index: [Operations docs](README.md).
