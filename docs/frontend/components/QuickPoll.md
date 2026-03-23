@@ -8,3 +8,5 @@
 
 This module can serve as a reference implementation for direct contract-call UIs.
 Prefer `QuickPollCard` in production-facing layouts to reduce duplicated logic.
+
+Source file: `frontend/src/components/QuickPoll.jsx`.
