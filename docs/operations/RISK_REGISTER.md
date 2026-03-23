@@ -8,3 +8,5 @@ Track active risks with:
 - next review date
 
 Update this register during incident and release reviews.
+
+Companion index: [Operations docs](README.md).
