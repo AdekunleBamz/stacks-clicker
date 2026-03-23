@@ -65,3 +65,7 @@ The dApp interacts with pre-deployed contracts on Stacks Mainnet. You can find t
 
 ---
 Need help? Open an issue on [GitHub](https://github.com/AdekunleBamz/stacks-clicker/issues).
+
+Runbook index: [Operations docs](operations/README.md).
+
+Runbook index: [Operations docs](operations/README.md).
