@@ -9,3 +9,5 @@ Returned state:
 
 Fetches are timeout-protected with `AbortController`.
 Render fallbacks when `price` is unavailable instead of blocking interactions.
+
+Source file: `frontend/src/hooks/usePrice.js`.
