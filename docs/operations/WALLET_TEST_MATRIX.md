@@ -5,3 +5,5 @@
 - Retry the same actions after a page refresh to confirm session recovery.
 - Record any wallet-specific warnings so support can reuse known workarounds.
 - Include at least one low-balance wallet scenario in matrix coverage.
+
+Companion index: [Operations docs](README.md).
