@@ -8,3 +8,5 @@ Exposed methods:
 - `handlePollPing()`
 - `isLoading(functionName)`
 - Validate question length before `createPoll` to avoid rejected transactions.
+
+Source file: `frontend/src/hooks/useQuickPoll.js`.
