@@ -5,3 +5,5 @@ Validates:
 - storage-key removal restores initial value
 - malformed storage payloads are handled safely
 - same-tab custom event synchronization behavior
+
+Source file: `frontend/src/tests/useLocalStorage.test.jsx`.
