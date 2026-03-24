@@ -64,10 +64,17 @@ export function useQuickPoll({ onTxSubmit }) {
     }
   }, [onTxSubmit]);
 
-  const vote = useCallback((pollId, option) => executeAction('🗳️ Vote', 'vote', [
-    { type: 'uint128', value: pollId.toString() },
-    { type: 'uint128', value: option.toString() }
-  ]), [executeAction]);
+  const vote = useCallback(
+    (pollId, option) => {
+      const normalizedPollId = Number.isFinite(pollId) && pollId >= 0 ? Math.floor(pollId) : 0;
+      const normalizedOption = Number.isFinite(option) && option >= 0 ? Math.floor(option) : 0;
+      return executeAction('🗳️ Vote', 'vote', [
+        { type: 'uint128', value: normalizedPollId.toString() },
+        { type: 'uint128', value: normalizedOption.toString() }
+      ]);
+    },
+    [executeAction]
+  );
 
   const createPoll = useCallback((question) => {
     const normalizedQuestion = String(question).trim();
