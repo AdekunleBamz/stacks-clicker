@@ -1,10 +1,6 @@
 import { useState, useCallback } from 'react';
 import { callContract } from '../utils/walletconnect';
-
-/** @constant {string} Smart contract deployer address */
-const DEPLOYER = 'SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT';
-/** @constant {string} TipJar contract name */
-const CONTRACT_NAME = 'tipjar-v2p';
+import { DEPLOYER, TIPJAR_CONTRACT as CONTRACT_NAME } from '../utils/constants';
 
 /**
  * Custom hook for interacting with the TipJar smart contract.
