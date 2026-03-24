@@ -78,26 +78,27 @@ export default function ClickerGame({ onTxSubmit }) {
   };
 
   return (
-    <div className="game-card clicker-game">
+    <div className="game-card clicker-game glass-card" role="region" aria-labelledby="clicker-game-title">
       <div className="game-header">
-        <h2 aria-label="Clicker Game Primary Interface">🎮 Clicker Game</h2>
+        <h2 id="clicker-game-title">🎮 Clicker Game</h2>
         <span className="game-badge" title="Gamified operational click interface">Earn Streaks</span>
       </div>
 
-      <div className="game-stats">
+      <div className="game-stats" role="group" aria-label="Game progress summary">
         <div className="stat">
-          <span className="stat-value">{clickCount}</span>
-          <span className="stat-label" aria-hidden="true">Total Clicks</span>
+          <span className="stat-value" aria-live="polite" aria-atomic="true">{clickCount}</span>
+          <span className="stat-label">Total Clicks</span>
         </div>
       </div>
 
       <div className="game-actions">
         <button
           type="button"
-          className="action-btn primary huge"
+          className="action-btn primary-button huge"
           onClick={handleClick}
           disabled={!isConnected || loading}
           title="Click to generate a transaction manually"
+          aria-label={loading ? "Processing click..." : "Click to earn streaks"}
         >
           <span aria-hidden="true">{loading ? '⏳' : '👆'}</span> Click!
         </button>
@@ -109,16 +110,17 @@ export default function ClickerGame({ onTxSubmit }) {
             max="100"
             value={multiClickAmount}
             onChange={(e) => setMultiClickAmount(Number.parseInt(e.target.value, 10) || 1)}
-            className="multi-input"
+            className="multi-input input-field"
             aria-label="Number of multi-clicks"
             title="Choose between 1 and 100 automatic clicks"
           />
           <button
             type="button"
-            className="action-btn secondary"
+            className="action-btn secondary-button"
             onClick={handleMultiClick}
-            title="Submit a multi-click transaction"
+            title={`Submit a transaction for ${multiClickAmount} clicks at once`}
             disabled={!isConnected || loading}
+            aria-label={`Submit ${multiClickAmount} multi-clicks`}
           >
             Multi-Click ×{multiClickAmount}
           </button>
@@ -126,9 +128,10 @@ export default function ClickerGame({ onTxSubmit }) {
 
         <button
           type="button"
-          className="action-btn outline"
+          className="action-btn secondary-button outline"
           onClick={handlePing}
           disabled={!isConnected || loading}
+          aria-label="Send a network ping transaction"
         >
           📡 Ping
         </button>
