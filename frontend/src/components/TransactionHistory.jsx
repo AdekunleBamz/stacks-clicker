@@ -135,10 +135,10 @@ function TransactionHistory({ txLog }) {
         />
         <div className="tx-export-actions" role="toolbar" aria-label="Export and Filter Data">
           <select
-            className="tx-filter-select"
+            className="tx-filter-select input-field"
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            aria-label="Filter transaction history list by specific processing status"
+            aria-label="Filter transactions by processing status"
           >
             <option value="all">All Status</option>
             <option value="success">Success</option>
@@ -146,10 +146,10 @@ function TransactionHistory({ txLog }) {
             <option value="failed">Failed</option>
           </select>
           <select
-            className="tx-filter-select"
+            className="tx-filter-select input-field"
             value={filterAction}
             onChange={(e) => setFilterAction(e.target.value)}
-            aria-label="Filter transactions by action type"
+            aria-label="Filter transactions by action category"
           >
             <option value="all">All Types</option>
             <option value="Click">Clicks</option>
@@ -296,7 +296,7 @@ function TransactionHistory({ txLog }) {
                     <label>Network</label>
                     <span>{selectedTx.network || 'mainnet'}</span>
                   </div>
-                  <button type="button" className="text-btn mt-2" onClick={() => setModalView('raw')}>
+                  <button type="button" className="text-btn mt-2 ghost-button btn-sm" onClick={() => setModalView('raw')}>
                     View Technical Raw Data ↗
                   </button>
                 </div>
