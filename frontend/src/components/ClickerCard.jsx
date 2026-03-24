@@ -5,6 +5,7 @@ import ActionCard from './common/ActionCard';
 import ActionButton from './common/ActionButton';
 import Tooltip from './common/Tooltip';
 import { useSound } from '../hooks/useSound';
+import { useCombo } from '../hooks/useCombo';
 
 /**
  * Component for the Clicker game interaction card.
@@ -24,8 +25,7 @@ function ClickerCard({ address, clicker }) {
   const { isLoading, click, multiClick, ping } = clicker;
   const { playSound } = useSound();
   const [errorField, setErrorField] = React.useState(null);
-  const [combo, setCombo] = React.useState(0);
-  const comboTimerRef = React.useRef(null);
+  const { combo, incrementCombo } = useCombo();
 
   /**
    * Internal wrapper to play acoustic feedback before executing a contract action.
@@ -42,11 +42,7 @@ function ClickerCard({ address, clicker }) {
       }
 
       // Combo management
-      setCombo((prev) => prev + 1);
-      if (comboTimerRef.current) clearTimeout(comboTimerRef.current);
-      comboTimerRef.current = setTimeout(() => {
-        setCombo(0);
-      }, 2000);
+      incrementCombo();
 
       playSound('click');
       actionFn(...args);
