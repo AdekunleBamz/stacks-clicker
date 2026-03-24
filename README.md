@@ -2,6 +2,9 @@
 
 A premium, high-performance decentralized interaction hub on the Stacks blockchain. Built for speed, aesthetics, and seamless on-chain activity.
 
+## Vision 🔗
+Stacks Clicker aims to be more than just a game; it is a gateway for users to explore the Stacks ecosystem through simplified, gamified on-chain actions. By lowering the barrier to entry, we foster a more active and engaged Bitcoin L2 community.
+
 ![App Icon](frontend/public/favicon.svg)
 
 ## Project Structure 📁
