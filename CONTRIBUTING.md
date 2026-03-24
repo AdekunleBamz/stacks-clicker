@@ -29,7 +29,14 @@ Enhancement suggestions are tracked as GitHub issues. When creating an enhanceme
 1. Install dependencies: `cd frontend && npm install`
 2. Set up environment: `cd frontend && cp .env.example .env`
 3. Add your WalletConnect project ID to `frontend/.env`
-4. Start dev server: `cd frontend && npm run dev`
+4. Smart Contract Development: Ensure [Clarinet](https://github.com/hirosystems/clarinet) is installed for local testing and contract-call simulations.
+5. Start dev server: `cd frontend && npm run dev`
+
+## Contract Contributions
+When modifying Clarity contracts:
+- Run `clarinet test` to ensure logic remains sound.
+- Maintain the folder structure for contract archives.
+- Update the relevant interface hooks in `frontend/src/hooks` if contract functions change.
 
 ## Style Guide
 
