@@ -1,14 +1,20 @@
-import React from 'react';
 import packageJson from '../../package.json';
+import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 
 /**
  * Standard application footer.
  */
 export default function Footer() {
   const version = packageJson.version;
+  const [ref, isVisible] = useIntersectionObserver({ threshold: 0.5 });
 
   return (
-    <footer className="app-footer" role="contentinfo" aria-label="Global Application Footer">
+    <footer 
+      ref={ref}
+      className={`app-footer ${isVisible ? 'footer-visible' : ''}`} 
+      role="contentinfo" 
+      aria-label="Global Application Footer"
+    >
       <div className="footer-content">
         <div className="footer-left">
           <p>Built with <span role="img" aria-label="love">❤️</span> on Stacks</p>
