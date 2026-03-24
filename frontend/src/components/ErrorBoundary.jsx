@@ -18,11 +18,11 @@ export default class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="error-boundary-container" role="alert" aria-live="assertive">
-          <div className="error-content">
-            <div className="error-icon">⚠️</div>
+        <div className="error-boundary-container" role="alert" aria-live="assertive" aria-describedby="error-desc">
+          <div className="error-content glass-card">
+            <div className="error-icon" aria-hidden="true">⚠️</div>
             <h2 className="error-title" aria-label="Application Error Encountered" style={{ color: 'var(--error)' }}>Something went wrong</h2>
-            <p className="error-message">
+            <p className="error-message" id="error-desc">
               {this.state.error?.message || 'An unexpected error occurred.'}
             </p>
             <div className="error-actions">
