@@ -129,10 +129,11 @@ export default function ClickerGame({ onTxSubmit }) {
 
         <button
           type="button"
-          className="action-btn secondary-button outline"
+          className="action-btn secondary-button outline glass-card"
           onClick={handlePing}
           disabled={!isConnected || loading}
           aria-label="Send a network ping transaction"
+          aria-busy={loading}
         >
           📡 Ping
         </button>
