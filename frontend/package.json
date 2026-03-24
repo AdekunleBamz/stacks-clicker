@@ -5,6 +5,13 @@
   "description": "Premium React frontend for the Stacks Clicker interaction hub",
   "author": "AdekunleBamz",
   "license": "MIT",
+  "keywords": [
+    "stacks",
+    "blockchain",
+    "clicker",
+    "web3",
+    "react"
+  ],
   "type": "module",
   "scripts": {
     "dev": "vite",
