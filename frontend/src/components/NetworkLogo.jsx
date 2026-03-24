@@ -10,9 +10,10 @@ export default function NetworkLogo() {
       className="logo-glow"
       animate={{ rotate: [0, 5, -5, 0] }}
       transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-      aria-hidden="true"
+      role="img"
+      aria-label="Stacks Clicker Network Logo"
     >
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M16 2L4 16L16 30L28 16L16 2Z" fill="url(#logo-grad)" />
         <path d="M16 6L8 16L16 26L24 16L16 6Z" fill="white" fillOpacity="0.2" />
         <defs>
