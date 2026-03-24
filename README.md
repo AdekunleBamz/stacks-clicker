@@ -89,6 +89,12 @@ npm install && cp .env.example .env && npm run dev
 
 Shared branch commits should be SSH signed before they are pushed. You can confirm the latest signature locally with `git log -1 --show-signature` and verify the pushed commit through GitHub's `Verified` badge.
 
+## Troubleshooting 🔍
+
+- **Blank QR Code**: Ensure `VITE_WALLETCONNECT_PROJECT_ID` is correctly set in your `.env` file and that you have a stable internet connection.
+- **Transaction Failed**: Check if you have enough STX for gas fees. Re-connecting your wallet can often resolve stale session issues.
+- **UI Not Updating**: Try a hard refresh (`Cmd+Shift+R` or `Ctrl+F5`) to clear the local cache and reload the latest assets.
+
 ## License 📄
 
 MIT License. See [LICENSE](LICENSE) for details.
