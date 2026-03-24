@@ -7,25 +7,27 @@ import { CONFIG, STACKS_NETWORK } from '../utils/constants';
  * Transaction Log Component
  * Displays recent transactions with status
  */
-function getStatusIcon(status) {
-  switch (status) {
-    case 'success':
-      return '✅';
-    case 'pending':
-      return '⏳';
-    case 'failed':
-      return '❌';
-    default:
-      return '📝';
-  }
-}
-
-function getExplorerLink(txId) {
-  if (!txId || txId.startsWith('pending-')) return null;
-  return `${CONFIG.EXPLORER_URL}/txid/${txId}?chain=${STACKS_NETWORK}`;
-}
-
 export default function TransactionLog({ transactions = [] }) {
+  const network = (import.meta.env.VITE_STACKS_NETWORK || 'mainnet').toLowerCase();
+  const explorerChain = network === 'testnet' ? 'testnet' : 'mainnet';
+
+  const getStatusIcon = (status) => {
+    switch (status) {
+      case 'success':
+        return '✅';
+      case 'pending':
+        return '⏳';
+      case 'failed':
+        return '❌';
+      default:
+        return '📝';
+    }
+  };
+
+  const getExplorerLink = (txId) => {
+    if (!txId || txId.startsWith('pending-')) return null;
+    return `https://explorer.hiro.so/txid/${txId}?chain=${explorerChain}`;
+  };
 
   if (transactions.length === 0) {
     return (
