@@ -6,7 +6,7 @@ A premium, high-performance decentralized interaction hub on the Stacks blockcha
 
 ## Project Structure 📁
 
-- `contracts/`: Clarity smart contracts for the Stacks blockchain.
+- `contracts/`: Clarity smart contracts [detailed here](contracts/README.md).
 - `frontend/`: React-based web application (Vite, Framer Motion).
 - `deployments/`: Network-specific deployment plans.
 - `docs/`: Additional technical documentation and guides.
