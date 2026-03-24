@@ -27,11 +27,10 @@ function PlayerStats({ stats, txCount }) {
   return (
     <section
       className="stats-bar"
-      aria-label="Player Statistics"
+      aria-labelledby="stats-bar-title"
       role="region"
-      tabIndex={0}
-      title="Your Personal Player Statistics Overview"
     >
+      <h3 id="stats-bar-title" className="sr-only">Your Player Statistics Overview</h3>
       <div className="stats-cards" role="group" aria-label="Aggregate Player Performance Metrics">
         {statItems.map((item, index) => (
           <StatsCard key={item.label} {...item} index={index} />
