@@ -28,7 +28,7 @@ graph TD
 
 - **I18nProvider**: Manages multi-language support and locale-aware string resolution.
 - **WalletProvider**: Manages Stacks authentication, session state, and account derivation.
-- **ErrorBoundary**: Catches and displays fallback UI for runtime crashes, ensuring the entire app doesn't go dark on a single failure.
+- **ErrorBoundary**: Catches and displays fallback UI for runtime crashes, ensuring the entire app doesn't go dark on a single failure. It logs errors to the console and provides a "Retry" mechanism for users to reload without losing session state.
 
 ## Interaction Layer: Collector Pattern
 The application uses a **Collector Pattern** to aggregate domain-specific contract logic into a single consumption point:
