@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { useState, useEffect, useId, memo } from 'react';
 import { useHover } from '../../hooks/useHover';
 import { useFocus } from '../../hooks/useFocus';
 import PropTypes from 'prop-types';
@@ -14,10 +14,8 @@ import { motion, AnimatePresence } from 'framer-motion';
  * @returns {JSX.Element} The rendered tooltip wrapper
  */
 function Tooltip({ content, children }) {
-  const [isVisible, setIsVisible] = useState(false);
-  const [hoverRef, isHovered] = useHover();
-  const [focusRef, isFocused] = useFocus();
-
+  const id = useId();
+  const tooltipId = `tooltip-${id}`;
   const shouldShow = isHovered || isFocused;
 
   useEffect(() => {
@@ -39,10 +37,13 @@ function Tooltip({ content, children }) {
       className="tooltip-wrapper"
       style={{ position: 'relative', display: 'inline-block', width: '100%' }}
     >
-      {children}
+      {React.cloneElement(children, {
+        'aria-describedby': isVisible ? tooltipId : undefined
+      })}
       <AnimatePresence>
         {isVisible && (
           <motion.div
+            id={tooltipId}
             initial={{ opacity: 0, y: 10, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 5, scale: 0.95 }}
