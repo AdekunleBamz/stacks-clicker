@@ -106,60 +106,65 @@ export default function TipJar({ onTxSubmit }) {
   };
 
   return (
-    <div className="game-card tipjar">
+    <div className="game-card tipjar glass-card" role="region" aria-labelledby="tipjar-title">
       <div className="game-header">
-        <h2 aria-label="TipJar Tipping Component">💰 TipJar</h2>
+        <h2 id="tipjar-title">💰 TipJar</h2>
         <span className="game-badge" title="Direct peer-to-peer creator tips interface">Support Creators</span>
       </div>
 
-      <div className="game-stats">
+      <div className="game-stats" role="group" aria-label="Tipping statistics">
         <div className="stat">
-          <span className="stat-value">{(totalTipped / 1000000).toFixed(4)}</span>
-          <span className="stat-label" aria-hidden="true">STX Tipped</span>
+          <span className="stat-value" aria-live="polite" aria-atomic="true">{(totalTipped / 1000000).toFixed(4)}</span>
+          <span className="stat-label">STX Tipped</span>
         </div>
       </div>
 
       <div className="game-actions">
         <button
           type="button"
-          className="action-btn primary"
+          className="action-btn primary-button"
           onClick={handleQuickTip}
           disabled={!isConnected || loading}
+          aria-label={loading ? "Sending quick tip..." : "Send quick tip of 0.001 STX"}
         >
           {loading ? '⏳' : '⚡'} Quick Tip (0.001 STX)
         </button>
 
         <button
           type="button"
-          className="action-btn secondary"
+          className="action-btn secondary-button"
           onClick={handleSelfPing}
           disabled={!isConnected || loading}
           title="Send a self ping transaction"
+          aria-label="Send self ping transaction"
         >
           <span aria-hidden="true">📡</span> Self Ping
         </button>
 
         <div className="tip-custom">
           <div className="input-group">
-            <label className="input-label">Recipient Address</label>
+            <label className="input-label" htmlFor="recipient-address">Recipient Address</label>
             <input
+              id="recipient-address"
               type="text"
               placeholder="SP..."
               value={recipientAddress}
               onChange={(e) => setRecipientAddress(e.target.value)}
-              className="address-input"
+              className="address-input input-field"
+              aria-required="true"
             />
           </div>
           <div className="input-group">
-            <label className="input-label">Amount (uSTX)</label>
+            <label className="input-label" htmlFor="tip-amount">Amount (uSTX)</label>
             <div className="tip-amount-group">
               <input
+                id="tip-amount"
                 type="number"
                 min="1000"
                 step="1000"
                 value={tipAmount}
                 onChange={(e) => setTipAmount(Number.parseInt(e.target.value, 10) || 1000)}
-                className="amount-input"
+                className="amount-input input-field"
                 aria-label="Tip Amount in microstacks"
                 title="Enter the tip amount in uSTX"
               />
@@ -167,10 +172,11 @@ export default function TipJar({ onTxSubmit }) {
           </div>
           <button
             type="button"
-            className="action-btn outline"
+            className="action-btn secondary-button outline"
             onClick={handleTipUser}
             disabled={!isConnected || loading || !recipientAddress}
-            title="Send the specified amount to the recipient"
+            title={`Send ${tipAmount} uSTX to ${recipientAddress}`}
+            aria-label={`Send tip to user ${recipientAddress}`}
           >
             Send Tip
           </button>
@@ -178,9 +184,10 @@ export default function TipJar({ onTxSubmit }) {
 
         <button
           type="button"
-          className="action-btn outline"
+          className="action-btn secondary-button outline"
           onClick={handleDonate}
           disabled={!isConnected || loading}
+          aria-label={`Donate ${tipAmount} uSTX to developer`}
         >
           🎁 Donate {tipAmount} uSTX
         </button>
