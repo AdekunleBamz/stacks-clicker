@@ -37,7 +37,7 @@ function Header({ theme, toggleTheme }) {
 
         <div className="wallet-section">
           <select
-            className="language-select"
+            className="language-select input-field"
             value={lang}
             onChange={(e) => setLang(e.target.value)}
             aria-label="Select application language"
