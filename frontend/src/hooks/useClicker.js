@@ -42,28 +42,14 @@ export function useClicker({ onTxSubmit }) {
       throw new Error('VITE_DEPLOYER_ADDRESS is not set');
     }
 
-    const key = `clicker-${functionName}`;
-    setLoading(key, true);
-    try {
-      const result = await callContract({
-        contractAddress: DEPLOYER,
-        contractName: CONTRACT_NAME,
-        functionName,
-        functionArgs,
-      });
-      onTxSubmit?.(displayName, result.txId);
-      return result;
-    } catch (err) {
-      console.error(`${displayName} failed:`, err);
-      throw err;
-    } finally {
-      setLoading(key, false);
-    }
-  }, [onTxSubmit]);
-
-  const ping = useCallback(() => executeAction('📡 Ping', 'ping'), [executeAction]);
-  const resetStreak = useCallback(
-    () => executeAction('♻️ Reset Streak', 'reset-streak'),
+  const click = useCallback(() => executeAction('🎯 Click', 'click'), [executeAction]);
+  const multiClick = useCallback(
+    (amount = 1) => {
+      const normalizedAmount = Number.isFinite(amount) && amount > 0 ? Math.floor(amount) : 1;
+      return executeAction('🔥 Multi-Click', 'multi-click', [
+        { type: 'uint128', value: normalizedAmount.toString() },
+      ]);
+    },
     [executeAction]
   );
 
