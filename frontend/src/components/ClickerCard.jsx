@@ -93,6 +93,7 @@ function ClickerCard({ address, clicker }) {
             isLoading={isLoading('click')}
             isError={errorField === 'click'}
             className="primary"
+            aria-keyshortcuts="C"
           />
         </Tooltip>
         <Tooltip content="Boost your activity by performing 10 clicks in one batch for better efficiency.">
