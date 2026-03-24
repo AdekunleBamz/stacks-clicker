@@ -32,7 +32,7 @@ export default function PerformanceOverlay() {
   if (!isVisible) return null;
 
   return (
-    <div className="perf-overlay" role="status" aria-label="Performance Stats">
+    <div className="perf-overlay glass-card" role="status" aria-live="polite" aria-label="Performance Statistics: Alt+P to toggle">
       <div className="perf-stat">
         <span className="perf-label">FPS:</span>
         <span className={`perf-value ${fps < 30 ? 'bad' : fps < 50 ? 'warn' : 'good'}`}>
