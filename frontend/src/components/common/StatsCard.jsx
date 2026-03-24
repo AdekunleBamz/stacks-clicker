@@ -24,7 +24,15 @@ function AnimatedNumber({ value }) {
     return () => controls.stop();
   }, [value, displayValue]);
 
-  return <span aria-live="polite" aria-atomic="true">{typeof value === 'number' ? displayValue.toLocaleString() : value}</span>;
+  return (
+    <span 
+      role="status" 
+      aria-live="polite" 
+      aria-atomic="true"
+    >
+      {typeof value === 'number' ? displayValue.toLocaleString() : value}
+    </span>
+  );
 }
 
 AnimatedNumber.propTypes = {
@@ -89,7 +97,14 @@ function StatsCard({ label, value, icon, color, isPrice = false, isGrowing = fal
         </div>
         <div className="label" id={`stat-label-${index}`}>{label}</div>
         {!isPrice && typeof value === 'number' && (
-          <div className="progress-container">
+          <div 
+            className="progress-container" 
+            role="progressbar" 
+            aria-valuenow={Math.min(value % 100, 100)} 
+            aria-valuemin="0" 
+            aria-valuemax="100"
+            aria-label={`${label} progress`}
+          >
             <motion.div 
               className="progress-bar"
               initial={{ width: 0 }}
