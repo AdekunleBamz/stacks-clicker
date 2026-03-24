@@ -36,6 +36,7 @@ export default function ConnectButton() {
       className="connect-btn primary-button"
       onClick={connectWallet}
       aria-label="Connect Stacks Wallet"
+      aria-haspopup="dialog"
     >
       Connect Wallet
     </button>
