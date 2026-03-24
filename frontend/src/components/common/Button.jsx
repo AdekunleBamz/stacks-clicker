@@ -26,7 +26,7 @@ const Button = ({
   return (
     <motion.button
       type={type}
-      className={`${baseClass} ${variantClass} ${sizeClass} ${loadingClass} ${className}`}
+      className={`${baseClass} ${variantClass} ${sizeClass} ${loadingClass} glass-card ${className}`}
       onClick={onClick}
       disabled={disabled || isLoading}
       aria-busy={isLoading}
@@ -36,7 +36,7 @@ const Button = ({
       {...props}
     >
       {isLoading ? (
-        <span className="btn-spinner" role="progressbar" aria-label="Loading"></span>
+        <span className="btn-spinner" role="progressbar" aria-label="Loading" aria-live="polite"></span>
       ) : (
         <>
           {icon && <span className="btn-icon">{icon}</span>}
