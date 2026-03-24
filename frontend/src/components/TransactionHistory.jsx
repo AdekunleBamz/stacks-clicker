@@ -5,6 +5,8 @@ import { notify } from '../utils/toast';
 import SkeletonLoader from './common/SkeletonLoader';
 import SearchInput from './common/SearchInput';
 import TransactionItem from './TransactionItem';
+import { useDebounce } from '../hooks/useDebounce';
+import { useClipboard } from '../hooks/useClipboard';
 
 function escapeCsvValue(value) {
   const normalized = String(value ?? '').replace(/"/g, '""');
@@ -19,12 +21,14 @@ function escapeCsvValue(value) {
  */
 function TransactionHistory({ txLog }) {
   const [searchTerm, setSearchTerm] = useState('');
+  const debouncedSearchTerm = useDebounce(searchTerm, 300);
   const [selectedTx, setSelectedTx] = useState(null);
   const [contextMenu, setContextMenu] = useState(null);
   const [filterStatus, setFilterStatus] = useState('all');
   const [filterAction, setFilterAction] = useState('all');
   const [visibleItems, setVisibleItems] = useState(10);
   const [modalView, setModalView] = useState('summary'); // 'summary' or 'raw'
+  const { copyToClipboard } = useClipboard();
   const closeBtnRef = React.useRef(null);
 
   React.useEffect(() => {
@@ -53,7 +57,7 @@ function TransactionHistory({ txLog }) {
     return txLog.filter((tx) => {
       const actionText = String(tx.action ?? '').toLowerCase();
       const idText = String(tx.id ?? '').toLowerCase();
-      const search = searchTerm.toLowerCase();
+      const search = debouncedSearchTerm.toLowerCase();
       const matchesSearch =
         actionText.includes(search) ||
         idText.includes(search);
@@ -61,7 +65,7 @@ function TransactionHistory({ txLog }) {
       const matchesAction = filterAction === 'all' || tx.action.toLowerCase().includes(filterAction.toLowerCase());
       return matchesSearch && matchesStatus && matchesAction;
     });
-  }, [txLog, searchTerm, filterStatus, filterAction]);
+  }, [txLog, debouncedSearchTerm, filterStatus, filterAction]);
 
   const highlightText = useCallback((text, highlight) => {
     if (!highlight.trim()) return text;
@@ -110,17 +114,8 @@ function TransactionHistory({ txLog }) {
   );
 
   const copyText = useCallback(async (value, label = 'Value') => {
-    if (!navigator?.clipboard?.writeText) {
-      notify.error('Clipboard access is not available');
-      return;
-    }
-    try {
-      await navigator.clipboard.writeText(value);
-      notify.success(`${label} copied`);
-    } catch (error) {
-      notify.error(`Unable to copy ${label.toLowerCase()}`);
-    }
-  }, []);
+    copyToClipboard(value);
+  }, [copyToClipboard]);
 
   const openExplorer = useCallback((tx) => {
     if (!tx.explorerUrl) {
