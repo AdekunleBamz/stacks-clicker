@@ -1,10 +1,7 @@
-import React, { useState, memo, useCallback, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { motion, AnimatePresence } from 'framer-motion';
-import ActionCard from './common/ActionCard';
-import ActionButton from './common/ActionButton';
-import Tooltip from './common/Tooltip';
 import { useSound } from '../hooks/useSound';
+import { useKeydown } from '../hooks/useKeydown';
+import { useClipboard } from '../hooks/useClipboard';
+import { useInterval } from '../hooks/useInterval';
 import { notify } from '../utils/toast';
 
 /**
@@ -21,20 +18,12 @@ import { notify } from '../utils/toast';
  * @param {Function} props.quickpoll.isLoading - Function to check loading state by action name
  * @returns {JSX.Element} The rendered QuickPoll interaction card
  */
-function QuickPollCard({ address, quickpoll }) {
-  const { isLoading, vote, createPoll, handlePollPing } = quickpoll;
-  const [pollQuestion, setPollQuestion] = useState('');
-  const { playSound } = useSound();
-  const [errorField, setErrorField] = useState(null);
-  const trimmedQuestion = pollQuestion.trim();
+  const { copyToClipboard } = useClipboard();
   const [timeLeft, setTimeLeft] = useState(3600); // 1 hour in seconds
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 3600));
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
+  useInterval(() => {
+    setTimeLeft((prev) => (prev > 0 ? prev - 1 : 3600));
+  }, 1000);
 
   const formatTime = (seconds) => {
     const m = Math.floor(seconds / 60);
@@ -72,19 +61,18 @@ function QuickPollCard({ address, quickpoll }) {
    * @param {string} fieldId - ID of the button for error highlighting
    * @param {Function} [validation=()=>true] - Optional pre-check function for action validity
    */
-  const handleAction = useCallback(
-    (actionFn, fieldId, validation = () => true) => {
-      if (!address || !validation()) {
-        playSound('error');
-        setErrorField(fieldId);
-        setTimeout(() => setErrorField(null), 500);
-        return;
-      }
-      playSound('click');
-      actionFn();
     },
     [address, playSound]
   );
+
+  // Keyboard shortcuts
+  const voteYesAction = useCallback(() => handleAction(handleVoteYes, 'vote-yes'), [handleAction, handleVoteYes]);
+  const pollPingAction = useCallback(() => handleAction(handlePollPing, 'poll-ping'), [handleAction, handlePollPing]);
+
+  useKeydown('v', voteYesAction);
+  useKeydown('V', voteYesAction);
+  useKeydown('q', pollPingAction);
+  useKeydown('Q', pollPingAction);
 
   return (
     <ActionCard
@@ -101,7 +89,7 @@ function QuickPollCard({ address, quickpoll }) {
             icon="🗳️"
             cost="0.001 STX"
             className="success"
-            onClick={() => handleAction(handlePollPing, 'poll-ping')}
+            onClick={pollPingAction}
             isLoading={isLoading('poll-ping')}
             isError={errorField === 'poll-ping'}
             disabled={isLoading('poll-ping')}
@@ -145,9 +133,9 @@ function QuickPollCard({ address, quickpoll }) {
             <ActionButton
               label="Yes"
               icon="👍"
-              cost="0.001"
+               cost="0.001"
               className="success"
-              onClick={() => handleAction(handleVoteYes, 'vote-yes')}
+              onClick={voteYesAction}
               isLoading={isLoading('vote')}
               isError={errorField === 'vote-yes'}
               disabled={isLoading('vote')}
@@ -163,16 +151,9 @@ function QuickPollCard({ address, quickpoll }) {
           <button 
             type="button" 
             className="share-poll-btn"
-            aria-label="Share Poll Results"
+             aria-label="Share Poll Results"
             title="Copy Results Link"
-            onClick={() => {
-              if (!navigator?.clipboard?.writeText) {
-                notify.error('Clipboard access is unavailable.');
-                return;
-              }
-              notify.success('Results link copied to clipboard!');
-              navigator.clipboard.writeText(window.location.href);
-            }}
+            onClick={() => copyToClipboard(window.location.href)}
           >
             ↗ Share Results
           </button>
