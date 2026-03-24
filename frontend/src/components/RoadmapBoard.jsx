@@ -20,28 +20,30 @@ export default function RoadmapBoard() {
   }, []);
 
   return (
-    <section className="roadmap-board">
+    <section className="roadmap-board" aria-labelledby="roadmap-title">
       <div className="roadmap-header">
-        <h2 className="section-title" aria-label="Upcoming Project Roadmap">🚀 Project Roadmap</h2>
+        <h2 className="section-title" id="roadmap-title" aria-label="Upcoming Project Roadmap">🚀 Project Roadmap</h2>
         <p className="section-desc">Vote on upcoming features you want to see most.</p>
       </div>
       <div className="roadmap-items" role="feed" aria-live="polite" aria-label="Dynamically Updating Roadmap Feed">
         {items.map((item, index) => (
           <motion.div
             key={item.title}
-            className={`roadmap-card ${item.status}`}
+            className={`roadmap-card ${item.status} glass-card`}
+            role="article"
+            aria-labelledby={`roadmap-item-title-${index}`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
           >
-            <div className={`status-tag ${item.status}`}>{item.status}</div>
+            <div className={`status-tag ${item.status}`} aria-label={`Project status: ${item.status}`}>{item.status}</div>
             <div className="roadmap-card-body">
               <span className="q-badge">{item.quarter}</span>
-              <h3 className="roadmap-card-title">{item.title}</h3>
+              <h3 className="roadmap-card-title" id={`roadmap-item-title-${index}`}>{item.title}</h3>
             </div>
             <div className="roadmap-card-footer">
-              <div className="vote-count">
-                <span className="vote-icon">🔥</span>
+              <div className="vote-count" role="status" aria-live="polite">
+                <span className="vote-icon" aria-hidden="true">🔥</span>
                 {item.votes} votes
               </div>
               {item.status !== 'completed' && (
