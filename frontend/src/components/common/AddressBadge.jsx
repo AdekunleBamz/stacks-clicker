@@ -31,17 +31,16 @@ function AddressBadge({ address, onDisconnect }) {
     <div className="wallet-info" role="region" aria-label="Wallet Connection Status">
       <button
         type="button"
-        className="address-badge-btn"
-        aria-keyshortcuts="c"
+        className="address-badge-btn secondary-button"
         onClick={handleCopy}
-        title="Copy full wallet address to clipboard"
-        aria-label="Copy wallet address"
+        title={`Copy full Stacks address: ${address}`}
+        aria-label={`Copy wallet address ${truncateAddress(address, 4)}`}
       >
-        <span className="address-text">
+        <span className="address-text" aria-hidden="true">
           {truncateAddress(address, isMobile ? 4 : 6)}
         </span>
-        <span className="copy-icon" aria-hidden="true" aria-live="polite">
-          {copied ? '✅' : '📋'}
+        <span className="copy-status" role="status" aria-live="polite">
+          {copied ? ' ✅' : ' 📋'}
         </span>
       </button>
       {onDisconnect && (
