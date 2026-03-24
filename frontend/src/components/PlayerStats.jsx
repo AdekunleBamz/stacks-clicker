@@ -1,3 +1,4 @@
+import React, { useMemo, memo } from 'react';
 import PropTypes from 'prop-types';
 import StatsCard from './common/StatsCard';
 import { usePrevious } from '../hooks/usePrevious';
