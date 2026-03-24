@@ -60,6 +60,7 @@ function ModalContent({ onClose, title, children, footer, className, closeBtnRef
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
+      aria-describedby="modal-body-desc"
     >
       <div className="modal-header">
         <h3 id="modal-title">{title}</h3>
@@ -73,7 +74,7 @@ function ModalContent({ onClose, title, children, footer, className, closeBtnRef
           ×
         </button>
       </div>
-      <div className="modal-body">
+      <div className="modal-body" id="modal-body-desc">
         {children}
       </div>
       {footer && (
