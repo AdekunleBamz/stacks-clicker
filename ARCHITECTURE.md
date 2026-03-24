@@ -22,7 +22,8 @@ graph TD
     EB --> I18n[I18nProvider]
     I18n --> Wallet[WalletProvider]
     Wallet --> App[App.jsx]
-    App --> Components[UI Components]
+    App --> MainGrid[MainGrid.jsx]
+    MainGrid --> Components[UI Components]
 ```
 
 - **I18nProvider**: Manages multi-language support and locale-aware string resolution.
