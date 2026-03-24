@@ -1,7 +1,7 @@
 import React, { useState, memo, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { notify } from '../../utils/toast';
 import { useMedia } from '../../hooks/useMedia';
+import { useClipboard } from '../../hooks/useClipboard';
 
 /**
  * Component for displaying a truncated Stacks wallet address with copy-to-clipboard functionality.
@@ -14,28 +14,15 @@ import { useMedia } from '../../hooks/useMedia';
  * @returns {JSX.Element|null} The rendered address badge or null if no address is provided
  */
 function AddressBadge({ address, onDisconnect }) {
-  const [copied, setCopied] = useState(false);
   const isMobile = useMedia('(max-width: 480px)');
+  const { copied, copyToClipboard } = useClipboard();
 
   /**
    * Copies the full address to the system clipboard and provides visual feedback.
    */
   const handleCopy = useCallback(() => {
-    if (!address) return;
-    if (!navigator?.clipboard?.writeText) {
-      notify.error('Clipboard not available');
-      return;
-    }
-
-    navigator.clipboard
-      .writeText(address)
-      .then(() => {
-        setCopied(true);
-        notify.success('Address copied!');
-        setTimeout(() => setCopied(false), 2000);
-      })
-      .catch(() => notify.error('Unable to copy address'));
-  }, [address]);
+    copyToClipboard(address);
+  }, [address, copyToClipboard]);
 
   if (!address) return null;
 
