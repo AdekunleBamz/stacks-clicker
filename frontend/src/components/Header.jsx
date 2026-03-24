@@ -31,7 +31,7 @@ function Header({ theme, toggleTheme }) {
         >
           <div className="header-left">
           <NetworkLogo />
-          <h1 className="header-title" aria-label="Stacks Clicker Dashboard">Stacks Clicker</h1>
+          <h1 className="header-title text-gradient" aria-label="Stacks Clicker Dashboard">Stacks Clicker</h1>
         </div>
         </div>
 
