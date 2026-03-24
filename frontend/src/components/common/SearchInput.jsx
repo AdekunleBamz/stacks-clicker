@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { useId, memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -15,17 +15,21 @@ import { motion, AnimatePresence } from 'framer-motion';
  * @returns {JSX.Element} The rendered search input
  */
 function SearchInput({ value, onChange, onClear, placeholder = 'Search...', count }) {
+  const id = useId();
+  const searchId = `search-input-${id}`;
+
   return (
-    <div className="search-wrapper">
+    <div className="search-wrapper" role="search">
       <div className="search-relative">
         <span className="search-icon" aria-hidden="true">🔍</span>
         <input
+          id={searchId}
           type="text"
           placeholder={placeholder}
-          className="search-input"
+          className="search-input input-field"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          aria-label="Transaction search input stream"
+          aria-label="Search transaction history"
         />
         <AnimatePresence>
           {value && (
@@ -44,7 +48,7 @@ function SearchInput({ value, onChange, onClear, placeholder = 'Search...', coun
         </AnimatePresence>
       </div>
       {count !== undefined && (
-        <span className="search-count-badge">{count}</span>
+        <span className="search-count-badge" aria-label={`${count} results found`}>{count}</span>
       )}
     </div>
   );
