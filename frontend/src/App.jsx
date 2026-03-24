@@ -15,7 +15,7 @@ import SkeletonLoader from './components/common/SkeletonLoader';
 import { useI18n } from './context/I18nContext';
 import { useInteractions } from './hooks/useInteractions';
 import { useSound } from './hooks/useSound';
-import { useLocalStorage } from './hooks/useLocalStorage';
+import { useTheme } from './hooks/useTheme';
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 
 // Lazy load heavy components for optimized initial paint
@@ -44,22 +44,8 @@ export default function App() {
   const [celebration, setCelebration] = useState(null);
   const celebrationTimeoutRef = useRef(null);
 
-  // Theme Management (Persisted via LocalStorage)
-  const [theme, setTheme] = useLocalStorage('theme', 'dark');
-
-  /**
-   * Effect to synchronize the HTML data-theme attribute with the current application theme.
-   */
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
-
-  /**
-   * Toggles between 'light' and 'dark' themes.
-   */
-  const toggleTheme = useCallback(() => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
-  }, [setTheme]);
+  // Theme Management
+  const { theme, toggleTheme } = useTheme();
 
   /**
    * Adds a transaction record to the local session log and triggers UI notifications.
