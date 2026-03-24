@@ -18,6 +18,7 @@ import { useSound } from './hooks/useSound';
 import { useTheme } from './hooks/useTheme';
 import { useTransactionHistory } from './hooks/useTransactionHistory';
 import { useMilestones } from './hooks/useMilestones';
+import { useDocumentTitle } from './hooks/useDocumentTitle';
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 
 // Lazy load heavy components for optimized initial paint
@@ -91,12 +92,12 @@ export default function App() {
 
 
   /**
-   * Effect to dynamically update the document title based on interaction activity.
+   * Global Tab Feedback
    */
-  useEffect(() => {
-    const total = stats.clicks + stats.tips + stats.votes;
-    document.title = total > 0 ? `(${total}) Stacks Clicker` : 'Stacks Clicker';
-  }, [stats]);
+  useDocumentTitle({
+    title: 'Stacks Clicker',
+    count: stats.clicks + stats.tips + stats.votes,
+  });
 
   const MilestoneCelebration = React.lazy(() => import('./components/MilestoneCelebration'));
 
