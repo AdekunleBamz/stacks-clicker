@@ -1,8 +1,10 @@
+import React, { memo } from 'react';
 import NetworkLogo from './NetworkLogo';
 import AddressBadge from './common/AddressBadge';
 import Tooltip from './common/Tooltip';
 import { useWallet } from '../context/WalletContext';
 import { useI18n } from '../context/I18nContext';
+import { useScrollPosition } from '../hooks/useScrollPosition';
 
 /**
  * Main application header component.
@@ -12,12 +14,14 @@ import { useI18n } from '../context/I18nContext';
  * @param {string} props.theme - Current theme ('dark' or 'light').
  * @param {Function} props.toggleTheme - Function to toggle between themes.
  */
-export default function Header({ theme, toggleTheme }) {
+function Header({ theme, toggleTheme }) {
   const { address, connectWallet, disconnectWallet } = useWallet();
   const { lang, setLang } = useI18n();
+  const { y } = useScrollPosition();
+  const isScrolled = y > 20;
 
   return (
-    <header className="app-header">
+    <header className={`app-header ${isScrolled ? 'header-scrolled' : ''}`}>
       <div className="header-content">
         <div 
           className="logo" 
@@ -82,3 +86,6 @@ export default function Header({ theme, toggleTheme }) {
     </header>
   );
 }
+Header.displayName = 'Header';
+
+export default memo(Header);
