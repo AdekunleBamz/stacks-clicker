@@ -26,7 +26,7 @@ function SearchInput({ value, onChange, onClear, placeholder = 'Search...', coun
           id={searchId}
           type="text"
           placeholder={placeholder}
-          className="search-input input-field"
+          className="search-input input-field glass-card"
           value={value}
           onChange={(e) => onChange(e.target.value)}
           aria-label="Search transaction history"
@@ -48,7 +48,7 @@ function SearchInput({ value, onChange, onClear, placeholder = 'Search...', coun
         </AnimatePresence>
       </div>
       {count !== undefined && (
-        <span className="search-count-badge" aria-label={`${count} results found`}>{count}</span>
+        <span className="search-count-badge glass-card" role="status" aria-live="polite" aria-label={`${count} results found`}>{count}</span>
       )}
     </div>
   );
