@@ -26,17 +26,23 @@ export default function BaseModal({ isOpen, onClose, title, children, footer, cl
 
   return (
     <AnimatePresence>
-      <div className="modal-overlay" onClick={onClose} role="presentation">
-        <ModalContent 
-          onClose={onClose} 
-          title={title} 
-          footer={footer} 
-          className={className} 
-          closeBtnRef={closeBtnRef}
+      {isOpen && (
+        <div 
+          className="modal-overlay" 
+          onClick={onClose} 
+          role="presentation"
         >
-          {children}
-        </ModalContent>
-      </div>
+          <ModalContent 
+            onClose={onClose} 
+            title={title} 
+            footer={footer} 
+            className={className} 
+            closeBtnRef={closeBtnRef}
+          >
+            {children}
+          </ModalContent>
+        </div>
+      )}
     </AnimatePresence>
   );
 }
@@ -59,7 +65,7 @@ function ModalContent({ onClose, title, children, footer, className, closeBtnRef
         <h3 id="modal-title">{title}</h3>
         <button
           type="button"
-          className="close-btn"
+          className="close-btn secondary-button btn-sm"
           onClick={onClose}
           ref={closeBtnRef}
           aria-label="Close modal"
