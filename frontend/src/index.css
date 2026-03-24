@@ -509,6 +509,39 @@ textarea:focus-visible {
   color: var(--text-main);
 }
 
+.primary-button {
+  background: var(--grad-primary);
+  color: white;
+  border: none;
+  box-shadow: var(--shadow-primary);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-lg);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.primary-button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.secondary-button {
+  background: var(--bg-input);
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.secondary-button:hover {
+  background: var(--border);
+  border-color: var(--primary);
+}
+
 .btn-spinner {
   width: 1.2rem;
   height: 1.2rem;
