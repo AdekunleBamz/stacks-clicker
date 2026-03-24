@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
+import { useLongPress } from '../hooks/useLongPress';
 
 /**
  * Individual transaction item with swipe actions and status visualization.
@@ -16,6 +17,8 @@ function TransactionItem({
 }) {
   const txId = String(tx.id ?? '');
   const isPending = tx.isPending ?? txId.startsWith('pending');
+
+  const longPressHandlers = useLongPress(() => onDetails(tx), { delay: 600 });
 
   return (
     <div className="tx-item-wrapper">
@@ -41,6 +44,7 @@ function TransactionItem({
         whileDrag={{ scale: 1.02 }}
         onContextMenu={(e) => onContextMenu(e, tx)}
         style={{ willChange: 'transform' }}
+        {...longPressHandlers}
       >
         <div className="tx-status-dot" aria-hidden="true" />
         <div className="tx-main">
