@@ -1,6 +1,7 @@
 import React, { useState, memo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { notify } from '../../utils/toast';
+import { useMedia } from '../../hooks/useMedia';
 
 /**
  * Component for displaying a truncated Stacks wallet address with copy-to-clipboard functionality.
@@ -14,6 +15,7 @@ import { notify } from '../../utils/toast';
  */
 function AddressBadge({ address, onDisconnect }) {
   const [copied, setCopied] = useState(false);
+  const isMobile = useMedia('(max-width: 480px)');
 
   /**
    * Copies the full address to the system clipboard and provides visual feedback.
@@ -48,7 +50,9 @@ function AddressBadge({ address, onDisconnect }) {
         aria-label="Copy wallet address"
       >
         <span className="address-text">
-          {address.slice(0, 6)}...{address.slice(-4)}
+          {isMobile 
+            ? `${address.slice(0, 4)}...${address.slice(-3)}` 
+            : `${address.slice(0, 6)}...${address.slice(-4)}`}
         </span>
         <span className="copy-icon" aria-hidden="true" aria-live="polite">
           {copied ? '✅' : '📋'}
