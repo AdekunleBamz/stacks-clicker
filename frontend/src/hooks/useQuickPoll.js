@@ -67,10 +67,10 @@ export function useQuickPoll({ onTxSubmit }) {
   const vote = useCallback(
     (pollId, option) => {
       const normalizedPollId = Number.isFinite(pollId) && pollId >= 0 ? Math.floor(pollId) : 0;
-      const normalizedOption = Number.isFinite(option) && option >= 0 ? Math.floor(option) : 0;
+      const voteYesFlag = option === true || option === 1 || option === 'yes' || option === 'true';
       return executeAction('🗳️ Vote', 'vote', [
         { type: 'uint128', value: normalizedPollId.toString() },
-        { type: 'uint128', value: normalizedOption.toString() }
+        { type: 'bool', value: voteYesFlag }
       ]);
     },
     [executeAction]
