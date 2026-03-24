@@ -28,7 +28,7 @@ export default function ScrollToTop() {
       {isVisible && (
         <motion.button
           type="button"
-          className="scroll-to-top secondary-button btn-sm"
+          className="scroll-to-top secondary-button btn-sm glass-card"
           onClick={scrollToTop}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
