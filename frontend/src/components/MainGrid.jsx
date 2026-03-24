@@ -4,6 +4,7 @@ import InteractionStreaks from './InteractionStreaks';
 import ClickerCard from './ClickerCard';
 import TipJarCard from './TipJarCard';
 import QuickPollCard from './QuickPollCard';
+import { useTrace } from '../hooks/useTrace';
 
 /**
  * Main layout grid for the application.
@@ -16,6 +17,10 @@ function MainGrid({
   tipjar,
   quickpoll
 }) {
+  if (process.env.NODE_ENV === 'development') {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useTrace('MainGrid', { address, stats, clicker, tipjar, quickpoll });
+  }
   return (
     <section className="interaction-section" aria-labelledby="interactions-title">
       <h2 className="section-title" id="interactions-title" aria-label="Available Interactions Dashboard">Interactions</h2>
