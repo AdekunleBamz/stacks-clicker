@@ -35,6 +35,16 @@
   --radius-lg: 24px;
   --radius-xl: 32px;
 
+  /* Grid & Spacing System 
+   * We follow an 8pt grid for all margins, paddings, and alignment.
+   * This ensures a high degree of visual rhythm and vertical cadence.
+   */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+
   /* Semantic Tokens */
   --color-primary: var(--primary);
   --color-success: var(--success);
