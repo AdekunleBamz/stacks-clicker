@@ -83,6 +83,9 @@ export function useQuickPoll({ onTxSubmit }) {
     if (!normalizedQuestion) {
       throw new Error('Poll question is required');
     }
+    if (!/^[\x00-\x7F]+$/.test(normalizedQuestion)) {
+      throw new Error('Poll question must use ASCII characters');
+    }
     return executeAction('📝 Create Poll', 'create-poll', [{ type: 'string-ascii', value: normalizedQuestion }]);
   }, [executeAction]);
   const handlePollPing = useCallback(() => executeAction('📡 Poll-Ping', 'poll-ping'), [executeAction]);
