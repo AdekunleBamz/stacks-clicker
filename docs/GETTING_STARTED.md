@@ -61,7 +61,7 @@ Use `npm run lint` before opening a pull request if you touched application code
 - If UI changes do not reflect, restart `npm run dev` after editing `.env`.
 
 ## 📜 Contract Interaction
-The dApp interacts with pre-deployed contracts on Stacks Mainnet. You can find the contract source code in the `contracts/` directory for reference.
+The dApp interacts with pre-deployed contracts on the network configured by `VITE_STACKS_NETWORK` (default: Stacks Mainnet). You can find the contract source code in the `contracts/` directory for reference.
 
 Current active contract names used by the frontend:
 - `clicker-v2p`
