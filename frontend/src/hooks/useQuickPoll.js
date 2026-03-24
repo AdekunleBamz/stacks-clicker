@@ -36,7 +36,21 @@ export function useQuickPoll({ onTxSubmit } = {}) {
     } finally {
       setLoading(key, false);
     }
-  };
+  }, [onTxSubmit]);
+
+  const vote = useCallback((pollId, option) => {
+    const voteYesFlag = option === true || option === 1 || option === 'yes';
+    return executeAction('🗳️ Vote', 'vote', [
+      { type: 'uint128', value: pollId.toString() },
+      { type: 'bool', value: voteYesFlag }
+    ]);
+  }, [executeAction]);
+
+  const createPoll = useCallback((question) => {
+    const normalizedQuestion = String(question).trim();
+    return executeAction('📝 Create Poll', 'create-poll', [{ type: 'string-ascii', value: normalizedQuestion }]);
+  }, [executeAction]);
+  const handlePollPing = useCallback(() => executeAction('📡 Poll-Ping', 'poll-ping'), [executeAction]);
 
   return {
     isLoading: (key) => !!loadingStates[key],
