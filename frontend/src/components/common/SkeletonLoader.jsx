@@ -24,7 +24,8 @@ function SkeletonLoader({ width = '100%', height = '20px', borderRadius = '8px',
         width,
         height,
         borderRadius,
-        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+        borderRadius,
+        backgroundColor: 'var(--skeleton-base, rgba(255, 255, 255, 0.05))',
         overflow: 'hidden',
         position: 'relative'
       }}
