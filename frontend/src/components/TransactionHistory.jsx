@@ -5,6 +5,7 @@ import { notify } from '../utils/toast';
 import SkeletonLoader from './common/SkeletonLoader';
 import SearchInput from './common/SearchInput';
 import TransactionItem from './TransactionItem';
+import BaseModal from './common/BaseModal';
 import { useDebounce } from '../hooks/useDebounce';
 import { useClipboard } from '../hooks/useClipboard';
 
@@ -29,13 +30,7 @@ function TransactionHistory({ txLog }) {
   const [visibleItems, setVisibleItems] = useState(10);
   const [modalView, setModalView] = useState('summary'); // 'summary' or 'raw'
   const { copyToClipboard } = useClipboard();
-  const closeBtnRef = React.useRef(null);
-
-  React.useEffect(() => {
-    if (selectedTx) {
-      setTimeout(() => closeBtnRef.current?.focus(), 100);
-    }
-  }, [selectedTx]);
+  // We no longer need closeBtnRef or the useEffect here as BaseModal handles it
 
   const handleModalClose = useCallback(() => {
     setSelectedTx(null);
@@ -232,116 +227,103 @@ function TransactionHistory({ txLog }) {
             </motion.div>
           </div>
         )}
-        {selectedTx && (
-          <div className="modal-overlay" key="modal-wrapper" onClick={handleModalClose}>
-            <motion.div
-              className="modal-content tx-details-modal"
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="modal-header">
-                <div className="modal-breadcrumbs">
-                  <button
-                    type="button"
-                    className={`breadcrumb-item ${modalView === 'summary' ? 'active' : ''}`}
-                    onClick={() => setModalView('summary')}
-                  >
-                    Summary
+        <BaseModal
+          isOpen={!!selectedTx}
+          onClose={handleModalClose}
+          title={
+            <div className="modal-breadcrumbs">
+              <button
+                type="button"
+                className={`breadcrumb-item ${modalView === 'summary' ? 'active' : ''}`}
+                onClick={() => setModalView('summary')}
+              >
+                Summary
+              </button>
+              {modalView === 'raw' && (
+                <>
+                  <span className="breadcrumb-separator">/</span>
+                  <button type="button" className="breadcrumb-item active">
+                    Raw Data
                   </button>
-                  {modalView === 'raw' && (
-                    <>
-                      <span className="breadcrumb-separator">/</span>
-                      <button type="button" className="breadcrumb-item active">
-                        Raw Data
-                      </button>
-                    </>
-                  )}
+                </>
+              )}
+            </div>
+          }
+          className="tx-details-modal"
+          footer={
+            selectedTx?.explorerUrl ? (
+              <a
+                href={selectedTx.explorerUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="action-btn primary"
+                style={{ textDecoration: 'none', width: '100%', justifyContent: 'center' }}
+              >
+                View on Explorer ↗
+              </a>
+            ) : (
+              <button type="button" className="action-btn primary" disabled>
+                Explorer unavailable
+              </button>
+            )
+          }
+        >
+          {selectedTx && (
+            <div className="modal-body-content">
+              {modalView === 'summary' ? (
+                <div className="summary-view">
+                  <div className="detail-row">
+                    <label>Action Type</label>
+                    <span className="action-value">{selectedTx.action}</span>
+                  </div>
+                  <div className="detail-row">
+                    <label>Time of Action</label>
+                    <span className="time-value">{selectedTx.time}</span>
+                  </div>
+                  <div className="detail-row">
+                    <label>Transaction ID</label>
+                    <code className="tx-id-full" title={selectedTx.id}>
+                      {selectedTx.id}
+                    </code>
+                  </div>
+                  <div className="detail-row">
+                    <label>Transaction Status</label>
+                    <span className={`status-badge ${selectedTx.status}`}>
+                      {selectedTx.status}
+                    </span>
+                  </div>
+                  <div className="detail-row">
+                    <label>Network</label>
+                    <span>{selectedTx.network || 'mainnet'}</span>
+                  </div>
+                  <button type="button" className="text-btn mt-2" onClick={() => setModalView('raw')}>
+                    View Technical Raw Data ↗
+                  </button>
                 </div>
-                <button
-                  type="button"
-                  className="close-btn"
-                  onClick={handleModalClose}
-                  ref={closeBtnRef}
-                  aria-label="Close modal"
-                >
-                  ×
-                </button>
-              </div>
-              <div className="modal-body">
-                {modalView === 'summary' ? (
-                  <div className="summary-view">
-                    <div className="detail-row">
-                      <label>Action Type</label>
-                      <span className="action-value">{selectedTx.action}</span>
-                    </div>
-                    <div className="detail-row">
-                      <label>Time of Action</label>
-                      <span className="time-value">{selectedTx.time}</span>
-                    </div>
-                    <div className="detail-row">
-                      <label>Transaction ID</label>
-                      <code className="tx-id-full" title={selectedTx.id}>
-                        {selectedTx.id}
-                      </code>
-                    </div>
-                    <div className="detail-row">
-                      <label>Transaction Status</label>
-                      <span className={`status-badge ${selectedTx.status}`}>
-                        {selectedTx.status}
-                      </span>
-                    </div>
-                    <div className="detail-row">
-                      <label>Network</label>
-                      <span>{selectedTx.network || 'mainnet'}</span>
-                    </div>
-                    <button type="button" className="text-btn mt-2" onClick={() => setModalView('raw')}>
-                      View Technical Raw Data ↗
-                    </button>
-                  </div>
-                ) : (
-                  <div className="detail-row full">
-                    <label>Raw Metadata</label>
-                    <pre className="raw-json">
-                      {JSON.stringify(
-                        {
-                          id: selectedTx.id,
-                          action: selectedTx.action,
-                          status: selectedTx.status,
-                          network: selectedTx.network || 'mainnet',
-                          submittedAt: selectedTx.submittedAt || null,
-                          explorerUrl: selectedTx.explorerUrl || null,
-                          tx_id: selectedTx.id,
-                          timestamp: selectedTx.time,
-                        },
-                        null,
-                        2
-                      )}
-                    </pre>
-                  </div>
-                )}
-              </div>
-              <div className="modal-footer">
-                {selectedTx.explorerUrl ? (
-                  <a
-                    href={selectedTx.explorerUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="action-btn primary"
-                    style={{ textDecoration: 'none', justifyContent: 'center' }}
-                  >
-                    View on Explorer ↗
-                  </a>
-                ) : (
-                  <button type="button" className="action-btn primary" disabled>
-                    Explorer unavailable
-                  </button>
-                )}
-              </div>
-            </motion.div>
-          </div>
-        )}
+              ) : (
+                <div className="detail-row full">
+                  <label>Raw Metadata</label>
+                  <pre className="raw-json">
+                    {JSON.stringify(
+                      {
+                        id: selectedTx.id,
+                        action: selectedTx.action,
+                        status: selectedTx.status,
+                        network: selectedTx.network || 'mainnet',
+                        submittedAt: selectedTx.submittedAt || null,
+                        explorerUrl: selectedTx.explorerUrl || null,
+                        tx_id: selectedTx.id,
+                        timestamp: selectedTx.time,
+                      },
+                      null,
+                      2
+                    )}
+                  </pre>
+                </div>
+              )}
+            </div>
+          )}
+        </BaseModal>
       </AnimatePresence>
 
       <div className="tx-list">
