@@ -15,7 +15,7 @@ function QuickActions({ address, onClearLog, onPingAll }) {
   }, [playSound]);
 
   return (
-    <div className="quick-actions-panel" role="region" aria-label="Quick manual actions">
+    <div className="quick-actions-panel glass-card" role="region" aria-labelledby="quick-actions-heading">
       <h4 className="panel-title" id="quick-actions-heading">⚡ Quick Actions</h4>
       <div className="actions-stack" role="group" aria-labelledby="quick-actions-heading">
         <ActionButton
