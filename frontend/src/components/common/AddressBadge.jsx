@@ -2,6 +2,7 @@ import React, { useState, memo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useMedia } from '../../hooks/useMedia';
 import { useClipboard } from '../../hooks/useClipboard';
+import { truncateAddress } from '../../utils/format';
 
 /**
  * Component for displaying a truncated Stacks wallet address with copy-to-clipboard functionality.
@@ -37,9 +38,7 @@ function AddressBadge({ address, onDisconnect }) {
         aria-label="Copy wallet address"
       >
         <span className="address-text">
-          {isMobile 
-            ? `${address.slice(0, 4)}...${address.slice(-3)}` 
-            : `${address.slice(0, 6)}...${address.slice(-4)}`}
+          {truncateAddress(address, isMobile ? 4 : 6)}
         </span>
         <span className="copy-icon" aria-hidden="true" aria-live="polite">
           {copied ? '✅' : '📋'}
