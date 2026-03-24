@@ -10,7 +10,7 @@ Completed roadmap items should be recorded in [CHANGELOG.md](CHANGELOG.md) when 
 
 ## 🟡 Q3 2026: Advanced Gameplay
 - [ ] **Staking Mechanics**: Stake STX to earn "Click Power" multipliers.
-- [ ] **NFT Integration**: Special badges for milestone achievements (1k, 10k clicks).
+- [ ] **NFT Integration**: Special badges for milestone achievements (1k, 10k clicks) with on-chain metadata.
 - [ ] **Mobile App (PWA)**: Enhanced mobile experience with push notifications.
 
 ## 🔴 Q4 2026: Multi-Contract Synergy
