@@ -1,6 +1,7 @@
 import React, { useState, useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
+import { usePrevious } from '../hooks/usePrevious';
 
 /**
  * Component to track and display user interaction streaks and achievement badges.
@@ -14,16 +15,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 function InteractionStreaks({ totalInteractions }) {
   const [streak, setStreak] = useState(0);
   const [badges, setBadges] = useState([]);
+  const prevTotal = usePrevious(totalInteractions);
 
   /**
    * Internal effect to increment streak based on interaction activity.
-   * In a production environment, this would ideally be calculated from timestamped transaction logs.
    */
   useEffect(() => {
-    if (totalInteractions > 0) {
+    if (totalInteractions > (prevTotal ?? 0)) {
       setStreak(prev => prev + 1);
     }
-  }, [totalInteractions]);
+  }, [totalInteractions, prevTotal]);
 
   /**
    * Effect to calculate and update earned badges based on total interaction milestones.
