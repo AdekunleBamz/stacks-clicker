@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { useId, memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 
@@ -15,11 +15,14 @@ import { motion } from 'framer-motion';
  * @returns {JSX.Element} The rendered action card
  */
 function ActionCard({ title, subtitle, icon, iconClass = '', children }) {
+  const id = useId();
+  const titleId = `action-title-${id}`;
+
   return (
     <motion.div
-      className="action-card"
+      className="action-card glass-card"
       role="region"
-      aria-label={`${title} Interaction Card`}
+      aria-labelledby={titleId}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
@@ -27,10 +30,10 @@ function ActionCard({ title, subtitle, icon, iconClass = '', children }) {
       transition={{ type: 'spring', stiffness: 400, damping: 15 }}
     >
       <div className="contract-header">
-        <div className={`contract-icon ${iconClass}`}>{icon}</div>
+        <div className={`contract-icon ${iconClass}`} aria-hidden="true">{icon}</div>
         <div>
-          <div className="contract-title">{title}</div>
-          <div className="contract-subtitle">{subtitle}</div>
+          <h3 id={titleId} className="contract-title">{title}</h3>
+          <p className="contract-subtitle">{subtitle}</p>
         </div>
       </div>
       <div className="actions">
