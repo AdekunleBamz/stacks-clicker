@@ -61,13 +61,13 @@ function InteractionStreaks({ totalInteractions }) {
           {badges.map(badge => (
             <motion.div
               key={badge.id}
-              className="badge-item"
+              className="badge-item glass-card"
               role="listitem"
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               whileHover={{ y: -5 }}
               style={{ borderColor: badge.color }}
-              aria-label={`Achievement: ${badge.label}`}
+              aria-label={`Achievement badge: ${badge.label}`}
             >
               <span className="badge-text" aria-hidden="true">{badge.label}</span>
             </motion.div>
