@@ -30,12 +30,13 @@ const Button = ({
       onClick={onClick}
       disabled={disabled || isLoading}
       aria-busy={isLoading}
+      aria-label={isLoading ? `Processing ${typeof children === 'string' ? children : 'action'}` : undefined}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       {...props}
     >
       {isLoading ? (
-        <span className="btn-spinner"></span>
+        <span className="btn-spinner" role="progressbar" aria-label="Loading"></span>
       ) : (
         <>
           {icon && <span className="btn-icon">{icon}</span>}
