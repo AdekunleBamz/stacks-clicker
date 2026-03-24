@@ -560,6 +560,14 @@ textarea:focus-visible {
   background: rgba(255, 255, 255, 0.05);
 }
 
+.text-gradient {
+  background: var(--grad-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
 .btn-spinner {
   width: 1.2rem;
   height: 1.2rem;
