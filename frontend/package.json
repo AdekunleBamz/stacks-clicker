@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "description": "Premium React frontend for the Stacks Clicker interaction hub",
   "author": "AdekunleBamz",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "vite",
