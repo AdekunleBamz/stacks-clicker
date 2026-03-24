@@ -17,7 +17,7 @@ function Footer() {
       role="contentinfo" 
       aria-label="Global Application Footer"
     >
-      <div className="footer-content">
+      <div className="footer-content glass-card">
         <div className="footer-left">
           <p>© {currentYear} • Built with <span role="img" aria-label="love">❤️</span> on Stacks</p>
           <span className="app-version" title="Current Interface Version">v{version}</span>
