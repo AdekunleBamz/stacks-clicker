@@ -52,12 +52,20 @@ export default function PullToRefresh({ onRefresh }) {
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
+      role="region"
+      aria-label="Pull to refresh content"
     >
       <div
         className="ptr-indicator"
+        role="status"
+        aria-live="polite"
         style={{ transform: `translateY(${pullDistance - 50}px)`, opacity: pullDistance / PULL_THRESHOLD }}
       >
-        <div className={`ptr-spinner ${refreshing ? 'spinning' : ''}`}>
+        <div 
+          className={`ptr-spinner ${refreshing ? 'spinning' : ''}`}
+          role={refreshing ? "progressbar" : "img"}
+          aria-label={refreshing ? "Refreshing content" : "Pull to refresh"}
+        >
           {refreshing ? '⏳' : '↓'}
         </div>
       </div>

@@ -28,16 +28,17 @@ export default function ScrollToTop() {
       {isVisible && (
         <motion.button
           type="button"
-          className="scroll-to-top"
+          className="scroll-to-top secondary-button btn-sm"
           onClick={scrollToTop}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          aria-label="Scroll to top"
+          aria-label="Scroll back to top of the page"
+          title="Scroll to Top"
         >
-          ▲
+          <span aria-hidden="true">▲</span>
         </motion.button>
       )}
     </AnimatePresence>
