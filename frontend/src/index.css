@@ -440,6 +440,15 @@ textarea:focus-visible {
 }
 
 /* Unified Components */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: var(--radius-lg);
+}
+
 .app-btn {
   display: inline-flex;
   align-items: center;
