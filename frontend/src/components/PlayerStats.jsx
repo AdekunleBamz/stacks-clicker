@@ -31,7 +31,7 @@ function PlayerStats({ stats, txCount }) {
       role="region"
     >
       <h3 id="stats-bar-title" className="sr-only">Your Player Statistics Overview</h3>
-      <div className="stats-cards" role="group" aria-label="Aggregate Player Performance Metrics">
+      <div className="stats-cards stats-grid" role="group" aria-label="Aggregate Player Performance Metrics">
         {statItems.map((item, index) => (
           <StatsCard key={item.label} {...item} index={index} />
         ))}
