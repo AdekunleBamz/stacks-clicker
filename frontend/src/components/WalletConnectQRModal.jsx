@@ -40,7 +40,7 @@ export default function WalletConnectQRModal({ uri, onClose }) {
         <div className="qr-modal-body">
           <p className="qr-instructions">Scan this QR code with your Stacks wallet app</p>
 
-          <div className="qr-code-container">
+          <div className="qr-code-container" role="img" aria-label="WalletConnect pairing QR code. Scan this with your Stacks wallet app.">
             <QRCodeSVG
               value={uri}
               size={256}
