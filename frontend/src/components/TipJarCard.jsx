@@ -4,6 +4,7 @@ import ActionCard from './common/ActionCard';
 import ActionButton from './common/ActionButton';
 import Tooltip from './common/Tooltip';
 import { useSound } from '../hooks/useSound';
+import { useKeydown } from '../hooks/useKeydown';
 import { notify } from '../utils/toast';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -65,19 +66,18 @@ function TipJarCard({ address, tipjar }) {
    * @param {Function} actionFn - The interaction function to execute
    * @param {string} fieldId - ID of the button for error highlighting
    */
-  const handleAction = useCallback(
-    (actionFn, fieldId, validation = () => true) => {
-      if (!address || !validation()) {
-        playSound('error');
-        setErrorField(fieldId);
-        setTimeout(() => setErrorField(null), 500);
-        return;
-      }
-      playSound('click');
-      actionFn();
     },
     [address, playSound]
   );
+
+  // Keyboard shortcuts for tipping and pinging
+  const quickTipAction = useCallback(() => handleAction(handleQuickTip, 'quick-tip'), [handleAction, handleQuickTip]);
+  const pingAction = useCallback(() => handleAction(handleSelfPing, 'self-ping'), [handleAction, handleSelfPing]);
+
+  useKeydown('t', quickTipAction);
+  useKeydown('T', quickTipAction);
+  useKeydown('p', pingAction);
+  useKeydown('P', pingAction);
 
   return (
     <ActionCard
@@ -94,7 +94,7 @@ function TipJarCard({ address, tipjar }) {
             icon="🏓"
             cost="0.001 STX"
             className="success"
-            onClick={() => handleAction(handleSelfPing, 'self-ping')}
+            onClick={pingAction}
             isLoading={isLoading('self-ping')}
             isError={errorField === 'self-ping'}
             disabled={isLoading('self-ping')}
@@ -106,7 +106,7 @@ function TipJarCard({ address, tipjar }) {
             icon="💰"
             cost="0.002 STX"
             className="warning"
-            onClick={() => handleAction(handleQuickTip, 'quick-tip')}
+            onClick={quickTipAction}
             isLoading={isLoading('tip')}
             isError={errorField === 'quick-tip'}
             disabled={isLoading('tip')}
