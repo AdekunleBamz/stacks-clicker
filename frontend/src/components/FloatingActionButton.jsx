@@ -20,15 +20,16 @@ function FloatingActionButton({ onAction }) {
   ], [onAction]);
 
   return (
-    <div className="fab-container">
+    <div className="fab-container" role="application" aria-label="Mobile quick actions">
       <AnimatePresence>
         {isOpen && (
-          <div className="fab-menu">
+          <div className="fab-menu" role="menu">
             {actions.map((action, index) => (
               <motion.button
                 type="button"
                 key={action.id}
-                className="fab-item"
+                className="fab-item secondary-button"
+                role="menuitem"
                 title={action.label}
                 aria-label={action.label}
                 initial={{ opacity: 0, scale: 0, y: 20 }}
@@ -41,7 +42,7 @@ function FloatingActionButton({ onAction }) {
                 }}
               >
                 <span className="fab-label">{action.label}</span>
-                <span className="fab-icon">{action.icon}</span>
+                <span className="fab-icon" aria-hidden="true">{action.icon}</span>
               </motion.button>
             ))}
           </div>
@@ -49,14 +50,15 @@ function FloatingActionButton({ onAction }) {
       </AnimatePresence>
       <motion.button
         type="button"
-        className={`fab-main ${isOpen ? 'active' : ''}`}
+        className={`fab-main primary-button ${isOpen ? 'active' : ''}`}
         onClick={toggleOpen}
         aria-expanded={isOpen}
+        aria-haspopup="true"
         aria-label={isOpen ? 'Close quick actions menu' : 'Open quick actions menu'}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
-        <span className="fab-main-icon">{isOpen ? '×' : '⚡'}</span>
+        <span className="fab-main-icon" aria-hidden="true">{isOpen ? '×' : '⚡'}</span>
       </motion.button>
     </div>
   );
