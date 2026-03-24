@@ -21,7 +21,9 @@ import { STACKS_NETWORK } from './constants';
 const PROJECT_ID = import.meta.env.VITE_WALLETCONNECT_PROJECT_ID;
 const DEBUG = import.meta.env.VITE_DEBUG === 'true';
 
-const STACKS_CHAIN = STACKS_NETWORK === 'testnet' ? 'stacks:2147483648' : 'stacks:1';
+// Stacks chain ID for mainnet (CAIP-2 format)
+const STACKS_MAINNET_CHAIN = 'stacks:1';
+const STACKS_NETWORK = STACKS_MAINNET_CHAIN === 'stacks:2147483648' ? 'testnet' : 'mainnet';
 
 // App metadata - MUST have valid icons array
 const metadata = {
@@ -310,7 +312,7 @@ export async function callContract({
         // they ensure that the smart contract doesn't transfer more assets
         // than authorized by the user.
         postConditions: postConditions || [],
-        network: (import.meta.env.VITE_STACKS_NETWORK || 'mainnet').toLowerCase(),
+        network: STACKS_NETWORK,
       },
       STACKS_CHAIN
     );
