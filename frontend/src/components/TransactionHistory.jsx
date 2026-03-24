@@ -159,7 +159,7 @@ function TransactionHistory({ txLog }) {
           </select>
           <button
             type="button"
-            className="export-btn"
+            className="export-btn secondary-button btn-sm"
             onClick={() => exportData('json')}
             aria-label="Export history as JSON"
             title="Export as JSON"
@@ -168,7 +168,7 @@ function TransactionHistory({ txLog }) {
           </button>
           <button
             type="button"
-            className="export-btn"
+            className="export-btn secondary-button btn-sm"
             onClick={() => exportData('csv')}
             aria-label="Export history as CSV"
             title="Export as CSV"
@@ -256,13 +256,13 @@ function TransactionHistory({ txLog }) {
                 href={selectedTx.explorerUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="action-btn primary"
+                className="action-btn primary-button"
                 style={{ textDecoration: 'none', width: '100%', justifyContent: 'center' }}
               >
                 View on Explorer ↗
               </a>
             ) : (
-              <button type="button" className="action-btn primary" disabled>
+              <button type="button" className="action-btn primary-button" disabled>
                 Explorer unavailable
               </button>
             )
@@ -326,7 +326,7 @@ function TransactionHistory({ txLog }) {
         </BaseModal>
       </AnimatePresence>
 
-      <div className="tx-list">
+      <div className="tx-list" role="list">
         <AnimatePresence mode="popLayout">
           {filteredLog.length === 0 ? (
             <motion.div
@@ -375,8 +375,10 @@ function TransactionHistory({ txLog }) {
         {filteredLog.length > visibleItems && (
           <button
             type="button"
-            className="load-more-btn"
+            className="load-more-btn secondary-button"
+            style={{ width: '100%', marginTop: '1rem' }}
             onClick={() => setVisibleItems((prev) => prev + 10)}
+            aria-label={`Show ${Math.min(10, filteredLog.length - visibleItems)} more transactions`}
           >
             Load More Activity ({filteredLog.length - visibleItems} remaining)
           </button>
