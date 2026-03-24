@@ -31,7 +31,7 @@ function AddressBadge({ address, onDisconnect }) {
     <div className="wallet-info" role="region" aria-label="Wallet Connection Status">
       <button
         type="button"
-        className="address-badge-btn secondary-button"
+        className="address-badge-btn secondary-button glass-card"
         onClick={handleCopy}
         title={`Copy full Stacks address: ${address}`}
         aria-label={`Copy wallet address ${truncateAddress(address, 4)}`}
