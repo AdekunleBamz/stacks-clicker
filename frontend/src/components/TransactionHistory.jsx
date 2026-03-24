@@ -15,6 +15,11 @@ function escapeCsvValue(value) {
   return `"${normalized}"`;
 }
 
+const DEFAULT_NETWORK =
+  String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
+    ? 'testnet'
+    : 'mainnet';
+
 /**
  * Error fallback component for transaction history
  */
@@ -337,13 +342,58 @@ function TransactionHistory({ txLog, isLoading = false, showError = false, onRet
                 >
                   Summary
                 </button>
-                {modalView === 'raw' && (
-                  <>
-                    <span className="breadcrumb-separator">/</span>
-                    <button type="button" className="breadcrumb-item active">
-                      Raw Data
+              </div>
+              <div className="modal-body">
+                {modalView === 'summary' ? (
+                  <div className="summary-view">
+                    <div className="detail-row">
+                      <label>Action Type</label>
+                      <span className="action-value">{selectedTx.action}</span>
+                    </div>
+                    <div className="detail-row">
+                      <label>Time of Action</label>
+                      <span className="time-value">{selectedTx.time}</span>
+                    </div>
+                    <div className="detail-row">
+                      <label>Transaction ID</label>
+                      <code className="tx-id-full" title={selectedTx.id}>
+                        {selectedTx.id}
+                      </code>
+                    </div>
+                    <div className="detail-row">
+                      <label>Transaction Status</label>
+                      <span className={`status-badge ${selectedTx.status}`}>
+                        {selectedTx.status}
+                      </span>
+                    </div>
+                    <div className="detail-row">
+                      <label>Network</label>
+                      <span>{selectedTx.network || DEFAULT_NETWORK}</span>
+                    </div>
+                    <button type="button" className="text-btn mt-2" onClick={() => setModalView('raw')}>
+                      View Technical Raw Data ↗
                     </button>
-                  </>
+                  </div>
+                ) : (
+                  <div className="detail-row full">
+                    <label>Raw Metadata</label>
+                    <pre className="raw-json">
+                      {JSON.stringify(
+                        {
+                          id: selectedTx.id,
+                          action: selectedTx.action,
+                          status: selectedTx.status,
+                          network: selectedTx.network || DEFAULT_NETWORK,
+                          submittedAt: selectedTx.submittedAt || null,
+                          explorerUrl: selectedTx.explorerUrl || null,
+                          tx_id: selectedTx.id,
+                          timestamp: selectedTx.time,
+                        },
+                        null,
+                        2
+                      )}
+                    </pre>
+                  </div>
                 )}
               </div>
             }
