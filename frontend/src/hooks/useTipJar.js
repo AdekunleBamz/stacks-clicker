@@ -64,7 +64,13 @@ export function useTipJar({ onTxSubmit }) {
     }
   }, [onTxSubmit]);
 
-  const tip = useCallback((amount = 1000) => executeAction('💰 Tip', 'tip', [{ type: 'uint128', value: amount.toString() }]), [executeAction]);
+  const tip = useCallback(
+    (amount = 1000) => {
+      const normalizedAmount = Number.isFinite(amount) && amount > 0 ? Math.floor(amount) : 1000;
+      return executeAction('💰 Tip', 'tip', [{ type: 'uint128', value: normalizedAmount.toString() }]);
+    },
+    [executeAction]
+  );
   const withdraw = useCallback(() => executeAction('💸 Withdraw', 'withdraw'), [executeAction]);
   const handleSelfPing = useCallback(() => executeAction('📡 Self-Ping', 'self-ping'), [executeAction]);
 
