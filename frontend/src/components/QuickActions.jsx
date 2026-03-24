@@ -15,9 +15,9 @@ function QuickActions({ address, onClearLog, onPingAll }) {
   }, [playSound]);
 
   return (
-    <div className="quick-actions-panel" role="region" aria-live="polite" aria-label="Quick manual actions">
-      <h4 className="panel-title">⚡ Quick Actions</h4>
-      <div className="actions-stack">
+    <div className="quick-actions-panel" role="region" aria-label="Quick manual actions">
+      <h4 className="panel-title" id="quick-actions-heading">⚡ Quick Actions</h4>
+      <div className="actions-stack" role="group" aria-labelledby="quick-actions-heading">
         <ActionButton
           label="Ping All"
           icon="📡"
@@ -34,10 +34,11 @@ function QuickActions({ address, onClearLog, onPingAll }) {
         <ActionButton
           label="Support"
           icon="💬"
-          className="secondary btn-sm"
+          className="secondary-button btn-sm"
           onClick={() =>
             handleAction(() => window.open('https://stacks.org', '_blank', 'noopener,noreferrer'))
           }
+          aria-label="Open Stacks support in new tab"
         />
       </div>
     </div>
