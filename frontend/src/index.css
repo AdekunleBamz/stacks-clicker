@@ -54,7 +54,10 @@
   --color-text: var(--text-main);
   --color-text-dim: var(--text-muted);
 
-  /* Glassmorphism Tokens */
+  /* Glassmorphism System
+   * This design language uses background blurs and semi-transparent layers
+   * to create a sense of depth and hierarchy without opaque borders.
+   */
   --glass-bg: rgba(15, 15, 25, 0.6);
   --glass-border: rgba(255, 255, 255, 0.1);
   --glass-blur: blur(12px);
