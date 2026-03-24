@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useId } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 
@@ -17,23 +17,25 @@ const Card = ({
   headerAction,
   ...props 
 }) => {
+  const id = useId();
+  const titleId = `card-title-${id}`;
   const depthClass = `card-depth-${depth}`;
   const interactiveClass = interactive ? 'card-interactive' : '';
 
   return (
     <motion.div
-      className={`card-wrapper ${depthClass} ${interactiveClass} ${className}`}
-      role="article"
-      aria-label={title ? `${title} card` : undefined}
+      className={`card-wrapper glass-card ${depthClass} ${interactiveClass} ${className}`}
+      role="region"
+      aria-labelledby={title ? titleId : undefined}
       whileHover={interactive ? { y: -5, boxShadow: 'var(--shadow-lg)' } : {}}
       {...props}
     >
       {(title || icon || headerAction) && (
         <div className="card-header">
           <div className="card-title-group">
-            {icon && <span className="card-icon">{icon}</span>}
+            {icon && <span className="card-icon" aria-hidden="true">{icon}</span>}
             <div className="card-text">
-              {title && <h3 className="card-title" title={`Card Section: ${title}`}>{title}</h3>}
+              {title && <h3 id={titleId} className="card-title">{title}</h3>}
               {subtitle && <p className="card-subtitle">{subtitle}</p>}
             </div>
           </div>
