@@ -38,9 +38,9 @@ A premium, high-performance decentralized interaction hub on the Stacks blockcha
 2. Install dependencies:
    ```bash
    cd stacks-clicker/frontend
-   npm install
+   npm ci
    ```
-   For reproducible CI/local parity, you can use `npm ci` instead.
+   Note: `npm ci` is recommended for deterministic installs. Use `npm install` for manual package updates.
 3. Configure environment variables:
    Copy the example file in the `frontend` directory and update the required values:
    ```bash
