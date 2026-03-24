@@ -2,6 +2,7 @@
   "name": "stacks-clicker-frontend",
   "private": true,
   "version": "1.0.0",
+  "description": "Premium React frontend for the Stacks Clicker interaction hub",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -40,15 +41,5 @@
     "vite": "^6.0.5",
     "vitest": "^4.0.18"
   },
-  "description": "Premium decentralized interaction hub for the Stacks blockchain",
-  "main": "vite.config.js",
-  "keywords": [
-    "stacks",
-    "blockchain",
-    "clicker",
-    "web3",
-    "react"
-  ],
-  "author": "AdekunleBamz",
-  "license": "MIT"
+  "main": "vite.config.js"
 }
