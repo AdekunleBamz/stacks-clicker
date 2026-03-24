@@ -20,8 +20,10 @@ import UniversalProvider from '@walletconnect/universal-provider';
 const PROJECT_ID = import.meta.env.VITE_WALLETCONNECT_PROJECT_ID;
 const DEBUG = import.meta.env.VITE_DEBUG === 'true';
 
-// Stacks chain ID for mainnet (CAIP-2 format)
-const STACKS_MAINNET_CHAIN = (import.meta.env.VITE_STACKS_NETWORK === 'testnet') ? 'stacks:2147483648' : 'stacks:1';
+const STACKS_NETWORK = String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
+  ? 'testnet'
+  : 'mainnet';
+const STACKS_CHAIN = STACKS_NETWORK === 'testnet' ? 'stacks:2147483648' : 'stacks:1';
 
 // App metadata - MUST have valid icons array
 const metadata = {
@@ -130,7 +132,7 @@ export async function wcConnect(onDisplayUri) {
   const connectPromise = provider.connect({
     requiredNamespaces: {
       stacks: {
-        chains: [STACKS_MAINNET_CHAIN],
+        chains: [STACKS_CHAIN],
         methods: ['stx_getAddresses', 'stx_signTransaction', 'stx_callContract', 'stx_transferStx'],
         events: ['accountsChanged', 'chainChanged'],
       },
@@ -173,7 +175,7 @@ export async function getAddresses() {
           method: 'stx_getAddresses',
           params: {},
         },
-        STACKS_MAINNET_CHAIN
+        STACKS_CHAIN
       ),
       timeoutPromise,
     ]);
@@ -240,7 +242,7 @@ export async function signTransaction(txHex, broadcast = true) {
         broadcast,
       },
     },
-    STACKS_MAINNET_CHAIN
+    STACKS_CHAIN
   );
 
   log('Transaction result:', result);
@@ -277,10 +279,10 @@ export async function callContract({
         // they ensure that the smart contract doesn't transfer more assets
         // than authorized by the user.
         postConditions: postConditions || [],
-        network: (import.meta.env.VITE_STACKS_NETWORK || 'mainnet').toLowerCase(),
+        network: STACKS_NETWORK,
       },
     },
-    STACKS_MAINNET_CHAIN
+    STACKS_CHAIN
   );
 
   log('Contract call result:', result);
@@ -307,7 +309,7 @@ export async function transferStx(recipient, amount, memo) {
         memo: memo || '',
       },
     },
-    STACKS_MAINNET_CHAIN
+    STACKS_CHAIN
   );
 
   return result;
