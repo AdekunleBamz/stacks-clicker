@@ -6,6 +6,7 @@ import ActionButton from './common/ActionButton';
 import Tooltip from './common/Tooltip';
 import { useSound } from '../hooks/useSound';
 import { useCombo } from '../hooks/useCombo';
+import { useThrottle } from '../hooks/useThrottle';
 
 /**
  * Component for the Clicker game interaction card.
@@ -47,8 +48,10 @@ function ClickerCard({ address, clicker }) {
       playSound('click');
       actionFn(...args);
     },
-    [address, playSound]
+    [address, playSound, incrementCombo]
   );
+
+  const throttledClick = useThrottle(() => handleAction(click), 1000);
 
   return (
     <ActionCard
@@ -81,7 +84,7 @@ function ClickerCard({ address, clicker }) {
             label="Express Click"
             icon="⚡"
             cost="0.001 STX"
-            onClick={() => handleAction(click)}
+            onClick={throttledClick}
             isLoading={isLoading('click')}
             isError={errorField === 'click'}
             className="primary"
