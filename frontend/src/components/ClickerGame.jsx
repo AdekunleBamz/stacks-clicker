@@ -99,6 +99,7 @@ export default function ClickerGame({ onTxSubmit }) {
           disabled={!isConnected || loading}
           title="Click to generate a transaction manually"
           aria-label={loading ? "Processing click..." : "Click to earn streaks"}
+          aria-busy={loading}
         >
           <span aria-hidden="true">{loading ? '⏳' : '👆'}</span> Click!
         </button>
