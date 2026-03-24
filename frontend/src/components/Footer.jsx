@@ -1,11 +1,13 @@
+import React, { memo } from 'react';
 import packageJson from '../../package.json';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 
 /**
  * Standard application footer.
  */
-export default function Footer() {
+function Footer() {
   const version = packageJson.version;
+  const currentYear = new Date().getFullYear();
   const [ref, isVisible] = useIntersectionObserver({ threshold: 0.5 });
 
   return (
@@ -17,7 +19,7 @@ export default function Footer() {
     >
       <div className="footer-content">
         <div className="footer-left">
-          <p>Built with <span role="img" aria-label="love">❤️</span> on Stacks</p>
+          <p>© {currentYear} • Built with <span role="img" aria-label="love">❤️</span> on Stacks</p>
           <span className="app-version" title="Current Interface Version">v{version}</span>
         </div>
         <div className="footer-links">
@@ -56,3 +58,7 @@ export default function Footer() {
     </footer>
   );
 }
+
+Footer.displayName = 'Footer';
+
+export default memo(Footer);
