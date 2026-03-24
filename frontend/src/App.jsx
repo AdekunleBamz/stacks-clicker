@@ -17,6 +17,7 @@ import { useInteractions } from './hooks/useInteractions';
 import { useSound } from './hooks/useSound';
 import { useTheme } from './hooks/useTheme';
 import { useTransactionHistory } from './hooks/useTransactionHistory';
+import { useMilestones } from './hooks/useMilestones';
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 
 // Lazy load heavy components for optimized initial paint
@@ -40,13 +41,17 @@ export default function App() {
 
   // Application State
   const { txLog, addTxToLog, setTxLog } = useTransactionHistory({
-    playSound: (id) => playSound(id),
+    playSound,
     onTxAdded: () => setParticleTrigger((prev) => prev + 1),
   });
   const [stats, setStats] = useState({ clicks: 0, tips: 0, votes: 0 });
+  const { celebration } = useMilestones({
+    stats,
+    onMilestone: (total) => {
+      setParticleTrigger((prev) => prev + 5);
+    },
+  });
   const [particleTrigger, setParticleTrigger] = useState(0);
-  const [celebration, setCelebration] = useState(null);
-  const celebrationTimeoutRef = useRef(null);
 
   // Theme Management
   const { theme, toggleTheme } = useTheme();
@@ -84,22 +89,6 @@ export default function App() {
     playSound,
   });
 
-  /**
-   * Effect to monitor interaction milestones and trigger celebrations.
-   * Scales visual feedback (particles) during significant achievements.
-   */
-  useEffect(() => {
-    const milestones = [10, 50, 100, 500];
-    const total = stats.clicks + stats.tips + stats.votes;
-    if (milestones.includes(total) && total > 0) {
-      setCelebration(`Level Up: ${total} Interactions!`);
-      setParticleTrigger((prev) => prev + 5); // Execute a massive burst
-      window.clearTimeout(celebrationTimeoutRef.current);
-      celebrationTimeoutRef.current = window.setTimeout(() => setCelebration(null), 3000);
-    }
-
-    return () => window.clearTimeout(celebrationTimeoutRef.current);
-  }, [stats]);
 
   /**
    * Effect to dynamically update the document title based on interaction activity.
