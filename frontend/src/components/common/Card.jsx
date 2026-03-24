@@ -27,6 +27,7 @@ const Card = ({
       className={`card-wrapper glass-card ${depthClass} ${interactiveClass} ${className}`}
       role="region"
       aria-labelledby={title ? titleId : undefined}
+      aria-describedby={subtitle ? `card-desc-${id}` : undefined}
       whileHover={interactive ? { y: -5, boxShadow: 'var(--shadow-lg)' } : {}}
       {...props}
     >
@@ -36,7 +37,7 @@ const Card = ({
             {icon && <span className="card-icon" aria-hidden="true">{icon}</span>}
             <div className="card-text">
               {title && <h3 id={titleId} className="card-title">{title}</h3>}
-              {subtitle && <p className="card-subtitle">{subtitle}</p>}
+              {subtitle && <p className="card-subtitle" id={`card-desc-${id}`}>{subtitle}</p>}
             </div>
           </div>
           {headerAction && <div className="card-header-action">{headerAction}</div>}
