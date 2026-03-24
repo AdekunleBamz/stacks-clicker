@@ -59,13 +59,24 @@ function TipJarCard({ address, tipjar }) {
     notify.success(`Tipping ${amount} STX...`);
   }, [tip]);
 
-  /**
-   * Internal wrapper to check connection and play sound before executing an action.
-   * If not connected, triggers an error sound and visual feedback.
-   *
-   * @param {Function} actionFn - The interaction function to execute
-   * @param {string} fieldId - ID of the button for error highlighting
-   */
+  const handleAction = useCallback(
+    (actionFn, fieldId, validationFn = () => true) => {
+      if (!address) {
+        playSound('error');
+        setErrorField(fieldId);
+        setTimeout(() => setErrorField(null), 500);
+        return;
+      }
+
+      if (!validationFn()) {
+        playSound('error');
+        setErrorField(fieldId);
+        setTimeout(() => setErrorField(null), 500);
+        return;
+      }
+
+      playSound('click');
+      actionFn();
     },
     [address, playSound]
   );
@@ -134,23 +145,27 @@ function TipJarCard({ address, tipjar }) {
           <input
             id="tip-amount-input"
             type="number"
-            step="1"
+            step="0.001"
             min="0.001"
-            className="amount-input"
+            className="amount-input input-field"
             value={tipAmount}
             onChange={(e) => setTipAmount(e.target.value)}
             placeholder="Min 0.001"
             aria-invalid={!isTipAmountValid}
+            aria-describedby="tip-amount-label"
           />
         </div>
 
         <AnimatePresence>
           {showSuccess && (
             <motion.div 
+              id="tip-success-notification"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
               className="tip-success-msg"
+              role="status"
+              aria-live="polite"
             >
               🎉 Thank you for your generous tip!
             </motion.div>
