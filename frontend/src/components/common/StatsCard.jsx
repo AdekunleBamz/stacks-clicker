@@ -40,14 +40,15 @@ AnimatedNumber.propTypes = {
  * @param {React.ReactNode} props.icon - Icon element or emoji representing the stat
  * @param {string} props.color - Theme color used for accents and glows
  * @param {boolean} [props.isPrice=false] - If true, treats the value as a price (no counting animation)
+ * @param {boolean} [props.isGrowing=false] - If true, applies a pulse animation to the card
  * @param {number} [props.index=0] - Index in the grid for staggered entrance animation
  * @param {string} [props.tooltip] - Optional description for the tooltip
  * @returns {JSX.Element} The rendered stats card
  */
-function StatsCard({ label, value, icon, color, isPrice = false, index = 0, tooltip }) {
+function StatsCard({ label, value, icon, color, isPrice = false, isGrowing = false, index = 0, tooltip }) {
   const cardContent = (
     <motion.div
-      className="stat-card"
+      className={`stat-card ${isGrowing ? 'stat-growing' : ''}`}
       tabIndex={0}
       role="group"
       aria-label={`${label} statistic: ${value}`}
@@ -102,6 +103,7 @@ StatsCard.propTypes = {
   icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
   color: PropTypes.string.isRequired,
   isPrice: PropTypes.bool,
+  isGrowing: PropTypes.bool,
   index: PropTypes.number,
   tooltip: PropTypes.string
 };
