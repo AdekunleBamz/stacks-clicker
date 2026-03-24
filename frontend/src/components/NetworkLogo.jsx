@@ -18,8 +18,8 @@ export default function NetworkLogo() {
         <path d="M16 6L8 16L16 26L24 16L16 6Z" fill="white" fillOpacity="0.2" />
         <defs>
           <linearGradient id="logo-grad" x1="4" y1="2" x2="28" y2="30" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#6366f1" />
-            <stop offset="1" stopColor="#a855f7" />
+            <stop stopColor="var(--primary-color, #6366f1)" />
+            <stop offset="1" stopColor="var(--accent-color, #a855f7)" />
           </linearGradient>
         </defs>
       </svg>
