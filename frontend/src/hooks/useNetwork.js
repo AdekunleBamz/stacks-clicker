@@ -7,6 +7,15 @@ import { STACKS_NETWORK, CONFIG } from '../utils/constants';
 const CONFIGURED_NETWORK = STACKS_NETWORK;
 const HIRO_INFO_ENDPOINT = `${CONFIG.API_URL}/v2/info`;
 
+const CONFIGURED_NETWORK =
+  String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
+    ? 'testnet'
+    : 'mainnet';
+const HIRO_INFO_ENDPOINT =
+  CONFIGURED_NETWORK === 'testnet'
+    ? 'https://api.testnet.hiro.so/v2/info'
+    : 'https://api.mainnet.hiro.so/v2/info';
+
 /**
  * Custom hook to monitor the Stacks network status and current block height.
  * Periodically polls the Hiro API to provide real-time blockchain telemetry.
@@ -19,7 +28,7 @@ const HIRO_INFO_ENDPOINT = `${CONFIG.API_URL}/v2/info`;
 export function useNetwork() {
   const [blockHeight, setBlockHeight] = useState(null);
   const [isConnected, setIsConnected] = useState(true);
-  const [network, setNetwork] = useState((import.meta.env.VITE_STACKS_NETWORK || 'mainnet').toLowerCase());
+  const [network, setNetwork] = useState(CONFIGURED_NETWORK);
 
   const fetchStatus = useCallback(async () => {
     setIsUpdating(true);
@@ -35,7 +44,7 @@ export function useNetwork() {
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), 10000);
       try {
-        const response = await fetch(`${networkApiBase}/v2/info`, {
+        const response = await fetch(HIRO_INFO_ENDPOINT, {
           signal: controller.signal,
         });
         if (!response.ok) throw new Error('Network offline');
