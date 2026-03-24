@@ -21,6 +21,7 @@ import { useMilestones } from './hooks/useMilestones';
 import { useDocumentTitle } from './hooks/useDocumentTitle';
 import { useKeydown } from './hooks/useKeydown';
 import { useBattery } from './hooks/useBattery';
+import { useNetworkStatus } from './hooks/useNetworkStatus';
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 
 // Lazy load heavy components for optimized initial paint
@@ -112,6 +113,8 @@ export default function App() {
   if (isLowBattery) {
     console.debug('[App] Low battery detected: Enabling power-saving mode');
   }
+
+  const isOnline = useNetworkStatus();
 
   const MilestoneCelebration = React.lazy(() => import('./components/MilestoneCelebration'));
 
