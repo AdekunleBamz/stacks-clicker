@@ -22,6 +22,7 @@ import { useDocumentTitle } from './hooks/useDocumentTitle';
 import { useKeydown } from './hooks/useKeydown';
 import { useBattery } from './hooks/useBattery';
 import { useNetworkStatus } from './hooks/useNetworkStatus';
+import { usePrefersReducedMotion } from './hooks/usePrefersReducedMotion';
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 
 // Lazy load heavy components for optimized initial paint
@@ -115,6 +116,7 @@ export default function App() {
   }
 
   const isOnline = useNetworkStatus();
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   const MilestoneCelebration = React.lazy(() => import('./components/MilestoneCelebration'));
 
@@ -172,7 +174,7 @@ export default function App() {
       <QuickActions address={address} onClearLog={() => setTxLog([])} onPingAll={pingAll} />
 
       <Toaster position="top-right" />
-      <ParticleOverlay trigger={particleTrigger} />
+      {!prefersReducedMotion && <ParticleOverlay trigger={particleTrigger} />}
       <React.Suspense fallback={null}>
         <MilestoneCelebration celebration={celebration} />
       </React.Suspense>
