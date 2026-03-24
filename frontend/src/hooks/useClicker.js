@@ -1,10 +1,6 @@
 import { useState, useCallback } from 'react';
 import { callContract } from '../utils/walletconnect';
-
-/** @constant {string} Smart contract deployer address */
-const DEPLOYER = 'SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT';
-/** @constant {string} Clicker contract name */
-const CONTRACT_NAME = 'clicker-v2p';
+import { DEPLOYER, CLICKER_CONTRACT as CONTRACT_NAME } from '../utils/constants';
 
 /**
  * Custom hook for interacting with the Clicker smart contract.
