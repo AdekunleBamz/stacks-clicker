@@ -1,5 +1,6 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { notify } from '../utils/toast';
+import { useDocumentVisibility } from './useDocumentVisibility';
 
 /**
  * Custom hook for managing the transaction history log.
@@ -12,6 +13,15 @@ import { notify } from '../utils/toast';
  */
 export function useTransactionHistory({ playSound, onTxAdded }) {
   const [txLog, setTxLog] = useState([]);
+  const isVisible = useDocumentVisibility();
+
+  useEffect(() => {
+    if (!isVisible) {
+      console.debug('[useTransactionHistory] Tab hidden: Pausing background log updates');
+    } else {
+      console.debug('[useTransactionHistory] Tab visible: Resuming background log updates');
+    }
+  }, [isVisible]);
 
   /**
    * Adds a transaction record to the local session log.
