@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 /**
  * Modern pull-to-refresh component for mobile.
  */
-export default function PullToRefresh({ onRefresh }) {
+export default function PullToRefresh({ onRefresh, children }) {
   const [startY, setStartY] = useState(0);
   const [pullDistance, setPullDistance] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
@@ -65,12 +65,15 @@ export default function PullToRefresh({ onRefresh }) {
           className={`ptr-spinner ${refreshing ? 'spinning' : ''}`}
           role={refreshing ? "progressbar" : "img"}
           aria-label={refreshing ? "Refreshing content" : "Pull to refresh"}
+          aria-valuenow={refreshing ? undefined : Math.min((pullDistance / PULL_THRESHOLD) * 100, 100)}
+          aria-valuemin="0"
+          aria-valuemax="100"
         >
           {refreshing ? '⏳' : '↓'}
         </div>
       </div>
       <div style={{ transform: `translateY(${pullDistance > 0 ? pullDistance : 0}px)` }}>
-        {/* Children content or overlay logic */}
+        {children}
       </div>
     </div>
   );
