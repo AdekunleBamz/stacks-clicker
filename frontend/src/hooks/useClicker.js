@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import { callContract } from '../utils/walletconnect';
+import { useNotifications } from './useNotifications';
 import { DEPLOYER, CLICKER_CONTRACT as CONTRACT_NAME } from '../utils/constants';
 
 /**
@@ -16,6 +17,7 @@ import { DEPLOYER, CLICKER_CONTRACT as CONTRACT_NAME } from '../utils/constants'
  */
 export function useClicker({ onTxSubmit }) {
   const [loadingStates, setLoadingStates] = useState({});
+  const { showError, showLoading } = useNotifications();
 
   /**
    * Internal helper to update loading state for a specific action key.
@@ -47,6 +49,7 @@ export function useClicker({ onTxSubmit }) {
       const key = `clicker-${functionName}`;
       setLoading(key, true);
       try {
+        showLoading(`Broadcasting ${displayName}...`);
         const result = await callContract({
           contractAddress: DEPLOYER,
           contractName: CONTRACT_NAME,
@@ -56,6 +59,7 @@ export function useClicker({ onTxSubmit }) {
         onTxSubmit?.(displayName, result.txId);
         return result;
       } catch (err) {
+        showError(`${displayName} failed.`);
         console.error(`${displayName} failed:`, err);
         throw err;
       } finally {
