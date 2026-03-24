@@ -72,10 +72,12 @@ export function useClicker({ onTxSubmit }) {
 
   const click = useCallback(() => executeAction('🎯 Click', 'click'), [executeAction]);
   const multiClick = useCallback(
-    (amount = 1) =>
-      executeAction('🔥 Multi-Click', 'multi-click', [
-        { type: 'uint128', value: amount.toString() },
-      ]),
+    (amount = 1) => {
+      const normalizedAmount = Number.isFinite(amount) && amount > 0 ? Math.floor(amount) : 1;
+      return executeAction('🔥 Multi-Click', 'multi-click', [
+        { type: 'uint128', value: normalizedAmount.toString() },
+      ]);
+    },
     [executeAction]
   );
   const ping = useCallback(() => executeAction('📡 Ping', 'ping'), [executeAction]);
