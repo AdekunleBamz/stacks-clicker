@@ -2089,6 +2089,16 @@ textarea:focus-visible {
   transform: translateY(0);
 }
 
+@keyframes stat-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); filter: brightness(1.2); }
+  100% { transform: scale(1); }
+}
+
+.stat-growing {
+  animation: stat-pulse 0.4s ease-out;
+}
+
 .error-icon {
   font-size: 3rem;
   margin-bottom: 1.5rem;
