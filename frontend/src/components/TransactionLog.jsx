@@ -34,12 +34,12 @@ export default function TransactionLog({ transactions = [] }) {
   }
 
   return (
-    <div className="tx-log">
-      <h3>📋 Transaction Log</h3>
+    <div className="tx-log glass-card" role="region" aria-labelledby="tx-log-title">
+      <h3 id="tx-log-title">📋 Transaction Log</h3>
       <div className="tx-list" role="log" aria-live="polite" aria-atomic="false">
         {transactions.map((tx, index) => (
           <div key={tx.id || index} className={`tx-item ${tx.status}`}>
-            <span className="tx-status">{getStatusIcon(tx.status)}</span>
+            <span className="tx-status" aria-hidden="true">{getStatusIcon(tx.status)}</span>
             <span className="tx-action">{tx.action}</span>
             <span className="tx-time">{tx.time}</span>
             {getExplorerLink(tx.id) && (
@@ -49,6 +49,7 @@ export default function TransactionLog({ transactions = [] }) {
                 rel="noopener noreferrer"
                 className="tx-link"
                 title="View on Explorer"
+                aria-label={`View transaction ${tx.id} on Stacks Explorer`}
               >
                 🔗
               </a>
