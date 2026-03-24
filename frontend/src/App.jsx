@@ -16,6 +16,7 @@ import { useI18n } from './context/I18nContext';
 import { useInteractions } from './hooks/useInteractions';
 import { useSound } from './hooks/useSound';
 import { useTheme } from './hooks/useTheme';
+import { useTransactionHistory } from './hooks/useTransactionHistory';
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 
 // Lazy load heavy components for optimized initial paint
@@ -38,7 +39,10 @@ export default function App() {
   const { playSound } = useSound();
 
   // Application State
-  const [txLog, setTxLog] = useState([]);
+  const { txLog, addTxToLog, setTxLog } = useTransactionHistory({
+    playSound: (id) => playSound(id),
+    onTxAdded: () => setParticleTrigger((prev) => prev + 1),
+  });
   const [stats, setStats] = useState({ clicks: 0, tips: 0, votes: 0 });
   const [particleTrigger, setParticleTrigger] = useState(0);
   const [celebration, setCelebration] = useState(null);
@@ -47,37 +51,6 @@ export default function App() {
   // Theme Management
   const { theme, toggleTheme } = useTheme();
 
-  /**
-   * Adds a transaction record to the local session log and triggers UI notifications.
-   *
-   * @param {string} action - Human-readable label for the interaction (e.g., '🎯 Click')
-   * @param {string} txId - The unique transaction hash returned from the Stacks network
-   * @param {string} [status='success'] - Current lifecycle state of the transaction
-   * @returns {Object} The formatted transaction object
-   */
-  const addTxToLog = useCallback(
-    (action, txId, status = 'success') => {
-      const submittedAt = new Date();
-      const isPending = !txId || status === 'pending';
-      const tx = {
-        id: txId || `pending-${Date.now()}`,
-        action,
-        status,
-        time: submittedAt.toLocaleTimeString(),
-        submittedAt: submittedAt.toISOString(),
-        network: 'mainnet',
-        explorerUrl: isPending ? null : `https://explorer.hiro.so/txid/${txId}?chain=mainnet`,
-        isPending,
-      };
-      setTxLog((prev) => [tx, ...prev.slice(0, 49)]); // Maintain last 50 TXs
-      setParticleTrigger((prev) => prev + 1);
-      playSound('success');
-
-      notify.custom(`${action} submitted!`, action.split(' ')[0]);
-      return tx;
-    },
-    [playSound]
-  );
 
   /**
    * Unified interaction interface provided by the useInteractions collector.
