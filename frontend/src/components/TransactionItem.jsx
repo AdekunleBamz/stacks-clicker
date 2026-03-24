@@ -22,8 +22,8 @@ function TransactionItem({
   const longPressHandlers = useLongPress(() => onDetails(tx), { delay: 600 });
 
   return (
-    <div className="tx-item-wrapper">
-      <div className="tx-swipe-actions">
+    <div className="tx-item-wrapper" role="listitem">
+      <div className="tx-swipe-actions" aria-label="Quick transaction actions">
         <button type="button" className="swipe-btn copy" onClick={() => onCopy(tx.id)} aria-label="Copy transaction ID" title="Copy transaction ID">
           📋
         </button>
@@ -58,7 +58,7 @@ function TransactionItem({
               View Details <span>→</span>
             </button>
             <span className="tx-action-separator">•</span>
-            <button type="button" className="text-btn" onClick={() => onCopy(tx.id)}>
+            <button type="button" className="text-btn" onClick={() => onCopy(tx.id)} aria-label={`Copy transaction ID ${tx.id}`}>
               Copy ID
             </button>
           </div>
