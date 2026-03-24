@@ -18,6 +18,11 @@ import { useSound } from './hooks/useSound';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 
+const STACKS_NETWORK =
+  String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
+    ? 'testnet'
+    : 'mainnet';
+
 // Lazy load heavy components for optimized initial paint
 const MainGrid = React.lazy(() => import('./components/MainGrid'));
 const PlayerStats = React.lazy(() => import('./components/PlayerStats'));
@@ -79,8 +84,8 @@ export default function App() {
         status,
         time: submittedAt.toLocaleTimeString(),
         submittedAt: submittedAt.toISOString(),
-        network: 'mainnet',
-        explorerUrl: isPending ? null : `https://explorer.hiro.so/txid/${txId}?chain=mainnet`,
+        network: STACKS_NETWORK,
+        explorerUrl: isPending ? null : `https://explorer.hiro.so/txid/${txId}?chain=${STACKS_NETWORK}`,
         isPending,
       };
       setTxLog((prev) => [tx, ...prev.slice(0, 49)]); // Maintain last 50 TXs
