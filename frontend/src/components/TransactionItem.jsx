@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import { useLongPress } from '../hooks/useLongPress';
+import { truncateAddress } from '../utils/format';
 
 /**
  * Individual transaction item with swipe actions and status visualization.
@@ -78,8 +79,7 @@ function TransactionItem({
             </div>
             {tx.explorerUrl && (
               <button type="button" onClick={() => onOpenExplorer(tx)} className="tx-explorer-link">
-                {highlightText(txId.slice(0, 8), searchTerm)}...
-                {highlightText(txId.slice(-6), searchTerm)} ↗
+                {highlightText(truncateAddress(txId, 8), searchTerm)} ↗
               </button>
             )}
           </div>
