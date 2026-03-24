@@ -21,14 +21,14 @@ function QuickActions({ address, onClearLog, onPingAll }) {
         <ActionButton
           label="Ping All"
           icon="📡"
-          className="secondary btn-sm"
+          className="secondary-button btn-sm"
           onClick={() => handleAction(onPingAll)}
           disabled={!address}
         />
         <ActionButton
           label="Clear Log"
           icon="🗑️"
-          className="secondary btn-sm"
+          className="secondary-button btn-sm"
           onClick={() => handleAction(onClearLog)}
         />
         <ActionButton
