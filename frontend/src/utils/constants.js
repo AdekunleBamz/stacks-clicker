@@ -16,3 +16,11 @@ export const QUICKPOLL_CONTRACT = 'quickpoll-v2p';
 
 /** @type {string} Network environment */
 export const STACKS_NETWORK = import.meta.env.VITE_STACKS_NETWORK || 'mainnet';
+
+export default {
+  DEPLOYER,
+  CLICKER_CONTRACT,
+  TIPJAR_CONTRACT,
+  QUICKPOLL_CONTRACT,
+  STACKS_NETWORK,
+};
