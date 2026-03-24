@@ -4,8 +4,8 @@ Our vision is to build the premier GameFi intersection for the Stacks ecosystem.
 Completed roadmap items should be recorded in [CHANGELOG.md](CHANGELOG.md) when shipped.
 
 ## 🟢 Q2 2026: Community & Social
-- [ ] **Leaderboards**: Real-time ranking of top players and tippers.
-- [ ] **Social Profiles**: Connect BNS (Bitcoin Name System) names to accounts.
+- [ ] **Leaderboards**: Real-time ranking of top players and tippers by activity volume.
+- [ ] **Social Profiles**: Connect BNS (Bitcoin Name System) names to accounts for on-chain identity resolution.
 - [ ] **Custom Notification Tones**: Unlockable sounds for high-streak players.
 
 ## 🟡 Q3 2026: Advanced Gameplay
