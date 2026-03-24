@@ -78,6 +78,9 @@ export function useQuickPoll({ onTxSubmit }) {
 
   const createPoll = useCallback((question) => {
     const normalizedQuestion = String(question).trim();
+    if (!normalizedQuestion) {
+      throw new Error('Poll question is required');
+    }
     return executeAction('📝 Create Poll', 'create-poll', [{ type: 'string-ascii', value: normalizedQuestion }]);
   }, [executeAction]);
   const handlePollPing = useCallback(() => executeAction('📡 Poll-Ping', 'poll-ping'), [executeAction]);
