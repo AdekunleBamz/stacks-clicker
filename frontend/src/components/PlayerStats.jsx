@@ -1,6 +1,6 @@
-import React, { memo, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import StatsCard from './common/StatsCard';
+import { usePrevious } from '../hooks/usePrevious';
 
 /**
  * Component to display player statistics and achievement progress.
@@ -13,12 +13,15 @@ import StatsCard from './common/StatsCard';
  * @returns {JSX.Element} The rendered statistics bar
  */
 function PlayerStats({ stats, txCount }) {
+  const prevStats = usePrevious(stats) || { clicks: 0, tips: 0, votes: 0 };
+  const prevTxCount = usePrevious(txCount) || 0;
+
   const statItems = useMemo(() => [
-    { label: 'Total Clicks', value: stats.clicks, icon: '🎯', color: 'indigo', tooltip: 'Total number of on-chain click operations performed by your address.' },
-    { label: 'Total Tips', value: stats.tips, icon: '💰', color: 'amber', tooltip: 'Total amount of STX tokens you have tipped to the community.' },
-    { label: 'Total Votes', value: stats.votes, icon: '🗳️', color: 'emerald', tooltip: 'Number of unique votes you have cast in community polls.' },
-    { label: 'Session TXs', value: txCount, icon: '📦', color: 'pink', tooltip: 'Total number of transactions initiated in this browsing session.' }
-  ], [stats, txCount]);
+    { label: 'Total Clicks', value: stats.clicks, isGrowing: stats.clicks > prevStats.clicks, icon: '🎯', color: 'indigo', tooltip: 'Total number of on-chain click operations.' },
+    { label: 'Total Tips', value: stats.tips, isGrowing: stats.tips > prevStats.tips, icon: '💰', color: 'amber', tooltip: 'Total STX tokens tipped.' },
+    { label: 'Total Votes', value: stats.votes, isGrowing: stats.votes > prevStats.votes, icon: '🗳️', color: 'emerald', tooltip: 'Unique poll votes.' },
+    { label: 'Session TXs', value: txCount, isGrowing: txCount > prevTxCount, icon: '📦', color: 'pink', tooltip: 'Transactions in this session.' }
+  ], [stats, txCount, prevStats, prevTxCount]);
 
   return (
     <section
