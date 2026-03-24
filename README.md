@@ -26,8 +26,9 @@ A premium, high-performance decentralized interaction hub on the Stacks blockcha
 ## Getting Started 🛠️
 
 ### Prerequisites
-- Node.js (v18+)
-- Stacks Wallet (Hiro/Leather)
+- **Node.js**: v18.0.0 or higher (LTS recommended)
+- **Stacks Wallet**: Hiro Wallet or Leather extension
+- **Clarinet**: Required for smart contract development and testing
 
 ### Installation
 1. Clone the repository:
