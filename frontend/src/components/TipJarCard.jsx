@@ -96,7 +96,7 @@ function TipJarCard({ address, tipjar }) {
       title="💰 TipJar"
       subtitle="Send tips to generate transactions."
       icon="💎"
-      iconClass="bg-amber-500/20 text-amber-500"
+      iconClass="bg-amber-500/20 text-amber-500 glass-card"
     >
       <div className="actions" role="group" aria-label="Tipping Controls">
         <Tooltip content="Ping the TipJar contract to verify active connectivity.">
