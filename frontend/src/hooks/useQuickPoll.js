@@ -52,7 +52,7 @@ export function useQuickPoll({ onTxSubmit } = {}) {
     const normalizedQuestion = String(question ?? '').trim();
     return executeAction('📝 Create Poll', 'create-poll', [{ type: 'string-ascii', value: normalizedQuestion }]);
   }, [executeAction]);
-  const handlePollPing = useCallback(() => executeAction('📡 Poll-Ping', 'poll-ping'), [executeAction]);
+  const handlePollPing = useCallback(() => executeAction('📡 Poll-Ping', 'ping'), [executeAction]);
 
   return {
     isLoading: (key) => !!loadingStates[key],
