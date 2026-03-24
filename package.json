@@ -1,4 +1,13 @@
 {
+  "description": "A high-performance decentralized interaction hub on Stacks",
+  "keywords": [
+    "stacks",
+    "blockchain",
+    "clarity",
+    "gamefi",
+    "clicker",
+    "bitcoin-l2"
+  ],
   "dependencies": {
     "@stacks/network": "^7.3.1",
     "@stacks/transactions": "^7.3.1",
