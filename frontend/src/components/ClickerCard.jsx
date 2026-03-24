@@ -7,6 +7,7 @@ import Tooltip from './common/Tooltip';
 import { useSound } from '../hooks/useSound';
 import { useCombo } from '../hooks/useCombo';
 import { useThrottle } from '../hooks/useThrottle';
+import { useKeydown } from '../hooks/useKeydown';
 
 /**
  * Component for the Clicker game interaction card.
@@ -52,6 +53,10 @@ function ClickerCard({ address, clicker }) {
   );
 
   const throttledClick = useThrottle(() => handleAction(click), 1000);
+
+  // Keyboard shortcut for clicking
+  useKeydown('c', throttledClick);
+  useKeydown('C', throttledClick);
 
   return (
     <ActionCard
