@@ -37,7 +37,7 @@ function ActionButton({
   return (
     <motion.button
       type="button"
-      className={`action-btn ${className}`}
+      className={`action-btn primary-button ${className}`}
       onClick={onClick}
       disabled={disabled || isLoading}
       aria-busy={isLoading}
