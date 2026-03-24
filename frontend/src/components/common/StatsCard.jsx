@@ -103,6 +103,7 @@ function StatsCard({ label, value, icon, color, isPrice = false, isGrowing = fal
             aria-valuenow={Math.min(value % 100, 100)} 
             aria-valuemin="0" 
             aria-valuemax="100"
+            aria-valuetext={`${Math.floor(Math.min(value % 100, 100))}% towards next milestone`}
             aria-label={`${label} progress`}
           >
             <motion.div 
