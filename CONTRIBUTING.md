@@ -23,6 +23,8 @@ Enhancement suggestions are tracked as GitHub issues. When creating an enhanceme
 4. Ensure the test suite passes (`npm run test` in frontend).
 5. Make sure your code lints (`npm run lint` in frontend).
 6. Sign commits that will be pushed to shared branches (`git commit -S`).
+   - If using SSH signing: `git config user.signingkey /path/to/key.pub` and `git config gpg.format ssh`.
+   - If using GPG signing: Ensure your GPG key ID is set in `git config user.signingkey`.
 
 ## Development Setup
 
