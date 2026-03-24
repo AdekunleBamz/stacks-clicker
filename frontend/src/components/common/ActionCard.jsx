@@ -23,6 +23,7 @@ function ActionCard({ title, subtitle, icon, iconClass = '', children }) {
       className="action-card glass-card"
       role="region"
       aria-labelledby={titleId}
+      aria-describedby={subtitle ? `action-desc-${id}` : undefined}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
@@ -33,7 +34,7 @@ function ActionCard({ title, subtitle, icon, iconClass = '', children }) {
         <div className={`contract-icon ${iconClass}`} aria-hidden="true">{icon}</div>
         <div>
           <h3 id={titleId} className="contract-title">{title}</h3>
-          <p className="contract-subtitle">{subtitle}</p>
+          {subtitle && <p className="contract-subtitle" id={`action-desc-${id}`}>{subtitle}</p>}
         </div>
       </div>
       <div className="actions">
