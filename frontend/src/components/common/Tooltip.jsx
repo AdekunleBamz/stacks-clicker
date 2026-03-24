@@ -1,4 +1,6 @@
 import React, { useState, useEffect, memo } from 'react';
+import { useHover } from '../../hooks/useHover';
+import { useFocus } from '../../hooks/useFocus';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -13,7 +15,10 @@ import { motion, AnimatePresence } from 'framer-motion';
  */
 function Tooltip({ content, children }) {
   const [isVisible, setIsVisible] = useState(false);
-  const [shouldShow, setShouldShow] = useState(false);
+  const [hoverRef, isHovered] = useHover();
+  const [focusRef, isFocused] = useFocus();
+
+  const shouldShow = isHovered || isFocused;
 
   useEffect(() => {
     let timer;
@@ -27,11 +32,11 @@ function Tooltip({ content, children }) {
 
   return (
     <div
+      ref={(node) => {
+        hoverRef.current = node;
+        focusRef.current = node;
+      }}
       className="tooltip-wrapper"
-      onMouseEnter={() => setShouldShow(true)}
-      onMouseLeave={() => setShouldShow(false)}
-      onFocus={() => setShouldShow(true)}
-      onBlur={() => setShouldShow(false)}
       style={{ position: 'relative', display: 'inline-block', width: '100%' }}
     >
       {children}
