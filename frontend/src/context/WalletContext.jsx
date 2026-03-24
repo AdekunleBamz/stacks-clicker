@@ -14,7 +14,11 @@ import { STACKS_NETWORK } from '../utils/constants';
  */
 
 /** @type {React.Context<WalletContextValue|null>} */
-export const WalletContext = createContext(null);
+const WalletContext = createContext(null);
+const STACKS_NETWORK =
+  String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
+    ? 'testnet'
+    : 'mainnet';
 
 function getAppDetails() {
   const origin = typeof window !== 'undefined' ? window.location.origin : '';
@@ -47,10 +51,6 @@ export function WalletProvider({ children }) {
       const stored = window.localStorage.getItem('stacks-session');
       if (stored) {
         const userData = JSON.parse(stored);
-        if (!userData || typeof userData !== 'object') {
-          setAddress(null);
-          return;
-        }
         const nextAddress =
           STACKS_NETWORK === 'testnet'
             ? userData?.addresses?.testnet || userData?.addresses?.mainnet
