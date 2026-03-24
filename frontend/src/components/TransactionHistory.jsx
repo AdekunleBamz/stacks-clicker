@@ -14,6 +14,11 @@ function escapeCsvValue(value) {
   return `"${normalized}"`;
 }
 
+const DEFAULT_NETWORK =
+  String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
+    ? 'testnet'
+    : 'mainnet';
+
 /**
  * Component to display a list of recent transactions with status indicators.
  * @param {Object} props - Component props.
@@ -302,7 +307,7 @@ function TransactionHistory({ txLog }) {
                   </div>
                   <div className="detail-row">
                     <label>Network</label>
-                    <span>{selectedTx.network || 'mainnet'}</span>
+                    <span>{selectedTx.network || DEFAULT_NETWORK}</span>
                   </div>
                   <button type="button" className="text-btn mt-2 ghost-button btn-sm" onClick={() => setModalView('raw')}>
                     View Technical Raw Data ↗
@@ -317,7 +322,7 @@ function TransactionHistory({ txLog }) {
                         id: selectedTx.id,
                         action: selectedTx.action,
                         status: selectedTx.status,
-                        network: selectedTx.network || 'mainnet',
+                        network: selectedTx.network || DEFAULT_NETWORK,
                         submittedAt: selectedTx.submittedAt || null,
                         explorerUrl: selectedTx.explorerUrl || null,
                         tx_id: selectedTx.id,
