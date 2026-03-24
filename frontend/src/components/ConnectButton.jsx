@@ -1,5 +1,7 @@
 import React from 'react';
 import { useWallet } from '../context/WalletContext';
+import { truncateAddress } from '../utils/format';
+import { useMedia } from '../hooks/useMedia';
 
 /**
  * Wallet connection button component
@@ -8,23 +10,19 @@ import { useWallet } from '../context/WalletContext';
 export default function ConnectButton() {
   const { address, connectWallet, disconnectWallet } = useWallet();
 
-  // Format address for display
-  const formatAddress = (addr) => {
-    if (!addr) return '';
-    return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
-  };
+  const isMobile = useMedia('(max-width: 480px)');
 
   if (address) {
     return (
-      <div className="wallet-connected">
-        <span className="wallet-address" title={address} aria-label={`Connected address ${address}`}>
-          {formatAddress(address)}
+      <div className="wallet-connected" role="region" aria-label="Wallet connection info">
+        <span className="wallet-address glass-card" title={`Full Stacks address: ${address}`} aria-label={`Connected address ${truncateAddress(address, 4)}`}>
+          {truncateAddress(address, isMobile ? 4 : 6)}
         </span>
         <button
           type="button"
-          className="disconnect-btn"
+          className="disconnect-btn secondary-button btn-sm"
           onClick={disconnectWallet}
-          title="Disconnect wallet"
+          aria-label="Disconnect Stacks Wallet"
         >
           Disconnect
         </button>
@@ -35,10 +33,9 @@ export default function ConnectButton() {
   return (
     <button
       type="button"
-      className="connect-btn"
+      className="connect-btn primary-button"
       onClick={connectWallet}
       aria-label="Connect Stacks Wallet"
-      title="Connect Stacks Wallet"
     >
       Connect Wallet
     </button>
