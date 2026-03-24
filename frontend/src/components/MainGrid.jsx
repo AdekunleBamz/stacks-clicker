@@ -5,7 +5,7 @@ import ClickerCard from './ClickerCard';
 import TipJarCard from './TipJarCard';
 import QuickPollCard from './QuickPollCard';
 import { useTrace } from '../hooks/useTrace';
-import { useWindowSize } from '../hooks/useWindowSize';
+import { useMedia } from '../hooks/useMedia';
 
 /**
  * Main layout grid for the application.
@@ -18,12 +18,11 @@ function MainGrid({
   tipjar,
   quickpoll
 }) {
-  const { width } = useWindowSize();
-  const isCompact = width < 768;
+  const isCompact = useMedia('(max-width: 768px)');
 
   if (process.env.NODE_ENV === 'development') {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    useTrace('MainGrid', { address, stats, clicker, tipjar, quickpoll, width });
+    useTrace('MainGrid', { address, stats, clicker, tipjar, quickpoll, isCompact });
   }
   return (
     <section 
