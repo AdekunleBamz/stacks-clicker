@@ -52,7 +52,7 @@ function StatsCard({ label, value, icon, color, isPrice = false, isGrowing = fal
   const cardContent = (
     <motion.div
       ref={measureRef}
-      className={`stat-card ${isGrowing ? 'stat-growing' : ''}`}
+      className={`stat-card glass-card ${isGrowing ? 'stat-growing' : ''}`}
       tabIndex={0}
       role="group"
       aria-label={`${label} statistic: ${value}`}
