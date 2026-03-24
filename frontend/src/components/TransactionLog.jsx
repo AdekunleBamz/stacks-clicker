@@ -3,6 +3,11 @@ import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CONFIG, STACKS_NETWORK } from '../utils/constants';
 
+const STACKS_NETWORK =
+  String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
+    ? 'testnet'
+    : 'mainnet';
+
 /**
  * Transaction Log Component
  * Displays recent transactions with status
@@ -26,7 +31,7 @@ export default function TransactionLog({ transactions = [] }) {
 
   const getExplorerLink = (txId) => {
     if (!txId || txId.startsWith('pending-')) return null;
-    return `https://explorer.hiro.so/txid/${txId}?chain=${explorerChain}`;
+    return `https://explorer.hiro.so/txid/${txId}?chain=${STACKS_NETWORK}`;
   };
 
   if (transactions.length === 0) {
