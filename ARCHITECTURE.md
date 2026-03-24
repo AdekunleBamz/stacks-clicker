@@ -25,11 +25,14 @@ graph TD
     App --> Components[UI Components]
 ```
 
-- **I18nProvider**: Manages multi-language support.
-- **WalletProvider**: Manages Stacks authentication and session state.
-- **ErrorBoundary**: Catches and displays fallback UI for runtime crashes.
+- **I18nProvider**: Manages multi-language support and locale-aware string resolution.
+- **WalletProvider**: Manages Stacks authentication, session state, and account derivation.
+- **ErrorBoundary**: Catches and displays fallback UI for runtime crashes, ensuring the entire app doesn't go dark on a single failure.
 
-## State Orchestration
+## Interaction Layer: Collector Pattern
+The application uses a **Collector Pattern** to aggregate domain-specific contract logic into a single consumption point:
+- `useInteractions()`: Acts as the collector, initializing hooks for `clicker`, `tipjar`, and `quickpoll`.
+- **Decoupled Logic**: Each domain hook contains its own loading states and transaction submission logic, allowing for independent UI updates.
 
 ### Global State (Context)
 - `useWallet()`: Unified interface for connection status and address.
