@@ -14,6 +14,10 @@ import toast from 'react-hot-toast';
 
 /** @type {React.Context<WalletContextValue|null>} */
 const WalletContext = createContext(null);
+const STACKS_NETWORK =
+  String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
+    ? 'testnet'
+    : 'mainnet';
 
 function getAppDetails() {
   const origin = typeof window !== 'undefined' ? window.location.origin : '';
@@ -45,8 +49,13 @@ export function WalletProvider({ children }) {
       const stored = window.localStorage.getItem('stacks-session');
       if (stored) {
         const userData = JSON.parse(stored);
-        if (userData?.addresses?.mainnet) {
-          setAddress(userData.addresses.mainnet);
+        const nextAddress =
+          STACKS_NETWORK === 'testnet'
+            ? userData?.addresses?.testnet || userData?.addresses?.mainnet
+            : userData?.addresses?.mainnet || userData?.addresses?.testnet;
+
+        if (nextAddress) {
+          setAddress(nextAddress);
           return;
         }
       }
