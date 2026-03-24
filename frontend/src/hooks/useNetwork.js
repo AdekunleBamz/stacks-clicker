@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useInterval } from './useInterval';
+import { useWindowFocus } from './useWindowFocus';
+import { useDocumentVisibility } from './useDocumentVisibility';
 
 /**
  * Custom hook to monitor the Stacks network status and current block height.
@@ -14,6 +16,8 @@ export function useNetwork() {
   const [blockHeight, setBlockHeight] = useState(840000); // Realistic baseline
   const [isConnected, setIsConnected] = useState(true);
   const [network, setNetwork] = useState('mainnet');
+  const isFocused = useWindowFocus();
+  const isVisible = useDocumentVisibility();
 
   const fetchStatus = useCallback(async () => {
     const controller = new AbortController();
@@ -40,10 +44,12 @@ export function useNetwork() {
   }, []);
 
   useEffect(() => {
-    fetchStatus();
-  }, [fetchStatus]);
+    if (isFocused && isVisible) {
+      fetchStatus();
+    }
+  }, [fetchStatus, isFocused, isVisible]);
 
-  useInterval(fetchStatus, 30000); // Update every 30s
+  useInterval(fetchStatus, isFocused && isVisible ? 30000 : null); // Update every 30s only when active
 
   return { blockHeight, isConnected, network };
 }
