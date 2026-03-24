@@ -18,25 +18,30 @@ const toastStyle = {
   minWidth: '280px'
 };
 
-const ToastWithProgress = ({ t, message, icon, color }) => (
+/**
+ * Progress indicator component for toast notifications.
+ */
+const ToastWithProgress = ({ t, message, icon, color, isLoading = false }) => (
   <div style={toastStyle}>
     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
       {icon && <span style={{ fontSize: '1.2rem' }}>{icon}</span>}
       <span>{message}</span>
     </div>
-    <motion.div
-      initial={{ width: '100%' }}
-      animate={{ width: 0 }}
-      transition={{ duration: (t.duration || 4000) / 1000, ease: 'linear' }}
-      style={{
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        height: '3px',
-        background: color || 'var(--primary)',
-        boxShadow: `0 0 8px ${color || 'var(--primary)'}`
-      }}
-    />
+    {!isLoading && (
+      <motion.div
+        initial={{ width: '100%' }}
+        animate={{ width: 0 }}
+        transition={{ duration: (t.duration || 4000) / 1000, ease: 'linear' }}
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          height: '3px',
+          background: color || 'var(--primary)',
+          boxShadow: `0 0 8px ${color || 'var(--primary)'}`
+        }}
+      />
+    )}
   </div>
 );
 
@@ -64,10 +69,17 @@ export const notify = {
       <ToastWithProgress t={t} message={message} icon="⚠️" color="var(--warning)" />
     ), options),
 
+  loading: (message, options = {}) =>
+    toast.custom((t) => (
+      <ToastWithProgress t={t} message={message} icon="⏳" color="var(--primary)" isLoading={true} />
+    ), { ...options, duration: Infinity }),
+
   custom: (message, icon, options = {}) =>
     toast.custom((t) => (
       <ToastWithProgress t={t} message={message} icon={icon} color="var(--primary)" />
-    ), options)
+    ), options),
+
+  dismiss: (toastId) => toast.dismiss(toastId)
 };
 
 export default notify;
