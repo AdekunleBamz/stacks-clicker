@@ -145,7 +145,7 @@ export default function App() {
         <Header theme={theme} toggleTheme={toggleTheme} currentLang={lang} onLangChange={setLang} />
       </React.Suspense>
 
-      <div className="layout-content">
+      <div className="layout-content" role="presentation">
         <React.Suspense fallback={<SkeletonLoader height="300px" borderRadius="24px" />}>
           <PlayerStats stats={stats} txCount={txLog.length} />
         </React.Suspense>
