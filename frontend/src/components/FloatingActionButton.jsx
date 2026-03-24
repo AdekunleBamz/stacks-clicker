@@ -1,18 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, memo, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useKeydown } from '../hooks/useKeydown';
 
 /**
  * FAB component for mobile quick actions.
  */
-export default function FloatingActionButton({ onAction }) {
+function FloatingActionButton({ onAction }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const actions = [
+  const toggleOpen = useCallback(() => setIsOpen(prev => !prev), []);
+  
+  useKeydown('x', toggleOpen);
+
+  const actions = useMemo(() => [
     { id: 'ping', icon: '📡', label: 'Ping All', onClick: () => onAction('ping') },
     { id: 'clear', icon: '🗑️', label: 'Clear', onClick: () => onAction('clear') },
     { id: 'top', icon: '⬆️', label: 'Top', onClick: () => window.scrollTo({ top: 0, behavior: 'smooth' }) },
-  ];
+  ], [onAction]);
 
   return (
     <div className="fab-container">
@@ -45,7 +50,7 @@ export default function FloatingActionButton({ onAction }) {
       <motion.button
         type="button"
         className={`fab-main ${isOpen ? 'active' : ''}`}
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={toggleOpen}
         aria-expanded={isOpen}
         aria-label={isOpen ? 'Close quick actions menu' : 'Open quick actions menu'}
         whileHover={{ scale: 1.1 }}
@@ -60,3 +65,6 @@ export default function FloatingActionButton({ onAction }) {
 FloatingActionButton.propTypes = {
   onAction: PropTypes.func.isRequired
 };
+FloatingActionButton.displayName = 'FloatingActionButton';
+
+export default memo(FloatingActionButton);
