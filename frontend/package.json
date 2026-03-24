@@ -3,6 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "description": "Premium React frontend for the Stacks Clicker interaction hub",
+  "author": "AdekunleBamz",
   "type": "module",
   "scripts": {
     "dev": "vite",
