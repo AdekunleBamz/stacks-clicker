@@ -19,6 +19,7 @@ import { useTheme } from './hooks/useTheme';
 import { useTransactionHistory } from './hooks/useTransactionHistory';
 import { useMilestones } from './hooks/useMilestones';
 import { useDocumentTitle } from './hooks/useDocumentTitle';
+import { useKeydown } from './hooks/useKeydown';
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 
 // Lazy load heavy components for optimized initial paint
@@ -97,6 +98,12 @@ export default function App() {
   useDocumentTitle({
     title: 'Stacks Clicker',
     count: stats.clicks + stats.tips + stats.votes,
+  });
+
+  // Global shortcuts
+  useKeydown('Escape', () => {
+    // Reset any open UI states if Escape is pressed
+    console.debug('[App] Escape key pressed: Resetting UI states');
   });
 
   const MilestoneCelebration = React.lazy(() => import('./components/MilestoneCelebration'));
