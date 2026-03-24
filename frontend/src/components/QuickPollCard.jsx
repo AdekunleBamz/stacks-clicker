@@ -1,8 +1,12 @@
+import React, { useState, useCallback, memo } from 'react';
+import PropTypes from 'prop-types';
+import ActionCard from './common/ActionCard';
+import ActionButton from './common/ActionButton';
+import Tooltip from './common/Tooltip';
 import { useSound } from '../hooks/useSound';
 import { useKeydown } from '../hooks/useKeydown';
 import { useClipboard } from '../hooks/useClipboard';
 import { useInterval } from '../hooks/useInterval';
-import { notify } from '../utils/toast';
 
 /**
  * Component for the QuickPoll interaction card.
@@ -18,8 +22,15 @@ import { notify } from '../utils/toast';
  * @param {Function} props.quickpoll.isLoading - Function to check loading state by action name
  * @returns {JSX.Element} The rendered QuickPoll interaction card
  */
+function QuickPollCard({ address, quickpoll }) {
+  const { vote, createPoll, handlePollPing, isLoading } = quickpoll;
+  const [pollQuestion, setPollQuestion] = useState('');
+  const [errorField, setErrorField] = useState(null);
+  const { playSound } = useSound();
   const { copyToClipboard } = useClipboard();
   const [timeLeft, setTimeLeft] = useState(3600); // 1 hour in seconds
+
+  const trimmedQuestion = pollQuestion.trim();
 
   useInterval(() => {
     setTimeLeft((prev) => (prev > 0 ? prev - 1 : 3600));
@@ -32,38 +43,43 @@ import { notify } from '../utils/toast';
   };
 
   /**
-   * Triggers a 'YES' vote transaction for the current poll.
-   */
-  const handleVoteYes = useCallback(() => vote(1, 1), [vote]);
-
-  /**
-   * Triggers a 'NO' vote transaction for the current poll.
-   */
-  const handleVoteNo = useCallback(() => vote(1, 0), [vote]);
-
-  /**
-   * Triggers a transaction to create a new poll with the entered question.
-   */
-  const handleCreateNewPoll = useCallback(() => {
-    if (!trimmedQuestion) {
-      return;
-    }
-
-    createPoll(trimmedQuestion);
-    setPollQuestion('');
-  }, [createPoll, trimmedQuestion]);
-
-  /**
    * Internal wrapper to check connection and validation before executing a contract action.
    * Provides acoustic and visual feedback for errors.
-   *
-   * @param {Function} actionFn - The interaction function to execute
-   * @param {string} fieldId - ID of the button for error highlighting
-   * @param {Function} [validation=()=>true] - Optional pre-check function for action validity
    */
+  const handleAction = useCallback(
+    async (actionFn, fieldId, validation = () => true) => {
+      if (!address) {
+        playSound('error');
+        setErrorField(fieldId);
+        setTimeout(() => setErrorField(null), 1000);
+        return;
+      }
+
+      if (!validation()) {
+        playSound('error');
+        setErrorField(fieldId);
+        setTimeout(() => setErrorField(null), 1000);
+        return;
+      }
+
+      try {
+        playSound('click');
+        await actionFn();
+      } catch (err) {
+        setErrorField(fieldId);
+        setTimeout(() => setErrorField(null), 1000);
+      }
     },
     [address, playSound]
   );
+
+  const handleVoteYes = useCallback(() => vote(1, 1), [vote]);
+  const handleVoteNo = useCallback(() => vote(1, 0), [vote]);
+  const handleCreateNewPoll = useCallback(() => {
+    if (!trimmedQuestion) return;
+    createPoll(trimmedQuestion);
+    setPollQuestion('');
+  }, [createPoll, trimmedQuestion]);
 
   // Keyboard shortcuts
   const voteYesAction = useCallback(() => handleAction(handleVoteYes, 'vote-yes'), [handleAction, handleVoteYes]);
@@ -88,11 +104,12 @@ import { notify } from '../utils/toast';
             label="Poll Ping"
             icon="🗳️"
             cost="0.001 STX"
-            className="success"
+            className="secondary-button success"
             onClick={pollPingAction}
             isLoading={isLoading('poll-ping')}
             isError={errorField === 'poll-ping'}
             disabled={isLoading('poll-ping')}
+            aria-label="Send poll network ping"
           />
         </Tooltip>
 
@@ -103,14 +120,15 @@ import { notify } from '../utils/toast';
           <input
             id="poll-question-input"
             type="text"
-            className="poll-input"
+            className="poll-input input-field"
             value={pollQuestion}
             onChange={(e) => setPollQuestion(e.target.value)}
             placeholder="Enter poll question..."
             maxLength={100}
             aria-invalid={!trimmedQuestion && errorField === 'create-poll'}
+            aria-required="true"
           />
-          <span className="input-help-text">{trimmedQuestion.length}/100</span>
+          <span className="input-help-text" aria-hidden="true">{trimmedQuestion.length}/100</span>
         </div>
 
         <Tooltip content="Create a new poll on the Stacks blockchain.">
@@ -118,42 +136,47 @@ import { notify } from '../utils/toast';
             label="Create Poll"
             icon="📋"
             cost="0.001 STX"
-            className="primary"
+            className="primary-button"
             onClick={() =>
               handleAction(handleCreateNewPoll, 'create-poll', () => trimmedQuestion.length > 0)
             }
             isLoading={isLoading('create-poll')}
             isError={errorField === 'create-poll'}
             disabled={isLoading('create-poll')}
+            aria-label="Create new poll on-chain"
           />
         </Tooltip>
 
         <div className="actions-row">
           <Tooltip content="Vote YES on the active community poll.">
             <ActionButton
-              label="Yes"
+              label="Vote Yes"
               icon="👍"
-               cost="0.001"
-              className="success"
+              cost="0.001 STX"
+              className="secondary-button success"
               onClick={voteYesAction}
               isLoading={isLoading('vote')}
               isError={errorField === 'vote-yes'}
               disabled={isLoading('vote')}
+              aria-label="Submit Yes vote"
             />
           </Tooltip>
         </div>
 
         <div className="poll-footer">
-          <div className="poll-timer">
-            <span className="timer-icon">⏳</span>
+          <div className="poll-timer" role="timer" aria-live="off">
+            <span className="timer-icon" aria-hidden="true">⏳</span>
             <span className="timer-text">Ends in: {formatTime(timeLeft)}</span>
           </div>
           <button 
             type="button" 
-            className="share-poll-btn"
-             aria-label="Share Poll Results"
+            className="share-poll-btn secondary-button btn-sm"
+            aria-label="Share current poll results URL"
             title="Copy Results Link"
-            onClick={() => copyToClipboard(window.location.href)}
+            onClick={() => {
+              playSound('click');
+              copyToClipboard(window.location.href);
+            }}
           >
             ↗ Share Results
           </button>
