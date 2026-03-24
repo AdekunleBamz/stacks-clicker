@@ -24,7 +24,7 @@ function AnimatedNumber({ value }) {
     return () => controls.stop();
   }, [value, displayValue]);
 
-  return <span>{typeof value === 'number' ? displayValue.toLocaleString() : value}</span>;
+  return <span aria-live="polite" aria-atomic="true">{typeof value === 'number' ? displayValue.toLocaleString() : value}</span>;
 }
 
 AnimatedNumber.propTypes = {
@@ -54,8 +54,9 @@ function StatsCard({ label, value, icon, color, isPrice = false, isGrowing = fal
       ref={measureRef}
       className={`stat-card glass-card ${isGrowing ? 'stat-growing' : ''}`}
       tabIndex={0}
-      role="group"
-      aria-label={`${label} statistic: ${value}`}
+      role="article"
+      aria-labelledby={`stat-label-${index}`}
+      aria-describedby={`stat-value-${index}`}
       initial={{ opacity: 0, scale: 0.9, y: 20 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{
@@ -79,14 +80,14 @@ function StatsCard({ label, value, icon, color, isPrice = false, isGrowing = fal
         {icon}
       </div>
       <div className="stat-content">
-        <div className="value">
+        <div className="value" id={`stat-value-${index}`}>
           {isPrice ? (
             <span>{value}</span>
           ) : (
             <AnimatedNumber value={value} />
           )}
         </div>
-        <div className="label">{label}</div>
+        <div className="label" id={`stat-label-${index}`}>{label}</div>
         {!isPrice && typeof value === 'number' && (
           <div className="progress-container">
             <motion.div 
