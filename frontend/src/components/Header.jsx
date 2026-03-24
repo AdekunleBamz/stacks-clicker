@@ -21,7 +21,10 @@ function Header({ theme, toggleTheme }) {
   const isScrolled = y > 20;
 
   return (
-    <header className={`app-header ${isScrolled ? 'header-scrolled' : ''}`}>
+    <header 
+      className={`app-header ${isScrolled ? 'header-scrolled' : ''}`}
+      role="banner"
+    >
       <div className="header-content">
         <div 
           className="logo" 
