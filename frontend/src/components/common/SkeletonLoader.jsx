@@ -18,6 +18,7 @@ function SkeletonLoader({ width = '100%', height = '20px', borderRadius = '8px',
     <div
       className={`skeleton-wrapper ${className}`}
       role="status"
+      aria-busy="true"
       aria-label="Loading content..."
       style={{
         width,
@@ -37,6 +38,7 @@ function SkeletonLoader({ width = '100%', height = '20px', borderRadius = '8px',
           repeat: Infinity,
           ease: "linear"
         }}
+        aria-hidden="true"
         style={{
           position: 'absolute',
           top: 0,
