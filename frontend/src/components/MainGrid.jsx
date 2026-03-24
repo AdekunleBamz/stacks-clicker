@@ -5,6 +5,7 @@ import ClickerCard from './ClickerCard';
 import TipJarCard from './TipJarCard';
 import QuickPollCard from './QuickPollCard';
 import { useTrace } from '../hooks/useTrace';
+import { useWindowSize } from '../hooks/useWindowSize';
 
 /**
  * Main layout grid for the application.
@@ -17,12 +18,18 @@ function MainGrid({
   tipjar,
   quickpoll
 }) {
+  const { width } = useWindowSize();
+  const isCompact = width < 768;
+
   if (process.env.NODE_ENV === 'development') {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    useTrace('MainGrid', { address, stats, clicker, tipjar, quickpoll });
+    useTrace('MainGrid', { address, stats, clicker, tipjar, quickpoll, width });
   }
   return (
-    <section className="interaction-section" aria-labelledby="interactions-title">
+    <section 
+      className={`interaction-section ${isCompact ? 'compact-layout' : ''}`} 
+      aria-labelledby="interactions-title"
+    >
       <h2 className="section-title" id="interactions-title" aria-label="Available Interactions Dashboard">Interactions</h2>
       <InteractionStreaks totalInteractions={stats.clicks + stats.tips + stats.votes} />
       <div className="cards-container" role="group" aria-label="Available Interaction Panels">
