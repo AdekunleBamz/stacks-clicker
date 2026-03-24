@@ -31,7 +31,7 @@ function TransactionItem({
           type="button"
           className="swipe-btn details"
           onClick={() => onDetails(tx)}
-          aria-label="View Details"
+          aria-label="View transaction diagnostics"
           title="View Details"
         >
           🔍
@@ -47,7 +47,11 @@ function TransactionItem({
         style={{ willChange: 'transform' }}
         {...longPressHandlers}
       >
-        <div className="tx-status-dot" aria-hidden="true" />
+        <div 
+          className="tx-status-dot" 
+          aria-label={`Status: ${tx.status}`} 
+          role="img"
+        />
         <div className="tx-main">
           <div className="tx-header">
             <span className="tx-action-label">{highlightText(tx.action, searchTerm)}</span>
@@ -77,11 +81,14 @@ function TransactionItem({
                 <span className="step-label">Confirmed</span>
               </div>
             </div>
-            {tx.explorerUrl && (
-              <button type="button" onClick={() => onOpenExplorer(tx)} className="tx-explorer-link">
+              <button 
+                type="button" 
+                onClick={() => onOpenExplorer(tx)} 
+                className="tx-explorer-link ghost-button btn-xs"
+                aria-label={`View transaction ${txId} on Explorer`}
+              >
                 {highlightText(truncateAddress(txId, 8), searchTerm)} ↗
               </button>
-            )}
           </div>
         </div>
       </motion.div>
