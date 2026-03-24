@@ -38,7 +38,8 @@ function InteractionStreaks({ totalInteractions }) {
   }, [totalInteractions]);
 
   return (
-    <div className="streak-panel" role="status" aria-live="polite" aria-atomic="true">
+    <div className="streak-panel glass-card" role="region" aria-labelledby="streak-heading">
+      <h3 id="streak-heading" className="sr-only">Interaction Streaks and Achievements</h3>
       <div className="streak-stats">
         <div className="streak-count">
           <motion.span
@@ -51,22 +52,24 @@ function InteractionStreaks({ totalInteractions }) {
           >
             🔥
           </motion.span>
-          <span className="streak-value">{streak}</span>
-          <span className="streak-label" aria-hidden="true">Streak</span>
+          <span className="streak-value" aria-live="polite" aria-atomic="true">{streak}</span>
+          <span className="streak-label">Streak</span>
         </div>
       </div>
-      <div className="badges-grid">
+      <div className="badges-grid" role="list" aria-label="Earned achievement badges">
         <AnimatePresence>
           {badges.map(badge => (
             <motion.div
               key={badge.id}
               className="badge-item"
+              role="listitem"
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               whileHover={{ y: -5 }}
               style={{ borderColor: badge.color }}
+              aria-label={`Achievement: ${badge.label}`}
             >
-              <span className="badge-text" title={`Achievement Badge: ${badge.label}`}>{badge.label}</span>
+              <span className="badge-text" aria-hidden="true">{badge.label}</span>
             </motion.div>
           ))}
         </AnimatePresence>
