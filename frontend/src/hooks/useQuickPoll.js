@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import { callContract } from '../utils/walletconnect';
+import { useNotifications } from './useNotifications';
 import { DEPLOYER, QUICKPOLL_CONTRACT as CONTRACT_NAME } from '../utils/constants';
 
 /**
@@ -16,6 +17,7 @@ import { DEPLOYER, QUICKPOLL_CONTRACT as CONTRACT_NAME } from '../utils/constant
  */
 export function useQuickPoll({ onTxSubmit }) {
   const [loadingStates, setLoadingStates] = useState({});
+  const { showError, showLoading } = useNotifications();
 
   /**
    * Internal helper to update loading state for a specific action key.
@@ -43,6 +45,7 @@ export function useQuickPoll({ onTxSubmit }) {
     const key = `quickpoll-${functionName}`;
     setLoading(key, true);
     try {
+      showLoading(`Broadcasting ${displayName}...`);
       const result = await callContract({
         contractAddress: DEPLOYER,
         contractName: CONTRACT_NAME,
@@ -52,6 +55,7 @@ export function useQuickPoll({ onTxSubmit }) {
       onTxSubmit?.(displayName, result.txId);
       return result;
     } catch (err) {
+      showError(`${displayName} failed.`);
       console.error(`${displayName} failed:`, err);
       throw err;
     } finally {
