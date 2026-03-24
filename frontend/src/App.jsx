@@ -18,11 +18,6 @@ import { useSound } from './hooks/useSound';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 
-const STACKS_NETWORK =
-  String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
-    ? 'testnet'
-    : 'mainnet';
-
 // Lazy load heavy components for optimized initial paint
 const MainGrid = React.lazy(() => import('./components/MainGrid'));
 const PlayerStats = React.lazy(() => import('./components/PlayerStats'));
@@ -37,6 +32,8 @@ const TransactionHistory = React.lazy(() => import('./components/TransactionHist
  * @returns {JSX.Element} The root application UI tree
  */
 export default function App() {
+  const configuredNetwork = (import.meta.env.VITE_STACKS_NETWORK || 'mainnet').toLowerCase();
+
   // Global Contexts
   const { address } = useWallet();
   const { lang, setLang } = useI18n();
@@ -84,8 +81,8 @@ export default function App() {
         status,
         time: submittedAt.toLocaleTimeString(),
         submittedAt: submittedAt.toISOString(),
-        network: STACKS_NETWORK,
-        explorerUrl: isPending ? null : `https://explorer.hiro.so/txid/${txId}?chain=${STACKS_NETWORK}`,
+        network: configuredNetwork,
+        explorerUrl: isPending ? null : `https://explorer.hiro.so/txid/${txId}?chain=${configuredNetwork}`,
         isPending,
       };
       setTxLog((prev) => [tx, ...prev.slice(0, 49)]); // Maintain last 50 TXs
@@ -95,7 +92,7 @@ export default function App() {
       notify.custom(`${action} submitted!`, action.split(' ')[0]);
       return tx;
     },
-    [playSound]
+    [configuredNetwork, playSound]
   );
 
   /**
