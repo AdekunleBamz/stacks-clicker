@@ -142,20 +142,20 @@ export default function QuickPoll({ onTxSubmit }) {
   };
 
   return (
-    <div className="game-card quickpoll">
+    <div className="game-card quickpoll glass-card" role="region" aria-labelledby="poll-main-title">
       <div className="game-header">
-        <h2 aria-label="QuickPoll Interactive Component">🗳️ QuickPoll</h2>
+        <h2 id="poll-main-title" aria-label="QuickPoll Interactive Component">🗳️ QuickPoll</h2>
         <span className="game-badge" title="Live decentralized community voting portal">Community Voting</span>
       </div>
 
-      <div className="game-stats">
+      <div className="game-stats" aria-live="polite">
         <div className="stat">
           <span className="stat-value">{votes.yes}</span>
-          <span className="stat-label" aria-hidden="true">Yes Votes</span>
+          <span className="stat-label" aria-label="Yes Votes count">Yes Votes</span>
         </div>
         <div className="stat">
           <span className="stat-value">{votes.no}</span>
-          <span className="stat-label">No Votes</span>
+          <span className="stat-label" aria-label="No Votes count">No Votes</span>
         </div>
       </div>
 
