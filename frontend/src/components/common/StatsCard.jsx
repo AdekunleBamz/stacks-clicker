@@ -2,6 +2,7 @@ import React, { useEffect, useState, memo } from 'react';
 import { motion, animate } from 'framer-motion';
 import PropTypes from 'prop-types';
 import Tooltip from './Tooltip';
+import { useMeasure } from '../../hooks/useMeasure';
 
 /**
  * Animated number component for smooth counting transitions between values.
@@ -46,8 +47,11 @@ AnimatedNumber.propTypes = {
  * @returns {JSX.Element} The rendered stats card
  */
 function StatsCard({ label, value, icon, color, isPrice = false, isGrowing = false, index = 0, tooltip }) {
+  const [measureRef, { width, height }] = useMeasure();
+
   const cardContent = (
     <motion.div
+      ref={measureRef}
       className={`stat-card ${isGrowing ? 'stat-growing' : ''}`}
       tabIndex={0}
       role="group"
@@ -65,7 +69,11 @@ function StatsCard({ label, value, icon, color, isPrice = false, isGrowing = fal
         boxShadow: "0 10px 30px -10px rgba(0,0,0,0.5)",
         borderColor: color + "44"
       }}
-      style={{ '--accent-color': color }}
+      style={{ 
+        '--accent-color': color,
+        '--card-width': `${width}px`,
+        '--card-height': `${height}px`
+      }}
     >
       <div className="stat-icon" style={{ filter: `drop-shadow(0 0 8px ${color}44)` }}>
         {icon}
