@@ -10,8 +10,8 @@ export default function Toast({ toasts = [] }) {
   return (
     <div className="toast-container">
       {toasts.map((toast) => (
-        <div key={toast.id} className={`toast toast-${toast.type}`} role="alert" aria-live="assertive" aria-atomic="true">
-          <span className="toast-icon">
+        <div key={toast.id} className={`toast toast-${toast.type} glass-card`} role={toast.type === 'error' ? 'alert' : 'status'} aria-live={toast.type === 'error' ? 'assertive' : 'polite'} aria-atomic="true">
+          <span className="toast-icon" aria-hidden="true">
             {toast.type === 'success' && '✅'}
             {toast.type === 'error' && '❌'}
             {toast.type === 'info' && 'ℹ️'}
