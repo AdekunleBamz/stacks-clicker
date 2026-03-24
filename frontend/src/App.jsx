@@ -20,6 +20,7 @@ import { useTransactionHistory } from './hooks/useTransactionHistory';
 import { useMilestones } from './hooks/useMilestones';
 import { useDocumentTitle } from './hooks/useDocumentTitle';
 import { useKeydown } from './hooks/useKeydown';
+import { useBattery } from './hooks/useBattery';
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 
 // Lazy load heavy components for optimized initial paint
@@ -105,6 +106,12 @@ export default function App() {
     // Reset any open UI states if Escape is pressed
     console.debug('[App] Escape key pressed: Resetting UI states');
   });
+
+  const { isLowBattery } = useBattery();
+
+  if (isLowBattery) {
+    console.debug('[App] Low battery detected: Enabling power-saving mode');
+  }
 
   const MilestoneCelebration = React.lazy(() => import('./components/MilestoneCelebration'));
 
