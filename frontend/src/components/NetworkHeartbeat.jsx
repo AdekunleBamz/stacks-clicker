@@ -24,7 +24,7 @@ export default function NetworkHeartbeat() {
           className={`heartbeat-pulse ${isConnected ? 'online pulse-animation' : 'offline'}`} 
           aria-hidden="true"
         ></div>
-        <div className="heartbeat-info">
+        <div className="heartbeat-info glass-card">
           <span className="network-name">{isConnected ? network : 'Disconnected'}</span>
           <span className="block-height" aria-label={`Current block height: ${blockHeight}`}>
             {isConnected ? `#${blockHeight}` : 'Offline'}
