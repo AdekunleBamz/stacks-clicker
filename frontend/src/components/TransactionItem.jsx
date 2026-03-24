@@ -40,6 +40,7 @@ function TransactionItem({
         dragElastic={0.1}
         whileDrag={{ scale: 1.02 }}
         onContextMenu={(e) => onContextMenu(e, tx)}
+        style={{ willChange: 'transform' }}
       >
         <div className="tx-status-dot" aria-hidden="true" />
         <div className="tx-main">
@@ -90,6 +91,8 @@ TransactionItem.propTypes = {
     action: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
     time: PropTypes.string.isRequired,
+    isPending: PropTypes.bool,
+    explorerUrl: PropTypes.string,
   }).isRequired,
   searchTerm: PropTypes.string,
   highlightText: PropTypes.func.isRequired,
