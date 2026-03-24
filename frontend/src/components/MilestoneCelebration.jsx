@@ -21,8 +21,10 @@ export default function MilestoneCelebration({ celebration }) {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 1.5 }}
         >
-          <div className="milestone-text" role="alert" aria-label={`Celebration: ${celebration}`}>
-            {celebration}
+          <div className="milestone-text glass-card" role="alert" aria-label={`Celebration: ${celebration}`}>
+            <span className="celebration-emoji" aria-hidden="true">🎉</span>
+            <span className="celebration-message">{celebration}</span>
+            <span className="celebration-emoji" aria-hidden="true">💎</span>
           </div>
         </motion.div>
       )}
