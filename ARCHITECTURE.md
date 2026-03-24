@@ -80,6 +80,11 @@ sequenceDiagram
 - The UI uses a "Glassmorphism" design system defined in `index.css` via CSS variables (`--bg-primary`, `--glass-bg`).
 - Themes are applied at the `:root` level and persisted across sessions.
 
+### Persistence & Sync
+- **LocalStorage**: Game state (clicks, streaks, settings) is persisted to `localStorage` via the `useLocalStorage` hook.
+- **Cross-tab Synchronization**: The application listens for `storage` events to ensure that if a user has multiple tabs open, their stats and theme remain consistent across all of them.
+- **Optimistic Updates**: On-chain interaction hooks update local state *before* the transaction is confirmed to provide an instant feel.
+
 ## Performance Considerations
 - **Lazy Loading**: `MainGrid`, `PlayerStats`, and `TransactionHistory` are lazy-loaded via `React.lazy` and `Suspense` to improve initial Load Time.
 - **Asset Optimization**: SVGs are used for icons to ensure sharpness and small bundle size.
