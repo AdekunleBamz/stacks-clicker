@@ -3,6 +3,15 @@ import { useInterval } from './useInterval';
 import { useWindowFocus } from './useWindowFocus';
 import { useDocumentVisibility } from './useDocumentVisibility';
 
+const CONFIGURED_NETWORK =
+  String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
+    ? 'testnet'
+    : 'mainnet';
+const HIRO_INFO_ENDPOINT =
+  CONFIGURED_NETWORK === 'testnet'
+    ? 'https://api.testnet.hiro.so/v2/info'
+    : 'https://api.mainnet.hiro.so/v2/info';
+
 /**
  * Custom hook to monitor the Stacks network status and current block height.
  * Periodically polls the Hiro API to provide real-time blockchain telemetry.
@@ -15,7 +24,7 @@ import { useDocumentVisibility } from './useDocumentVisibility';
 export function useNetwork() {
   const [blockHeight, setBlockHeight] = useState(840000); // Realistic baseline
   const [isConnected, setIsConnected] = useState(true);
-  const [network, setNetwork] = useState('mainnet');
+  const [network, setNetwork] = useState(CONFIGURED_NETWORK);
   const [isUpdating, setIsUpdating] = useState(false);
   const isFocused = useWindowFocus();
   const isVisible = useDocumentVisibility();
@@ -25,7 +34,7 @@ export function useNetwork() {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 10000);
     try {
-      const response = await fetch('https://api.mainnet.hiro.so/v2/info', {
+      const response = await fetch(HIRO_INFO_ENDPOINT, {
         signal: controller.signal,
       });
       if (!response.ok) throw new Error('Network offline');
