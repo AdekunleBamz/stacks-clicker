@@ -159,12 +159,13 @@ function QuickPollCard({ address, quickpoll }) {
               isError={errorField === 'vote-yes'}
               disabled={isLoading('vote')}
               aria-label="Submit Yes vote"
+              aria-keyshortcuts="V"
             />
           </Tooltip>
         </div>
 
         <div className="poll-footer">
-          <div className="poll-timer" role="timer" aria-live="off">
+          <div className="poll-timer" role="timer" aria-live="polite">
             <span className="timer-icon" aria-hidden="true">⏳</span>
             <span className="timer-text">Ends in: {formatTime(timeLeft)}</span>
           </div>
