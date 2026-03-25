@@ -16,12 +16,16 @@ export function useKeydown(targetKey, handler) {
 
   useEffect(() => {
     function handleKeyDown(event) {
-      if (event.key === targetKey) {
-        // Prevent default browser behavior if needed for specific shortcuts
-        // For now, we just execute the handler
+      // Ignore if user is typing in an input, textarea, or contentEditable element
+      const isTyping = event.target.tagName === 'INPUT' || 
+                       event.target.tagName === 'TEXTAREA' || 
+                       event.target.isContentEditable;
+
+      if (event.key === targetKey && !isTyping) {
         handlerRef.current(event);
       }
     }
+
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
