@@ -364,6 +364,7 @@ export default function App() {
       {/* Toast Notifications */}
       <Toast toasts={toasts} />
     </div>
+
   );
 }
 
