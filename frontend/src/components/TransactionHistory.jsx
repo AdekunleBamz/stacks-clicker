@@ -122,7 +122,7 @@ function TransactionHistory({ txLog }) {
   }, []);
 
   return (
-    <section className="tx-log" aria-labelledby="tx-history-title">
+    <section className="tx-log glass-card" aria-labelledby="tx-history-title">
       <div className="log-header">
         <h3 id="tx-history-title" aria-label="Recent Account Activity Log">📜 Recent Activity</h3>
         <SearchInput
@@ -133,48 +133,52 @@ function TransactionHistory({ txLog }) {
           aria-label="Search transaction history"
           count={filteredLog.length}
         />
-        <div className="tx-export-actions" role="toolbar" aria-label="Export and Filter Data">
-          <select
-            className="tx-filter-select input-field"
-            value={filterStatus}
-            onChange={(e) => setFilterStatus(e.target.value)}
-            aria-label="Filter transactions by processing status"
-          >
-            <option value="all">All Status</option>
-            <option value="success">Success</option>
-            <option value="pending">Pending</option>
-            <option value="failed">Failed</option>
-          </select>
-          <select
-            className="tx-filter-select input-field"
-            value={filterAction}
-            onChange={(e) => setFilterAction(e.target.value)}
-            aria-label="Filter transactions by action category"
-          >
-            <option value="all">All Types</option>
-            <option value="Click">Clicks</option>
-            <option value="Tip">Tips</option>
-            <option value="Vote">Votes</option>
-            <option value="Ping">Pings</option>
-          </select>
-          <button
-            type="button"
-            className="export-btn secondary-button btn-sm"
-            onClick={() => exportData('json')}
-            aria-label="Export history as JSON"
-            title="Export as JSON"
-          >
-            JSON
-          </button>
-          <button
-            type="button"
-            className="export-btn secondary-button btn-sm"
-            onClick={() => exportData('csv')}
-            aria-label="Export history as CSV"
-            title="Export as CSV"
-          >
-            CSV
-          </button>
+        <div className="tx-export-actions" role="toolbar" aria-label="Transaction log controls">
+          <div className="filter-group" role="group" aria-label="Filter transactions">
+            <select
+              className="tx-filter-select input-field"
+              value={filterStatus}
+              onChange={(e) => setFilterStatus(e.target.value)}
+              aria-label="Filter by transaction status"
+            >
+              <option value="all">All Statuses</option>
+              <option value="success">Successful</option>
+              <option value="pending">Processing</option>
+              <option value="failed">Failed</option>
+            </select>
+            <select
+              className="tx-filter-select input-field"
+              value={filterAction}
+              onChange={(e) => setFilterAction(e.target.value)}
+              aria-label="Filter by action type"
+            >
+              <option value="all">All Action Types</option>
+              <option value="Click">Clicks</option>
+              <option value="Tip">Tips</option>
+              <option value="Vote">Votes</option>
+              <option value="Ping">Pings</option>
+            </select>
+          </div>
+          <div className="export-group" role="group" aria-label="Export transaction data">
+            <button
+              type="button"
+              className="export-btn secondary-button btn-sm"
+              onClick={() => exportData('json')}
+              aria-label="Download transaction history as JSON file"
+              title="Export as JSON"
+            >
+              JSON
+            </button>
+            <button
+              type="button"
+              className="export-btn secondary-button btn-sm"
+              onClick={() => exportData('csv')}
+              aria-label="Download transaction history as CSV file"
+              title="Export as CSV"
+            >
+              CSV
+            </button>
+          </div>
         </div>
       </div>
 
