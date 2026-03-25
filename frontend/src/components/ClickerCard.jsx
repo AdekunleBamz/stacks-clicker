@@ -70,7 +70,9 @@ function ClickerCard({ address, clicker }) {
         <AnimatePresence>
           {combo > 1 && (
             <motion.div
+              style={{ willChange: 'transform, opacity' }}
               initial={{ opacity: 0, scale: 0.5, y: 20 }}
+
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 1.5, y: -20 }}
               className="combo-badge"
