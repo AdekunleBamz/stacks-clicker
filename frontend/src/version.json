@@ -1,6 +1,12 @@
 {
-  "version": "2.1.0-alpha",
-  "build": "2026.03.25",
+  "version": "2.1.0",
+  "build": "2026.03.25.1",
   "environment": "production",
-  "interface": "v2i"
+  "features": {
+    "clicker": true,
+    "tipjar": true,
+    "quickpoll": true,
+    "transaction_log": true,
+    "multilingual": true
+  }
 }
