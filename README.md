@@ -84,9 +84,21 @@ npm install && cp .env.example .env && npm run dev
 - **Testnet Focus**: Some features are currently tuned for mock/testnet environments and may require adjustments for high-value mainnet usage.
 
 ## Technical Architecture 🏗️
-- Frontend state is coordinated through `WalletContext`, `I18nContext`, and domain hooks.
-- Smart contract interactions are routed through `useClicker`, `useTipJar`, and `useQuickPoll`.
-- See [ARCHITECTURE.md](ARCHITECTURE.md) for end-to-end interaction flow details.
+
+```mermaid
+graph TD
+    User((User)) -->|Hiro Wallet| Frontend[React Frontend]
+    Frontend -->|useInteractions| Hooks[Domain Hooks]
+    Hooks -->|callContract| Utils[Wallet Utils]
+    Utils -->|Stacks API| BC[Stacks Blockchain]
+    BC -->|Events| Indexer[Hiro Indexer]
+    Indexer -->|Block Height| Hooks
+```
+
+- **Frontend**: Vite + React + Framer Motion for a 60fps glassmorphic UI.
+- **State Management**: Context API for global wallet and I18n state; custom hooks for domain logic.
+- **On-chain**: Integrated with `micro-stacks` and Hiro API for real-time blockchain telemetry.
+- See [ARCHITECTURE.md](ARCHITECTURE.md) for full end-to-end interaction flow details.
 
 ## Security & Verification 🔑
 
