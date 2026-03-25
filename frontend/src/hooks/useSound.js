@@ -3,25 +3,20 @@ import { useCallback } from 'react';
 let audioContext = null;
 
 function getAudioContext() {
-  if (typeof window === 'undefined') {
-    return null;
-  }
+  if (typeof window === 'undefined') return null;
 
   const AudioContextCtor = window.AudioContext || window.webkitAudioContext;
-  if (!AudioContextCtor) {
-    return null;
-  }
+  if (!AudioContextCtor) return null;
 
-  if (!audioContext) {
+  if (!audioContext || audioContext.state === 'closed') {
     audioContext = new AudioContextCtor();
   }
 
-  if (audioContext.state === 'closed') {
-    audioContext = new AudioContextCtor();
-  }
-
+  // Attempt to resume if suspended (common in browser autoplay policies)
   if (audioContext.state === 'suspended') {
-    audioContext.resume().catch(() => {});
+    const resume = () => audioContext.resume().catch(() => {});
+    // Resume on first interaction if possible, or attempt immediately
+    resume();
   }
 
   return audioContext;
