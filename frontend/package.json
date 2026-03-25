@@ -2,15 +2,19 @@
   "name": "stacks-clicker-frontend",
   "private": true,
   "version": "1.0.0",
-  "description": "Premium React frontend for the Stacks Clicker interaction hub",
+  "description": "Premium React frontend for the Stacks Clicker decentralized interaction hub",
   "author": "AdekunleBamz",
   "license": "MIT",
   "keywords": [
     "stacks",
-    "blockchain",
+    "bitcoin",
+    "l2",
+    "defi",
     "clicker",
     "web3",
-    "react"
+    "react",
+    "framer-motion",
+    "glassmorphism"
   ],
   "type": "module",
   "scripts": {
