@@ -13,13 +13,14 @@ import { motion } from 'framer-motion';
  * @param {string} [props.className=''] - Additional CSS classes
  * @returns {JSX.Element} The rendered skeleton loader
  */
-function SkeletonLoader({ width = '100%', height = '20px', borderRadius = '8px', className = '' }) {
+function SkeletonLoader({ width = '100%', height = '20px', borderRadius = '8px', className = '', label = 'content' }) {
   return (
     <div
       className={`skeleton-wrapper ${className}`}
       role="status"
       aria-busy="true"
-      aria-label="Loading content..."
+      aria-label={`Loading ${label}...`}
+      title={`Loading ${label}...`}
       style={{
         width,
         height,
