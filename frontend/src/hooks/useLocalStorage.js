@@ -26,19 +26,24 @@ export function useLocalStorage(key, initialValue) {
   const setValue = useCallback(
     (value) => {
       try {
-        setStoredValue((currentValue) => {
-          const valueToStore = typeof value === 'function' ? value(currentValue) : value;
-          if (typeof window !== 'undefined') {
-            window.localStorage.setItem(key, JSON.stringify(valueToStore));
-            window.dispatchEvent(new CustomEvent('local-storage', { detail: { key } }));
-          }
-          return valueToStore;
-        });
+        const valueToStore = typeof value === 'function' ? value(storedValue) : value;
+        
+        // Prevent redundant writes if values are deep-equal (simple check for now)
+        if (JSON.stringify(valueToStore) === JSON.stringify(storedValue)) {
+          return;
+        }
+
+        setStoredValue(valueToStore);
+
+        if (typeof window !== 'undefined') {
+          window.localStorage.setItem(key, JSON.stringify(valueToStore));
+          window.dispatchEvent(new CustomEvent('local-storage', { detail: { key } }));
+        }
       } catch (error) {
-        console.error(`[StorageSync] Unable to persist data due to privacy blocking:`, error);
+        console.error(`[useLocalStorage] Error setting key "${key}":`, error);
       }
     },
-    [key]
+    [key, storedValue]
   );
 
   useEffect(() => {
