@@ -33,6 +33,11 @@ function ActionCard({ title, subtitle, icon, iconClass = '', children }) {
         boxShadow: '0 30px 60px -12px rgba(99, 102, 241, 0.45)', 
         borderColor: 'rgba(99, 102, 241, 0.6)' 
       }}
+      whileFocus={{
+        scale: 1.02,
+        borderColor: 'var(--primary)',
+        boxShadow: '0 0 0 4px var(--primary-glow)'
+      }}
       transition={{ type: 'spring', stiffness: 350, damping: 20 }}
     >
       <div className="contract-header">
