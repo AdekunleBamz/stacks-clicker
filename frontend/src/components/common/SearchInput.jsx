@@ -21,7 +21,7 @@ function SearchInput({ value, onChange, onClear, placeholder = 'Search...', coun
   return (
     <div className="search-wrapper" role="search">
       <div className="search-relative">
-        <span className="search-icon" aria-hidden="true">🔍</span>
+        <span className="search-icon" aria-hidden="true" style={{ willChange: 'transform' }}>🔍</span>
         <input
           id={searchId}
           type="text"
