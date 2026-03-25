@@ -28,8 +28,7 @@ function Header({ theme, toggleTheme }) {
       <div className="header-content">
         <div 
           className="logo" 
-          role="banner" 
-          aria-label="Application Logo"
+          aria-label="Stacks Clicker Logo"
           title="Stacks Clicker Logo"
         >
           <div className="header-left">
@@ -56,6 +55,7 @@ function Header({ theme, toggleTheme }) {
               onClick={toggleTheme}
               aria-label={`Toggle to ${theme === 'dark' ? 'light' : 'dark'} theme`}
               title="Toggle application display theme"
+              style={{ transition: 'all 0.2s ease' }}
             >
               {theme === 'dark' ? '☀️' : '🌙'}
             </button>
