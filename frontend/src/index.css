@@ -485,6 +485,7 @@ textarea:focus-visible {
     inset 0 1px 1px 0 rgba(255, 255, 255, 0.05);
   border-radius: var(--radius-lg);
   transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  will-change: transform;
 }
 
 .glass-card-premium {
@@ -566,6 +567,7 @@ textarea:focus-visible {
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s ease;
+  will-change: transform;
 }
 
 .primary-button:hover {
@@ -582,6 +584,7 @@ textarea:focus-visible {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+  will-change: transform;
 }
 
 .secondary-button:hover {
