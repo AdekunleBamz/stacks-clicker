@@ -121,6 +121,10 @@ function TransactionHistory({ txLog }) {
     window.open(tx.explorerUrl, '_blank', 'noopener,noreferrer');
   }, []);
 
+  const handleCopy = useCallback((id) => {
+    copyText(id, 'ID');
+  }, [copyText]);
+
   return (
     <section className="tx-log glass-card" aria-labelledby="tx-history-title">
       <div className="log-header">
@@ -369,7 +373,7 @@ function TransactionHistory({ txLog }) {
                 searchTerm={searchTerm}
                 highlightText={highlightText}
                 onDetails={setSelectedTx}
-                onCopy={(id) => copyText(id, 'ID')}
+                onCopy={handleCopy}
                 onContextMenu={handleContextMenu}
                 onOpenExplorer={openExplorer}
               />
