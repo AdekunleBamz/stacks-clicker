@@ -47,8 +47,10 @@ function SkeletonLoader({ width = '100%', height = '20px', borderRadius = '8px',
           left: 0,
           width: '100%',
           height: '100%',
-          background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03), transparent)',
+          background: 'linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.05) 50%, transparent 100%)',
+          willChange: 'transform'
         }}
+
       />
     </div>
   );
