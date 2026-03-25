@@ -1466,10 +1466,12 @@ textarea:focus-visible {
   height: 10px;
   border-radius: 50%;
   background: var(--success);
-  margin-top: 6px;
-  box-shadow: 0 0 15px var(--success-glow);
+  margin-top: 5px;
+  box-shadow: 0 0 12px var(--success-glow);
   position: relative;
+  flex-shrink: 0;
 }
+
 
 .tx-item.pending .tx-status-dot {
   background: var(--warning);
