@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState } from 'react';
 import { Toaster } from 'react-hot-toast';
-import { notify } from './utils/toast';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import QuickActions from './components/QuickActions';
