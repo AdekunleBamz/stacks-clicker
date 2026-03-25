@@ -32,7 +32,7 @@ const SettingsModal = () => {
           <h4 className="settings-label">Appearance</h4>
           <div className="settings-row">
             <span>Theme Mode</span>
-            <button
+            <button 
               className="theme-toggle-btn secondary-button btn-sm"
               onClick={toggleTheme}
             >
@@ -45,9 +45,8 @@ const SettingsModal = () => {
           <h4 className="settings-label">Localization</h4>
           <div className="settings-row">
             <span>Preferred Language</span>
-            <select
+            <select 
               className="lang-select-input input-field"
-              aria-label="Preferred language"
               value={lang}
               onChange={(e) => handleLanguageChange(e.target.value)}
             >
@@ -65,13 +64,13 @@ const SettingsModal = () => {
             <span>Interaction Sounds</span>
             <div className="toggle-switch">
               {/* Simplified toggle for demonstration */}
-              <button type="button" className="secondary-button btn-sm">Enabled</button>
+              <button className="secondary-button btn-sm">Enabled</button>
             </div>
           </div>
         </section>
       </div>
 
-      <style>{`
+      <style jsx>{`
         .settings-container {
           display: flex;
           flex-direction: column;
