@@ -35,7 +35,7 @@ function SkeletonLoader({ width = '100%', height = '20px', borderRadius = '8px',
           x: ['-100%', '100%']
         }}
         transition={{
-          duration: 1.5,
+          duration: 1.2,
           repeat: Infinity,
           ease: "linear"
         }}
@@ -46,7 +46,7 @@ function SkeletonLoader({ width = '100%', height = '20px', borderRadius = '8px',
           left: 0,
           width: '100%',
           height: '100%',
-          background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent)',
+          background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03), transparent)',
         }}
       />
     </div>
