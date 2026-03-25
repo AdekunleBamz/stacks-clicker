@@ -280,6 +280,7 @@ textarea:focus-visible {
   top: 0;
   z-index: 100;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, height, background-color;
 }
 
 .header-scrolled {
@@ -290,6 +291,7 @@ textarea:focus-visible {
   border-bottom: 1px solid var(--border);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
+
 
 .header-content {
   max-width: 1200px;
