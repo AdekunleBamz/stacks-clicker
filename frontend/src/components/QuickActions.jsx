@@ -10,7 +10,8 @@ function QuickActions({ address, onClearLog, onPingAll }) {
   const { playSound } = useSound();
 
   const handleAction = useCallback((fn) => {
-    playSound('click');
+    if (typeof fn !== 'function') return;
+    playSound?.('click');
     fn();
   }, [playSound]);
 
