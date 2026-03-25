@@ -100,16 +100,19 @@ export function WalletProvider({ children }) {
     return () => window.removeEventListener('storage', handleStorage);
   }, [checkConnection]);
 
+  const appDetails = useMemo(() => getAppDetails(), []);
+
   const value = useMemo(
     () => ({
       address,
       connectWallet,
       disconnectWallet,
-      appDetails: getAppDetails(),
+      appDetails,
       isConnected: !!address,
     }),
-    [address, connectWallet, disconnectWallet]
+    [address, connectWallet, disconnectWallet, appDetails]
   );
+
 
   return <WalletContext.Provider value={value}>{children}</WalletContext.Provider>;
 }
