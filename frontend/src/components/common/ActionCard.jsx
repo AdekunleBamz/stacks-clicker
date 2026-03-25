@@ -27,8 +27,13 @@ function ActionCard({ title, subtitle, icon, iconClass = '', children }) {
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      whileHover={{ y: -8, boxShadow: '0 25px 50px -12px rgba(99, 102, 241, 0.4)', borderColor: 'rgba(99, 102, 241, 0.5)' }}
-      transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+      whileHover={{ 
+        y: -10, 
+        scale: 1.02,
+        boxShadow: '0 30px 60px -12px rgba(99, 102, 241, 0.45)', 
+        borderColor: 'rgba(99, 102, 241, 0.6)' 
+      }}
+      transition={{ type: 'spring', stiffness: 350, damping: 20 }}
     >
       <div className="contract-header">
         <div className={`contract-icon ${iconClass}`} aria-hidden="true">{icon}</div>
