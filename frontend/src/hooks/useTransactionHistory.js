@@ -56,9 +56,18 @@ export function useTransactionHistory({ playSound, onTxAdded }) {
     [playSound, onTxAdded]
   );
 
+  /**
+   * Clears all session transaction logs.
+   */
+  const clearLog = useCallback(() => {
+    setTxLog([]);
+    console.debug('[useTransactionHistory] Transaction log cleared');
+  }, []);
+  
   return {
     txLog,
     addTxToLog,
     setTxLog,
+    clearLog,
   };
 }
