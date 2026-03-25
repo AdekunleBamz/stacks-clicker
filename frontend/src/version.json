@@ -1,0 +1,6 @@
+{
+  "version": "2.1.0-alpha",
+  "build": "2026.03.25",
+  "environment": "production",
+  "interface": "v2i"
+}
