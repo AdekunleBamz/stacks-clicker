@@ -24,6 +24,8 @@ function ActionCard({ title, subtitle, icon, iconClass = '', children }) {
       role="region"
       aria-labelledby={titleId}
       aria-describedby={subtitle ? `action-desc-${id}` : undefined}
+      layout
+      style={{ willChange: 'transform, opacity' }}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
@@ -39,6 +41,7 @@ function ActionCard({ title, subtitle, icon, iconClass = '', children }) {
         boxShadow: '0 0 0 4px var(--primary-glow)'
       }}
       transition={{ type: 'spring', stiffness: 350, damping: 20 }}
+
     >
       <div className="contract-header">
         <div className={`contract-icon ${iconClass}`} aria-hidden="true">{icon}</div>
