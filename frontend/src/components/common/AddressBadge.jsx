@@ -38,7 +38,8 @@ function AddressBadge({ address, onDisconnect }) {
         onClick={handleCopy}
         title={`Copy full Stacks address: ${address}`}
         aria-label={`Copy wallet address ${truncateAddress(address, 4)}`}
-        style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+        style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', willChange: 'transform' }}
+
       >
         <span className="address-text" aria-hidden="true">
           {truncateAddress(address, isMobile ? 4 : 6)}
@@ -55,6 +56,7 @@ function AddressBadge({ address, onDisconnect }) {
                 aria-live="polite"
               >
                 ✅
+                <span className="sr-only">Address copied to clipboard</span>
               </motion.span>
             ) : (
               <motion.span
