@@ -1148,13 +1148,22 @@ textarea:focus-visible {
 .stat-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 1.25rem;
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.25rem;
   border-left: 4px solid var(--accent-color, var(--primary));
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  will-change: transform;
 }
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
 
 .stat-icon { font-size: 1.5rem; }
 .stat-card .value { font-size: 1.5rem; font-weight: 800; }
