@@ -4,7 +4,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 // import QuickActions from './components/QuickActions';
 // import NetworkHeartbeat from './components/NetworkHeartbeat';
-import OnboardingTour from './components/OnboardingTour';
+// import OnboardingTour from './components/OnboardingTour';
 import FloatingActionButton from './components/FloatingActionButton';
 import { useWallet } from './context/WalletContext';
 import ParticleOverlay from './components/common/ParticleOverlay';
@@ -29,6 +29,7 @@ const MainGrid = React.lazy(() => import('./components/MainGrid'));
 const PlayerStats = React.lazy(() => import('./components/PlayerStats'));
 const QuickActions = React.lazy(() => import('./components/QuickActions'));
 const NetworkHeartbeat = React.lazy(() => import('./components/NetworkHeartbeat'));
+const OnboardingTour = React.lazy(() => import('./components/OnboardingTour'));
 
 /**
  * Main application component for the Stacks Clicker v2.
@@ -168,7 +169,9 @@ export default function App() {
       </div>
 
       <Footer />
-      <OnboardingTour />
+      <React.Suspense fallback={null}>
+        <OnboardingTour />
+      </React.Suspense>
       <FloatingActionButton />
       <React.Suspense fallback={null}>
         <NetworkHeartbeat />
