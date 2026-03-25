@@ -39,10 +39,17 @@ function TransactionItem({
       </div>
       <motion.div
         className={`tx-item ${tx.status}`}
+        tabIndex={0}
         drag="x"
         dragConstraints={{ left: -120, right: 0 }}
         dragElastic={0.1}
         whileDrag={{ scale: 1.02 }}
+        whileFocus={{
+          scale: 1.01,
+          borderColor: 'var(--primary)',
+          boxShadow: '0 0 0 2px var(--primary-glow)',
+          outline: 'none'
+        }}
         onContextMenu={(e) => onContextMenu(e, tx)}
         style={{ willChange: 'transform' }}
         {...longPressHandlers}
