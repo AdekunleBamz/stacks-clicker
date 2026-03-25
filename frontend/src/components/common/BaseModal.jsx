@@ -9,18 +9,25 @@ import { useLockBodyScroll } from '../hooks/useLockBodyScroll';
  */
 export default function BaseModal({ isOpen, onClose, title, children, footer, className = '' }) {
   const closeBtnRef = useRef(null);
+  const previousFocus = useRef(null);
 
-  // Lock scroll when open
-  // This is a conditional hook usage, but we can't do that.
-  // We'll use the hook inside the component that is only rendered when isOpen is true.
-  // Or better, we just always use it and the hook handles its own logic.
-  // Actually, useLockBodyScroll as written should be used inside the modal content component.
-  
   useEffect(() => {
     if (isOpen) {
-      setTimeout(() => closeBtnRef.current?.focus(), 100);
+      previousFocus.current = document.activeElement;
+      const timer = setTimeout(() => closeBtnRef.current?.focus(), 100);
+      
+      const handleEscape = (e) => {
+        if (e.key === 'Escape') onClose();
+      };
+      
+      window.addEventListener('keydown', handleEscape);
+      return () => {
+        clearTimeout(timer);
+        window.removeEventListener('keydown', handleEscape);
+        previousFocus.current?.focus();
+      };
     }
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
