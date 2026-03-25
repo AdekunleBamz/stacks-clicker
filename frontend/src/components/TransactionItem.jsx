@@ -41,8 +41,9 @@ function TransactionItem({
         className={`tx-item ${tx.status}`}
         tabIndex={0}
         drag="x"
-        dragConstraints={{ left: -120, right: 0 }}
-        dragElastic={0.1}
+        dragConstraints={{ left: -140, right: 0 }}
+        dragElastic={0.05}
+
         whileDrag={{ scale: 1.02 }}
         whileFocus={{
           scale: 1.01,
