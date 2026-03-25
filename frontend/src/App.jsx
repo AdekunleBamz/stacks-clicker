@@ -44,7 +44,7 @@ export default function App() {
   const { playSound } = useSound();
 
   // Application State
-  const { txLog, addTxToLog, setTxLog } = useTransactionHistory({
+  const { txLog, addTxToLog, setTxLog, clearLog } = useTransactionHistory({
     playSound,
     onTxAdded: () => setParticleTrigger((prev) => prev + 1),
   });
@@ -170,7 +170,7 @@ export default function App() {
       <OnboardingTour />
       <FloatingActionButton />
       <NetworkHeartbeat />
-      <QuickActions address={address} onClearLog={() => setTxLog([])} onPingAll={pingAll} />
+      <QuickActions address={address} onClearLog={clearLog} onPingAll={pingAll} />
 
       <Toaster position="top-right" />
       {!prefersReducedMotion && <ParticleOverlay trigger={particleTrigger} />}
