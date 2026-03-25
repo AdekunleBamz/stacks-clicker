@@ -21,12 +21,13 @@ export function useClicker({ onTxSubmit }) {
 
   /**
    * Internal helper to update loading state for a specific action key.
-   * @param {string} key - Unique key for the action
-   * @param {boolean} val - Loading state value
    */
-  const setLoading = (key, val) => {
-    setLoadingStates((prev) => ({ ...prev, [key]: val }));
-  };
+  const setLoading = useCallback((key, val) => {
+    setLoadingStates((prev) => {
+      if (prev[key] === val) return prev;
+      return { ...prev, [key]: val };
+    });
+  }, []);
 
   /**
    * Checks if a specific contract function is currently loading.
