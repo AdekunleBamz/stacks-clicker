@@ -19,7 +19,7 @@ function Footer() {
     >
       <div className="footer-content glass-card">
         <div className="footer-left">
-          <p>© {currentYear} • Built with <span role="img" aria-label="love">❤️</span> on Stacks</p>
+          <p>© {currentYear} • Stacks Clicker • Built with <span role="img" aria-label="love">❤️</span> on Stacks</p>
           <span className="app-version" title="Current Interface Version">v{version}</span>
         </div>
         <div className="footer-links">
