@@ -1,5 +1,6 @@
 import React, { useState, memo, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useMedia } from '../../hooks/useMedia';
 import { useClipboard } from '../../hooks/useClipboard';
 import { truncateAddress } from '../../utils/format';
@@ -29,20 +30,46 @@ function AddressBadge({ address, onDisconnect }) {
 
   return (
     <div className="wallet-info" role="region" aria-label="Wallet Connection Status">
-      <button
+      <motion.button
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
         type="button"
         className="address-badge-btn secondary-button glass-card"
         onClick={handleCopy}
         title={`Copy full Stacks address: ${address}`}
         aria-label={`Copy wallet address ${truncateAddress(address, 4)}`}
+        style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
       >
         <span className="address-text" aria-hidden="true">
           {truncateAddress(address, isMobile ? 4 : 6)}
         </span>
-        <span className="copy-status" role="status" aria-live="polite">
-          {copied ? ' ✅' : ' 📋'}
-        </span>
-      </button>
+        <div className="copy-status-container" style={{ width: '20px', display: 'flex', justifyContent: 'center' }}>
+          <AnimatePresence mode="wait">
+            {copied ? (
+              <motion.span
+                key="check"
+                initial={{ opacity: 0, scale: 0.5, rotate: -45 }}
+                animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                exit={{ opacity: 0, scale: 0.5 }}
+                role="status"
+                aria-live="polite"
+              >
+                ✅
+              </motion.span>
+            ) : (
+              <motion.span
+                key="copy"
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.5 }}
+                aria-hidden="true"
+              >
+                📋
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </div>
+      </motion.button>
       {onDisconnect && (
         <button
           type="button"
