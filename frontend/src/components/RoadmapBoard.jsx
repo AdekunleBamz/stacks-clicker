@@ -47,15 +47,17 @@ export default function RoadmapBoard() {
                 {item.votes} votes
               </div>
               {item.status !== 'completed' && (
-                <button 
+                <motion.button 
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   type="button" 
-                  className="roadmap-vote-btn"
+                  className="roadmap-vote-btn secondary-button btn-sm"
                   onClick={() => handleVote(item.title)}
                   aria-label={`Vote for ${item.title}`}
                   title="Cast a vote for this feature"
                 >
                   Vote
-                </button>
+                </motion.button>
               )}
             </div>
           </motion.div>
