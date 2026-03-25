@@ -27,21 +27,35 @@ export default function BaseModal({ isOpen, onClose, title, children, footer, cl
   return (
     <AnimatePresence>
       {isOpen && (
-        <div 
-          className="modal-overlay" 
-          onClick={onClose} 
+        <motion.div
+          key="modal-overlay"
+          initial={{ opacity: 0, backdropFilter: 'blur(0px)' }}
+          animate={{ opacity: 1, backdropFilter: 'blur(12px)' }}
+          exit={{ opacity: 0, backdropFilter: 'blur(0px)' }}
+          className="modal-overlay"
+          onClick={onClose}
           role="presentation"
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(0, 0, 0, 0.4)',
+            zIndex: 1000,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '1.5rem'
+          }}
         >
-          <ModalContent 
-            onClose={onClose} 
-            title={title} 
-            footer={footer} 
-            className={className} 
+          <ModalContent
+            onClose={onClose}
+            title={title}
+            footer={footer}
+            className={className}
             closeBtnRef={closeBtnRef}
           >
             {children}
           </ModalContent>
-        </div>
+        </motion.div>
       )}
     </AnimatePresence>
   );
