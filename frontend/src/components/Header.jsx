@@ -62,14 +62,14 @@ function Header({ theme, toggleTheme }) {
           </Tooltip>
 
           {address ? (
-            <div className="wallet-connected">
+            <div className="wallet-connected" role="group" aria-label="Wallet connection options">
               <AddressBadge address={address} />
               <button
                 type="button"
                 className="btn-logout"
                 onClick={disconnectWallet}
-                aria-label="Logout"
-                title="Logout"
+                aria-label="Disconnect wallet session"
+                title="Disconnect wallet"
               >
                 <span className="logout-icon" aria-hidden="true">🚪</span>
               </button>
@@ -79,7 +79,8 @@ function Header({ theme, toggleTheme }) {
               type="button"
               className="btn-connect"
               onClick={connectWallet}
-              aria-label="Connect Stacks Wallet"
+              aria-label="Connect Stacks Wallet to begin playing"
+              title="Connect Wallet"
             >
               Connect Wallet
             </button>
