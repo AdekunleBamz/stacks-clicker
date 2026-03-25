@@ -16,9 +16,14 @@ import { useScrollPosition } from '../hooks/useScrollPosition';
  */
 function Header({ theme, toggleTheme }) {
   const { address, connectWallet, disconnectWallet } = useWallet();
-  const { lang, setLang } = useI18n();
   const { y } = useScrollPosition();
   const isScrolled = y > 20;
+
+  const handleLangChange = React.useCallback(
+    (e) => setLang(e.target.value),
+    [setLang]
+  );
+
 
   return (
     <header 
@@ -41,8 +46,9 @@ function Header({ theme, toggleTheme }) {
           <select
             className="language-select input-field"
             value={lang}
-            onChange={(e) => setLang(e.target.value)}
+            onChange={handleLangChange}
             aria-label="Select application language"
+
           >
             <option value="en">EN</option>
             <option value="es">ES</option>
