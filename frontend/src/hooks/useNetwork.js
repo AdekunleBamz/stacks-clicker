@@ -16,10 +16,12 @@ export function useNetwork() {
   const [blockHeight, setBlockHeight] = useState(840000); // Realistic baseline
   const [isConnected, setIsConnected] = useState(true);
   const [network, setNetwork] = useState('mainnet');
+  const [isUpdating, setIsUpdating] = useState(false);
   const isFocused = useWindowFocus();
   const isVisible = useDocumentVisibility();
 
   const fetchStatus = useCallback(async () => {
+    setIsUpdating(true);
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 10000);
     try {
@@ -40,6 +42,7 @@ export function useNetwork() {
       setIsConnected(false);
     } finally {
       clearTimeout(timeout);
+      setIsUpdating(false);
     }
   }, []);
 
@@ -51,5 +54,5 @@ export function useNetwork() {
 
   useInterval(fetchStatus, isFocused && isVisible ? 30000 : null); // Update every 30s only when active
 
-  return { blockHeight, isConnected, network };
+  return { blockHeight, isConnected, network, isUpdating };
 }
