@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useSound } from '../../hooks/useSound';
 
 /**
  * FAB that appears when the user scrolls down, allowing quick scroll to top.
  */
 export default function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
+  const { playSound } = useSound();
 
   useEffect(() => {
     const toggleVisibility = () => {
-      setIsVisible(window.pageYOffset > 300);
+      setIsVisible(window.scrollY > 300);
     };
 
     window.addEventListener('scroll', toggleVisibility, { passive: true });
@@ -30,11 +32,13 @@ export default function ScrollToTop() {
           type="button"
           className="scroll-to-top secondary-button btn-sm glass-card"
           onClick={scrollToTop}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 20 }}
-          whileHover={{ scale: 1.1 }}
+          initial={{ opacity: 0, scale: 0.5, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.5, y: 20 }}
+          whileHover={{ scale: 1.1, backgroundColor: 'var(--border)' }}
           whileTap={{ scale: 0.9 }}
+          onHoverStart={() => playSound('hover')}
+          transition={{ type: 'spring', stiffness: 400, damping: 17 }}
           aria-label="Scroll back to top of the page"
           title="Scroll to Top"
         >
