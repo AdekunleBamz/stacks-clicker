@@ -445,8 +445,11 @@ textarea:focus-visible {
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
+  box-shadow: 
+    var(--glass-shadow),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.05);
   border-radius: var(--radius-lg);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .app-btn {
