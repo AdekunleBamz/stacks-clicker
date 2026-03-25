@@ -11,7 +11,8 @@ export default function NetworkLogo() {
       animate={{ rotate: [0, 5, -5, 0] }}
       transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       role="img"
-      aria-label="Stacks Clicker Network Logo"
+      aria-label="Stacks Clicker animated diamond logo"
+      title="Stacks Clicker Network Logo"
     >
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M16 2L4 16L16 30L28 16L16 2Z" fill="url(#logo-grad)" />
