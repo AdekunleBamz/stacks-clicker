@@ -17,11 +17,13 @@ export default function TipJar({ onTxSubmit }) {
   const [tipAmount, setTipAmount] = useState(1000); // 1000 uSTX = 0.001 STX
   const [recipientAddress, setRecipientAddress] = useState('');
   const [totalTipped, setTotalTipped] = useState(0);
+  const [feedbackMessage, setFeedbackMessage] = useState('');
 
   const handleQuickTip = async () => {
     if (!isConnected) return;
 
     setLoading(true);
+    setFeedbackMessage('Processing quick tip...');
     try {
       const result = await callContract({
         contractAddress: DEPLOYER,
@@ -31,9 +33,11 @@ export default function TipJar({ onTxSubmit }) {
       });
 
       setTotalTipped((prev) => prev + 1000);
+      setFeedbackMessage('Quick tip of 0.001 STX sent! Thank you.');
       onTxSubmit?.('quick-tip', result.txId);
     } catch (err) {
       console.error('Quick tip failed:', err);
+      setFeedbackMessage('Quick tip transaction failed.');
     } finally {
       setLoading(false);
     }
@@ -43,6 +47,7 @@ export default function TipJar({ onTxSubmit }) {
     if (!isConnected) return;
 
     setLoading(true);
+    setFeedbackMessage('Sending self-ping...');
     try {
       const result = await callContract({
         contractAddress: DEPLOYER,
@@ -51,9 +56,11 @@ export default function TipJar({ onTxSubmit }) {
         functionArgs: [],
       });
 
+      setFeedbackMessage('Self-ping confirmed on network.');
       onTxSubmit?.('self-ping', result.txId);
     } catch (err) {
       console.error('Self-ping failed:', err);
+      setFeedbackMessage('Self-ping failed.');
     } finally {
       setLoading(false);
     }
@@ -64,6 +71,7 @@ export default function TipJar({ onTxSubmit }) {
     if (!isConnected || !normalizedRecipient) return;
 
     setLoading(true);
+    setFeedbackMessage(`Sending ${tipAmount} uSTX to ${normalizedRecipient}...`);
     try {
       const result = await callContract({
         contractAddress: DEPLOYER,
@@ -76,9 +84,11 @@ export default function TipJar({ onTxSubmit }) {
       });
 
       setTotalTipped((prev) => prev + tipAmount);
+      setFeedbackMessage(`Successfully tipped ${tipAmount} uSTX to ${normalizedRecipient}!`);
       onTxSubmit?.('tip-user', result.txId);
     } catch (err) {
       console.error('Tip user failed:', err);
+      setFeedbackMessage('Failed to send tip to user.');
     } finally {
       setLoading(false);
     }
@@ -88,6 +98,7 @@ export default function TipJar({ onTxSubmit }) {
     if (!isConnected) return;
 
     setLoading(true);
+    setFeedbackMessage(`Donating ${tipAmount} uSTX to developers...`);
     try {
       const result = await callContract({
         contractAddress: DEPLOYER,
@@ -97,9 +108,11 @@ export default function TipJar({ onTxSubmit }) {
       });
 
       setTotalTipped((prev) => prev + tipAmount);
+      setFeedbackMessage('Thank you for your generous donation!');
       onTxSubmit?.('donate', result.txId);
     } catch (err) {
       console.error('Donate failed:', err);
+      setFeedbackMessage('Donation transaction failed.');
     } finally {
       setLoading(false);
     }
@@ -110,6 +123,7 @@ export default function TipJar({ onTxSubmit }) {
       <div className="game-header">
         <h2 id="tipjar-title">💰 TipJar</h2>
         <span className="game-badge" title="Direct peer-to-peer creator tips interface">Support Creators</span>
+        <span className="sr-only" role="status" aria-live="polite">{feedbackMessage}</span>
       </div>
 
       <div className="game-stats" role="group" aria-label="Tipping statistics">
@@ -132,11 +146,12 @@ export default function TipJar({ onTxSubmit }) {
 
         <button
           type="button"
-          className="action-btn secondary-button"
+          className="action-btn secondary-button glass-card"
           onClick={handleSelfPing}
           disabled={!isConnected || loading}
           title="Send a self ping transaction"
           aria-label="Send self ping transaction"
+          aria-busy={loading}
         >
           <span aria-hidden="true">📡</span> Self Ping
         </button>
