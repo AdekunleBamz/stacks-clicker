@@ -1488,7 +1488,13 @@ textarea:focus-visible {
 .tx-main { flex: 1; }
 .tx-header { display: flex; justify-content: space-between; margin-bottom: 0.25rem; align-items: center; }
 .tx-action-label { font-weight: 700; font-size: 0.95rem; }
-.tx-timestamp { font-size: 0.7rem; color: var(--text-muted); }
+.tx-timestamp {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-feature-settings: "tnum";
+  letter-spacing: 0.01em;
+}
+
 .tx-link { color: var(--success); text-decoration: none; font-size: 0.8rem; font-family: monospace; display: flex; align-items: center; gap: 0.25rem; transition: opacity 0.2s; }
 .tx-link:hover { opacity: 0.8; text-decoration: underline; }
 
