@@ -42,7 +42,7 @@ export function useSound() {
    */
   const playSound = useCallback((type) => {
     // Graceful acoustic degraded safety fallback for rigid browser autoplay policies
-    if (!['click', 'success', 'error'].includes(type)) {
+    if (!['click', 'success', 'error', 'hover'].includes(type)) {
       return;
     }
 
@@ -59,6 +59,15 @@ export function useSound() {
 
     // Synthesize different waveforms based on the required feedback type
     switch (type) {
+      case 'hover':
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(1200, now);
+        osc.frequency.exponentialRampToValueAtTime(800, now + 0.05);
+        gain.gain.setValueAtTime(0.02, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+        osc.start(now);
+        osc.stop(now + 0.05);
+        break;
       case 'click':
         osc.type = 'sine';
         osc.frequency.setValueAtTime(800, now);
