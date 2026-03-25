@@ -16,6 +16,7 @@ import { useScrollPosition } from '../hooks/useScrollPosition';
  */
 function Header({ theme, toggleTheme }) {
   const { address, connectWallet, disconnectWallet } = useWallet();
+  const { lang, setLang } = useI18n();
   const { y } = useScrollPosition();
   const isScrolled = y > 20;
 
@@ -23,6 +24,7 @@ function Header({ theme, toggleTheme }) {
     (e) => setLang(e.target.value),
     [setLang]
   );
+
 
 
   return (
@@ -36,11 +38,10 @@ function Header({ theme, toggleTheme }) {
           aria-label="Stacks Clicker Logo"
           title="Stacks Clicker Logo"
         >
-          <div className="header-left">
           <NetworkLogo />
           <h1 className="header-title text-gradient" aria-label="Stacks Clicker Dashboard">Stacks Clicker</h1>
         </div>
-        </div>
+
 
         <div className="wallet-section">
           <select
