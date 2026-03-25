@@ -43,6 +43,8 @@
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   --shadow-primary: 0 0 15px var(--primary-glow);
   --shadow-success: 0 0 15px var(--success-glow);
+  --shadow-premium: 0 20px 50px -12px rgba(99, 102, 241, 0.35);
+  --shadow-deep: 0 30px 60px -12px rgba(0, 0, 0, 0.5);
 
   /* Gradient Tokens */
   --grad-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
@@ -450,6 +452,15 @@ textarea:focus-visible {
     inset 0 1px 1px 0 rgba(255, 255, 255, 0.05);
   border-radius: var(--radius-lg);
   transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.glass-card-premium {
+  background: rgba(15, 15, 25, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  box-shadow: var(--shadow-premium);
+  border-radius: var(--radius-lg);
 }
 
 .app-btn {

@@ -64,7 +64,7 @@ function ClickerCard({ address, clicker }) {
       title="🎯 Power Clicker"
       subtitle="Click to generate on-chain activity."
       icon="🚀"
-      iconClass="bg-indigo-500/20 text-indigo-400 glass-card"
+      iconClass="bg-indigo-500/20 text-indigo-400 glass-card-premium"
     >
       <div className="clicker-header">
         <AnimatePresence>
