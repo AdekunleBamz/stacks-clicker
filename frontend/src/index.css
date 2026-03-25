@@ -750,10 +750,27 @@ textarea:focus-visible {
   grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   gap: 2.5rem;
   align-items: stretch;
+}
 
+@media (max-width: 1024px) {
+  .main-grid {
+    grid-template-columns: 1fr;
+  }
+  .stats-bar {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 640px) {
+  .stats-bar {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .section-title {
+    font-size: 1.5rem;
+  }
+}
+
   .cards-container {
     grid-template-columns: 1fr;
     gap: 1.5rem;
