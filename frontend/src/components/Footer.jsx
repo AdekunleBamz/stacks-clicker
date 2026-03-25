@@ -1,12 +1,14 @@
 import React, { memo } from 'react';
 import packageJson from '../../package.json';
+import versionData from '../version.json';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
+
 
 /**
  * Standard application footer.
  */
 function Footer() {
-  const version = packageJson.version;
+  const version = versionData.version;
   const currentYear = new Date().getFullYear();
   const [ref, isVisible] = useIntersectionObserver({ threshold: 0.5 });
 
