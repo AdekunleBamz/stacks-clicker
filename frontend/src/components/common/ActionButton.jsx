@@ -53,6 +53,12 @@ function ActionButton({
         translateY: 0,
         filter: "brightness(0.9)"
       } : {}}
+      whileFocus={!disabled && !isLoading ? {
+        scale: 1.02,
+        borderColor: 'var(--primary)',
+        boxShadow: '0 0 0 4px var(--primary-glow)',
+        outline: 'none'
+      } : {}}
       animate={isError ? "shake" : {}}
       variants={shakeVariants}
       transition={{ type: "spring", stiffness: 500, damping: 15 }}
