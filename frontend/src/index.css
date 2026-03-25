@@ -1138,12 +1138,18 @@ textarea:focus-visible {
 }
 
 /* Stats Bar */
+.stats-section-container {
+  max-width: 1200px;
+  margin: 0 auto 2rem;
+  width: 100%;
+}
+
 .stats-bar {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  margin-bottom: 2rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
 }
+
 
 .stat-card {
   background: var(--bg-card);
