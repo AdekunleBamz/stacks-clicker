@@ -3,7 +3,7 @@ import { Toaster } from 'react-hot-toast';
 import Header from './components/Header';
 import Footer from './components/Footer';
 // import QuickActions from './components/QuickActions';
-import NetworkHeartbeat from './components/NetworkHeartbeat';
+// import NetworkHeartbeat from './components/NetworkHeartbeat';
 import OnboardingTour from './components/OnboardingTour';
 import FloatingActionButton from './components/FloatingActionButton';
 import { useWallet } from './context/WalletContext';
@@ -27,8 +27,8 @@ import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 // Lazy load heavy components for optimized initial paint
 const MainGrid = React.lazy(() => import('./components/MainGrid'));
 const PlayerStats = React.lazy(() => import('./components/PlayerStats'));
-const TransactionHistory = React.lazy(() => import('./components/TransactionHistory'));
 const QuickActions = React.lazy(() => import('./components/QuickActions'));
+const NetworkHeartbeat = React.lazy(() => import('./components/NetworkHeartbeat'));
 
 /**
  * Main application component for the Stacks Clicker v2.
@@ -170,7 +170,9 @@ export default function App() {
       <Footer />
       <OnboardingTour />
       <FloatingActionButton />
-      <NetworkHeartbeat />
+      <React.Suspense fallback={null}>
+        <NetworkHeartbeat />
+      </React.Suspense>
       <React.Suspense fallback={null}>
         <QuickActions address={address} onClearLog={clearLog} onPingAll={pingAll} />
       </React.Suspense>
