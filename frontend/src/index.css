@@ -475,6 +475,12 @@ textarea:focus-visible {
 }
 
 /* Unified Components */
+.glass-card, .glass-card-premium {
+  border-radius: var(--radius-lg);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  will-change: transform;
+}
+
 .glass-card {
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
@@ -483,9 +489,6 @@ textarea:focus-visible {
   box-shadow: 
     var(--glass-shadow),
     inset 0 1px 1px 0 rgba(255, 255, 255, 0.05);
-  border-radius: var(--radius-lg);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-  will-change: transform;
 }
 
 .glass-card-premium {
@@ -494,8 +497,8 @@ textarea:focus-visible {
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(99, 102, 241, 0.3);
   box-shadow: var(--shadow-premium);
-  border-radius: var(--radius-lg);
 }
+
 
 .app-btn {
   display: inline-flex;
