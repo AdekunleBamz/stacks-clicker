@@ -30,10 +30,17 @@ export default function RoadmapBoard() {
           <motion.div
             key={item.title}
             className={`roadmap-card ${item.status} glass-card`}
+            tabIndex={0}
             role="article"
             aria-labelledby={`roadmap-item-title-${index}`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
+            whileFocus={{
+              scale: 1.02,
+              borderColor: 'var(--primary)',
+              boxShadow: '0 0 0 4px var(--primary-glow)',
+              outline: 'none'
+            }}
             transition={{ delay: index * 0.1 }}
           >
             <div className={`status-tag ${item.status}`} aria-label={`Project status: ${item.status}`}>{item.status}</div>
