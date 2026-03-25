@@ -33,16 +33,22 @@ export function useBattery() {
 
     navigator.getBattery().then((batt) => {
       batteryInstance = batt;
+      
+      const handleChange = () => updateBattery(batt);
+      
+      batteryInstance.addEventListener('levelchange', handleChange);
+      batteryInstance.addEventListener('chargingchange', handleChange);
+      
       updateBattery(batt);
 
-      batt.addEventListener('levelchange', () => updateBattery(batt));
-      batt.addEventListener('chargingchange', () => updateBattery(batt));
+      // Store handlers for cleanup
+      batteryInstance._handleChange = handleChange;
     });
 
     return () => {
-      if (batteryInstance) {
-        batteryInstance.removeEventListener('levelchange', () => updateBattery(batteryInstance));
-        batteryInstance.removeEventListener('chargingchange', () => updateBattery(batteryInstance));
+      if (batteryInstance && batteryInstance._handleChange) {
+        batteryInstance.removeEventListener('levelchange', batteryInstance._handleChange);
+        batteryInstance.removeEventListener('chargingchange', batteryInstance._handleChange);
       }
     };
   }, []);
