@@ -6,8 +6,8 @@ import Tooltip from './common/Tooltip';
 /**
  * Visual indicator for network synchronization and state.
  */
-export default function NetworkHeartbeat() {
-  const { blockHeight, isConnected, network } = useNetwork();
+function NetworkHeartbeat() {
+  const { blockHeight, isConnected, network, isUpdating } = useNetwork();
   const heartbeatTitle = isConnected
     ? `Stacks ${network} live at block ${blockHeight}`
     : 'Stacks interactive network currently unavailable';
@@ -15,7 +15,7 @@ export default function NetworkHeartbeat() {
   return (
     <Tooltip content={heartbeatTitle}>
       <div 
-        className="heartbeat-container" 
+        className={`heartbeat-container ${isUpdating ? 'heartbeat-active' : ''}`} 
         role="status" 
         aria-live="polite" 
         aria-atomic="true" 
@@ -23,11 +23,11 @@ export default function NetworkHeartbeat() {
       >
         <motion.div 
           animate={isConnected ? {
-            scale: [1, 1.5, 1],
-            opacity: [0.8, 0.4, 0.8]
+            scale: isUpdating ? [1, 1.8, 1] : [1, 1.5, 1],
+            opacity: isUpdating ? [1, 0.2, 1] : [0.8, 0.4, 0.8]
           } : {}}
           transition={{
-            duration: 2,
+            duration: isUpdating ? 0.6 : 2,
             repeat: Infinity,
             ease: "easeInOut"
           }}
@@ -44,3 +44,5 @@ export default function NetworkHeartbeat() {
     </Tooltip>
   );
 }
+
+export default React.memo(NetworkHeartbeat);
