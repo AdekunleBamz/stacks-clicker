@@ -8,7 +8,14 @@ import { useLocalStorage } from './useLocalStorage';
  * @returns {Object} { theme, toggleTheme, setTheme }
  */
 export function useTheme() {
-  const [theme, setTheme] = useLocalStorage('theme', 'dark');
+  const getSystemTheme = () => {
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: light)').matches) {
+      return 'light';
+    }
+    return 'dark';
+  };
+
+  const [theme, setTheme] = useLocalStorage('theme', getSystemTheme());
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
