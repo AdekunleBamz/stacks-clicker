@@ -1,24 +1,19 @@
 # Code of Conduct
 
-This project is committed to providing a welcoming and respectful space for everyone.
+We are committed to providing a welcoming and respectful space for everyone.
 
-## Our Standards
+## Standards
 
-- Be respectful and constructive in discussions.
-- Assume good intent and ask clarifying questions before escalating.
+- Be respectful and constructive.
+- Assume good intent.
 - Share feedback about code, not people.
-- Avoid harassment, discrimination, or personal attacks.
-
-## Scope
-
-This Code of Conduct applies in project spaces, including issues, pull requests, and discussions.
+- Avoid harassment or personal attacks.
 
 ## Reporting
 
-If you experience or witness unacceptable behavior, report it to `security@stacksclicker.io`.
-Reports will be reviewed and handled in confidence. Please include:
-- A description of the incident.
-- Dates and times of the occurrence.
-- Any relevant context or screenshots.
+Report unacceptable behavior to `security@stacksclicker.io`. Reports include:
+- Description of the incident.
+- Dates and relevant context.
 
-If email is unavailable, open a private GitHub security advisory.
+All reports are handled in confidence.
+
