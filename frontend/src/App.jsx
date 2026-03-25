@@ -148,9 +148,12 @@ export default function App() {
       </React.Suspense>
 
       <div className="layout-content" role="presentation">
-        <React.Suspense fallback={<SkeletonLoader height="300px" borderRadius="24px" />}>
-          <PlayerStats stats={stats} txCount={txLog.length} />
-        </React.Suspense>
+        <div className="stats-section-container">
+          <React.Suspense fallback={<SkeletonLoader height="120px" borderRadius="16px" theme={theme} />}>
+            <PlayerStats stats={stats} txCount={txLog.length} />
+          </React.Suspense>
+        </div>
+
 
         <main id="main-content" className="app-main" tabIndex={-1} style={{ outline: 'none' }}>
           <React.Suspense fallback={<SkeletonLoader height="500px" borderRadius="32px" />}>
