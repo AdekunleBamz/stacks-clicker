@@ -2,6 +2,12 @@
  * Centralized constants for the Stacks Clicker application.
  */
 
+/** @type {string} Network environment */
+export const STACKS_NETWORK =
+  String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
+    ? 'testnet'
+    : 'mainnet';
+
 /** @type {string} Smart contract deployer address */
 export const DEPLOYER = String(
   import.meta.env.VITE_DEPLOYER_ADDRESS || 'SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT'
@@ -16,16 +22,32 @@ export const TIPJAR_CONTRACT = 'tipjar-v2p';
 /** @type {string} QuickPoll contract name */
 export const QUICKPOLL_CONTRACT = 'quickpoll-v2m';
 
-/** @type {string} Network environment */
-export const STACKS_NETWORK =
-  String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
-    ? 'testnet'
-    : 'mainnet';
+/** @type {Object} Contract naming schema */
+export const CONTRACTS = {
+  CLICKER: CLICKER_CONTRACT,
+  TIPJAR: TIPJAR_CONTRACT,
+  QUICKPOLL: QUICKPOLL_CONTRACT,
+};
+
+/** @type {Object} External API and explorer URLs */
+export const CONFIG = {
+  EXPLORER_URL: 'https://explorer.hiro.so',
+  EXPLORER_CHAIN_QUERY: STACKS_NETWORK,
+  API_URL:
+    STACKS_NETWORK === 'mainnet' ? 'https://api.mainnet.hiro.so' : 'https://api.testnet.hiro.so',
+  HIRO_AUTH_URL: 'https://auth.hiro.so',
+};
+
+/** @type {string} Explorer tx URL prefix */
+export const HIRO_EXPLORER_TX_BASE = `${CONFIG.EXPLORER_URL}/txid/`;
 
 export default {
   DEPLOYER,
   CLICKER_CONTRACT,
   TIPJAR_CONTRACT,
   QUICKPOLL_CONTRACT,
+  CONTRACTS,
   STACKS_NETWORK,
+  CONFIG,
+  HIRO_EXPLORER_TX_BASE,
 };
