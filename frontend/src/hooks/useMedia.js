@@ -12,17 +12,26 @@ export function useMedia(query) {
   );
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined') return undefined;
 
     const media = window.matchMedia(query);
-    if (media.matches !== matches) {
-      setMatches(media.matches);
+    const listener = () => setMatches(media.matches);
+
+    // Modern browsers use addEventListener, older ones use addListener
+    if (media.addEventListener) {
+      media.addEventListener('change', listener);
+    } else {
+      media.addListener(listener);
     }
 
-    const listener = () => setMatches(media.matches);
-    media.addEventListener('change', listener);
-    return () => media.removeEventListener('change', listener);
-  }, [query, matches]);
+    return () => {
+      if (media.removeEventListener) {
+        media.removeEventListener('change', listener);
+      } else {
+        media.removeListener(listener);
+      }
+    };
+  }, [query]);
 
   return matches;
 }
