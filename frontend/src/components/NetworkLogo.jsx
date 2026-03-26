@@ -4,13 +4,22 @@ import { motion } from 'framer-motion';
 /**
  * Animated SVG logo for the Stacks Clicker dApp.
  */
-export default function NetworkLogo() {
+export default function NetworkLogo({ isSyncing = false }) {
   return (
     <motion.div
-      className="logo-glow"
-      animate={{ rotate: [0, 5, -5, 0] }}
-      transition={{ duration: 4, repeat: Infinity, ease: [0.4, 0, 0.2, 1] }}
-      aria-hidden="true"
+      className={`logo-glow ${isSyncing ? 'syncing' : ''}`}
+      style={{ willChange: 'transform' }}
+      whileHover={{ scale: 1.15, filter: 'brightness(1.2) drop-shadow(0 0 8px var(--primary-glow))' }}
+      animate={isSyncing ? { rotate: 360 } : { rotate: [0, 5, -5, 0] }}
+      transition={{ 
+        rotate: isSyncing 
+          ? { duration: 2, repeat: Infinity, ease: "linear" }
+          : { duration: 4, repeat: Infinity, ease: "easeInOut" },
+        scale: { type: 'spring', stiffness: 300, damping: 15 }
+      }}
+      role="img"
+      aria-label="Stacks Clicker animated diamond logo"
+      title="Stacks Clicker Network Logo"
     >
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stacks Clicker logo">
         <path d="M16 2L4 16L16 30L28 16L16 2Z" fill="url(#logo-grad)" />
