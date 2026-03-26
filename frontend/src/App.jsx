@@ -170,25 +170,22 @@ function AppContent() {
       <PerformanceOverlay />
       <ScrollToTop />
 
-      {/* Header */}
-      <header className="header" role="banner">
-        <div className="header-content">
-          <div className="logo" aria-label="StacksClicker Logo">
-            <span className="logo-icon" aria-hidden="true">🎮</span>
-            <h1>StacksClicker</h1>
-          </div>
-          <div className="header-actions">
-            <motion.button
-              whileHover={{ scale: 1.1, rotate: 10 }}
-              whileTap={{ scale: 0.9 }}
-              className="icon-btn"
-              onClick={() => setIsAudioOpen(true)}
-              aria-label="Open Audio Settings"
-            >
-              ⚙️
-            </motion.button>
-            <ConnectButton />
-          </div>
+      {/* Dedicated Accessibility Announcer for screen readers */}
+      <div className="sr-only" aria-live="polite" aria-atomic="true">
+        {txLog.length > 0 && `Action: ${txLog[0].action} broadcasted.`}
+      </div>
+
+      <div id="notification-announcer" role="status" aria-live="polite" className="sr-only"></div>
+
+      <React.Suspense fallback={<SkeletonLoader height="80px" borderRadius="12px" />}>
+        <Header theme={theme} toggleTheme={toggleTheme} currentLang={lang} onLangChange={setLang} />
+      </React.Suspense>
+
+      <div className="layout-content" role="presentation">
+        <div className="stats-section-container">
+          <React.Suspense fallback={<SkeletonLoader height="120px" borderRadius="16px" theme={theme} />}>
+            <PlayerStats stats={stats} txCount={txLog.length} />
+          </React.Suspense>
         </div>
       </header>
 
