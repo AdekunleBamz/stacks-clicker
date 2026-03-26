@@ -180,10 +180,12 @@ export default function App() {
       <PerformanceOverlay />
       <ScrollToTop />
 
-      {/* Screen reader only announcement for high-frequency updates */}
+      {/* Dedicated Accessibility Announcer for screen readers */}
       <div className="sr-only" aria-live="polite" aria-atomic="true">
-        {txLog.length > 0 ? `Latest action: ${txLog[0].action}` : ''}
+        {txLog.length > 0 && `Action: ${txLog[0].action} broadcasted.`}
       </div>
+
+      <div id="notification-announcer" role="status" aria-live="polite" className="sr-only"></div>
 
       <React.Suspense fallback={<SkeletonLoader height="80px" borderRadius="12px" />}>
         <Header theme={theme} toggleTheme={toggleTheme} currentLang={lang} onLangChange={setLang} />
