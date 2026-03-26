@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import { callContract } from '../utils/walletconnect';
 import { useNotifications } from './useNotifications';
+import { parseContractError } from '../utils/errors';
 import { DEPLOYER, CLICKER_CONTRACT as CONTRACT_NAME } from '../utils/constants';
 
 /**
@@ -60,14 +61,15 @@ export function useClicker({ onTxSubmit }) {
         onTxSubmit?.(displayName, result.txId);
         return result;
       } catch (err) {
-        showError(`${displayName} failed.`);
+        const userFriendlyError = parseContractError(err);
+        showError(userFriendlyError);
         console.error(`${displayName} failed:`, err);
         throw err;
       } finally {
         setLoading(key, false);
       }
     },
-    [onTxSubmit]
+    [onTxSubmit, setLoading, showError, showLoading]
   );
 
   const click = useCallback(() => executeAction('🎯 Click', 'click'), [executeAction]);
