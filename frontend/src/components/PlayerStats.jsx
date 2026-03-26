@@ -33,6 +33,17 @@ export default function PlayerStats({ stats, txCount }) {
     { label: 'Transactions', value: txCount, icon: '⚡', color: '#ec4899' },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  };
+
   return (
     <section
       className="stats-bar"
@@ -41,10 +52,21 @@ export default function PlayerStats({ stats, txCount }) {
       tabIndex={0}
       title="Your Personal Player Statistics Overview"
     >
-      <div className="stats-cards" role="group" aria-label="Aggregate Player Performance Metrics" aria-live="polite" aria-atomic="false">
-        {statItems.map((item, index) => (
-          <StatsCard key={item.label} {...item} index={index} />
-        ))}
+      <h3 id="stats-bar-title" className="sr-only">Your Player Statistics Overview</h3>
+      <div className="stats-cards-wrapper">
+        <motion.div 
+          className="stats-cards stats-grid" 
+          role="group" 
+          aria-label="Aggregate Player Performance Metrics"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          {statItems.map((item, index) => (
+            <StatsCard key={item.label} {...item} index={index} />
+          ))}
+        </motion.div>
       </div>
     </section>
   );

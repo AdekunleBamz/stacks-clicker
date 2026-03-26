@@ -24,6 +24,20 @@ import { useMeasure } from '../../hooks/useMeasure';
 function StatsCard({ label, value, icon, color, isPrice = false, isGrowing = false, index = 0, tooltip }) {
   const [measureRef, { width, height }] = useMeasure();
 
+  const itemVariants = {
+    hidden: { opacity: 0, scale: 0.9, y: 20 },
+    visible: { 
+      opacity: 1, 
+      scale: 1, 
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 260,
+        damping: 20
+      }
+    }
+  };
+
   const cardContent = (
     <motion.div
       ref={measureRef}
@@ -32,14 +46,7 @@ function StatsCard({ label, value, icon, color, isPrice = false, isGrowing = fal
       role="article"
       aria-labelledby={`stat-label-${index}`}
       aria-describedby={`stat-value-${index}`}
-      initial={{ opacity: 0, scale: 0.9, y: 20 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
-      transition={{
-        type: "spring",
-        stiffness: 260,
-        damping: 20,
-        delay: index * 0.1
-      }}
+      variants={itemVariants}
       whileHover={{
         scale: 1.05,
         boxShadow: "0 10px 30px -10px rgba(0,0,0,0.5)",
