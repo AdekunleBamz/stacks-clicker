@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import NetworkHeartbeat from './NetworkHeartbeat';
 import NetworkLogo from './NetworkLogo';
 import AddressBadge from './common/AddressBadge';
@@ -16,9 +17,30 @@ import { useI18n } from '../context/I18nContext';
 export default function Header({ theme, toggleTheme }) {
   const { address, connectWallet, disconnectWallet } = useWallet();
   const { lang, setLang } = useI18n();
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 12);
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <header className="app-header">
+    <header 
+      className={`app-header ${isScrolled ? 'header-scrolled' : ''}`}
+      role="banner"
+      style={{
+        backdropFilter: isScrolled ? 'blur(16px)' : 'blur(0px)',
+        backgroundColor: isScrolled ? 'var(--glass-bg-scrolled)' : 'transparent',
+        borderBottom: isScrolled ? '1px solid var(--glass-border)' : '1px solid transparent',
+        boxShadow: isScrolled ? '0 4px 30px rgba(0, 0, 0, 0.1)' : 'none',
+        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+      }}
+    >
       <div className="header-content">
         <div 
           className="logo" 
