@@ -2,7 +2,6 @@ import React from 'react';
 import Modal from './common/Modal';
 import { useModal } from '../context/ModalContext';
 import { truncateAddress } from '../utils/format';
-import { CONFIG, STACKS_NETWORK } from '../utils/constants';
 
 /**
  * Modal to view detailed information about a specific transaction.
@@ -15,7 +14,7 @@ const TransactionModal = () => {
   const { txId, action, timestamp, status = 'success' } = modalData;
 
   const getExplorerLink = () => {
-    return `${CONFIG.EXPLORER_URL}/txid/${txId}?chain=${STACKS_NETWORK}`;
+    return `https://explorer.hiro.so/txid/${txId}?chain=mainnet`;
   };
 
   return (
@@ -25,7 +24,7 @@ const TransactionModal = () => {
       title="🔍 Transaction Details"
     >
       <div className="tx-details-container">
-
+        
         <div className="detail-row">
           <span className="detail-label">Action</span>
           <span className="detail-value highlight">{action}</span>
@@ -64,7 +63,7 @@ const TransactionModal = () => {
         </div>
       </div>
 
-      <style>{`
+      <style jsx>{`
         .tx-details-container {
           display: flex;
           flex-direction: column;
