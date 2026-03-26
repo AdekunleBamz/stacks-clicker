@@ -1,18 +1,15 @@
-import { useEffect, useRef } from 'react';
-
 /**
- * Custom hook for capturing global keydown events.
+ * Custom hook for capturing global keydown events with multi-key support.
  *
- * @param {string} targetKey - The key to listen for (e.g., 'Escape', 'Enter', 'c')
- * @param {Function} handler - The callback function to execute on keydown
+ * @param {Object} keyMap - Mapping of keys to handler functions (e.g., { 'Escape': handleClose, 'Enter': handleSubmit })
  */
-export function useKeydown(targetKey, handler) {
-  const handlerRef = useRef(handler);
+export function useKeydown(keyMap) {
+  const keyMapRef = useRef(keyMap);
 
-  // Update ref if handler changes
+  // Update ref if keyMap changes
   useEffect(() => {
-    handlerRef.current = handler;
-  }, [handler]);
+    keyMapRef.current = keyMap;
+  }, [keyMap]);
 
   useEffect(() => {
     function handleKeyDown(event) {
@@ -21,13 +18,15 @@ export function useKeydown(targetKey, handler) {
                        event.target.tagName === 'TEXTAREA' || 
                        event.target.isContentEditable;
 
-      if (event.key === targetKey && !isTyping) {
-        handlerRef.current(event);
+      if (isTyping) return;
+
+      const handler = keyMapRef.current[event.key];
+      if (handler) {
+        handler(event);
       }
     }
 
-
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [targetKey]);
+  }, []);
 }
