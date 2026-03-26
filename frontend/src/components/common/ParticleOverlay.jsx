@@ -45,7 +45,8 @@ export default function ParticleOverlay({ trigger }) {
 
   useEffect(() => {
     if (trigger) {
-      createParticles();
+      const count = typeof trigger === 'object' && trigger.count ? trigger.count : 12;
+      createParticles(count);
     }
   }, [trigger, createParticles]);
 
