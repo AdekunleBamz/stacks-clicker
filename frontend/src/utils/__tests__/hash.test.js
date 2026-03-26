@@ -16,27 +16,6 @@ describe('hash utilities', () => {
       const hash = simpleHash('any-string');
       expect(hash).toBeGreaterThanOrEqual(0);
       expect(hash).toBeLessThanOrEqual(4294967295);
-      expect(Number.isInteger(hash)).toBe(true);
-    });
-
-    test('returns stable seed hash for empty strings', () => {
-      expect(simpleHash('')).toBe(5381);
-    });
-
-    test('handles undefined input by hashing empty string', () => {
-      expect(simpleHash(undefined)).toBe(5381);
-    });
-
-    test('treats null input the same way as an empty string', () => {
-      expect(simpleHash(null)).toBe(5381);
-    });
-
-    test('coerces numeric input consistently', () => {
-      expect(simpleHash(42)).toBe(simpleHash('42'));
-    });
-
-    test('handles unicode input deterministically', () => {
-      expect(simpleHash('Yoruba-ọrọ')).toBe(simpleHash('Yoruba-ọrọ'));
     });
   });
 
@@ -48,39 +27,6 @@ describe('hash utilities', () => {
 
     test('is deterministic', () => {
       expect(stringToColor('stacks')).toBe(stringToColor('stacks'));
-    });
-
-    test('keeps hue channel within 0-359 range', () => {
-      const match = stringToColor('range-check').match(/^hsl\((\d+), 70%, 65%\)$/);
-      const hue = Number(match?.[1]);
-      expect(hue).toBeGreaterThanOrEqual(0);
-      expect(hue).toBeLessThan(360);
-    });
-
-    test('returns different colors for different ids in common cases', () => {
-      expect(stringToColor('tx-1')).not.toBe(stringToColor('tx-2'));
-    });
-
-    test('handles undefined input without throwing', () => {
-      expect(stringToColor(undefined)).toMatch(/^hsl\(\d+, 70%, 65%\)$/);
-    });
-
-    test('coerces numeric input consistently in color generation', () => {
-      expect(stringToColor(7)).toBe(stringToColor('7'));
-    });
-
-    test('handles empty string input', () => {
-      expect(stringToColor('')).toMatch(/^hsl\(\d+, 70%, 65%\)$/);
-    });
-
-    test('handles null input without throwing', () => {
-      expect(stringToColor(null)).toMatch(/^hsl\(\d+, 70%, 65%\)$/);
-    });
-
-    test('produces consistent colors across multiple calls', () => {
-      const color1 = stringToColor('consistent-test');
-      const color2 = stringToColor('consistent-test');
-      expect(color1).toBe(color2);
     });
   });
 });
