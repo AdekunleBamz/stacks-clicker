@@ -1,4 +1,5 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
+import { useLocalStorage } from './useLocalStorage';
 import { notify } from '../utils/toast';
 import { useDocumentVisibility } from './useDocumentVisibility';
 
@@ -9,11 +10,15 @@ import { useDocumentVisibility } from './useDocumentVisibility';
  * @param {Object} options - Hook options
  * @param {Function} options.playSound - Function to play sound effects
  * @param {Function} options.onTxAdded - Callback triggered after a transaction is added
- * @returns {Object} { txLog, addTxToLog, setTxLog }
+ * @returns {Object} { txLog, addTxToLog, setTxLog, pendingTxs, txCount }
  */
 export function useTransactionHistory({ playSound, onTxAdded }) {
-  const [txLog, setTxLog] = useState([]);
+  const [txLog, setTxLog] = useLocalStorage('stacks-tx-log', []);
   const isVisible = useDocumentVisibility();
+
+  // Memoized derived stats
+  const pendingTxs = useMemo(() => txLog.filter((tx) => tx.isPending), [txLog]);
+  const txCount = useMemo(() => txLog.length, [txLog]);
 
   useEffect(() => {
     if (!isVisible) {
@@ -53,7 +58,7 @@ export function useTransactionHistory({ playSound, onTxAdded }) {
       onTxAdded?.(tx);
       return tx;
     },
-    [playSound, onTxAdded]
+    [playSound, onTxAdded, setTxLog]
   );
 
   /**
@@ -62,12 +67,14 @@ export function useTransactionHistory({ playSound, onTxAdded }) {
   const clearLog = useCallback(() => {
     setTxLog([]);
     console.debug('[useTransactionHistory] Transaction log cleared');
-  }, []);
+  }, [setTxLog]);
   
   return {
     txLog,
     addTxToLog,
     setTxLog,
     clearLog,
+    pendingTxs,
+    txCount,
   };
 }
