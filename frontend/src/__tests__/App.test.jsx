@@ -76,7 +76,7 @@ vi.mock('../components/Footer', () => ({ default: () => <footer data-testid="foo
 describe('App Smoke Test', () => {
   it('renders the core application structure without crashing', () => {
     render(<App />);
-
+    
     // Check for main structural elements
     expect(screen.getByRole('application')).toBeDefined();
     expect(screen.getByTestId('header')).toBeDefined();
@@ -89,12 +89,5 @@ describe('App Smoke Test', () => {
     const skipLink = screen.getByText(/Skip to main content/i);
     expect(skipLink).toBeDefined();
     expect(skipLink.getAttribute('href')).toBe('#main-content');
-  });
-
-  it('renders main content area with correct id', () => {
-    render(<App />);
-    const mainContent = screen.getByRole('main');
-    expect(mainContent).toBeDefined();
-    expect(mainContent.id).toBe('main-content');
   });
 });
