@@ -1,20 +1,11 @@
-import React, { useRef, useState, useEffect, memo, useCallback } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 /**
  * ScrollArea provides custom scrollbars while using native scrolling performance.
  * It hides the default browser scrollbars and replaces them with sleek, theme-aware ones.
- * Uses memoization to prevent unnecessary re-renders during scroll events.
- *
- * @param {Object} props - Component props
- * @param {React.ReactNode} props.children - Content to wrap with custom scroll area
- * @param {string} [props.className=''] - Additional CSS class names
- * @param {Object} [props.style={}] - Inline styles
- * @param {string|number} [props.height] - Height of the scroll area
- * @param {string} [props.orientation='vertical'] - Scroll orientation (vertical, horizontal, both)
- * @returns {JSX.Element} The rendered scroll area wrapper
  */
-const ScrollArea = memo(function ScrollArea({ children, className = '', style = {}, height, orientation = 'vertical' }) {
+const ScrollArea = ({ children, className = '', style = {}, height, orientation = 'vertical' }) => {
   const scrollRef = useRef(null);
   const [scrollState, setScrollState] = useState({
     scrollTop: 0,
@@ -27,18 +18,18 @@ const ScrollArea = memo(function ScrollArea({ children, className = '', style = 
   const [isHovered, setIsHovered] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
 
-  const handleScroll = useCallback(() => {
+  const handleScroll = () => {
     if (scrollRef.current) {
       const { scrollTop, scrollHeight, clientHeight, scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
       setScrollState({ scrollTop, scrollHeight, clientHeight, scrollLeft, scrollWidth, clientWidth });
     }
-  }, []);
+  };
 
   useEffect(() => {
     handleScroll(); // Init
-    window.addEventListener('resize', handleScroll, { passive: true });
-    return () => window.removeEventListener('resize', handleScroll, { passive: true });
-  }, [handleScroll]);
+    window.addEventListener('resize', handleScroll);
+    return () => window.removeEventListener('resize', handleScroll);
+  }, []);
 
   const showVerticalThumb = scrollState.scrollHeight > scrollState.clientHeight;
   const showHorizontalThumb = scrollState.scrollWidth > scrollState.clientWidth;
@@ -53,13 +44,13 @@ const ScrollArea = memo(function ScrollArea({ children, className = '', style = 
   const thumbLeft = (scrollState.scrollLeft / (scrollState.scrollWidth - scrollState.clientWidth)) * (trackWidth - thumbWidth);
 
   return (
-    <div
-      className={`scroll-area-wrapper ${className}`}
+    <div 
+      className={`scroll-area-wrapper ${className}`} 
       style={{ ...style, height: height || '100%' }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div
+      <div 
         className={`scroll-viewport ${orientation}`}
         ref={scrollRef}
         onScroll={handleScroll}
@@ -69,11 +60,11 @@ const ScrollArea = memo(function ScrollArea({ children, className = '', style = 
 
       {showVerticalThumb && orientation !== 'horizontal' && (
         <div className={`scroll-track vertical ${isHovered || isDragging ? 'visible' : ''}`}>
-          <div
+          <div 
             className="scroll-thumb"
-            style={{
-              height: `${thumbHeight}px`,
-              transform: `translateY(${thumbTop || 0}px)`
+            style={{ 
+              height: `${thumbHeight}px`, 
+              transform: `translateY(${thumbTop || 0}px)` 
             }}
           />
         </div>
@@ -81,17 +72,17 @@ const ScrollArea = memo(function ScrollArea({ children, className = '', style = 
 
       {showHorizontalThumb && orientation !== 'vertical' && (
         <div className={`scroll-track horizontal ${isHovered || isDragging ? 'visible' : ''}`}>
-          <div
+          <div 
             className="scroll-thumb"
-            style={{
-              width: `${thumbWidth}px`,
-              transform: `translateX(${thumbLeft || 0}px)`
+            style={{ 
+              width: `${thumbWidth}px`, 
+              transform: `translateX(${thumbLeft || 0}px)` 
             }}
           />
         </div>
       )}
 
-      <style>{`
+      <style jsx>{`
         .scroll-area-wrapper {
           position: relative;
           overflow: hidden;
@@ -158,7 +149,7 @@ const ScrollArea = memo(function ScrollArea({ children, className = '', style = 
       `}</style>
     </div>
   );
-});
+};
 
 ScrollArea.propTypes = {
   children: PropTypes.node.isRequired,
@@ -166,6 +157,6 @@ ScrollArea.propTypes = {
   style: PropTypes.object,
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   orientation: PropTypes.oneOf(['vertical', 'horizontal', 'both']),
-});
+};
 
 export default ScrollArea;
