@@ -93,6 +93,22 @@
   transition: box-shadow 0.2s ease, outline-offset 0.2s ease;
 }
 
+/* 
+ * 🎨 Global Focus Styles (A11y Enhancement)
+ * Ensuring keyboard navigation is highly visible but 
+ * doesn't interfere with mouse interactions.
+ */
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 4px var(--primary-glow);
+  transition: box-shadow 0.2s ease, outline-offset 0.2s ease;
+}
+
 [data-theme='light'] {
   --primary: #4f46e5;
   --bg-dark: #f8fafc;
