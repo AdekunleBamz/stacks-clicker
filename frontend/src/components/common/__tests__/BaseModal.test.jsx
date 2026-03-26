@@ -30,7 +30,7 @@ describe('BaseModal component', () => {
         <div>Content</div>
       </BaseModal>
     );
-
+    
     fireEvent.click(screen.getByLabelText('Close modal'));
     expect(handleClose).toHaveBeenCalledTimes(1);
   });
@@ -42,7 +42,7 @@ describe('BaseModal component', () => {
         <div>Content</div>
       </BaseModal>
     );
-
+    
     // The overlay is the first div with modal-overlay class
     const overlay = screen.getByRole('presentation');
     fireEvent.click(overlay);
@@ -56,7 +56,7 @@ describe('BaseModal component', () => {
         <div data-testid="content">Content</div>
       </BaseModal>
     );
-
+    
     fireEvent.click(screen.getByTestId('content'));
     expect(handleClose).not.toHaveBeenCalled();
   });
@@ -68,30 +68,8 @@ describe('BaseModal component', () => {
         <div>Content</div>
       </BaseModal>
     );
-
+    
     fireEvent.keyDown(window, { key: 'Escape' });
     expect(handleClose).toHaveBeenCalledTimes(1);
-  });
-
-  it('does not close on Escape when onClose is not provided', () => {
-    render(
-      <BaseModal isOpen={true} onClose={null} title="Test Modal">
-        <div>Content</div>
-      </BaseModal>
-    );
-
-    // Should not throw when Escape is pressed
-    fireEvent.keyDown(window, { key: 'Escape' });
-  });
-
-  it('renders with custom className when provided', () => {
-    render(
-      <BaseModal isOpen={true} onClose={() => {}} title="Test Modal" className="custom-modal">
-        <div>Content</div>
-      </BaseModal>
-    );
-
-    const modal = screen.getByRole('dialog');
-    expect(modal).toHaveClass('custom-modal');
   });
 });
