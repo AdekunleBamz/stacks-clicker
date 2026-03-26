@@ -67,11 +67,19 @@ export function useTipJar({ onTxSubmit }) {
   }, [onTxSubmit, setLoading, showError, showLoading]);
 
   const tip = useCallback(
-    (amount = MIN_TIP_MICRO_STX * 10) => {
-      const normalizedAmount = Number.isFinite(amount) && amount > 0 ? Math.floor(amount) : MIN_TIP_MICRO_STX * 10;
-      return executeAction('💰 Tip', 'tip', [{ type: 'uint128', value: normalizedAmount.toString() }]);
+    (amount = 1000) => {
+      const numericAmount = Number(amount);
+      if (isNaN(numericAmount) || numericAmount <= 0) {
+        showError('Invalid tip amount. Must be a positive number.');
+        return;
+      }
+      if (numericAmount < 100) {
+        showError('Minimum tip is 100 micro-STX.');
+        return;
+      }
+      return executeAction('💰 Tip', 'tip', [{ type: 'uint128', value: numericAmount.toString() }]);
     },
-    [executeAction]
+    [executeAction, showError]
   );
   const withdraw = useCallback(() => executeAction('💸 Withdraw', 'withdraw'), [executeAction]);
   const handleSelfPing = useCallback(() => executeAction('📡 Self-Ping', 'self-ping'), [executeAction]);
