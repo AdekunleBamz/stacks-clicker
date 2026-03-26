@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-let audioContext = null;
+let compressor = null;
 
 function getAudioContext() {
   if (typeof window === 'undefined') return null;
@@ -10,16 +10,22 @@ function getAudioContext() {
 
   if (!audioContext || audioContext.state === 'closed') {
     audioContext = new AudioContextCtor();
+    
+    // Create a master compressor to prevent clipping during overlapping sounds
+    compressor = audioContext.createDynamicsCompressor();
+    compressor.threshold.setValueAtTime(-24, audioContext.currentTime);
+    compressor.knee.setValueAtTime(40, audioContext.currentTime);
+    compressor.ratio.setValueAtTime(12, audioContext.currentTime);
+    compressor.attack.setValueAtTime(0, audioContext.currentTime);
+    compressor.release.setValueAtTime(0.25, audioContext.currentTime);
+    compressor.connect(audioContext.destination);
   }
 
-  // Attempt to resume if suspended (common in browser autoplay policies)
   if (audioContext.state === 'suspended') {
-    const resume = () => audioContext.resume().catch(() => {});
-    // Resume on first interaction if possible, or attempt immediately
-    resume();
+    audioContext.resume().catch(() => {});
   }
 
-  return audioContext;
+  return { ctx: audioContext, destination: compressor };
 }
 
 /**
@@ -41,14 +47,14 @@ export function useSound() {
       return;
     }
 
-    const ctx = getAudioContext();
+    const { ctx, destination } = getAudioContext() || {};
     if (!ctx) return;
 
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
 
     osc.connect(gain);
-    gain.connect(ctx.destination);
+    gain.connect(destination);
 
     const now = ctx.currentTime;
 
