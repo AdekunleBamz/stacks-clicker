@@ -1,0 +1,42 @@
+import { expect, test, describe } from 'vitest';
+import { truncateAddress, formatNumber, formatStx } from '../format';
+
+describe('format utilities', () => {
+  describe('truncateAddress', () => {
+    const address = 'SP3K8AD8ARD4VTC6K1D75X9P90NVST68S2K6PP4Y';
+
+    test('truncates address with default options', () => {
+      expect(truncateAddress(address)).toBe('SP3K...P4Y');
+    });
+
+    test('truncates address with custom prefix and suffix', () => {
+      expect(truncateAddress(address, { prefix: 6, suffix: 4 })).toBe('SP3K8A...P4Y');
+    });
+
+    test('returns original address if very short', () => {
+      const short = 'SP123';
+      expect(truncateAddress(short)).toBe('SP123');
+    });
+
+    test('returns empty string if address is missing', () => {
+      expect(truncateAddress(null)).toBe('');
+    });
+  });
+
+  describe('formatNumber', () => {
+    test('formats large numbers with commas', () => {
+      expect(formatNumber(1234567)).toBe('1,234,567');
+    });
+
+    test('specifies precision if provided in options', () => {
+      expect(formatNumber(1234.567, { minimumFractionDigits: 1, maximumFractionDigits: 1 })).toBe('1,234.6');
+    });
+  });
+
+  describe('formatStx', () => {
+    test('converts micro-STX to STX with 2 decimals', () => {
+      expect(formatStx(1000000)).toBe('1.00 STX');
+      expect(formatStx(500000)).toBe('0.50 STX');
+    });
+  });
+});
