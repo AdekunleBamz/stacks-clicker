@@ -21,11 +21,11 @@ export function useInteractions({ onTxSubmit }) {
    * to transaction submissions to improve mobile game feel.
    */
   const handleTxSubmit = useCallback((action, txId) => {
-    // Trigger short haptic pulse (60ms) if supported
+    // Trigger short haptic pulse (40ms) if supported
     if (typeof window !== 'undefined' && 'vibrate' in navigator) {
-      navigator.vibrate(60);
+      navigator.vibrate(40);
     }
-
+    
     // Continue with original submission callback
     onTxSubmit?.(action, txId);
   }, [onTxSubmit]);
