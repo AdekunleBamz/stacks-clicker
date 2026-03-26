@@ -18,18 +18,17 @@ export function useWindowSize() {
     let timeoutId = null;
     const handleResize = () => {
       clearTimeout(timeoutId);
-      const debounceDelay = 150;
       timeoutId = setTimeout(() => {
         setWindowSize({
           width: window.innerWidth,
           height: window.innerHeight,
         });
-      }, 150);
+      }, 250);
     };
 
-    window.addEventListener('resize', handleResize, { passive: true });
+    window.addEventListener('resize', handleResize);
     return () => {
-      window.removeEventListener('resize', handleResize, { passive: true });
+      window.removeEventListener('resize', handleResize);
       clearTimeout(timeoutId);
     };
   }, []);
