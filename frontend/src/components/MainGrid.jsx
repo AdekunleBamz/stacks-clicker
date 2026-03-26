@@ -26,7 +26,7 @@ function MainGrid({
         <QuickPollCard address={address} quickpoll={quickpoll} />
       </div>
 
-      <style>{`
+      <style jsx>{`
         .ultrawide-safe {
           max-width: 1600px;
           margin: 0 auto;
@@ -44,7 +44,7 @@ function MainGrid({
             gap: 3rem;
             padding: 0 4rem;
           }
-
+          
           .section-title {
             font-size: 2.5rem;
             text-align: center;
