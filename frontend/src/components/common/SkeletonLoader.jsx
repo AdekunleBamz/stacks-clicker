@@ -13,7 +13,15 @@ import { motion } from 'framer-motion';
  * @param {string} [props.className=''] - Additional CSS classes
  * @returns {JSX.Element} The rendered skeleton loader
  */
-function SkeletonLoader({ width = '100%', height = '20px', borderRadius = '8px', className = '' }) {
+function SkeletonLoader({ 
+  width = '100%', 
+  height = '20px', 
+  borderRadius = '8px', 
+  className = '', 
+  label = 'content',
+  gradientAngle = 90,
+  shimmerColor = 'rgba(255, 255, 255, 0.05)'
+}) {
   return (
     <div
       className={`skeleton-wrapper ${className}`}
@@ -45,7 +53,8 @@ function SkeletonLoader({ width = '100%', height = '20px', borderRadius = '8px',
           left: 0,
           width: '100%',
           height: '100%',
-          background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent)',
+          background: `linear-gradient(${gradientAngle}deg, transparent 0%, ${shimmerColor} 50%, transparent 100%)`,
+          willChange: 'transform'
         }}
       />
     </div>
@@ -56,7 +65,10 @@ SkeletonLoader.propTypes = {
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   borderRadius: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  className: PropTypes.string
+  className: PropTypes.string,
+  label: PropTypes.string,
+  gradientAngle: PropTypes.number,
+  shimmerColor: PropTypes.string
 };
 
 export default memo(SkeletonLoader);
