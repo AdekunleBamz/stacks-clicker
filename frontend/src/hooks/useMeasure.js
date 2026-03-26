@@ -22,8 +22,14 @@ export function useMeasure() {
   useLayoutEffect(() => {
     if (!ref.current) return;
 
+    // Perform initial measurement
+    const initialRect = ref.current.getBoundingClientRect();
+    setDimensions(initialRect);
+
     const observer = new ResizeObserver(([entry]) => {
-      setDimensions(entry.contentRect);
+      if (entry && entry.contentRect) {
+        setDimensions(entry.contentRect);
+      }
     });
 
     observer.observe(ref.current);
