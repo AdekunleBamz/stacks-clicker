@@ -14,22 +14,26 @@ export function useMedia(query) {
   });
 
   useEffect(() => {
-    if (typeof window === 'undefined' || !trimmedQuery) return undefined;
+    if (typeof window === 'undefined') return undefined;
 
-    const media = window.matchMedia(trimmedQuery);
+    const media = window.matchMedia(query);
     const listener = () => setMatches(media.matches);
 
-    if (typeof media.addEventListener === 'function') {
+    // Modern browsers use addEventListener, older ones use addListener
+    if (media.addEventListener) {
       media.addEventListener('change', listener);
-      return () => {
-        media.removeEventListener('change', listener);
-      };
+    } else {
+      media.addListener(listener);
     }
 
     return () => {
-      media.removeEventListener('change', listener);
+      if (media.removeEventListener) {
+        media.removeEventListener('change', listener);
+      } else {
+        media.removeListener(listener);
+      }
     };
-  }, [trimmedQuery]);
+  }, [query]);
 
   return matches;
 }
