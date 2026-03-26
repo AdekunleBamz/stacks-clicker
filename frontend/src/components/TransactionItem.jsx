@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
-import { motion } from 'framer-motion';
+import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 
 /**
  * Individual transaction item with swipe actions and status visualization.
@@ -16,10 +16,11 @@ function TransactionItem({
 }) {
   const txId = String(tx.id ?? '');
   const isPending = tx.isPending ?? txId.startsWith('pending');
+  const [ref, inView] = useIntersectionObserver({ threshold: 0.1 });
 
   return (
-    <div className="tx-item-wrapper">
-      <div className="tx-swipe-actions">
+    <div className="tx-item-wrapper" role="listitem" ref={ref}>
+      <div className="tx-swipe-actions" aria-label="Quick transaction actions">
         <button type="button" className="swipe-btn copy" onClick={() => onCopy(tx.id)} aria-label="Copy transaction ID" title="Copy transaction ID">
           📋
         </button>
@@ -34,12 +35,11 @@ function TransactionItem({
         </button>
       </div>
       <motion.div
-        layout
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, height: 0 }}
-        transition={{ duration: 0.3, ease: 'easeOut' }}
-        className={`tx-card ${tx.tx_status}`}
+        className={`tx-item ${tx.status}`}
+        tabIndex={0}
+        initial={{ opacity: 0, y: 20 }}
+        animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+        transition={{ type: 'spring', stiffness: 260, damping: 20 }}
         drag="x"
         dragConstraints={{ left: -120, right: 0 }}
         dragElastic={0.1}
