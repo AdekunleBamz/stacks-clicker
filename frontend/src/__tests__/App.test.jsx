@@ -76,7 +76,7 @@ vi.mock('../components/Footer', () => ({ default: () => <footer data-testid="foo
 describe('App Smoke Test', () => {
   it('renders the core application structure without crashing', () => {
     render(<App />);
-
+    
     // Check for main structural elements
     expect(screen.getByRole('application')).toBeDefined();
     expect(screen.getByTestId('header')).toBeDefined();
