@@ -87,6 +87,15 @@ function AppContent() {
   const { clicker, tipjar, quickpoll, pingAll } = useInteractions({
     onTxSubmit: (action, txId) => {
       addTxToLog(action, txId);
+      const normalizedAction = String(action).toLowerCase();
+      
+      // Determine particle intensity based on action
+      let particleCount = 8;
+      if (normalizedAction.includes('multi')) particleCount = 25;
+      if (normalizedAction.includes('tip')) particleCount = 15;
+      
+      setParticleTrigger({ id: Date.now(), count: particleCount });
+
       // Update local reactive stats for immediate feedback (optimistic logic)
       if (action.includes('Click')) {
         setStats((prev) => ({ ...prev, clicks: prev.clicks + 1 }));
