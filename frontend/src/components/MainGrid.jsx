@@ -20,11 +20,37 @@ function MainGrid({
     <section className="interaction-section" aria-labelledby="interactions-title" aria-live="polite">
       <h2 className="section-title" id="interactions-title" aria-label="Available Interactions Dashboard">Interactions</h2>
       <InteractionStreaks totalInteractions={stats.clicks + stats.tips + stats.votes} />
-      <div className="cards-container" role="group" aria-label="Available Interaction Panels">
+      <div className="cards-container main-interaction-grid ultrawide-safe" role="group" aria-label="Available Interaction Panels">
         <ClickerCard address={address} clicker={clicker} />
         <TipJarCard address={address} tipjar={tipjar} />
         <QuickPollCard address={address} quickpoll={quickpoll} />
       </div>
+
+      <style jsx>{`
+        .ultrawide-safe {
+          max-width: 1600px;
+          margin: 0 auto;
+          display: grid;
+          gap: 2rem;
+          /* Base responsive grid */
+          grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        }
+
+        /* Ultra-wide 21:9 explicit overrides */
+        @media (min-width: 1920px) {
+          .ultrawide-safe {
+            max-width: 2000px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            padding: 0 4rem;
+          }
+          
+          .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+          }
+        }
+      `}</style>
     </section>
   );
 }
