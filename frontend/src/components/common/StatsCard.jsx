@@ -1,43 +1,10 @@
 import React, { useEffect, useState, memo } from 'react';
 import { motion, animate } from 'framer-motion';
 import PropTypes from 'prop-types';
+import AnimatedNumber from './AnimatedNumber';
 import Tooltip from './Tooltip';
 import { useMeasure } from '../../hooks/useMeasure';
 
-/**
- * Animated number component for smooth counting transitions between values.
- *
- * @component
- * @param {Object} props - Component props
- * @param {number|string} props.value - The target numeric value to animate towards
- * @returns {JSX.Element} The rendered animated number
- */
-function AnimatedNumber({ value }) {
-  const [displayValue, setDisplayValue] = useState(value);
-
-  useEffect(() => {
-    if (typeof value !== 'number') return;
-    const controls = animate(displayValue, value, {
-      duration: 1,
-      onUpdate: (latest) => setDisplayValue(Math.floor(latest)),
-    });
-    return () => controls.stop();
-  }, [value, displayValue]);
-
-  return (
-    <span 
-      role="status" 
-      aria-live="polite" 
-      aria-atomic="true"
-    >
-      {typeof value === 'number' ? displayValue.toLocaleString() : value}
-    </span>
-  );
-}
-
-AnimatedNumber.propTypes = {
-  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired
-};
 
 /**
  * Individual card for displaying a single statistic with animations and thematic coloring.
