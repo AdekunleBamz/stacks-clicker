@@ -41,9 +41,16 @@ function TransactionItem({
         animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
         transition={{ type: 'spring', stiffness: 260, damping: 20 }}
         drag="x"
-        dragConstraints={{ left: -120, right: 0 }}
-        dragElastic={0.1}
-        whileDrag={{ scale: 1.02 }}
+        dragConstraints={{ left: -140, right: 0 }}
+        dragElastic={0.15}
+        dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }}
+        whileDrag={{ scale: 1.01, cursor: 'grabbing' }}
+        whileFocus={{
+          scale: 1.01,
+          borderColor: 'var(--primary)',
+          boxShadow: '0 0 0 2px var(--primary-glow)',
+          outline: 'none'
+        }}
         onContextMenu={(e) => onContextMenu(e, tx)}
       >
         <div className="tx-status-dot" aria-hidden="true" />
