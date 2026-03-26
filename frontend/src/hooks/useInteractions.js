@@ -16,9 +16,23 @@ import { useQuickPoll } from './useQuickPoll';
  * @property {Function} pingAll - Unified function to trigger heartbeat pings across all contracts
  */
 export function useInteractions({ onTxSubmit }) {
-  const clicker = useClicker({ onTxSubmit });
-  const tipjar = useTipJar({ onTxSubmit });
-  const quickpoll = useQuickPoll({ onTxSubmit });
+  /**
+   * Enhanced callback that adds tactile haptic feedback (Vibration API)
+   * to transaction submissions to improve mobile game feel.
+   */
+  const handleTxSubmit = useCallback((action, txId) => {
+    // Trigger short haptic pulse (40ms) if supported
+    if (typeof window !== 'undefined' && 'vibrate' in navigator) {
+      navigator.vibrate(40);
+    }
+    
+    // Continue with original submission callback
+    onTxSubmit?.(action, txId);
+  }, [onTxSubmit]);
+
+  const clicker = useClicker({ onTxSubmit: handleTxSubmit });
+  const tipjar = useTipJar({ onTxSubmit: handleTxSubmit });
+  const quickpoll = useQuickPoll({ onTxSubmit: handleTxSubmit });
 
   /**
    * Triggers heartbeat/ping transactions for all active smart contracts simultaneously.
