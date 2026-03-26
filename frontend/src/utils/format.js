@@ -3,16 +3,19 @@
  */
 
 /**
- * Truncates a Stacks address for display.
+ * Truncates a Stacks address for display with flexible sizing.
  * 
  * @param {string} address - The full Stacks address
- * @param {number} [chars=4] - Number of characters to show at start and end
- * @returns {string} The truncated address (e.g., 'SP2F...3H7K')
+ * @param {Object} [options] - Truncation options
+ * @param {number} [options.prefix=4] - Chars to show at start
+ * @param {number} [options.suffix=4] - Chars to show at end
+ * @param {string} [options.separator='...'] - Chars to show in middle
+ * @returns {string} The truncated address
  */
-export function truncateAddress(address, chars = 4) {
+export function truncateAddress(address, { prefix = 4, suffix = 4, separator = '...' } = {}) {
   if (!address) return '';
-  if (address.length <= chars * 2 + 2) return address;
-  return `${address.substring(0, chars)}...${address.substring(address.length - chars)}`;
+  if (address.length <= prefix + suffix + separator.length) return address;
+  return `${address.substring(0, prefix)}${separator}${address.substring(address.length - suffix)}`;
 }
 
 /**
