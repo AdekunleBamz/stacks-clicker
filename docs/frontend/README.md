@@ -10,3 +10,4 @@ This folder contains focused references for frontend components, hooks, and cont
 - `tests/`: Suite intent summaries for key frontend behaviors.
 
 - Add links to newly introduced feature docs in this index as part of the same pull request.
+- Remove links to deleted modules in the same PR to keep this index trustworthy.
