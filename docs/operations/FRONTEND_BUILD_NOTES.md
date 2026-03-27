@@ -5,6 +5,5 @@ Reference for building, troubleshooting, and optimizing the frontend.
 If build hangs locally, kill stale vite processes before retrying.
 Capture the failing package/version from terminal output before clearing caches.
 When lockfiles change, re-run `npm ci` before retrying a failed production build.
-Confirm the active Node.js version matches project expectations before retrying repeated build failures.
 
 Companion index: [Operations docs](README.md).
