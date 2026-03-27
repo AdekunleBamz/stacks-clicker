@@ -2,6 +2,7 @@
 
 Our vision is to build the premier GameFi intersection for the Stacks ecosystem.
 Completed roadmap items should be recorded in [CHANGELOG.md](CHANGELOG.md) when shipped.
+Roadmap priorities may shift when security, reliability, or protocol changes require immediate attention.
 
 ## 🟢 Q2 2026: Community & Social
 - [ ] **Leaderboards**: Real-time ranking of top players and tippers by activity volume.
