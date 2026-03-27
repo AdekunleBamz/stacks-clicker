@@ -5,5 +5,6 @@
 - Fix root cause before adjusting assertions.
 - Document recurring failures for maintainers.
 - Record failing commit hash when triage starts for reproducibility.
+- Tag suspected flakes clearly so they are tracked separately from confirmed regressions.
 
 Companion index: [Operations docs](README.md).
