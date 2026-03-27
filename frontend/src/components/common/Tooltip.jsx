@@ -15,8 +15,8 @@ import { motion, AnimatePresence } from 'framer-motion';
  */
 function Tooltip({ content, children }) {
   const [isVisible, setIsVisible] = useState(false);
-  const { isHovered, ref: hoverRef } = useHover();
-  const { isFocused, ref: focusRef } = useFocus();
+  const [hoverRef, isHovered] = useHover();
+  const [focusRef, isFocused] = useFocus();
   const id = useId();
   const tooltipId = `tooltip-${id}`;
   const shouldShow = isHovered || isFocused;
