@@ -4,6 +4,7 @@
 - Confirm click, tip, and poll interactions trigger expected UI updates.
 - Check transaction history filtering and export actions.
 - Validate mobile and desktop rendering.
+- Run at least one smoke pass on a constrained network profile to catch timeout-sensitive flows.
 - Validate reduced-motion mode does not hide critical status feedback.
 
 ## Maintenance Note
