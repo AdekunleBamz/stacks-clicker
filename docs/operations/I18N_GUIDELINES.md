@@ -5,5 +5,6 @@
 - Avoid hardcoding user-facing strings in deep components.
 - Ensure new labels are translated before release.
 - Include plural and empty-state copy in translation reviews.
+- Keep interpolation placeholders consistent across locales to avoid runtime formatting errors.
 
 Companion index: [Operations docs](README.md).
