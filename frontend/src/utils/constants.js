@@ -2,11 +2,10 @@
  * Centralized constants for the Stacks Clicker application.
  */
 
-/** @type {string} Network environment */
-export const STACKS_NETWORK =
-  String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
-    ? 'testnet'
-    : 'mainnet';
+import { CONTRACTS as SDK_CONTRACTS, DEFAULT_DEPLOYER } from 'stacks-clicker-sdk';
+
+/** @type {'mainnet'|'testnet'} Network environment */
+export const STACKS_NETWORK = import.meta.env.VITE_STACKS_NETWORK === 'testnet' ? 'testnet' : 'mainnet';
 
 /** @type {string} Smart contract deployer address */
 export const DEPLOYER = String(
@@ -14,10 +13,10 @@ export const DEPLOYER = String(
 ).trim();
 
 /** @type {string} Clicker contract name */
-export const CLICKER_CONTRACT = 'clicker-v2p';
+export const CLICKER_CONTRACT = SDK_CONTRACTS.CLICKER;
 
 /** @type {string} TipJar contract name */
-export const TIPJAR_CONTRACT = 'tipjar-v2p';
+export const TIPJAR_CONTRACT = SDK_CONTRACTS.TIPJAR;
 
 /** @type {string} QuickPoll contract name */
 export const QUICKPOLL_CONTRACT = 'quickpoll-v2p';

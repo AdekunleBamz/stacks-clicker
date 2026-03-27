@@ -6,19 +6,19 @@ import { DEPLOYER, TIPJAR_CONTRACT as CONTRACT_NAME, MIN_TIP_MICRO_STX } from '.
 
 /**
  * Custom hook for interacting with the TipJar smart contract.
- * Manages tipping, withdrawals, and contract pings with centralized loading state.
+ * Manages tipping and contract pings with centralized loading state.
  *
  * @param {Object} options - Hook options
  * @param {Function} options.onTxSubmit - Shared callback triggered when a transaction is broadcasted
- * @returns {Object} { isLoading, tip, withdraw, handleSelfPing }
+ * @returns {Object} { isLoading, tip, handleSelfPing }
  * @property {Function} isLoading - Checks if a specific function is loading: (actionKey) => boolean
  * @property {Function} tip - Sends a tip transaction: (amount: number) => void
- * @property {Function} withdraw - Triggers a withdrawal transaction for the user
  * @property {Function} handleSelfPing - Triggers a self-ping heartbeat for the user
  */
 export function useTipJar({ onTxSubmit }) {
   const [loadingStates, setLoadingStates] = useState({});
   const { showError, showLoading } = useNotifications();
+  const STX_TO_MICROSTX = 1_000_000;
 
   /**
    * Internal helper to update loading state for a specific action key.
@@ -66,20 +66,18 @@ export function useTipJar({ onTxSubmit }) {
     }
   }, [onTxSubmit, setLoading, showError, showLoading]);
 
-  const tip = useCallback(
-    (amount = 1000) => {
-      const numericAmount = Number(amount);
-      if (isNaN(numericAmount) || numericAmount <= 0) {
-        showError('Invalid tip amount. Must be a positive number.');
-        return;
-      }
-      if (numericAmount < 100) {
-        showError('Minimum tip is 100 micro-STX.');
-        return;
-      }
-      return executeAction('💰 Tip', 'tip', [{ type: 'uint128', value: numericAmount.toString() }]);
-    },
-    [executeAction, showError]
+  const tip = useCallback((amount = 0.001) => {
+    const normalized = Number(amount);
+    const microStxAmount = Number.isFinite(normalized)
+      ? Math.max(1, Math.round(normalized * STX_TO_MICROSTX))
+      : 1;
+    const payload = stacksClickerSdk.tip(microStxAmount);
+    return executeAction('💰 Tip', payload.functionName, payload.functionArgs);
+  }, [executeAction]);
+
+  const handleSelfPing = useCallback(
+    () => executeAction('📡 Self-Ping', 'ping', [], 'self-ping'),
+    [executeAction]
   );
   const withdraw = useCallback(() => executeAction('💸 Withdraw', 'withdraw'), [executeAction]);
   const handleSelfPing = useCallback(() => executeAction('📡 Self-Ping', 'self-ping'), [executeAction]);
@@ -87,7 +85,6 @@ export function useTipJar({ onTxSubmit }) {
   return {
     isLoading,
     tip,
-    withdraw,
     handleSelfPing
   };
 }
