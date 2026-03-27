@@ -26,9 +26,9 @@ cd stacks-clicker
 ### 2. Install Frontend Dependencies
 ```bash
 cd frontend
-npm install
+npm ci
 ```
-For cleaner CI parity, `npm ci` also works when you do not need to refresh the lockfile.
+Use `npm install` only when you intentionally need to refresh the lockfile.
 
 ### 3. Configure Environment
 Copy the checked-in example file before editing local values:
