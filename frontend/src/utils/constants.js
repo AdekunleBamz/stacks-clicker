@@ -2,21 +2,19 @@
  * Centralized constants for the Stacks Clicker application.
  */
 
-import { DEFAULT_CONTRACTS, DEFAULT_DEPLOYER } from 'stacks-clicker-sdk';
+import { CONTRACTS as SDK_CONTRACTS, DEFAULT_DEPLOYER } from 'stacks-clicker-sdk';
 
 /** @type {'mainnet'|'testnet'} Network environment */
 export const STACKS_NETWORK = import.meta.env.VITE_STACKS_NETWORK === 'testnet' ? 'testnet' : 'mainnet';
-
-const ACTIVE_CONTRACTS = DEFAULT_CONTRACTS[STACKS_NETWORK];
 
 /** @type {string} Smart contract deployer address */
 export const DEPLOYER = DEFAULT_DEPLOYER;
 
 /** @type {string} Clicker contract name */
-export const CLICKER_CONTRACT = ACTIVE_CONTRACTS.clicker;
+export const CLICKER_CONTRACT = SDK_CONTRACTS.CLICKER;
 
 /** @type {string} TipJar contract name */
-export const TIPJAR_CONTRACT = ACTIVE_CONTRACTS.tipJar;
+export const TIPJAR_CONTRACT = SDK_CONTRACTS.TIPJAR;
 
 /** @type {string} QuickPoll contract name */
 export const QUICKPOLL_CONTRACT = import.meta.env.VITE_QUICKPOLL_CONTRACT || 'quickpoll-v2m';

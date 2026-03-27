@@ -49,22 +49,22 @@ const ToastWithProgress = ({ t, message, icon, color, isLoading = false }) => (
  * Premium toast utility for consistent notifications with progress bars.
  */
 export const notify = {
-  success: (message, options = {}) => 
+  success: (message, options = {}) =>
     toast.custom((t) => (
       <ToastWithProgress t={t} message={message} icon="✅" color="var(--success)" />
     ), options),
-  
-  error: (message, options = {}) => 
+
+  error: (message, options = {}) =>
     toast.custom((t) => (
       <ToastWithProgress t={t} message={message} icon="❌" color="var(--error)" />
     ), options),
-    
-  info: (message, options = {}) => 
+
+  info: (message, options = {}) =>
     toast.custom((t) => (
       <ToastWithProgress t={t} message={message} icon="ℹ️" color="var(--primary)" />
     ), options),
-    
-  warning: (message, options = {}) => 
+
+  warning: (message, options = {}) =>
     toast.custom((t) => (
       <ToastWithProgress t={t} message={message} icon="⚠️" color="var(--warning)" />
     ), options),
