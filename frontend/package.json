@@ -1,7 +1,7 @@
 {
   "name": "stacks-clicker-frontend",
   "private": true,
-  "version": "1.0.0",
+  "version": "2.2.0",
   "description": "Premium React frontend for the Stacks Clicker decentralized interaction hub",
   "author": "AdekunleBamz",
   "license": "MIT",
@@ -40,7 +40,8 @@
     "qrcode.react": "^4.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-hot-toast": "^2.6.0"
+    "react-hot-toast": "^2.6.0",
+    "stacks-clicker-sdk": "^1.0.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.9.1",

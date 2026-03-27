@@ -1,10 +1,8 @@
 import { useState, useCallback } from 'react';
 import { callContract } from '../utils/walletconnect';
-
-/** @constant {string} Smart contract deployer address */
-const DEPLOYER = (import.meta.env.VITE_DEPLOYER_ADDRESS || '').trim();
-/** @constant {string} TipJar contract name */
-const CONTRACT_NAME = 'tipjar-v2p';
+import { useNotifications } from './useNotifications';
+import { DEPLOYER, TIPJAR_CONTRACT as CONTRACT_NAME } from '../utils/constants';
+import { stacksClickerSdk } from '../utils/sdk';
 
 /**
  * Custom hook for interacting with the TipJar smart contract.
@@ -45,12 +43,8 @@ export function useTipJar({ onTxSubmit }) {
    * @param {string} functionName - Contract function name
    * @param {Array} functionArgs - Arguments for the contract call
    */
-  const executeAction = useCallback(async (displayName, functionName, functionArgs = []) => {
-    if (!DEPLOYER) {
-      throw new Error('VITE_DEPLOYER_ADDRESS is not set');
-    }
-
-    const key = `tipjar-${functionName}`;
+  const executeAction = useCallback(async (displayName, functionName, functionArgs = [], actionKey = functionName) => {
+    const key = `tipjar-${actionKey}`;
     setLoading(key, true);
     try {
       showLoading(`Broadcasting ${displayName}...`);
@@ -72,21 +66,20 @@ export function useTipJar({ onTxSubmit }) {
     }
   }, [onTxSubmit, setLoading, showError, showLoading]);
 
-  const tip = useCallback((amount = 0.001) => {
-    const normalized = Number(amount);
-    const microStxAmount = Number.isFinite(normalized)
-      ? Math.max(1, Math.round(normalized * STX_TO_MICROSTX))
-      : 1;
-    const payload = stacksClickerSdk.tip(microStxAmount);
+  const tip = useCallback((amount = 1000) => {
+    const payload = stacksClickerSdk.tip(amount);
     return executeAction('💰 Tip', payload.functionName, payload.functionArgs);
+  }, [executeAction]);
+
+  const withdraw = useCallback(() => {
+    const payload = stacksClickerSdk.withdrawTip();
+    return executeAction('💸 Withdraw', payload.functionName, payload.functionArgs);
   }, [executeAction]);
 
   const handleSelfPing = useCallback(
     () => executeAction('📡 Self-Ping', 'ping', [], 'self-ping'),
     [executeAction]
   );
-  const withdraw = useCallback(() => executeAction('💸 Withdraw', 'withdraw'), [executeAction]);
-  const handleSelfPing = useCallback(() => executeAction('📡 Self-Ping', 'self-ping'), [executeAction]);
 
   return {
     isLoading,

@@ -1,10 +1,8 @@
 import { useState, useCallback } from 'react';
 import { callContract } from '../utils/walletconnect';
-
-/** @constant {string} Smart contract deployer address */
-const DEPLOYER = (import.meta.env.VITE_DEPLOYER_ADDRESS || '').trim();
-/** @constant {string} Clicker contract name */
-const CONTRACT_NAME = 'click-v2p';
+import { useNotifications } from './useNotifications';
+import { DEPLOYER, CLICKER_CONTRACT as CONTRACT_NAME } from '../utils/constants';
+import { stacksClickerSdk } from '../utils/sdk';
 
 /**
  * Custom hook for interacting with the Clicker smart contract.
@@ -42,16 +40,22 @@ export function useClicker({ onTxSubmit }) {
       throw new Error('VITE_DEPLOYER_ADDRESS is not set');
     }
 
-  const click = useCallback(() => executeAction('🎯 Click', 'click'), [executeAction]);
+  const click = useCallback(() => {
+    const payload = stacksClickerSdk.click();
+    return executeAction('🎯 Click', payload.functionName, payload.functionArgs);
+  }, [executeAction]);
+
   const multiClick = useCallback(
     (amount = 1) => {
-      const normalizedAmount = Number.isFinite(amount) && amount > 0 ? Math.floor(amount) : 1;
-      return executeAction('🔥 Multi-Click', 'multi-click', [
-        { type: 'uint128', value: normalizedAmount.toString() },
-      ]);
+      const payload = stacksClickerSdk.multiClick(amount);
+      return executeAction('🔥 Multi-Click', payload.functionName, payload.functionArgs);
     },
     [executeAction]
   );
+  const ping = useCallback(() => {
+    const payload = stacksClickerSdk.ping();
+    return executeAction('📡 Ping', payload.functionName, payload.functionArgs);
+  }, [executeAction]);
 
   return {
     isLoading,

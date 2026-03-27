@@ -45,12 +45,8 @@ export function useQuickPoll({ onTxSubmit }) {
    * @param {string} functionName - Contract function name
    * @param {Array} functionArgs - Arguments for the contract call
    */
-  const executeAction = useCallback(async (displayName, functionName, functionArgs = []) => {
-    if (!DEPLOYER) {
-      throw new Error('VITE_DEPLOYER_ADDRESS is not set');
-    }
-
-    const key = `quickpoll-${functionName}`;
+  const executeAction = useCallback(async (displayName, functionName, functionArgs = [], actionKey = functionName) => {
+    const key = `quickpoll-${actionKey}`;
     setLoading(key, true);
     try {
       showLoading(`Broadcasting ${displayName}...`);
@@ -72,17 +68,15 @@ export function useQuickPoll({ onTxSubmit }) {
     }
   }, [onTxSubmit, setLoading, showError, showLoading]);
 
-  const vote = useCallback(
-    (pollId, option) => {
-      const normalizedPollId = Number.isFinite(pollId) && pollId >= 0 ? Math.floor(pollId) : 0;
-      const voteYesFlag = option === true || option === 1 || option === 'yes' || option === 'true';
-      return executeAction('🗳️ Vote', 'vote', [
-        { type: 'uint128', value: normalizedPollId.toString() },
-        { type: 'bool', value: voteYesFlag }
-      ]);
-    },
-    [executeAction]
-  );
+  const vote = useCallback((pollId, option) => {
+    const functionName = option === 1 ? 'vote-yes' : 'vote-no';
+    return executeAction(
+      '🗳️ Vote',
+      functionName,
+      [{ type: 'uint128', value: pollId.toString() }],
+      'vote'
+    );
+  }, [executeAction]);
 
   const createPoll = useCallback((question) => {
     const normalizedQuestion = String(question).trim();
@@ -91,7 +85,10 @@ export function useQuickPoll({ onTxSubmit }) {
     }
     return executeAction('📝 Create Poll', 'create-poll', [{ type: 'string-ascii', value: normalizedQuestion }]);
   }, [executeAction]);
-  const handlePollPing = useCallback(() => executeAction('📡 Poll-Ping', 'ping'), [executeAction]);
+  const handlePollPing = useCallback(
+    () => executeAction('📡 Poll-Ping', 'ping', [], 'poll-ping'),
+    [executeAction]
+  );
 
   return {
     isLoading,
