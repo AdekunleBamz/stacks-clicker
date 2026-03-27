@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react';
 import { callContract } from '../utils/walletconnect';
 import { useNotifications } from './useNotifications';
 import { DEPLOYER, TIPJAR_CONTRACT as CONTRACT_NAME } from '../utils/constants';
+import { stacksClickerSdk } from '../utils/sdk';
 
 /**
  * Custom hook for interacting with the TipJar smart contract.
@@ -42,8 +43,8 @@ export function useTipJar({ onTxSubmit }) {
    * @param {string} functionName - Contract function name
    * @param {Array} functionArgs - Arguments for the contract call
    */
-  const executeAction = useCallback(async (displayName, functionName, functionArgs = []) => {
-    const key = `tipjar-${functionName}`;
+  const executeAction = useCallback(async (displayName, functionName, functionArgs = [], actionKey = functionName) => {
+    const key = `tipjar-${actionKey}`;
     setLoading(key, true);
     try {
       showLoading(`Broadcasting ${displayName}...`);
@@ -64,9 +65,20 @@ export function useTipJar({ onTxSubmit }) {
     }
   }, [onTxSubmit]);
 
-  const tip = useCallback((amount = 1000) => executeAction('💰 Tip', 'tip', [{ type: 'uint128', value: amount.toString() }]), [executeAction]);
-  const withdraw = useCallback(() => executeAction('💸 Withdraw', 'withdraw'), [executeAction]);
-  const handleSelfPing = useCallback(() => executeAction('📡 Self-Ping', 'self-ping'), [executeAction]);
+  const tip = useCallback((amount = 1000) => {
+    const payload = stacksClickerSdk.tip(amount);
+    return executeAction('💰 Tip', payload.functionName, payload.functionArgs);
+  }, [executeAction]);
+
+  const withdraw = useCallback(() => {
+    const payload = stacksClickerSdk.withdrawTip();
+    return executeAction('💸 Withdraw', payload.functionName, payload.functionArgs);
+  }, [executeAction]);
+
+  const handleSelfPing = useCallback(
+    () => executeAction('📡 Self-Ping', 'ping', [], 'self-ping'),
+    [executeAction]
+  );
 
   return {
     isLoading,

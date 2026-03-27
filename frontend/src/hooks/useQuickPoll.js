@@ -42,8 +42,8 @@ export function useQuickPoll({ onTxSubmit }) {
    * @param {string} functionName - Contract function name
    * @param {Array} functionArgs - Arguments for the contract call
    */
-  const executeAction = useCallback(async (displayName, functionName, functionArgs = []) => {
-    const key = `quickpoll-${functionName}`;
+  const executeAction = useCallback(async (displayName, functionName, functionArgs = [], actionKey = functionName) => {
+    const key = `quickpoll-${actionKey}`;
     setLoading(key, true);
     try {
       showLoading(`Broadcasting ${displayName}...`);
@@ -64,16 +64,24 @@ export function useQuickPoll({ onTxSubmit }) {
     }
   }, [onTxSubmit]);
 
-  const vote = useCallback((pollId, option) => executeAction('🗳️ Vote', 'vote', [
-    { type: 'uint128', value: pollId.toString() },
-    { type: 'uint128', value: option.toString() }
-  ]), [executeAction]);
+  const vote = useCallback((pollId, option) => {
+    const functionName = option === 1 ? 'vote-yes' : 'vote-no';
+    return executeAction(
+      '🗳️ Vote',
+      functionName,
+      [{ type: 'uint128', value: pollId.toString() }],
+      'vote'
+    );
+  }, [executeAction]);
 
   const createPoll = useCallback((question) => {
     const normalizedQuestion = String(question).trim();
     return executeAction('📝 Create Poll', 'create-poll', [{ type: 'string-ascii', value: normalizedQuestion }]);
   }, [executeAction]);
-  const handlePollPing = useCallback(() => executeAction('📡 Poll-Ping', 'poll-ping'), [executeAction]);
+  const handlePollPing = useCallback(
+    () => executeAction('📡 Poll-Ping', 'ping', [], 'poll-ping'),
+    [executeAction]
+  );
 
   return {
     isLoading,
