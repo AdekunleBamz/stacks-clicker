@@ -20,7 +20,7 @@ Thank you for your interest in contributing! We follow an atomic-commit workflow
 
 ```bash
 cd frontend
-npm install
+npm ci
 cp .env.example .env # Add your WalletConnect ID
 npm run dev
 ```
