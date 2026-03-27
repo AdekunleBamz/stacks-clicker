@@ -8,5 +8,6 @@ Common tx-log fields:
 - `submittedAt`
 - `explorerUrl`
 - `network`
+- `errorCode` (optional, for rejected/failed flows)
 
 Companion index: [Operations docs](README.md).
