@@ -5,5 +5,6 @@
 - Run one click, one tip, and one poll action to confirm success feedback appears.
 - Refresh the app and verify recent state still renders as expected.
 - Confirm error toast content is readable and actionable when a transaction fails.
+- Validate one user-rejected transaction path so cancellation messaging stays clear.
 
 Companion index: [Operations docs](README.md).
