@@ -9,3 +9,4 @@ Current content is intentionally minimal and can be extended with:
 - release hash and timestamp for easier support triage
 
 - Prefer stable support and status links here so users always have a reliable fallback path.
+- If release hash is shown, link it to changelog or deployment notes for quick verification.
