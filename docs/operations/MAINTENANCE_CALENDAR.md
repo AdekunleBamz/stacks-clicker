@@ -5,5 +5,6 @@ Suggested recurring tasks:
 - biweekly: UI and accessibility smoke test
 - monthly: docs and roadmap refresh
 - quarterly: validate recovery runbooks with a tabletop incident drill
+- quarterly: verify supported wallet app/extension versions are still current
 
 Companion index: [Operations docs](README.md).
