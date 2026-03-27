@@ -10,11 +10,22 @@ If you discover a security vulnerability within this project, please **do not op
 - **Verified Contracts**: Review smart contract code before interacting. Our contracts are documented with NatSpec to aid in code clarity.
 - **Official SDKs**: Only use official Stacks SDKs for blockchain interactions to ensure secure transaction building and signing.
 
-## 🚀 Scope
-This policy applies to all components of the StacksClicker project, including:
-- Smart contracts (`contracts/`)
-- Frontend application (`frontend/`)
-- Deployment scripts and configuration files
+## Reporting a Vulnerability
 
-## 📜 Disclaimer
-StacksClicker is provided "as is" without warranty of any kind. Users are responsible for their own security and the safety of their funds when interacting with the Stacks blockchain.
+If you find a security vulnerability, please contact us:
+- **Email**: `security@stacksclicker.io`
+- **Fallback**: Open a private GitHub security advisory.
+
+We aim to acknowledge valid reports within 72 hours.
+
+Please include:
+- Type of vulnerability.
+- Location in source code.
+- Steps to reproduce.
+- Impact assessment.
+
+## User Best Practices
+
+- **Private Keys**: We will NEVER ask for your seed phrase.
+- **Official Domain**: Only interact with `stacksclicker.io`.
+- **Review Transactions**: Always check Hiro/Leather wallet popups for detailed transaction context.
