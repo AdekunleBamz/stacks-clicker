@@ -15,6 +15,8 @@ If you find a security vulnerability, please contact us:
 - **Email**: `security@stacksclicker.io`
 - **Fallback**: Open a private GitHub security advisory.
 
+We aim to acknowledge valid reports within 72 hours.
+
 Please include:
 - Type of vulnerability.
 - Location in source code.
@@ -26,4 +28,3 @@ Please include:
 - **Private Keys**: We will NEVER ask for your seed phrase.
 - **Official Domain**: Only interact with `stacksclicker.io`.
 - **Review Transactions**: Always check Hiro/Leather wallet popups for detailed transaction context.
-
