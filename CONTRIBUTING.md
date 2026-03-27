@@ -8,6 +8,7 @@ Thank you for your interest in contributing! We follow an atomic-commit workflow
 2.  **Pull Requests**:
     *   Fork the repo and create a branch from `main`.
     *   Use prefix: `feat/`, `fix/`, `docs/`, or `refactor/`.
+    *   Open a draft PR early when you want feedback before final polish.
     *   **Atomic Commits**: Keep commits tiny and focused.
     *   **GPG Signing**: All commits must be signed (`git commit -S`).
 3.  **Standards**:
@@ -29,4 +30,3 @@ For smart contract changes, use [Clarinet](https://github.com/hirosystems/clarin
 ## License
 
 By contributing, you agree that your work will be licensed under the MIT License.
-
