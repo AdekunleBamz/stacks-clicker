@@ -5,5 +5,6 @@
 - Provide workaround when immediate fix is unavailable.
 - Link users to security channel for sensitive reports.
 - Capture timezone when collecting timestamps for incident correlation.
+- Ask whether failure happened at signing, broadcasting, or confirmation to narrow triage quickly.
 
 Companion index: [Operations docs](README.md).
