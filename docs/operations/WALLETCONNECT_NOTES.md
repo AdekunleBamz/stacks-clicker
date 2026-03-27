@@ -5,5 +5,6 @@
 - Keep QR modal path available as pairing fallback.
 - Log only non-sensitive session diagnostics.
 - Re-test reconnect behavior after wallet app version upgrades.
+- Check for chain/network mismatches first when sessions connect but contract calls fail.
 
 Companion index: [Operations docs](README.md).
