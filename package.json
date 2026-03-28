@@ -1,4 +1,7 @@
 {
+  "name": "stacks-clicker-root",
+  "private": true,
+  "version": "1.0.0",
   "description": "A high-performance decentralized interaction hub on Stacks",
   "keywords": [
     "stacks",
@@ -12,6 +15,14 @@
     "@stacks/network": "^7.3.1",
     "@stacks/transactions": "^7.3.1",
     "@stacks/wallet-sdk": "^7.2.0"
+  },
+  "scripts": {
+    "frontend:install": "npm --prefix frontend ci",
+    "frontend:dev": "npm --prefix frontend run dev",
+    "frontend:build": "npm --prefix frontend run build",
+    "frontend:test": "npm --prefix frontend run test",
+    "contracts:check": "clarinet check",
+    "contracts:test": "clarinet test"
   },
   "engines": {
     "node": ">=18.0.0"

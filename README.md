@@ -44,6 +44,11 @@ Stacks Clicker aims to be more than just a game; it is a gateway for users to ex
    npm ci
    ```
    Note: `npm ci` is recommended for deterministic installs. Use `npm install` for manual package updates.
+   From the project root, you can also use:
+   ```bash
+   npm run frontend:install
+   npm run frontend:dev
+   ```
 3. Configure environment variables:
    Copy the example file in the `frontend` directory and update the required values:
    ```bash
