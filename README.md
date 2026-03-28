@@ -67,6 +67,11 @@ If you wish to modify, test, or deploy the Stacks smart contracts locally:
    npm run frontend:install
    ```
    Note: `npm ci` is recommended for deterministic installs. Use `npm install` for manual package updates.
+   From the project root, you can also use:
+   ```bash
+   npm run frontend:install
+   npm run frontend:dev
+   ```
 3. Configure environment variables:
    Create a `.env` file in the `frontend` directory:
    ```env

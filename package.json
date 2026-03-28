@@ -1,11 +1,16 @@
 {
+  "name": "stacks-clicker-root",
   "private": true,
-  "scripts": {
-    "frontend:install": "npm --prefix frontend install",
-    "frontend:dev": "npm --prefix frontend run dev",
-    "frontend:build": "npm --prefix frontend run build",
-    "frontend:lint": "npm --prefix frontend run lint"
-  },
+  "version": "1.0.0",
+  "description": "A high-performance decentralized interaction hub on Stacks",
+  "keywords": [
+    "stacks",
+    "blockchain",
+    "clarity",
+    "gamefi",
+    "clicker",
+    "bitcoin-l2"
+  ],
   "dependencies": {
     "@stacks/network": "^7.3.1",
     "@stacks/transactions": "^7.3.1",
@@ -16,19 +21,8 @@
     "frontend:dev": "npm --prefix frontend run dev",
     "frontend:build": "npm --prefix frontend run build",
     "frontend:test": "npm --prefix frontend run test",
-    "frontend:test:run": "npm --prefix frontend run test:run",
-    "frontend:test:coverage": "npm --prefix frontend run test:coverage",
-    "frontend:smoke": "npm --prefix frontend run test:run -- src/hooks/__tests__/usePrice.test.js src/hooks/__tests__/useInterval.test.js",
-    "frontend:lint": "npm --prefix frontend run lint",
-    "frontend:lint:fix": "npm --prefix frontend run lint:fix",
-    "frontend:format": "npm --prefix frontend run format",
-    "frontend:format:check": "npm --prefix frontend run format:check",
     "contracts:check": "clarinet check",
-    "contracts:test": "clarinet test",
-    "contracts:coverage": "clarinet test --coverage",
-    "check:fast": "npm run frontend:lint && npm run frontend:smoke",
-    "check": "npm run contracts:check && npm run frontend:lint && npm run frontend:test:run",
-    "clean": "rm -rf node_modules frontend/node_modules frontend/dist"
+    "contracts:test": "clarinet test"
   },
   "engines": {
     "node": ">=18.0.0"
