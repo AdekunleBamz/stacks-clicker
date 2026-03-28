@@ -85,6 +85,7 @@ If you wish to modify, test, or deploy the Stacks smart contracts locally:
    ```bash
    npm run frontend:dev
    ```
+   Build for production when needed:
    ```bash
    npm run build
    ```
@@ -106,6 +107,9 @@ git clone https://github.com/AdekunleBamz/stacks-clicker.git && cd stacks-clicke
 
 # Install & Run
 npm ci && cp .env.example .env && npm run dev
+
+# Run frontend tests
+npm run test
 ```
 
 ## Key Interactions 🎮
