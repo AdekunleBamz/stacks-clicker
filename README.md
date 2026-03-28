@@ -78,7 +78,7 @@ This project has undergone a comprehensive 94-PR improvement cycle focusing on:
 git clone https://github.com/AdekunleBamz/stacks-clicker.git && cd stacks-clicker/frontend
 
 # Install & Run
-npm install && cp .env.example .env && npm run dev
+npm ci && cp .env.example .env && npm run dev
 ```
 
 ## Key Interactions 🎮
