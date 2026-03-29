@@ -13,3 +13,5 @@ Loading key note:
 
 ## Maintenance Note
 - Confirm cooldown math notes stay aligned with contract-side click throttling updates.
+
+Source file: `frontend/src/hooks/useClicker.js`.
