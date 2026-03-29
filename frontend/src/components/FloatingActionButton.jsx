@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 /**
  * FAB component for mobile quick actions.
  */
-export default function FloatingActionButton({ onAction }) {
+export default function FloatingActionButton({ onAction = () => {} }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const actions = [
@@ -48,7 +48,6 @@ export default function FloatingActionButton({ onAction }) {
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
         aria-label={isOpen ? 'Close quick actions menu' : 'Open quick actions menu'}
-        aria-expanded={isOpen}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
@@ -59,5 +58,5 @@ export default function FloatingActionButton({ onAction }) {
 }
 
 FloatingActionButton.propTypes = {
-  onAction: PropTypes.func.isRequired
+  onAction: PropTypes.func
 };
