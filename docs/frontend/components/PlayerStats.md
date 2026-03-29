@@ -12,3 +12,5 @@ Current card set:
 Keep stat labels consistent with transaction history terminology.
 
 - Keep stat labels synchronized with transaction history terminology for easier cross-reference.
+
+Source file: `frontend/src/components/PlayerStats.jsx`.
