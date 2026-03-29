@@ -25,6 +25,13 @@ cp .env.example .env # Add your WalletConnect ID
 npm run dev
 ```
 
+From the repository root, you can run the equivalent helper scripts:
+
+```bash
+npm run frontend:install
+npm run frontend:dev
+```
+
 For smart contract changes, use [Clarinet](https://github.com/hirosystems/clarinet) for testing.
 
 ## License
