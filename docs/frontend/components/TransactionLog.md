@@ -8,3 +8,5 @@ Treat unknown status values as non-fatal and show neutral styling.
 
 ## Maintenance Note
 - Revisit retention and truncation notes if log paging strategy changes.
+
+Source file: `frontend/src/components/TransactionLog.jsx`.
