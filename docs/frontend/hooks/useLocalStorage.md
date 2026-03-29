@@ -9,5 +9,6 @@ Prefer JSON-safe values to keep parsing and migration predictable.
 
 ## Maintenance Note
 - Keep key versioning notes updated when persisted shape or migration logic changes.
+- Keep storage key namespaces consistent to avoid collisions between feature modules.
 
 Source file: `frontend/src/hooks/useLocalStorage.js`.
