@@ -11,3 +11,5 @@ Important behavior:
 - keep optimistic UI labels in sync with final transaction status updates
 
 - Document clipboard fallback messaging for environments where copy APIs are unavailable.
+
+Source file: `frontend/src/components/QuickPollCard.jsx`.
