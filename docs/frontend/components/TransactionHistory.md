@@ -12,3 +12,5 @@ Treat unknown status values as neutral badges instead of dropping entries.
 
 ## Maintenance Note
 - Re-check filter and sort behavior notes when history query defaults change.
+
+Source file: `frontend/src/components/TransactionHistory.jsx`.
