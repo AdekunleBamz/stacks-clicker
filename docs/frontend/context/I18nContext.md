@@ -12,3 +12,5 @@ Keep translation keys stable to prevent runtime fallback churn.
 
 ## Maintenance Note
 - Reconfirm provider boundary guidance when new locale-loading layers are introduced.
+
+Source file: `frontend/src/context/I18nContext.jsx`.
