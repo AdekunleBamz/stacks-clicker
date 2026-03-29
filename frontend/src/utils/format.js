@@ -26,7 +26,9 @@ export function truncateAddress(address, { prefix = 4, suffix = 4, separator = '
  * @returns {string} The formatted string
  */
 export function formatNumber(value, options = {}) {
-  return new Intl.NumberFormat('en-US', options).format(value);
+  const numericValue = Number(value);
+  if (!Number.isFinite(numericValue)) return '0';
+  return new Intl.NumberFormat('en-US', options).format(numericValue);
 }
 
 /**
