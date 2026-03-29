@@ -8,3 +8,5 @@ Validates:
 
 ## Maintenance Note
 - Add migration-case assertions whenever persisted storage schema evolves.
+
+Source file: `frontend/src/tests/useLocalStorage.test.jsx`.
