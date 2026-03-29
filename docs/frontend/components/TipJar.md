@@ -12,3 +12,5 @@ Keep recipient validation strict to avoid malformed address submissions.
 
 ## Maintenance Note
 - Keep displayed fee caveats aligned with current network fee behavior.
+
+Source file: `frontend/src/components/TipJar.jsx`.
