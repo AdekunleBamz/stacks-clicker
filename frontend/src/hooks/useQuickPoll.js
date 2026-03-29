@@ -1,9 +1,7 @@
 import { useState, useCallback } from 'react';
 import { callContract } from '../utils/walletconnect';
 import { useNotifications } from './useNotifications';
-import { DEPLOYER } from '../utils/constants';
-
-const CONTRACT_NAME = 'quickpoll-v2m';
+import { DEPLOYER, QUICKPOLL_CONTRACT as CONTRACT_NAME } from '../utils/constants';
 
 /**
  * Custom hook for interacting with the QuickPoll smart contract.
