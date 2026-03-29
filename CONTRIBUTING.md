@@ -33,6 +33,7 @@ npm run frontend:dev
 ```
 
 For smart contract changes, use [Clarinet](https://github.com/hirosystems/clarinet) for testing.
+For frontend verification before opening a PR, run `npm run test -- --run`.
 
 ## License
 
