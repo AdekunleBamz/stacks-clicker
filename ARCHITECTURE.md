@@ -40,7 +40,7 @@ The application uses a **Collector Pattern** to aggregate domain-specific contra
 - `useI18n()`: Translation strings and locale switching.
 
 ### Interaction Layer (Hooks)
-We use a **Collector Pattern** to aggregate contract interactions:
+The interaction layer exposes contract calls through domain-specific hooks:
 
 - `useInteractions()`: The master hook that provides `clicker`, `tipjar`, and `quickpoll` namespaces.
 - `useClicker()`, `useTipJar()`, `useQuickPoll()`: Domain-specific hooks handling Clarity contract-calls.
