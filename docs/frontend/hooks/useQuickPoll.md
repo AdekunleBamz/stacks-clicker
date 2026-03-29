@@ -7,7 +7,9 @@ Exposed methods:
 - `createPoll(question)`
 - `handlePollPing()`
 - `isLoading(functionName)`
-- Validate question length before `createPoll` to avoid rejected transactions.
+
+Input guard:
+- Validate question length before calling `createPoll` to avoid rejected transactions.
 
 ## Maintenance Note
 - Revisit poll expiry/window assumptions when backend polling cadence is adjusted.
