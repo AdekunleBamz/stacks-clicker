@@ -90,7 +90,7 @@ sequenceDiagram
 - **Optimistic Updates**: On-chain interaction hooks update local state *before* the transaction is confirmed to provide an instant feel.
 
 ## Performance Considerations
-- **Lazy Loading**: `MainGrid`, `PlayerStats`, and `TransactionHistory` are lazy-loaded via `React.lazy` and `Suspense` to improve initial Load Time.
+- **Lazy Loading**: `MainGrid`, `PlayerStats`, and `TransactionHistory` are lazy-loaded via `React.lazy` and `Suspense` to improve initial load time.
 - **Asset Optimization**: SVGs are used for icons to ensure sharpness and small bundle size.
 - **Telemetry**: `PerformanceOverlay` provides real-time FPS and MEM monitoring during development (`?dev=true`).
 
