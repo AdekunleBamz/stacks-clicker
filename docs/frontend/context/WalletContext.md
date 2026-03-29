@@ -12,3 +12,5 @@ Treat missing provider state as disconnected and recover on next explicit connec
 
 ## Maintenance Note
 - Keep provider capability notes current when wallet SDK versions are upgraded.
+
+Source file: `frontend/src/context/WalletContext.jsx`.
