@@ -152,6 +152,8 @@
       (new-total (+ (var-get total-votes) u1))
       (new-yes (+ (var-get yes-votes) u1))
     )
+    ;; Prevent duplicate votes from the same principal
+    (asserts! (not (default-to false (map-get? has-voted tx-sender))) ERR-ALREADY-VOTED)
     ;; Track new voter
     (track-new-voter)
     ;; Collect fee
@@ -185,6 +187,8 @@
       (new-total (+ (var-get total-votes) u1))
       (new-no (+ (var-get no-votes) u1))
     )
+    ;; Prevent duplicate votes from the same principal
+    (asserts! (not (default-to false (map-get? has-voted tx-sender))) ERR-ALREADY-VOTED)
     ;; Track new voter
     (track-new-voter)
     ;; Collect fee
