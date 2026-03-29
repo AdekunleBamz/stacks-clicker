@@ -14,14 +14,17 @@ import { motion, AnimatePresence } from 'framer-motion';
 export default function ParticleOverlay({ trigger }) {
   const [particles, setParticles] = useState([]);
   const timeoutsMode = useRef([]);
+  const isReduced =
+    typeof window !== 'undefined' &&
+    typeof window.matchMedia === 'function' &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /**
    * Generates a batch of randomized particles and manages their lifecycle.
    *
    * @param {number} [count=12] - Number of particles to generate in a single burst
    */
-    const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const createParticles = useCallback((count = isReduced ? 4 : 12) => {
+  const createParticles = useCallback((count = isReduced ? 4 : 12) => {
     const batchId = Date.now();
     const newParticles = Array.from({ length: count }).map((_, i) => ({
       id: `${batchId}-${i}`,
@@ -41,7 +44,7 @@ export default function ParticleOverlay({ trigger }) {
     }, 1000);
 
     timeoutsMode.current.push(timeout);
-  }, []);
+  }, [isReduced]);
 
   useEffect(() => {
     if (trigger) {
@@ -104,6 +107,10 @@ ParticleOverlay.propTypes = {
   trigger: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.number,
-    PropTypes.string
+    PropTypes.string,
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+      count: PropTypes.number,
+    }),
   ])
 };
