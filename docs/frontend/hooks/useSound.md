@@ -10,5 +10,6 @@ Supported sound types:
 
 ## Maintenance Note
 - Revalidate browser autoplay handling whenever audio asset paths or playback defaults change.
+- Keep first-interaction playback tied to explicit user gestures to avoid autoplay regressions.
 
 Source file: `frontend/src/hooks/useSound.js`.
