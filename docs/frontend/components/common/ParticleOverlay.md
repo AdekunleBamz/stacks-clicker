@@ -7,3 +7,5 @@ Throttle repeated triggers during rapid success events to avoid render spikes.
 
 ## Maintenance Note
 - Reassess particle density defaults when performance budgets are tightened.
+
+Source file: `frontend/src/components/common/ParticleOverlay.jsx`.
