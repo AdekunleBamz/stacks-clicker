@@ -66,11 +66,6 @@ The dApp interacts with pre-deployed contracts on the network configured by `VIT
 Current active contract names used by the frontend:
 - `clicker-v2p`
 - `tipjar-v2p`
-- `quickpoll-v2m`
-
-Current active contract names used by the frontend:
-- `clicker-v2p`
-- `tipjar-v2p`
 - `quickpoll-v2p`
 
 ---
