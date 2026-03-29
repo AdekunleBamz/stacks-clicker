@@ -9,3 +9,5 @@
 
 ## Maintenance Note
 - Revalidate status-badge wording when transaction lifecycle states are expanded.
+
+Source file: `frontend/src/components/TransactionItem.jsx`.
