@@ -9,3 +9,5 @@ Checks:
 
 ## Maintenance Note
 - Revalidate timer-related assertions whenever click cooldown semantics are adjusted.
+
+Source file: `frontend/src/tests/ClickerCard.test.jsx`.
