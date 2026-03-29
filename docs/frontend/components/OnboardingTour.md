@@ -9,3 +9,5 @@ Interaction model:
 - keep step copy stable to preserve screenshot-based help docs
 
 - Persist dismissal state only after explicit user intent to avoid hiding first-run guidance accidentally.
+
+Source file: `frontend/src/components/OnboardingTour.jsx`.
