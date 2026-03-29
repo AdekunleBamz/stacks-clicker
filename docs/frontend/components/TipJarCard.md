@@ -13,3 +13,5 @@ Display amount formatting help near the input to reduce invalid submissions.
 
 ## Maintenance Note
 - Keep empty-state copy and min-tip validation notes aligned during UX copy updates.
+
+Source file: `frontend/src/components/TipJarCard.jsx`.
