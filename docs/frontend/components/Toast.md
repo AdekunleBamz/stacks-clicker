@@ -7,3 +7,5 @@ Include recovery hints for failures that users can immediately retry.
 
 ## Maintenance Note
 - Revalidate timeout durations with accessibility guidance whenever toast variants change.
+
+Source file: `frontend/src/components/Toast.jsx`.
