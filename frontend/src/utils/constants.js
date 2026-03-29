@@ -20,7 +20,7 @@ export const CLICKER_CONTRACT = 'clicker-v2p';
 export const TIPJAR_CONTRACT = 'tipjar-v2p';
 
 /** @type {string} QuickPoll contract name */
-export const QUICKPOLL_CONTRACT = 'quickpoll-v2m';
+export const QUICKPOLL_CONTRACT = 'quickpoll-v2p';
 
 /** @type {Object} Contract naming schema */
 export const CONTRACTS = {
