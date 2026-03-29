@@ -59,8 +59,8 @@ describe('TipJarCard Component', () => {
   it('invokes the fixed tip actions', () => {
     renderCard();
 
-    fireEvent.click(screen.getByRole('button', { name: /self ping/i }));
-    fireEvent.click(screen.getByRole('button', { name: /quick tip/i }));
+    fireEvent.click(screen.getByTitle('Self Ping'));
+    fireEvent.click(screen.getByTitle('Quick Tip'));
 
     expect(handleSelfPing).toHaveBeenCalledTimes(1);
     expect(tip).toHaveBeenCalledTimes(1);
@@ -73,7 +73,7 @@ describe('TipJarCard Component', () => {
     fireEvent.change(screen.getByLabelText(/custom amount/i), {
       target: { value: '0.05' },
     });
-    fireEvent.click(screen.getByRole('button', { name: /custom tip/i }));
+    fireEvent.click(screen.getByTitle('Custom Tip'));
 
     expect(tip).toHaveBeenCalledWith(0.05);
     expect(screen.getByText('0.051 STX')).toBeInTheDocument();
@@ -85,7 +85,7 @@ describe('TipJarCard Component', () => {
     fireEvent.change(screen.getByLabelText(/custom amount/i), {
       target: { value: '0' },
     });
-    fireEvent.click(screen.getByRole('button', { name: /custom tip/i }));
+    fireEvent.click(screen.getByTitle('Custom Tip'));
 
     expect(tip).not.toHaveBeenCalled();
     expect(screen.getByText('Invalid amount')).toBeInTheDocument();
@@ -94,7 +94,7 @@ describe('TipJarCard Component', () => {
   it('prevents actions when disconnected', () => {
     renderCard(null);
 
-    fireEvent.click(screen.getByRole('button', { name: /quick tip/i }));
+    fireEvent.click(screen.getByTitle('Quick Tip'));
 
     expect(tip).not.toHaveBeenCalled();
     expect(handleSelfPing).not.toHaveBeenCalled();
