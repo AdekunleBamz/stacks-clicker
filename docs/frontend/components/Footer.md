@@ -10,3 +10,5 @@ Current content is intentionally minimal and can be extended with:
 
 - Prefer stable support and status links here so users always have a reliable fallback path.
 - If release hash is shown, link it to changelog or deployment notes for quick verification.
+
+Source file: `frontend/src/components/Footer.jsx`.
