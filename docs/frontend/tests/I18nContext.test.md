@@ -8,3 +8,5 @@ Covers:
 
 ## Maintenance Note
 - Keep fallback-locale test cases updated when language packs are added.
+
+Source file: `frontend/src/tests/I18nContext.test.jsx`.
