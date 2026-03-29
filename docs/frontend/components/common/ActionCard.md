@@ -7,3 +7,5 @@ Avoid embedding unrelated layout concerns so this wrapper stays reusable.
 
 ## Maintenance Note
 - Keep spacing-density notes current when card content slots are expanded.
+
+Source file: `frontend/src/components/common/ActionCard.jsx`.
