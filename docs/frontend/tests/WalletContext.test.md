@@ -9,3 +9,5 @@ Covers:
 
 ## Maintenance Note
 - Recheck reconnect-path assertions when wallet session bootstrap logic changes.
+
+Source file: `frontend/src/tests/WalletContext.test.jsx`.
