@@ -76,12 +76,6 @@ function ClickerCard({ address, clicker }) {
             </motion.div>
           )}
         </AnimatePresence>
-        {/* The following div is added based on the instruction to mount a conditional shimmer class
-            onto a balance display node. It's placed here as a plausible location within the header,
-            assuming 'loading' and 'balance' would be available in this scope. */}
-        <div className={`stats-value ${loading ? 'shimmer' : ''}`} aria-live="polite">
-          {loading ? '...' : (address ? balance : '—')} STX
-        </div>
       </div>
       <div className="actions" role="group" aria-label="Clicker Contract Controls">
         <Tooltip content="Perform a single on-chain click interaction instantly (fixed cost).">

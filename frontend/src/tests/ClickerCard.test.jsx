@@ -74,11 +74,9 @@ describe('ClickerCard Component', () => {
   it('calls click actions with the expected payloads', () => {
     renderCard();
 
-    const buttons = screen.getAllByRole('button');
-
-    fireEvent.click(buttons[0]);
-    fireEvent.click(buttons[1]);
-    fireEvent.click(buttons[2]);
+    fireEvent.click(screen.getByRole('button', { name: /express click/i }));
+    fireEvent.click(screen.getByRole('button', { name: /turbo 10x/i }));
+    fireEvent.click(screen.getByRole('button', { name: /network ping/i }));
 
     expect(click).toHaveBeenCalledTimes(1);
     expect(multiClick).toHaveBeenCalledTimes(1);
