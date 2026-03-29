@@ -52,7 +52,7 @@ Visit `http://localhost:5173` to interact with the dApp.
 ## 🧪 Testing
 From the `frontend` directory, run the automated test suite:
 ```bash
-npm run test
+npm run test -- --run
 ```
 Use `npm run lint` before opening a pull request if you touched application code.
 
@@ -66,7 +66,7 @@ The dApp interacts with pre-deployed contracts on Stacks Mainnet. You can find t
 Current active contract names used by the frontend:
 - `clicker-v2p`
 - `tipjar-v2p`
-- `quickpoll-v2p`
+- `quickpoll-v2m`
 
 ---
 Need help? Open an issue on [GitHub](https://github.com/AdekunleBamz/stacks-clicker/issues).
