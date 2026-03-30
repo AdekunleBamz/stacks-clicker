@@ -9,6 +9,7 @@ Behavior notes:
 - Numeric codes (`100`, `101`, `401`, etc.) map to stable canned messages.
 - String heuristics (`user rejected`, `insufficient`) provide fallback mapping when no code is present.
 - Unknown errors return a bounded fallback string prefixed with `Transaction failed:`.
+- Rate-limit/backoff messages are passed through directly so retry timing remains visible.
 
 ## Maintenance Note
 - Keep mappings and fallback expectations aligned with `frontend/src/utils/__tests__/errors.test.js`.
