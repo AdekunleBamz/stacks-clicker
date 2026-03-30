@@ -7,3 +7,5 @@ Avoid animating rapidly changing values to keep motion readable.
 
 ## Maintenance Note
 - Keep numeric formatting examples aligned with locale and precision defaults.
+
+Source file: `frontend/src/components/common/StatsCard.jsx`.
