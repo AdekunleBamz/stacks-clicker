@@ -17,6 +17,10 @@ describe('hash utilities', () => {
       expect(hash).toBeGreaterThanOrEqual(0);
       expect(hash).toBeLessThanOrEqual(4294967295);
     });
+
+    test('returns stable seed hash for empty strings', () => {
+      expect(simpleHash('')).toBe(5381);
+    });
   });
 
   describe('stringToColor', () => {
