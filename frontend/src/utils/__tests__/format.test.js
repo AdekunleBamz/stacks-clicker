@@ -25,6 +25,10 @@ describe('format utilities', () => {
     test('normalizes negative prefix and suffix values', () => {
       expect(truncateAddress(address, { prefix: -1, suffix: -2 })).toBe(address);
     });
+
+    test('supports custom separators', () => {
+      expect(truncateAddress(address, { separator: '***' })).toBe('SP3K***PP4Y');
+    });
   });
 
   describe('formatNumber', () => {
