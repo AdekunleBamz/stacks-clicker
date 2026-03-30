@@ -9,4 +9,10 @@ describe('parseContractError', () => {
   test('maps user rejected messages to rejection copy', () => {
     expect(parseContractError('User rejected transaction')).toContain('User Rejected');
   });
+
+  test('falls back to truncated raw message when code is unknown', () => {
+    const message =
+      'This is an unknown error message that is intentionally long for fallback truncation coverage';
+    expect(parseContractError(message)).toMatch(/^Transaction failed: /);
+  });
 });
