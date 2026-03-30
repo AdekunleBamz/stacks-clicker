@@ -16,6 +16,7 @@ describe('hash utilities', () => {
       const hash = simpleHash('any-string');
       expect(hash).toBeGreaterThanOrEqual(0);
       expect(hash).toBeLessThanOrEqual(4294967295);
+      expect(Number.isInteger(hash)).toBe(true);
     });
 
     test('returns stable seed hash for empty strings', () => {
