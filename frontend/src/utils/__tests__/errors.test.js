@@ -18,6 +18,10 @@ describe('parseContractError', () => {
     expect(parseContractError({ message: '(err u100)' })).toContain('Unauthorized');
   });
 
+  test('maps plain numeric strings directly', () => {
+    expect(parseContractError('500')).toContain('Network Error');
+  });
+
   test('falls back to truncated raw message when code is unknown', () => {
     const message =
       'This is an unknown error message that is intentionally long for fallback truncation coverage';
