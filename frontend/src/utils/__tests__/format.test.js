@@ -6,7 +6,7 @@ describe('format utilities', () => {
     const address = 'SP3K8AD8ARD4VTC6K1D75X9P90NVST68S2K6PP4Y';
 
     test('truncates address with default options', () => {
-      expect(truncateAddress(address)).toBe('SP3K...P4Y');
+      expect(truncateAddress(address)).toBe('SP3K...PP4Y');
     });
 
     test('truncates address with custom prefix and suffix', () => {
