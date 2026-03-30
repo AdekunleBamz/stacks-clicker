@@ -43,5 +43,10 @@ describe('format utilities', () => {
       expect(formatStx(1000000)).toBe('1.00 STX');
       expect(formatStx(500000)).toBe('0.50 STX');
     });
+
+    test('returns 0.00 STX for non-finite input', () => {
+      expect(formatStx(undefined)).toBe('0.00 STX');
+      expect(formatStx(Number.NaN)).toBe('0.00 STX');
+    });
   });
 });
