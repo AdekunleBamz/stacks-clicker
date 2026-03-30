@@ -22,6 +22,10 @@ describe('parseContractError', () => {
     expect(parseContractError({ message: '(err u100)' })).toContain('Unauthorized');
   });
 
+  test('parses error objects using reason property', () => {
+    expect(parseContractError({ reason: '(err u103)' })).toContain('Cooldown Active');
+  });
+
   test('maps plain numeric strings directly', () => {
     expect(parseContractError('500')).toContain('Network Error');
   });
