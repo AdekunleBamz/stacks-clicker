@@ -350,5 +350,7 @@ export function getSession() {
  */
 export function getWalletConnectLink(wcUri) {
   if (!wcUri) return '';
-  return `https://walletconnect.com/wc?uri=${encodeURIComponent(wcUri)}`;
+  const normalizedUri = String(wcUri).trim();
+  if (!normalizedUri) return '';
+  return `https://walletconnect.com/wc?uri=${encodeURIComponent(normalizedUri)}`;
 }
