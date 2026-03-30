@@ -13,4 +13,10 @@ describe('getWalletConnectLink', () => {
     expect(getWalletConnectLink('')).toBe('');
     expect(getWalletConnectLink(undefined)).toBe('');
   });
+
+  test('trims surrounding whitespace before encoding', () => {
+    const uri = 'wc:trimmed@2?relay-protocol=irn';
+    const link = getWalletConnectLink(`  ${uri}  `);
+    expect(link).toContain(encodeURIComponent(uri));
+  });
 });
