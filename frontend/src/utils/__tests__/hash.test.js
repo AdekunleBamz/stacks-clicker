@@ -21,6 +21,10 @@ describe('hash utilities', () => {
     test('returns stable seed hash for empty strings', () => {
       expect(simpleHash('')).toBe(5381);
     });
+
+    test('handles unicode input deterministically', () => {
+      expect(simpleHash('Yoruba-ọrọ')).toBe(simpleHash('Yoruba-ọrọ'));
+    });
   });
 
   describe('stringToColor', () => {
