@@ -36,10 +36,8 @@ npm run frontend:dev
 ```
 
 For smart contract changes, use [Clarinet](https://github.com/hirosystems/clarinet) for testing.
-For frontend verification before opening a PR:
-- Run `npm run test -- --run` to execute tests
-- Run `npm run frontend:lint` to check code quality
-- Run `npm run format:check` to verify formatting
+For frontend verification before opening a PR, run `npm run test -- --run`.
+If your change spans both areas, run `npm run check` from the repository root before requesting review.
 
 ## License
 
