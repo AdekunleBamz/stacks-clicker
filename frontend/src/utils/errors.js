@@ -46,5 +46,6 @@ export function parseContractError(error) {
     return ERROR_MAP['101'];
   }
 
-  return `Transaction failed: ${errorMessage.length > 60 ? errorMessage.slice(0, 60) + '...' : errorMessage}`;
+  const compactMessage = errorMessage.length > 60 ? `${errorMessage.slice(0, 60)}...` : errorMessage;
+  return `Transaction failed: ${compactMessage}`;
 }
