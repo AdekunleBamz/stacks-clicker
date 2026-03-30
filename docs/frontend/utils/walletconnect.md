@@ -13,6 +13,8 @@ Primary APIs include:
 Behavior notes:
 - Uses env-driven `STACKS_NETWORK` to choose the Stacks chain ID.
 - `getWalletConnectLink` trims and URL-encodes WC URIs for camera-friendly links.
+- `getWalletConnectLink` ignores non-`wc:` values to avoid generating invalid camera links.
+- `callContract` applies temporary per-call backoff after rate-limit/chaining broadcast errors.
 
 ## Maintenance Note
 - Keep helper behavior synchronized with `frontend/src/utils/__tests__/walletconnect.test.js`.
