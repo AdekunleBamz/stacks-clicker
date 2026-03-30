@@ -56,5 +56,9 @@ describe('hash utilities', () => {
     test('returns different colors for different ids in common cases', () => {
       expect(stringToColor('tx-1')).not.toBe(stringToColor('tx-2'));
     });
+
+    test('handles undefined input without throwing', () => {
+      expect(stringToColor(undefined)).toMatch(/^hsl\(\d+, 70%, 65%\)$/);
+    });
   });
 });
