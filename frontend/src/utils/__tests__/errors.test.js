@@ -14,6 +14,10 @@ describe('parseContractError', () => {
     expect(parseContractError('insufficient balance for fee')).toContain('Insufficient Funds');
   });
 
+  test('parses error objects using their message property', () => {
+    expect(parseContractError({ message: '(err u100)' })).toContain('Unauthorized');
+  });
+
   test('falls back to truncated raw message when code is unknown', () => {
     const message =
       'This is an unknown error message that is intentionally long for fallback truncation coverage';
