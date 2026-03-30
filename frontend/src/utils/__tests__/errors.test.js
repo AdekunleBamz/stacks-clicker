@@ -52,6 +52,11 @@ describe('parseContractError', () => {
     expect(parseContractError(msg)).toBe(msg);
   });
 
+  test('passes through quota-only messages', () => {
+    const msg = 'Per-minute quota reached for stacks provider';
+    expect(parseContractError(msg)).toBe(msg);
+  });
+
   test('passes through TooMuchChaining messages', () => {
     const msg = 'BROADCAST ERROR — TooMuchChaining';
     expect(parseContractError(msg)).toBe(msg);
