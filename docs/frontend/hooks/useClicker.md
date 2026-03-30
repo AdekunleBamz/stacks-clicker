@@ -13,5 +13,6 @@ Loading key note:
 
 ## Maintenance Note
 - Confirm cooldown math notes stay aligned with contract-side click throttling updates.
+- Keep click/ping error copy synchronized with broadcast backoff handling.
 
 Source file: `frontend/src/hooks/useClicker.js`.
