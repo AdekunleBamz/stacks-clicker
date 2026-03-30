@@ -6,5 +6,7 @@
 - If failures cluster, pause release activity and follow the incident response checklist.
 - Include the exact `txid` or wallet rejection code in triage notes whenever available.
 - Confirm explorer lookups use the correct network to avoid false negatives during triage.
+- Capture provider throttle details (`TooMuchChaining`, quota retry seconds) when present.
+- When retrying after throttling, document the cooldown used before the next broadcast attempt.
 
 Companion index: [Operations docs](README.md).
