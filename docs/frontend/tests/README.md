@@ -6,3 +6,5 @@ Run the frontend suite with `npm --prefix frontend run test -- --run`.
 
 ## Maintenance Note
 - Keep flaky-test triage guidance updated as CI retry policy evolves.
+
+Source directory: `frontend/src/tests/`.
