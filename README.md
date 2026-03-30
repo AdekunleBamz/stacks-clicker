@@ -156,6 +156,7 @@ Shared branch commits should be SSH signed before they are pushed. You can confi
 - **Nonce Out of Sync**: If transactions fail with a "nonce" error, try manually incrementing the nonce in your wallet settings or wait a few minutes for the network to sync.
 - **Contract Not Found**: Ensure you are on the correct network (Mainnet vs Testnet) by checking the toggle in the app header and your wallet extension.
 - **UI Not Updating**: Try a hard refresh (`Cmd+Shift+R` or `Ctrl+F5`) to clear the local cache and reload the latest assets.
+- **Wrong Network Explorer Link**: Confirm `VITE_STACKS_NETWORK` in `frontend/.env` matches the wallet network before retesting.
 
 ## License 📄
 
