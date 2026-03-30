@@ -36,5 +36,12 @@ describe('hash utilities', () => {
     test('is deterministic', () => {
       expect(stringToColor('stacks')).toBe(stringToColor('stacks'));
     });
+
+    test('keeps hue channel within 0-359 range', () => {
+      const match = stringToColor('range-check').match(/^hsl\((\d+), 70%, 65%\)$/);
+      const hue = Number(match?.[1]);
+      expect(hue).toBeGreaterThanOrEqual(0);
+      expect(hue).toBeLessThan(360);
+    });
   });
 });
