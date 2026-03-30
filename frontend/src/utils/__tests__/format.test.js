@@ -10,7 +10,7 @@ describe('format utilities', () => {
     });
 
     test('truncates address with custom prefix and suffix', () => {
-      expect(truncateAddress(address, { prefix: 6, suffix: 4 })).toBe('SP3K8A...P4Y');
+      expect(truncateAddress(address, { prefix: 6, suffix: 4 })).toBe('SP3K8A...PP4Y');
     });
 
     test('returns original address if very short', () => {
