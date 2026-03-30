@@ -15,6 +15,7 @@ Behavior notes:
 - `getWalletConnectLink` trims and URL-encodes WC URIs for camera-friendly links.
 - `getWalletConnectLink` ignores non-`wc:` values to avoid generating invalid camera links.
 - `callContract` applies temporary per-call backoff after rate-limit/chaining broadcast errors.
+- Default fallback waits are 8 seconds for `TooMuchChaining` and 15 seconds for generic rate-limit failures.
 
 ## Maintenance Note
 - Keep helper behavior synchronized with `frontend/src/utils/__tests__/walletconnect.test.js`.
