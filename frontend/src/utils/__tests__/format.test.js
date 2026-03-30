@@ -31,6 +31,11 @@ describe('format utilities', () => {
     test('specifies precision if provided in options', () => {
       expect(formatNumber(1234.567, { minimumFractionDigits: 1, maximumFractionDigits: 1 })).toBe('1,234.6');
     });
+
+    test('returns 0 for non-finite input', () => {
+      expect(formatNumber(undefined)).toBe('0');
+      expect(formatNumber(Number.NaN)).toBe('0');
+    });
   });
 
   describe('formatStx', () => {
