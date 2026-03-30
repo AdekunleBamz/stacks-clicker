@@ -7,3 +7,5 @@ Match skeleton dimensions to final content to reduce layout shifts.
 
 ## Maintenance Note
 - Validate shimmer duration against motion-budget guidance during design refreshes.
+
+Source file: `frontend/src/components/common/SkeletonLoader.jsx`.
