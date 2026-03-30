@@ -28,4 +28,10 @@ describe('getWalletConnectLink', () => {
     const link = getWalletConnectLink(`  ${uri}  `);
     expect(link).toContain(encodeURIComponent(uri));
   });
+
+  test('normalizes uppercase WC scheme before encoding', () => {
+    const uri = 'WC:upper@2?relay-protocol=irn';
+    const link = getWalletConnectLink(uri);
+    expect(link).toContain(encodeURIComponent('wc:upper@2?relay-protocol=irn'));
+  });
 });
