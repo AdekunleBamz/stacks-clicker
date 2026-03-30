@@ -13,5 +13,6 @@ Input guard:
 
 ## Maintenance Note
 - Revisit poll expiry/window assumptions when backend polling cadence is adjusted.
+- Keep user-facing error copy aligned with parser output for rate-limit/backoff failures.
 
 Source file: `frontend/src/hooks/useQuickPoll.js`.
