@@ -40,6 +40,25 @@ const metadata = {
 // Singleton provider instance
 let provider = null;
 let session = null;
+const callBackoffUntilByKey = new Map();
+
+function getBackoffKey(contractAddress, contractName, functionName) {
+  return `${contractAddress}.${contractName}.${functionName}`;
+}
+
+function getErrorMessage(error) {
+  if (typeof error === 'string') return error;
+  if (error?.message) return error.message;
+  return String(error);
+}
+
+function parseRetryAfterSeconds(errorMessage) {
+  const explicitWait = errorMessage.match(/try again in\s+(\d+)\s*seconds?/i);
+  if (explicitWait) return Number(explicitWait[1]);
+  if (/toomuchchaining/i.test(errorMessage)) return 8;
+  if (/rate limit/i.test(errorMessage)) return 15;
+  return 0;
+}
 
 /**
  * Debug logger
@@ -265,29 +284,51 @@ export async function callContract({
     throw new Error('Not connected');
   }
 
+  const backoffKey = getBackoffKey(contractAddress, contractName, functionName);
+  const backoffUntil = callBackoffUntilByKey.get(backoffKey) || 0;
+  if (backoffUntil > Date.now()) {
+    const waitSeconds = Math.max(1, Math.ceil((backoffUntil - Date.now()) / 1000));
+    throw new Error(
+      `Broadcast backoff active for ${contractName}.${functionName}. Please try again in ${waitSeconds} seconds`
+    );
+  }
+
   log('Requesting stx_callContract:', contractName, functionName);
 
-  const result = await provider.request(
-    {
-      method: 'stx_callContract',
-      params: {
-        contractAddress,
-        contractName,
-        functionName,
-        functionArgs: functionArgs || [],
-        // Post-conditions are essential for security.
-        // they ensure that the smart contract doesn't transfer more assets
-        // than authorized by the user.
-        postConditions: postConditions || [],
-        network: STACKS_NETWORK,
+  try {
+    const result = await provider.request(
+      {
+        method: 'stx_callContract',
+        params: {
+          contractAddress,
+          contractName,
+          functionName,
+          functionArgs: functionArgs || [],
+          // Post-conditions are essential for security.
+          // they ensure that the smart contract doesn't transfer more assets
+          // than authorized by the user.
+          postConditions: postConditions || [],
+          network: STACKS_NETWORK,
+        },
       },
-    },
-    STACKS_CHAIN
-  );
+      STACKS_CHAIN
+    );
 
-  log('Contract call result:', result);
+    callBackoffUntilByKey.delete(backoffKey);
+    log('Contract call result:', result);
+    return result;
+  } catch (error) {
+    const errorMessage = getErrorMessage(error);
+    const retryAfterSeconds = parseRetryAfterSeconds(errorMessage);
+    if (retryAfterSeconds > 0) {
+      callBackoffUntilByKey.set(backoffKey, Date.now() + retryAfterSeconds * 1000);
+      if (!/try again in\s+\d+\s*seconds?/i.test(errorMessage)) {
+        throw new Error(`${errorMessage}. Please try again in ${retryAfterSeconds} seconds`);
+      }
+    }
+    throw error;
+  }
 
-  return result;
 }
 
 /**
@@ -352,5 +393,6 @@ export function getWalletConnectLink(wcUri) {
   if (!wcUri) return '';
   const normalizedUri = String(wcUri).trim();
   if (!normalizedUri) return '';
+  if (!normalizedUri.startsWith('wc:')) return '';
   return `https://walletconnect.com/wc?uri=${encodeURIComponent(normalizedUri)}`;
 }
