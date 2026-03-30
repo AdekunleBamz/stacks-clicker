@@ -26,6 +26,10 @@ describe('parseContractError', () => {
     expect(parseContractError({ reason: '(err u103)' })).toContain('Cooldown Active');
   });
 
+  test('parses error objects using error property', () => {
+    expect(parseContractError({ error: '(err u104)' })).toContain('Limit Reached');
+  });
+
   test('maps plain numeric strings directly', () => {
     expect(parseContractError('500')).toContain('Network Error');
   });
