@@ -7,3 +7,5 @@ Keep reveal threshold high enough to avoid showing the button on minor scrolls.
 
 ## Maintenance Note
 - Revisit visibility threshold notes after major layout or viewport breakpoint changes.
+
+Source file: `frontend/src/components/common/ScrollToTop.jsx`.
