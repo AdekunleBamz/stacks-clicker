@@ -4,6 +4,7 @@
 - Check for regressions in state, loading, and error paths.
 - Confirm accessibility labels for interactive controls.
 - Ensure tests/docs are updated where needed.
+- Confirm env/config docs stay in sync when new runtime flags are introduced.
 - Validate transaction failures still surface actionable user feedback.
 - Confirm a clear rollback path exists for risky behavior changes.
 
