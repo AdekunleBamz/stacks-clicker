@@ -42,6 +42,11 @@ describe('parseContractError', () => {
     expect(parseContractError('minor network blip')).toBe('Transaction failed: minor network blip');
   });
 
+  test('passes through backoff-active messages with retry timing', () => {
+    const msg = 'Broadcast backoff active for quickpoll-v2p.ping. Please try again in 12 seconds';
+    expect(parseContractError(msg)).toBe(msg);
+  });
+
   test('falls back to truncated raw message when code is unknown', () => {
     const message =
       'This is an unknown error message that is intentionally long for fallback truncation coverage';
