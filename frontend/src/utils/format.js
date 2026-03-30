@@ -38,5 +38,7 @@ export function formatNumber(value, options = {}) {
  * @returns {string} The formatted STX amount
  */
 export function formatStx(microStx) {
-  return (microStx / 1000000).toFixed(2) + ' STX';
+  const numericValue = Number(microStx);
+  if (!Number.isFinite(numericValue)) return '0.00 STX';
+  return (numericValue / 1000000).toFixed(2) + ' STX';
 }
