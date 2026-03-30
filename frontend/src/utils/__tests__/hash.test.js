@@ -60,5 +60,9 @@ describe('hash utilities', () => {
     test('handles undefined input without throwing', () => {
       expect(stringToColor(undefined)).toMatch(/^hsl\(\d+, 70%, 65%\)$/);
     });
+
+    test('coerces numeric input consistently in color generation', () => {
+      expect(stringToColor(7)).toBe(stringToColor('7'));
+    });
   });
 });
