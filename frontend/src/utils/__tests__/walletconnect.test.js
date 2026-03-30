@@ -12,6 +12,7 @@ describe('getWalletConnectLink', () => {
   test('returns empty string for missing URI', () => {
     expect(getWalletConnectLink('')).toBe('');
     expect(getWalletConnectLink(undefined)).toBe('');
+    expect(getWalletConnectLink('   ')).toBe('');
   });
 
   test('trims surrounding whitespace before encoding', () => {
