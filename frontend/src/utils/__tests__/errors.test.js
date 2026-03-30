@@ -37,6 +37,8 @@ describe('parseContractError', () => {
   test('falls back to truncated raw message when code is unknown', () => {
     const message =
       'This is an unknown error message that is intentionally long for fallback truncation coverage';
-    expect(parseContractError(message)).toMatch(/^Transaction failed: /);
+    const parsed = parseContractError(message);
+    expect(parsed).toMatch(/^Transaction failed: /);
+    expect(parsed.endsWith('...')).toBe(true);
   });
 });
