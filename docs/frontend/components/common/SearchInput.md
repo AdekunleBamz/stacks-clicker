@@ -10,3 +10,5 @@ Keep placeholder text action-oriented to improve discoverability.
 
 ## Maintenance Note
 - Revalidate empty-query and clear-action behavior notes after search UX updates.
+
+Source file: `frontend/src/components/common/SearchInput.jsx`.
