@@ -19,6 +19,10 @@ describe('getWalletConnectLink', () => {
     expect(getWalletConnectLink('https://example.com')).toBe('');
   });
 
+  test('returns empty string for object-like inputs', () => {
+    expect(getWalletConnectLink({})).toBe('');
+  });
+
   test('trims surrounding whitespace before encoding', () => {
     const uri = 'wc:trimmed@2?relay-protocol=irn';
     const link = getWalletConnectLink(`  ${uri}  `);
