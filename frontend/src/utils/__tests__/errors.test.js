@@ -52,6 +52,11 @@ describe('parseContractError', () => {
     expect(parseContractError(msg)).toBe(msg);
   });
 
+  test('passes through TooMuchChaining messages', () => {
+    const msg = 'BROADCAST ERROR — TooMuchChaining';
+    expect(parseContractError(msg)).toBe(msg);
+  });
+
   test('falls back to truncated raw message when code is unknown', () => {
     const message =
       'This is an unknown error message that is intentionally long for fallback truncation coverage';
