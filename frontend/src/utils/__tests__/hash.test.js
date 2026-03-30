@@ -23,6 +23,10 @@ describe('hash utilities', () => {
       expect(simpleHash('')).toBe(5381);
     });
 
+    test('handles undefined input by hashing empty string', () => {
+      expect(simpleHash(undefined)).toBe(5381);
+    });
+
     test('handles unicode input deterministically', () => {
       expect(simpleHash('Yoruba-ọrọ')).toBe(simpleHash('Yoruba-ọrọ'));
     });
