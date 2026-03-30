@@ -6,6 +6,6 @@
 - Document recurring failures for maintainers.
 - Record failing commit hash when triage starts for reproducibility.
 - Tag suspected flakes clearly so they are tracked separately from confirmed regressions.
-- Capture Node/npm and wallet extension versions in the triage note when failures are environment-specific.
+- Save the exact repro command used during triage so reviewers can replay quickly.
 
 Companion index: [Operations docs](README.md).
