@@ -26,6 +26,10 @@ describe('parseContractError', () => {
     expect(parseContractError('500')).toContain('Network Error');
   });
 
+  test('prefers explicit numeric codes over keyword heuristics', () => {
+    expect(parseContractError('Error 101: user rejected')).toContain('Insufficient Funds');
+  });
+
   test('handles null input without throwing', () => {
     expect(parseContractError(null)).toContain('Transaction failed');
   });
