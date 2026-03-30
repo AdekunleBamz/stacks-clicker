@@ -26,7 +26,10 @@ const ERROR_MAP = {
  * @returns {string} A user-friendly error message
  */
 export function parseContractError(error) {
-  const errorMessage = typeof error === 'string' ? error : error?.message || String(error);
+  const errorMessage =
+    typeof error === 'string'
+      ? error
+      : error?.message || error?.reason || error?.error || String(error);
   const lowerMessage = errorMessage.toLowerCase();
   
   // Extract numeric codes from strings like "(err u101)" or "Error: 101"
