@@ -6,16 +6,8 @@ Common issues and solutions for local development setup.
 
 ### Node.js Version
 - Ensure Node.js version is compatible with frontend tooling.
-- Check version with: `node --version`
-- Use nvm: `nvm use` to switch to the correct version from `.nvmrc`.
-
-### Dependencies
-- Reinstall dependencies when lockfiles change: `npm ci`
-- Clear npm cache if issues persist: `npm cache clean --force`
-- Delete `node_modules` and reinstall: `rm -rf node_modules && npm install`
-
-## Environment Variables
-
+- Reinstall dependencies when lockfiles change.
+- Remove `node_modules` before reinstalling if dependency resolution errors persist.
 - Confirm `.env` variables are present before wallet tests.
 - Copy `.env.example` to `.env` and fill in required values.
 - Restart dev server after env changes: `npm run dev`
