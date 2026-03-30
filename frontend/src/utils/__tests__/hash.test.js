@@ -43,5 +43,9 @@ describe('hash utilities', () => {
       expect(hue).toBeGreaterThanOrEqual(0);
       expect(hue).toBeLessThan(360);
     });
+
+    test('returns different colors for different ids in common cases', () => {
+      expect(stringToColor('tx-1')).not.toBe(stringToColor('tx-2'));
+    });
   });
 });
