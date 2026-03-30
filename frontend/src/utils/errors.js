@@ -27,6 +27,7 @@ const ERROR_MAP = {
  */
 export function parseContractError(error) {
   const errorMessage = typeof error === 'string' ? error : error?.message || String(error);
+  const lowerMessage = errorMessage.toLowerCase();
   
   // Extract numeric codes from strings like "(err u101)" or "Error: 101"
   const match = errorMessage.match(/\d+/);
@@ -37,11 +38,11 @@ export function parseContractError(error) {
   }
 
   // Handle common string-based patterns
-  if (errorMessage.toLowerCase().includes('user rejected')) {
+  if (lowerMessage.includes('user rejected')) {
     return ERROR_MAP['401'];
   }
 
-  if (errorMessage.toLowerCase().includes('insufficient')) {
+  if (lowerMessage.includes('insufficient')) {
     return ERROR_MAP['101'];
   }
 
