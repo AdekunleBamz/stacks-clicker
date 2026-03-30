@@ -14,8 +14,10 @@
  */
 export function truncateAddress(address, { prefix = 4, suffix = 4, separator = '...' } = {}) {
   if (!address) return '';
-  if (address.length <= prefix + suffix + separator.length) return address;
-  return `${address.substring(0, prefix)}${separator}${address.substring(address.length - suffix)}`;
+  const safePrefix = Number.isFinite(prefix) ? Math.max(0, Math.trunc(prefix)) : 4;
+  const safeSuffix = Number.isFinite(suffix) ? Math.max(0, Math.trunc(suffix)) : 4;
+  if (address.length <= safePrefix + safeSuffix + separator.length) return address;
+  return `${address.substring(0, safePrefix)}${separator}${address.substring(address.length - safeSuffix)}`;
 }
 
 /**
