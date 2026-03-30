@@ -8,4 +8,9 @@ describe('getWalletConnectLink', () => {
     expect(link).toContain('https://walletconnect.com/wc?uri=');
     expect(link).toContain(encodeURIComponent(uri));
   });
+
+  test('returns empty string for missing URI', () => {
+    expect(getWalletConnectLink('')).toBe('');
+    expect(getWalletConnectLink(undefined)).toBe('');
+  });
 });
