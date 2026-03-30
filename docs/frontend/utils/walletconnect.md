@@ -14,4 +14,7 @@ Behavior notes:
 - Uses env-driven `STACKS_NETWORK` to choose the Stacks chain ID.
 - `getWalletConnectLink` trims and URL-encodes WC URIs for camera-friendly links.
 
+## Maintenance Note
+- Keep helper behavior synchronized with `frontend/src/utils/__tests__/walletconnect.test.js`.
+
 Source file: `frontend/src/utils/walletconnect.js`.
