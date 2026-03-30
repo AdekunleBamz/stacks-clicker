@@ -16,6 +16,7 @@ export function truncateAddress(address, { prefix = 4, suffix = 4, separator = '
   if (!address) return '';
   const safePrefix = Number.isFinite(prefix) ? Math.max(0, Math.trunc(prefix)) : 4;
   const safeSuffix = Number.isFinite(suffix) ? Math.max(0, Math.trunc(suffix)) : 4;
+  if (safePrefix + safeSuffix === 0) return address;
   if (address.length <= safePrefix + safeSuffix + separator.length) return address;
   return `${address.substring(0, safePrefix)}${separator}${address.substring(address.length - safeSuffix)}`;
 }
