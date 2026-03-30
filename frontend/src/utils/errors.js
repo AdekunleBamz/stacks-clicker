@@ -37,6 +37,14 @@ export function parseContractError(error) {
     return ERROR_MAP[code];
   }
 
+  if (
+    lowerMessage.includes('backoff active') ||
+    lowerMessage.includes('rate limit') ||
+    lowerMessage.includes('toomuchchaining')
+  ) {
+    return errorMessage;
+  }
+
   // Handle common string-based patterns
   if (lowerMessage.includes('user rejected')) {
     return ERROR_MAP['401'];
