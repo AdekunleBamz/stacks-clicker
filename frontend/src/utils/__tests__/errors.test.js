@@ -10,6 +10,10 @@ describe('parseContractError', () => {
     expect(parseContractError('User rejected transaction')).toContain('User Rejected');
   });
 
+  test('matches user rejected pattern case-insensitively', () => {
+    expect(parseContractError('USER REJECTED TX')).toContain('User Rejected');
+  });
+
   test('maps insufficient-balance strings to insufficient funds copy', () => {
     expect(parseContractError('insufficient balance for fee')).toContain('Insufficient Funds');
   });
