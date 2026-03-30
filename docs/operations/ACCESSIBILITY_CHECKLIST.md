@@ -6,5 +6,6 @@
 - Color contrast is readable across themes.
 - Motion-heavy effects include a reduced-motion fallback.
 - Verify status toasts/alerts are announced clearly by screen readers.
+- Confirm focus returns to the triggering control after closing wallet or modal overlays.
 
 Companion index: [Operations docs](README.md).
