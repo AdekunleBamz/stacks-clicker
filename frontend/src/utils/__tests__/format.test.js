@@ -44,6 +44,10 @@ describe('format utilities', () => {
       expect(formatNumber(undefined)).toBe('0');
       expect(formatNumber(Number.NaN)).toBe('0');
     });
+
+    test('formats numeric string input', () => {
+      expect(formatNumber('1200')).toBe('1,200');
+    });
   });
 
   describe('formatStx', () => {
