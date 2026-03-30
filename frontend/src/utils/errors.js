@@ -40,6 +40,7 @@ export function parseContractError(error) {
   if (
     lowerMessage.includes('backoff active') ||
     lowerMessage.includes('rate limit') ||
+    lowerMessage.includes('quota') ||
     lowerMessage.includes('toomuchchaining')
   ) {
     return errorMessage;
