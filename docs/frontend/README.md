@@ -13,7 +13,10 @@ This folder contains focused references for frontend components, hooks, and cont
 | `utils/` | Shared utility functions and formatting behavior |
 | `tests/` | Suite intent summaries for key frontend behaviors |
 
-## Documentation Guidelines
+- Add links to newly introduced feature docs in this index as part of the same pull request.
+- Remove links to deleted modules in the same PR to keep this index trustworthy.
+- Prefer relative links in this directory so moved branches still render docs previews correctly.
+- Mirror command examples with root-level npm scripts when equivalent shortcuts exist.
 
 - **Add links** to newly introduced feature docs in this index as part of the same pull request.
 - **Remove links** to deleted modules in the same PR to keep this index trustworthy.
