@@ -36,7 +36,10 @@ cp frontend/.env.example frontend/.env
 | `VITE_DEPLOYER_ADDRESS` | No | Defaults to the value shipped in `frontend/.env.example` |
 | `VITE_COINGECKO_API_KEY` | No | Enables higher-limit price lookups |
 
-## Pre-Startup Checklist
+Before local startup:
+- verify required variables are present
+- confirm the selected network matches your wallet network
+- keep separate `.env` snapshots per network when switching frequently during QA
 
 Before local startup:
 1. Verify required variables are present in `.env`
