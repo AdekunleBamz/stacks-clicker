@@ -27,6 +27,10 @@ describe('hash utilities', () => {
       expect(simpleHash(undefined)).toBe(5381);
     });
 
+    test('coerces numeric input consistently', () => {
+      expect(simpleHash(42)).toBe(simpleHash('42'));
+    });
+
     test('handles unicode input deterministically', () => {
       expect(simpleHash('Yoruba-ọrọ')).toBe(simpleHash('Yoruba-ọrọ'));
     });
