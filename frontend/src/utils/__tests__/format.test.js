@@ -21,6 +21,10 @@ describe('format utilities', () => {
     test('returns empty string if address is missing', () => {
       expect(truncateAddress(null)).toBe('');
     });
+
+    test('normalizes negative prefix and suffix values', () => {
+      expect(truncateAddress(address, { prefix: -1, suffix: -2 })).toBe(address);
+    });
   });
 
   describe('formatNumber', () => {
