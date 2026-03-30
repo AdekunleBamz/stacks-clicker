@@ -10,9 +10,10 @@
  * @returns {number} 32-bit hash value
  */
 export function simpleHash(str) {
+  const normalized = String(str ?? '');
   let hash = 5381;
-  for (let i = 0; i < str.length; i++) {
-    hash = (hash * 33) ^ str.charCodeAt(i);
+  for (let i = 0; i < normalized.length; i++) {
+    hash = (hash * 33) ^ normalized.charCodeAt(i);
   }
   return hash >>> 0;
 }
