@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import { callContract } from '../utils/walletconnect';
 import { useNotifications } from './useNotifications';
+import { parseContractError } from '../utils/errors';
 import { DEPLOYER, QUICKPOLL_CONTRACT as CONTRACT_NAME } from '../utils/constants';
 
 /**
@@ -56,13 +57,14 @@ export function useQuickPoll({ onTxSubmit }) {
       onTxSubmit?.(displayName, result.txId);
       return result;
     } catch (err) {
-      showError(`${displayName} failed.`);
+      const userFriendlyError = parseContractError(err);
+      showError(userFriendlyError);
       console.error(`${displayName} failed:`, err);
       throw err;
     } finally {
       setLoading(key, false);
     }
-  }, [onTxSubmit]);
+  }, [onTxSubmit, setLoading, showError, showLoading]);
 
   const vote = useCallback(
     (pollId, option) => {
