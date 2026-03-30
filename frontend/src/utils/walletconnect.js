@@ -393,6 +393,7 @@ export function getWalletConnectLink(wcUri) {
   if (!wcUri) return '';
   const normalizedUri = String(wcUri).trim();
   if (!normalizedUri) return '';
-  if (!normalizedUri.startsWith('wc:')) return '';
-  return `https://walletconnect.com/wc?uri=${encodeURIComponent(normalizedUri)}`;
+  if (!/^wc:/i.test(normalizedUri)) return '';
+  const canonicalUri = normalizedUri.replace(/^wc:/i, 'wc:');
+  return `https://walletconnect.com/wc?uri=${encodeURIComponent(canonicalUri)}`;
 }
