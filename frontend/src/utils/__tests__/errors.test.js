@@ -22,6 +22,10 @@ describe('parseContractError', () => {
     expect(parseContractError('500')).toContain('Network Error');
   });
 
+  test('handles null input without throwing', () => {
+    expect(parseContractError(null)).toContain('Transaction failed');
+  });
+
   test('falls back to truncated raw message when code is unknown', () => {
     const message =
       'This is an unknown error message that is intentionally long for fallback truncation coverage';
