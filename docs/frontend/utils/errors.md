@@ -10,4 +10,7 @@ Behavior notes:
 - String heuristics (`user rejected`, `insufficient`) provide fallback mapping when no code is present.
 - Unknown errors return a bounded fallback string prefixed with `Transaction failed:`.
 
+## Maintenance Note
+- Keep mappings and fallback expectations aligned with `frontend/src/utils/__tests__/errors.test.js`.
+
 Source file: `frontend/src/utils/errors.js`.
