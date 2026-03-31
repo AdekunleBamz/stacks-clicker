@@ -77,25 +77,9 @@
   }
 }
 
-/* 
+/*
  * 🎨 Global Focus Styles (A11y Enhancement)
- * Ensuring keyboard navigation is highly visible but 
- * doesn't interfere with mouse interactions.
- */
-:focus {
-  outline: none;
-}
-
-:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 4px;
-  box-shadow: 0 0 0 4px var(--primary-glow);
-  transition: box-shadow 0.2s ease, outline-offset 0.2s ease;
-}
-
-/* 
- * 🎨 Global Focus Styles (A11y Enhancement)
- * Ensuring keyboard navigation is highly visible but 
+ * Ensuring keyboard navigation is highly visible but
  * doesn't interfere with mouse interactions.
  */
 :focus {
@@ -176,7 +160,7 @@ body::before {
   width: 100%;
   height: 100%;
   /* Background Effects
-   * We use mesh gradients and subtle glows to create a high-fidelity 
+   * We use mesh gradients and subtle glows to create a high-fidelity
    * feel that avoids flat, boring aesthetics.
    */
   background:
@@ -2429,7 +2413,7 @@ select:focus-visible {
     padding: 0;
     align-items: flex-end;
   }
-  
+
   .modal-content {
     max-height: 85vh;
     border-radius: var(--radius-xl) var(--radius-xl) 0 0;
