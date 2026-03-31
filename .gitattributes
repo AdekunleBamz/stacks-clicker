@@ -10,6 +10,11 @@
 *.jsx text
 *.tsx text
 *.json text
+*.mjs text
+
+# CSS and stylesheets
+*.css text
+*.scss text
 
 # Documentation
 *.md text
@@ -21,9 +26,14 @@
 .editorconfig text
 .gitignore text
 .gitattributes text
+.env.example text
 
 # Shell scripts
 *.sh text eol=lf
+
+# HTML and templates
+*.html text
+*.htm text
 
 # Binary files
 *.png binary
@@ -32,3 +42,7 @@
 *.gif binary
 *.ico binary
 *.svg text
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
