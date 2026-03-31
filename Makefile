@@ -1,4 +1,4 @@
-.PHONY: help check test coverage console deploy-devnet deploy-mainnet clean security-audit lint:all install dev build
+.PHONY: help check test coverage console deploy-devnet deploy-mainnet clean security-audit lint:all lint:fix install dev build test:frontend format:check
 
 # Default target
 help:
@@ -19,9 +19,19 @@ help:
 security-audit:
 	cd frontend && npm audit
 
+# Testing
+test:frontend:
+	cd frontend && npm run test:run
+
 # Linting
 lint:all:
 	cd frontend && npm run lint
+
+lint:fix:
+	cd frontend && npm run lint:fix
+
+format:check:
+	cd frontend && npm run format:check
 
 
 # Check contract syntax
