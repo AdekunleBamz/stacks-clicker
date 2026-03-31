@@ -13,6 +13,8 @@ import './index.css';
  * 2. ErrorBoundary for graceful failure UI
  * 3. I18nProvider for multi-language support (English, Yoruba, etc.)
  * 4. WalletProvider for Stacks/Hiro wallet connectivity
+ *
+ * @see {@link https://react.dev/reference/react-dom/client/createRoot React DOM Client}
  */
 const rootElement = document.getElementById('root');
 
