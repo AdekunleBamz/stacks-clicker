@@ -1,8 +1,21 @@
 # Stacks Clicker Roadmap
 
 Our vision is to build the premier GameFi intersection for the Stacks ecosystem.
-Completed roadmap items should be recorded in [CHANGELOG.md](CHANGELOG.md) when shipped.
-Roadmap priorities may shift when security, reliability, or protocol changes require immediate attention.
+
+## Guidelines
+
+- Completed roadmap items should be recorded in [CHANGELOG.md](CHANGELOG.md) when shipped.
+- Roadmap priorities may shift when security, reliability, or protocol changes require immediate attention.
+- Major feature development should be discussed in GitHub Issues before implementation.
+- Community feedback helps shape roadmap priorities - feel free to contribute your ideas.
+
+## Progress Legend
+
+| Icon | Meaning |
+| :--- | :--- |
+| 🟢 | Current quarter - active development |
+| 🟡 | Next quarter - planning phase |
+| 🔴 | Future quarter - exploratory |
 
 ## 🟢 Q2 2026: Community & Social
 - [ ] **Leaderboards**: Real-time ranking of top players and tippers by activity volume.
