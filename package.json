@@ -21,8 +21,10 @@
     "frontend:dev": "npm --prefix frontend run dev",
     "frontend:build": "npm --prefix frontend run build",
     "frontend:test": "npm --prefix frontend run test",
+    "frontend:lint": "npm --prefix frontend run lint",
     "contracts:check": "clarinet check",
-    "contracts:test": "clarinet test"
+    "contracts:test": "clarinet test",
+    "clean": "rm -rf node_modules frontend/node_modules frontend/dist"
   },
   "engines": {
     "node": ">=18.0.0"
