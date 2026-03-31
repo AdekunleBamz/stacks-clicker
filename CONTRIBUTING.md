@@ -15,6 +15,8 @@ Thank you for your interest in contributing! We follow an atomic-commit workflow
     *   React: Use functional components and hooks.
     *   Styling: Use CSS Variables from `index.css`.
     *   JSDoc: Document all primary functions and components.
+    *   Accessibility: Ensure WCAG 2.1 AA compliance for all UI changes.
+    *   Testing: Add tests for new features and bug fixes.
 
 ## Local Development
 
@@ -33,7 +35,10 @@ npm run frontend:dev
 ```
 
 For smart contract changes, use [Clarinet](https://github.com/hirosystems/clarinet) for testing.
-For frontend verification before opening a PR, run `npm run test -- --run`.
+For frontend verification before opening a PR:
+- Run `npm run test -- --run` to execute tests
+- Run `npm run lint` to check code quality
+- Run `npm run format:check` to verify formatting
 
 ## License
 
