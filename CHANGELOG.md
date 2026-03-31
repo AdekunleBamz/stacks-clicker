@@ -1,11 +1,22 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-Use `YYYY-MM-DD` release dates and move shipped entries out of `Unreleased`.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## Guidelines
+
+- Use `YYYY-MM-DD` release dates and move shipped entries out of `Unreleased`.
+- Group changes by type: Added, Changed, Deprecated, Removed, Fixed, Security.
+- Link version tags to GitHub release pages when available.
 
 ## [Unreleased]
 ### Changed
 - Improved contributor and setup documentation quality.
+- Enhanced security policy with detailed procedures.
+- Updated code of conduct with comprehensive guidelines.
+- Improved roadmap documentation with progress legend.
 
 ## [v2p] - 2026-03-11
 ### Added
