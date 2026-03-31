@@ -93,5 +93,14 @@ history.txt
 **/wallets.json
 *.pem
 *.key
+
+# Local development
 internal/
 internal
+
+# Test artifacts
+*.testresults.xml
+test-results/
+
+# Debug files
+*.dbg
