@@ -54,6 +54,10 @@ From the `frontend` directory, run the automated test suite:
 ```bash
 npm run test -- --run
 ```
+For watch mode during development:
+```bash
+npm run test
+```
 Use `npm run lint` before opening a pull request if you touched application code.
 
 ## 🧰 Troubleshooting
