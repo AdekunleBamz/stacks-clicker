@@ -11,6 +11,11 @@ import { notify } from '../utils/toast';
  * Component for the QuickPoll interaction card.
  * Enables users to create new polls and vote (Yes/No) on existing on-chain polls.
  *
+ * Supports keyboard navigation:
+ * - Tab/Shift+Tab: Navigate between interactive elements
+ * - Enter/Space: Activate focused button
+ * - 1: Vote Yes, 2: Vote No (when card is focused)
+ *
  * @component
  * @param {Object} props - Component props
  * @param {string|null} [props.address] - Connected wallet address; required for actions
@@ -28,6 +33,8 @@ function QuickPollCard({ address, quickpoll }) {
   const [errorField, setErrorField] = useState(null);
   const trimmedQuestion = pollQuestion.trim();
   const [timeLeft, setTimeLeft] = useState(3600); // 1 hour in seconds
+  const cardRef = useRef(null);
+  const inputRef = useRef(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -80,12 +87,47 @@ function QuickPollCard({ address, quickpoll }) {
     [address, playSound]
   );
 
+  /**
+   * Handle keyboard shortcuts for quick voting
+   * - '1' key: Vote Yes
+   * - '2' key: Vote No
+   * - 'Enter' on input: Create poll
+   */
+  const handleKeyDown = useCallback((e) => {
+    // Only handle keyboard shortcuts when the card is focused and not in input
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        handleAction(handleCreateNewPoll, 'create-poll', () => trimmedQuestion.length > 0);
+      }
+      return;
+    }
+
+    switch (e.key) {
+      case '1':
+        e.preventDefault();
+        handleAction(handleVoteYes, 'vote-yes');
+        break;
+      case '2':
+        e.preventDefault();
+        handleAction(handleVoteNo, 'vote-no');
+        break;
+      default:
+        break;
+    }
+  }, [handleAction, handleCreateNewPoll, handleVoteYes, handleVoteNo, trimmedQuestion.length]);
+
   return (
     <ActionCard
       title="🗳️ QuickPoll"
       subtitle="Vote to generate transactions."
       icon="🗳️"
       iconClass="bg-emerald-500/20 text-emerald-400"
+      ref={cardRef}
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      role="region"
+      aria-label="QuickPoll voting card. Press 1 to vote Yes, 2 to vote No."
     >
       <div className="actions" role="group" aria-label="Polling Controls">
         <div className="actions-header-row">
@@ -172,13 +214,36 @@ function QuickPollCard({ address, quickpoll }) {
               isLoading={isLoading('vote')}
               isError={errorField === 'vote-yes'}
               disabled={isLoading('vote')}
+              aria-describedby="vote-yes-description"
+              data-shortcut="1"
             />
           </Tooltip>
+          <span id="vote-yes-description" className="sr-only">
+            Vote yes on the current poll. Keyboard shortcut: press 1
+          </span>
+
+          <Tooltip content="Vote NO on the active community poll. Press 2 as shortcut.">
+            <ActionButton
+              label="No"
+              icon="👎"
+              cost="0.001"
+              className="danger"
+              onClick={() => handleAction(handleVoteNo, 'vote-no')}
+              isLoading={isLoading('vote')}
+              isError={errorField === 'vote-no'}
+              disabled={isLoading('vote')}
+              aria-describedby="vote-no-description"
+              data-shortcut="2"
+            />
+          </Tooltip>
+          <span id="vote-no-description" className="sr-only">
+            Vote no on the current poll. Keyboard shortcut: press 2
+          </span>
         </div>
 
         <div className="poll-footer">
           <div className="stat" aria-live="polite">
-          <span className="stat-label">Total Votes</span>
+            <span className="stat-label">Total Votes</span>
             <span className="timer-text">Ends in: {formatTime(timeLeft)}</span>
           </div>
           <button
@@ -195,6 +260,19 @@ function QuickPollCard({ address, quickpoll }) {
           >
             ↗ Share Results
           </button>
+        </div>
+
+        {/* Keyboard shortcuts help */}
+        <div className="keyboard-hints" aria-label="Keyboard shortcuts">
+          <span className="hint">
+            <kbd>1</kbd> Vote Yes
+          </span>
+          <span className="hint">
+            <kbd>2</kbd> Vote No
+          </span>
+          <span className="hint">
+            <kbd>Enter</kbd> Create Poll
+          </span>
         </div>
       </div>
     </ActionCard>
