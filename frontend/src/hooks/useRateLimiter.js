@@ -1,5 +1,15 @@
 import { useRef, useCallback, useEffect, useState } from 'react';
 
+/**
+ * Custom hook for rate limiting function calls.
+ * Prevents rapid repeated actions by enforcing a minimum time interval
+ * between successful executions.
+ *
+ * @param {Object} options - Configuration options
+ * @param {number} [options.interval=1000] - Minimum milliseconds between allowed calls
+ * @param {Function} [options.onRejected] - Callback invoked when a call is rejected
+ * @returns {{withRateLimit: Function, isLimited: boolean, remainingMs: number, reset: Function, callCount: number}}
+ */
 export function useRateLimiter(options = {}) {
   const { interval = 1000, onRejected } = options;
   const lastCallTimeRef = useRef(0);
@@ -28,10 +38,11 @@ export function useRateLimiter(options = {}) {
 
         lastCallTimeRef.current = Date.now();
         callCountRef.current += 1;
+
         try {
           return fn(...args);
         } finally {
-          // Force re-render to update isLimited state even if the callback throws.
+          // Re-render immediately and again after cooldown expiry.
           forceUpdate((n) => n + 1);
 
           if (timeoutRef.current) {
@@ -59,7 +70,6 @@ export function useRateLimiter(options = {}) {
     forceUpdate((n) => n + 1);
   }, []);
 
-  // Cleanup on unmount
   useEffect(() => {
     return () => {
       if (timeoutRef.current) {
