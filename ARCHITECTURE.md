@@ -95,8 +95,14 @@ sequenceDiagram
 - **Telemetry**: `PerformanceOverlay` provides real-time FPS and MEM monitoring during development (`?dev=true`).
 
 ## Related References
-- [README.md](README.md) for onboarding and local setup.
-- [docs/frontend/README.md](docs/frontend/README.md) for component and hook documentation.
+
+| Document | Description |
+| :--- | :--- |
+| [README.md](README.md) | Onboarding and local setup guide |
+| [docs/frontend/README.md](docs/frontend/README.md) | Component and hook documentation |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Contribution guidelines and standards |
+| [docs/GETTING_STARTED.md](docs/GETTING_STARTED.md) | Detailed getting started guide |
+| [docs/operations/README.md](docs/operations/README.md) | Operations runbooks and checklists |
 
 ---
 *Created by Antigravity - Advanced Agentic Coding @ Google DeepMind*
