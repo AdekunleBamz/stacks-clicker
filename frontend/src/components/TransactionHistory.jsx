@@ -16,12 +16,78 @@ function escapeCsvValue(value) {
 }
 
 /**
- * Component to display a list of recent transactions with status indicators.
- * @param {Object} props - Component props.
- * @param {Array} props.txLog - Array of transaction objects.
- * @returns {JSX.Element} The rendered transaction history section.
+ * Error fallback component for transaction history
  */
-function TransactionHistory({ txLog }) {
+function TransactionHistoryError({ error, onRetry }) {
+  return (
+    <div className="tx-history-error glass-card" role="alert">
+      <div className="error-icon">⚠️</div>
+      <h4>Failed to load transaction history</h4>
+      <p className="error-message">{error?.message || 'An unexpected error occurred'}</p>
+      <button
+        type="button"
+        className="retry-btn primary-button btn-sm"
+        onClick={onRetry}
+        aria-label="Retry loading transaction history"
+      >
+        Retry
+      </button>
+    </div>
+  );
+}
+
+TransactionHistoryError.propTypes = {
+  error: PropTypes.instanceOf(Error),
+  onRetry: PropTypes.func.isRequired,
+};
+
+/**
+ * Loading skeleton for transaction history
+ */
+function TransactionHistorySkeleton() {
+  return (
+    <section className="tx-log glass-card" aria-label="Loading transaction history">
+      <div className="log-header">
+        <div className="skeleton-title">
+          <SkeletonLoader height="24px" width="180px" borderRadius="8px" />
+        </div>
+        <div className="skeleton-search">
+          <SkeletonLoader height="40px" width="250px" borderRadius="8px" />
+        </div>
+        <div className="skeleton-filters">
+          <SkeletonLoader height="36px" width="120px" borderRadius="6px" />
+          <SkeletonLoader height="36px" width="120px" borderRadius="6px" />
+        </div>
+      </div>
+      <div className="tx-list" role="list">
+        {[...Array(5)].map((_, i) => (
+          <div key={i} className="tx-item-skeleton" role="listitem">
+            <SkeletonLoader height="48px" borderRadius="12px" />
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/**
+ * Component to display a list of recent transactions with status indicators.
+ * Includes error boundary, loading states, and comprehensive filtering.
+ *
+ * @component
+ * @param {Object} props - Component props
+ * @param {Array} props.txLog - Array of transaction objects
+ * @param {boolean} [props.isLoading=false] - Whether the component is in loading state
+ * @param {boolean} [props.showError=false] - Whether to show error state
+ * @param {Function} [props.onRetry] - Callback to retry loading
+ * @returns {JSX.Element} The rendered transaction history section
+ *
+ * @example
+ * ```jsx
+ * <TransactionHistory txLog={transactions} isLoading={loading} />
+ * ```
+ */
+function TransactionHistory({ txLog, isLoading = false, showError = false, onRetry }) {
   const [searchTerm, setSearchTerm] = useState('');
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
   const [selectedTx, setSelectedTx] = useState(null);
@@ -29,9 +95,9 @@ function TransactionHistory({ txLog }) {
   const [filterStatus, setFilterStatus] = useState('all');
   const [filterAction, setFilterAction] = useState('all');
   const [visibleItems, setVisibleItems] = useState(10);
-  const [modalView, setModalView] = useState('summary'); // 'summary' or 'raw'
+  const [modalView, setModalView] = useState('summary');
+  const [hasError, setHasError] = useState(false);
   const { copyToClipboard } = useClipboard();
-  // We no longer need closeBtnRef or the useEffect here as BaseModal handles it
 
   const handleModalClose = useCallback(() => {
     setSelectedTx(null);
@@ -49,18 +115,25 @@ function TransactionHistory({ txLog }) {
 
   const closeContextMenu = useCallback(() => setContextMenu(null), []);
 
+  // Error boundary logic
   const filteredLog = useMemo(() => {
-    return txLog.filter((tx) => {
-      const actionText = String(tx.action ?? '').toLowerCase();
-      const idText = String(tx.id ?? '').toLowerCase();
-      const search = debouncedSearchTerm.toLowerCase();
-      const matchesSearch =
-        actionText.includes(search) ||
-        idText.includes(search);
-      const matchesStatus = filterStatus === 'all' || tx.status === filterStatus;
-      const matchesAction = filterAction === 'all' || tx.action.toLowerCase().includes(filterAction.toLowerCase());
-      return matchesSearch && matchesStatus && matchesAction;
-    });
+    try {
+      return txLog.filter((tx) => {
+        const actionText = String(tx.action ?? '').toLowerCase();
+        const idText = String(tx.id ?? '').toLowerCase();
+        const search = debouncedSearchTerm.toLowerCase();
+        const matchesSearch =
+          actionText.includes(search) ||
+          idText.includes(search);
+        const matchesStatus = filterStatus === 'all' || tx.status === filterStatus;
+        const matchesAction = filterAction === 'all' || tx.action.toLowerCase().includes(filterAction.toLowerCase());
+        return matchesSearch && matchesStatus && matchesAction;
+      });
+    } catch (error) {
+      setHasError(true);
+      notify.error('Error filtering transactions');
+      return [];
+    }
   }, [txLog, debouncedSearchTerm, filterStatus, filterAction]);
 
   const highlightText = useCallback((text, highlight) => {
@@ -83,28 +156,33 @@ function TransactionHistory({ txLog }) {
 
   const exportData = useCallback(
     (format) => {
-      let content = '';
-      const filename = `stacks-tx-history-${new Date().toISOString().split('T')[0]}`;
+      try {
+        let content = '';
+        const filename = `stacks-tx-history-${new Date().toISOString().split('T')[0]}`;
 
-      if (format === 'json') {
-        content = JSON.stringify(txLog, null, 2);
-      } else if (format === 'csv') {
-        const headers = ['Action', 'Time', 'ID', 'Status', 'Network'];
-        const rows = txLog.map((tx) =>
-          [tx.action, tx.time, tx.id, tx.status, tx.network || ''].map(escapeCsvValue).join(',')
-        );
-        content = [headers.join(','), ...rows].join('\n');
+        if (format === 'json') {
+          content = JSON.stringify(txLog, null, 2);
+        } else if (format === 'csv') {
+          const headers = ['Action', 'Time', 'ID', 'Status', 'Network'];
+          const rows = txLog.map((tx) =>
+            [tx.action, tx.time, tx.id, tx.status, tx.network || ''].map(escapeCsvValue).join(',')
+          );
+          content = [headers.join(','), ...rows].join('\n');
+        }
+
+        const blob = new Blob([content], {
+          type: format === 'json' ? 'application/json' : 'text/csv',
+        });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `${filename}.${format}`;
+        link.click();
+        URL.revokeObjectURL(url);
+        notify.success(`Exported ${txLog.length} transactions as ${format.toUpperCase()}`);
+      } catch (error) {
+        notify.error('Failed to export transactions');
       }
-
-      const blob = new Blob([content], {
-        type: format === 'json' ? 'application/json' : 'text/csv',
-      });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `${filename}.${format}`;
-      link.click();
-      URL.revokeObjectURL(url);
     },
     [txLog]
   );
@@ -125,6 +203,16 @@ function TransactionHistory({ txLog }) {
   const handleCopy = useCallback((id) => {
     copyText(id, 'ID');
   }, [copyText]);
+
+  // Show error state
+  if (showError || hasError) {
+    return <TransactionHistoryError error={new Error('Failed to load transactions')} onRetry={() => { setHasError(false); onRetry?.(); }} />;
+  }
+
+  // Show loading state
+  if (isLoading) {
+    return <TransactionHistorySkeleton />;
+  }
 
   return (
     <section className="tx-log glass-card" aria-labelledby="tx-history-title">
@@ -410,6 +498,9 @@ TransactionHistory.propTypes = {
       isPending: PropTypes.bool,
     })
   ).isRequired,
+  isLoading: PropTypes.bool,
+  showError: PropTypes.bool,
+  onRetry: PropTypes.func,
 };
 
 export default memo(TransactionHistory);
