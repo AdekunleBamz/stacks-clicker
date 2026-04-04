@@ -19,6 +19,14 @@ function fallbackCopy(text) {
   return copied;
 }
 
+/**
+ * Custom hook for interacting with the system clipboard.
+ * Provides a clean interface for copying text and tracking copy status.
+ *
+ * @param {Object} options - Hook options
+ * @param {number} [options.timeout=2000] - Duration in ms before the copied state resets
+ * @returns {Object} { copied, copyToClipboard }
+ */
 export function useClipboard({ timeout = 2000 } = {}) {
   const safeTimeout = Number.isFinite(timeout) && timeout > 0 ? timeout : 2000;
   const [copied, setCopied] = useState(false);
@@ -62,7 +70,6 @@ export function useClipboard({ timeout = 2000 } = {}) {
             setCopied(false);
             timeoutRef.current = null;
           }, timeout);
-
           return true;
         }
 
