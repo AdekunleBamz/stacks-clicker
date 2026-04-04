@@ -87,7 +87,8 @@ export function useLocalStorage(key, initialValue) {
         }
         setStoredValue(readValue());
       } catch (error) {
-        console.warn(`Error parsing storage event for key "${trimmedKey}":`, error);
+        console.warn(`Error parsing storage event for key "${key}":`, error);
+        setStoredValue(initialValue);
       }
     };
 

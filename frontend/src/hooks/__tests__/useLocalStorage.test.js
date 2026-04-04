@@ -92,4 +92,20 @@ describe('useLocalStorage hook', () => {
 
     expect(result.current[0]).toEqual({ count: 5 });
   });
+
+  it('falls back to the initial value when a storage event carries malformed JSON', () => {
+    window.localStorage.setItem(key, JSON.stringify({ count: 5 }));
+    const { result } = renderHook(() => useLocalStorage(key, initialValue));
+
+    act(() => {
+      window.dispatchEvent(
+        new StorageEvent('storage', {
+          key,
+          newValue: 'not-json',
+        })
+      );
+    });
+
+    expect(result.current[0]).toEqual(initialValue);
+  });
 });
