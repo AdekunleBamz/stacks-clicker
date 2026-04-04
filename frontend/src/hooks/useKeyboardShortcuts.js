@@ -14,6 +14,7 @@ export function useKeyboardShortcuts({ isEnabled, actions, playSound }) {
       const activeElement = document.activeElement;
       const isTyping =
         activeElement?.tagName === 'INPUT' ||
+        activeElement?.tagName === 'SELECT' ||
         activeElement?.tagName === 'TEXTAREA' ||
         activeElement?.isContentEditable;
 
