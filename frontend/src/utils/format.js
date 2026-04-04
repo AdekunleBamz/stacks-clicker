@@ -45,6 +45,16 @@ export function formatNumber(value, options = {}) {
  * @returns {string} The formatted STX amount
  */
 export function formatStx(microStx) {
+  if (typeof microStx === 'bigint') {
+    const isNegative = microStx < 0n;
+    const absolute = isNegative ? -microStx : microStx;
+    const roundedCentiStx = (absolute + 5000n) / 10000n;
+    const whole = roundedCentiStx / 100n;
+    const fraction = (roundedCentiStx % 100n).toString().padStart(2, '0');
+    const sign = isNegative ? '-' : '';
+    return `${sign}${new Intl.NumberFormat('en-US').format(whole)}.${fraction} STX`;
+  }
+
   const numericValue = Number(microStx);
   if (!Number.isFinite(numericValue)) return '0.00 STX';
   return (numericValue / 1000000).toFixed(2) + ' STX';

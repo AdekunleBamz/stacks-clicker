@@ -60,6 +60,10 @@ describe('format utilities', () => {
       expect(formatStx(500000)).toBe('0.50 STX');
     });
 
+    test('preserves precision for bigint micro-STX values', () => {
+      expect(formatStx(12345678901234567890n)).toBe('12,345,678,901,234.57 STX');
+    });
+
     test('returns 0.00 STX for non-finite input', () => {
       expect(formatStx(undefined)).toBe('0.00 STX');
       expect(formatStx(Number.NaN)).toBe('0.00 STX');
