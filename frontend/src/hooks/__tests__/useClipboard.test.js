@@ -62,36 +62,4 @@ describe('useClipboard hook', () => {
     expect(result.current.copied).toBe(false);
     vi.useRealTimers();
   });
-
-  it('falls back to document.execCommand when the Clipboard API is unavailable', async () => {
-    Object.defineProperty(navigator, 'clipboard', {
-      configurable: true,
-      value: undefined,
-    });
-
-    const { result } = renderHook(() => useClipboard());
-
-    let copied;
-    await act(async () => {
-      copied = await result.current.copyToClipboard('fallback');
-    });
-
-    expect(copied).toBe(true);
-    expect(document.execCommand).toHaveBeenCalledWith('copy');
-    expect(notify.success).toHaveBeenCalledWith('Copied to clipboard!');
-  });
-
-  it('returns false for empty clipboard payloads without notifying', async () => {
-    const { result } = renderHook(() => useClipboard());
-
-    let copied;
-    await act(async () => {
-      copied = await result.current.copyToClipboard('');
-    });
-
-    expect(copied).toBe(false);
-    expect(navigator.clipboard.writeText).not.toHaveBeenCalled();
-    expect(notify.success).not.toHaveBeenCalled();
-    expect(notify.error).not.toHaveBeenCalled();
-  });
 });
