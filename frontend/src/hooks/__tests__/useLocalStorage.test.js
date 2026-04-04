@@ -148,19 +148,19 @@ describe('useLocalStorage hook', () => {
     expect(result.current[0]).toEqual(initialValue);
   });
 
-  it('ignores storage events for other keys', () => {
-    window.localStorage.setItem(key, JSON.stringify({ count: 5 }));
+  it('resets to the initial value when the storage key is removed elsewhere', () => {
+    window.localStorage.setItem(key, JSON.stringify({ count: 42 }));
     const { result } = renderHook(() => useLocalStorage(key, initialValue));
 
     act(() => {
       window.dispatchEvent(
         new StorageEvent('storage', {
-          key: 'other-key',
-          newValue: JSON.stringify({ count: 99 }),
+          key,
+          newValue: null,
         })
       );
     });
 
-    expect(result.current[0]).toEqual({ count: 5 });
+    expect(result.current[0]).toEqual(initialValue);
   });
 });
