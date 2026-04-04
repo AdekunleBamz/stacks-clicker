@@ -42,7 +42,7 @@ export function useRateLimiter(options = {}) {
         try {
           return fn(...args);
         } finally {
-          // Re-render immediately and again after cooldown expiry.
+          // Re-render even if the wrapped callback throws.
           forceUpdate((n) => n + 1);
 
           if (timeoutRef.current) {
