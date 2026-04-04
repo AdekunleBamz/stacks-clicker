@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { notify } from '../utils/toast';
 
 function fallbackCopy(text) {
@@ -30,13 +30,7 @@ function fallbackCopy(text) {
 export function useClipboard({ timeout = 2000 } = {}) {
   const safeTimeout = Number.isFinite(timeout) && timeout > 0 ? timeout : 2000;
   const [copied, setCopied] = useState(false);
-  const timerRef = useRef(null);
-
-  useEffect(() => {
-    return () => {
-      if (timerRef.current) clearTimeout(timerRef.current);
-    };
-  }, []);
+  const timeoutRef = useRef(null);
 
   const copyToClipboard = useCallback(
     async (text) => {
@@ -53,8 +47,14 @@ export function useClipboard({ timeout = 2000 } = {}) {
         setCopied(true);
         notify.success('Copied to clipboard!');
 
-        if (timerRef.current) clearTimeout(timerRef.current);
-        timerRef.current = setTimeout(() => setCopied(false), safeTimeout);
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current);
+        }
+
+        timeoutRef.current = setTimeout(() => {
+          setCopied(false);
+          timeoutRef.current = null;
+        }, timeout);
         return true;
       } catch (error) {
         if (fallbackCopy(text)) {
@@ -80,10 +80,13 @@ export function useClipboard({ timeout = 2000 } = {}) {
     [timeout]
   );
 
-  const clearCopied = useCallback(() => {
-    if (timerRef.current) clearTimeout(timerRef.current);
-    setCopied(false);
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
   }, []);
 
-  return { copied, copyToClipboard, clearCopied };
+  return { copied, copyToClipboard };
 }
