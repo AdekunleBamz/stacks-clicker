@@ -26,10 +26,10 @@ export function useRateLimiter(options = {}) {
         }
 
         lastCallTimeRef.current = Date.now();
-
         try {
           return fn(...args);
         } finally {
+          // Force re-render to update isLimited state even if the callback throws.
           forceUpdate({});
 
           if (timeoutRef.current) {
@@ -57,6 +57,7 @@ export function useRateLimiter(options = {}) {
     forceUpdate({});
   }, []);
 
+  // Cleanup on unmount
   useEffect(() => {
     return () => {
       if (timeoutRef.current) {
