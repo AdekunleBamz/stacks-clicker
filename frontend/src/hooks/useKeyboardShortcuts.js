@@ -23,10 +23,12 @@ export function useKeyboardShortcuts({ isEnabled, actions, playSound }) {
       }
 
       if (e.key.toLowerCase() === 'c' && actions.click) {
+        e.preventDefault();
         playSound('click');
         actions.click();
       }
       if (e.key.toLowerCase() === 't' && actions.tip) {
+        e.preventDefault();
         playSound('click');
         actions.tip(1000); // Standard quick tip amount (micro-STX)
       }
