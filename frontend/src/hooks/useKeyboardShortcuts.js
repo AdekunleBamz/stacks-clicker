@@ -17,7 +17,7 @@ export function useKeyboardShortcuts({ isEnabled, actions, playSound }) {
         activeElement?.tagName === 'TEXTAREA' ||
         activeElement?.isContentEditable;
 
-      if (isTyping || e.metaKey || e.ctrlKey || e.altKey || !isEnabled) {
+      if (isTyping || e.repeat || e.metaKey || e.ctrlKey || e.altKey || !isEnabled) {
         return;
       }
 
