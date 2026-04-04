@@ -49,4 +49,20 @@ describe('useLocalStorage hook', () => {
     const { result } = renderHook(() => useLocalStorage(key, initialValue));
     expect(result.current[0]).toEqual(initialValue);
   });
+
+  it('resets to the initial value when the storage key is removed elsewhere', () => {
+    window.localStorage.setItem(key, JSON.stringify({ count: 42 }));
+    const { result } = renderHook(() => useLocalStorage(key, initialValue));
+
+    act(() => {
+      window.dispatchEvent(
+        new StorageEvent('storage', {
+          key,
+          newValue: null,
+        })
+      );
+    });
+
+    expect(result.current[0]).toEqual(initialValue);
+  });
 });
