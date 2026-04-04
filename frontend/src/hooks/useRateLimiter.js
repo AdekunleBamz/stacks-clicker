@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useState } from 'react';
+import { useRef, useCallback, useEffect, useState } from 'react';
 
 /**
  * Custom hook for rate limiting function calls.
@@ -68,23 +68,21 @@ export function useRateLimiter(options = {}) {
         }
 
         lastCallTimeRef.current = Date.now();
-        const result = fn(...args);
-
-        // Force re-render to update isLimited state
-        forceUpdate({});
-
-        // Clear previous timeout
-        if (timeoutRef.current) {
-          clearTimeout(timeoutRef.current);
-        }
-
-        // Set timeout to update state when rate limit expires
-        timeoutRef.current = setTimeout(() => {
+        try {
+          return fn(...args);
+        } finally {
+          // Force re-render to update isLimited state even if the callback throws.
           forceUpdate({});
-          timeoutRef.current = null;
-        }, interval);
 
-        return result;
+          if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+          }
+
+          timeoutRef.current = setTimeout(() => {
+            forceUpdate({});
+            timeoutRef.current = null;
+          }, interval);
+        }
       };
     },
     [canCall, onRejected, interval]
@@ -103,7 +101,7 @@ export function useRateLimiter(options = {}) {
   }, []);
 
   // Cleanup on unmount
-  React.useEffect(() => {
+  useEffect(() => {
     return () => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
