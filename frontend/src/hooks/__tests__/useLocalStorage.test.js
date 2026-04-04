@@ -77,61 +77,6 @@ describe('useLocalStorage hook', () => {
     expect(result.current[0]).toEqual({ count: 9 });
   });
 
-  it('skips redundant localStorage writes when the next value is unchanged', () => {
-    const setItemSpy = vi.spyOn(Storage.prototype, 'setItem');
-    const { result } = renderHook(() => useLocalStorage(key, initialValue));
-
-    act(() => {
-      result.current[1]({ count: 0 });
-    });
-
-    expect(setItemSpy).not.toHaveBeenCalled();
-  });
-
-  it('re-reads the stored value when a matching local-storage custom event fires', () => {
-    const { result } = renderHook(() => useLocalStorage(key, initialValue));
-
-    act(() => {
-      window.localStorage.setItem(key, JSON.stringify({ count: 9 }));
-      window.dispatchEvent(new CustomEvent('local-storage', { detail: { key } }));
-    });
-
-    expect(result.current[0]).toEqual({ count: 9 });
-  });
-
-  it('skips redundant localStorage writes when the next value is unchanged', () => {
-    const setItemSpy = vi.spyOn(Storage.prototype, 'setItem');
-    const { result } = renderHook(() => useLocalStorage(key, initialValue));
-
-    act(() => {
-      result.current[1]({ count: 0 });
-    });
-
-    expect(setItemSpy).not.toHaveBeenCalled();
-  });
-
-  it('re-reads the stored value when a matching local-storage custom event fires', () => {
-    const { result } = renderHook(() => useLocalStorage(key, initialValue));
-
-    act(() => {
-      window.localStorage.setItem(key, JSON.stringify({ count: 9 }));
-      window.dispatchEvent(new CustomEvent('local-storage', { detail: { key } }));
-    });
-
-    expect(result.current[0]).toEqual({ count: 9 });
-  });
-
-  it('skips redundant localStorage writes when the next value is unchanged', () => {
-    const setItemSpy = vi.spyOn(Storage.prototype, 'setItem');
-    const { result } = renderHook(() => useLocalStorage(key, initialValue));
-
-    act(() => {
-      result.current[1]({ count: 0 });
-    });
-
-    expect(setItemSpy).not.toHaveBeenCalled();
-  });
-
   it('falls back to the initial value when a storage event carries malformed JSON', () => {
     window.localStorage.setItem(key, JSON.stringify({ count: 5 }));
     const { result } = renderHook(() => useLocalStorage(key, initialValue));
@@ -164,52 +109,19 @@ describe('useLocalStorage hook', () => {
     expect(result.current[0]).toEqual(initialValue);
   });
 
-  it('skips redundant localStorage writes when the next value is unchanged', () => {
-    const setItemSpy = vi.spyOn(Storage.prototype, 'setItem');
-    const { result } = renderHook(() => useLocalStorage(key, initialValue));
-
-    act(() => {
-      result.current[1]({ count: 0 });
-    });
-
-    expect(setItemSpy).not.toHaveBeenCalled();
-  });
-
-  it('re-reads the stored value when a matching local-storage custom event fires', () => {
-    const { result } = renderHook(() => useLocalStorage(key, initialValue));
-
-    act(() => {
-      window.localStorage.setItem(key, JSON.stringify({ count: 9 }));
-      window.dispatchEvent(new CustomEvent('local-storage', { detail: { key } }));
-    });
-
-    expect(result.current[0]).toEqual({ count: 9 });
-  });
-
-  it('skips redundant localStorage writes when the next value is unchanged', () => {
-    const setItemSpy = vi.spyOn(Storage.prototype, 'setItem');
-    const { result } = renderHook(() => useLocalStorage(key, initialValue));
-
-    act(() => {
-      result.current[1]({ count: 0 });
-    });
-
-    expect(setItemSpy).not.toHaveBeenCalled();
-  });
-
-  it('falls back to the initial value when a storage event carries malformed JSON', () => {
+  it('ignores storage events for other keys', () => {
     window.localStorage.setItem(key, JSON.stringify({ count: 5 }));
     const { result } = renderHook(() => useLocalStorage(key, initialValue));
 
     act(() => {
       window.dispatchEvent(
         new StorageEvent('storage', {
-          key,
-          newValue: 'not-json',
+          key: 'other-key',
+          newValue: JSON.stringify({ count: 99 }),
         })
       );
     });
 
-    expect(result.current[0]).toEqual(initialValue);
+    expect(result.current[0]).toEqual({ count: 5 });
   });
 });
