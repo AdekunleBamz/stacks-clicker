@@ -53,6 +53,10 @@ describe('format utilities', () => {
     test('formats numeric string input', () => {
       expect(formatNumber('1200')).toBe('1,200');
     });
+
+    test('preserves precision for bigint input', () => {
+      expect(formatNumber(12345678901234567890n)).toBe('12,345,678,901,234,567,890');
+    });
   });
 
   describe('formatCompact', () => {
