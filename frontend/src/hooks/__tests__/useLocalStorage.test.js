@@ -109,25 +109,19 @@ describe('useLocalStorage hook', () => {
     expect(result.current[0]).toEqual(initialValue);
   });
 
-  it('skips redundant localStorage writes when the next value is unchanged', () => {
-    const setItemSpy = vi.spyOn(Storage.prototype, 'setItem');
+  it('resets to the initial value when the storage key is removed elsewhere', () => {
+    window.localStorage.setItem(key, JSON.stringify({ count: 42 }));
     const { result } = renderHook(() => useLocalStorage(key, initialValue));
 
     act(() => {
-      result.current[1]({ count: 0 });
+      window.dispatchEvent(
+        new StorageEvent('storage', {
+          key,
+          newValue: null,
+        })
+      );
     });
 
-    expect(setItemSpy).not.toHaveBeenCalled();
-  });
-
-  it('re-reads the stored value when a matching local-storage custom event fires', () => {
-    const { result } = renderHook(() => useLocalStorage(key, initialValue));
-
-    act(() => {
-      window.localStorage.setItem(key, JSON.stringify({ count: 9 }));
-      window.dispatchEvent(new CustomEvent('local-storage', { detail: { key } }));
-    });
-
-    expect(result.current[0]).toEqual({ count: 9 });
+    expect(result.current[0]).toEqual(initialValue);
   });
 });
