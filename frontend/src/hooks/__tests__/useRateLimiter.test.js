@@ -38,4 +38,28 @@ describe('useRateLimiter hook', () => {
 
     vi.useRealTimers();
   });
+
+  it('allows immediate reuse after reset is called', () => {
+    vi.useFakeTimers();
+    const handler = vi.fn();
+    const { result } = renderHook(() => useRateLimiter({ interval: 1000 }));
+
+    act(() => {
+      result.current.withRateLimit(handler)();
+    });
+
+    act(() => {
+      result.current.reset();
+    });
+
+    let secondResult;
+    act(() => {
+      secondResult = result.current.withRateLimit(handler)();
+    });
+
+    expect(secondResult).toBeUndefined();
+    expect(handler).toHaveBeenCalledTimes(2);
+
+    vi.useRealTimers();
+  });
 });
