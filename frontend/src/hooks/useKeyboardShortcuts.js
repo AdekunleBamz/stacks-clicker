@@ -19,7 +19,7 @@ export function useKeyboardShortcuts({ isEnabled, actions, playSound }) {
 
         activeElement?.isContentEditable;
 
-      if (isTyping || e.metaKey || e.ctrlKey || e.altKey || e.repeat || !isEnabled) {
+      if (isTyping || e.repeat || e.metaKey || e.ctrlKey || e.altKey || !isEnabled) {
         return;
       }
 
