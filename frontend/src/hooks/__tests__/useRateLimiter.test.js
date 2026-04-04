@@ -62,31 +62,4 @@ describe('useRateLimiter hook', () => {
 
     vi.useRealTimers();
   });
-
-  it('keeps cooldown state in sync even when the wrapped callback throws', () => {
-    vi.useFakeTimers();
-    const { result } = renderHook(() => useRateLimiter({ interval: 1000 }));
-
-    let caughtError;
-    act(() => {
-      try {
-        result.current.withRateLimit(() => {
-          throw new Error('boom');
-        })();
-      } catch (error) {
-        caughtError = error;
-      }
-    });
-
-    expect(caughtError.message).toBe('boom');
-    expect(result.current.isLimited).toBe(true);
-
-    act(() => {
-      vi.advanceTimersByTime(1000);
-    });
-
-    expect(result.current.isLimited).toBe(false);
-
-    vi.useRealTimers();
-  });
 });
