@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { notify } from '../utils/toast';
 
 /**
@@ -11,6 +11,7 @@ import { notify } from '../utils/toast';
  */
 export function useClipboard({ timeout = 2000 } = {}) {
   const [copied, setCopied] = useState(false);
+  const timeoutRef = useRef(null);
 
   const copyToClipboard = useCallback(
     async (text) => {
@@ -25,8 +26,15 @@ export function useClipboard({ timeout = 2000 } = {}) {
         await navigator.clipboard.writeText(text);
         setCopied(true);
         notify.success('Copied to clipboard!');
-        
-        setTimeout(() => setCopied(false), timeout);
+
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current);
+        }
+
+        timeoutRef.current = setTimeout(() => {
+          setCopied(false);
+          timeoutRef.current = null;
+        }, timeout);
         return true;
       } catch (error) {
         console.error('Failed to copy text:', error);
@@ -36,6 +44,14 @@ export function useClipboard({ timeout = 2000 } = {}) {
     },
     [timeout]
   );
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
   return { copied, copyToClipboard };
 }

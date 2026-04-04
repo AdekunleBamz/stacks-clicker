@@ -34,4 +34,31 @@ describe('useClipboard hook', () => {
     expect(notify.success).toHaveBeenCalledWith('Copied to clipboard!');
     expect(result.current.copied).toBe(true);
   });
+
+  it('keeps the copied state alive until the latest copy timeout expires', async () => {
+    vi.useFakeTimers();
+    const { result } = renderHook(() => useClipboard({ timeout: 2000 }));
+
+    await act(async () => {
+      await result.current.copyToClipboard('first');
+    });
+
+    await act(async () => {
+      vi.advanceTimersByTime(1000);
+      await result.current.copyToClipboard('second');
+    });
+
+    act(() => {
+      vi.advanceTimersByTime(1000);
+    });
+
+    expect(result.current.copied).toBe(true);
+
+    act(() => {
+      vi.advanceTimersByTime(1000);
+    });
+
+    expect(result.current.copied).toBe(false);
+    vi.useRealTimers();
+  });
 });
