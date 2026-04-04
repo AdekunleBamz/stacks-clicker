@@ -19,6 +19,7 @@ describe('useClipboard hook', () => {
         writeText: vi.fn().mockResolvedValue(undefined),
       },
     });
+    document.execCommand = vi.fn().mockReturnValue(true);
   });
 
   it('copies text and exposes the copied state on success', async () => {
@@ -60,5 +61,23 @@ describe('useClipboard hook', () => {
 
     expect(result.current.copied).toBe(false);
     vi.useRealTimers();
+  });
+
+  it('falls back to document.execCommand when the Clipboard API is unavailable', async () => {
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: undefined,
+    });
+
+    const { result } = renderHook(() => useClipboard());
+
+    let copied;
+    await act(async () => {
+      copied = await result.current.copyToClipboard('fallback');
+    });
+
+    expect(copied).toBe(true);
+    expect(document.execCommand).toHaveBeenCalledWith('copy');
+    expect(notify.success).toHaveBeenCalledWith('Copied to clipboard!');
   });
 });

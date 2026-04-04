@@ -1,6 +1,24 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { notify } from '../utils/toast';
 
+function fallbackCopy(text) {
+  if (typeof document === 'undefined' || typeof document.execCommand !== 'function') {
+    return false;
+  }
+
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.setAttribute('readonly', '');
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = '0';
+  document.body.appendChild(textarea);
+  textarea.select();
+
+  const copied = document.execCommand('copy');
+  document.body.removeChild(textarea);
+  return copied;
+}
+
 /**
  * Custom hook for interacting with the system clipboard.
  * Provides a clean interface for copying text and tracking copy status.
@@ -16,14 +34,15 @@ export function useClipboard({ timeout = 2000 } = {}) {
   const copyToClipboard = useCallback(
     async (text) => {
       if (!text) return false;
-      
-      if (!navigator?.clipboard?.writeText) {
-        notify.error('Clipboard not available');
-        return false;
-      }
 
       try {
-        await navigator.clipboard.writeText(text);
+        if (navigator?.clipboard?.writeText) {
+          await navigator.clipboard.writeText(text);
+        } else if (!fallbackCopy(text)) {
+          notify.error('Clipboard not available');
+          return false;
+        }
+
         setCopied(true);
         notify.success('Copied to clipboard!');
 
@@ -37,6 +56,21 @@ export function useClipboard({ timeout = 2000 } = {}) {
         }, timeout);
         return true;
       } catch (error) {
+        if (fallbackCopy(text)) {
+          setCopied(true);
+          notify.success('Copied to clipboard!');
+
+          if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+          }
+
+          timeoutRef.current = setTimeout(() => {
+            setCopied(false);
+            timeoutRef.current = null;
+          }, timeout);
+          return true;
+        }
+
         console.error('Failed to copy text:', error);
         notify.error('Unable to copy');
         return false;
