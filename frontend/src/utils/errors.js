@@ -14,9 +14,12 @@ const ERROR_MAP = {
   '102': 'Invalid Parameters: The data provided to the contract is malformed.',
   '103': 'Cooldown Active: Please wait before performing this action again.',
   '104': 'Limit Reached: You have reached the maximum allowed for this interaction.',
+  '105': 'Poll Expired: This poll is no longer accepting votes.',
+  '106': 'Already Voted: You have already cast your vote in this poll.',
   '401': 'User Rejected: The transaction request was cancelled in your wallet.',
   '403': 'Contract Paused: This interaction is currently disabled by the maintainers.',
   '500': 'Network Error: Failed to broadcast the transaction. Please try again.',
+  '1001': 'Invalid Amount: Please specify a positive number for this interaction.',
 };
 
 /**
