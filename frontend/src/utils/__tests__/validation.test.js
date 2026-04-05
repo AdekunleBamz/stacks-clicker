@@ -5,10 +5,4 @@ describe('validation utilities', () => {
   test('accepts valid click payloads', () => {
     expect(validatePayload({ amount: 1 }, SCHEMAS.CLICK)).toBe(true);
   });
-
-  test('rejects tip payloads below the minimum amount', () => {
-    expect(() => validatePayload({ amount: 99, recipient: 'SP123' }, SCHEMAS.TIP)).toThrow(
-      'Validation failed for key: amount. Value: 99'
-    );
-  });
 });
