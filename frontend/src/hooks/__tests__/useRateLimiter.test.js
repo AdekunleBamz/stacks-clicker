@@ -109,4 +109,23 @@ describe('useRateLimiter hook', () => {
     expect(result.current.remainingMs).toBe(0);
     vi.useRealTimers();
   });
+
+  it('clears the reported remaining cooldown after reset', () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2026-04-04T00:00:00Z'));
+
+    const { result } = renderHook(() => useRateLimiter({ interval: 1000 }));
+
+    act(() => {
+      result.current.withRateLimit(() => true)();
+    });
+
+    act(() => {
+      result.current.reset();
+    });
+
+    expect(result.current.isLimited).toBe(false);
+    expect(result.current.remainingMs).toBe(0);
+    vi.useRealTimers();
+  });
 });
