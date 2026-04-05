@@ -94,4 +94,19 @@ describe('useClipboard hook', () => {
     expect(notify.success).not.toHaveBeenCalled();
     expect(notify.error).not.toHaveBeenCalled();
   });
+
+  it('surfaces an error when both clipboard strategies fail', async () => {
+    navigator.clipboard.writeText.mockRejectedValueOnce(new Error('denied'));
+    document.execCommand.mockReturnValue(false);
+
+    const { result } = renderHook(() => useClipboard());
+
+    let copied;
+    await act(async () => {
+      copied = await result.current.copyToClipboard('SP123');
+    });
+
+    expect(copied).toBe(false);
+    expect(notify.error).toHaveBeenCalledWith('Unable to copy');
+  });
 });
