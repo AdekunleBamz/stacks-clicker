@@ -109,4 +109,20 @@ describe('useClipboard hook', () => {
     expect(copied).toBe(false);
     expect(notify.error).toHaveBeenCalledWith('Unable to copy');
   });
+
+  it('falls back to execCommand when the Clipboard API rejects', async () => {
+    navigator.clipboard.writeText.mockRejectedValueOnce(new Error('temporary outage'));
+    document.execCommand.mockReturnValue(true);
+
+    const { result } = renderHook(() => useClipboard());
+
+    let copied;
+    await act(async () => {
+      copied = await result.current.copyToClipboard('SP123');
+    });
+
+    expect(copied).toBe(true);
+    expect(document.execCommand).toHaveBeenCalledWith('copy');
+    expect(notify.success).toHaveBeenCalledWith('Copied to clipboard!');
+  });
 });
