@@ -146,4 +146,3 @@ Shared branch commits should be signed (SSH or GPG) before they are pushed. You 
 MIT License. See [LICENSE](LICENSE) for details.
 
 ---
-Built and maintained by the Stacks Clicker contributors.
