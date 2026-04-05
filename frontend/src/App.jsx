@@ -103,12 +103,10 @@ export default function App() {
     onTxSubmit: (action, txId) => {
       addTxToLog(action, txId);
       // Update local reactive stats for immediate feedback (optimistic logic)
-      if (action.includes('Click')) {
-        setStats((prev) => ({ ...prev, clicks: prev.clicks + 1 }));
-      } else if (action.includes('Tip')) {
-        setStats((prev) => ({ ...prev, tips: prev.tips + 1 }));
-      } else if (action.includes('Vote')) {
-        setStats((prev) => ({ ...prev, votes: prev.votes + 1 }));
+      const actionLower = action.toLowerCase();
+      const type = ['click', 'tip', 'vote'].find(t => actionLower.includes(t));
+      if (type) {
+        setStats(prev => ({ ...prev, [`${type}s`]: prev[`${type}s`] + 1 }));
       }
     },
   });
