@@ -22,6 +22,7 @@
     "frontend:build": "npm --prefix frontend run build",
     "frontend:test": "npm --prefix frontend run test",
     "frontend:lint": "npm --prefix frontend run lint",
+    "frontend:lint:fix": "npm --prefix frontend run lint:fix",
     "contracts:check": "clarinet check",
     "contracts:test": "clarinet test",
     "clean": "rm -rf node_modules frontend/node_modules frontend/dist"
