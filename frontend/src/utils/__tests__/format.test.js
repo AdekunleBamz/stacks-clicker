@@ -29,6 +29,10 @@ describe('format utilities', () => {
     test('supports custom separators', () => {
       expect(truncateAddress(address, { separator: '***' })).toBe('SP3K***PP4Y');
     });
+
+    test('returns the full address when both visible segments are disabled', () => {
+      expect(truncateAddress(address, { prefix: 0, suffix: 0 })).toBe(address);
+    });
   });
 
   describe('formatNumber', () => {
