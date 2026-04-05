@@ -36,26 +36,21 @@ function AppContent() {
       totalStreaks: 156,
       rank: '#42'
     },
-    achievements: [
-      {
-        icon: '🔥',
-        title: 'Hot Streak',
-        description: 'Reached a 100-click streak without stopping',
-        unlocked: true,
-        date: '2025-05-15'
-      },
-      {
-        icon: '💎',
-        title: 'Early Supporter',
-        description: 'Connected your wallet during the alpha phase',
-        unlocked: true,
-        date: '2025-05-10'
-      },
-      {
-        icon: '👑',
-        title: 'Whale Tipper',
-        description: 'Sent more than 1 STX in total tips',
-        unlocked: false
+    [configuredNetwork, playSound]
+  );
+
+  /**
+   * Unified interaction interface provided by the useInteractions collector.
+   * Centralizes callbacks for all game-related contract calls.
+   */
+  const { clicker, tipjar, quickpoll, pingAll } = useInteractions({
+    onTxSubmit: (action, txId) => {
+      addTxToLog(action, txId);
+      // Update local reactive stats for immediate feedback (optimistic logic)
+      const actionLower = action.toLowerCase();
+      const type = ['click', 'tip', 'vote'].find(t => actionLower.includes(t));
+      if (type) {
+        setStats(prev => ({ ...prev, [`${type}s`]: prev[`${type}s`] + 1 }));
       }
     ]
   });
