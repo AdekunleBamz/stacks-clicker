@@ -14,14 +14,14 @@ const ERROR_MAP = Object.freeze({
   '102': 'Invalid Parameters: The data provided to the contract is malformed.',
   '103': 'Cooldown Active: Please wait before performing this action again.',
   '104': 'Limit Reached: You have reached the maximum allowed for this interaction.',
-  '105': 'Already Voted: You have already submitted a vote for this poll.',
-  '106': 'Not Found: The requested contract or resource could not be found.',
-  '107': 'Poll Closed: Voting for this poll has ended.',
+  '105': 'Poll Expired: This poll is no longer accepting votes.',
+  '106': 'Already Voted: You have already cast your vote in this poll.',
   '401': 'User Rejected: The transaction request was cancelled in your wallet.',
   '403': 'Contract Paused: This interaction is currently disabled by the maintainers.',
   '408': 'Request Timeout: The transaction request timed out. Please retry.',
   '500': 'Network Error: Failed to broadcast the transaction. Please try again.',
-});
+  '1001': 'Invalid Amount: Please specify a positive number for this interaction.',
+};
 
 /**
  * Parses a raw error from the Stacks blockchain or wallet provider.
