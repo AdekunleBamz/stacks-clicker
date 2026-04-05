@@ -130,6 +130,7 @@ export default function ClickerGame({ onTxSubmit }) {
           className="action-btn outline"
           onClick={handlePing}
           disabled={!isConnected || loading}
+          title="Send a network heartbeat to verify connectivity"
         >
           📡 Ping
         </button>
