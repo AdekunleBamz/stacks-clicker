@@ -43,16 +43,41 @@ function AppContent() {
     { id: 3, user: 'DEGEN', text: 'voted YES on Poll #4!', type: 'poll', time: '5m ago' }
   ]);
 
-  // Mock User Data for Progress Dashboard
-  const [userData, setUserData] = useState({
-    level: 12,
-    xp: 2450,
-    nextLevelXP: 5000,
-    stats: {
-      totalTipped: 0.0452,
-      clickRate: 3.4,
-      totalStreaks: 156,
-      rank: '#42'
+  /**
+   * Toggles between 'light' and 'dark' themes.
+   */
+  const toggleTheme = useCallback(() => {
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  }, [setTheme]);
+
+  /**
+   * Adds a transaction record to the local session log and triggers UI notifications.
+   *
+   * @param {string} action - Human-readable label for the interaction (e.g., '🎯 Click')
+   * @param {string} txId - The unique transaction hash returned from the Stacks network
+   * @param {string} [status='success'] - Current lifecycle state of the transaction
+   * @returns {Object} The formatted transaction object
+   */
+  const addTxToLog = useCallback(
+    (action, txId, status = 'success') => {
+      const submittedAt = new Date();
+      const isPending = !txId || status === 'pending';
+      const tx = {
+        id: txId || `pending-${Date.now()}`,
+        action,
+        status,
+        time: submittedAt.toLocaleTimeString(),
+        submittedAt: submittedAt.toISOString(),
+        network: configuredNetwork,
+        explorerUrl: isPending ? null : `https://explorer.hiro.so/txid/${txId}?chain=${configuredNetwork}`,
+        isPending,
+      };
+      setTxLog((prev) => [tx, ...prev.slice(0, 49)]); // Maintain last 50 TXs
+      setParticleTrigger((prev) => prev + 1);
+      playSound('success');
+
+      notify.custom(`${action} submitted!`);
+      return tx;
     },
     [playSound]
   );

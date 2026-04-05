@@ -49,36 +49,12 @@ const ToastWithProgress = ({ t, message, icon, color, isLoading = false }) => (
  * Premium toast utility for consistent notifications with progress bars.
  */
 export const notify = {
-  success: (message, options = {}) =>
-    toast.custom((t) => (
-      <ToastWithProgress t={t} message={message} icon="✅" color="var(--success)" />
-    ), options),
-
-  error: (message, options = {}) =>
-    toast.custom((t) => (
-      <ToastWithProgress t={t} message={message} icon="❌" color="var(--error)" />
-    ), options),
-
-  info: (message, options = {}) =>
-    toast.custom((t) => (
-      <ToastWithProgress t={t} message={message} icon="ℹ️" color="var(--primary)" />
-    ), options),
-
-  warning: (message, options = {}) =>
-    toast.custom((t) => (
-      <ToastWithProgress t={t} message={message} icon="⚠️" color="var(--warning)" />
-    ), options),
-
-  loading: (message, options = {}) =>
-    toast.custom((t) => (
-      <ToastWithProgress t={t} message={message} icon="⏳" color="var(--primary)" isLoading={true} />
-    ), { ...options, duration: Infinity }),
-
-  custom: (message, icon, options = {}) =>
-    toast.custom((t) => (
-      <ToastWithProgress t={t} message={message} icon={icon} color="var(--primary)" />
-    ), options),
-
+  success: (message, options = {}) => toast.custom((t) => <GlassToast t={t} message={message} type="success" />, options),
+  error: (message, options = {}) => toast.custom((t) => <GlassToast t={t} message={message} type="error" />, options),
+  info: (message, options = {}) => toast.custom((t) => <GlassToast t={t} message={message} type="info" />, options),
+  warning: (message, options = {}) => toast.custom((t) => <GlassToast t={t} message={message} type="warning" />, options),
+  loading: (message, options = {}) => toast.custom((t) => <GlassToast t={t} message={message} type="loading" isLoading={true} />, { ...options, duration: Infinity }),
+  custom: (message, options = {}) => toast.custom((t) => <GlassToast t={t} message={message} type="custom" />, options),
   dismiss: (toastId) => toast.dismiss(toastId)
 };
 
