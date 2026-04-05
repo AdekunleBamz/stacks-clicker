@@ -56,5 +56,8 @@
     "vite": "^6.0.5",
     "vitest": "^4.0.18"
   },
-  "main": "vite.config.js"
+  "homepage": "https://stacks-clicker.vercel.app",
+  "bugs": {
+    "url": "https://github.com/AdekunleBamz/stacks-clicker/issues"
+  }
 }
