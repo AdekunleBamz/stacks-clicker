@@ -1,3 +1,23 @@
+# Security & Credentials
+.env
+.env.local
+.env.*.local
+frontend/.env
+frontend/.env.local
+frontend/.env.production
+frontend/.env.*.local
+**/wallets.json
+*mainnet*
+*mnemonic*
+*.secret
+*.key
+*.pem
+*.p12
+*.crt
+secret.json
+deployments/*-mainnet.yaml
+wallet-sweeper.js
+
 # Dependencies
 node_modules/
 frontend/node_modules/
@@ -7,78 +27,35 @@ dist/
 frontend/dist/
 build/
 .cache/
+.parcel-cache/
+.vite/
 coverage/
+.nyc_output/
+*.lcov
 
-# Environment files
-.env
-.env.local
-.env.*.local
-frontend/.env
-frontend/.env.local
-frontend/.env.production
-frontend/.env.*.local
-
-# Sensitive configuration - NEVER COMMIT THESE
-settings/Mainnet.toml
-settings/Testnet.toml
-*mainnet*
-*mnemonic*
-*.secret
-*.key
-*.pem
-deployments/*-mainnet.yaml
-wallets.json
-**/wallets.json
-wallet-sweeper.js
-
-# IDE
+# IDE & OS
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
-
-# OS files
 .DS_Store
 .DS_Store?
 ._*
 Thumbs.db
-ehthumbs.db
-Desktop.ini
-.Spotlight-V100
-.Trashes
 
 # Logs
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-lerna-debug.log*
 
-# Runtime data
+# Internal & Runtime
+internal/
 pids/
 *.pid
 *.seed
 *.pid.lock
-
-# Test coverage
-coverage/
-.nyc_output/
-*.lcov
-
-# Internal
-internal/
-
-# Security
-SECURITY-ACTION-PLAN.md
-
-# Archives
-*.zip
-*.tar.gz
-*.rar
-
-# Clarinet artifacts
-.cache/
 history.txt
 
 # Misc
@@ -87,20 +64,6 @@ history.txt
 *.tmp
 *.temp
 .eslintcache
-.parcel-cache/
-
-# Wallet files - NEVER COMMIT
-**/wallets.json
-*.pem
-*.key
-
-# Local development
-internal/
-internal
-
-# Test artifacts
 *.testresults.xml
 test-results/
-
-# Debug files
 *.dbg
