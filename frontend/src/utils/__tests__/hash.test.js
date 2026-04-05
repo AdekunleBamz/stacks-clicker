@@ -16,6 +16,27 @@ describe('hash utilities', () => {
       const hash = simpleHash('any-string');
       expect(hash).toBeGreaterThanOrEqual(0);
       expect(hash).toBeLessThanOrEqual(4294967295);
+      expect(Number.isInteger(hash)).toBe(true);
+    });
+
+    test('returns stable seed hash for empty strings', () => {
+      expect(simpleHash('')).toBe(5381);
+    });
+
+    test('handles undefined input by hashing empty string', () => {
+      expect(simpleHash(undefined)).toBe(5381);
+    });
+
+    test('treats null input the same way as an empty string', () => {
+      expect(simpleHash(null)).toBe(5381);
+    });
+
+    test('coerces numeric input consistently', () => {
+      expect(simpleHash(42)).toBe(simpleHash('42'));
+    });
+
+    test('handles unicode input deterministically', () => {
+      expect(simpleHash('Yoruba-ọrọ')).toBe(simpleHash('Yoruba-ọrọ'));
     });
   });
 
