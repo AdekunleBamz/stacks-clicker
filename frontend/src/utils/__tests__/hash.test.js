@@ -27,6 +27,10 @@ describe('hash utilities', () => {
       expect(simpleHash(undefined)).toBe(5381);
     });
 
+    test('treats null input the same way as an empty string', () => {
+      expect(simpleHash(null)).toBe(5381);
+    });
+
     test('coerces numeric input consistently', () => {
       expect(simpleHash(42)).toBe(simpleHash('42'));
     });
