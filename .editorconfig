@@ -28,3 +28,9 @@ indent_style = tab
 
 [*.md]
 trim_trailing_whitespace = false
+
+[*.html]
+indent_size = 2
+
+[.env*]
+indent_size = 2
