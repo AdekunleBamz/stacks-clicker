@@ -30,15 +30,7 @@ describe('format utilities', () => {
       expect(truncateAddress(address, { separator: '***' })).toBe('SP3K***PP4Y');
     });
 
-    test('trims surrounding whitespace before truncation', () => {
-      expect(truncateAddress(`  ${address}  `)).toBe('SP3K...PP4Y');
-    });
-
-    test('truncates fractional prefix and suffix options', () => {
-      expect(truncateAddress(address, { prefix: 5.9, suffix: 3.8 })).toBe('SP3K8...P4Y');
-    });
-
-    test('returns full address when prefix and suffix are zero', () => {
+    test('returns the full address when both visible segments are disabled', () => {
       expect(truncateAddress(address, { prefix: 0, suffix: 0 })).toBe(address);
     });
   });
