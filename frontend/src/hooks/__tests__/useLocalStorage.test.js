@@ -49,4 +49,15 @@ describe('useLocalStorage hook', () => {
     const { result } = renderHook(() => useLocalStorage(key, initialValue));
     expect(result.current[0]).toEqual(initialValue);
   });
+
+  it('skips redundant localStorage writes when the next value is unchanged', () => {
+    const setItemSpy = vi.spyOn(Storage.prototype, 'setItem');
+    const { result } = renderHook(() => useLocalStorage(key, initialValue));
+
+    act(() => {
+      result.current[1]({ count: 0 });
+    });
+
+    expect(setItemSpy).not.toHaveBeenCalled();
+  });
 });
