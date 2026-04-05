@@ -21,6 +21,18 @@ describe('format utilities', () => {
     test('returns empty string if address is missing', () => {
       expect(truncateAddress(null)).toBe('');
     });
+
+    test('normalizes negative prefix and suffix values', () => {
+      expect(truncateAddress(address, { prefix: -1, suffix: -2 })).toBe(address);
+    });
+
+    test('supports custom separators', () => {
+      expect(truncateAddress(address, { separator: '***' })).toBe('SP3K***PP4Y');
+    });
+
+    test('returns the full address when both visible segments are disabled', () => {
+      expect(truncateAddress(address, { prefix: 0, suffix: 0 })).toBe(address);
+    });
   });
 
   describe('formatNumber', () => {
