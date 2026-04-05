@@ -173,6 +173,7 @@ export default function ClickerGame({ onTxSubmit }) {
           onClick={handlePing}
           disabled={!isConnected || loading}
           aria-label="Ping the contract"
+          title="Send a network heartbeat to verify connectivity"
         >
           📡 Ping
         </motion.button>
