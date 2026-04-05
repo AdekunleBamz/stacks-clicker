@@ -1,4 +1,4 @@
-.PHONY: help check test coverage console deploy-devnet deploy-mainnet clean security-audit lint:all lint:fix install dev build test:frontend format:check
+.PHONY: help check test coverage console deploy-devnet deploy-mainnet clean security-audit lint:all lint:fix install dev build test:frontend format:check format:fix
 
 # Default target
 help:
@@ -12,6 +12,9 @@ help:
 	@echo "  make deploy-mainnet - Deploy to mainnet"
 	@echo "  make clean          - Clean build artifacts"
 	@echo "  make lint:all       - Run linting for root and frontend"
+	@echo "  make lint:fix       - Fix linting issues"
+	@echo "  make format:check   - Check code formatting"
+	@echo "  make format:fix     - Fix formatting issues"
 	@echo "  make security-audit - Run npm audit for frontend"
 	@echo ""
 
@@ -32,6 +35,9 @@ lint:fix:
 
 format:check:
 	cd frontend && npm run format:check
+
+format:fix:
+	cd frontend && npm run format
 
 
 # Check contract syntax
