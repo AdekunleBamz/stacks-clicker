@@ -142,8 +142,7 @@ export const notify = {
   info: (message, options = {}) => toast.custom((t) => <GlassToast t={t} message={message} type="info" />, options),
   warning: (message, options = {}) => toast.custom((t) => <GlassToast t={t} message={message} type="warning" />, options),
   loading: (message, options = {}) => toast.custom((t) => <GlassToast t={t} message={message} type="loading" isLoading={true} />, { ...options, duration: Infinity }),
-  custom: (message, icon, options = {}) =>
-    toast.custom((t) => <GlassToast t={t} message={message} type="custom" customIcon={icon} />, options),
+  custom: (message, options = {}) => toast.custom((t) => <GlassToast t={t} message={message} type="custom" />, options),
   dismiss: (toastId) => toast.dismiss(toastId)
 };
 
