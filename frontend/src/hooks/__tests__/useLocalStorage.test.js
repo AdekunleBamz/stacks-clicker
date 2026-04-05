@@ -87,4 +87,15 @@ describe('useLocalStorage hook', () => {
 
     expect(setItemSpy).not.toHaveBeenCalled();
   });
+
+  it('re-reads the stored value when a matching local-storage custom event fires', () => {
+    const { result } = renderHook(() => useLocalStorage(key, initialValue));
+
+    act(() => {
+      window.localStorage.setItem(key, JSON.stringify({ count: 9 }));
+      window.dispatchEvent(new CustomEvent('local-storage', { detail: { key } }));
+    });
+
+    expect(result.current[0]).toEqual({ count: 9 });
+  });
 });
