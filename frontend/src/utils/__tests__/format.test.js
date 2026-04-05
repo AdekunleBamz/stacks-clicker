@@ -262,7 +262,6 @@ describe('format utilities', () => {
     test('formats zero bigint amounts without introducing signs or commas', () => {
       expect(formatStx(0n)).toBe('0.00 STX');
     });
-
     test('returns 0.00 STX for non-finite input', () => {
       expect(formatStx(undefined)).toBe('0.00 STX');
       expect(formatStx(Number.NaN)).toBe('0.00 STX');
