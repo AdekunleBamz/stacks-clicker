@@ -128,4 +128,23 @@ describe('useRateLimiter hook', () => {
     expect(result.current.remainingMs).toBe(0);
     vi.useRealTimers();
   });
+
+  it('returns false on rejected calls even when no onRejected handler is provided', () => {
+    vi.useFakeTimers();
+    const handler = vi.fn();
+    const { result } = renderHook(() => useRateLimiter({ interval: 1000 }));
+
+    act(() => {
+      result.current.withRateLimit(handler)();
+    });
+
+    let secondResult;
+    act(() => {
+      secondResult = result.current.withRateLimit(handler)();
+    });
+
+    expect(secondResult).toBe(false);
+    expect(handler).toHaveBeenCalledTimes(1);
+    vi.useRealTimers();
+  });
 });
