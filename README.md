@@ -9,7 +9,7 @@ Stacks Clicker aims to be more than just a game; it is a gateway for users to ex
 
 ## Project Structure 📁
 
-- `contracts/`: Clarity smart contracts [detailed here](contracts/README.md).
+- `contracts/`: Clarity smart contracts.
 - `frontend/`: React-based web application (Vite, Framer Motion).
 - `deployments/`: Network-specific deployment plans.
 - `settings/`: Clarinet network configuration files (simnet/devnet).
@@ -138,3 +138,4 @@ Shared branch commits should be signed (SSH or GPG) before they are pushed. You 
 MIT License. See [LICENSE](LICENSE) for details.
 
 ---
+*Built with ❤️ by the [TimeFi Team](https://github.com/AdekunleBamz)*
