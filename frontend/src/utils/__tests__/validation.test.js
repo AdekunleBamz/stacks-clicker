@@ -17,4 +17,10 @@ describe('validation utilities', () => {
       'Validation failed for key: recipient. Value: 0xabc'
     );
   });
+
+  test('ignores extra payload fields outside the schema', () => {
+    expect(
+      validatePayload({ optionId: 0, label: 'Yes', ignored: true }, SCHEMAS.POLL)
+    ).toBe(true);
+  });
 });
