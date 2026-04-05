@@ -26,6 +26,9 @@
   --app-bg: #0b0b13; /* darkened base app background for heightened card contrast */
   --warning: #f59e0b;
   --error: #ef4444;
+  --perf-good: #00ff00;
+  --perf-warn: #ffff00;
+  --perf-bad: #ff0000;
   --bg-dark: #030014;
   --bg-card: rgba(15, 15, 25, 0.6);
   --bg-input: rgba(255, 255, 255, 0.03);
@@ -1937,9 +1940,9 @@ textarea:focus-visible {
 
 .perf-stat { display: flex; gap: 4px; }
 .perf-label { opacity: 0.6; }
-.perf-value.good { color: #00ff00; }
-.perf-value.warn { color: #ffff00; }
-.perf-value.bad { color: #ff0000; }
+.perf-value.good { color: var(--perf-good); }
+.perf-value.warn { color: var(--perf-warn); }
+.perf-value.bad { color: var(--perf-bad); }
 
 /* Pull to Refresh */
 .ptr-wrapper {
