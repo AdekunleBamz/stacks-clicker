@@ -29,7 +29,7 @@ export function usePerformance() {
             total: Math.round(window.performance.memory.jsHeapSizeLimit / 1048576),
           });
         }
-        
+
         prevTimeRef.current = time;
         framesRef.current = 0;
       }

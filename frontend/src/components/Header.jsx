@@ -30,7 +30,7 @@ export default function Header({ theme, toggleTheme }) {
   }, []);
 
   return (
-    <header 
+    <header
       className={`app-header ${isScrolled ? 'header-scrolled' : ''}`}
       role="banner"
       style={{
@@ -42,9 +42,9 @@ export default function Header({ theme, toggleTheme }) {
       }}
     >
       <div className="header-content">
-        <div 
-          className="logo" 
-          role="banner" 
+        <div
+          className="logo"
+          role="banner"
           aria-label="Application Logo"
           title="Stacks Clicker V2 Logo"
         >

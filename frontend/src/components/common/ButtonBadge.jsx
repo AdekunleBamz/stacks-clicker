@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
  */
 const ButtonBadge = ({ count, showDotOnly = false, maxCount = 99, color = 'var(--error)' }) => {
   const isVisible = count > 0 || showDotOnly;
-  
+
   const displayCount = count > maxCount ? `${maxCount}+` : count;
 
   return (
@@ -26,7 +26,7 @@ const ButtonBadge = ({ count, showDotOnly = false, maxCount = 99, color = 'var(-
           {!showDotOnly && <span className="badge-text">{displayCount}</span>}
         </motion.div>
       )}
-      
+
       <style jsx>{`
         .button-badge {
           position: absolute;

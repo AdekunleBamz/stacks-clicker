@@ -61,7 +61,7 @@ describe('Header component', () => {
   it('triggers theme toggle when button is clicked', () => {
     const handleToggle = vi.fn();
     render(<Header theme="dark" toggleTheme={handleToggle} />);
-    
+
     fireEvent.click(screen.getByLabelText(/Toggle to light theme/i));
     expect(handleToggle).toHaveBeenCalledTimes(1);
   });

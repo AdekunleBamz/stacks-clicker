@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 /**
  * Custom hook to manage global keyboard shortcuts for the application.
- * 
+ *
  * @param {Object} options - Shortcut configurations
  * @param {boolean} options.isEnabled - Whether shortcuts are active
  * @param {Object} options.actions - Action map for specific keys

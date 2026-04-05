@@ -10,10 +10,10 @@ import { useState, useEffect, useRef } from 'react';
  * @param {boolean} [options.triggerOnce=true] - If true, the observer will disconnect after the first intersection
  * @returns {[React.RefObject, boolean]} A ref to attach to the element and a boolean indicating visibility
  */
-export function useIntersectionObserver({ 
-  rootMargin = '0px', 
-  threshold = 0.1, 
-  triggerOnce = true 
+export function useIntersectionObserver({
+  rootMargin = '0px',
+  threshold = 0.1,
+  triggerOnce = true
 } = {}) {
   const [isIntersecting, setIntersecting] = useState(false);
   const elementRef = useRef(null);

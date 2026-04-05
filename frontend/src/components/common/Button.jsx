@@ -6,17 +6,17 @@ import { motion } from 'framer-motion';
  * A unified, reusable button component for the application.
  * Supports different variants, sizes, and loading states.
  */
-const Button = ({ 
-  children, 
-  onClick, 
-  variant = 'primary', 
-  size = 'md', 
-  isLoading = false, 
-  disabled = false, 
-  className = '', 
+const Button = ({
+  children,
+  onClick,
+  variant = 'primary',
+  size = 'md',
+  isLoading = false,
+  disabled = false,
+  className = '',
   type = 'button',
   icon,
-  ...props 
+  ...props
 }) => {
   const baseClass = 'app-btn';
   const variantClass = `btn-${variant}`;

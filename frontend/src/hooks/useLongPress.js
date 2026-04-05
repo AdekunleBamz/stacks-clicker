@@ -18,7 +18,7 @@ export function useLongPress(callback, { delay = 500 } = {}) {
     if (event.type === 'touchstart') {
       // event.preventDefault(); // Don't prevent default, might break scroll
     }
-    
+
     setIsPressing(true);
     timerRef.current = setTimeout(() => {
       callback(event);

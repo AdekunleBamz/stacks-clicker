@@ -20,7 +20,7 @@ export const SCHEMAS = {
 
 /**
  * Validates a payload against a pre-defined schema.
- * 
+ *
  * @param {Object} payload - The data to validate
  * @param {Object} schema - The schema mapping keys to validation functions
  * @throws {Error} If validation fails

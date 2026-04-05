@@ -15,11 +15,11 @@ export default function BaseModal({ isOpen, onClose, title, children, footer, cl
     if (isOpen) {
       previousFocus.current = document.activeElement;
       const timer = setTimeout(() => closeBtnRef.current?.focus(), 100);
-      
+
       const handleEscape = (e) => {
         if (e.key === 'Escape') onClose();
       };
-      
+
       window.addEventListener('keydown', handleEscape);
       return () => {
         clearTimeout(timer);

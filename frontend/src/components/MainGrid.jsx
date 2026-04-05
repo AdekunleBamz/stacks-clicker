@@ -44,7 +44,7 @@ function MainGrid({
             gap: 3rem;
             padding: 0 4rem;
           }
-          
+
           .section-title {
             font-size: 2.5rem;
             text-align: center;

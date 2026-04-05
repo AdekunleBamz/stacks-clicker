@@ -6,16 +6,16 @@ import { motion } from 'framer-motion';
  * A unified, reusable card component for the application.
  * Supports different depth levels and interactive states.
  */
-const Card = ({ 
-  children, 
-  title, 
-  subtitle, 
-  icon, 
-  depth = 1, 
-  interactive = false, 
-  className = '', 
+const Card = ({
+  children,
+  title,
+  subtitle,
+  icon,
+  depth = 1,
+  interactive = false,
+  className = '',
   headerAction,
-  ...props 
+  ...props
 }) => {
   const id = useId();
   const titleId = `card-title-${id}`;

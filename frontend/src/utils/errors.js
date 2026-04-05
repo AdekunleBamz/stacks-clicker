@@ -1,6 +1,6 @@
 /**
  * Utility for parsing Stacks smart contract error codes into human-readable messages.
- * 
+ *
  * Stacks errors are typically returned as strings like "(err u101)" or "101".
  * This module maps these numeric codes to friendly feedback for the user.
  *
@@ -24,7 +24,7 @@ const ERROR_MAP = {
 
 /**
  * Parses a raw error from the Stacks blockchain or wallet provider.
- * 
+ *
  * @param {any} error - The error object or string to parse
  * @returns {string} A user-friendly error message
  */
@@ -34,7 +34,7 @@ export function parseContractError(error) {
       ? error
       : error?.message || error?.reason || error?.error || String(error);
   const lowerMessage = errorMessage.toLowerCase();
-  
+
   // Extract numeric codes from strings like "(err u101)" or "Error: 101"
   const match = errorMessage.match(/\d+/);
   const code = match ? match[0] : null;

@@ -45,7 +45,7 @@ function StatsCard({ label, value, icon, color, isPrice = false, isGrowing = fal
         boxShadow: "0 10px 30px -10px rgba(0,0,0,0.5)",
         borderColor: color + "44"
       }}
-      style={{ 
+      style={{
         '--accent-color': color,
         '--card-width': `${width}px`,
         '--card-height': `${height}px`
@@ -64,16 +64,16 @@ function StatsCard({ label, value, icon, color, isPrice = false, isGrowing = fal
         </div>
         <div className="label" id={`stat-label-${index}`}>{label}</div>
         {!isPrice && typeof value === 'number' && (
-          <div 
-            className="progress-container" 
-            role="progressbar" 
-            aria-valuenow={Math.min(value % 100, 100)} 
-            aria-valuemin="0" 
+          <div
+            className="progress-container"
+            role="progressbar"
+            aria-valuenow={Math.min(value % 100, 100)}
+            aria-valuemin="0"
             aria-valuemax="100"
             aria-valuetext={`${Math.floor(Math.min(value % 100, 100))}% towards next milestone`}
             aria-label={`${label} progress`}
           >
-            <motion.div 
+            <motion.div
               className="progress-bar"
               initial={{ width: 0 }}
               animate={{ width: `${Math.min(((value % 100) / 100) * 100, 100)}%` }}

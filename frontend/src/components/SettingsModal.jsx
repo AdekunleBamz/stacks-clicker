@@ -32,7 +32,7 @@ const SettingsModal = () => {
           <h4 className="settings-label">Appearance</h4>
           <div className="settings-row">
             <span>Theme Mode</span>
-            <button 
+            <button
               className="theme-toggle-btn secondary-button btn-sm"
               onClick={toggleTheme}
             >
@@ -45,7 +45,7 @@ const SettingsModal = () => {
           <h4 className="settings-label">Localization</h4>
           <div className="settings-row">
             <span>Preferred Language</span>
-            <select 
+            <select
               className="lang-select-input input-field"
               value={lang}
               onChange={(e) => handleLanguageChange(e.target.value)}

@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 /**
  * Custom hook for debugging unnecessary re-renders.
  * Logs changed props to the console between renders.
- * 
+ *
  * @param {string} name - Component name for identification
  * @param {Object} props - Component props to track
  */
@@ -14,7 +14,7 @@ export function useWhyDidYouUpdate(name, props) {
     if (previousProps.current) {
       const allKeys = Object.keys({ ...previousProps.current, ...props });
       const changesObj = {};
-      
+
       allKeys.forEach((key) => {
         if (previousProps.current[key] !== props[key]) {
           changesObj[key] = {

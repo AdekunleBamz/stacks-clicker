@@ -13,7 +13,7 @@ describe('ActionButton component', () => {
   it('triggers onClick handler when clicked', () => {
     const handleClick = vi.fn();
     render(<ActionButton label="Click Me" onClick={handleClick} />);
-    
+
     fireEvent.click(screen.getByRole('button'));
     expect(handleClick).toHaveBeenCalledTimes(1);
   });

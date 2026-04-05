@@ -13,7 +13,7 @@ export default function RoadmapBoard() {
   const [items, setItems] = useState(INITIAL_ROADMAP_ITEMS);
 
   const handleVote = useCallback((title) => {
-    setItems(prev => prev.map(item => 
+    setItems(prev => prev.map(item =>
       item.title === title ? { ...item, votes: item.votes + 1 } : item
     ));
     notify.success(`Voted for: ${title}`);
@@ -54,10 +54,10 @@ export default function RoadmapBoard() {
                 {item.votes} votes
               </div>
               {item.status !== 'completed' && (
-                <motion.button 
+                <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  type="button" 
+                  type="button"
                   className="roadmap-vote-btn secondary-button btn-sm"
                   onClick={() => handleVote(item.title)}
                   aria-label={`Vote for ${item.title}`}

@@ -61,7 +61,7 @@ export default function PullToRefresh({ onRefresh, children }) {
         aria-live="polite"
         style={{ transform: `translateY(${pullDistance - 50}px)`, opacity: pullDistance / PULL_THRESHOLD }}
       >
-        <div 
+        <div
           className={`ptr-spinner ${refreshing ? 'spinning' : ''}`}
           role={refreshing ? "progressbar" : "img"}
           aria-label={refreshing ? "Refreshing content" : "Pull to refresh"}

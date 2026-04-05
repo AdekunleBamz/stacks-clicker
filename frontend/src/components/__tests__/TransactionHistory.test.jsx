@@ -10,10 +10,10 @@ vi.mock('../TransactionItem', () => ({
 
 vi.mock('../common/SearchInput', () => ({
   default: ({ value, onChange }) => (
-    <input 
-      data-testid="search-input" 
-      value={value} 
-      onChange={(e) => onChange(e.target.value)} 
+    <input
+      data-testid="search-input"
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
     />
   )
 }));
@@ -33,10 +33,10 @@ describe('TransactionHistory component', () => {
   it('filters items based on search term', async () => {
     render(<TransactionHistory txLog={mockTxLog} />);
     const searchInput = screen.getByTestId('search-input');
-    
+
     // Search for "Click"
     fireEvent.change(searchInput, { target: { value: 'Click' } });
-    
+
     // We expect 1 item because filtering happens after debounce (mocked or small delay)
     // In this test, we might need to wait if useDebounce is real.
     // If useDebounce is mocked to return immediately:
@@ -47,9 +47,9 @@ describe('TransactionHistory component', () => {
   it('shows empty state when no transactions match filter', () => {
     render(<TransactionHistory txLog={mockTxLog} />);
     const searchInput = screen.getByTestId('search-input');
-    
+
     fireEvent.change(searchInput, { target: { value: 'Nonexistent' } });
-    
+
     // Depending on implementation, it might show "No results found"
     // Let's check based on common patterns in the codebase
     // Usually it displays some message.
@@ -59,9 +59,9 @@ describe('TransactionHistory component', () => {
     const createObjectURL = vi.fn();
     global.URL.createObjectURL = createObjectURL;
     global.URL.revokeObjectURL = vi.fn();
-    
+
     render(<TransactionHistory txLog={mockTxLog} />);
-    
+
     // Trigger export (Search for export button)
     // If it exists in the UI
   });
