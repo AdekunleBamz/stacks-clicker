@@ -43,8 +43,8 @@ export default function SocialFeed({ activities }) {
                                 <div className="activity-meta">
                                     <span className="activity-time">{activity.time}</span>
                                     <div className="activity-reactions">
-                                        <button className="reaction-btn">❤️</button>
-                                        <button className="reaction-btn">🙌</button>
+                                        <button className="reaction-btn" aria-label="React with heart">❤️</button>
+                                        <button className="reaction-btn" aria-label="React with praise">🙌</button>
                                     </div>
                                 </div>
                             </div>
