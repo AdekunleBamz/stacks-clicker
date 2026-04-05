@@ -80,4 +80,33 @@ describe('useClipboard hook', () => {
     expect(document.execCommand).toHaveBeenCalledWith('copy');
     expect(notify.success).toHaveBeenCalledWith('Copied to clipboard!');
   });
+
+  it('returns false for empty clipboard payloads without notifying', async () => {
+    const { result } = renderHook(() => useClipboard());
+
+    let copied;
+    await act(async () => {
+      copied = await result.current.copyToClipboard('');
+    });
+
+    expect(copied).toBe(false);
+    expect(navigator.clipboard.writeText).not.toHaveBeenCalled();
+    expect(notify.success).not.toHaveBeenCalled();
+    expect(notify.error).not.toHaveBeenCalled();
+  });
+
+  it('surfaces an error when both clipboard strategies fail', async () => {
+    navigator.clipboard.writeText.mockRejectedValueOnce(new Error('denied'));
+    document.execCommand.mockReturnValue(false);
+
+    const { result } = renderHook(() => useClipboard());
+
+    let copied;
+    await act(async () => {
+      copied = await result.current.copyToClipboard('SP123');
+    });
+
+    expect(copied).toBe(false);
+    expect(notify.error).toHaveBeenCalledWith('Unable to copy');
+  });
 });
