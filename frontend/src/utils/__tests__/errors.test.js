@@ -60,6 +60,11 @@ describe('parseContractError', () => {
     expect(parseContractError(msg)).toBe(msg);
   });
 
+  test('passes through rate-limit messages sourced from error.reason', () => {
+    const reason = 'Rate limit reached for clicker broadcast queue';
+    expect(parseContractError({ reason })).toBe(reason);
+  });
+
   test('passes through quota-only messages', () => {
     const msg = 'Per-minute quota reached for stacks provider';
     expect(parseContractError(msg)).toBe(msg);
