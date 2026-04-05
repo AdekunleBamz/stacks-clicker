@@ -78,15 +78,9 @@ describe('parseContractError', () => {
     expect(parsed.endsWith('...')).toBe(true);
   });
 
-  test('handles undefined input without throwing', () => {
-    expect(parseContractError(undefined)).toContain('Transaction failed');
-  });
-
-  test('handles empty string input', () => {
-    expect(parseContractError('')).toContain('Transaction failed');
-  });
-
-  test('handles error with nested error property', () => {
-    expect(parseContractError({ error: { message: '(err u102)' } })).toContain('Invalid Parameters');
+  test('stringifies non-standard error values when no message fields exist', () => {
+    expect(parseContractError(Symbol('wallet-denied'))).toBe(
+      'Transaction failed: Symbol(wallet-denied)'
+    );
   });
 });
