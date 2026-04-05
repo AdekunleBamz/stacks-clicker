@@ -89,7 +89,7 @@ export default function App() {
       setParticleTrigger((prev) => prev + 1);
       playSound('success');
 
-      notify.custom(`${action} submitted!`, action.split(' ')[0]);
+      notify.custom(`${action} submitted!`);
       return tx;
     },
     [configuredNetwork, playSound]

@@ -53,7 +53,7 @@ export function useTransactionHistory({ playSound, onTxAdded }) {
 
       setTxLog((prev) => [tx, ...prev.slice(0, 49)]); // Maintain last 50 TXs
       playSound?.('success');
-      notify.custom(`${action} submitted!`, action.split(' ')[0]);
+      notify.custom(`${action} submitted!`);
 
       onTxAdded?.(tx);
       return tx;
