@@ -427,4 +427,10 @@ describe('numeric helpers', () => {
   it('rejects cache age strings above the maximum', () => {
     expect(isValidCacheAge('900001')).toBe(false);
   });
+
+  test('rejects tip payloads below the minimum amount', () => {
+    expect(() => validatePayload({ amount: 99, recipient: 'SP123' }, SCHEMAS.TIP)).toThrow(
+      'Validation failed for key: amount. Value: 99'
+    );
+  });
 });
