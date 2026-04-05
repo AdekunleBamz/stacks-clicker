@@ -68,6 +68,10 @@ describe('format utilities', () => {
       expect(formatStx(12345678901234567890n)).toBe('12,345,678,901,234.57 STX');
     });
 
+    test('formats negative bigint micro-STX values with a leading sign', () => {
+      expect(formatStx(-1234567n)).toBe('-1.23 STX');
+    });
+
     test('returns 0.00 STX for non-finite input', () => {
       expect(formatStx(undefined)).toBe('0.00 STX');
       expect(formatStx(Number.NaN)).toBe('0.00 STX');
