@@ -82,4 +82,10 @@ describe('parseContractError', () => {
     expect(parsed).toMatch(/^Transaction failed: /);
     expect(parsed.endsWith('...')).toBe(true);
   });
+
+  test('stringifies non-standard error values when no message fields exist', () => {
+    expect(parseContractError(Symbol('wallet-denied'))).toBe(
+      'Transaction failed: Symbol(wallet-denied)'
+    );
+  });
 });
