@@ -34,7 +34,26 @@ Stacks Clicker aims to be more than just a game; it is a gateway for users to ex
 - **Stacks Wallet**: Hiro Wallet or Leather extension
 - **Clarinet**: Required for smart contract development and testing
 
-### Installation
+### Local Discovery
+- Clarinet is recommended for local smart contract testing and development.
+- Docker is required for spinning up a local Stacks Devnet environment.
+
+### Smart Contract Development (Optional)
+If you wish to modify, test, or deploy the Stacks smart contracts locally:
+1. Initialize the local devnet container:
+   ```bash
+   clarinet integrate
+   ```
+2. Run the test suite:
+   ```bash
+   clarinet test
+   ```
+3. Check contract syntax and static analysis rules:
+   ```bash
+   clarinet check
+   ```
+
+### Frontend Installation
 1. Clone the repository:
    ```bash
    git clone https://github.com/AdekunleBamz/stacks-clicker.git
