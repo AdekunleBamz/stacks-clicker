@@ -21,11 +21,7 @@ export function useCombo({ timeout = COMBO_TIMEOUT_MS } = {}) {
   }, []);
 
   const incrementCombo = useCallback(() => {
-    setCombo((prev) => {
-      const next = prev + 1;
-      setMaxCombo((max) => (next > max ? next : max));
-      return next;
-    });
+    setCombo((prev) => prev + 1);
 
     if (timerRef.current) clearTimeout(timerRef.current);
     timerRef.current = setTimeout(() => {

@@ -25,7 +25,7 @@ export function useInteractions({ onTxSubmit }) {
     if (typeof window !== 'undefined' && 'vibrate' in navigator) {
       navigator.vibrate(40);
     }
-    
+
     // Continue with original submission callback
     onTxSubmit?.(action, txId);
   }, [onTxSubmit]);

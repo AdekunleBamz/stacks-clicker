@@ -20,8 +20,42 @@ export default function ClickerCard({ address, clicker }) {
       icon="🚀"
       accentColor="#5546FF"
     >
-      <div className="actions">
-        <Tooltip text="Perform a single on-chain click interaction instantly.">
+      <div className="clicker-header">
+        <AnimatePresence>
+          {combo > 1 && (
+            <motion.div
+              style={{ willChange: 'transform, opacity' }}
+              initial={{ opacity: 0, scale: 0.2, y: 40, rotate: -15 }}
+              animate={{
+                opacity: 1,
+                scale: Math.min(1 + combo * 0.05, 1.5),
+                y: 0,
+                rotate: 0
+              }}
+              exit={{ opacity: 0, scale: 2, y: -40, filter: 'blur(10px)' }}
+              transition={{
+                type: 'spring',
+                stiffness: 600,
+                damping: 20,
+                mass: 0.8
+              }}
+              className="combo-badge premium-glow"
+              role="status"
+              aria-label={`Combo ${combo}x active`}
+            >
+              <div className="combo-inner glass-card">
+                <span className="combo-number">{combo}x</span>
+                <span className="combo-text">COMBO!</span>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <div className="stat" aria-live="polite">
+          <span className="stat-label">Total Clicks</span>
+        </div>
+      </div>
+      <div className="actions" role="group" aria-label="Clicker Contract Controls">
+        <Tooltip content="Perform a single on-chain click interaction instantly (fixed cost).">
           <ActionButton
             label="Express Click"
             icon="⚡"

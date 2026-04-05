@@ -35,8 +35,9 @@ export default function Header({ theme, toggleTheme }) {
       <div className="header-content">
         <div
           className="logo"
-          aria-label="Stacks Clicker logo"
-          title="Stacks Clicker"
+          role="banner"
+          aria-label="Application Logo"
+          title="Stacks Clicker V2 Logo"
         >
           <NetworkLogo isSyncing={isScrolled} />
           <h1 className="header-title text-gradient" aria-label="Stacks Clicker Dashboard">Stacks Clicker</h1>

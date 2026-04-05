@@ -33,7 +33,6 @@ const SettingsModal = () => {
           <div className="settings-row">
             <span>Theme Mode</span>
             <button
-              type="button"
               className="theme-toggle-btn secondary-button btn-sm"
               onClick={toggleTheme}
             >

@@ -15,6 +15,11 @@ export function useLongPress(callback, { delay = 500 } = {}) {
   const safeDelay = Number.isFinite(delay) && delay > 0 ? delay : 500;
 
   const start = useCallback((event) => {
+    // Prevent default context menu on mobile
+    if (event.type === 'touchstart') {
+      // event.preventDefault(); // Don't prevent default, might break scroll
+    }
+
     setIsPressing(true);
     timerRef.current = setTimeout(() => {
       callback(event);

@@ -30,7 +30,7 @@ describe('BaseModal component', () => {
         <div>Content</div>
       </BaseModal>
     );
-    
+
     fireEvent.click(screen.getByLabelText('Close modal'));
     expect(handleClose).toHaveBeenCalledTimes(1);
   });
@@ -42,7 +42,7 @@ describe('BaseModal component', () => {
         <div>Content</div>
       </BaseModal>
     );
-    
+
     // The overlay is the first div with modal-overlay class
     const overlay = screen.getByRole('presentation');
     fireEvent.click(overlay);
@@ -56,7 +56,7 @@ describe('BaseModal component', () => {
         <div data-testid="content">Content</div>
       </BaseModal>
     );
-    
+
     fireEvent.click(screen.getByTestId('content'));
     expect(handleClose).not.toHaveBeenCalled();
   });
@@ -68,7 +68,7 @@ describe('BaseModal component', () => {
         <div>Content</div>
       </BaseModal>
     );
-    
+
     fireEvent.keyDown(window, { key: 'Escape' });
     expect(handleClose).toHaveBeenCalledTimes(1);
   });

@@ -18,7 +18,7 @@ import { motion } from 'framer-motion';
  * @param {React.ReactNode} [props.headerAction] - Optional action element in header
  * @returns {JSX.Element} The rendered card component
  */
-const Card = memo(function Card({
+const Card = ({
   children,
   title,
   subtitle,

@@ -19,7 +19,7 @@ import { motion } from 'framer-motion';
  * @param {React.ReactNode} [props.icon] - Optional icon element
  * @returns {JSX.Element} The rendered button
  */
-const Button = memo(function Button({
+const Button = ({
   children,
   onClick,
   variant = 'primary',

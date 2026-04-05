@@ -18,7 +18,7 @@ describe('useLocalStorage hook', () => {
 
   it('updates local storage when value changes', () => {
     const { result } = renderHook(() => useLocalStorage(key, initialValue));
-    
+
     act(() => {
       result.current[1]({ count: 1 });
     });
@@ -29,14 +29,14 @@ describe('useLocalStorage hook', () => {
 
   it('hydrates from existing local storage value', () => {
     window.localStorage.setItem(key, JSON.stringify({ count: 42 }));
-    
+
     const { result } = renderHook(() => useLocalStorage(key, initialValue));
     expect(result.current[0]).toEqual({ count: 42 });
   });
 
   it('handles function updates (functional state)', () => {
     const { result } = renderHook(() => useLocalStorage(key, initialValue));
-    
+
     act(() => {
       result.current[1]((prev) => ({ count: prev.count + 1 }));
     });

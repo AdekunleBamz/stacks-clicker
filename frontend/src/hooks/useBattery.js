@@ -38,10 +38,13 @@ export function useBattery() {
     navigator.getBattery().then((batt) => {
       if (cancelled) return;
       batteryInstance = batt;
-      handleChange = () => updateBattery(batt);
+
+      const handleChange = () => updateBattery(batt);
 
       batteryInstance.addEventListener('levelchange', handleChange);
       batteryInstance.addEventListener('chargingchange', handleChange);
+
+      updateBattery(batt);
 
       updateBattery(batt);
     });

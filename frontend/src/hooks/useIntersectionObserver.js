@@ -11,7 +11,6 @@ import { useState, useEffect, useRef } from 'react';
  * @returns {[React.RefObject, boolean]} A ref to attach to the element and a boolean indicating visibility
  */
 export function useIntersectionObserver({
-  root = null,
   rootMargin = '0px',
   threshold = 0.1,
   triggerOnce = true

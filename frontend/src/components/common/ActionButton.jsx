@@ -46,8 +46,8 @@ function ActionButton({
       aria-live="assertive"
       title={label}
       tabIndex={0}
-      whileHover={!disabled && !isLoading ? { 
-        scale: 1.02, 
+      whileHover={!disabled && !isLoading ? {
+        scale: 1.02,
         translateY: -2,
         boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)"
       } : {}}

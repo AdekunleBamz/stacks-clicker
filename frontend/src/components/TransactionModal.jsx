@@ -29,7 +29,7 @@ const TransactionModal = () => {
       title="🔍 Transaction Details"
     >
       <div className="tx-details-container">
-        
+
         <div className="detail-row">
           <span className="detail-label">Action</span>
           <span className="detail-value highlight">{action}</span>
