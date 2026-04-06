@@ -172,7 +172,11 @@ export default function App() {
         aria-label="Skip navigation and jump to primary content"
         onClick={(e) => {
           e.preventDefault();
-          document.getElementById('main-content')?.focus();
+          const mainContent = document.getElementById('main-content');
+          if (mainContent) {
+            mainContent.focus();
+            mainContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
         }}
       >
         Skip to main content
