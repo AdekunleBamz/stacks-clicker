@@ -1,22 +1,35 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 
 /**
  * A unified, reusable button component for the application.
- * Supports different variants, sizes, and loading states.
+ * Supports different variants, sizes, and loading states with smooth Framer Motion animations.
+ * Uses memoization to prevent unnecessary re-renders.
+ *
+ * @param {Object} props - Component props
+ * @param {React.ReactNode} props.children - Button content
+ * @param {Function} [props.onClick] - Click handler
+ * @param {string} [props.variant='primary'] - Button variant style
+ * @param {string} [props.size='md'] - Button size
+ * @param {boolean} [props.isLoading=false] - Loading state
+ * @param {boolean} [props.disabled=false] - Disabled state
+ * @param {string} [props.className=''] - Additional CSS class
+ * @param {string} [props.type='button'] - HTML button type attribute
+ * @param {React.ReactNode} [props.icon] - Optional icon element
+ * @returns {JSX.Element} The rendered button
  */
-const Button = ({ 
-  children, 
-  onClick, 
-  variant = 'primary', 
-  size = 'md', 
-  isLoading = false, 
-  disabled = false, 
-  className = '', 
+const Button = memo(function Button({
+  children,
+  onClick,
+  variant = 'primary',
+  size = 'md',
+  isLoading = false,
+  disabled = false,
+  className = '',
   type = 'button',
   icon,
-  ...props 
+  ...props
 }) => {
   const baseClass = 'app-btn';
   const variantClass = `btn-${variant}`;
@@ -45,7 +58,7 @@ const Button = ({
       )}
     </motion.button>
   );
-};
+});
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,
