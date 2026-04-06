@@ -1,17 +1,18 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef, memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 
 /**
  * A floating particle effect component to celebrate successful on-chain interactions.
  * Triggers a burst of animated emojis/particles at the center of the screen.
+ * Uses memoization to prevent unnecessary re-renders during rapid triggers.
  *
  * @component
  * @param {Object} props - Component props
- * @param {boolean|number|string} props.trigger - A truthy value or changing signal that triggers the particle burst
+ * @param {boolean|number|string|Object} [props.trigger] - A truthy value or changing signal that triggers the particle burst
  * @returns {JSX.Element} The rendered particle overlay
  */
-export default function ParticleOverlay({ trigger }) {
+const ParticleOverlay = memo(function ParticleOverlay({ trigger }) {
   const [particles, setParticles] = useState([]);
   const timeoutsMode = useRef([]);
   const isReduced =
@@ -101,7 +102,7 @@ export default function ParticleOverlay({ trigger }) {
       </AnimatePresence>
     </div>
   );
-}
+});
 
 ParticleOverlay.propTypes = {
   trigger: PropTypes.oneOfType([
@@ -114,3 +115,5 @@ ParticleOverlay.propTypes = {
     }),
   ])
 };
+
+export default ParticleOverlay;
