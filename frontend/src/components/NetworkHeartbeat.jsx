@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useNetwork } from '../hooks/useNetwork';
 import Tooltip from './common/Tooltip';
 
 /**
  * Visual indicator for network synchronization and state.
+ * Displays real-time block height and connection status to the Stacks network.
+ * Uses memoization to prevent unnecessary re-renders since it reads from context.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered network heartbeat indicator
  */
-export default function NetworkHeartbeat() {
+const NetworkHeartbeat = memo(function NetworkHeartbeat() {
   const { blockHeight, isConnected, network } = useNetwork();
   const heartbeatTitle = isConnected
     ? `Stacks ${network} live at block ${blockHeight}`
@@ -22,4 +27,6 @@ export default function NetworkHeartbeat() {
       </div>
     </Tooltip>
   );
-}
+});
+
+export default NetworkHeartbeat;
