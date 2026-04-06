@@ -205,7 +205,7 @@
       (current-clicks (get-user-clicks tx-sender))
       (safe-count count)
       (new-count (+ current-clicks safe-count))
-      (new-total (+ (var-get total-clicks safe-count))
+      (new-total (+ (var-get total-clicks) safe-count))
     )
     ;; Check contract is active
     (try! (check-not-paused))
