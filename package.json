@@ -3,6 +3,16 @@
   "private": true,
   "version": "1.0.0",
   "description": "A high-performance decentralized interaction hub on Stacks",
+  "author": "AdekunleBamz",
+  "license": "MIT",
+  "homepage": "https://github.com/AdekunleBamz/stacks-clicker#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AdekunleBamz/stacks-clicker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AdekunleBamz/stacks-clicker/issues"
+  },
   "keywords": [
     "stacks",
     "blockchain",
