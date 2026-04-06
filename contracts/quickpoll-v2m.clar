@@ -142,6 +142,10 @@
   (map-get? polls poll-id)
 )
 
+(define-read-only (get-poll-creator (poll-id uint))
+  (get creator (map-get? polls poll-id))
+)
+
 (define-read-only (get-poll-count)
   (var-get poll-counter)
 )
@@ -184,6 +188,14 @@
 
 (define-read-only (is-contract-paused)
   (var-get is-paused)
+)
+
+(define-read-only (get-user-tip-stats (user principal))
+  {
+    sent: (get-user-tips-sent user),
+    received: (get-user-tips-received user),
+    count: (get-user-tip-count user)
+  }
 )
 
 (define-read-only (get-poll-results (poll-id uint))
