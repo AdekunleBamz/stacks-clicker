@@ -1,13 +1,24 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLockBodyScroll } from '../hooks/useLockBodyScroll';
 
 /**
- * Generic Modal backdrop and container.
- * Handles locking body scroll and basic animations.
+ * Generic Modal backdrop and container component.
+ * Handles locking body scroll, focus management, escape key handling,
+ * and smooth Framer Motion animations for enter/exit transitions.
+ * Uses memoization to prevent unnecessary re-renders.
+ *
+ * @param {Object} props - Component props
+ * @param {boolean} props.isOpen - Whether the modal is currently open
+ * @param {Function} props.onClose - Callback function to close the modal
+ * @param {React.ReactNode} [props.title] - Modal title displayed in header
+ * @param {React.ReactNode} props.children - Content to render inside the modal body
+ * @param {React.ReactNode} [props.footer] - Optional footer content
+ * @param {string} [props.className=''] - Additional CSS class names
+ * @returns {JSX.Element|null} The rendered modal or null if closed
  */
-export default function BaseModal({ isOpen, onClose, title, children, footer, className = '' }) {
+const BaseModal = memo(function BaseModal({ isOpen, onClose, title, children, footer, className = '' }) {
   const closeBtnRef = useRef(null);
   const previousFocus = useRef(null);
 
@@ -15,11 +26,11 @@ export default function BaseModal({ isOpen, onClose, title, children, footer, cl
     if (isOpen) {
       previousFocus.current = document.activeElement;
       const timer = setTimeout(() => closeBtnRef.current?.focus(), 100);
-      
+
       const handleEscape = (e) => {
         if (e.key === 'Escape') onClose();
       };
-      
+
       window.addEventListener('keydown', handleEscape);
       return () => {
         clearTimeout(timer);
@@ -66,7 +77,7 @@ export default function BaseModal({ isOpen, onClose, title, children, footer, cl
       )}
     </AnimatePresence>
   );
-}
+});
 
 function ModalContent({ onClose, title, children, footer, className, closeBtnRef }) {
   useLockBodyScroll();
@@ -115,3 +126,5 @@ BaseModal.propTypes = {
   footer: PropTypes.node,
   className: PropTypes.string
 };
+
+export default BaseModal;
