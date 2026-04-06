@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 /**
- * Standard application footer.
+ * Standard application footer component.
+ * Displays copyright information, version number, and social media links.
+ * Memoized to prevent unnecessary re-renders since it has no dynamic props.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered footer
  */
-export default function Footer() {
+const Footer = memo(function Footer() {
   const version = '1.0.0';
   const currentYear = new Date().getFullYear();
 
@@ -66,4 +71,6 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+});
+
+export default Footer;
