@@ -1,20 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class ErrorBoundary extends React.Component {
+/**
+ * ErrorBoundary component - Catches JavaScript errors anywhere in the component tree.
+ * Displays a fallback UI with recovery options when an error occurs.
+ *
+ * @class
+ * @extends React.Component
+ * @param {Object} props - Component props
+ * @param {React.ReactNode} props.children - Child components to wrap
+ */
+class ErrorBoundary extends React.Component {
+  /**
+   * Creates an ErrorBoundary instance.
+   * @param {Object} props - Component props
+   */
   constructor(props) {
     super(props);
     this.state = { hasError: false, error: null };
   }
 
+  /**
+   * Updates state when an error is thrown by a descendant component.
+   * @param {Error} error - The error that was thrown
+   * @returns {Object} Updated state object
+   */
   static getDerivedStateFromError(error) {
     return { hasError: true, error };
   }
 
+  /**
+   * Logs error information to console for debugging.
+   * @param {Error} error - The error that was caught
+   * @param {Object} errorInfo - Object containing the component stack trace
+   */
   componentDidCatch(error, errorInfo) {
     console.error('ErrorBoundary caught:', error, errorInfo);
   }
 
+  /**
+   * Renders the error boundary UI or children.
+   * @returns {React.ReactNode} The rendered content
+   */
   render() {
     if (this.state.hasError) {
       return (
