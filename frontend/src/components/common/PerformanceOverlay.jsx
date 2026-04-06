@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 
 /**
  * Performance monitoring overlay for developer mode.
  * Real-time monitoring of frames per second (FPS) and JavaScript heap memory usage.
  * Only activates when 'dev' query parameter is present in the URL.
+ * Uses memoization to minimize performance impact during monitoring.
  *
  * @component
  * @returns {JSX.Element|null} The rendered performance overlay or null if dev mode is disabled
  */
-export default function PerformanceOverlay() {
+const PerformanceOverlay = memo(function PerformanceOverlay() {
   const [fps, setFps] = useState(0);
   const [memory, setMemory] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -74,4 +75,6 @@ export default function PerformanceOverlay() {
       )}
     </div>
   );
-}
+});
+
+export default PerformanceOverlay;
