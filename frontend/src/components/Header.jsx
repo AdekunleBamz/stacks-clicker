@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import NetworkHeartbeat from './NetworkHeartbeat';
 import NetworkLogo from './NetworkLogo';
 import AddressBadge from './common/AddressBadge';
@@ -30,7 +31,7 @@ export default function Header({ theme, toggleTheme }) {
   }, []);
 
   return (
-    <header 
+    <header
       className={`app-header ${isScrolled ? 'header-scrolled' : ''}`}
       role="banner"
       style={{
@@ -42,9 +43,9 @@ export default function Header({ theme, toggleTheme }) {
       }}
     >
       <div className="header-content">
-        <div 
-          className="logo" 
-          role="banner" 
+        <div
+          className="logo"
+          role="banner"
           aria-label="Application Logo"
           title="Stacks Clicker V2 Logo"
         >
@@ -106,3 +107,8 @@ export default function Header({ theme, toggleTheme }) {
     </header>
   );
 }
+
+Header.propTypes = {
+  theme: PropTypes.oneOf(['dark', 'light']).isRequired,
+  toggleTheme: PropTypes.func.isRequired,
+};
