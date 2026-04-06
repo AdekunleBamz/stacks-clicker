@@ -1,21 +1,33 @@
-import React, { useId } from 'react';
+import React, { useId, memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 
 /**
  * A unified, reusable card component for the application.
- * Supports different depth levels and interactive states.
+ * Supports different depth levels, interactive states, and proper ARIA accessibility.
+ * Uses memoization to prevent unnecessary re-renders.
+ *
+ * @param {Object} props - Component props
+ * @param {React.ReactNode} props.children - Content to render inside the card body
+ * @param {string} [props.title] - Optional card title
+ * @param {string} [props.subtitle] - Optional card subtitle/description
+ * @param {React.ReactNode} [props.icon] - Optional icon element or emoji
+ * @param {number} [props.depth=1] - Visual depth level (1, 2, or 3)
+ * @param {boolean} [props.interactive=false] - Whether the card has hover effects
+ * @param {string} [props.className=''] - Additional CSS class names
+ * @param {React.ReactNode} [props.headerAction] - Optional action element in header
+ * @returns {JSX.Element} The rendered card component
  */
-const Card = ({ 
-  children, 
-  title, 
-  subtitle, 
-  icon, 
-  depth = 1, 
-  interactive = false, 
-  className = '', 
+const Card = memo(function Card({
+  children,
+  title,
+  subtitle,
+  icon,
+  depth = 1,
+  interactive = false,
+  className = '',
   headerAction,
-  ...props 
+  ...props
 }) => {
   const id = useId();
   const titleId = `card-title-${id}`;
@@ -48,7 +60,7 @@ const Card = ({
       </div>
     </motion.div>
   );
-};
+});
 
 Card.propTypes = {
   children: PropTypes.node.isRequired,
@@ -59,6 +71,6 @@ Card.propTypes = {
   interactive: PropTypes.bool,
   className: PropTypes.string,
   headerAction: PropTypes.node,
-};
+});
 
 export default Card;
