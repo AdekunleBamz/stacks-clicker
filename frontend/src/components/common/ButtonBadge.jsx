@@ -1,14 +1,22 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 
 /**
  * Animated badge for buttons/icons to indicate notifications or updates.
  * Can display a number or just a solid dot indicator.
+ * Uses memoization to prevent unnecessary re-renders during badge animations.
+ *
+ * @param {Object} props - Component props
+ * @param {number} [props.count] - Number to display in the badge
+ * @param {boolean} [props.showDotOnly=false] - If true, shows only a dot instead of count
+ * @param {number} [props.maxCount=99] - Maximum count before showing "maxCount+" format
+ * @param {string} [props.color='var(--error)'] - Badge background color
+ * @returns {JSX.Element|null} The rendered badge or null if not visible
  */
-const ButtonBadge = ({ count, showDotOnly = false, maxCount = 99, color = 'var(--error)' }) => {
+const ButtonBadge = memo(function ButtonBadge({ count, showDotOnly = false, maxCount = 99, color = 'var(--error)' }) {
   const isVisible = count > 0 || showDotOnly;
-  
+
   const displayCount = count > maxCount ? `${maxCount}+` : count;
 
   return (
@@ -26,7 +34,7 @@ const ButtonBadge = ({ count, showDotOnly = false, maxCount = 99, color = 'var(-
           {!showDotOnly && <span className="badge-text">{displayCount}</span>}
         </motion.div>
       )}
-      
+
       <style jsx>{`
         .button-badge {
           position: absolute;
@@ -62,7 +70,7 @@ const ButtonBadge = ({ count, showDotOnly = false, maxCount = 99, color = 'var(-
       `}</style>
     </AnimatePresence>
   );
-};
+});
 
 ButtonBadge.propTypes = {
   count: PropTypes.number,
