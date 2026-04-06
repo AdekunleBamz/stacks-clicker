@@ -203,14 +203,15 @@
   (let
     (
       (current-clicks (get-user-clicks tx-sender))
-      (safe-count (if (> count MAX-MULTI-CLICK) MAX-MULTI-CLICK count))
+      (safe-count count)
       (new-count (+ current-clicks safe-count))
-      (new-total (+ (var-get total-clicks) safe-count))
+      (new-total (+ (var-get total-clicks safe-count))
     )
     ;; Check contract is active
     (try! (check-not-paused))
     ;; Validate input
     (asserts! (> count u0) ERR-ZERO-VALUE)
+    (asserts! (<= count MAX-MULTI-CLICK) ERR-INVALID-COUNT)
     ;; Track new user
     (track-new-user)
     ;; Collect fee
