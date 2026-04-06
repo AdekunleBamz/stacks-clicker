@@ -1,11 +1,21 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
 
 /**
  * Base Modal component for shared UI interactions.
+ * Provides a reusable dialog with smooth Framer Motion animations,
+ * escape key handling, and proper ARIA accessibility attributes.
+ *
+ * @param {Object} props - Component props
+ * @param {boolean} props.isOpen - Whether the modal is currently open
+ * @param {Function} props.onClose - Callback function to close the modal
+ * @param {string} props.title - Modal title displayed in the header
+ * @param {React.ReactNode} props.children - Content to render inside the modal body
+ * @param {string} [props.maxWidth='500px'] - Maximum width of the modal content
+ * @returns {JSX.Element} The rendered modal dialog
  */
-const Modal = ({ isOpen, onClose, title, children, maxWidth = '500px' }) => {
+const Modal = memo(function Modal({ isOpen, onClose, title, children, maxWidth = '500px' }) {
   const handleKeyDown = useCallback(
     (e) => {
       if (e.key === 'Escape') onClose();
@@ -59,7 +69,7 @@ const Modal = ({ isOpen, onClose, title, children, maxWidth = '500px' }) => {
       )}
     </AnimatePresence>
   );
-};
+});
 
 Modal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
@@ -67,6 +77,6 @@ Modal.propTypes = {
   title: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
   maxWidth: PropTypes.string,
-};
+});
 
 export default Modal;
