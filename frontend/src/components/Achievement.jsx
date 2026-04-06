@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { memo } from 'react';
+import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 
 /**
- * Achievement Component
- * Displays individual player milestones
+ * Achievement Component - Displays individual player milestones.
+ * Shows locked/unlocked state with smooth animations and visual feedback.
+ * Uses memoization to prevent unnecessary re-renders.
+ *
+ * @param {Object} props - Component props
+ * @param {Object} props.achievement - Achievement data object
+ * @param {string} props.achievement.icon - Icon or emoji representing the achievement
+ * @param {string} props.achievement.title - Achievement title
+ * @param {string} props.achievement.description - Achievement description
+ * @param {boolean} props.achievement.unlocked - Whether the achievement is unlocked
+ * @param {string} [props.achievement.date] - Date when achievement was unlocked
+ * @returns {JSX.Element} The rendered achievement card
  */
-export default function Achievement({ achievement }) {
+const Achievement = memo(function Achievement({ achievement }) {
     const { icon, title, description, unlocked, date } = achievement;
 
     return (
@@ -35,4 +46,16 @@ export default function Achievement({ achievement }) {
             )}
         </motion.div>
     );
-}
+});
+
+Achievement.propTypes = {
+    achievement: PropTypes.shape({
+        icon: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        unlocked: PropTypes.bool.isRequired,
+        date: PropTypes.string
+    }).isRequired
+};
+
+export default Achievement;
