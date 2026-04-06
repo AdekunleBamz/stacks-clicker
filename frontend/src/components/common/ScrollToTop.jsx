@@ -1,10 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 /**
- * FAB that appears when the user scrolls down, allowing quick scroll to top.
+ * Floating Action Button (FAB) that appears when the user scrolls down,
+ * allowing quick smooth scroll back to the top of the page.
+ * Uses memoization to prevent unnecessary re-renders during scroll events.
+ *
+ * @component
+ * @returns {JSX.Element|null} The rendered scroll-to-top button or null
  */
-export default function ScrollToTop() {
+const ScrollToTop = memo(function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -20,12 +25,12 @@ export default function ScrollToTop() {
     return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
 
-  const scrollToTop = () => {
+  const scrollToTop = useCallback(() => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
     });
-  };
+  }, []);
 
   return (
     <AnimatePresence>
@@ -47,4 +52,6 @@ export default function ScrollToTop() {
       )}
     </AnimatePresence>
   );
-}
+});
+
+export default ScrollToTop;
