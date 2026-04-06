@@ -1,11 +1,20 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { motion, useSpring, useTransform, animate } from 'framer-motion';
+import React, { useEffect, useState, useRef, memo } from 'react';
+import { animate } from 'framer-motion';
+import PropTypes from 'prop-types';
 
 /**
- * CountUp Component
- * Animates a number from its current value to a new target value
+ * CountUp Component - Animates a number from its current value to a new target value.
+ * Uses Framer Motion's animate function for smooth number transitions.
+ * Uses memoization to prevent unnecessary re-renders.
+ *
+ * @param {Object} props - Component props
+ * @param {number} props.value - Target numeric value to animate to
+ * @param {number} [props.decimals=0] - Number of decimal places to display
+ * @param {string} [props.prefix=''] - String to prepend to the displayed value
+ * @param {string} [props.suffix=''] - String to append to the displayed value
+ * @returns {JSX.Element} The rendered animated number
  */
-export default function CountUp({ value, decimals = 0, prefix = '', suffix = '' }) {
+const CountUp = memo(function CountUp({ value, decimals = 0, prefix = '', suffix = '' }) {
     const [displayValue, setDisplayValue] = useState(value);
     const prevValue = useRef(value);
 
@@ -26,4 +35,13 @@ export default function CountUp({ value, decimals = 0, prefix = '', suffix = '' 
             {prefix}{displayValue}{suffix}
         </span>
     );
-}
+});
+
+CountUp.propTypes = {
+    value: PropTypes.number.isRequired,
+    decimals: PropTypes.number,
+    prefix: PropTypes.string,
+    suffix: PropTypes.string
+};
+
+export default CountUp;
