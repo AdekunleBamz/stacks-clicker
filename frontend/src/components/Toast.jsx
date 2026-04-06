@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 
 /**
  * Toast notification component with smooth framer-motion animations.
+ * Displays a list of toast notifications with appropriate icons and ARIA roles.
+ *
+ * @param {Object} props - Component props
+ * @param {Array} [props.toasts=[]] - Array of toast notification objects
+ * @returns {JSX.Element} The rendered toast container
  */
-export default function Toast({ toasts = [] }) {
+const Toast = memo(function Toast({ toasts = [] }) {
   return (
     <div className="toast-container" role="status" aria-live="polite">
       <AnimatePresence mode="popLayout">
@@ -68,7 +73,7 @@ export default function Toast({ toasts = [] }) {
       </AnimatePresence>
     </div>
   );
-}
+});
 
 Toast.propTypes = {
   toasts: PropTypes.arrayOf(
@@ -79,3 +84,5 @@ Toast.propTypes = {
     })
   ),
 };
+
+export default Toast;
