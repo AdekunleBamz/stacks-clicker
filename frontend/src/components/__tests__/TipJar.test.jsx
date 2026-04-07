@@ -40,10 +40,10 @@ describe('TipJar component', () => {
   it('handles quick tip click', async () => {
     callContract.mockResolvedValueOnce({ txId: '0x123' });
     renderTipJar();
-    
+
     const quickTipBtn = screen.getByText(/Quick Tip/i);
     fireEvent.click(quickTipBtn);
-    
+
     expect(callContract).toHaveBeenCalledWith(expect.objectContaining({
       functionName: 'quick-tip'
     }));
@@ -53,27 +53,51 @@ describe('TipJar component', () => {
     renderTipJar({ isConnected: false });
     const quickTipBtn = screen.getByText(/Quick Tip/i);
     fireEvent.click(quickTipBtn);
-    
+
     expect(callContract).not.toHaveBeenCalled();
   });
 
   it('updates tip amount from input and handles custom tip', async () => {
     callContract.mockResolvedValueOnce({ txId: '0x456' });
     renderTipJar();
-    
+
     // Find input (assuming it has a label or descriptive text)
     // Looking at the TipJar.jsx preview, it has setTipAmount(1000)
     const amountInput = screen.getByRole('spinbutton'); // Assuming type="number"
     fireEvent.change(amountInput, { target: { value: '5000' } });
-    
+
     const tipUserBtn = screen.getByText(/Tip User/i);
     fireEvent.click(tipUserBtn);
-    
+
     expect(callContract).toHaveBeenCalledWith(expect.objectContaining({
       functionName: 'tip-user',
       functionArgs: expect.arrayContaining([
         expect.objectContaining({ value: '5000' })
       ])
     }));
+  });
+
+  it('handles self-ping action', async () => {
+    callContract.mockResolvedValueOnce({ txId: '0x789' });
+    renderTipJar();
+
+    const selfPingBtn = screen.getByText(/Self Ping/i);
+    fireEvent.click(selfPingBtn);
+
+    expect(callContract).toHaveBeenCalledWith(expect.objectContaining({
+      functionName: 'self-ping'
+    }));
+  });
+
+  it('calls onTxSubmit callback after successful tip', async () => {
+    callContract.mockResolvedValueOnce({ txId: '0xabc' });
+    renderTipJar();
+
+    const quickTipBtn = screen.getByText(/Quick Tip/i);
+    fireEvent.click(quickTipBtn);
+
+    await new Promise(resolve => setTimeout(resolve, 0));
+
+    expect(onTxSubmit).toHaveBeenCalled();
   });
 });
