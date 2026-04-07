@@ -44,4 +44,10 @@ describe('getWalletConnectLink', () => {
     const link = getWalletConnectLink(uri);
     expect(link).toContain('https://walletconnect.com/wc?uri=');
   });
+
+  test('handles URIs with version 1 format', () => {
+    const uri = 'wc:12345@1?bridge=https://bridge.walletconnect.org&key=abc';
+    const link = getWalletConnectLink(uri);
+    expect(link).toContain('https://walletconnect.com/wc?uri=');
+  });
 });
