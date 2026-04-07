@@ -97,7 +97,7 @@ Clarinet.test({
     assertEquals(info['version'].expectUint(5), 5n);
     assertEquals(info['total-clicks'].expectUint(1), 1n);
     assertEquals(info['unique-users'].expectUint(1), 1n);
-    assertEquals(info['fee'].expectUint(1000), 1000n);
+    assertEquals(info['fee'].expectUint(100), 100n);
   },
 });
 
