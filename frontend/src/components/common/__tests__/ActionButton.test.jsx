@@ -13,7 +13,7 @@ describe('ActionButton component', () => {
   it('triggers onClick handler when clicked', () => {
     const handleClick = vi.fn();
     render(<ActionButton label="Click Me" onClick={handleClick} />);
-    
+
     fireEvent.click(screen.getByRole('button'));
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
@@ -40,5 +40,16 @@ describe('ActionButton component', () => {
     render(<ActionButton label="Buy" onClick={() => {}} cost="1.00 STX" />);
     const button = screen.getByRole('button');
     expect(button.getAttribute('aria-label')).toBe('Buy - Cost: 1.00 STX');
+  });
+
+  it('renders without cost when cost prop is not provided', () => {
+    render(<ActionButton label="Click" onClick={() => {}} />);
+    expect(screen.queryByText(/STX/i)).toBeNull();
+  });
+
+  it('applies custom className when provided', () => {
+    render(<ActionButton label="Click" onClick={() => {}} className="custom-class" />);
+    const button = screen.getByRole('button');
+    expect(button.closest('button')).toHaveClass('custom-class');
   });
 });
