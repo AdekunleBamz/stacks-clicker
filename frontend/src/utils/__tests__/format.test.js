@@ -60,5 +60,14 @@ describe('format utilities', () => {
       expect(formatStx(undefined)).toBe('0.00 STX');
       expect(formatStx(Number.NaN)).toBe('0.00 STX');
     });
+
+    test('handles zero value', () => {
+      expect(formatStx(0)).toBe('0.00 STX');
+    });
+
+    test('handles small micro-STX amounts', () => {
+      expect(formatStx(1)).toBe('0.00 STX');
+      expect(formatStx(99)).toBe('0.00 STX');
+    });
   });
 });
