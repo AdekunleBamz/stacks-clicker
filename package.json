@@ -31,9 +31,13 @@
     "frontend:dev": "npm --prefix frontend run dev",
     "frontend:build": "npm --prefix frontend run build",
     "frontend:test": "npm --prefix frontend run test",
+    "frontend:test:coverage": "npm --prefix frontend run test:coverage",
     "frontend:lint": "npm --prefix frontend run lint",
+    "frontend:lint:fix": "npm --prefix frontend run lint:fix",
+    "frontend:format": "npm --prefix frontend run format",
     "contracts:check": "clarinet check",
     "contracts:test": "clarinet test",
+    "contracts:coverage": "clarinet test --coverage",
     "clean": "rm -rf node_modules frontend/node_modules frontend/dist"
   },
   "engines": {
