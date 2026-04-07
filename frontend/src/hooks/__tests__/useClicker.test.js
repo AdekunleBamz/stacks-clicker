@@ -31,9 +31,9 @@ describe('useClicker hook', () => {
   it('handles a successful click transaction', async () => {
     const mockTxId = '0x123';
     callContract.mockResolvedValueOnce({ txId: mockTxId });
-    
+
     const { result } = renderHook(() => useClicker({ onTxSubmit }));
-    
+
     // Trigger click - Wrapped in act because it updates state
     let promise;
     await act(async () => {
@@ -48,9 +48,9 @@ describe('useClicker hook', () => {
   it('handles a failed click transaction', async () => {
     const mockError = new Error('User Rejected');
     callContract.mockRejectedValueOnce(mockError);
-    
+
     const { result } = renderHook(() => useClicker({ onTxSubmit }));
-    
+
     await act(async () => {
       try {
         await result.current.click();
@@ -65,7 +65,7 @@ describe('useClicker hook', () => {
   it('correctly handles multi-click payloads', async () => {
     callContract.mockResolvedValueOnce({ txId: '0x' });
     const { result } = renderHook(() => useClicker({ onTxSubmit }));
-    
+
     await act(async () => {
       await result.current.multiClick(10);
     });
@@ -73,6 +73,32 @@ describe('useClicker hook', () => {
     expect(callContract).toHaveBeenCalledWith(expect.objectContaining({
       functionName: 'multi-click',
       functionArgs: [{ type: 'uint128', value: '10' }]
+    }));
+  });
+
+  it('handles ping action', async () => {
+    callContract.mockResolvedValueOnce({ txId: '0xping' });
+    const { result } = renderHook(() => useClicker({ onTxSubmit }));
+
+    await act(async () => {
+      await result.current.ping();
+    });
+
+    expect(callContract).toHaveBeenCalledWith(expect.objectContaining({
+      functionName: 'ping'
+    }));
+  });
+
+  it('handles reset-streak action', async () => {
+    callContract.mockResolvedValueOnce({ txId: '0xreset' });
+    const { result } = renderHook(() => useClicker({ onTxSubmit }));
+
+    await act(async () => {
+      await result.current.resetStreak();
+    });
+
+    expect(callContract).toHaveBeenCalledWith(expect.objectContaining({
+      functionName: 'reset-streak'
     }));
   });
 });
