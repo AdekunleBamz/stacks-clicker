@@ -46,3 +46,8 @@
 *.woff2 binary
 *.ttf binary
 *.eot binary
+*.mp3 binary
+*.mp4 binary
+*.webm binary
+*.pdf binary
+*.zip binary
