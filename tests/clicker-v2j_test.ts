@@ -94,7 +94,7 @@ Clarinet.test({
     let result = chain.callReadOnlyFn('clicker-v2p', 'get-contract-info', [], deployer.address);
     const info = result.result.expectTuple();
 
-    assertEquals(info['version'].expectUint(2), 2n);
+    assertEquals(info['version'].expectUint(5), 5n);
     assertEquals(info['total-clicks'].expectUint(1), 1n);
     assertEquals(info['unique-users'].expectUint(1), 1n);
     assertEquals(info['fee'].expectUint(1000), 1000n);
