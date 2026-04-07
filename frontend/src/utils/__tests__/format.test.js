@@ -69,5 +69,9 @@ describe('format utilities', () => {
       expect(formatStx(1)).toBe('0.00 STX');
       expect(formatStx(99)).toBe('0.00 STX');
     });
+
+    test('handles negative values gracefully', () => {
+      expect(formatStx(-1000000)).toBe('-1.00 STX');
+    });
   });
 });
