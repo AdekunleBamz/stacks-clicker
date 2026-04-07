@@ -64,5 +64,13 @@ describe('hash utilities', () => {
     test('coerces numeric input consistently in color generation', () => {
       expect(stringToColor(7)).toBe(stringToColor('7'));
     });
+
+    test('handles empty string input', () => {
+      expect(stringToColor('')).toMatch(/^hsl\(\d+, 70%, 65%\)$/);
+    });
+
+    test('handles null input without throwing', () => {
+      expect(stringToColor(null)).toMatch(/^hsl\(\d+, 70%, 65%\)$/);
+    });
   });
 });
