@@ -104,3 +104,9 @@ test-results/
 
 # Debug files
 *.dbg
+
+# Vite
+.vite/
+
+# Vitest
+.vitest/
