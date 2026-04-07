@@ -72,5 +72,11 @@ describe('hash utilities', () => {
     test('handles null input without throwing', () => {
       expect(stringToColor(null)).toMatch(/^hsl\(\d+, 70%, 65%\)$/);
     });
+
+    test('produces consistent colors across multiple calls', () => {
+      const color1 = stringToColor('consistent-test');
+      const color2 = stringToColor('consistent-test');
+      expect(color1).toBe(color2);
+    });
   });
 });
