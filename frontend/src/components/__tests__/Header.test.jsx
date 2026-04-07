@@ -61,7 +61,7 @@ describe('Header component', () => {
   it('triggers theme toggle when button is clicked', () => {
     const handleToggle = vi.fn();
     render(<Header theme="dark" toggleTheme={handleToggle} />);
-    
+
     fireEvent.click(screen.getByLabelText(/Toggle to light theme/i));
     expect(handleToggle).toHaveBeenCalledTimes(1);
   });
@@ -76,5 +76,22 @@ describe('Header component', () => {
     render(<Header theme="dark" toggleTheme={vi.fn()} />);
     expect(screen.getByRole('banner')).toHaveAttribute('role', 'banner');
     expect(screen.getByLabelText('Select application language')).toBeDefined();
+  });
+
+  it('shows connect button when wallet is not connected', () => {
+    render(<Header theme="dark" toggleTheme={vi.fn()} />);
+    expect(screen.getByLabelText('Connect Stacks Wallet to begin playing')).toBeDefined();
+  });
+
+  it('calls disconnectWallet when disconnect button is clicked', () => {
+    const disconnectFn = vi.fn();
+    useWallet.mockReturnValue({
+      address: 'SP123...',
+      disconnectWallet: disconnectFn,
+    });
+    render(<Header theme="dark" toggleTheme={vi.fn()} />);
+
+    fireEvent.click(screen.getByLabelText('Disconnect wallet session'));
+    expect(disconnectFn).toHaveBeenCalledTimes(1);
   });
 });
