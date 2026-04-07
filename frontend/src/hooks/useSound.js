@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 
 let compressor = null;
+let audioContext = null;
 
 function getAudioContext() {
   if (typeof window === 'undefined') return null;
@@ -10,7 +11,7 @@ function getAudioContext() {
 
   if (!audioContext || audioContext.state === 'closed') {
     audioContext = new AudioContextCtor();
-    
+
     // Create a master compressor to prevent clipping during overlapping sounds
     compressor = audioContext.createDynamicsCompressor();
     compressor.threshold.setValueAtTime(-24, audioContext.currentTime);
