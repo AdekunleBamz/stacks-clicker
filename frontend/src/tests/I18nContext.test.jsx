@@ -56,4 +56,28 @@ describe('I18nContext', () => {
     expect(screen.getByTestId('lang')).toHaveTextContent('en');
     expect(screen.getByTestId('message')).toHaveTextContent('Welcome to Stacks Clicker V2');
   });
+
+  it('restores language preference from localStorage', () => {
+    window.localStorage.setItem('lang', JSON.stringify('es'));
+
+    render(
+      <I18nProvider>
+        <TestComponent />
+      </I18nProvider>
+    );
+
+    expect(screen.getByTestId('lang')).toHaveTextContent('es');
+  });
+
+  it('handles malformed localStorage data gracefully', () => {
+    window.localStorage.setItem('lang', 'invalid-json');
+
+    render(
+      <I18nProvider>
+        <TestComponent />
+      </I18nProvider>
+    );
+
+    expect(screen.getByTestId('lang')).toHaveTextContent('en');
+  });
 });
