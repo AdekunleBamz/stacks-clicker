@@ -119,15 +119,15 @@ Clarinet.test({
     // All should succeed
     block.receipts.forEach(r => r.result.expectOk());
 
-    // Verify fees collected (6 actions x 1000 microSTX = 6000)
+    // Verify fees collected (6 actions x 100 microSTX = 600)
     let clickerFees = chain.callReadOnlyFn('clicker-v2p', 'get-total-fees-collected', [], deployer.address);
-    clickerFees.result.expectUint(3000); // 3 clicker actions
+    clickerFees.result.expectUint(300); // 3 clicker actions
 
     let tipjarFees = chain.callReadOnlyFn('tipjar-v2p', 'get-total-fees-collected', [], deployer.address);
-    tipjarFees.result.expectUint(2000); // 2 tipjar actions
+    tipjarFees.result.expectUint(200); // 2 tipjar actions
 
     let pollFees = chain.callReadOnlyFn('quickpoll-v2p', 'get-total-fees-collected', [], deployer.address);
-    pollFees.result.expectUint(1000); // 1 quickpoll action
+    pollFees.result.expectUint(100); // 1 quickpoll action
   },
 });
 
