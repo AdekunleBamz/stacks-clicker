@@ -5,6 +5,16 @@
  * @module utils/validation
  */
 
+/**
+ * Validates a Stacks address format.
+ * @param {string} address - The address to validate
+ * @returns {boolean} True if the address is valid
+ */
+export function isValidStacksAddress(address) {
+  if (!address || typeof address !== 'string') return false;
+  return /^S[Pp][0-9A-HJ-NP-Za-km-z]{38,40}$/.test(address);
+}
+
 export const SCHEMAS = {
   CLICK: {
     amount: (val) => typeof val === 'number' && val > 0,
@@ -20,7 +30,7 @@ export const SCHEMAS = {
 
 /**
  * Validates a payload against a pre-defined schema.
- * 
+ *
  * @param {Object} payload - The data to validate
  * @param {Object} schema - The schema mapping keys to validation functions
  * @throws {Error} If validation fails
