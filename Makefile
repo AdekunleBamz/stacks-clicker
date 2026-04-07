@@ -83,3 +83,22 @@ dev:
 # Build frontend for production
 build:
 	cd frontend && npm run build
+
+# Preview production build
+preview:
+	cd frontend && npm run preview
+
+# Run frontend tests with coverage
+test:coverage:
+	cd frontend && npm run test:coverage
+
+# Install clarinet
+install:clarinet:
+	curl -LsSf https://github.com/hirosystems/clarinet/releases/latest/download/clarinet-installer.sh | sh
+
+# Verify environment setup
+env:check:
+	@echo "Checking environment..."
+	@node --version
+	@npm --version
+	@clarinet --version 2>/dev/null || echo "Clarinet not installed"
