@@ -34,4 +34,14 @@ describe('getWalletConnectLink', () => {
     const link = getWalletConnectLink(uri);
     expect(link).toContain(encodeURIComponent('wc:upper@2?relay-protocol=irn'));
   });
+
+  test('handles null input gracefully', () => {
+    expect(getWalletConnectLink(null)).toBe('');
+  });
+
+  test('handles URIs with special characters', () => {
+    const uri = 'wc:test@2?symKey=abc+def/ghi=';
+    const link = getWalletConnectLink(uri);
+    expect(link).toContain('https://walletconnect.com/wc?uri=');
+  });
 });
