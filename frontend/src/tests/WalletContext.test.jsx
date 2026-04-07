@@ -144,4 +144,34 @@ describe('WalletContext', () => {
     expect(screen.getByTestId('status')).toHaveTextContent('Connected');
     expect(screen.getByTestId('address')).toHaveTextContent('SP9UPDATED');
   });
+
+  it('handles logout event from another tab', () => {
+    localStorage.setItem(
+      'stacks-session',
+      JSON.stringify({
+        addresses: { mainnet: 'SP123ABCD' },
+      })
+    );
+
+    render(
+      <WalletProvider>
+        <TestComponent />
+      </WalletProvider>
+    );
+
+    // Verify initially connected
+    expect(screen.getByTestId('status')).toHaveTextContent('Connected');
+
+    act(() => {
+      window.dispatchEvent(
+        new StorageEvent('storage', {
+          key: 'stacks-session',
+          newValue: null,
+        })
+      );
+    });
+
+    expect(screen.getByTestId('status')).toHaveTextContent('Disconnected');
+    expect(screen.getByTestId('address')).toHaveTextContent('No Address');
+  });
 });
