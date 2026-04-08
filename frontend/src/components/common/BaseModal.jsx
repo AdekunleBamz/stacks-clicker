@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useLockBodyScroll } from '../hooks/useLockBodyScroll';
+import { useLockBodyScroll } from '../../hooks/useLockBodyScroll';
 
 /**
  * Generic Modal backdrop and container component.
