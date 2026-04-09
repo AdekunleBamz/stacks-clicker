@@ -240,48 +240,48 @@ function TransactionHistory({ txLog }) {
             </motion.div>
           </div>
         )}
-        <BaseModal
-          isOpen={!!selectedTx}
-          onClose={handleModalClose}
-          title={
-            <div className="modal-breadcrumbs">
-              <button
-                type="button"
-                className={`breadcrumb-item ${modalView === 'summary' ? 'active' : ''}`}
-                onClick={() => setModalView('summary')}
-              >
-                Summary
-              </button>
-              {modalView === 'raw' && (
-                <>
-                  <span className="breadcrumb-separator">/</span>
-                  <button type="button" className="breadcrumb-item active">
-                    Raw Data
-                  </button>
-                </>
-              )}
-            </div>
-          }
-          className="tx-details-modal"
-          footer={
-            selectedTx?.explorerUrl ? (
-              <a
-                href={selectedTx.explorerUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="action-btn primary-button"
-                style={{ textDecoration: 'none', width: '100%', justifyContent: 'center' }}
-              >
-                View on Explorer ↗
-              </a>
-            ) : (
-              <button type="button" className="action-btn primary-button" disabled>
-                Explorer unavailable
-              </button>
-            )
-          }
-        >
-          {selectedTx && (
+        {selectedTx && (
+          <BaseModal
+            isOpen
+            onClose={handleModalClose}
+            title={
+              <div className="modal-breadcrumbs">
+                <button
+                  type="button"
+                  className={`breadcrumb-item ${modalView === 'summary' ? 'active' : ''}`}
+                  onClick={() => setModalView('summary')}
+                >
+                  Summary
+                </button>
+                {modalView === 'raw' && (
+                  <>
+                    <span className="breadcrumb-separator">/</span>
+                    <button type="button" className="breadcrumb-item active">
+                      Raw Data
+                    </button>
+                  </>
+                )}
+              </div>
+            }
+            className="tx-details-modal"
+            footer={
+              selectedTx.explorerUrl ? (
+                <a
+                  href={selectedTx.explorerUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="action-btn primary-button"
+                  style={{ textDecoration: 'none', width: '100%', justifyContent: 'center' }}
+                >
+                  View on Explorer ↗
+                </a>
+              ) : (
+                <button type="button" className="action-btn primary-button" disabled>
+                  Explorer unavailable
+                </button>
+              )
+            }
+          >
             <div className="modal-body-content">
               {modalView === 'summary' ? (
                 <div className="summary-view">
@@ -335,8 +335,8 @@ function TransactionHistory({ txLog }) {
                 </div>
               )}
             </div>
-          )}
-        </BaseModal>
+          </BaseModal>
+        )}
       </AnimatePresence>
 
       <div className="tx-list" role="list">
