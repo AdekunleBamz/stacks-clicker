@@ -40,6 +40,7 @@ function ActionButton({
       className={`action-btn ${className}`}
       onClick={onClick}
       disabled={disabled || isLoading}
+      aria-label={cost ? `${label} - Cost: ${cost}` : label}
       aria-busy={isLoading}
       aria-live="assertive"
       title={label}
@@ -81,7 +82,12 @@ function ActionButton({
       <div className="btn-content" style={{ zIndex: 2, position: 'relative' }}>
         <AnimatePresence mode="wait">
           {isLoading ? (
-            <div className="loading-progress-container" key="loader">
+            <div
+              className="loading-progress-container"
+              key="loader"
+              role="progressbar"
+              aria-label={`${label} in progress`}
+            >
               <motion.div
                 initial={{ width: 0 }}
                 animate={{ width: "100%", opacity: [0.6, 1, 0.6] }}
