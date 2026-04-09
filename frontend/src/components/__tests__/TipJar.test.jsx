@@ -61,12 +61,13 @@ describe('TipJar component', () => {
     callContract.mockResolvedValueOnce({ txId: '0x456' });
     renderTipJar();
 
-    // Find input (assuming it has a label or descriptive text)
-    // Looking at the TipJar.jsx preview, it has setTipAmount(1000)
     const amountInput = screen.getByRole('spinbutton'); // Assuming type="number"
-    fireEvent.change(amountInput, { target: { value: '5000' } });
+    const recipientInput = screen.getByPlaceholderText('SP123...');
 
-    const tipUserBtn = screen.getByText(/Tip User/i);
+    fireEvent.change(amountInput, { target: { value: '5000' } });
+    fireEvent.change(recipientInput, { target: { value: 'SP3K8AD8ARD4VTC6K1D75X9P90NVST68S2K6PP4Y' } });
+
+    const tipUserBtn = screen.getByText(/Send Tip/i);
     fireEvent.click(tipUserBtn);
 
     expect(callContract).toHaveBeenCalledWith(expect.objectContaining({
