@@ -46,8 +46,13 @@ describe('useLocalStorage hook', () => {
 
   it('gracefully handles malformed JSON in local storage', () => {
     window.localStorage.setItem(key, 'not-json');
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
     const { result } = renderHook(() => useLocalStorage(key, initialValue));
+
     expect(result.current[0]).toEqual(initialValue);
+    expect(window.localStorage.getItem(key)).toBeNull();
+    expect(warn).toHaveBeenCalledTimes(1);
   });
 
   it('skips redundant localStorage writes when the next value is unchanged', () => {

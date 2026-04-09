@@ -25,8 +25,9 @@ export function useLocalStorage(key, initialValue) {
       const item = window.localStorage.getItem(trimmedKey);
       return item ? JSON.parse(item) : resolveInitialValue();
     } catch (error) {
-      console.warn(`Error reading localStorage key "${trimmedKey}":`, error);
-      return resolveInitialValue();
+      window.localStorage.removeItem(key);
+      console.warn(`Error reading localStorage key "${key}":`, error);
+      return initialValue;
     }
   }, [resolveInitialValue, trimmedKey]);
 
