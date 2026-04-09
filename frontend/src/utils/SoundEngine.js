@@ -15,6 +15,8 @@ class SoundEngine {
     }
 
     loadSound(name, url) {
+        if (typeof Audio === 'undefined') return;
+
         const audio = new Audio(url);
         audio.preload = 'auto';
         this.sounds[name] = audio;

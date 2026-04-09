@@ -13,7 +13,7 @@ import toast from 'react-hot-toast';
  */
 
 /** @type {React.Context<WalletContextValue|null>} */
-const WalletContext = createContext(null);
+export const WalletContext = createContext(null);
 const STACKS_NETWORK =
   String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
     ? 'testnet'
