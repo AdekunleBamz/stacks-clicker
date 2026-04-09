@@ -38,6 +38,12 @@ class ErrorBoundary extends React.Component {
     console.error('ErrorBoundary caught:', error, errorInfo);
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.state.hasError && prevProps.children !== this.props.children) {
+      this.setState({ hasError: false, error: null });
+    }
+  }
+
   /**
    * Renders the error boundary UI or children.
    * @returns {React.ReactNode} The rendered content
@@ -56,7 +62,7 @@ class ErrorBoundary extends React.Component {
               <button
                 type="button"
                 className="action-btn primary"
-                onClick={() => this.setState({ hasError: false })}
+                onClick={() => this.setState({ hasError: false, error: null })}
               >
                 <span aria-hidden="true">🔄</span> Try Again
               </button>
