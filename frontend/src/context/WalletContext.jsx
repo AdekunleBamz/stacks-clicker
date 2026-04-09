@@ -100,9 +100,14 @@ export function WalletProvider({ children }) {
     }
 
     const handleStorage = (event) => {
-      if (event.key === 'stacks-session') {
-        checkConnection();
+      if (event.key !== 'stacks-session') return;
+
+      if (event.newValue === null) {
+        setAddress(null);
+        return;
       }
+
+      checkConnection();
     };
 
     window.addEventListener('storage', handleStorage);
