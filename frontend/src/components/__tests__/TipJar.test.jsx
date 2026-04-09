@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import TipJar from '../TipJar';
 import { WalletContext } from '../../context/WalletContext';
@@ -44,9 +44,11 @@ describe('TipJar component', () => {
     const quickTipBtn = screen.getByText(/Quick Tip/i);
     fireEvent.click(quickTipBtn);
 
-    expect(callContract).toHaveBeenCalledWith(expect.objectContaining({
-      functionName: 'quick-tip'
-    }));
+    await waitFor(() => {
+      expect(callContract).toHaveBeenCalledWith(expect.objectContaining({
+        functionName: 'quick-tip'
+      }));
+    });
   });
 
   it('prevents tipping when not connected', () => {
@@ -70,12 +72,14 @@ describe('TipJar component', () => {
     const tipUserBtn = screen.getByText(/Send Tip/i);
     fireEvent.click(tipUserBtn);
 
-    expect(callContract).toHaveBeenCalledWith(expect.objectContaining({
-      functionName: 'tip-user',
-      functionArgs: expect.arrayContaining([
-        expect.objectContaining({ value: '5000' })
-      ])
-    }));
+    await waitFor(() => {
+      expect(callContract).toHaveBeenCalledWith(expect.objectContaining({
+        functionName: 'tip-user',
+        functionArgs: expect.arrayContaining([
+          expect.objectContaining({ value: '5000' })
+        ])
+      }));
+    });
   });
 
   it('handles self-ping action', async () => {
@@ -85,9 +89,11 @@ describe('TipJar component', () => {
     const selfPingBtn = screen.getByText(/Self Ping/i);
     fireEvent.click(selfPingBtn);
 
-    expect(callContract).toHaveBeenCalledWith(expect.objectContaining({
-      functionName: 'self-ping'
-    }));
+    await waitFor(() => {
+      expect(callContract).toHaveBeenCalledWith(expect.objectContaining({
+        functionName: 'self-ping'
+      }));
+    });
   });
 
   it('calls onTxSubmit callback after successful tip', async () => {
@@ -97,8 +103,8 @@ describe('TipJar component', () => {
     const quickTipBtn = screen.getByText(/Quick Tip/i);
     fireEvent.click(quickTipBtn);
 
-    await new Promise(resolve => setTimeout(resolve, 0));
-
-    expect(onTxSubmit).toHaveBeenCalled();
+    await waitFor(() => {
+      expect(onTxSubmit).toHaveBeenCalled();
+    });
   });
 });
