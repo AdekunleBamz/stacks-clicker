@@ -161,7 +161,7 @@ export default function TipJar({ onTxSubmit }) {
                 id="tip-amount-input-primary"
                 type="number"
                 min="1"
-                max="100"0"
+                max="1000000"
                 value={tipAmount}
                 onChange={(e) => setTipAmount(Number.parseInt(e.target.value, 10) || 1000)}
                 className="amount-input"
