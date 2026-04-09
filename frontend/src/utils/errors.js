@@ -29,7 +29,12 @@ export function parseContractError(error) {
   const errorMessage =
     typeof error === 'string'
       ? error
-      : error?.message || error?.reason || error?.error || String(error);
+      : error?.message
+        || error?.reason
+        || error?.error?.message
+        || error?.error?.reason
+        || error?.error
+        || String(error);
   const lowerMessage = errorMessage.toLowerCase();
   
   // Extract numeric codes from strings like "(err u101)" or "Error: 101"
