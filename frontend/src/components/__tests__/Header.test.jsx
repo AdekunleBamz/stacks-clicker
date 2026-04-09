@@ -78,6 +78,14 @@ describe('Header component', () => {
     expect(screen.getByLabelText('Select application language')).toBeDefined();
   });
 
+  it('shows only supported language options', () => {
+    render(<Header theme="dark" toggleTheme={vi.fn()} />);
+
+    const select = screen.getByLabelText('Select application language');
+    const options = Array.from(select.querySelectorAll('option')).map((option) => option.textContent);
+    expect(options).toEqual(['EN', 'ES']);
+  });
+
   it('shows connect button when wallet is not connected', () => {
     render(<Header theme="dark" toggleTheme={vi.fn()} />);
     expect(screen.getByLabelText('Connect Stacks Wallet to begin playing')).toBeDefined();
