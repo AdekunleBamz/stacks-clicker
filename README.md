@@ -41,19 +41,14 @@ Stacks Clicker aims to be more than just a game; it is a gateway for users to ex
    ```
 2. Install dependencies:
    ```bash
-   cd stacks-clicker/frontend
-   npm ci
+   cd stacks-clicker
+   npm run frontend:install
    ```
    Note: `npm ci` is recommended for deterministic installs. Use `npm install` for manual package updates.
-   From the project root, you can also use:
-   ```bash
-   npm run frontend:install
-   npm run frontend:dev
-   ```
 3. Configure environment variables:
    Copy the example file in the `frontend` directory and update the required values:
    ```bash
-   cp .env.example .env
+   cp frontend/.env.example frontend/.env
    ```
    ```env
    VITE_WALLETCONNECT_PROJECT_ID=your_project_id_here
@@ -64,11 +59,11 @@ Stacks Clicker aims to be more than just a game; it is a gateway for users to ex
    Optional values such as `VITE_STACKS_NETWORK` and `VITE_COINGECKO_API_KEY` are documented in `frontend/.env.example`.
 4. Start the development server:
    ```bash
-   npm run dev
+   npm run frontend:dev
    ```
    Build for production when needed:
    ```bash
-   npm run build
+   npm run frontend:build
    ```
 
 ## UX & Accessibility Enhancements
@@ -84,13 +79,13 @@ This project has undergone a comprehensive 94-PR improvement cycle focusing on:
 
 ```bash
 # Clone
-git clone https://github.com/AdekunleBamz/stacks-clicker.git && cd stacks-clicker/frontend
+git clone https://github.com/AdekunleBamz/stacks-clicker.git && cd stacks-clicker
 
 # Install & Run
-npm ci && cp .env.example .env && npm run dev
+npm run frontend:install && cp frontend/.env.example frontend/.env && npm run frontend:dev
 
 # Run frontend tests
-npm run test -- --run
+npm run frontend:test:run
 ```
 
 ## Key Interactions 🎮
