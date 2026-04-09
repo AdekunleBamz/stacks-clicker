@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import QuickPoll from '../QuickPoll';
 import { WalletContext } from '../../context/WalletContext';
@@ -46,10 +46,12 @@ describe('QuickPoll component', () => {
     const createBtn = screen.getByText(/Create Poll/i);
     fireEvent.click(createBtn);
 
-    expect(callContract).toHaveBeenCalledWith(expect.objectContaining({
-      functionName: 'create-poll',
-      functionArgs: [{ type: 'string-ascii', value: 'Should we add Dark Mode?' }]
-    }));
+    await waitFor(() => {
+      expect(callContract).toHaveBeenCalledWith(expect.objectContaining({
+        functionName: 'create-poll',
+        functionArgs: [{ type: 'string-ascii', value: 'Should we add Dark Mode?' }]
+      }));
+    });
   });
 
   it('handles quick voting', async () => {
@@ -59,9 +61,11 @@ describe('QuickPoll component', () => {
     const quickYesBtn = screen.getByText(/Quick Yes/i);
     fireEvent.click(quickYesBtn);
 
-    expect(callContract).toHaveBeenCalledWith(expect.objectContaining({
-      functionName: 'quick-vote-yes'
-    }));
+    await waitFor(() => {
+      expect(callContract).toHaveBeenCalledWith(expect.objectContaining({
+        functionName: 'quick-vote-yes'
+      }));
+    });
   });
 
   it('handles specific poll ID voting', async () => {
@@ -74,10 +78,12 @@ describe('QuickPoll component', () => {
     const voteYesBtn = screen.getByText(/Vote Yes #5/i);
     fireEvent.click(voteYesBtn);
 
-    expect(callContract).toHaveBeenCalledWith(expect.objectContaining({
-      functionName: 'vote-yes',
-      functionArgs: [{ type: 'uint128', value: '5' }]
-    }));
+    await waitFor(() => {
+      expect(callContract).toHaveBeenCalledWith(expect.objectContaining({
+        functionName: 'vote-yes',
+        functionArgs: [{ type: 'uint128', value: '5' }]
+      }));
+    });
   });
 
   it('prevents voting when disconnected', () => {
@@ -98,10 +104,12 @@ describe('QuickPoll component', () => {
     const voteNoBtn = screen.getByText(/Vote No #3/i);
     fireEvent.click(voteNoBtn);
 
-    expect(callContract).toHaveBeenCalledWith(expect.objectContaining({
-      functionName: 'vote-no',
-      functionArgs: [{ type: 'uint128', value: '3' }]
-    }));
+    await waitFor(() => {
+      expect(callContract).toHaveBeenCalledWith(expect.objectContaining({
+        functionName: 'vote-no',
+        functionArgs: [{ type: 'uint128', value: '3' }]
+      }));
+    });
   });
 
   it('calls onTxSubmit callback after successful vote', async () => {
@@ -111,8 +119,8 @@ describe('QuickPoll component', () => {
     const quickYesBtn = screen.getByText(/Quick Yes/i);
     fireEvent.click(quickYesBtn);
 
-    await new Promise(resolve => setTimeout(resolve, 0));
-
-    expect(onTxSubmit).toHaveBeenCalled();
+    await waitFor(() => {
+      expect(onTxSubmit).toHaveBeenCalled();
+    });
   });
 });
