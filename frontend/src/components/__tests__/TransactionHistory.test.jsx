@@ -5,7 +5,9 @@ import TransactionHistory from '../TransactionHistory';
 
 // Mock child components to isolate TransactionHistory logic
 vi.mock('../TransactionItem', () => ({
-  default: ({ tx }) => <div data-testid="tx-item">{tx.action}</div>
+  default: React.forwardRef(function MockTransactionItem({ tx }, ref) {
+    return <div ref={ref} data-testid="tx-item">{tx.action}</div>;
+  })
 }));
 
 vi.mock('../common/SearchInput', () => ({
