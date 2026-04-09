@@ -407,7 +407,7 @@ TransactionHistory.propTypes = {
       id: PropTypes.string.isRequired,
       action: PropTypes.string.isRequired,
       status: PropTypes.string.isRequired,
-      time: PropTypes.string.isRequired,
+      time: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
       network: PropTypes.string,
       submittedAt: PropTypes.string,
       explorerUrl: PropTypes.string,
