@@ -12,7 +12,7 @@
  */
 export function isValidStacksAddress(address) {
   if (!address || typeof address !== 'string') return false;
-  return /^S[Pp][0-9A-HJ-NP-Za-km-z]{38,40}$/.test(address);
+  return /^S[PT][0123456789ABCDEFGHJKMNPQRSTVWXYZ]{38}$/.test(address);
 }
 
 export const SCHEMAS = {
@@ -21,7 +21,7 @@ export const SCHEMAS = {
   },
   TIP: {
     amount: (val) => typeof val === 'number' && val >= 100,
-    recipient: (val) => typeof val === 'string' && val.startsWith('SP'),
+    recipient: (val) => isValidStacksAddress(val),
   },
   POLL: {
     optionId: (val) => typeof val === 'number' && val >= 0,
