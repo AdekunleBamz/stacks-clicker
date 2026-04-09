@@ -28,7 +28,12 @@ class SoundEngine {
         // Create a clone to allow overlapping sounds
         const sound = this.sounds[name].cloneNode();
         sound.volume = this.masterVolume;
-        sound.play().catch(e => console.warn('Audio playback failed:', e));
+        try {
+            const playback = sound.play?.();
+            playback?.catch?.((error) => console.warn('Audio playback failed:', error));
+        } catch (error) {
+            console.warn('Audio playback failed:', error);
+        }
     }
 }
 
