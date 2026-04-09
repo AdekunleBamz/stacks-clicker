@@ -10,11 +10,12 @@ import { DEPLOYER, CLICKER_CONTRACT as CONTRACT_NAME } from '../utils/constants'
  *
  * @param {Object} options - Hook options
  * @param {Function} options.onTxSubmit - Shared callback triggered when a transaction is broadcasted (receives action name and txId)
- * @returns {Object} { isLoading, click, multiClick, ping }
+ * @returns {Object} { isLoading, click, multiClick, ping, resetStreak }
  * @property {Function} isLoading - Function checking if a specific action is pending: (actionKey) => boolean
  * @property {Function} click - Triggers a single click transaction
  * @property {Function} multiClick - Triggers a multi-click transaction: (amount: number) => void
  * @property {Function} ping - Triggers a network ping/heartbeat transaction
+ * @property {Function} resetStreak - Resets the current click streak on-chain
  */
 export function useClicker({ onTxSubmit }) {
   const [loadingStates, setLoadingStates] = useState({});
@@ -83,11 +84,16 @@ export function useClicker({ onTxSubmit }) {
     [executeAction]
   );
   const ping = useCallback(() => executeAction('📡 Ping', 'ping'), [executeAction]);
+  const resetStreak = useCallback(
+    () => executeAction('♻️ Reset Streak', 'reset-streak'),
+    [executeAction]
+  );
 
   return {
     isLoading,
     click,
     multiClick,
     ping,
+    resetStreak,
   };
 }
