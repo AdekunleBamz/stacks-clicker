@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import NetworkHeartbeat from './NetworkHeartbeat';
 import NetworkLogo from './NetworkLogo';
 import AddressBadge from './common/AddressBadge';
 import Tooltip from './common/Tooltip';
 import { useWallet } from '../context/WalletContext';
 import { useI18n } from '../context/I18nContext';
+import { useScrollPosition } from '../hooks/useScrollPosition';
 
 /**
  * Main application header component.
@@ -18,17 +17,8 @@ import { useI18n } from '../context/I18nContext';
 export default function Header({ theme, toggleTheme }) {
   const { address, connectWallet, disconnectWallet } = useWallet();
   const { lang, setLang } = useI18n();
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 12);
-    };
-
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const { y } = useScrollPosition();
+  const isScrolled = y > 12;
 
   return (
     <header
@@ -45,13 +35,12 @@ export default function Header({ theme, toggleTheme }) {
       <div className="header-content">
         <div
           className="logo"
-          role="banner"
-          aria-label="Application Logo"
-          title="Stacks Clicker V2 Logo"
+          aria-label="Stacks Clicker logo"
+          title="Stacks Clicker"
         >
           <div className="header-left">
           <NetworkLogo />
-          <h1 className="header-title" aria-label="Stacks Clicker Version 2 Dashboard">Stacks Clicker V2</h1>
+          <h1 className="header-title" aria-label="Stacks Clicker dashboard">Stacks Clicker</h1>
         </div>
         </div>
 
@@ -86,8 +75,8 @@ export default function Header({ theme, toggleTheme }) {
                 type="button"
                 className="btn-logout"
                 onClick={disconnectWallet}
-                aria-label="Logout"
-                title="Logout"
+                aria-label="Disconnect wallet session"
+                title="Disconnect wallet session"
               >
                 <span className="logout-icon" aria-hidden="true">🚪</span>
               </button>
@@ -97,7 +86,7 @@ export default function Header({ theme, toggleTheme }) {
               type="button"
               className="btn-connect"
               onClick={connectWallet}
-              aria-label="Connect Stacks Wallet"
+              aria-label="Connect Stacks Wallet to begin playing"
             >
               Connect Wallet
             </button>
