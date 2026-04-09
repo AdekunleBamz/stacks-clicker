@@ -28,7 +28,7 @@ const BaseModal = memo(function BaseModal({ isOpen, onClose, title, children, fo
       const timer = setTimeout(() => closeBtnRef.current?.focus(), 100);
 
       const handleEscape = (e) => {
-        if (e.key === 'Escape') onClose();
+        if (e.key === 'Escape') onClose?.();
       };
 
       window.addEventListener('keydown', handleEscape);
@@ -120,7 +120,7 @@ function ModalContent({ onClose, title, children, footer, className, closeBtnRef
 
 BaseModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
+  onClose: PropTypes.func,
   title: PropTypes.node,
   children: PropTypes.node.isRequired,
   footer: PropTypes.node,
