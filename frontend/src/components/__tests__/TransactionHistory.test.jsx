@@ -18,6 +18,10 @@ vi.mock('../common/SearchInput', () => ({
   )
 }));
 
+vi.mock('../../hooks/useDebounce', () => ({
+  useDebounce: (value) => value,
+}));
+
 describe('TransactionHistory component', () => {
   const mockTxLog = [
     { id: '1', action: 'Click', status: 'success', time: Date.now() },
