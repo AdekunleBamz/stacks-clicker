@@ -65,7 +65,8 @@ export default function TipJar({ onTxSubmit }) {
   };
 
   const handleTipUser = async () => {
-    if (!isConnected || !recipientAddress) return;
+    const normalizedRecipient = recipientAddress.trim();
+    if (!isConnected || !normalizedRecipient) return;
 
     setLoading(true);
     try {
@@ -74,7 +75,7 @@ export default function TipJar({ onTxSubmit }) {
         contractName: 'tipjar-v2p',
         functionName: 'tip-user',
         functionArgs: [
-          { type: 'principal', value: recipientAddress },
+          { type: 'principal', value: normalizedRecipient },
           { type: 'uint128', value: tipAmount.toString() },
         ],
       });
@@ -164,7 +165,10 @@ export default function TipJar({ onTxSubmit }) {
                 min="1"
                 max="1000000"
                 value={tipAmount}
-                onChange={(e) => setTipAmount(Number.parseInt(e.target.value, 10) || 1000)}
+                onChange={(e) => {
+                  const nextAmount = Number.parseInt(e.target.value, 10) || 1000;
+                  setTipAmount(Math.min(1000000, Math.max(1, nextAmount)));
+                }}
                 className="amount-input"
                 aria-label="Tip Amount in microstacks"
                 title="Enter the tip amount in uSTX"
