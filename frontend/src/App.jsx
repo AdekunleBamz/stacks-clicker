@@ -32,7 +32,8 @@ const TransactionHistory = React.lazy(() => import('./components/TransactionHist
  * @returns {JSX.Element} The root application UI tree
  */
 export default function App() {
-  const configuredNetwork = (import.meta.env.VITE_STACKS_NETWORK || 'mainnet').toLowerCase();
+  const rawNetwork = String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase();
+  const configuredNetwork = rawNetwork === 'testnet' ? 'testnet' : 'mainnet';
 
   // Global Contexts
   const { address } = useWallet();
