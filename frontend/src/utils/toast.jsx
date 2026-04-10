@@ -76,8 +76,9 @@ const getGlassStyle = (color) => ({
 /**
  * Premium glassmorphic toast notification component.
  */
-const GlassToast = ({ t, message, type, isLoading = false }) => {
+const GlassToast = ({ t, message, type, isLoading = false, customIcon = null }) => {
   const icon = getIconForType(type);
+  const activeIcon = customIcon ?? icon;
   const colorMap = {
     success: 'var(--success)',
     error: 'var(--error)',
@@ -100,17 +101,19 @@ const GlassToast = ({ t, message, type, isLoading = false }) => {
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-        <div style={{ 
-          background: `${color}15`, 
-          padding: '8px', 
-          borderRadius: '50%', 
-          display: 'flex', 
-          alignItems: 'center', 
-          justifyContent: 'center',
-          border: `1px solid ${color}30`
-        }}>
-          {icon}
-        </div>
+        {activeIcon && (
+          <div style={{ 
+            background: `${color}15`, 
+            padding: '8px', 
+            borderRadius: '50%', 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center',
+            border: `1px solid ${color}30`
+          }}>
+            {activeIcon}
+          </div>
+        )}
         <span style={{ letterSpacing: '0.02em', textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>{message}</span>
       </div>
       
@@ -139,7 +142,8 @@ export const notify = {
   info: (message, options = {}) => toast.custom((t) => <GlassToast t={t} message={message} type="info" />, options),
   warning: (message, options = {}) => toast.custom((t) => <GlassToast t={t} message={message} type="warning" />, options),
   loading: (message, options = {}) => toast.custom((t) => <GlassToast t={t} message={message} type="loading" isLoading={true} />, { ...options, duration: Infinity }),
-  custom: (message, icon, options = {}) => toast.custom((t) => <GlassToast t={t} message={message} type="custom" />, options),
+  custom: (message, icon, options = {}) =>
+    toast.custom((t) => <GlassToast t={t} message={message} type="custom" customIcon={icon} />, options),
   dismiss: (toastId) => toast.dismiss(toastId)
 };
 
