@@ -17,14 +17,14 @@ export function isValidStacksAddress(address) {
 
 export const SCHEMAS = {
   CLICK: {
-    amount: (val) => typeof val === 'number' && val > 0,
+    amount: (val) => Number.isFinite(val) && val > 0,
   },
   TIP: {
-    amount: (val) => typeof val === 'number' && val >= 100,
+    amount: (val) => Number.isFinite(val) && val >= 100,
     recipient: (val) => isValidStacksAddress(val),
   },
   POLL: {
-    optionId: (val) => typeof val === 'number' && val >= 0,
+    optionId: (val) => Number.isInteger(val) && val >= 0,
   },
 };
 
