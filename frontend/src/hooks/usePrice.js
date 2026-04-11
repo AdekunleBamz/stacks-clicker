@@ -16,9 +16,15 @@ export function usePrice() {
 
   useEffect(() => {
     let isMounted = true;
+    let activeController = null;
 
     const fetchPrice = async () => {
+      if (activeController) {
+        activeController.abort();
+      }
+
       const controller = new AbortController();
+      activeController = controller;
       const timeout = setTimeout(() => controller.abort(), 10000);
       try {
         const response = await fetch(
@@ -33,12 +39,16 @@ export function usePrice() {
           setError(null);
         }
       } catch (err) {
+        if (err?.name === 'AbortError') return;
         if (isMounted) {
           console.error('Failed to fetch STX price:', err);
           setError(err);
         }
       } finally {
         clearTimeout(timeout);
+        if (activeController === controller) {
+          activeController = null;
+        }
         if (isMounted) {
           setLoading(false);
         }
@@ -51,6 +61,9 @@ export function usePrice() {
     return () => {
       isMounted = false;
       clearInterval(interval);
+      if (activeController) {
+        activeController.abort();
+      }
     };
   }, []);
 
