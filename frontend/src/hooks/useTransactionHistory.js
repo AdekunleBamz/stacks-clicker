@@ -3,6 +3,8 @@ import { useLocalStorage } from './useLocalStorage';
 import { notify } from '../utils/toast';
 import { useDocumentVisibility } from './useDocumentVisibility';
 
+const MAX_TX_LOG_ENTRIES = 50;
+
 /**
  * Custom hook for managing the transaction history log.
  * Handles adding new transactions, maintaining the log limit, and triggering feedback (sounds/toast).
@@ -51,7 +53,24 @@ export function useTransactionHistory({ playSound, onTxAdded }) {
         isPending,
       };
 
-      setTxLog((prev) => [tx, ...prev.slice(0, 49)]); // Maintain last 50 TXs
+      setTxLog((prev) => {
+        if (txId) {
+          const existingIndex = prev.findIndex((entry) => entry.id === txId);
+          if (existingIndex >= 0) {
+            const existing = prev[existingIndex];
+            const merged = {
+              ...existing,
+              ...tx,
+              id: txId,
+              submittedAt: existing.submittedAt ?? tx.submittedAt,
+            };
+            const withoutExisting = prev.filter((_, index) => index !== existingIndex);
+            return [merged, ...withoutExisting].slice(0, MAX_TX_LOG_ENTRIES);
+          }
+        }
+
+        return [tx, ...prev].slice(0, MAX_TX_LOG_ENTRIES);
+      });
       playSound?.('success');
       notify.custom(`${action} submitted!`, action.split(' ')[0]);
 
