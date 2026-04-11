@@ -49,7 +49,9 @@ export function useNetwork() {
       );
       setIsConnected(true);
     } catch (error) {
-      console.warn('Stacks Network Status Check Failed:', error);
+      if (error?.name !== 'AbortError') {
+        console.warn('Stacks Network Status Check Failed:', error);
+      }
       setIsConnected(false);
     } finally {
       clearTimeout(timeout);
