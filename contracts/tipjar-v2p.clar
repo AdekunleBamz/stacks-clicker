@@ -168,6 +168,14 @@
   (var-get is-paused)
 )
 
+(define-read-only (get-user-tip-stats (user principal))
+  {
+    sent: (get-user-tips-sent user),
+    received: (get-user-tips-received user),
+    count: (get-user-tip-count user)
+  }
+)
+
 (define-read-only (get-stats)
   {
     total-tips: (var-get total-tips),
