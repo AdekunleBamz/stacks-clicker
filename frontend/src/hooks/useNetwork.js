@@ -40,8 +40,10 @@ export function useNetwork() {
       if (!response.ok) throw new Error('Network offline');
 
       const data = await response.json();
+      const parsedHeight = Number(data.stacks_tip_height);
+      const safeHeight = Number.isFinite(parsedHeight) ? parsedHeight : 0;
 
-      setBlockHeight(data.stacks_tip_height);
+      setBlockHeight(safeHeight);
       setNetwork(
         data.network_id === 1 ? 'mainnet' : data.network_id === 2147483648 ? 'testnet' : 'unknown'
       );
