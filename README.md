@@ -134,4 +134,4 @@ Shared branch commits should be SSH signed before they are pushed. You can confi
 MIT License. See [LICENSE](LICENSE) for details.
 
 ---
-*Built with ❤️ by Antigravity - Advanced Agentic Coding @ Google DeepMind*
+Built and maintained by the Stacks Clicker contributors.
