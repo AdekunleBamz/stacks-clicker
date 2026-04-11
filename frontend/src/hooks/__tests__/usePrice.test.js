@@ -1,0 +1,46 @@
+import { renderHook, waitFor } from '@testing-library/react';
+import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
+import { usePrice } from '../usePrice';
+
+describe('usePrice hook', () => {
+  beforeEach(() => {
+    vi.restoreAllMocks();
+    global.fetch = vi.fn();
+  });
+
+  afterEach(() => {
+    delete global.fetch;
+    vi.restoreAllMocks();
+  });
+
+  it('loads and exposes the latest STX price', async () => {
+    global.fetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({ blockstack: { usd: 1.23 } }),
+    });
+
+    const { result } = renderHook(() => usePrice());
+
+    await waitFor(() => {
+      expect(result.current.loading).toBe(false);
+    });
+
+    expect(result.current.price).toBe(1.23);
+    expect(result.current.error).toBeNull();
+  });
+
+  it('ignores abort errors from canceled requests', async () => {
+    const abortError = Object.assign(new Error('aborted'), { name: 'AbortError' });
+    global.fetch.mockRejectedValueOnce(abortError);
+    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    const { result } = renderHook(() => usePrice());
+
+    await waitFor(() => {
+      expect(result.current.loading).toBe(false);
+    });
+
+    expect(result.current.error).toBeNull();
+    expect(consoleSpy).not.toHaveBeenCalled();
+  });
+});
