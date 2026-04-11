@@ -36,8 +36,18 @@ export const SCHEMAS = {
  * @throws {Error} If validation fails
  */
 export function validatePayload(payload, schema) {
+  if (!payload || typeof payload !== 'object') {
+    throw new Error('Validation failed: payload must be an object');
+  }
+  if (!schema || typeof schema !== 'object') {
+    throw new Error('Validation failed: schema must be an object');
+  }
+
   for (const key in schema) {
     if (Object.prototype.hasOwnProperty.call(schema, key)) {
+      if (typeof schema[key] !== 'function') {
+        throw new Error(`Validation failed: schema key "${key}" is not a validator function`);
+      }
       const isValid = schema[key](payload[key]);
       if (!isValid) {
         throw new Error(`Validation failed for key: ${key}. Value: ${payload[key]}`);
