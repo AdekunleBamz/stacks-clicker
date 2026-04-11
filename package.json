@@ -33,12 +33,15 @@
     "frontend:test": "npm --prefix frontend run test",
     "frontend:test:run": "npm --prefix frontend run test:run",
     "frontend:test:coverage": "npm --prefix frontend run test:coverage",
+    "frontend:smoke": "npm --prefix frontend run test:run -- src/hooks/__tests__/usePrice.test.js src/hooks/__tests__/useInterval.test.js",
     "frontend:lint": "npm --prefix frontend run lint",
     "frontend:lint:fix": "npm --prefix frontend run lint:fix",
     "frontend:format": "npm --prefix frontend run format",
     "contracts:check": "clarinet check",
     "contracts:test": "clarinet test",
     "contracts:coverage": "clarinet test --coverage",
+    "check:fast": "npm run frontend:lint && npm run frontend:smoke",
+    "check": "npm run contracts:check && npm run frontend:lint && npm run frontend:test:run",
     "clean": "rm -rf node_modules frontend/node_modules frontend/dist"
   },
   "engines": {
