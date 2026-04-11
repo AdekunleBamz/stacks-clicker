@@ -2,6 +2,16 @@
 
 Quick verification tests to run before each release to ensure core functionality.
 
+## Command Shortcut
+
+Run the lightweight automated smoke suite first:
+
+```bash
+npm run frontend:smoke
+```
+
+Then use this checklist for manual verification.
+
 ## Initial Load
 
 - [ ] Open the landing page and verify primary cards render without layout shifts.

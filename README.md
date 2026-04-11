@@ -86,6 +86,12 @@ npm run frontend:install && cp frontend/.env.example frontend/.env && npm run fr
 
 # Run frontend tests
 npm run frontend:test:run
+
+# Run fast frontend smoke checks
+npm run frontend:smoke
+
+# Run quick repo validation
+npm run check:fast
 ```
 
 ## Key Interactions 🎮
