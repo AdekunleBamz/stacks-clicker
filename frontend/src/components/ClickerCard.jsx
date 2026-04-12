@@ -23,7 +23,7 @@ import { useSound } from '../hooks/useSound';
 function ClickerCard({ address, clicker }) {
   const { isLoading, click, multiClick, ping } = clicker;
   const { playSound } = useSound();
-  const [errorField, setErrorField] = React.useState(null);
+  const [activeError, setActiveError] = React.useState(null);
   const [combo, setCombo] = React.useState(0);
   const comboTimerRef = React.useRef(null);
 
@@ -36,8 +36,8 @@ function ClickerCard({ address, clicker }) {
     (actionFn, ...args) => {
       if (!address) {
         playSound('error');
-        setErrorField(actionFn.name || 'action');
-        setTimeout(() => setErrorField(null), 500);
+        setActiveError(actionFn.name || 'action');
+        setTimeout(() => setActiveError(null), 500);
         return;
       }
 
@@ -104,7 +104,7 @@ function ClickerCard({ address, clicker }) {
             cost="0.001 STX"
             onClick={() => handleAction(click)}
             isLoading={isLoading('click')}
-            isError={errorField === 'click'}
+            isError={activeError === 'click'}
             className="primary"
           />
         </Tooltip>
@@ -116,7 +116,7 @@ function ClickerCard({ address, clicker }) {
             className="secondary"
             onClick={() => handleAction(multiClick, 10)}
             isLoading={isLoading('multi-click')}
-            isError={errorField === 'multiClick'}
+            isError={activeError === 'multiClick'}
           />
         </Tooltip>
         <Tooltip content="Ping the network to verify connection and emit a heartbeat event.">
@@ -127,7 +127,7 @@ function ClickerCard({ address, clicker }) {
             className="success"
             onClick={() => handleAction(ping)}
             isLoading={isLoading('ping')}
-            isError={errorField === 'ping'}
+            isError={activeError === 'ping'}
           />
         </Tooltip>
       </div>
