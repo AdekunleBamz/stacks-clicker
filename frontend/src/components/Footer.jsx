@@ -8,23 +8,23 @@ import React, { memo } from 'react';
  * @component
  * @returns {JSX.Element} The rendered footer
  */
-const Footer = memo(function Footer() {
-  const version = '1.0.0';
-  const currentYear = new Date().getFullYear();
+const VERSION = '1.0.0';
+const CURRENT_YEAR = new Date().getFullYear();
 
+const Footer = memo(function Footer() {
   return (
     <footer className="app-footer" role="contentinfo" aria-label="Global Application Footer">
       <div className="footer-content">
         <section className="footer-left" aria-label="Copyright and version">
           <small>
-            &copy; {currentYear} Stacks Clicker • Built with{' '}
+            &copy; {CURRENT_YEAR} Stacks Clicker • Built with{' '}
             <span role="img" aria-label="love">
               ❤️
             </span>{' '}
             on Stacks
           </small>
           <span className="app-version" title="Current Interface Version">
-            v{version}
+            v{VERSION}
           </span>
         </section>
 
