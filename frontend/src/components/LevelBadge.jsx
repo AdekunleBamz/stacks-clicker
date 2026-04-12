@@ -9,6 +9,8 @@ export default function LevelBadge({ level }) {
     return (
         <motion.div
             className="level-badge-container"
+            role="status"
+            aria-label={`Current Level: ${level}`}
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ type: "spring", damping: 12, stiffness: 200 }}
