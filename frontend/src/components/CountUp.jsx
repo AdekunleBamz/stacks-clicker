@@ -15,7 +15,7 @@ import PropTypes from 'prop-types';
  * @returns {JSX.Element} The rendered animated number
  */
 const CountUp = memo(function CountUp({ value, decimals = 0, prefix = '', suffix = '' }) {
-    const [displayValue, setDisplayValue] = useState(value);
+    const [displayValue, setDisplayValue] = useState(() => Number(value).toFixed(decimals));
     const prevValue = useRef(value);
 
     useEffect(() => {
