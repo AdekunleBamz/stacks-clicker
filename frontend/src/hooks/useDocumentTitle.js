@@ -10,6 +10,10 @@ import { useEffect } from 'react';
  */
 export function useDocumentTitle({ title, count = 0 }) {
   useEffect(() => {
+    const previous = document.title;
     document.title = count > 0 ? `(${count}) ${title}` : title;
+    return () => {
+      document.title = previous;
+    };
   }, [title, count]);
 }
