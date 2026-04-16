@@ -33,6 +33,7 @@ function InteractionStreaks({ totalInteractions }) {
     if (totalInteractions >= 10) newBadges.push({ id: 'bronze', label: '🥉 Novice', color: '#cd7f32' });
     if (totalInteractions >= 50) newBadges.push({ id: 'silver', label: '🥈 Regular', color: '#c0c0c0' });
     if (totalInteractions >= 100) newBadges.push({ id: 'gold', label: '🥇 Pro', color: '#ffd700' });
+    if (totalInteractions >= 200) newBadges.push({ id: 'veteran', label: '🏅 Veteran', color: '#4fc3f7' });
     setBadges(newBadges);
   }, [totalInteractions]);
 
