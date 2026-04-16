@@ -17,14 +17,14 @@ import { useInteractions } from './hooks/useInteractions';
 import { useSound } from './hooks/useSound';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
+import { STACKS_NETWORK } from './utils/constants';
 
 // Lazy load heavy components for optimized initial paint
 const MainGrid = React.lazy(() => import('./components/MainGrid'));
 const PlayerStats = React.lazy(() => import('./components/PlayerStats'));
 const TransactionHistory = React.lazy(() => import('./components/TransactionHistory'));
 
-const _rawNetwork = String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase();
-const configuredNetwork = _rawNetwork === 'testnet' ? 'testnet' : 'mainnet';
+const configuredNetwork = STACKS_NETWORK;
 
 /**
  * Main application component for the Stacks Clicker v2.
