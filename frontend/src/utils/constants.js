@@ -47,6 +47,9 @@ export const MAX_TX_LOG_SIZE = 50;
 /** @type {number} Minimum tip amount in micro-STX */
 export const MIN_TIP_MICRO_STX = 100;
 
+/** @type {number} Milliseconds before a combo resets after the last interaction */
+export const COMBO_TIMEOUT_MS = 2000;
+
 export default {
   DEPLOYER,
   CLICKER_CONTRACT,
