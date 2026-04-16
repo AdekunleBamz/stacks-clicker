@@ -5,6 +5,7 @@ import ActionCard from './common/ActionCard';
 import ActionButton from './common/ActionButton';
 import Tooltip from './common/Tooltip';
 import { useSound } from '../hooks/useSound';
+import { COMBO_TIMEOUT_MS } from '../utils/constants';
 
 /**
  * Component for the Clicker game interaction card.
@@ -46,7 +47,7 @@ function ClickerCard({ address, clicker }) {
       if (comboTimerRef.current) clearTimeout(comboTimerRef.current);
       comboTimerRef.current = setTimeout(() => {
         setCombo(0);
-      }, 2000);
+      }, COMBO_TIMEOUT_MS);
 
       playSound('click');
       actionFn(...args);
