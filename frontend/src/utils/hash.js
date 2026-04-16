@@ -40,3 +40,5 @@ export function stringToColor(str) {
 export function hashToIndex(str, length) {
   return simpleHash(str) % length;
 }
+
+export default { simpleHash, stringToColor, hashToIndex };
