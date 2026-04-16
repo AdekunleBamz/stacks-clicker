@@ -14,7 +14,7 @@ import { motion, AnimatePresence } from 'framer-motion';
  */
 const ParticleOverlay = memo(function ParticleOverlay({ trigger }) {
   const [particles, setParticles] = useState([]);
-  const timeoutsMode = useRef([]);
+  const timeoutsRef = useRef([]);
   const isReduced =
     typeof window !== 'undefined' &&
     typeof window.matchMedia === 'function' &&
@@ -41,10 +41,10 @@ const ParticleOverlay = memo(function ParticleOverlay({ trigger }) {
     // Schedule cleanup after the animation duration (1s)
     const timeout = setTimeout(() => {
       setParticles((prev) => prev.filter(p => !newParticles.find(np => np.id === p.id)));
-      timeoutsMode.current = timeoutsMode.current.filter(t => t !== timeout);
+      timeoutsRef.current = timeoutsRef.current.filter(t => t !== timeout);
     }, 1000);
 
-    timeoutsMode.current.push(timeout);
+    timeoutsRef.current.push(timeout);
   }, [isReduced]);
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const ParticleOverlay = memo(function ParticleOverlay({ trigger }) {
   useEffect(() => {
     return () => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
-      timeoutsMode.current.forEach(clearTimeout);
+      timeoutsRef.current.forEach(clearTimeout);
     };
   }, []);
 
