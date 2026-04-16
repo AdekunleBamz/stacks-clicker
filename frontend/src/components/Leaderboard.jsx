@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 
 /**
@@ -34,3 +35,13 @@ export default function Leaderboard({ players }) {
         </div>
     );
 }
+
+Leaderboard.propTypes = {
+    players: PropTypes.arrayOf(
+        PropTypes.shape({
+            address: PropTypes.string.isRequired,
+            clicks: PropTypes.number.isRequired,
+            level: PropTypes.number.isRequired,
+        })
+    ).isRequired,
+};
