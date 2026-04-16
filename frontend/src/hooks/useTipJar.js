@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { callContract } from '../utils/walletconnect';
 import { useNotifications } from './useNotifications';
 import { parseContractError } from '../utils/errors';
-import { DEPLOYER, TIPJAR_CONTRACT as CONTRACT_NAME } from '../utils/constants';
+import { DEPLOYER, TIPJAR_CONTRACT as CONTRACT_NAME, MIN_TIP_MICRO_STX } from '../utils/constants';
 
 /**
  * Custom hook for interacting with the TipJar smart contract.
@@ -67,8 +67,8 @@ export function useTipJar({ onTxSubmit }) {
   }, [onTxSubmit, setLoading, showError, showLoading]);
 
   const tip = useCallback(
-    (amount = 1000) => {
-      const normalizedAmount = Number.isFinite(amount) && amount > 0 ? Math.floor(amount) : 1000;
+    (amount = MIN_TIP_MICRO_STX * 10) => {
+      const normalizedAmount = Number.isFinite(amount) && amount > 0 ? Math.floor(amount) : MIN_TIP_MICRO_STX * 10;
       return executeAction('💰 Tip', 'tip', [{ type: 'uint128', value: normalizedAmount.toString() }]);
     },
     [executeAction]
