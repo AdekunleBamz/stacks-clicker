@@ -23,6 +23,9 @@ const MainGrid = React.lazy(() => import('./components/MainGrid'));
 const PlayerStats = React.lazy(() => import('./components/PlayerStats'));
 const TransactionHistory = React.lazy(() => import('./components/TransactionHistory'));
 
+const _rawNetwork = String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase();
+const configuredNetwork = _rawNetwork === 'testnet' ? 'testnet' : 'mainnet';
+
 /**
  * Main application component for the Stacks Clicker v2.
  * Orchestrates global state, blockchain interactions, theme management, and responsive layout.
@@ -32,9 +35,6 @@ const TransactionHistory = React.lazy(() => import('./components/TransactionHist
  * @returns {JSX.Element} The root application UI tree
  */
 export default function App() {
-  const rawNetwork = String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase();
-  const configuredNetwork = rawNetwork === 'testnet' ? 'testnet' : 'mainnet';
-
   // Global Contexts
   const { address } = useWallet();
   const { lang, setLang } = useI18n();
