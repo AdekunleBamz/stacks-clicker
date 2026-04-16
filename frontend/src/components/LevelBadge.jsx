@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 
 /**
@@ -51,3 +52,7 @@ export default function LevelBadge({ level }) {
         </motion.div>
     );
 }
+
+LevelBadge.propTypes = {
+    level: PropTypes.number.isRequired,
+};
