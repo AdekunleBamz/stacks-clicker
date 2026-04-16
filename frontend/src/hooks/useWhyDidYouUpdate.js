@@ -24,7 +24,7 @@ export function useWhyDidYouUpdate(name, props) {
         }
       });
 
-      if (Object.keys(changesObj).length) {
+      if (Object.keys(changesObj).length && import.meta.env.DEV) {
         console.group(`[why-did-you-update] ${name}`);
         console.log('Changed props:', changesObj);
         console.groupEnd();
