@@ -25,7 +25,7 @@ const TransactionModal = () => {
       title="🔍 Transaction Details"
     >
       <div className="tx-details-container">
-        
+
         <div className="detail-row">
           <span className="detail-label">Action</span>
           <span className="detail-value highlight">{action}</span>
@@ -64,7 +64,7 @@ const TransactionModal = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .tx-details-container {
           display: flex;
           flex-direction: column;
