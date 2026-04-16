@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect, useCallback, use
 import PropTypes from 'prop-types';
 import { showConnect, disconnect } from '@stacks/connect';
 import toast from 'react-hot-toast';
+import { STACKS_NETWORK } from '../utils/constants';
 
 /**
  * @typedef {Object} WalletContextValue
@@ -14,10 +15,6 @@ import toast from 'react-hot-toast';
 
 /** @type {React.Context<WalletContextValue|null>} */
 export const WalletContext = createContext(null);
-const STACKS_NETWORK =
-  String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
-    ? 'testnet'
-    : 'mainnet';
 
 function getAppDetails() {
   const origin = typeof window !== 'undefined' ? window.location.origin : '';
