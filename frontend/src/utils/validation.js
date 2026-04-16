@@ -5,6 +5,8 @@
  * @module utils/validation
  */
 
+import { MIN_TIP_MICRO_STX } from './constants';
+
 /**
  * Validates a Stacks address format.
  * @param {string} address - The address to validate
@@ -29,7 +31,7 @@ export const SCHEMAS = {
     amount: (val) => Number.isFinite(val) && val > 0,
   },
   TIP: {
-    amount: (val) => Number.isFinite(val) && val >= 100,
+    amount: (val) => Number.isFinite(val) && val >= MIN_TIP_MICRO_STX,
     recipient: (val) => isValidStacksAddress(val),
   },
   POLL: {
