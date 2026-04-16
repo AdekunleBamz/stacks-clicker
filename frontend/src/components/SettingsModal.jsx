@@ -32,7 +32,7 @@ const SettingsModal = () => {
           <h4 className="settings-label">Appearance</h4>
           <div className="settings-row">
             <span>Theme Mode</span>
-            <button 
+            <button
               type="button"
               className="theme-toggle-btn secondary-button btn-sm"
               onClick={toggleTheme}
@@ -46,7 +46,7 @@ const SettingsModal = () => {
           <h4 className="settings-label">Localization</h4>
           <div className="settings-row">
             <span>Preferred Language</span>
-            <select 
+            <select
               className="lang-select-input input-field"
               aria-label="Preferred language"
               value={lang}
@@ -72,7 +72,7 @@ const SettingsModal = () => {
         </section>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .settings-container {
           display: flex;
           flex-direction: column;
