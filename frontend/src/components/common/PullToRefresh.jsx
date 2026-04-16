@@ -1,6 +1,8 @@
 import React, { useState, memo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
+const PULL_THRESHOLD = 80;
+
 /**
  * Modern pull-to-refresh component for mobile devices.
  * Provides visual feedback during pull gesture and triggers refresh on release.
@@ -16,7 +18,6 @@ const PullToRefresh = memo(function PullToRefresh({ onRefresh, children }) {
   const [pullDistance, setPullDistance] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
 
-  const PULL_THRESHOLD = 80;
 
   const handleTouchStart = useCallback((e) => {
     if (window.scrollY === 0) {
