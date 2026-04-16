@@ -16,6 +16,7 @@ export default function MilestoneCelebration({ celebration }) {
           className="milestone-celebration"
           role="status"
           aria-live="assertive"
+          aria-atomic="true"
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 1.5 }}
