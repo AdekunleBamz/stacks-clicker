@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 
 /**
  * Custom hook for capturing long-press interactions.
@@ -14,11 +14,6 @@ export function useLongPress(callback, { delay = 500 } = {}) {
   const timerRef = useRef();
 
   const start = useCallback((event) => {
-    // Prevent default context menu on mobile
-    if (event.type === 'touchstart') {
-      // event.preventDefault(); // Don't prevent default, might break scroll
-    }
-    
     setIsPressing(true);
     timerRef.current = setTimeout(() => {
       callback(event);
@@ -29,6 +24,12 @@ export function useLongPress(callback, { delay = 500 } = {}) {
   const stop = useCallback(() => {
     clearTimeout(timerRef.current);
     setIsPressing(false);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(timerRef.current);
+    };
   }, []);
 
   return {
