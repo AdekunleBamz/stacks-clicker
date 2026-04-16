@@ -6,6 +6,10 @@ import Tooltip from './common/Tooltip';
 import { useSound } from '../hooks/useSound';
 import { notify } from '../utils/toast';
 import { motion, AnimatePresence } from 'framer-motion';
+import { MIN_TIP_MICRO_STX } from '../utils/constants';
+
+/** Smallest allowed tip in STX units (derived from the micro-STX constant) */
+const MIN_TIP_STX = MIN_TIP_MICRO_STX / 1_000_000;
 
 /**
  * Component for the TipJar interaction card.
@@ -22,18 +26,18 @@ import { motion, AnimatePresence } from 'framer-motion';
  */
 function TipJarCard({ address, tipjar }) {
   const { isLoading, tip, handleSelfPing } = tipjar;
-  const [tipAmount, setTipAmount] = useState('0.001');
+  const [tipAmount, setTipAmount] = useState(String(MIN_TIP_STX));
   const { playSound } = useSound();
   const [errorField, setErrorField] = useState(null);
   const [showSuccess, setShowSuccess] = useState(false);
   const predefinedAmounts = [1, 5, 10];
   const parsedTipAmount = Number.parseFloat(tipAmount);
-  const isTipAmountValid = Number.isFinite(parsedTipAmount) && parsedTipAmount >= 0.001;
+  const isTipAmountValid = Number.isFinite(parsedTipAmount) && parsedTipAmount >= MIN_TIP_STX;
 
   /**
    * Triggers a fixed 0.001 STX tip transaction.
    */
-  const handleQuickTip = useCallback(() => tip(0.001), [tip]);
+  const handleQuickTip = useCallback(() => tip(MIN_TIP_STX), [tip]);
 
   /**
    * Triggers a tip transaction with the user-defined custom amount.
