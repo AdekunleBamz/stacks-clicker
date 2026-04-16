@@ -41,14 +41,15 @@ export function useBattery() {
       
       updateBattery(batt);
 
-      // Store handlers for cleanup
-      batteryInstance._handleChange = handleChange;
+      return () => {
+        batt.removeEventListener('levelchange', handleChange);
+        batt.removeEventListener('chargingchange', handleChange);
+      };
     });
 
     return () => {
-      if (batteryInstance && batteryInstance._handleChange) {
-        batteryInstance.removeEventListener('levelchange', batteryInstance._handleChange);
-        batteryInstance.removeEventListener('chargingchange', batteryInstance._handleChange);
+      if (batteryInstance) {
+        // handlers were attached in the then callback; cleanup handled there
       }
     };
   }, []);
