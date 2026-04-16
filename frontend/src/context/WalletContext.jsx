@@ -38,6 +38,7 @@ function getAppDetails() {
  */
 export function WalletProvider({ children }) {
   const [address, setAddress] = useState(null);
+  const [isConnecting, setIsConnecting] = useState(false);
 
   const checkConnection = useCallback(() => {
     if (typeof window === 'undefined') {
@@ -73,13 +74,16 @@ export function WalletProvider({ children }) {
    * Opens the Stacks wallet connection modal and handles authentication callbacks.
    */
   const connectWallet = useCallback(() => {
+    setIsConnecting(true);
     showConnect({
       appDetails: getAppDetails(),
       onFinish: () => {
+        setIsConnecting(false);
         checkConnection();
         toast.success('Wallet connected! 🎉');
       },
       onCancel: () => {
+        setIsConnecting(false);
         toast.error('Connection cancelled');
       },
     });
@@ -123,8 +127,9 @@ export function WalletProvider({ children }) {
       disconnectWallet,
       appDetails,
       isConnected: !!address,
+      isConnecting,
     }),
-    [address, connectWallet, disconnectWallet, appDetails]
+    [address, connectWallet, disconnectWallet, appDetails, isConnecting]
   );
 
 
