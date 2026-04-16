@@ -7,11 +7,6 @@ const STACKS_NETWORK =
     ? 'testnet'
     : 'mainnet';
 
-const STACKS_NETWORK =
-  String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
-    ? 'testnet'
-    : 'mainnet';
-
 /**
  * Transaction Log Component
  * Displays recent transactions with status
