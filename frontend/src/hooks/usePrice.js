@@ -23,6 +23,8 @@ export function usePrice() {
         activeController.abort();
       }
 
+      if (isMounted) setLoading(true);
+
       const controller = new AbortController();
       activeController = controller;
       const timeout = setTimeout(() => controller.abort(), 10000);
