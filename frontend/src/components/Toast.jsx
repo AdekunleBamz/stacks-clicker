@@ -12,7 +12,7 @@ import { motion, AnimatePresence } from 'framer-motion';
  */
 const Toast = memo(function Toast({ toasts = [] }) {
   return (
-    <div className="toast-container" role="status" aria-live="polite">
+    <div className="toast-container" aria-label="Notifications">
       <AnimatePresence mode="popLayout">
         {toasts.map((toast) => (
           <motion.div
