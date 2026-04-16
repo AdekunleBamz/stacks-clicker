@@ -24,7 +24,7 @@ export function useHover() {
       };
     }
     return undefined;
-  }, [ref.current]);
+  }, []);
 
   return [ref, isHovered];
 }
