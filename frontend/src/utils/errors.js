@@ -68,3 +68,6 @@ export function parseContractError(error) {
   const compactMessage = errorMessage.length > 60 ? `${errorMessage.slice(0, 60)}...` : errorMessage;
   return `Transaction failed: ${compactMessage}`;
 }
+
+/** Alias for parseContractError for callers preferring a more generic name */
+export const getErrorMessage = parseContractError;
