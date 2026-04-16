@@ -91,7 +91,7 @@ const ScrollArea = memo(function ScrollArea({ children, className = '', style = 
         </div>
       )}
 
-      <style jsx>{`
+      <style>{`
         .scroll-area-wrapper {
           position: relative;
           overflow: hidden;
