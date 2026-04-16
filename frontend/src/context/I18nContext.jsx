@@ -20,6 +20,18 @@ const translations = {
     recent_activity: 'Actividad Reciente',
     connect_wallet: 'Conectar Cartera',
     disconnect: 'Desconectar',
+    loading: 'Cargando...',
+    error: 'Algo salió mal',
+  },
+  fr: {
+    welcome: 'Bienvenue sur Stacks Clicker V2',
+    interactions: 'Interactions',
+    stats: 'Statistiques',
+    recent_activity: 'Activité Récente',
+    connect_wallet: 'Connecter le Portefeuille',
+    disconnect: 'Déconnecter',
+    loading: 'Chargement...',
+    error: 'Quelque chose a mal tourné',
   },
 };
 
