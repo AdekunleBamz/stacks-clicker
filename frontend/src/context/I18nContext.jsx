@@ -9,6 +9,8 @@ const translations = {
     recent_activity: 'Recent Activity',
     connect_wallet: 'Connect Wallet',
     disconnect: 'Disconnect',
+    loading: 'Loading...',
+    error: 'Something went wrong',
   },
   es: {
     welcome: 'Bienvenido a Stacks Clicker V2',
