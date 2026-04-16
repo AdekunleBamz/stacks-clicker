@@ -33,6 +33,7 @@ const SettingsModal = () => {
           <div className="settings-row">
             <span>Theme Mode</span>
             <button 
+              type="button"
               className="theme-toggle-btn secondary-button btn-sm"
               onClick={toggleTheme}
             >
@@ -64,7 +65,7 @@ const SettingsModal = () => {
             <span>Interaction Sounds</span>
             <div className="toggle-switch">
               {/* Simplified toggle for demonstration */}
-              <button className="secondary-button btn-sm">Enabled</button>
+              <button type="button" className="secondary-button btn-sm">Enabled</button>
             </div>
           </div>
         </section>
