@@ -27,11 +27,13 @@ export function useNotifications() {
   const showSuccess = useCallback((msg) => showNotification(msg, 'success'), [showNotification]);
   const showError = useCallback((msg) => showNotification(msg, 'error'), [showNotification]);
   const showLoading = useCallback((msg) => showNotification(msg, 'loading'), [showNotification]);
+  const showInfo = useCallback((msg) => showNotification(msg, 'default'), [showNotification]);
 
   return {
     showNotification,
     showSuccess,
     showError,
     showLoading,
+    showInfo,
   };
 }
