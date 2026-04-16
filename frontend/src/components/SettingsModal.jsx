@@ -48,6 +48,7 @@ const SettingsModal = () => {
             <span>Preferred Language</span>
             <select 
               className="lang-select-input input-field"
+              aria-label="Preferred language"
               value={lang}
               onChange={(e) => handleLanguageChange(e.target.value)}
             >
