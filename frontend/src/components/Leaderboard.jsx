@@ -14,10 +14,11 @@ export default function Leaderboard({ players }) {
                 <span className="game-badge">Top Clickers</span>
             </div>
 
-            <div className="leaderboard-list">
+            <div className="leaderboard-list" role="list" aria-label="Top clickers leaderboard">
                 {players.map((player, i) => (
                     <motion.div
                         key={player.address}
+                        role="listitem"
                         className={`leaderboard-item rank-${i + 1}`}
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
