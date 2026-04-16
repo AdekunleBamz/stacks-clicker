@@ -17,6 +17,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhanced security policy with detailed procedures.
 - Updated code of conduct with comprehensive guidelines.
 - Improved roadmap documentation with progress legend.
+- Consolidated STACKS_NETWORK and explorer URL references to shared constants.
+- Replaced all `style jsx` non-standard pragmas with standard style tags.
+- Marked passive event listeners across scroll, resize, focus and key hooks.
+- Added COMBO_TIMEOUT_MS and PRICE_REFRESH_INTERVAL_MS to constants module.
+- Derived tip amounts from MIN_TIP_MICRO_STX instead of hardcoded values.
+
+### Fixed
+- useWindowFocus, useKeyPress, useNetworkStatus, useWindowSize missing passive flags.
+- Initial focus target in OnboardingTour now points to the correct button class.
+- ScrollArea effect missing handleScroll in dependency array.
 
 ## [v2p] - 2026-03-11
 ### Added
