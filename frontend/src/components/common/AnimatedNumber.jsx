@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
  * @returns {JSX.Element} The rendered animated number
  */
 const AnimatedNumber = ({ value, duration = 1 }) => {
-  const [displayValue, setDisplayValue] = useState(value);
+  const [displayValue, setDisplayValue] = useState(() => typeof value === 'number' ? value : 0);
 
   useEffect(() => {
     if (typeof value !== 'number') return;
