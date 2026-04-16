@@ -17,19 +17,11 @@ export function useMedia(query) {
     const media = window.matchMedia(query);
     const listener = () => setMatches(media.matches);
 
-    // Modern browsers use addEventListener, older ones use addListener
-    if (media.addEventListener) {
-      media.addEventListener('change', listener);
-    } else {
-      media.addListener(listener);
-    }
+    // Modern browsers use addEventListener
+    media.addEventListener('change', listener);
 
     return () => {
-      if (media.removeEventListener) {
-        media.removeEventListener('change', listener);
-      } else {
-        media.removeListener(listener);
-      }
+      media.removeEventListener('change', listener);
     };
   }, [query]);
 
