@@ -2,8 +2,9 @@ import { useCallback, useEffect, useMemo } from 'react';
 import { useLocalStorage } from './useLocalStorage';
 import { notify } from '../utils/toast';
 import { useDocumentVisibility } from './useDocumentVisibility';
+import { MAX_TX_LOG_SIZE, CONFIG, STACKS_NETWORK } from '../utils/constants';
 
-const MAX_TX_LOG_ENTRIES = 50;
+const MAX_TX_LOG_ENTRIES = MAX_TX_LOG_SIZE;
 
 /**
  * Custom hook for managing the transaction history log.
@@ -44,8 +45,8 @@ export function useTransactionHistory({ playSound, onTxAdded }) {
         status,
         time: submittedAt.toLocaleTimeString(),
         submittedAt: submittedAt.toISOString(),
-        network: 'mainnet',
-        explorerUrl: isPending ? null : `https://explorer.hiro.so/txid/${txId}?chain=mainnet`,
+        network: STACKS_NETWORK,
+        explorerUrl: isPending ? null : `${CONFIG.EXPLORER_URL}/txid/${txId}?chain=${STACKS_NETWORK}`,
         isPending,
       };
 
