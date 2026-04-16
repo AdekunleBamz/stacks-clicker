@@ -46,3 +46,15 @@ export function formatStx(microStx) {
   const stx = numericValue / 1_000_000;
   return stx.toFixed(2) + ' STX';
 }
+
+/**
+ * Formats a large number with compact notation (e.g. 1.2K, 3.5M).
+ *
+ * @param {number} value - The number to format
+ * @returns {string} Compact string representation
+ */
+export function formatCompact(value) {
+  const numericValue = Number(value);
+  if (!Number.isFinite(numericValue)) return '0';
+  return new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 1 }).format(numericValue);
+}
