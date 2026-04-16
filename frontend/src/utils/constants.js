@@ -41,6 +41,12 @@ export const CONFIG = {
 /** @type {string} Explorer tx URL prefix */
 export const HIRO_EXPLORER_TX_BASE = `${CONFIG.EXPLORER_URL}/txid/`;
 
+/** @type {number} Maximum number of transactions to keep in the log */
+export const MAX_TX_LOG_SIZE = 50;
+
+/** @type {number} Minimum tip amount in micro-STX */
+export const MIN_TIP_MICRO_STX = 100;
+
 export default {
   DEPLOYER,
   CLICKER_CONTRACT,
