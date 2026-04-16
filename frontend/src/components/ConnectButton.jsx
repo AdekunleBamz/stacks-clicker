@@ -30,9 +30,9 @@ export default function ConnectButton() {
             whileHover={{ scale: 1.05 }}
             className="wallet-address glass-card"
             title={`Full Stacks address: ${address}`}
-            aria-label={`Connected address ${truncateAddress(address, 4)}`}
+            aria-label={`Connected address ${truncateAddress(address, { prefix: 4 })}`}
           >
-            {truncateAddress(address, isMobile ? 4 : 6)}
+            {truncateAddress(address, isMobile ? { prefix: 4 } : { prefix: 6 })}
           </motion.span>
           <motion.button
             whileHover={{ scale: 1.05, backgroundColor: 'rgba(239, 68, 68, 0.1)' }}
