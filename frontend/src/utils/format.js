@@ -58,3 +58,16 @@ export function formatCompact(value) {
   if (!Number.isFinite(numericValue)) return '0';
   return new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 1 }).format(numericValue);
 }
+
+/**
+ * Formats a decimal as a percentage string.
+ *
+ * @param {number} value - The decimal value (e.g. 0.75 for 75%)
+ * @param {number} [decimals=1] - Number of decimal places
+ * @returns {string} Formatted percentage string
+ */
+export function formatPercent(value, decimals = 1) {
+  const numericValue = Number(value);
+  if (!Number.isFinite(numericValue)) return '0%';
+  return (numericValue * 100).toFixed(decimals) + '%';
+}
