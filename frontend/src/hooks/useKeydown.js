@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react';
+
 /**
  * Custom hook for capturing global keydown events with multi-key support.
  *
