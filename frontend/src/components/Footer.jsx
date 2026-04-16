@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import versionData from '../version.json';
 
 /**
  * Standard application footer component.
@@ -8,7 +9,7 @@ import React, { memo } from 'react';
  * @component
  * @returns {JSX.Element} The rendered footer
  */
-const VERSION = '1.0.0';
+const VERSION = versionData.version || '1.0.0';
 const CURRENT_YEAR = new Date().getFullYear();
 
 const Footer = memo(function Footer() {
