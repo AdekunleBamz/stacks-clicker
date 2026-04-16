@@ -23,11 +23,7 @@ export function useTransactionHistory({ playSound, onTxAdded }) {
   const txCount = useMemo(() => txLog.length, [txLog]);
 
   useEffect(() => {
-    if (!isVisible) {
-      console.debug('[useTransactionHistory] Tab hidden: Pausing background log updates');
-    } else {
-      console.debug('[useTransactionHistory] Tab visible: Resuming background log updates');
-    }
+    // tab visibility changes pauses/resumes background updates
   }, [isVisible]);
 
   /**
@@ -85,7 +81,6 @@ export function useTransactionHistory({ playSound, onTxAdded }) {
    */
   const clearLog = useCallback(() => {
     setTxLog([]);
-    console.debug('[useTransactionHistory] Transaction log cleared');
   }, [setTxLog]);
   
   return {
