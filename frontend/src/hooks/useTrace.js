@@ -18,7 +18,7 @@ export function useTrace(componentName, props) {
       return ps;
     }, {});
 
-    if (Object.keys(changedProps).length > 0) {
+    if (Object.keys(changedProps).length > 0 && import.meta.env.DEV) {
       console.debug(`[useTrace] ${componentName} changed:`, changedProps);
     }
 
