@@ -50,6 +50,9 @@ export const MIN_TIP_MICRO_STX = 100;
 /** @type {number} Milliseconds before a combo resets after the last interaction */
 export const COMBO_TIMEOUT_MS = 2000;
 
+/** @type {number} Interval in ms between STX price refreshes */
+export const PRICE_REFRESH_INTERVAL_MS = 60_000;
+
 export default {
   DEPLOYER,
   CLICKER_CONTRACT,
