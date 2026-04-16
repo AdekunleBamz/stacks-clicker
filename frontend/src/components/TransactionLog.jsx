@@ -1,11 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
-
-const STACKS_NETWORK =
-  String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
-    ? 'testnet'
-    : 'mainnet';
+import { CONFIG, STACKS_NETWORK } from '../utils/constants';
 
 /**
  * Transaction Log Component
@@ -27,7 +23,7 @@ export default function TransactionLog({ transactions = [] }) {
 
   const getExplorerLink = (txId) => {
     if (!txId || txId.startsWith('pending-')) return null;
-    return `https://explorer.hiro.so/txid/${txId}?chain=${STACKS_NETWORK}`;
+    return `${CONFIG.EXPLORER_URL}/txid/${txId}?chain=${STACKS_NETWORK}`;
   };
 
   if (transactions.length === 0) {
