@@ -19,8 +19,6 @@ export function useDocumentVisibility() {
     };
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
-    // Trigger once to ensure sync
-    handleVisibilityChange();
 
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
