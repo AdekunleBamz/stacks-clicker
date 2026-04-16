@@ -34,6 +34,7 @@ export const SCHEMAS = {
   },
   POLL: {
     optionId: (val) => Number.isInteger(val) && val >= 0,
+    pollId: (val) => Number.isInteger(val) && val >= 0,
   },
 };
 
