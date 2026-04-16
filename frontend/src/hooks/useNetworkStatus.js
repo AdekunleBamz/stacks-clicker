@@ -17,12 +17,12 @@ export function useNetworkStatus() {
     const handleOnline = () => setIsOnline(true);
     const handleOffline = () => setIsOnline(false);
 
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
+    window.addEventListener('online', handleOnline, { passive: true });
+    window.addEventListener('offline', handleOffline, { passive: true });
 
     return () => {
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
+      window.removeEventListener('online', handleOnline, { passive: true });
+      window.removeEventListener('offline', handleOffline, { passive: true });
     };
   }, []);
 
