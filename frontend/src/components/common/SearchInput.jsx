@@ -16,7 +16,7 @@ import { motion, AnimatePresence } from 'framer-motion';
  */
 function SearchInput({ value, onChange, onClear, placeholder = 'Search...', count }) {
   return (
-    <div className="search-wrapper">
+    <div className="search-wrapper" role="search">
       <div className="search-relative">
         <span className="search-icon" aria-hidden="true">🔍</span>
         <input
