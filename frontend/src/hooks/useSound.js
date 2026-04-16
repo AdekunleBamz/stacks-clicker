@@ -97,6 +97,10 @@ export function useSound() {
         osc.start(now);
         osc.stop(now + 0.2);
         break;
+      default:
+        osc.disconnect();
+        gain.disconnect();
+        return;
     }
   }, []);
 
