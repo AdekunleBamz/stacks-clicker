@@ -24,12 +24,12 @@ export function useKeyPress(targetKey) {
       }
     };
 
-    window.addEventListener('keydown', downHandler);
-    window.addEventListener('keyup', upHandler);
+    window.addEventListener('keydown', downHandler, { passive: true });
+    window.addEventListener('keyup', upHandler, { passive: true });
 
     return () => {
-      window.removeEventListener('keydown', downHandler);
-      window.removeEventListener('keyup', upHandler);
+      window.removeEventListener('keydown', downHandler, { passive: true });
+      window.removeEventListener('keyup', upHandler, { passive: true });
     };
   }, [targetKey]);
 
