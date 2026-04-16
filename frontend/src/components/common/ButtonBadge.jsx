@@ -35,7 +35,7 @@ const ButtonBadge = memo(function ButtonBadge({ count, showDotOnly = false, maxC
         </motion.div>
       )}
 
-      <style jsx>{`
+      <style>{`
         .button-badge {
           position: absolute;
           top: -4px;
