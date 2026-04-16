@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 
 /**
  * Custom hook for managing interaction combos.
@@ -25,6 +25,12 @@ export function useCombo({ timeout = 2000 } = {}) {
       setCombo(0);
     }, timeout);
   }, [timeout]);
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []);
 
   return {
     combo,
