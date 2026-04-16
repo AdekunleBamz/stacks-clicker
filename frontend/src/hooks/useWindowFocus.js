@@ -20,14 +20,14 @@ export function useWindowFocus() {
       setIsFocused(!document.hidden);
     };
 
-    window.addEventListener('focus', handleFocus);
-    window.addEventListener('blur', handleBlur);
-    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('focus', handleFocus, { passive: true });
+    window.addEventListener('blur', handleBlur, { passive: true });
+    document.addEventListener('visibilitychange', handleVisibilityChange, { passive: true });
 
     return () => {
-      window.removeEventListener('focus', handleFocus);
-      window.removeEventListener('blur', handleBlur);
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('focus', handleFocus, { passive: true });
+      window.removeEventListener('blur', handleBlur, { passive: true });
+      document.removeEventListener('visibilitychange', handleVisibilityChange, { passive: true });
     };
   }, []);
 
