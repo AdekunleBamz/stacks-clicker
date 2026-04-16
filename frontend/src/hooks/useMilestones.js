@@ -14,7 +14,7 @@ export function useMilestones({ stats, onMilestone }) {
   const celebrationTimeoutRef = useRef(null);
 
   useEffect(() => {
-    const milestones = [10, 50, 100, 500];
+    const milestones = [10, 50, 100, 200, 500, 1000];
     const total = stats.clicks + stats.tips + stats.votes;
     
     if (milestones.includes(total) && total > 0) {
