@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useWallet } from '../context/WalletContext';
 import { callContract } from '../utils/walletconnect';
 import soundEngine from '../utils/SoundEngine';
-
-const DEPLOYER = 'SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT';
+import { DEPLOYER } from '../utils/constants';
 
 /**
  * QuickPoll Component
