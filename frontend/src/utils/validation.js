@@ -15,6 +15,15 @@ export function isValidStacksAddress(address) {
   return /^S[PT][0123456789ABCDEFGHJKMNPQRSTVWXYZ]{38}$/.test(address);
 }
 
+/**
+ * Returns true if the value is a non-empty string.
+ * @param {*} value
+ * @returns {boolean}
+ */
+export function isNonEmptyString(value) {
+  return typeof value === 'string' && value.trim().length > 0;
+}
+
 export const SCHEMAS = {
   CLICK: {
     amount: (val) => Number.isFinite(val) && val > 0,
