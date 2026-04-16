@@ -24,7 +24,7 @@ export function useFocus() {
       };
     }
     return undefined;
-  }, [ref.current]);
+  }, []);
 
   return [ref, isFocused];
 }
