@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 
 /**
@@ -55,3 +56,15 @@ export default function SocialFeed({ activities }) {
         </div>
     );
 }
+
+SocialFeed.propTypes = {
+    activities: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+            type: PropTypes.string.isRequired,
+            user: PropTypes.string.isRequired,
+            text: PropTypes.string.isRequired,
+            time: PropTypes.string.isRequired,
+        })
+    ).isRequired,
+};
