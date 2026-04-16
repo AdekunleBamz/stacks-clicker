@@ -59,3 +59,5 @@ Achievement.propTypes = {
 };
 
 export default Achievement;
+
+export default Achievement;
