@@ -43,6 +43,7 @@ const Button = memo(function Button({
       onClick={onClick}
       disabled={disabled || isLoading}
       aria-busy={isLoading}
+      aria-disabled={disabled || isLoading}
       aria-label={isLoading ? `Processing ${typeof children === 'string' ? children : 'action'}` : undefined}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
