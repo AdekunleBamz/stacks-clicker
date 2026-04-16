@@ -18,6 +18,7 @@ export function useKeydown(keyMap) {
       // Ignore if user is typing in an input, textarea, or contentEditable element
       const isTyping = event.target.tagName === 'INPUT' || 
                        event.target.tagName === 'TEXTAREA' || 
+                       event.target.tagName === 'SELECT' ||
                        event.target.isContentEditable;
 
       if (isTyping) return;
