@@ -36,9 +36,9 @@ const ScrollArea = memo(function ScrollArea({ children, className = '', style = 
 
   useEffect(() => {
     handleScroll(); // Init
-    window.addEventListener('resize', handleScroll);
-    return () => window.removeEventListener('resize', handleScroll);
-  }, []);
+    window.addEventListener('resize', handleScroll, { passive: true });
+    return () => window.removeEventListener('resize', handleScroll, { passive: true });
+  }, [handleScroll]);
 
   const showVerticalThumb = scrollState.scrollHeight > scrollState.clientHeight;
   const showHorizontalThumb = scrollState.scrollWidth > scrollState.clientWidth;
