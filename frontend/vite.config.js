@@ -15,6 +15,9 @@ export default defineConfig({
       buffer: 'buffer',
     },
   },
+  build: {
+    sourcemap: true,
+  },
   test: {
     globals: true,
     environment: 'jsdom',
