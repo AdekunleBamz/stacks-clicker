@@ -18,6 +18,7 @@ const ClickParticle = memo(function ClickParticle({ x, y, onComplete }) {
     return (
         <div
             className="particle-container"
+            aria-hidden="true"
             style={{
                 position: 'fixed',
                 left: x,
