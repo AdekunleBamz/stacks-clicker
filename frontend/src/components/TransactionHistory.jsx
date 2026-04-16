@@ -8,16 +8,12 @@ import TransactionItem from './TransactionItem';
 import BaseModal from './common/BaseModal';
 import { useDebounce } from '../hooks/useDebounce';
 import { useClipboard } from '../hooks/useClipboard';
+import { STACKS_NETWORK as DEFAULT_NETWORK } from '../utils/constants';
 
 function escapeCsvValue(value) {
   const normalized = String(value ?? '').replace(/"/g, '""');
   return `"${normalized}"`;
 }
-
-const DEFAULT_NETWORK =
-  String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
-    ? 'testnet'
-    : 'mainnet';
 
 /**
  * Component to display a list of recent transactions with status indicators.
