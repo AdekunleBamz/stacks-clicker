@@ -43,5 +43,6 @@ export function formatNumber(value, options = {}) {
 export function formatStx(microStx) {
   const numericValue = Number(microStx);
   if (!Number.isFinite(numericValue)) return '0.00 STX';
-  return (numericValue / 1000000).toFixed(2) + ' STX';
+  const stx = numericValue / 1_000_000;
+  return stx.toFixed(2) + ' STX';
 }
