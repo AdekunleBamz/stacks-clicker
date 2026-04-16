@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { PRICE_REFRESH_INTERVAL_MS } from '../utils/constants';
 
 /**
  * Custom hook to fetch and monitor the live STX (Stacks) price in USD.
@@ -58,7 +59,7 @@ export function usePrice() {
     };
 
     fetchPrice();
-    const interval = setInterval(fetchPrice, 60000); // Update every minute
+    const interval = setInterval(fetchPrice, PRICE_REFRESH_INTERVAL_MS);
 
     return () => {
       isMounted = false;
