@@ -31,7 +31,7 @@ const CountUp = memo(function CountUp({ value, decimals = 0, prefix = '', suffix
     }, [value, decimals]);
 
     return (
-        <span className="count-up">
+        <span className="count-up" aria-live="polite" aria-atomic="true">
             {prefix}{displayValue}{suffix}
         </span>
     );
