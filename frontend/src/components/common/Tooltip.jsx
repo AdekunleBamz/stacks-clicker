@@ -49,7 +49,6 @@ function Tooltip({ content, children }) {
             style={{ fontWeight: 500, letterSpacing: '0.01em' }}
             role="tooltip"
             aria-atomic="true"
-            aria-live="polite"
           >
             {content}
             <div className="tooltip-arrow" />
