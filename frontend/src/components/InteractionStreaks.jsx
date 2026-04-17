@@ -1,6 +1,7 @@
 import React, { useState, useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
+import { STREAK_THRESHOLDS } from '../utils/constants';
 
 /**
  * Component to track and display user interaction streaks and achievement badges.
@@ -30,10 +31,10 @@ function InteractionStreaks({ totalInteractions }) {
    */
   useEffect(() => {
     const newBadges = [];
-    if (totalInteractions >= 10) newBadges.push({ id: 'bronze', label: '🥉 Novice', color: '#cd7f32' });
-    if (totalInteractions >= 50) newBadges.push({ id: 'silver', label: '🥈 Regular', color: '#c0c0c0' });
-    if (totalInteractions >= 100) newBadges.push({ id: 'gold', label: '🥇 Pro', color: '#ffd700' });
-    if (totalInteractions >= 200) newBadges.push({ id: 'veteran', label: '🏅 Veteran', color: '#4fc3f7' });
+    if (totalInteractions >= STREAK_THRESHOLDS.BRONZE) newBadges.push({ id: 'bronze', label: '🥉 Novice', color: '#cd7f32' });
+    if (totalInteractions >= STREAK_THRESHOLDS.SILVER) newBadges.push({ id: 'silver', label: '🥈 Regular', color: '#c0c0c0' });
+    if (totalInteractions >= STREAK_THRESHOLDS.GOLD) newBadges.push({ id: 'gold', label: '🥇 Pro', color: '#ffd700' });
+    if (totalInteractions >= STREAK_THRESHOLDS.VETERAN) newBadges.push({ id: 'veteran', label: '🏅 Veteran', color: '#4fc3f7' });
     setBadges(newBadges);
   }, [totalInteractions]);
 
