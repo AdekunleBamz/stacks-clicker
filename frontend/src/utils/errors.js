@@ -57,7 +57,7 @@ export function parseContractError(error) {
   }
 
   // Handle common string-based patterns
-  if (lowerMessage.includes('user rejected')) {
+  if (lowerMessage.includes('user rejected') || lowerMessage.includes('cancelled')) {
     return ERROR_MAP['401'];
   }
 
