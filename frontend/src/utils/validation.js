@@ -62,7 +62,7 @@ export function validatePayload(payload, schema) {
       }
       const isValid = schema[key](payload[key]);
       if (!isValid) {
-        throw new Error(`Validation failed for key: ${key}. Value: ${payload[key]}`);
+        throw new Error(`Validation failed: "${key}" received invalid value (${JSON.stringify(payload[key])})`);
       }
     }
   }
