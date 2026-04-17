@@ -53,6 +53,14 @@ export const COMBO_TIMEOUT_MS = 2000;
 /** @type {number} Interval in ms between STX price refreshes */
 export const PRICE_REFRESH_INTERVAL_MS = 60_000;
 
+/** @type {Object} Interaction count thresholds for badge milestones */
+export const STREAK_THRESHOLDS = {
+  BRONZE: 10,
+  SILVER: 50,
+  GOLD: 100,
+  VETERAN: 200,
+};
+
 export default {
   DEPLOYER,
   CLICKER_CONTRACT,
