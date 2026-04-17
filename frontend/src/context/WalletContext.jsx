@@ -47,6 +47,10 @@ export function WalletProvider({ children }) {
       const stored = window.localStorage.getItem('stacks-session');
       if (stored) {
         const userData = JSON.parse(stored);
+        if (!userData || typeof userData !== 'object') {
+          setAddress(null);
+          return;
+        }
         const nextAddress =
           STACKS_NETWORK === 'testnet'
             ? userData?.addresses?.testnet || userData?.addresses?.mainnet
