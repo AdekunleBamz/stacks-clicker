@@ -38,6 +38,7 @@ export function stringToColor(str) {
  * @returns {number} A stable index in [0, length)
  */
 export function hashToIndex(str, length) {
+  if (!length || length <= 0) return 0;
   return simpleHash(str) % length;
 }
 
