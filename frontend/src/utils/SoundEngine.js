@@ -10,8 +10,9 @@ class SoundEngine {
     }
 
     setSettings(settings) {
-        this.masterVolume = settings.masterVolume;
-        this.sfxEnabled = settings.sfxEnabled;
+        const vol = Number(settings.masterVolume);
+        this.masterVolume = Number.isFinite(vol) ? Math.min(1, Math.max(0, vol)) : this.masterVolume;
+        this.sfxEnabled = Boolean(settings.sfxEnabled);
     }
 
     loadSound(name, url) {
