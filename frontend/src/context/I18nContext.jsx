@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useMemo } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
-const translations = {
+const translations = Object.freeze({
   en: {
     welcome: 'Welcome to Stacks Clicker V2',
     interactions: 'Interactions',
@@ -33,7 +33,7 @@ const translations = {
     loading: 'Chargement...',
     error: 'Quelque chose a mal tourné',
   },
-};
+});
 
 const I18nContext = createContext(null);
 
