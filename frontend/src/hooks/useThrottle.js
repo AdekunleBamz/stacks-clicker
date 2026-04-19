@@ -13,7 +13,7 @@ export function useThrottle(callback, delay) {
 
   return useCallback(
     (...args) => {
-      const now = new Date().getTime();
+      const now = Date.now();
       if (now - lastCall.current >= delay) {
         lastCall.current = now;
         return callback(...args);
