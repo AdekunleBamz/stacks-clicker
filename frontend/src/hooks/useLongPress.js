@@ -38,5 +38,6 @@ export function useLongPress(callback, { delay = 500 } = {}) {
     onMouseLeave: stop,
     onTouchStart: start,
     onTouchEnd: stop,
+    onTouchCancel: stop,
   };
 }
