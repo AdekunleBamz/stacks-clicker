@@ -21,6 +21,8 @@ export function useBattery() {
     }
 
     let batteryInstance = null;
+    let handleChange = null;
+    let cancelled = false;
 
     function updateBattery(batt) {
       setBattery({
@@ -32,24 +34,21 @@ export function useBattery() {
     }
 
     navigator.getBattery().then((batt) => {
+      if (cancelled) return;
       batteryInstance = batt;
-
-      const handleChange = () => updateBattery(batt);
+      handleChange = () => updateBattery(batt);
 
       batteryInstance.addEventListener('levelchange', handleChange);
       batteryInstance.addEventListener('chargingchange', handleChange);
 
       updateBattery(batt);
-
-      return () => {
-        batt.removeEventListener('levelchange', handleChange);
-        batt.removeEventListener('chargingchange', handleChange);
-      };
     });
 
     return () => {
-      if (batteryInstance) {
-        // handlers were attached in the then callback; cleanup handled there
+      cancelled = true;
+      if (batteryInstance && handleChange) {
+        batteryInstance.removeEventListener('levelchange', handleChange);
+        batteryInstance.removeEventListener('chargingchange', handleChange);
       }
     };
   }, []);
