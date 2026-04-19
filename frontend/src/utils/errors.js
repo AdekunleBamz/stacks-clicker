@@ -28,6 +28,7 @@ const ERROR_MAP = Object.freeze({
  * @returns {string} A user-friendly error message
  */
 export function parseContractError(error) {
+  if (!error) return 'Transaction failed: an unknown error occurred.';
   const errorMessage =
     typeof error === 'string'
       ? error
