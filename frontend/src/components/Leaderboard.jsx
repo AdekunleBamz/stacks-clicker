@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 
+const MEDAL_ICONS = ['🥇', '🥈', '🥉'];
+
 /**
  * Leaderboard Component
  * Displays top players in a vibrant, ranked list
@@ -29,7 +31,7 @@ export default function Leaderboard({ players }) {
                             <span className="player-address">{player.address}</span>
                             <span className="player-stats">{player.clicks} Clicks • LVL {player.level}</span>
                         </div>
-                        {i < 3 && <div className="medal-icon">{i === 0 ? '🥇' : i === 1 ? '🥈' : '🥉'}</div>}
+                        {i < 3 && <div className="medal-icon">{MEDAL_ICONS[i]}</div>}
                     </motion.div>
                 ))}
             </div>
