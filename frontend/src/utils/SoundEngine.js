@@ -42,12 +42,12 @@ const engine = new SoundEngine();
 
 // Preload sounds
 // In a production environment, these would be local assets in /public/sounds/
-const SOUND_ASSETS = {
+const SOUND_ASSETS = Object.freeze({
     click: 'https://assets.mixkit.co/sfx/preview/mixkit-modern-technology-select-3118.mp3',
     success: 'https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2015.mp3',
     levelUp: 'https://assets.mixkit.co/sfx/preview/mixkit-magic-marimba-notifaction-2231.mp3',
     error: 'https://assets.mixkit.co/sfx/preview/mixkit-wrong-answer-fail-notification-946.mp3'
-};
+});
 
 Object.entries(SOUND_ASSETS).forEach(([name, url]) => {
     engine.loadSound(name, url);
