@@ -9,6 +9,9 @@ import { useState, useEffect, useCallback } from 'react';
  * @returns {[any, Function]} A stateful value and a function to update it.
  */
 export function useLocalStorage(key, initialValue) {
+  if (!key || typeof key !== 'string') {
+    throw new Error('useLocalStorage: key must be a non-empty string');
+  }
   const readValue = useCallback(() => {
     if (typeof window === 'undefined') return initialValue;
 
