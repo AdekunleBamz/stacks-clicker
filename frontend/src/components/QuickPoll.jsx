@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useWallet } from '../context/WalletContext';
 import { callContract } from '../utils/walletconnect';
 import soundEngine from '../utils/SoundEngine';
-import { DEPLOYER } from '../utils/constants';
+import { DEPLOYER, QUICKPOLL_CONTRACT } from '../utils/constants';
 
 /**
  * QuickPoll Component
@@ -22,7 +22,7 @@ export default function QuickPoll({ onTxSubmit }) {
     try {
       const result = await callContract({
         contractAddress: DEPLOYER,
-        contractName: 'quickpoll-v2p',
+        contractName: QUICKPOLL_CONTRACT,
         functionName: 'create-poll',
         functionArgs: [{ type: 'string-ascii', value: pollQuestion }],
       });
@@ -43,7 +43,7 @@ export default function QuickPoll({ onTxSubmit }) {
     try {
       const result = await callContract({
         contractAddress: DEPLOYER,
-        contractName: 'quickpoll-v2p',
+        contractName: QUICKPOLL_CONTRACT,
         functionName: 'vote-yes',
         functionArgs: [{ type: 'uint128', value: pollId.toString() }],
       });
@@ -65,7 +65,7 @@ export default function QuickPoll({ onTxSubmit }) {
     try {
       const result = await callContract({
         contractAddress: DEPLOYER,
-        contractName: 'quickpoll-v2p',
+        contractName: QUICKPOLL_CONTRACT,
         functionName: 'vote-no',
         functionArgs: [{ type: 'uint128', value: pollId.toString() }],
       });
@@ -87,7 +87,7 @@ export default function QuickPoll({ onTxSubmit }) {
     try {
       const result = await callContract({
         contractAddress: DEPLOYER,
-        contractName: 'quickpoll-v2p',
+        contractName: QUICKPOLL_CONTRACT,
         functionName: 'quick-vote-yes',
         functionArgs: [],
       });
@@ -108,7 +108,7 @@ export default function QuickPoll({ onTxSubmit }) {
     try {
       const result = await callContract({
         contractAddress: DEPLOYER,
-        contractName: 'quickpoll-v2p',
+        contractName: QUICKPOLL_CONTRACT,
         functionName: 'quick-vote-no',
         functionArgs: [],
       });
