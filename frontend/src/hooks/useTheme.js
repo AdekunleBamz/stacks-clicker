@@ -1,6 +1,13 @@
 import { useEffect, useCallback } from 'react';
 import { useLocalStorage } from './useLocalStorage';
 
+function getSystemTheme() {
+  if (typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: light)').matches) {
+    return 'light';
+  }
+  return 'dark';
+}
+
 /**
  * Custom hook for managing the application theme (light/dark).
  * Synchronizes with localStorage and update the document's data-theme attribute.
@@ -8,13 +15,6 @@ import { useLocalStorage } from './useLocalStorage';
  * @returns {Object} { theme, toggleTheme, setTheme }
  */
 export function useTheme() {
-  const getSystemTheme = () => {
-    if (typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: light)').matches) {
-      return 'light';
-    }
-    return 'dark';
-  };
-
   const [theme, setTheme] = useLocalStorage('theme', getSystemTheme());
 
   useEffect(() => {
