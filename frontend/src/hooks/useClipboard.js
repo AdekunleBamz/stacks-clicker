@@ -22,7 +22,7 @@ export function useClipboard({ timeout = 2000 } = {}) {
   const copyToClipboard = useCallback(
     async (text) => {
       if (!text) return false;
-      
+
       if (!navigator?.clipboard?.writeText) {
         notify.error('Clipboard not available');
         return false;
@@ -32,7 +32,7 @@ export function useClipboard({ timeout = 2000 } = {}) {
         await navigator.clipboard.writeText(text);
         setCopied(true);
         notify.success('Copied to clipboard!');
-        
+
         if (timerRef.current) clearTimeout(timerRef.current);
         timerRef.current = setTimeout(() => setCopied(false), timeout);
         return true;
