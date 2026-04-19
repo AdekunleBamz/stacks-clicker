@@ -2,6 +2,13 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 
+const shakeVariants = {
+  shake: {
+    x: [0, -10, 10, -10, 10, 0],
+    transition: { duration: 0.4 }
+  }
+};
+
 /**
  * Reusable action button component with motion effects, loading states, and error animations.
  *
@@ -27,12 +34,6 @@ function ActionButton({
   cost,
   isError = false
 }) {
-  const shakeVariants = {
-    shake: {
-      x: [0, -10, 10, -10, 10, 0],
-      transition: { duration: 0.4 }
-    }
-  };
 
   return (
     <motion.button
