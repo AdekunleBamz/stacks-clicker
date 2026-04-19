@@ -93,7 +93,7 @@ export default function App() {
       notify.custom(`${action} submitted!`, action.split(' ')[0]);
       return tx;
     },
-    [configuredNetwork, playSound]
+    [playSound]
   );
 
   /**
