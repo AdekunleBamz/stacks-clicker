@@ -20,7 +20,7 @@ export function useCombo({ timeout = COMBO_TIMEOUT_MS } = {}) {
 
   const incrementCombo = useCallback(() => {
     setCombo((prev) => prev + 1);
-    
+
     if (timerRef.current) clearTimeout(timerRef.current);
     timerRef.current = setTimeout(() => {
       setCombo(0);
