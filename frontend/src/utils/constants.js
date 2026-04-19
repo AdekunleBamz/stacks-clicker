@@ -23,11 +23,11 @@ export const TIPJAR_CONTRACT = 'tipjar-v2p';
 export const QUICKPOLL_CONTRACT = 'quickpoll-v2p';
 
 /** @type {Object} Contract naming schema */
-export const CONTRACTS = {
+export const CONTRACTS = Object.freeze({
   CLICKER: CLICKER_CONTRACT,
   TIPJAR: TIPJAR_CONTRACT,
   QUICKPOLL: QUICKPOLL_CONTRACT,
-};
+});
 
 /** @type {Object} External API and explorer URLs */
 export const CONFIG = {
@@ -54,12 +54,12 @@ export const COMBO_TIMEOUT_MS = 2000;
 export const PRICE_REFRESH_INTERVAL_MS = 60_000;
 
 /** @type {Object} Interaction count thresholds for badge milestones */
-export const STREAK_THRESHOLDS = {
+export const STREAK_THRESHOLDS = Object.freeze({
   BRONZE: 10,
   SILVER: 50,
   GOLD: 100,
   VETERAN: 200,
-};
+});
 
 export default {
   DEPLOYER,
