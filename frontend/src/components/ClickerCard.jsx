@@ -69,16 +69,16 @@ function ClickerCard({ address, clicker }) {
             <motion.div
               style={{ willChange: 'transform, opacity' }}
               initial={{ opacity: 0, scale: 0.2, y: 40, rotate: -15 }}
-              animate={{ 
-                opacity: 1, 
-                scale: Math.min(1 + combo * 0.05, 1.5), 
-                y: 0, 
-                rotate: 0 
+              animate={{
+                opacity: 1,
+                scale: Math.min(1 + combo * 0.05, 1.5),
+                y: 0,
+                rotate: 0
               }}
               exit={{ opacity: 0, scale: 2, y: -40, filter: 'blur(10px)' }}
-              transition={{ 
-                type: 'spring', 
-                stiffness: 600, 
+              transition={{
+                type: 'spring',
+                stiffness: 600,
                 damping: 20,
                 mass: 0.8
               }}

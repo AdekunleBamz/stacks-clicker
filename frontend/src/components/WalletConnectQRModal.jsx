@@ -56,9 +56,9 @@ export default function WalletConnectQRModal({ uri, onClose }) {
             <a href={wcLink} target="_blank" rel="noopener noreferrer" className="qr-mobile-link">
               Open in Wallet App →
             </a>
-            <button 
-              type="button" 
-              className="qr-copy-btn" 
+            <button
+              type="button"
+              className="qr-copy-btn"
               onClick={handleCopy}
               title="Copy pairing link"
             >

@@ -160,8 +160,8 @@ function QuickPollCard({ address, quickpoll }) {
           <span className="stat-label">Total Votes</span>
             <span className="timer-text">Ends in: {formatTime(timeLeft)}</span>
           </div>
-          <button 
-            type="button" 
+          <button
+            type="button"
             className="share-poll-btn"
             aria-label="Share Poll Results"
             title="Copy Results Link"
