@@ -102,12 +102,12 @@ const GlassToast = ({ t, message, type, isLoading = false, customIcon = null }) 
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
         {activeIcon && (
-          <div style={{ 
-            background: `${color}15`, 
-            padding: '8px', 
-            borderRadius: '50%', 
-            display: 'flex', 
-            alignItems: 'center', 
+          <div style={{
+            background: `${color}15`,
+            padding: '8px',
+            borderRadius: '50%',
+            display: 'flex',
+            alignItems: 'center',
             justifyContent: 'center',
             border: `1px solid ${color}30`
           }}>
@@ -116,7 +116,7 @@ const GlassToast = ({ t, message, type, isLoading = false, customIcon = null }) 
         )}
         <span style={{ letterSpacing: '0.02em', textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>{message}</span>
       </div>
-      
+
       {!isLoading && (
         <motion.div
           initial={{ width: '100%' }}

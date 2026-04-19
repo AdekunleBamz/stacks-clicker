@@ -17,19 +17,19 @@ const AnimatedNumber = ({ value, duration = 1 }) => {
 
   useEffect(() => {
     if (typeof value !== 'number') return;
-    
+
     const controls = animate(displayValue, value, {
       duration,
       onUpdate: (latest) => setDisplayValue(Math.floor(latest)),
     });
-    
+
     return () => controls.stop();
   }, [value, duration]); // Intentionally not including displayValue to avoid infinite loops
 
   return (
-    <span 
-      role="status" 
-      aria-live="polite" 
+    <span
+      role="status"
+      aria-live="polite"
       aria-atomic="true"
       className="animated-number"
     >
