@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 
+const MILESTONE_THRESHOLDS = [10, 50, 100, 200, 500, 1000];
+
 /**
  * Custom hook for managing gameplay milestones and celebrations.
  * Monitors interaction stats and triggers celebration events at specific thresholds.
@@ -14,10 +16,9 @@ export function useMilestones({ stats, onMilestone }) {
   const celebrationTimeoutRef = useRef(null);
 
   useEffect(() => {
-    const milestones = [10, 50, 100, 200, 500, 1000];
     const total = stats.clicks + stats.tips + stats.votes;
     
-    if (milestones.includes(total) && total > 0) {
+    if (MILESTONE_THRESHOLDS.includes(total) && total > 0) {
       const message = `Level Up: ${total} Interactions!`;
       setCelebration(message);
       onMilestone?.(total);
