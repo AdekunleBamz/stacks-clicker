@@ -17,7 +17,7 @@ export function useMilestones({ stats, onMilestone }) {
 
   useEffect(() => {
     const total = stats.clicks + stats.tips + stats.votes;
-    
+
     if (MILESTONE_THRESHOLDS.includes(total) && total > 0) {
       const message = `Level Up: ${total} Interactions!`;
       setCelebration(message);

@@ -30,7 +30,7 @@ export function useLocalStorage(key, initialValue) {
     (value) => {
       try {
         const valueToStore = typeof value === 'function' ? value(storedValue) : value;
-        
+
         // Prevent redundant writes if values are deep-equal (simple check for now)
         if (JSON.stringify(valueToStore) === JSON.stringify(storedValue)) {
           return;

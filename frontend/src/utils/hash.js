@@ -5,7 +5,7 @@
 /**
  * Generates a simple DJB2 hash of a string.
  * Useful for mapping transaction IDs to colors or icons deterministically.
- * 
+ *
  * @param {string} str - String to hash
  * @returns {number} 32-bit hash value
  */
@@ -20,7 +20,7 @@ export function simpleHash(str) {
 
 /**
  * Generates a deterministic HSL color from a string hash.
- * 
+ *
  * @param {string} str - String to colorize
  * @returns {string} HSL color string
  */

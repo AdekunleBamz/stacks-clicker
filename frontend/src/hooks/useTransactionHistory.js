@@ -81,7 +81,7 @@ export function useTransactionHistory({ playSound, onTxAdded }) {
   const clearLog = useCallback(() => {
     setTxLog([]);
   }, [setTxLog]);
-  
+
   return {
     txLog,
     addTxToLog,

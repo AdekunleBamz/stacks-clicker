@@ -4,7 +4,7 @@
 
 /**
  * Truncates a Stacks address for display with flexible sizing.
- * 
+ *
  * @param {string} address - The full Stacks address
  * @param {Object} [options] - Truncation options
  * @param {number} [options.prefix=4] - Chars to show at start
@@ -23,7 +23,7 @@ export function truncateAddress(address, { prefix = 4, suffix = 4, separator = '
 
 /**
  * Formats a number as a human-readable currency or interaction count.
- * 
+ *
  * @param {number} value - The numeric value to format
  * @param {Object} [options] - Intl.NumberFormat options
  * @returns {string} The formatted string
@@ -36,7 +36,7 @@ export function formatNumber(value, options = {}) {
 
 /**
  * Formats a STX micro-amount into a human-readable string.
- * 
+ *
  * @param {number} microStx - The amount in micro-STX
  * @returns {string} The formatted STX amount
  */
