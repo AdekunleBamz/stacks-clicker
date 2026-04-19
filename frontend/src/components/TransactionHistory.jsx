@@ -109,7 +109,7 @@ function TransactionHistory({ txLog }) {
     [txLog]
   );
 
-  const copyText = useCallback(async (value, label = 'Value') => {
+  const copyText = useCallback(async (value) => {
     copyToClipboard(value);
   }, [copyToClipboard]);
 
