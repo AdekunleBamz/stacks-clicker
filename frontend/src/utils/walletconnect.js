@@ -289,6 +289,8 @@ export async function callContract({
     throw new Error(
       `Broadcast backoff active for ${contractName}.${functionName}. Please try again in ${waitSeconds} seconds`
     );
+  } else if (backoffUntil > 0) {
+    callBackoffUntilByKey.delete(backoffKey);
   }
 
   log('Requesting stx_callContract:', contractName, functionName);
