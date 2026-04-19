@@ -2,6 +2,8 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 
+const PARTICLE_COUNT = Array.from({ length: 8 });
+
 /**
  * ClickParticle Component - Creates a visual burst effect at the click location.
  * Renders 8 particles that explode outward in a radial pattern with fading opacity.
@@ -13,7 +15,6 @@ import { motion, AnimatePresence } from 'framer-motion';
  * @returns {JSX.Element} The rendered particle burst effect
  */
 const ClickParticle = memo(function ClickParticle({ x, y, onComplete }) {
-    const particles = Array.from({ length: 8 });
 
     return (
         <div
@@ -27,7 +28,7 @@ const ClickParticle = memo(function ClickParticle({ x, y, onComplete }) {
                 zIndex: 9999
             }}
         >
-            {particles.map((_, i) => {
+        {PARTICLE_COUNT.map((_, i) => {
                 const angle = (i * 45) * (Math.PI / 180);
                 const distance = 40 + Math.random() * 40;
                 const targetX = Math.cos(angle) * distance;
