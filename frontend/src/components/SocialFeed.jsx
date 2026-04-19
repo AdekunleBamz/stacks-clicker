@@ -2,6 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 
+const ACTIVITY_ICONS = Object.freeze({
+    click: '👆',
+    tip: '💰',
+    poll: '🗳️',
+    streak: '🔥',
+});
+
 /**
  * SocialFeed Component
  * Real-time community activity stream
@@ -33,10 +40,7 @@ export default function SocialFeed({ activities }) {
                             className={`activity-item type-${activity.type}`}
                         >
                             <span className="activity-icon">
-                                {activity.type === 'click' && '👆'}
-                                {activity.type === 'tip' && '💰'}
-                                {activity.type === 'poll' && '🗳️'}
-                                {activity.type === 'streak' && '🔥'}
+                                {ACTIVITY_ICONS[activity.type] ?? '📌'}
                             </span>
                             <div className="activity-content">
                                 <span className="activity-user">{activity.user}</span>
