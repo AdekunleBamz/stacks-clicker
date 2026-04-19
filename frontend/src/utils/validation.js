@@ -26,7 +26,7 @@ export function isNonEmptyString(value) {
   return typeof value === 'string' && value.trim().length > 0;
 }
 
-export const SCHEMAS = {
+export const SCHEMAS = Object.freeze({
   CLICK: {
     amount: (val) => Number.isFinite(val) && val > 0,
   },
@@ -38,7 +38,7 @@ export const SCHEMAS = {
     optionId: (val) => Number.isInteger(val) && val >= 0,
     pollId: (val) => Number.isInteger(val) && val >= 0,
   },
-};
+});
 
 /**
  * Validates a payload against a pre-defined schema.
