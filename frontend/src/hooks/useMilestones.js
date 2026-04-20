@@ -24,7 +24,7 @@ export function useMilestones({ stats, onMilestone }) {
       onMilestone?.(total);
 
       window.clearTimeout(celebrationTimeoutRef.current);
-      celebrationTimeoutRef.current = window.setTimeout(() => setCelebration(null), 3000);
+      celebrationTimeoutRef.current = window.setTimeout(() => setCelebration(null), 3500);
     }
 
     return () => window.clearTimeout(celebrationTimeoutRef.current);
