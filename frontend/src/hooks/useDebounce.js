@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 
 /**
  * Custom hook for debouncing a value.
@@ -29,4 +29,28 @@ export function useDebounce(value, delay) {
   }, [value, delay]);
 
   return debouncedValue;
+}
+
+/**
+ * Custom hook that returns a debounced version of a callback function.
+ *
+ * @param {Function} callback - The function to debounce
+ * @param {number} delay - Debounce delay in ms
+ * @returns {Function} Debounced callback
+ */
+export function useDebouncedCallback(callback, delay) {
+  const timerRef = useRef(null);
+  const callbackRef = useRef(callback);
+  callbackRef.current = callback;
+
+  return useCallback(
+    (...args) => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+      const resolvedDelay = Number.isFinite(delay) && delay >= 0 ? delay : 300;
+      timerRef.current = setTimeout(() => {
+        callbackRef.current(...args);
+      }, resolvedDelay);
+    },
+    [delay]
+  );
 }
