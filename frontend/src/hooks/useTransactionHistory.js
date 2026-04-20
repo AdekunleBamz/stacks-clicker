@@ -2,12 +2,9 @@ import { useCallback, useMemo } from 'react';
 import { useLocalStorage } from './useLocalStorage';
 import { notify } from '../utils/toast';
 
-import { MAX_TX_LOG_SIZE, CONFIG, STACKS_NETWORK } from '../utils/constants';
+import { MAX_TX_LOG_SIZE, STACKS_NETWORK } from '../utils/constants';
 
-const STACKS_NETWORK =
-  String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
-    ? 'testnet'
-    : 'mainnet';
+const DEBUG = import.meta.env.VITE_DEBUG === 'true';
 
 /**
  * Custom hook for managing the transaction history log.
@@ -25,7 +22,6 @@ export function useTransactionHistory({ playSound, onTxAdded }) {
   const successTxs = useMemo(() => txLog.filter((tx) => tx.status === 'success'), [txLog]);
   const failedTxs = useMemo(() => txLog.filter((tx) => tx.status === 'failed' || tx.status === 'error'), [txLog]);
   const txCount = useMemo(() => txLog.length, [txLog]);
-
   const addTxToLog = useCallback(
     (action, txId, status = 'success') => {
       const submittedAt = new Date();
@@ -80,7 +76,10 @@ export function useTransactionHistory({ playSound, onTxAdded }) {
    */
   const clearLog = useCallback(() => {
     setTxLog([]);
-  }, [setTxLog]);
+    if (DEBUG) {
+      console.debug('[useTransactionHistory] Transaction log cleared');
+    }
+  }, [DEBUG, setTxLog]);
 
   return {
     txLog,
