@@ -79,9 +79,12 @@ export function useQuickPoll({ onTxSubmit }) {
   );
 
   const createPoll = useCallback((question) => {
-    const normalizedQuestion = String(question).trim();
+    const normalizedQuestion = String(question ?? '').trim();
     if (!normalizedQuestion) {
       throw new Error('Poll question is required');
+    }
+    if (normalizedQuestion.length > 200) {
+      throw new Error('Poll question must not exceed 200 characters');
     }
     if (!/^[\x00-\x7F]+$/.test(normalizedQuestion)) {
       throw new Error('Poll question must use ASCII characters');
