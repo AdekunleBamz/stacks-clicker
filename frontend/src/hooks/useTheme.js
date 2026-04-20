@@ -18,7 +18,8 @@ export function useTheme() {
   const [theme, setTheme] = useLocalStorage('theme', getSystemTheme());
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
+    const validTheme = theme === 'light' || theme === 'dark' ? theme : 'dark';
+    document.documentElement.setAttribute('data-theme', validTheme);
   }, [theme]);
 
   const toggleTheme = useCallback(() => {
