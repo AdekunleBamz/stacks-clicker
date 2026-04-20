@@ -30,24 +30,26 @@ export function useLocalStorage(key, initialValue) {
   const setValue = useCallback(
     (value) => {
       try {
-        const valueToStore = typeof value === 'function' ? value(storedValue) : value;
+        setStoredValue((previousValue) => {
+          const valueToStore = typeof value === 'function' ? value(previousValue) : value;
 
-        // Prevent redundant writes if values are deep-equal (simple check for now)
-        if (JSON.stringify(valueToStore) === JSON.stringify(storedValue)) {
-          return;
-        }
+          // Prevent redundant writes if values are deep-equal (simple check for now)
+          if (JSON.stringify(valueToStore) === JSON.stringify(previousValue)) {
+            return previousValue;
+          }
 
-        setStoredValue(valueToStore);
+          if (typeof window !== 'undefined') {
+            window.localStorage.setItem(trimmedKey, JSON.stringify(valueToStore));
+            window.dispatchEvent(new CustomEvent('local-storage', { detail: { key: trimmedKey } }));
+          }
 
-        if (typeof window !== 'undefined') {
-          window.localStorage.setItem(key, JSON.stringify(valueToStore));
-          window.dispatchEvent(new CustomEvent('local-storage', { detail: { key } }));
-        }
+          return valueToStore;
+        });
       } catch (error) {
-        console.error(`[useLocalStorage] Error setting key "${key}":`, error);
+        console.error(`[useLocalStorage] Error setting key "${trimmedKey}":`, error);
       }
     },
-    [key, storedValue]
+    [trimmedKey]
   );
 
   useEffect(() => {
