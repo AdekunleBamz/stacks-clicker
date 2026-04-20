@@ -11,11 +11,12 @@ export function useNetworkStatus() {
     typeof window !== 'undefined' ? window.navigator.onLine : true
   );
   const [lastChanged, setLastChanged] = useState(null);
+  const [connectionCount, setConnectionCount] = useState(0);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    const handleOnline = () => { setIsOnline(true); setLastChanged(Date.now()); };
+    const handleOnline = () => { setIsOnline(true); setLastChanged(Date.now()); setConnectionCount((c) => c + 1); };
     const handleOffline = () => { setIsOnline(false); setLastChanged(Date.now()); };
 
     window.addEventListener('online', handleOnline, { passive: true });
@@ -27,5 +28,5 @@ export function useNetworkStatus() {
     };
   }, []);
 
-  return { isOnline, lastChanged };
+  return { isOnline, lastChanged, connectionCount };
 }
