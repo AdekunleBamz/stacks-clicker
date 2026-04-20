@@ -139,6 +139,21 @@ describe('useLocalStorage hook', () => {
     expect(result.current[0]).toBe(12);
   });
 
+  it('applies same-key storage events from other tabs', () => {
+    const { result } = renderHook(() => useLocalStorage('cross-tab-key', 1));
+
+    act(() => {
+      window.dispatchEvent(
+        new StorageEvent('storage', {
+          key: 'cross-tab-key',
+          newValue: JSON.stringify(55),
+        })
+      );
+    });
+
+    expect(result.current[0]).toBe(55);
+  });
+
   it('applies successive functional updates without stale state loss', () => {
     const { result } = renderHook(() => useLocalStorage('counter-key', { count: 0 }));
 
