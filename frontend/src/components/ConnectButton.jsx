@@ -58,6 +58,7 @@ export default function ConnectButton() {
           onClick={connectWallet}
           aria-label="Connect Stacks Wallet"
           aria-haspopup="dialog"
+          role="button"
         >
           Connect Wallet
         </motion.button>
