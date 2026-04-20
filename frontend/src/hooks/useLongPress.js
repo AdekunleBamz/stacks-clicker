@@ -34,6 +34,7 @@ export function useLongPress(callback, { delay = 500 } = {}) {
   }, []);
 
   return {
+    isPressing,
     onMouseDown: start,
     onMouseUp: stop,
     onMouseLeave: stop,
