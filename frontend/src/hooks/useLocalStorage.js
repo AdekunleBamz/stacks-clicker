@@ -9,20 +9,21 @@ import { useState, useEffect, useCallback } from 'react';
  * @returns {[any, Function]} A stateful value and a function to update it.
  */
 export function useLocalStorage(key, initialValue) {
-  if (!key || typeof key !== 'string') {
+  if (!key || typeof key !== 'string' || !key.trim()) {
     throw new Error('useLocalStorage: key must be a non-empty string');
   }
+  const trimmedKey = key.trim();
   const readValue = useCallback(() => {
     if (typeof window === 'undefined') return initialValue;
 
     try {
-      const item = window.localStorage.getItem(key);
+      const item = window.localStorage.getItem(trimmedKey);
       return item ? JSON.parse(item) : initialValue;
     } catch (error) {
-      console.warn(`Error reading localStorage key "${key}":`, error);
+      console.warn(`Error reading localStorage key "${trimmedKey}":`, error);
       return initialValue;
     }
-  }, [key, initialValue]);
+  }, [trimmedKey, initialValue]);
 
   const [storedValue, setStoredValue] = useState(readValue);
 
