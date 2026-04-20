@@ -109,7 +109,7 @@ git clone https://github.com/AdekunleBamz/stacks-clicker.git && cd stacks-clicke
 npm ci && cp frontend/.env.example frontend/.env && npm run dev
 
 # Run frontend tests
-npm run test
+npm run test:run
 
 # Run contract checks
 npm run check
