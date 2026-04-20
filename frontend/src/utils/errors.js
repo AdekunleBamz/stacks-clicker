@@ -64,6 +64,10 @@ export function parseContractError(error) {
     return ERROR_MAP['401'];
   }
 
+  if (lowerMessage.includes('disconnected') || lowerMessage.includes('connection lost')) {
+    return 'Wallet Disconnected: Please reconnect your wallet and try again.';
+  }
+
   if (lowerMessage.includes('insufficient')) {
     return ERROR_MAP['101'];
   }
