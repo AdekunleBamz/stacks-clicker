@@ -30,6 +30,7 @@ Complete all items before and during a release to ensure quality and traceabilit
 - [ ] Validate production links work correctly after deployment.
 - [ ] Record the release timestamp and operator in deployment notes.
 - [ ] Tag the release commit with semantic version tag.
+- [ ] Example: `git tag vX.Y.Z && git push origin vX.Y.Z`
 
 ## Post-Release
 
