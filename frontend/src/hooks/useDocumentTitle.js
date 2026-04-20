@@ -11,8 +11,10 @@ import { useEffect } from 'react';
 export function useDocumentTitle({ title, count = 0 }) {
   useEffect(() => {
     if (!title || typeof title !== 'string') return;
+    const trimmedTitle = title.trim();
+    if (!trimmedTitle) return;
     const previous = document.title;
-    document.title = count > 0 ? `(${count}) ${title}` : title;
+    document.title = count > 0 ? `(${count}) ${trimmedTitle}` : trimmedTitle;
     return () => {
       document.title = previous;
     };
