@@ -12,7 +12,7 @@ Common issues and solutions for local development setup.
 ### Dependencies
 - Reinstall dependencies when lockfiles change: `npm ci`
 - Clear npm cache if issues persist: `npm cache clean --force`
-- Delete `node_modules` and reinstall: `rm -rf node_modules && npm install`
+- Delete `node_modules` and reinstall: `rm -rf node_modules && npm ci`
 
 ## Environment Variables
 
