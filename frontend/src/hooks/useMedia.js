@@ -8,12 +8,12 @@ import { useState, useEffect } from 'react';
  */
 export function useMedia(query) {
   const [matches, setMatches] = useState(() => {
-    if (typeof window === 'undefined' || !query) return false;
+    if (typeof window === 'undefined' || !query || typeof query !== 'string') return false;
     return window.matchMedia(query).matches;
   });
 
   useEffect(() => {
-    if (typeof window === 'undefined') return undefined;
+    if (typeof window === 'undefined' || !query || typeof query !== 'string') return undefined;
 
     const media = window.matchMedia(query);
     const listener = () => setMatches(media.matches);
