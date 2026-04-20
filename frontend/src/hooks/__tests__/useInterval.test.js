@@ -92,6 +92,25 @@ describe('useInterval hook', () => {
     expect(secondCallback).toHaveBeenCalledTimes(1);
   });
 
+  it('clears scheduled interval on unmount', () => {
+    vi.useFakeTimers();
+    const callback = vi.fn();
+
+    const { unmount } = renderHook(() => useInterval(callback, 1000));
+
+    act(() => {
+      vi.advanceTimersByTime(1000);
+    });
+    expect(callback).toHaveBeenCalledTimes(1);
+
+    unmount();
+
+    act(() => {
+      vi.advanceTimersByTime(3000);
+    });
+    expect(callback).toHaveBeenCalledTimes(1);
+  });
+
   it('does not throw if callback is missing', () => {
     vi.useFakeTimers();
 
