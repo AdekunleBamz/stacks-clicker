@@ -73,6 +73,19 @@ describe('useInterval hook', () => {
     expect(callback).not.toHaveBeenCalled();
   });
 
+  it('does not schedule interval for string delays', () => {
+    vi.useFakeTimers();
+    const callback = vi.fn();
+
+    renderHook(() => useInterval(callback, '1000'));
+
+    act(() => {
+      vi.advanceTimersByTime(5000);
+    });
+
+    expect(callback).not.toHaveBeenCalled();
+  });
+
   it('supports zero-delay intervals', () => {
     vi.useFakeTimers();
     const callback = vi.fn();
