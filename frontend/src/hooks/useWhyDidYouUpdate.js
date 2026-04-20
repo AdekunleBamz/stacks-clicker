@@ -9,6 +9,7 @@ import { useEffect, useRef } from 'react';
  */
 export function useWhyDidYouUpdate(name, props) {
   const previousProps = useRef();
+  const safeName = typeof name === 'string' && name.trim() ? name.trim() : 'UnknownComponent';
 
   useEffect(() => {
     if (previousProps.current) {
@@ -25,7 +26,7 @@ export function useWhyDidYouUpdate(name, props) {
       });
 
       if (Object.keys(changesObj).length && import.meta.env.DEV) {
-        console.group(`[why-did-you-update] ${name}`);
+        console.group(`[why-did-you-update] ${safeName}`);
         console.log('Changed props:', changesObj);
         console.groupEnd();
       }
