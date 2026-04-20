@@ -16,6 +16,7 @@ Complete all items before initiating a deployment.
 - [ ] Ensure deployer wallet balance is sufficient for gas fees.
 - [ ] Confirm environment variables match the intended target network.
 - [ ] Verify contract addresses are correct for the target network.
+- [ ] Run one wallet-authenticated dry action on the target network before final deploy broadcast.
 
 ### System
 
