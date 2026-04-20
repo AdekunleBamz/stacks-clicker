@@ -183,8 +183,9 @@ export async function getAddresses() {
   log('Requesting stx_getAddresses');
 
   // Timeout wrapper (15 seconds)
+  let timeoutId;
   const timeoutPromise = new Promise((_, reject) => {
-    setTimeout(() => reject(new Error('stx_getAddresses timed out')), 15000);
+    timeoutId = setTimeout(() => reject(new Error('stx_getAddresses timed out')), 15000);
   });
 
   try {
@@ -216,6 +217,8 @@ export async function getAddresses() {
   } catch (err) {
     log('stx_getAddresses failed, falling back to session parse:', err.message);
     return parseSessionAddress();
+  } finally {
+    if (timeoutId) clearTimeout(timeoutId);
   }
 }
 
