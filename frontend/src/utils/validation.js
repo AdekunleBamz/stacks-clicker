@@ -44,6 +44,15 @@ export function isValidMicroStxAmount(value) {
   return Number.isInteger(value) && value >= 0;
 }
 
+/**
+ * Returns true if the tip amount meets the minimum threshold.
+ * @param {*} value
+ * @returns {boolean}
+ */
+export function isValidTipAmount(value) {
+  return Number.isFinite(Number(value)) && Number(value) >= MIN_TIP_MICRO_STX;
+}
+
 export const SCHEMAS = Object.freeze({
   CLICK: {
     amount: (val) => Number.isFinite(val) && val > 0,
