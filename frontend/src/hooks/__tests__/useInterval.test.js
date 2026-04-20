@@ -60,6 +60,19 @@ describe('useInterval hook', () => {
     expect(callback).not.toHaveBeenCalled();
   });
 
+  it('supports zero-delay intervals', () => {
+    vi.useFakeTimers();
+    const callback = vi.fn();
+
+    renderHook(() => useInterval(callback, 0));
+
+    act(() => {
+      vi.advanceTimersByTime(5);
+    });
+
+    expect(callback).toHaveBeenCalled();
+  });
+
   it('does not throw if callback is missing', () => {
     vi.useFakeTimers();
 
