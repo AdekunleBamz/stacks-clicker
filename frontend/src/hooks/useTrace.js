@@ -9,6 +9,7 @@ import { useEffect, useRef } from 'react';
  */
 export function useTrace(componentName, props) {
   const prevProps = useRef(props);
+  const safeName = typeof componentName === 'string' && componentName.trim() ? componentName.trim() : 'Unknown';
 
   useEffect(() => {
     const changedProps = Object.entries(props).reduce((ps, [k, v]) => {
@@ -19,7 +20,7 @@ export function useTrace(componentName, props) {
     }, {});
 
     if (Object.keys(changedProps).length > 0 && import.meta.env.DEV) {
-      console.debug(`[useTrace] ${componentName} changed:`, changedProps);
+      console.debug(`[useTrace] ${safeName} changed:`, changedProps);
     }
 
     prevProps.current = props;
