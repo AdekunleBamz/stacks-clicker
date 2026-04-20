@@ -7,5 +7,6 @@
 - Include the exact `txid` or wallet rejection code in triage notes whenever available.
 - Confirm explorer lookups use the correct network to avoid false negatives during triage.
 - Capture provider throttle details (`TooMuchChaining`, quota retry seconds) when present.
+- Log the account nonce observed at signing time when diagnosing repeated broadcast failures.
 
 Companion index: [Operations docs](README.md).
