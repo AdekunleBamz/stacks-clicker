@@ -12,7 +12,7 @@ export function useDebounce(value, delay) {
   const [debouncedValue, setDebouncedValue] = useState(value);
 
   useEffect(() => {
-    const resolvedDelay = typeof delay === 'number' && delay >= 0 ? delay : 300;
+    const resolvedDelay = Number.isFinite(delay) && delay >= 0 ? delay : 300;
 
     if (resolvedDelay === 0) {
       setDebouncedValue(value);
