@@ -21,7 +21,7 @@ export function useIntersectionObserver({
 
   useEffect(() => {
     const element = elementRef.current;
-    if (!element) return undefined;
+    if (!element || typeof IntersectionObserver === 'undefined') return undefined;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
