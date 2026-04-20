@@ -42,6 +42,7 @@ export function useCombo({ timeout = COMBO_TIMEOUT_MS } = {}) {
   return {
     combo,
     maxCombo,
+    isPeak: combo > 0 && combo === maxCombo,
     incrementCombo,
     resetCombo,
     isActive: combo > 0,
