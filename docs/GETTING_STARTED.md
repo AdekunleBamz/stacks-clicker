@@ -13,7 +13,7 @@ Stacks Clicker is a GameFi demonstration built on the Stacks blockchain (Bitcoin
 - **Node.js**: v18.0.0 or higher
 - **Package Manager**: npm (comes with Node.js)
 - **Stacks Wallet**: [Hiro](https://www.hiro.so/wallet), [Leather](https://leather.io/), or [Xverse](https://www.xverse.app/) (installed as a browser extension)
-- **WalletConnect ID**: Obtain one at [reown.com](https://reown.com/)
+- **WalletConnect ID**: Obtain one at [cloud.walletconnect.com](https://cloud.walletconnect.com)
 
 ## 🏃 Quick Start
 
