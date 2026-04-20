@@ -24,7 +24,7 @@ Stacks Clicker aims to be more than just a game; it is a gateway for users to ex
 - **💰 TipJar**: Support creators and generate activity with quick and custom tips.
 - **🗳️ QuickPoll**: Decentralized voting and poll creation for community engagement.
 - **🔥 Interaction Streaks**: Gamified engagement tracking with earned achievement badges.
-- **🌍 Multi-language**: Current I18n support includes English and Spanish.
+- **🌍 Multi-language**: Full I18n support including localization for English and Yoruba.
 - **🛡️ Secure Wallet**: Seamless integration with the Stacks/Hiro wallet.
 - **⚡ Performance First**: Zero-lag UI with glassmorphism, lazy loading, and memoized components.
 
