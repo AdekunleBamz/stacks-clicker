@@ -12,7 +12,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Link version tags to GitHub release pages when available.
 
 ## [Unreleased]
+### Added
+- `PLATINUM` tier (500 interactions) to `STREAK_THRESHOLDS`.
+- `MAX_POLL_OPTIONS` constant to cap quick poll option count.
+- `isPositiveInteger` helper to validation utils.
+- `isCritical` battery flag (level ≤ 5%) to `useBattery`.
+- `showWarning` helper to `useNotifications`.
+- `isDark` / `isLight` convenience booleans to `useTheme`.
+- `isAnyOpen` computed field to `ModalContext`.
+- `connectionCount` tracker to `useNetworkStatus`.
+- `stop` method to `SoundEngine` for halting sound playback.
+- 408 timeout and wallet-disconnected entries to `ERROR_MAP`.
+- 2000 interaction milestone threshold to `useMilestones`.
+
 ### Changed
+- `stringToColor` now varies saturation for more visually distinct colors.
+- `useThrottle`, `useDebounce`, `useLongPress`, `useCombo`, `useClipboard` all use `Number.isFinite` for delay validation.
+- `useScrollPosition` removal call now passes `passive: true` to match registration.
+- `useDocumentTitle` trims whitespace from title before setting.
+- `useIntersectionObserver` clamps `threshold` to `[0, 1]`.
+- `useWindowSize` extracts debounce delay as a named constant.
+- `useWhyDidYouUpdate` and `useTrace` guard against empty component names.
+- `useMedia` guards against non-string query arguments.
+- `useDocumentVisibility` passes `passive: true` to visibility listener.
+- `formatPercent` guards `decimals` param against non-integer values.
+- `formatStx` allows display of negative micro-STX values.
+
+### Fixed
+- `parseContractError` now handles `disconnected`/`connection lost` error patterns.
+
+### Docs
+- Added commit type reference list to `CONTRIBUTING.md`.
+- Added response timeline table to `SECURITY.md`.
+
+### Changed (prior)
 - Improved contributor and setup documentation quality.
 - Enhanced security policy with detailed procedures.
 - Updated code of conduct with comprehensive guidelines.
