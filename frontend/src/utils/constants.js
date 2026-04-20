@@ -71,6 +71,14 @@ export const MAX_COMBO_MULTIPLIER = 10;
 /** @type {number} Number of transactions to display per page in the history view */
 export const TX_HISTORY_PAGE_SIZE = 10;
 
+/** @type {Object} Poll lifecycle status codes */
+export const POLL_STATUS = Object.freeze({
+  OPEN: 'open',
+  CLOSED: 'closed',
+  PENDING: 'pending',
+  CANCELLED: 'cancelled',
+});
+
 export default {
   DEPLOYER,
   CLICKER_CONTRACT,
