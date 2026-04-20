@@ -142,7 +142,7 @@ graph TD
 
 - **Frontend**: Vite + React + Framer Motion for a 60fps glassmorphic UI.
 - **State Management**: Context API for global wallet and I18n state; custom hooks for domain logic.
-- **On-chain**: Integrated with `@stacks/transactions` and Hiro API for real-time blockchain telemetry.
+- **On-chain**: Integrated with Stacks Connect tooling and Hiro API for real-time blockchain telemetry.
 - See [ARCHITECTURE.md](ARCHITECTURE.md) for full end-to-end interaction flow details.
 
 ## Security & Verification 🔑
