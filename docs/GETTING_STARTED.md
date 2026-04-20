@@ -52,7 +52,7 @@ Visit `http://localhost:5173` to interact with the dApp.
 ## 🧪 Testing
 From the `frontend` directory, run the automated test suite:
 ```bash
-npm run test -- --run
+npm run test:run
 ```
 For watch mode during development:
 ```bash
