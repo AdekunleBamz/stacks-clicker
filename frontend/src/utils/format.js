@@ -127,3 +127,21 @@ export function formatSignedNumber(value, decimals = 2) {
   const formatted = Math.abs(numericValue).toFixed(safeDecimals);
   return numericValue >= 0 ? `+${formatted}` : `-${formatted}`;
 }
+
+/**
+ * Formats a byte count into a human-readable size string.
+ *
+ * @param {number} bytes - The number of bytes
+ * @param {number} [decimals=1] - Number of decimal places
+ * @returns {string} Formatted size string, e.g. "1.5 KB"
+ */
+export function formatBytes(bytes, decimals = 1) {
+  const numericBytes = Number(bytes);
+  if (!Number.isFinite(numericBytes) || numericBytes < 0) return '0 B';
+  if (numericBytes === 0) return '0 B';
+  const safeDecimals = Number.isInteger(decimals) && decimals >= 0 ? decimals : 1;
+  const units = ['B', 'KB', 'MB', 'GB', 'TB'];
+  const index = Math.min(Math.floor(Math.log2(numericBytes) / 10), units.length - 1);
+  const value = numericBytes / Math.pow(1024, index);
+  return `${value.toFixed(safeDecimals)} ${units[index]}`;
+}
