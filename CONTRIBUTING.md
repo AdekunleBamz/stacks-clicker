@@ -12,6 +12,7 @@ Thank you for your interest in contributing! We follow an atomic-commit workflow
     *   **Atomic Commits**: Keep commits tiny and focused.
     *   **GPG Signing**: All commits must be signed (`git commit -S`).
 3.  **Standards**:
+    *   Commit types: `feat`, `fix`, `docs`, `chore`, `refactor`, `test`, `style`.
     *   React: Use functional components and hooks.
     *   Styling: Use CSS Variables from `index.css`.
     *   JSDoc: Document all primary functions and components.
