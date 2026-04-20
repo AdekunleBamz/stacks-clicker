@@ -76,4 +76,20 @@ describe('usePrice hook', () => {
     expect(result.current.error.message).toContain('Network response was not ok');
     expect(consoleSpy).toHaveBeenCalled();
   });
+
+  it('keeps price null when API returns non-finite values', async () => {
+    global.fetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({ blockstack: { usd: Number.POSITIVE_INFINITY } }),
+    });
+
+    const { result } = renderHook(() => usePrice());
+
+    await waitFor(() => {
+      expect(result.current.loading).toBe(false);
+    });
+
+    expect(result.current.price).toBeNull();
+    expect(result.current.error).toBeNull();
+  });
 });
