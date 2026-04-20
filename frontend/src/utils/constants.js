@@ -59,6 +59,7 @@ export const STREAK_THRESHOLDS = Object.freeze({
   SILVER: 50,
   GOLD: 100,
   VETERAN: 200,
+  PLATINUM: 500,
 });
 
 export default {
