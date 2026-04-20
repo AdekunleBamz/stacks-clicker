@@ -70,5 +70,6 @@ export function formatCompact(value) {
 export function formatPercent(value, decimals = 1) {
   const numericValue = Number(value);
   if (!Number.isFinite(numericValue)) return '0%';
-  return (numericValue * 100).toFixed(decimals) + '%';
+  const safeDecimals = Number.isInteger(decimals) && decimals >= 0 ? decimals : 1;
+  return (numericValue * 100).toFixed(safeDecimals) + '%';
 }
