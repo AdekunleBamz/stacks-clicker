@@ -26,6 +26,15 @@ export function isNonEmptyString(value) {
   return typeof value === 'string' && value.trim().length > 0;
 }
 
+/**
+ * Returns true if the value is a positive integer greater than zero.
+ * @param {*} value
+ * @returns {boolean}
+ */
+export function isPositiveInteger(value) {
+  return Number.isInteger(value) && value > 0;
+}
+
 export const SCHEMAS = Object.freeze({
   CLICK: {
     amount: (val) => Number.isFinite(val) && val > 0,
