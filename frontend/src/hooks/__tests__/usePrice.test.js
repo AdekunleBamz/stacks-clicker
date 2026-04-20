@@ -43,4 +43,19 @@ describe('usePrice hook', () => {
     expect(result.current.error).toBeNull();
     expect(consoleSpy).not.toHaveBeenCalled();
   });
+
+  it('surfaces non-abort fetch errors', async () => {
+    const networkError = new Error('network down');
+    global.fetch.mockRejectedValueOnce(networkError);
+    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    const { result } = renderHook(() => usePrice());
+
+    await waitFor(() => {
+      expect(result.current.loading).toBe(false);
+    });
+
+    expect(result.current.error).toBe(networkError);
+    expect(consoleSpy).toHaveBeenCalled();
+  });
 });
