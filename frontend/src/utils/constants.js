@@ -68,6 +68,9 @@ export const STREAK_THRESHOLDS = Object.freeze({
 /** @type {number} Maximum combo multiplier applied to score calculations */
 export const MAX_COMBO_MULTIPLIER = 10;
 
+/** @type {number} Number of transactions to display per page in the history view */
+export const TX_HISTORY_PAGE_SIZE = 10;
+
 export default {
   DEPLOYER,
   CLICKER_CONTRACT,
