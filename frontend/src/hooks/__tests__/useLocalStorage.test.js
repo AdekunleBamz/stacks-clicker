@@ -111,6 +111,17 @@ describe('useLocalStorage hook', () => {
     expect(result.current[0]).toBe(7);
   });
 
+  it('ignores custom sync events for unrelated keys', () => {
+    const { result } = renderHook(() => useLocalStorage('event-key', 3));
+
+    act(() => {
+      window.localStorage.setItem('other-key', JSON.stringify(99));
+      window.dispatchEvent(new CustomEvent('local-storage', { detail: { key: 'other-key' } }));
+    });
+
+    expect(result.current[0]).toBe(3);
+  });
+
   it('applies successive functional updates without stale state loss', () => {
     const { result } = renderHook(() => useLocalStorage('counter-key', { count: 0 }));
 
