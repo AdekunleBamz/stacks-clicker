@@ -38,7 +38,8 @@ export function usePrice() {
         const data = await response.json();
 
         if (isMounted) {
-          setPrice(data.blockstack?.usd ?? null);
+          const raw = data.blockstack?.usd ?? null;
+          setPrice(raw !== null && Number.isFinite(raw) ? raw : null);
           setError(null);
         }
       } catch (err) {
