@@ -76,7 +76,7 @@ class ErrorBoundary extends React.Component {
               </button>
             </div>
             <p className="error-helper">
-              If the problem persists, please contact support or check the network status.
+              If the problem persists, try refreshing the page or check your network connection.
             </p>
           </div>
         </div>
