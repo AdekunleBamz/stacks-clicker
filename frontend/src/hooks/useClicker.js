@@ -19,6 +19,7 @@ import { DEPLOYER, CLICKER_CONTRACT as CONTRACT_NAME } from '../utils/constants'
  */
 export function useClicker({ onTxSubmit }) {
   const [loadingStates, setLoadingStates] = useState({});
+  const [lastActionName, setLastActionName] = useState(null);
   const { showError, showLoading } = useNotifications();
 
   /**
@@ -53,6 +54,7 @@ export function useClicker({ onTxSubmit }) {
       setLoading(key, true);
       try {
         showLoading(`Broadcasting ${displayName}...`);
+        setLastActionName(displayName);
         const result = await callContract({
           contractAddress: DEPLOYER,
           contractName: CONTRACT_NAME,
@@ -91,6 +93,7 @@ export function useClicker({ onTxSubmit }) {
 
   return {
     isLoading,
+    lastActionName,
     click,
     multiClick,
     ping,
