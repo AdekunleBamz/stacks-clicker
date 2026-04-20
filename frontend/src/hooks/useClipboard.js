@@ -46,5 +46,10 @@ export function useClipboard({ timeout = 2000 } = {}) {
     [timeout]
   );
 
-  return { copied, copyToClipboard };
+  const clearCopied = useCallback(() => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    setCopied(false);
+  }, []);
+
+  return { copied, copyToClipboard, clearCopied };
 }
