@@ -30,5 +30,7 @@ export function useTheme() {
     theme,
     toggleTheme,
     setTheme,
+    isDark: theme === 'dark',
+    isLight: theme === 'light',
   };
 }
