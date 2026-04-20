@@ -61,7 +61,7 @@ export function useLocalStorage(key, initialValue) {
 
     const handleStorageChange = (e) => {
       const changedKey = e.key ?? e.detail?.key;
-      if (changedKey !== key) {
+      if (changedKey !== trimmedKey) {
         return;
       }
 
@@ -77,7 +77,7 @@ export function useLocalStorage(key, initialValue) {
         }
         setStoredValue(readValue());
       } catch (error) {
-        console.warn(`Error parsing storage event for key "${key}":`, error);
+        console.warn(`Error parsing storage event for key "${trimmedKey}":`, error);
       }
     };
 
@@ -87,7 +87,7 @@ export function useLocalStorage(key, initialValue) {
       window.removeEventListener('storage', handleStorageChange);
       window.removeEventListener('local-storage', handleStorageChange);
     };
-  }, [initialValue, key, readValue]);
+  }, [initialValue, trimmedKey, readValue]);
 
   return [storedValue, setValue];
 }
