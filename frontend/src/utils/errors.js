@@ -19,6 +19,7 @@ const ERROR_MAP = Object.freeze({
   '107': 'Poll Closed: Voting for this poll has ended.',
   '401': 'User Rejected: The transaction request was cancelled in your wallet.',
   '403': 'Contract Paused: This interaction is currently disabled by the maintainers.',
+  '408': 'Request Timeout: The transaction request timed out. Please retry.',
   '500': 'Network Error: Failed to broadcast the transaction. Please try again.',
 });
 
