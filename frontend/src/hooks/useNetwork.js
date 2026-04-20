@@ -64,5 +64,14 @@ export function useNetwork() {
 
   useInterval(fetchStatus, isFocused && isVisible ? 30000 : null); // Update every 30s only when active
 
-  return { blockHeight, isConnected, network, isUpdating, lastUpdated };
+  const blocksSince = useCallback(
+    (referenceHeight) => {
+      const ref = Number(referenceHeight);
+      if (!Number.isFinite(ref) || !Number.isFinite(blockHeight)) return null;
+      return Math.max(0, blockHeight - ref);
+    },
+    [blockHeight]
+  );
+
+  return { blockHeight, isConnected, network, isUpdating, lastUpdated, blocksSince };
 }
