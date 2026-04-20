@@ -10,7 +10,7 @@ Thank you for your interest in contributing! We follow an atomic-commit workflow
     *   Use prefix: `feat/`, `fix/`, `docs/`, or `refactor/`.
     *   Open a draft PR early when you want feedback before final polish.
     *   **Atomic Commits**: Keep commits tiny and focused.
-    *   **GPG Signing**: All commits must be signed (`git commit -S`).
+    *   **Commit Signing**: All commits must be signed (`git commit -S`).
 3.  **Standards**:
     *   Commit types: `feat`, `fix`, `docs`, `chore`, `refactor`, `test`, `style`.
     *   React: Use functional components and hooks.
