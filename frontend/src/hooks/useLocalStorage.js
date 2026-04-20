@@ -13,17 +13,22 @@ export function useLocalStorage(key, initialValue) {
     throw new Error('useLocalStorage: key must be a non-empty string');
   }
   const trimmedKey = key.trim();
+  const resolveInitialValue = useCallback(
+    () => (typeof initialValue === 'function' ? initialValue() : initialValue),
+    [initialValue]
+  );
+
   const readValue = useCallback(() => {
-    if (typeof window === 'undefined') return initialValue;
+    if (typeof window === 'undefined') return resolveInitialValue();
 
     try {
       const item = window.localStorage.getItem(trimmedKey);
-      return item ? JSON.parse(item) : initialValue;
+      return item ? JSON.parse(item) : resolveInitialValue();
     } catch (error) {
       console.warn(`Error reading localStorage key "${trimmedKey}":`, error);
-      return initialValue;
+      return resolveInitialValue();
     }
-  }, [trimmedKey, initialValue]);
+  }, [resolveInitialValue, trimmedKey]);
 
   const [storedValue, setStoredValue] = useState(readValue);
 
@@ -66,7 +71,7 @@ export function useLocalStorage(key, initialValue) {
       }
 
       if (e.newValue === null && e.type === 'storage') {
-        setStoredValue(initialValue);
+        setStoredValue(resolveInitialValue());
         return;
       }
 
@@ -87,7 +92,7 @@ export function useLocalStorage(key, initialValue) {
       window.removeEventListener('storage', handleStorageChange);
       window.removeEventListener('local-storage', handleStorageChange);
     };
-  }, [initialValue, trimmedKey, readValue]);
+  }, [resolveInitialValue, trimmedKey, readValue]);
 
   return [storedValue, setValue];
 }
