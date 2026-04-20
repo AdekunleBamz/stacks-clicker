@@ -78,3 +78,25 @@ export function parseContractError(error) {
 
 /** Alias for parseContractError for callers preferring a more generic name */
 export const getErrorMessage = parseContractError;
+
+/**
+ * Returns true if the error is likely caused by a network connectivity issue.
+ *
+ * @param {any} error - The error to check
+ * @returns {boolean}
+ */
+export function isNetworkError(error) {
+  const msg = typeof error === 'string'
+    ? error
+    : error?.message || error?.reason || String(error);
+  const lower = msg.toLowerCase();
+  return (
+    lower.includes('network') ||
+    lower.includes('fetch') ||
+    lower.includes('dns') ||
+    lower.includes('timeout') ||
+    lower.includes('offline') ||
+    lower.includes('econnrefused') ||
+    lower.includes('failed to fetch')
+  );
+}
