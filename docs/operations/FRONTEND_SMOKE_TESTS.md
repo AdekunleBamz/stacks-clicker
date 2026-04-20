@@ -45,6 +45,7 @@ Then use this checklist for manual verification.
 - [ ] Confirm error toast content is readable and actionable when a transaction fails.
 - [ ] Validate one user-rejected transaction path so cancellation messaging stays clear.
 - [ ] Test network error handling with offline mode.
+- [ ] Return online after offline-mode testing and confirm data polling resumes.
 - [ ] Verify error boundary catches and displays component errors.
 
 ## Mobile Verification
