@@ -65,6 +65,9 @@ export const STREAK_THRESHOLDS = Object.freeze({
   PLATINUM: 500,
 });
 
+/** @type {number} Maximum combo multiplier applied to score calculations */
+export const MAX_COMBO_MULTIPLIER = 10;
+
 export default {
   DEPLOYER,
   CLICKER_CONTRACT,
