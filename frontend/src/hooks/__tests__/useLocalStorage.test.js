@@ -83,6 +83,17 @@ describe('useLocalStorage hook', () => {
     expect(result.current[0]).toBe(42);
   });
 
+  it('normalizes whitespace keys for custom sync events', () => {
+    const { result } = renderHook(() => useLocalStorage(' spaced-key ', 0));
+
+    act(() => {
+      window.localStorage.setItem('spaced-key', JSON.stringify(7));
+      window.dispatchEvent(new CustomEvent('local-storage', { detail: { key: 'spaced-key' } }));
+    });
+
+    expect(result.current[0]).toBe(7);
+  });
+
   it('applies successive functional updates without stale state loss', () => {
     const { result } = renderHook(() => useLocalStorage('counter-key', { count: 0 }));
 
