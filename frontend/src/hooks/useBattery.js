@@ -11,6 +11,7 @@ export function useBattery() {
     level: 1,
     charging: true,
     isLowBattery: false,
+    isCritical: false,
     supported: true,
   });
 
@@ -29,6 +30,7 @@ export function useBattery() {
         level: batt.level,
         charging: batt.charging,
         isLowBattery: batt.level <= 0.2 && !batt.charging,
+        isCritical: batt.level <= 0.05 && !batt.charging,
         supported: true,
       });
     }
