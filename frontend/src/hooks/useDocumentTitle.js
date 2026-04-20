@@ -10,6 +10,7 @@ import { useEffect } from 'react';
  */
 export function useDocumentTitle({ title, count = 0 }) {
   useEffect(() => {
+    if (!title || typeof title !== 'string') return;
     const previous = document.title;
     document.title = count > 0 ? `(${count}) ${title}` : title;
     return () => {
