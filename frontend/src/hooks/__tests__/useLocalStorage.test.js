@@ -16,6 +16,11 @@ describe('useLocalStorage hook', () => {
     expect(result.current[0]).toEqual(initialValue);
   });
 
+  it('supports lazy function initial values', () => {
+    const { result } = renderHook(() => useLocalStorage('lazy-key', () => ({ count: 5 })));
+    expect(result.current[0]).toEqual({ count: 5 });
+  });
+
   it('updates local storage when value changes', () => {
     const { result } = renderHook(() => useLocalStorage(key, initialValue));
 
