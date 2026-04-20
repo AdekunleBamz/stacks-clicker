@@ -9,6 +9,7 @@ import { notify } from '../utils/toast';
  */
 export function useNotifications() {
   const showNotification = useCallback((message, type = 'default') => {
+    if (!message) return;
     switch (type) {
       case 'success':
         notify.success(message);
