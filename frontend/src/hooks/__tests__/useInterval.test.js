@@ -158,6 +158,27 @@ describe('useInterval hook', () => {
     expect(callback).toHaveBeenCalledTimes(1);
   });
 
+  it('stops interval when delay changes to null', () => {
+    vi.useFakeTimers();
+    const callback = vi.fn();
+
+    const { rerender } = renderHook(({ delay }) => useInterval(callback, delay), {
+      initialProps: { delay: 500 },
+    });
+
+    act(() => {
+      vi.advanceTimersByTime(1000);
+    });
+    expect(callback).toHaveBeenCalledTimes(2);
+
+    rerender({ delay: null });
+
+    act(() => {
+      vi.advanceTimersByTime(1000);
+    });
+    expect(callback).toHaveBeenCalledTimes(2);
+  });
+
   it('does not throw if callback is missing', () => {
     vi.useFakeTimers();
 
