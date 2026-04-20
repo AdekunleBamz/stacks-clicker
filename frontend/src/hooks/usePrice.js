@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { PRICE_REFRESH_INTERVAL_MS } from '../utils/constants';
 
 /**
@@ -73,5 +73,19 @@ export function usePrice() {
     };
   }, []);
 
-  return { price, loading, error, lastFetched };
+  const stxValueOf = useCallback(
+    (microStx) => {
+      if (!price || !Number.isFinite(price)) return null;
+      const numericMicroStx = Number(microStx);
+      if (!Number.isFinite(numericMicroStx)) return null;
+      return (numericMicroStx / 1_000_000) * price;
+    },
+    [price]
+  );
+
+  const isStale = lastFetched !== null
+    ? Date.now() - lastFetched > PRICE_REFRESH_INTERVAL_MS * 2
+    : false;
+
+  return { price, loading, error, lastFetched, stxValueOf, isStale };
 }
