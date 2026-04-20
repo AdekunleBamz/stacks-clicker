@@ -37,5 +37,6 @@ export function useCombo({ timeout = COMBO_TIMEOUT_MS } = {}) {
     combo,
     incrementCombo,
     resetCombo,
+    isActive: combo > 0,
   };
 }
