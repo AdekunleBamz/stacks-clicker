@@ -35,6 +35,15 @@ export function isPositiveInteger(value) {
   return Number.isInteger(value) && value > 0;
 }
 
+/**
+ * Returns true if the amount is a valid micro-STX value (non-negative finite integer).
+ * @param {*} value
+ * @returns {boolean}
+ */
+export function isValidMicroStxAmount(value) {
+  return Number.isInteger(value) && value >= 0;
+}
+
 export const SCHEMAS = Object.freeze({
   CLICK: {
     amount: (val) => Number.isFinite(val) && val > 0,
