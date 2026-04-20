@@ -56,7 +56,7 @@ Stacks Clicker aims to be more than just a game; it is a gateway for users to ex
    VITE_DEBUG=true
    ```
    Set `VITE_DEPLOYER_ADDRESS` to the principal that deployed the app contracts.
-   Optional values such as `VITE_STACKS_NETWORK` and `VITE_COINGECKO_API_KEY` are documented in `frontend/.env.example`.
+   Optional values such as `VITE_STACKS_NETWORK`, `VITE_DEPLOYER_ADDRESS`, and `VITE_COINGECKO_API_KEY` are documented in `frontend/.env.example`.
 4. Start the development server:
    ```bash
    npm run frontend:dev
