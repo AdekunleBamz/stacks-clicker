@@ -64,6 +64,7 @@ Use `npm run lint` before opening a pull request if you touched application code
 ## 🧰 Troubleshooting
 - If wallet connection does not appear, verify `VITE_WALLETCONNECT_PROJECT_ID` is set.
 - If UI changes do not reflect, restart `npm run dev` after editing `.env`.
+- Keep local env values network-specific when switching between test and main environments.
 
 ## 📜 Contract Interaction
 The dApp interacts with pre-deployed contracts on the network configured by `VITE_STACKS_NETWORK` (default: Stacks Mainnet). You can find the contract source code in the `contracts/` directory for reference.
@@ -80,5 +81,3 @@ Current active contract names used by the frontend:
 
 ---
 Need help? Open an issue on [GitHub](https://github.com/AdekunleBamz/stacks-clicker/issues).
-
-- Keep local env values network-specific when switching between test and main environments.
