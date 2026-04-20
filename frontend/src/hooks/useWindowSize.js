@@ -23,7 +23,7 @@ export function useWindowSize() {
           width: window.innerWidth,
           height: window.innerHeight,
         });
-      }, 250);
+      }, 150);
     };
 
     window.addEventListener('resize', handleResize, { passive: true });
