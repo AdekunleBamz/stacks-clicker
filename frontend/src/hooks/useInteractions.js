@@ -44,10 +44,16 @@ export function useInteractions({ onTxSubmit }) {
     quickpoll?.handlePollPing?.();
   }, [clicker, tipjar, quickpoll]);
 
+  const isAnyLoading = useMemo(
+    () => !!(clicker?.isLoading || tipjar?.isLoading || quickpoll?.isLoading),
+    [clicker, tipjar, quickpoll]
+  );
+
   return useMemo(() => ({
     clicker,
     tipjar,
     quickpoll,
-    pingAll
-  }), [clicker, tipjar, quickpoll, pingAll]);
+    pingAll,
+    isAnyLoading,
+  }), [clicker, tipjar, quickpoll, pingAll, isAnyLoading]);
 }
