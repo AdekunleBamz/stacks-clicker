@@ -108,4 +108,28 @@ describe('usePrice hook', () => {
     expect(result.current.price).toBeNull();
     expect(result.current.error).toBeNull();
   });
+
+  it('clears previous errors after a successful fetch', async () => {
+    global.fetch
+      .mockRejectedValueOnce(new Error('temporary failure'))
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ blockstack: { usd: 2.34 } }),
+      });
+
+    const { result, rerender } = renderHook(() => usePrice());
+
+    await waitFor(() => {
+      expect(result.current.loading).toBe(false);
+      expect(result.current.error).toBeInstanceOf(Error);
+    });
+
+    // Re-render to trigger the same hook lifecycle path with next mocked response.
+    rerender();
+
+    await waitFor(() => {
+      expect(result.current.price).toBe(2.34);
+      expect(result.current.error).toBeNull();
+    });
+  });
 });
