@@ -14,6 +14,7 @@ export function usePrice() {
   const [price, setPrice] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [lastFetched, setLastFetched] = useState(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -41,6 +42,7 @@ export function usePrice() {
           const raw = data.blockstack?.usd ?? null;
           setPrice(raw !== null && Number.isFinite(raw) ? raw : null);
           setError(null);
+          setLastFetched(Date.now());
         }
       } catch (err) {
         if (err?.name === 'AbortError') return;
@@ -71,5 +73,5 @@ export function usePrice() {
     };
   }, []);
 
-  return { price, loading, error };
+  return { price, loading, error, lastFetched };
 }
