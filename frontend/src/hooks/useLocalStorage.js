@@ -94,5 +94,17 @@ export function useLocalStorage(key, initialValue) {
     };
   }, [resolveInitialValue, trimmedKey, readValue]);
 
-  return [storedValue, setValue];
+  const removeItem = useCallback(() => {
+    try {
+      if (typeof window !== 'undefined') {
+        window.localStorage.removeItem(trimmedKey);
+        window.dispatchEvent(new CustomEvent('local-storage', { detail: { key: trimmedKey } }));
+      }
+      setStoredValue(resolveInitialValue());
+    } catch (error) {
+      console.error(`[useLocalStorage] Error removing key "${trimmedKey}":`, error);
+    }
+  }, [trimmedKey, resolveInitialValue]);
+
+  return [storedValue, setValue, removeItem];
 }
