@@ -18,10 +18,10 @@ export function useDocumentVisibility() {
       setIsVisible(document.visibilityState === 'visible');
     };
 
-    document.addEventListener('visibilitychange', handleVisibilityChange);
+    document.addEventListener('visibilitychange', handleVisibilityChange, { passive: true });
 
     return () => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      document.removeEventListener('visibilitychange', handleVisibilityChange, { passive: true });
     };
   }, []);
 
