@@ -36,3 +36,13 @@ export function useWindowSize() {
 
   return windowSize;
 }
+
+/**
+ * Custom hook that returns true when the viewport is in portrait orientation.
+ *
+ * @returns {boolean} True if height >= width
+ */
+export function useIsPortrait() {
+  const { width, height } = useWindowSize();
+  return height >= width;
+}
