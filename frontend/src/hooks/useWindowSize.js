@@ -18,6 +18,7 @@ export function useWindowSize() {
     let timeoutId = null;
     const handleResize = () => {
       clearTimeout(timeoutId);
+      const debounceDelay = 150;
       timeoutId = setTimeout(() => {
         setWindowSize({
           width: window.innerWidth,
