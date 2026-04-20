@@ -24,6 +24,7 @@ cp frontend/.env.example frontend/.env
 | :--- | :--- | :--- |
 | `VITE_DEBUG` | Enables verbose debug logging | `false` |
 | `VITE_STACKS_NETWORK` | Network override (mainnet/testnet) | `mainnet` |
+| `VITE_DEPLOYER_ADDRESS` | Contract deployer principal for clicker/tipjar/quickpoll | `frontend/.env.example` value |
 | `VITE_COINGECKO_API_KEY` | Key for price lookup integrations | - |
 
 ## Quick Reference
@@ -33,7 +34,7 @@ cp frontend/.env.example frontend/.env
 | `VITE_WALLETCONNECT_PROJECT_ID` | Yes | Required for wallet pairing and QR flow |
 | `VITE_DEBUG` | No | Enables verbose debug logging |
 | `VITE_STACKS_NETWORK` | No | Defaults to `mainnet` when omitted |
-| `VITE_DEPLOYER_ADDRESS` | No | Defaults to the value shipped in `frontend/.env.example` |
+| `VITE_DEPLOYER_ADDRESS` | Contract deployer principal for clicker/tipjar/quickpoll | `frontend/.env.example` value |
 | `VITE_COINGECKO_API_KEY` | No | Enables higher-limit price lookups |
 
 Before local startup:
