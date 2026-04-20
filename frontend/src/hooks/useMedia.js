@@ -28,3 +28,19 @@ export function useMedia(query) {
 
   return matches;
 }
+
+/**
+ * Returns true when viewport width is below 640px (mobile small screen).
+ * @returns {boolean}
+ */
+export function useIsSmallScreen() {
+  return useMedia('(max-width: 639px)');
+}
+
+/**
+ * Returns true when viewport width is at least 1024px (desktop large screen).
+ * @returns {boolean}
+ */
+export function useIsLargeScreen() {
+  return useMedia('(min-width: 1024px)');
+}
