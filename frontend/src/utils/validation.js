@@ -14,7 +14,7 @@ import { MIN_TIP_MICRO_STX } from './constants';
  */
 export function isValidStacksAddress(address) {
   if (!address || typeof address !== 'string') return false;
-  return /^S[PT][0123456789ABCDEFGHJKMNPQRSTVWXYZ]{38}$/.test(address);
+  return /^S[PT][0123456789ABCDEFGHJKMNPQRSTVWXYZ]{38}$/.test(address.trim());
 }
 
 /**
