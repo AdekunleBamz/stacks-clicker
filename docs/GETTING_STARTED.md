@@ -48,6 +48,7 @@ Optional values such as `VITE_STACKS_NETWORK`, `VITE_DEPLOYER_ADDRESS`, and `VIT
 npm run dev
 ```
 Visit `http://localhost:5173` to interact with the dApp.
+From the repository root, you can run `npm run frontend:dev` for the same command.
 
 ## 🧪 Testing
 From the `frontend` directory, run the automated test suite:
