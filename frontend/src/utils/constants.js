@@ -53,6 +53,9 @@ export const COMBO_TIMEOUT_MS = 2500;
 /** @type {number} Interval in ms between STX price refreshes */
 export const PRICE_REFRESH_INTERVAL_MS = 45_000;
 
+/** @type {number} Maximum number of options allowed in a quick poll */
+export const MAX_POLL_OPTIONS = 4;
+
 /** @type {Object} Interaction count thresholds for badge milestones */
 export const STREAK_THRESHOLDS = Object.freeze({
   BRONZE: 10,
