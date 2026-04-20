@@ -18,6 +18,7 @@ Complete all items after deployment to verify successful release.
 
 ### Links & Navigation
 - [ ] Check explorer links open correct transaction pages.
+- [ ] Confirm explorer links use the same network as the deployed environment.
 - [ ] Verify all internal navigation links work.
 - [ ] Test mobile responsive layout.
 
