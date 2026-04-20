@@ -10,6 +10,7 @@ import { notify } from '../utils/toast';
  * @returns {Object} { copied, copyToClipboard }
  */
 export function useClipboard({ timeout = 2000 } = {}) {
+  const safeTimeout = Number.isFinite(timeout) && timeout > 0 ? timeout : 2000;
   const [copied, setCopied] = useState(false);
   const timerRef = useRef(null);
 
@@ -34,7 +35,7 @@ export function useClipboard({ timeout = 2000 } = {}) {
         notify.success('Copied to clipboard!');
 
         if (timerRef.current) clearTimeout(timerRef.current);
-        timerRef.current = setTimeout(() => setCopied(false), timeout);
+        timerRef.current = setTimeout(() => setCopied(false), safeTimeout);
         return true;
       } catch (error) {
         console.error('Failed to copy text:', error);
