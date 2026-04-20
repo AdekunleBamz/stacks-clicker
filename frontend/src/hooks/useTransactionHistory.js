@@ -3,6 +3,8 @@ import { useLocalStorage } from './useLocalStorage';
 import { notify } from '../utils/toast';
 import { useDocumentVisibility } from './useDocumentVisibility';
 
+const DEBUG = import.meta.env.VITE_DEBUG === 'true';
+
 /**
  * Custom hook for managing the transaction history log.
  * Handles adding new transactions, maintaining the log limit, and triggering feedback (sounds/toast).
@@ -21,12 +23,14 @@ export function useTransactionHistory({ playSound, onTxAdded }) {
   const txCount = useMemo(() => txLog.length, [txLog]);
 
   useEffect(() => {
+    if (!DEBUG) return;
+
     if (!isVisible) {
       console.debug('[useTransactionHistory] Tab hidden: Pausing background log updates');
     } else {
       console.debug('[useTransactionHistory] Tab visible: Resuming background log updates');
     }
-  }, [isVisible]);
+  }, [DEBUG, isVisible]);
 
   /**
    * Adds a transaction record to the local session log.
@@ -66,8 +70,10 @@ export function useTransactionHistory({ playSound, onTxAdded }) {
    */
   const clearLog = useCallback(() => {
     setTxLog([]);
-    console.debug('[useTransactionHistory] Transaction log cleared');
-  }, [setTxLog]);
+    if (DEBUG) {
+      console.debug('[useTransactionHistory] Transaction log cleared');
+    }
+  }, [DEBUG, setTxLog]);
   
   return {
     txLog,
