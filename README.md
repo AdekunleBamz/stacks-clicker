@@ -100,13 +100,7 @@ git clone https://github.com/AdekunleBamz/stacks-clicker.git && cd stacks-clicke
 npm run frontend:install && cp frontend/.env.example frontend/.env && npm run frontend:dev
 
 # Run frontend tests
-npm run frontend:test:run
-
-# Run fast frontend smoke checks
-npm run frontend:smoke
-
-# Run quick repo validation
-npm run check:fast
+npm run test:run
 ```
 
 ## Key Interactions 🎮
