@@ -42,7 +42,7 @@ export function formatNumber(value, options = {}) {
  */
 export function formatStx(microStx) {
   const numericValue = Number(microStx);
-  if (!Number.isFinite(numericValue)) return '0.00 STX';
+  if (!Number.isFinite(numericValue) || numericValue < 0) return '0.00 STX';
   const stx = numericValue / 1_000_000;
   const sign = stx < 0 ? '-' : '';
   return `${sign}${Math.abs(stx).toFixed(2)} STX`;
