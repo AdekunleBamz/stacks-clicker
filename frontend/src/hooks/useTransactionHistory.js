@@ -6,6 +6,11 @@ import { MAX_TX_LOG_SIZE, STACKS_NETWORK } from '../utils/constants';
 
 const DEBUG = import.meta.env.VITE_DEBUG === 'true';
 
+const STACKS_NETWORK =
+  String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
+    ? 'testnet'
+    : 'mainnet';
+
 /**
  * Custom hook for managing the transaction history log.
  * Handles adding new transactions, maintaining the log limit, and triggering feedback (sounds/toast).
