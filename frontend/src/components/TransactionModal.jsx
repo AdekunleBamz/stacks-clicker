@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import Modal from './common/Modal';
 import { useModal } from '../context/ModalContext';
 import { truncateAddress } from '../utils/format';
-import { STACKS_NETWORK } from '../utils/constants';
+
+const STACKS_NETWORK =
+  String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
+    ? 'testnet'
+    : 'mainnet';
 
 /**
  * Modal to view detailed information about a specific transaction.
