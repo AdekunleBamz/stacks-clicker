@@ -73,3 +73,20 @@ export function formatPercent(value, decimals = 1) {
   const safeDecimals = Number.isInteger(decimals) && decimals >= 0 ? decimals : 1;
   return (numericValue * 100).toFixed(safeDecimals) + '%';
 }
+
+/**
+ * Formats a duration in milliseconds into a human-readable string.
+ *
+ * @param {number} ms - Duration in milliseconds
+ * @returns {string} Formatted duration, e.g. "2m 30s" or "45s"
+ */
+export function formatDuration(ms) {
+  const numericMs = Number(ms);
+  if (!Number.isFinite(numericMs) || numericMs < 0) return '0s';
+  const totalSeconds = Math.floor(numericMs / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  if (minutes === 0) return `${seconds}s`;
+  if (seconds === 0) return `${minutes}m`;
+  return `${minutes}m ${seconds}s`;
+}
