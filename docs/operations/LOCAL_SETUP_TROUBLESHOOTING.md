@@ -23,6 +23,27 @@ Common issues and solutions for local development setup.
 ## Wallet Connection Issues
 
 - Clear cached browser wallet sessions when connect state appears stale.
-- Include shell/runtime version details when setup issues are reported.
+- Check browser extension is installed and unlocked.
+- Verify wallet is connected to correct network (mainnet/testnet).
+- Try disconnecting and reconnecting the wallet.
+
+## Common Issues
+
+| Issue | Solution |
+| :--- | :--- |
+| Port already in use | Change port in vite config or kill process on port 5173 |
+| Module not found | Run `npm ci` to sync dependencies with the lockfile |
+| Wallet not connecting | Clear browser cache and wallet extension data |
+| Build fails | Clear Vite cache: `rm -rf node_modules/.vite` |
+
+## Reporting Issues
+
+When reporting setup issues, include:
+- Shell/runtime version details (`node --version`, `npm --version`)
+- Operating system and version
+- Browser and wallet extension version
+- Steps to reproduce the issue
+
+---
 
 Companion index: [Operations docs](README.md).
