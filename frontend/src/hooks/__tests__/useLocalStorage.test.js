@@ -82,4 +82,15 @@ describe('useLocalStorage hook', () => {
 
     expect(result.current[0]).toBe(42);
   });
+
+  it('applies successive functional updates without stale state loss', () => {
+    const { result } = renderHook(() => useLocalStorage('counter-key', { count: 0 }));
+
+    act(() => {
+      result.current[1]((prev) => ({ count: prev.count + 1 }));
+      result.current[1]((prev) => ({ count: prev.count + 1 }));
+    });
+
+    expect(result.current[0]).toEqual({ count: 2 });
+  });
 });
