@@ -12,6 +12,7 @@ import { COMBO_TIMEOUT_MS } from '../utils/constants';
 export function useCombo({ timeout = COMBO_TIMEOUT_MS } = {}) {
   const [combo, setCombo] = useState(0);
   const timerRef = useRef(null);
+  const safeTimeout = Number.isFinite(timeout) && timeout > 0 ? timeout : COMBO_TIMEOUT_MS;
 
   const resetCombo = useCallback(() => {
     setCombo(0);
@@ -24,8 +25,8 @@ export function useCombo({ timeout = COMBO_TIMEOUT_MS } = {}) {
     if (timerRef.current) clearTimeout(timerRef.current);
     timerRef.current = setTimeout(() => {
       setCombo(0);
-    }, timeout);
-  }, [timeout]);
+    }, safeTimeout);
+  }, [safeTimeout]);
 
   useEffect(() => {
     return () => {
