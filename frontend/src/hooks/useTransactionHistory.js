@@ -20,6 +20,7 @@ export function useTransactionHistory({ playSound, onTxAdded }) {
   // Memoized derived stats
   const pendingTxs = useMemo(() => txLog.filter((tx) => tx.isPending), [txLog]);
   const successTxs = useMemo(() => txLog.filter((tx) => tx.status === 'success'), [txLog]);
+  const failedTxs = useMemo(() => txLog.filter((tx) => tx.status === 'failed' || tx.status === 'error'), [txLog]);
   const txCount = useMemo(() => txLog.length, [txLog]);
 
   useEffect(() => {
@@ -98,6 +99,7 @@ export function useTransactionHistory({ playSound, onTxAdded }) {
     removeTx,
     pendingTxs,
     successTxs,
+    failedTxs,
     txCount,
   };
 }
