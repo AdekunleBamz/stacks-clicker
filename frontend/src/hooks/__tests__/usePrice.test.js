@@ -92,4 +92,20 @@ describe('usePrice hook', () => {
     expect(result.current.price).toBeNull();
     expect(result.current.error).toBeNull();
   });
+
+  it('keeps price null when API payload is missing usd field', async () => {
+    global.fetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({ blockstack: {} }),
+    });
+
+    const { result } = renderHook(() => usePrice());
+
+    await waitFor(() => {
+      expect(result.current.loading).toBe(false);
+    });
+
+    expect(result.current.price).toBeNull();
+    expect(result.current.error).toBeNull();
+  });
 });
