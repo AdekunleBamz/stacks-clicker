@@ -48,10 +48,10 @@ export const MAX_TX_LOG_SIZE = 50;
 export const MIN_TIP_MICRO_STX = 100;
 
 /** @type {number} Milliseconds before a combo resets after the last interaction */
-export const COMBO_TIMEOUT_MS = 2000;
+export const COMBO_TIMEOUT_MS = 2500;
 
 /** @type {number} Interval in ms between STX price refreshes */
-export const PRICE_REFRESH_INTERVAL_MS = 60_000;
+export const PRICE_REFRESH_INTERVAL_MS = 45_000;
 
 /** @type {Object} Interaction count thresholds for badge milestones */
 export const STREAK_THRESHOLDS = Object.freeze({
