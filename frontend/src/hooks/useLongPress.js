@@ -12,14 +12,15 @@ import { useState, useRef, useCallback, useEffect } from 'react';
 export function useLongPress(callback, { delay = 500 } = {}) {
   const [isPressing, setIsPressing] = useState(false);
   const timerRef = useRef();
+  const safeDelay = typeof delay === 'number' && delay > 0 ? delay : 500;
 
   const start = useCallback((event) => {
     setIsPressing(true);
     timerRef.current = setTimeout(() => {
       callback(event);
       setIsPressing(false);
-    }, delay);
-  }, [callback, delay]);
+    }, safeDelay);
+  }, [callback, safeDelay]);
 
   const stop = useCallback(() => {
     clearTimeout(timerRef.current);
