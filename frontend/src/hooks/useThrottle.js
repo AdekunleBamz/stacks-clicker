@@ -10,7 +10,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
  */
 export function useThrottle(callback, delay) {
   const lastCall = useRef(0);
-  const safeDelay = typeof delay === 'number' && delay > 0 ? delay : 0;
+  const safeDelay = Number.isFinite(delay) && delay > 0 ? delay : 0;
 
   return useCallback(
     (...args) => {
