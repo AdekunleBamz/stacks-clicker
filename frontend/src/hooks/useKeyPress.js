@@ -10,7 +10,7 @@ export function useKeyPress(targetKey) {
   const [keyPressed, setKeyPressed] = useState(false);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined' || !targetKey) return;
 
     function downHandler({ key }) {
       if (key === targetKey) {
