@@ -10,15 +10,16 @@ import { useState, useEffect, useRef, useCallback } from 'react';
  */
 export function useThrottle(callback, delay) {
   const lastCall = useRef(0);
+  const safeDelay = typeof delay === 'number' && delay > 0 ? delay : 0;
 
   return useCallback(
     (...args) => {
       const now = Date.now();
-      if (now - lastCall.current >= delay) {
+      if (now - lastCall.current >= safeDelay) {
         lastCall.current = now;
         return callback(...args);
       }
     },
-    [callback, delay]
+    [callback, safeDelay]
   );
 }
