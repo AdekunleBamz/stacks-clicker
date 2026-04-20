@@ -28,3 +28,20 @@ export function useHover() {
 
   return [ref, isHovered];
 }
+
+/**
+ * Custom hook for tracking whether an element has ever been hovered.
+ * Useful for lazy-loading or reveal-on-interaction patterns.
+ *
+ * @returns {[Object, boolean]} [ref, hasBeenHovered]
+ */
+export function useHasBeenHovered() {
+  const [hasBeenHovered, setHasBeenHovered] = useState(false);
+  const [ref, isHovered] = useHover();
+
+  useEffect(() => {
+    if (isHovered) setHasBeenHovered(true);
+  }, [isHovered]);
+
+  return [ref, hasBeenHovered];
+}
