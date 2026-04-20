@@ -3,6 +3,11 @@ import { useLocalStorage } from './useLocalStorage';
 import { notify } from '../utils/toast';
 import { useDocumentVisibility } from './useDocumentVisibility';
 
+const STACKS_NETWORK =
+  String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
+    ? 'testnet'
+    : 'mainnet';
+
 /**
  * Custom hook for managing the transaction history log.
  * Handles adding new transactions, maintaining the log limit, and triggering feedback (sounds/toast).
@@ -46,8 +51,8 @@ export function useTransactionHistory({ playSound, onTxAdded }) {
         status,
         time: submittedAt.toLocaleTimeString(),
         submittedAt: submittedAt.toISOString(),
-        network: 'mainnet',
-        explorerUrl: isPending ? null : `https://explorer.hiro.so/txid/${txId}?chain=mainnet`,
+        network: STACKS_NETWORK,
+        explorerUrl: isPending ? null : `https://explorer.hiro.so/txid/${txId}?chain=${STACKS_NETWORK}`,
         isPending,
       };
 
