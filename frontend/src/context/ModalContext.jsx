@@ -26,6 +26,7 @@ export const ModalProvider = ({ children }) => {
     openModal,
     closeModal,
     isOpen: (type) => activeModal === type,
+    isAnyOpen: activeModal !== null,
   }), [activeModal, modalData, openModal, closeModal]);
 
   return (
