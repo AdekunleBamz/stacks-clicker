@@ -20,6 +20,14 @@ If you find a security vulnerability, please contact us:
 
 We aim to acknowledge valid reports within 72 hours.
 
+### Response Timeline
+
+| Stage | Target |  
+| :--- | :--- |
+| Acknowledgement | 72 hours |
+| Initial Assessment | 5 business days |
+| Fix / Patch Release | 14 business days |
+
 ### What to Include
 
 - Type of vulnerability
