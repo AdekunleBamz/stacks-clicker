@@ -41,7 +41,7 @@ VITE_WALLETCONNECT_PROJECT_ID=893... # Your Project ID
 VITE_DEBUG=true
 ```
 Keep `.env` local and never commit secrets to source control.
-Optional values such as `VITE_STACKS_NETWORK` and `VITE_COINGECKO_API_KEY` are documented in `.env.example`.
+Optional values such as `VITE_STACKS_NETWORK`, `VITE_DEPLOYER_ADDRESS`, and `VITE_COINGECKO_API_KEY` are documented in `.env.example`.
 
 ### 4. Start Development Server
 ```bash
