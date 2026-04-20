@@ -53,6 +53,16 @@ export function isValidTipAmount(value) {
   return Number.isFinite(Number(value)) && Number(value) >= MIN_TIP_MICRO_STX;
 }
 
+/**
+ * Returns true if the given poll option ID is a non-negative integer within bounds.
+ * @param {*} value - The option index to validate
+ * @param {number} [maxOptions=4] - Maximum number of allowed options (exclusive upper bound)
+ * @returns {boolean}
+ */
+export function isValidPollOptionId(value, maxOptions = 4) {
+  return Number.isInteger(value) && value >= 0 && value < maxOptions;
+}
+
 export const SCHEMAS = Object.freeze({
   CLICK: {
     amount: (val) => Number.isFinite(val) && val > 0,
