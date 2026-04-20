@@ -31,6 +31,10 @@ export function useNotifications() {
   const showInfo = useCallback((msg) => showNotification(msg, 'default'), [showNotification]);
   const showWarning = useCallback((msg) => showNotification(msg, 'error'), [showNotification]);
 
+  const dismiss = useCallback((toastId) => {
+    notify.dismiss?.(toastId);
+  }, []);
+
   return {
     showNotification,
     showSuccess,
@@ -38,5 +42,6 @@ export function useNotifications() {
     showLoading,
     showInfo,
     showWarning,
+    dismiss,
   };
 }
