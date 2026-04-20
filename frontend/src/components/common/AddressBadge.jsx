@@ -20,7 +20,7 @@ function AddressBadge({ address, onDisconnect }) {
    */
   const handleCopy = useCallback(() => {
     if (!address) return;
-    if (!navigator?.clipboard?.writeText) {
+    if (typeof navigator === 'undefined' || !navigator.clipboard?.writeText) {
       notify.error('Clipboard not available');
       return;
     }
