@@ -16,3 +16,14 @@ export function usePrevious(value) {
 
   return ref.current;
 }
+
+/**
+ * Custom hook that returns true when the value has changed since the last render.
+ *
+ * @param {any} value - The current value to track
+ * @returns {boolean} True if value changed from the previous render
+ */
+export function useHasChanged(value) {
+  const previous = usePrevious(value);
+  return previous !== undefined && previous !== value;
+}
