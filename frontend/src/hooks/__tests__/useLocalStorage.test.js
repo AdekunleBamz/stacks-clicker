@@ -11,6 +11,12 @@ describe('useLocalStorage hook', () => {
     vi.clearAllMocks();
   });
 
+  it('throws for empty storage keys', () => {
+    expect(() => renderHook(() => useLocalStorage('', 1))).toThrow(
+      'useLocalStorage: key must be a non-empty string'
+    );
+  });
+
   it('returns initialValue if local storage is empty', () => {
     const { result } = renderHook(() => useLocalStorage(key, initialValue));
     expect(result.current[0]).toEqual(initialValue);
