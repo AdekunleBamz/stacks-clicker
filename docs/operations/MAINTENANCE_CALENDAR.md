@@ -1,10 +1,10 @@
 # Maintenance Calendar
 
 Suggested recurring tasks:
-- weekly: dependency and security scan review
-- biweekly: UI and accessibility smoke test
-- monthly: docs and roadmap refresh
-- quarterly: validate recovery runbooks with a tabletop incident drill
-- quarterly: verify supported wallet app/extension versions are still current
+- Weekly: dependency and security scan review
+- Biweekly: UI and accessibility smoke test
+- Monthly: docs and roadmap refresh
+- Quarterly: validate recovery runbooks with a tabletop incident drill
+- Quarterly: verify supported wallet app/extension versions are still current
 
 Companion index: [Operations docs](README.md).
