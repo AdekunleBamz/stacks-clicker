@@ -34,6 +34,19 @@ describe('useInterval hook', () => {
     expect(callback).not.toHaveBeenCalled();
   });
 
+  it('does not schedule interval when delay is undefined', () => {
+    vi.useFakeTimers();
+    const callback = vi.fn();
+
+    renderHook(() => useInterval(callback, undefined));
+
+    act(() => {
+      vi.advanceTimersByTime(5000);
+    });
+
+    expect(callback).not.toHaveBeenCalled();
+  });
+
   it('does not throw if callback is missing', () => {
     vi.useFakeTimers();
 
