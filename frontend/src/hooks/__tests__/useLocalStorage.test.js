@@ -111,6 +111,17 @@ describe('useLocalStorage hook', () => {
     expect(result.current[0]).toBe(7);
   });
 
+  it('persists values using the trimmed key name', () => {
+    const { result } = renderHook(() => useLocalStorage(' persist-key ', 0));
+
+    act(() => {
+      result.current[1](42);
+    });
+
+    expect(window.localStorage.getItem('persist-key')).toBe('42');
+    expect(window.localStorage.getItem(' persist-key ')).toBeNull();
+  });
+
   it('ignores custom sync events for unrelated keys', () => {
     const { result } = renderHook(() => useLocalStorage('event-key', 3));
 
