@@ -7,5 +7,6 @@
 - Capture wallet app/extension version details with each matrix run.
 - Include at least one low-balance wallet scenario in matrix coverage.
 - Include a burst-transaction run to verify client-side backoff behavior under provider limits.
+- Verify session restore after wallet network switching (mainnet ↔ testnet) before closing the run.
 
 Companion index: [Operations docs](README.md).
