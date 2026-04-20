@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 
-const MILESTONE_THRESHOLDS = [10, 50, 100, 200, 500, 1000];
+const MILESTONE_THRESHOLDS = [10, 50, 100, 200, 500, 1000, 2000];
 
 /**
  * Custom hook for managing gameplay milestones and celebrations.
