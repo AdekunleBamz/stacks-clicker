@@ -112,3 +112,18 @@ export function formatRelativeTime(timestamp, now = Date.now()) {
   const diffDays = Math.floor(diffHours / 24);
   return `${diffDays}d ${suffix}`;
 }
+
+/**
+ * Formats a number with an explicit sign prefix for delta values.
+ *
+ * @param {number} value - The numeric delta value
+ * @param {number} [decimals=2] - Number of decimal places
+ * @returns {string} Formatted string with sign, e.g. "+1.50" or "-0.30"
+ */
+export function formatSignedNumber(value, decimals = 2) {
+  const numericValue = Number(value);
+  if (!Number.isFinite(numericValue)) return '0';
+  const safeDecimals = Number.isInteger(decimals) && decimals >= 0 ? decimals : 2;
+  const formatted = Math.abs(numericValue).toFixed(safeDecimals);
+  return numericValue >= 0 ? `+${formatted}` : `-${formatted}`;
+}
