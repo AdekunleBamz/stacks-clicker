@@ -36,6 +36,13 @@ class SoundEngine {
             console.warn('Audio playback failed:', error);
         }
     }
+
+    stop(name) {
+        if (!this.sounds[name]) return;
+        const sound = this.sounds[name];
+        sound.pause();
+        sound.currentTime = 0;
+    }
 }
 
 const engine = new SoundEngine();
