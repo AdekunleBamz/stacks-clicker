@@ -58,4 +58,22 @@ describe('usePrice hook', () => {
     expect(result.current.error).toBe(networkError);
     expect(consoleSpy).toHaveBeenCalled();
   });
+
+  it('stores an error for non-ok HTTP responses', async () => {
+    global.fetch.mockResolvedValueOnce({
+      ok: false,
+      json: async () => ({}),
+    });
+    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    const { result } = renderHook(() => usePrice());
+
+    await waitFor(() => {
+      expect(result.current.loading).toBe(false);
+    });
+
+    expect(result.current.error).toBeInstanceOf(Error);
+    expect(result.current.error.message).toContain('Network response was not ok');
+    expect(consoleSpy).toHaveBeenCalled();
+  });
 });
