@@ -73,6 +73,25 @@ describe('useInterval hook', () => {
     expect(callback).toHaveBeenCalled();
   });
 
+  it('uses the latest callback after rerender', () => {
+    vi.useFakeTimers();
+    const firstCallback = vi.fn();
+    const secondCallback = vi.fn();
+
+    const { rerender } = renderHook(({ cb }) => useInterval(cb, 1000), {
+      initialProps: { cb: firstCallback },
+    });
+
+    rerender({ cb: secondCallback });
+
+    act(() => {
+      vi.advanceTimersByTime(1000);
+    });
+
+    expect(firstCallback).not.toHaveBeenCalled();
+    expect(secondCallback).toHaveBeenCalledTimes(1);
+  });
+
   it('does not throw if callback is missing', () => {
     vi.useFakeTimers();
 
