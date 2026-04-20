@@ -72,6 +72,7 @@ If you wish to modify, test, or deploy the Stacks smart contracts locally:
    VITE_COINGECKO_API_KEY=your_api_key_here
    ```
    Set `VITE_DEPLOYER_ADDRESS` to the principal that deployed the app contracts.
+   Optional values such as `VITE_STACKS_NETWORK`, `VITE_DEPLOYER_ADDRESS`, and `VITE_COINGECKO_API_KEY` are documented in `frontend/.env.example`.
 4. Start the development server:
    ```bash
    npm run frontend:dev
