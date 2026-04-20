@@ -100,3 +100,17 @@ export function isNetworkError(error) {
     lower.includes('failed to fetch')
   );
 }
+
+/**
+ * Extracts a numeric error code from a raw error string or object.
+ *
+ * @param {any} error - The error to extract from
+ * @returns {string|null} The extracted numeric code, or null
+ */
+export function getErrorCode(error) {
+  const msg = typeof error === 'string'
+    ? error
+    : error?.message || error?.reason || String(error);
+  const match = msg.match(/\d+/);
+  return match ? match[0] : null;
+}
