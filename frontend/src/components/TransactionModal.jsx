@@ -3,6 +3,11 @@ import Modal from './common/Modal';
 import { useModal } from '../context/ModalContext';
 import { truncateAddress } from '../utils/format';
 
+const STACKS_NETWORK =
+  String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
+    ? 'testnet'
+    : 'mainnet';
+
 /**
  * Modal to view detailed information about a specific transaction.
  */
@@ -14,7 +19,7 @@ const TransactionModal = () => {
   const { txId, action, timestamp, status = 'success' } = modalData;
 
   const getExplorerLink = () => {
-    return `https://explorer.hiro.so/txid/${txId}?chain=mainnet`;
+    return `https://explorer.hiro.so/txid/${txId}?chain=${STACKS_NETWORK}`;
   };
 
   return (
