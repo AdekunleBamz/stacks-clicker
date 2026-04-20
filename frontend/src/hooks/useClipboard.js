@@ -1,5 +1,4 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { useState, useCallback, useEffect, useRef } from 'react';
 import { notify } from '../utils/toast';
 
 function fallbackCopy(text) {
