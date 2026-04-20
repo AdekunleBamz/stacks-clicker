@@ -21,6 +21,7 @@ export function useNetwork() {
   const [isConnected, setIsConnected] = useState(true);
   const [network, setNetwork] = useState(CONFIGURED_NETWORK);
   const [isUpdating, setIsUpdating] = useState(false);
+  const [lastUpdated, setLastUpdated] = useState(null);
   const isFocused = useWindowFocus();
   const isVisible = useDocumentVisibility();
 
@@ -43,6 +44,7 @@ export function useNetwork() {
         data.network_id === 1 ? 'mainnet' : data.network_id === 2147483648 ? 'testnet' : 'unknown'
       );
       setIsConnected(true);
+      setLastUpdated(Date.now());
     } catch (error) {
       if (error?.name !== 'AbortError') {
         console.warn('Stacks Network Status Check Failed:', error);
@@ -62,5 +64,5 @@ export function useNetwork() {
 
   useInterval(fetchStatus, isFocused && isVisible ? 30000 : null); // Update every 30s only when active
 
-  return { blockHeight, isConnected, network, isUpdating };
+  return { blockHeight, isConnected, network, isUpdating, lastUpdated };
 }
