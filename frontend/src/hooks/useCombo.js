@@ -11,6 +11,7 @@ import { COMBO_TIMEOUT_MS } from '../utils/constants';
  */
 export function useCombo({ timeout = COMBO_TIMEOUT_MS } = {}) {
   const [combo, setCombo] = useState(0);
+  const [maxCombo, setMaxCombo] = useState(0);
   const timerRef = useRef(null);
   const safeTimeout = Number.isFinite(timeout) && timeout > 0 ? timeout : COMBO_TIMEOUT_MS;
 
@@ -20,7 +21,11 @@ export function useCombo({ timeout = COMBO_TIMEOUT_MS } = {}) {
   }, []);
 
   const incrementCombo = useCallback(() => {
-    setCombo((prev) => prev + 1);
+    setCombo((prev) => {
+      const next = prev + 1;
+      setMaxCombo((max) => (next > max ? next : max));
+      return next;
+    });
 
     if (timerRef.current) clearTimeout(timerRef.current);
     timerRef.current = setTimeout(() => {
@@ -36,6 +41,7 @@ export function useCombo({ timeout = COMBO_TIMEOUT_MS } = {}) {
 
   return {
     combo,
+    maxCombo,
     incrementCombo,
     resetCombo,
     isActive: combo > 0,
