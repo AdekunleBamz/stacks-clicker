@@ -76,6 +76,13 @@ export function useTransactionHistory({ playSound, onTxAdded }) {
   );
 
   /**
+   * Removes a single transaction entry by id.
+   */
+  const removeTx = useCallback((id) => {
+    setTxLog((prev) => prev.filter((tx) => tx.id !== id));
+  }, [setTxLog]);
+
+  /**
    * Clears all session transaction logs.
    */
   const clearLog = useCallback(() => {
@@ -87,6 +94,7 @@ export function useTransactionHistory({ playSound, onTxAdded }) {
     addTxToLog,
     setTxLog,
     clearLog,
+    removeTx,
     pendingTxs,
     txCount,
   };
