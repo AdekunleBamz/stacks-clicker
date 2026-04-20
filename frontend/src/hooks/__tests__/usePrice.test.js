@@ -1,6 +1,7 @@
-import { renderHook, waitFor } from '@testing-library/react';
+import { act, renderHook, waitFor } from '@testing-library/react';
 import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
 import { usePrice } from '../usePrice';
+import { PRICE_REFRESH_INTERVAL_MS } from '../../utils/constants';
 
 describe('usePrice hook', () => {
   beforeEach(() => {
@@ -110,6 +111,7 @@ describe('usePrice hook', () => {
   });
 
   it('clears previous errors after a successful fetch', async () => {
+    vi.useFakeTimers();
     global.fetch
       .mockRejectedValueOnce(new Error('temporary failure'))
       .mockResolvedValueOnce({
@@ -117,19 +119,22 @@ describe('usePrice hook', () => {
         json: async () => ({ blockstack: { usd: 2.34 } }),
       });
 
-    const { result, rerender } = renderHook(() => usePrice());
+    const { result } = renderHook(() => usePrice());
 
     await waitFor(() => {
       expect(result.current.loading).toBe(false);
       expect(result.current.error).toBeInstanceOf(Error);
     });
 
-    // Re-render to trigger the same hook lifecycle path with next mocked response.
-    rerender();
+    act(() => {
+      vi.advanceTimersByTime(PRICE_REFRESH_INTERVAL_MS);
+    });
 
     await waitFor(() => {
       expect(result.current.price).toBe(2.34);
       expect(result.current.error).toBeNull();
     });
+
+    vi.useRealTimers();
   });
 });
