@@ -122,6 +122,23 @@ describe('useLocalStorage hook', () => {
     expect(result.current[0]).toBe(3);
   });
 
+  it('resets to initial value when storage key is removed', () => {
+    const { result } = renderHook(() => useLocalStorage('remove-key', 12));
+
+    act(() => {
+      result.current[1](90);
+    });
+    expect(result.current[0]).toBe(90);
+
+    act(() => {
+      window.dispatchEvent(
+        new StorageEvent('storage', { key: 'remove-key', newValue: null })
+      );
+    });
+
+    expect(result.current[0]).toBe(12);
+  });
+
   it('applies successive functional updates without stale state loss', () => {
     const { result } = renderHook(() => useLocalStorage('counter-key', { count: 0 }));
 
