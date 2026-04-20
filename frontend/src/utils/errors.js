@@ -16,6 +16,7 @@ const ERROR_MAP = Object.freeze({
   '104': 'Limit Reached: You have reached the maximum allowed for this interaction.',
   '105': 'Already Voted: You have already submitted a vote for this poll.',
   '106': 'Not Found: The requested contract or resource could not be found.',
+  '107': 'Poll Closed: Voting for this poll has ended.',
   '401': 'User Rejected: The transaction request was cancelled in your wallet.',
   '403': 'Contract Paused: This interaction is currently disabled by the maintainers.',
   '500': 'Network Error: Failed to broadcast the transaction. Please try again.',
