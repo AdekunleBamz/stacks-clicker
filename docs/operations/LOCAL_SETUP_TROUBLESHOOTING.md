@@ -32,7 +32,7 @@ Common issues and solutions for local development setup.
 | Issue | Solution |
 | :--- | :--- |
 | Port already in use | Change port in vite config or kill process on port 5173 |
-| Module not found | Run `npm install` to update dependencies |
+| Module not found | Run `npm ci` to sync dependencies with the lockfile |
 | Wallet not connecting | Clear browser cache and wallet extension data |
 | Build fails | Clear Vite cache: `rm -rf node_modules/.vite` |
 
