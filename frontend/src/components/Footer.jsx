@@ -18,7 +18,7 @@ const Footer = memo(function Footer() {
       <div className="footer-content">
         <section className="footer-left" aria-label="Copyright and version">
           <small>
-            &copy; {CURRENT_YEAR} Stacks Clicker • Built with{' '}
+            &copy; {CURRENT_YEAR} Stacks Clicker &mdash; Built with{' '}
             <span role="img" aria-label="love">
               ❤️
             </span>{' '}
