@@ -33,6 +33,16 @@ const translations = Object.freeze({
     loading: 'Chargement...',
     error: 'Quelque chose a mal tourné',
   },
+  pt: {
+    welcome: 'Bem-vindo ao Stacks Clicker V2',
+    interactions: 'Interações',
+    stats: 'Estatísticas',
+    recent_activity: 'Atividade Recente',
+    connect_wallet: 'Conectar Carteira',
+    disconnect: 'Desconectar',
+    loading: 'Carregando...',
+    error: 'Algo deu errado',
+  },
 });
 
 const I18nContext = createContext(null);
@@ -51,6 +61,7 @@ export function I18nProvider({ children }) {
     () => ({
       lang: activeLang,
       setLang,
+      supportedLangs: Object.keys(translations),
       t: (key) => translations[activeLang][key] ?? key,
     }),
     [activeLang, setLang]
