@@ -166,8 +166,14 @@ function QuickPollCard({ address, quickpoll }) {
             aria-label="Share Poll Results"
             title="Copy Results Link"
             onClick={() => {
-              notify.success('Results link copied to clipboard!');
-              navigator.clipboard.writeText(window.location.href);
+              if (typeof navigator === 'undefined' || !navigator.clipboard?.writeText) {
+                notify.error('Clipboard not available');
+                return;
+              }
+
+              navigator.clipboard.writeText(window.location.href)
+                .then(() => notify.success('Results link copied to clipboard!'))
+                .catch(() => notify.error('Failed to copy results link'));
             }}
           >
             ↗ Share Results
