@@ -32,3 +32,13 @@ export function useMilestones({ stats, onMilestone }) {
 
   return { celebration };
 }
+
+/**
+ * Custom hook that returns true if the given interaction count is at a milestone threshold.
+ *
+ * @param {number} count - The total interaction count to check
+ * @returns {boolean} True if count is a defined milestone
+ */
+export function useIsMilestone(count) {
+  return MILESTONE_THRESHOLDS.includes(Number(count));
+}
