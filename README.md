@@ -90,7 +90,7 @@ git clone https://github.com/AdekunleBamz/stacks-clicker.git && cd stacks-clicke
 npm ci && cp .env.example .env && npm run dev
 
 # Run frontend tests
-npm run test -- --run
+npm run test:run
 ```
 
 ## Key Interactions 🎮
