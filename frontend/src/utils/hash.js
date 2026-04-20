@@ -27,7 +27,8 @@ export function simpleHash(str) {
 export function stringToColor(str) {
   const hash = simpleHash(str);
   const hue = hash % 360;
-  return `hsl(${hue}, 70%, 65%)`;
+  const saturation = 55 + (hash % 20);
+  return `hsl(${hue}, ${saturation}%, 65%)`;
 }
 
 /**
