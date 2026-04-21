@@ -93,3 +93,5 @@ export default {
 export const CLICK_REWARD_AMOUNT = 10
 
 export const MAX_CLICKS_PER_SESSION = 1000
+
+export const CLICK_COOLDOWN_MS = 100
