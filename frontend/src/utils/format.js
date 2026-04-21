@@ -147,3 +147,5 @@ export function formatBytes(bytes, decimals = 1) {
 }
 
 export const formatClickCount = (n) => Number(n).toLocaleString();
+
+export const formatScore = (n) => Number(n).toFixed(2);
