@@ -127,3 +127,5 @@ export const ANIMATION_DURATION_MS = 200
 export const TOAST_DURATION_MS = 3000
 
 export const MAX_ACTIVE_BOOSTS = 5
+
+export const BOOST_DURATION_BLOCKS = 10
