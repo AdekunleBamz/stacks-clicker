@@ -107,3 +107,5 @@ export function validatePayload(payload, schema) {
 }
 
 export const isValidClickCount = (v) => Number.isInteger(Number(v)) && Number(v) >= 0;
+
+export const isValidUpgradeLevel = (v) => Number.isInteger(Number(v)) && Number(v) >= 0 && Number(v) <= 50;
