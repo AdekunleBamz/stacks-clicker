@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { truncateAddress, formatNumber, formatStx } from '../format';
+import { truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
 
 describe('format utilities', () => {
   describe('truncateAddress', () => {
@@ -28,6 +28,10 @@ describe('format utilities', () => {
 
     test('supports custom separators', () => {
       expect(truncateAddress(address, { separator: '***' })).toBe('SP3K***PP4Y');
+    });
+
+    test('trims surrounding whitespace before truncation', () => {
+      expect(truncateAddress(`  ${address}  `)).toBe('SP3K...PP4Y');
     });
   });
 
@@ -72,6 +76,12 @@ describe('format utilities', () => {
 
     test('handles negative values gracefully', () => {
       expect(formatStx(-1000000)).toBe('-1.00 STX');
+    });
+  });
+
+  describe('formatWalletShort', () => {
+    test('returns trimmed value without ellipsis when short', () => {
+      expect(formatWalletShort('  SP1234  ')).toBe('SP1234');
     });
   });
 });
