@@ -175,3 +175,5 @@ export const formatUpgradeName = (key) => key.replace(/_/g, " ").toLowerCase();
 export const formatCriticalLabel = (isCrit) => isCrit ? "CRITICAL!" : "";
 
 export const formatBoostTimeLeft = (blocks) => blocks + " blocks left";
+
+export const formatLeaderboardEntry = (addr, score) => addr + ": " + score;
