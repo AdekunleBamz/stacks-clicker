@@ -173,3 +173,5 @@ export const formatSessionTime = (ms) => Math.floor(ms / 60000) + "m " + Math.fl
 export const formatUpgradeName = (key) => key.replace(/_/g, " ").toLowerCase();
 
 export const formatCriticalLabel = (isCrit) => isCrit ? "CRITICAL!" : "";
+
+export const formatBoostTimeLeft = (blocks) => blocks + " blocks left";
