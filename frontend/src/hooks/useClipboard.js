@@ -43,7 +43,7 @@ export function useClipboard({ timeout = 2000 } = {}) {
         return false;
       }
     },
-    [timeout]
+    [safeTimeout]
   );
 
   const clearCopied = useCallback(() => {
