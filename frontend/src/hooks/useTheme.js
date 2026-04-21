@@ -15,7 +15,7 @@ function getSystemTheme() {
  * @returns {Object} { theme, toggleTheme, setTheme }
  */
 export function useTheme() {
-  const [theme, setTheme] = useLocalStorage('theme', getSystemTheme());
+  const [theme, setTheme] = useLocalStorage('theme', getSystemTheme);
 
   useEffect(() => {
     const validTheme = theme === 'light' || theme === 'dark' ? theme : 'dark';
