@@ -165,3 +165,5 @@ export const formatRank = (n) => "#" + n;
 export const formatBoostName = (name) => name.charAt(0).toUpperCase() + name.slice(1);
 
 export const formatCombo = (n) => n + "x combo";
+
+export const formatPrestigeCount = (n) => "Prestige " + n;
