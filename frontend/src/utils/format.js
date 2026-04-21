@@ -145,3 +145,5 @@ export function formatBytes(bytes, decimals = 1) {
   const value = numericBytes / Math.pow(1024, index);
   return `${value.toFixed(safeDecimals)} ${units[index]}`;
 }
+
+export const formatClickCount = (n) => Number(n).toLocaleString();
