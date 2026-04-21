@@ -151,3 +151,5 @@ export const formatClickCount = (n) => Number(n).toLocaleString();
 export const formatScore = (n) => Number(n).toFixed(2);
 
 export const formatUpgradeLevel = (lvl) => "Level " + lvl;
+
+export const formatMultiplier = (m) => m + "x";
