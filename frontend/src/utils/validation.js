@@ -42,7 +42,8 @@ export function isPositiveInteger(value) {
  * @returns {boolean}
  */
 export function isValidMicroStxAmount(value) {
-  return Number.isInteger(value) && value >= 0;
+  const numericValue = Number(value);
+  return Number.isInteger(numericValue) && numericValue >= 0;
 }
 
 /**
