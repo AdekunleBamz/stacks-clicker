@@ -21,9 +21,16 @@ export function usePrefersReducedMotion() {
       setPrefersReducedMotion(event.matches);
     };
 
-    mediaQuery.addEventListener('change', handleMediaChange);
+    if (typeof mediaQuery.addEventListener === 'function') {
+      mediaQuery.addEventListener('change', handleMediaChange);
+      return () => {
+        mediaQuery.removeEventListener('change', handleMediaChange);
+      };
+    }
+
+    mediaQuery.addListener(handleMediaChange);
     return () => {
-      mediaQuery.removeEventListener('change', handleMediaChange);
+      mediaQuery.removeListener(handleMediaChange);
     };
   }, []);
 
