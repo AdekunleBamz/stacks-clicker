@@ -115,3 +115,5 @@ export const SESSION_EXPIRY_MS = 3600000
 export const AUTO_SAVE_INTERVAL_MS = 30000
 
 export const COMBO_WINDOW_MS = 500
+
+export const MAX_COMBO_MULTIPLIER = 10
