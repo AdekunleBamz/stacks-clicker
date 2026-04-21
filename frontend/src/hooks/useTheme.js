@@ -22,6 +22,7 @@ export function useTheme() {
   const [theme, setTheme] = useLocalStorage('theme', getSystemTheme);
 
   useEffect(() => {
+    if (typeof document === 'undefined') return;
     const validTheme = theme === 'light' || theme === 'dark' ? theme : 'dark';
     document.documentElement.setAttribute('data-theme', validTheme);
   }, [theme]);
