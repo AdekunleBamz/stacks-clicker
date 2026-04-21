@@ -129,3 +129,5 @@ export const isValidLeaderboardRank = (v) => Number.isInteger(Number(v)) && Numb
 export const isValidAutoClickerCount = (v) => Number.isInteger(Number(v)) && Number(v) >= 0;
 
 export const isValidUpgradeCost = (v) => !isNaN(Number(v)) && Number(v) > 0;
+
+export const isValidClickReward = (v) => !isNaN(Number(v)) && Number(v) > 0;
