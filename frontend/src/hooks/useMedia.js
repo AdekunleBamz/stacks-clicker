@@ -7,15 +7,16 @@ import { useState, useEffect } from 'react';
  * @returns {boolean} Whether the media query matches
  */
 export function useMedia(query) {
+  const trimmedQuery = typeof query === 'string' ? query.trim() : '';
   const [matches, setMatches] = useState(() => {
-    if (typeof window === 'undefined' || !query || typeof query !== 'string') return false;
-    return window.matchMedia(query).matches;
+    if (typeof window === 'undefined' || !trimmedQuery) return false;
+    return window.matchMedia(trimmedQuery).matches;
   });
 
   useEffect(() => {
-    if (typeof window === 'undefined' || !query || typeof query !== 'string') return undefined;
+    if (typeof window === 'undefined' || !trimmedQuery) return undefined;
 
-    const media = window.matchMedia(query);
+    const media = window.matchMedia(trimmedQuery);
     const listener = () => setMatches(media.matches);
 
     // Modern browsers use addEventListener
@@ -24,7 +25,7 @@ export function useMedia(query) {
     return () => {
       media.removeEventListener('change', listener);
     };
-  }, [query]);
+  }, [trimmedQuery]);
 
   return matches;
 }
