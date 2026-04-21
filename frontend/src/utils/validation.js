@@ -139,3 +139,5 @@ export const isValidWalletAddress = (v) => typeof v === "string" && v.length >= 
 export const isValidUsername = (v) => typeof v === "string" && v.trim().length >= 3 && v.trim().length <= 32;
 
 export const isValidPage = (v) => Number.isInteger(Number(v)) && Number(v) >= 1;
+
+export const isValidPageSize = (v) => Number.isInteger(Number(v)) && Number(v) >= 1 && Number(v) <= 100;
