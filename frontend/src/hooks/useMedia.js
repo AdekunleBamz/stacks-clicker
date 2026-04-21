@@ -18,12 +18,15 @@ export function useMedia(query) {
     const media = window.matchMedia(query);
     const listener = () => setMatches(media.matches);
 
-    // Modern browsers use addEventListener
-    media.addEventListener('change', listener);
+    if (typeof media.addEventListener === 'function') {
+      media.addEventListener('change', listener);
+      return () => {
+        media.removeEventListener('change', listener);
+      };
+    }
 
-    return () => {
-      media.removeEventListener('change', listener);
-    };
+    media.addListener(listener);
+    return () => media.removeListener(listener);
   }, [query]);
 
   return matches;
