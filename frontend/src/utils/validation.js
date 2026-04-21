@@ -137,3 +137,5 @@ export const isValidCriticalChance = (v) => !isNaN(Number(v)) && Number(v) >= 0 
 export const isValidWalletAddress = (v) => typeof v === "string" && v.length >= 30;
 
 export const isValidUsername = (v) => typeof v === "string" && v.trim().length >= 3 && v.trim().length <= 32;
+
+export const isValidPage = (v) => Number.isInteger(Number(v)) && Number(v) >= 1;
