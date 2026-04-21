@@ -156,8 +156,6 @@ export const formatMultiplier = (m) => m + "x";
 
 export const formatCost = (n) => Number(n).toLocaleString() + " pts";
 
-export const formatDuration = (ms) => (ms / 1000).toFixed(1) + "s";
-
 export const formatRank = (n) => "#" + n;
 
 export const formatBoostName = (name) => name.charAt(0).toUpperCase() + name.slice(1);
