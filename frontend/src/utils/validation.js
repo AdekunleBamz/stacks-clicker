@@ -135,3 +135,5 @@ export const isValidClickReward = (v) => !isNaN(Number(v)) && Number(v) > 0;
 export const isValidCriticalChance = (v) => !isNaN(Number(v)) && Number(v) >= 0 && Number(v) <= 1;
 
 export const isValidWalletAddress = (v) => typeof v === "string" && v.length >= 30;
+
+export const isValidUsername = (v) => typeof v === "string" && v.trim().length >= 3 && v.trim().length <= 32;
