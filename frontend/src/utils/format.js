@@ -153,3 +153,5 @@ export const formatScore = (n) => Number(n).toFixed(2);
 export const formatUpgradeLevel = (lvl) => "Level " + lvl;
 
 export const formatMultiplier = (m) => m + "x";
+
+export const formatCost = (n) => Number(n).toLocaleString() + " pts";
