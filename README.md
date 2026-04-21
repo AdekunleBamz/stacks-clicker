@@ -125,7 +125,7 @@ npm run check:fast
 ## Known Limitations ⚠️
 
 - **Network Latency**: High traffic on the Stacks network can lead to delayed transaction confirmation.
-- **Wallet Compatibility**: Optimized for Hiro and Leather; other SIP-010 compatible wallets may vary in experience.
+- **Wallet Compatibility**: Optimized for Hiro and Leather; other Stacks-compatible wallets may vary in experience.
 - **Testnet Focus**: Some features are currently tuned for mock/testnet environments and may require adjustments for high-value mainnet usage.
 
 ## Technical Architecture 🏗️
