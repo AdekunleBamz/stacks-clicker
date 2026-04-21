@@ -143,3 +143,5 @@ export const isValidPage = (v) => Number.isInteger(Number(v)) && Number(v) >= 1;
 export const isValidPageSize = (v) => Number.isInteger(Number(v)) && Number(v) >= 1 && Number(v) <= 100;
 
 export const isValidBoostType = (v) => ["click","auto","combo","prestige"].includes(v);
+
+export const isValidUpgradeType = (v) => ["damage","speed","crit","auto"].includes(v);
