@@ -37,6 +37,7 @@
     "frontend:lint": "npm --prefix frontend run lint",
     "frontend:lint:fix": "npm --prefix frontend run lint:fix",
     "frontend:format": "npm --prefix frontend run format",
+    "frontend:format:check": "npm --prefix frontend run format:check",
     "contracts:check": "clarinet check",
     "contracts:test": "clarinet test",
     "contracts:coverage": "clarinet test --coverage",
