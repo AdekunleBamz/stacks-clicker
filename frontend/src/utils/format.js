@@ -171,3 +171,5 @@ export const formatPrestigeCount = (n) => "Prestige " + n;
 export const formatSessionTime = (ms) => Math.floor(ms / 60000) + "m " + Math.floor((ms % 60000) / 1000) + "s";
 
 export const formatUpgradeName = (key) => key.replace(/_/g, " ").toLowerCase();
+
+export const formatCriticalLabel = (isCrit) => isCrit ? "CRITICAL!" : "";
