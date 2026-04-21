@@ -2,7 +2,11 @@ import { useEffect, useCallback } from 'react';
 import { useLocalStorage } from './useLocalStorage';
 
 function getSystemTheme() {
-  if (typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: light)').matches) {
+  if (
+    typeof window !== 'undefined'
+    && typeof window.matchMedia === 'function'
+    && window.matchMedia('(prefers-color-scheme: light)').matches
+  ) {
     return 'light';
   }
   return 'dark';
