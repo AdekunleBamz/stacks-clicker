@@ -18,7 +18,7 @@ const NETWORK_POLL_INTERVAL_MS = 30_000;
  * @property {string} network - The current network environment (e.g., 'mainnet', 'testnet')
  */
 export function useNetwork() {
-  const [blockHeight, setBlockHeight] = useState(840000);
+  const [blockHeight, setBlockHeight] = useState(840000); // Realistic baseline
   const [isConnected, setIsConnected] = useState(false);
   const [network, setNetwork] = useState(CONFIGURED_NETWORK);
   const [isUpdating, setIsUpdating] = useState(false);
