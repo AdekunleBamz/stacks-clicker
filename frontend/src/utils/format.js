@@ -155,3 +155,5 @@ export const formatUpgradeLevel = (lvl) => "Level " + lvl;
 export const formatMultiplier = (m) => m + "x";
 
 export const formatCost = (n) => Number(n).toLocaleString() + " pts";
+
+export const formatPercent = (n) => (Number(n) * 100).toFixed(1) + "%";
