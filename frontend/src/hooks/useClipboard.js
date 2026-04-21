@@ -28,6 +28,11 @@ export function useClipboard({ timeout = 2000 } = {}) {
     async (text) => {
       if (!text) return false;
 
+      if (typeof navigator === 'undefined' || !navigator.clipboard?.writeText) {
+        notify.error('Clipboard not available');
+        return false;
+      }
+
       try {
         if (navigator?.clipboard?.writeText) {
           await navigator.clipboard.writeText(text);
