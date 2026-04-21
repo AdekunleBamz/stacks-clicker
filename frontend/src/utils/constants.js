@@ -110,20 +110,20 @@ export const LEADERBOARD_PAGE_SIZE = 20;
 
 export const SCORE_PRECISION = 2;
 
-export const SESSION_EXPIRY_MS = 3600000
+export const SESSION_EXPIRY_MS = 3_600_000;
 
-export const AUTO_SAVE_INTERVAL_MS = 30000
+export const AUTO_SAVE_INTERVAL_MS = 30_000;
 
-export const COMBO_WINDOW_MS = 500
+export const COMBO_WINDOW_MS = 500;
 
-export const CRITICAL_CLICK_CHANCE = 0.05
+export const CRITICAL_CLICK_CHANCE = 0.05;
 
-export const CRITICAL_CLICK_MULTIPLIER = 5
+export const CRITICAL_CLICK_MULTIPLIER = 5;
 
-export const ANIMATION_DURATION_MS = 200
+export const ANIMATION_DURATION_MS = 200;
 
-export const TOAST_DURATION_MS = 3000
+export const TOAST_DURATION_MS = 3_000;
 
-export const MAX_ACTIVE_BOOSTS = 5
+export const MAX_ACTIVE_BOOSTS = 5;
 
-export const BOOST_DURATION_BLOCKS = 10
+export const BOOST_DURATION_BLOCKS = 10;
