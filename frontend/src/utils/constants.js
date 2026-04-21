@@ -109,3 +109,5 @@ export const PRESTIGE_MULTIPLIER = 2
 export const LEADERBOARD_PAGE_SIZE = 20
 
 export const SCORE_PRECISION = 2
+
+export const SESSION_EXPIRY_MS = 3600000
