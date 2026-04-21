@@ -97,3 +97,5 @@ export const MAX_CLICKS_PER_SESSION = 1000
 export const CLICK_COOLDOWN_MS = 100
 
 export const UPGRADE_BASE_COST = 100
+
+export const UPGRADE_COST_MULTIPLIER = 1.5
