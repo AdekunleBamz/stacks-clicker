@@ -111,3 +111,5 @@ export const LEADERBOARD_PAGE_SIZE = 20
 export const SCORE_PRECISION = 2
 
 export const SESSION_EXPIRY_MS = 3600000
+
+export const AUTO_SAVE_INTERVAL_MS = 30000
