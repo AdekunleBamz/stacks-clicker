@@ -12,6 +12,7 @@ Stacks Clicker aims to be more than just a game; it is a gateway for users to ex
 - `contracts/`: Clarity smart contracts [detailed here](contracts/README.md).
 - `frontend/`: React-based web application (Vite, Framer Motion).
 - `deployments/`: Network-specific deployment plans.
+- `settings/`: Clarinet network configuration files (simnet/devnet).
 - `docs/`: Additional technical documentation and guides.
 - `tests/`: Clarinet test suites for smart contracts.
 - `Makefile`: Root-level automation for development and deployment.
