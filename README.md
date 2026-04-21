@@ -147,7 +147,7 @@ graph TD
 
 ## Security & Verification 🔑
 
-Shared branch commits should be SSH signed before they are pushed. You can confirm the latest signature locally with `git log -1 --show-signature` and verify the pushed commit through GitHub's `Verified` badge.
+Shared branch commits should be signed (SSH or GPG) before they are pushed. You can confirm the latest signature locally with `git log -1 --show-signature` and verify the pushed commit through GitHub's `Verified` badge.
 
 ## Troubleshooting 🔍
 
