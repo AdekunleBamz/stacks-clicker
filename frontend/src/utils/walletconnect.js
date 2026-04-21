@@ -31,8 +31,8 @@ const metadata = {
   url: typeof window !== 'undefined' ? window.location.origin : 'https://stacks-clicker.vercel.app',
   icons: [
     typeof window !== 'undefined'
-      ? new URL('/logo.svg', window.location.origin).toString()
-      : 'https://stacks-clicker.vercel.app/logo.svg',
+      ? new URL('/favicon.svg', window.location.origin).toString()
+      : 'https://stacks-clicker.vercel.app/favicon.svg',
   ],
 };
 
