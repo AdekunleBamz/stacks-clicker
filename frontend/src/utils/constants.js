@@ -107,3 +107,5 @@ export const PRESTIGE_THRESHOLD = 1000000
 export const PRESTIGE_MULTIPLIER = 2
 
 export const LEADERBOARD_PAGE_SIZE = 20
+
+export const SCORE_PRECISION = 2
