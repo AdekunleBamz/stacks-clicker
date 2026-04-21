@@ -13,12 +13,13 @@
  * @returns {string} The truncated address
  */
 export function truncateAddress(address, { prefix = 4, suffix = 4, separator = '...' } = {}) {
-  if (!address) return '';
+  if (typeof address !== 'string' || address.trim().length === 0) return '';
+  const normalizedAddress = address.trim();
   const safePrefix = Number.isFinite(prefix) ? Math.max(0, Math.trunc(prefix)) : 4;
   const safeSuffix = Number.isFinite(suffix) ? Math.max(0, Math.trunc(suffix)) : 4;
-  if (safePrefix + safeSuffix === 0) return address;
-  if (address.length <= safePrefix + safeSuffix) return address;
-  return `${address.substring(0, safePrefix)}${separator}${address.substring(address.length - safeSuffix)}`;
+  if (safePrefix + safeSuffix === 0) return normalizedAddress;
+  if (normalizedAddress.length <= safePrefix + safeSuffix) return normalizedAddress;
+  return `${normalizedAddress.substring(0, safePrefix)}${separator}${normalizedAddress.substring(normalizedAddress.length - safeSuffix)}`;
 }
 
 /**
