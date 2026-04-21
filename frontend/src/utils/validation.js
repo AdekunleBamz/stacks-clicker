@@ -131,3 +131,5 @@ export const isValidAutoClickerCount = (v) => Number.isInteger(Number(v)) && Num
 export const isValidUpgradeCost = (v) => !isNaN(Number(v)) && Number(v) > 0;
 
 export const isValidClickReward = (v) => !isNaN(Number(v)) && Number(v) > 0;
+
+export const isValidCriticalChance = (v) => !isNaN(Number(v)) && Number(v) >= 0 && Number(v) <= 1;
