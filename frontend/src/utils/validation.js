@@ -115,3 +115,5 @@ export const isValidScore = (v) => !isNaN(Number(v)) && Number(v) >= 0;
 export const isValidMultiplier = (v) => !isNaN(Number(v)) && Number(v) >= 1;
 
 export const isValidBoostDuration = (v) => Number.isInteger(Number(v)) && Number(v) > 0;
+
+export const isValidComboCount = (v) => Number.isInteger(Number(v)) && Number(v) >= 0;
