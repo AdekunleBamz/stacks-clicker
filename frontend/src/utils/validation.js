@@ -5,7 +5,7 @@
  * @module utils/validation
  */
 
-import { MIN_TIP_MICRO_STX } from './constants';
+import { MAX_POLL_OPTIONS, MIN_TIP_MICRO_STX } from './constants';
 
 /**
  * Validates a Stacks address format.
@@ -61,8 +61,13 @@ export function isValidTipAmount(value) {
  * @param {number} [maxOptions=4] - Maximum number of allowed options (exclusive upper bound)
  * @returns {boolean}
  */
-export function isValidPollOptionId(value, maxOptions = 4) {
-  return Number.isInteger(value) && value >= 0 && value < maxOptions;
+export function isValidPollOptionId(value, maxOptions = MAX_POLL_OPTIONS) {
+  const numericValue = Number(value);
+  const numericMaxOptions = Number(maxOptions);
+  if (!Number.isInteger(numericValue) || !Number.isInteger(numericMaxOptions) || numericMaxOptions <= 0) {
+    return false;
+  }
+  return numericValue >= 0 && numericValue < numericMaxOptions;
 }
 
 export const SCHEMAS = Object.freeze({
