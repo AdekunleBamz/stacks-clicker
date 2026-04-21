@@ -6,6 +6,7 @@ import { STACKS_NETWORK, CONFIG } from '../utils/constants';
 
 const CONFIGURED_NETWORK = STACKS_NETWORK;
 const HIRO_INFO_ENDPOINT = `${CONFIG.API_URL}/v2/info`;
+const NETWORK_POLL_INTERVAL_MS = 30_000;
 
 const CONFIGURED_NETWORK =
   String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
@@ -76,7 +77,7 @@ export function useNetwork() {
     }
   }, [fetchStatus, isFocused, isVisible]);
 
-  useInterval(fetchStatus, isFocused && isVisible ? 30000 : null); // Update every 30s only when active
+  useInterval(fetchStatus, isFocused && isVisible ? NETWORK_POLL_INTERVAL_MS : null); // Update every 30s only when active
 
   const blocksSince = useCallback(
     (referenceHeight) => {
