@@ -127,3 +127,5 @@ export const isValidSessionDuration = (v) => !isNaN(Number(v)) && Number(v) >= 0
 export const isValidLeaderboardRank = (v) => Number.isInteger(Number(v)) && Number(v) >= 1;
 
 export const isValidAutoClickerCount = (v) => Number.isInteger(Number(v)) && Number(v) >= 0;
+
+export const isValidUpgradeCost = (v) => !isNaN(Number(v)) && Number(v) > 0;
