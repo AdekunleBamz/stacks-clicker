@@ -177,7 +177,12 @@ export const formatLeaderboardEntry = (addr, score) => addr + ": " + score;
 
 export const formatClickRate = (cps) => cps.toFixed(1) + " clicks/s";
 
-export const formatWalletShort = (addr) => addr ? addr.slice(0,8) + "..." : "";
+export const formatWalletShort = (addr) => {
+  const normalized = typeof addr === 'string' ? addr.trim() : '';
+  if (!normalized) return '';
+  if (normalized.length <= 8) return normalized;
+  return normalized.slice(0, 8) + '...';
+};
 
 export const formatBlockHeight = (h) => "Block #" + h;
 
