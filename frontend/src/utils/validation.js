@@ -119,3 +119,5 @@ export const isValidBoostDuration = (v) => Number.isInteger(Number(v)) && Number
 export const isValidComboCount = (v) => Number.isInteger(Number(v)) && Number(v) >= 0;
 
 export const isValidPrestigeCount = (v) => Number.isInteger(Number(v)) && Number(v) >= 0;
+
+export const isValidClickRate = (v) => !isNaN(Number(v)) && Number(v) >= 0;
