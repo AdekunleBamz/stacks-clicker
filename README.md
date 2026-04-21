@@ -31,7 +31,7 @@ Stacks Clicker aims to be more than just a game; it is a gateway for users to ex
 ### Prerequisites
 - **Node.js**: v18.0.0 or higher (LTS recommended)
 - **npm**: v9.0.0 or higher (comes with Node.js)
-- **Stacks Wallet**: Hiro Wallet or Leather extension
+- **Stacks Wallet**: Hiro Wallet, Leather, or Xverse extension
 - **Clarinet**: Required for smart contract development and testing
 
 ### Local Discovery
