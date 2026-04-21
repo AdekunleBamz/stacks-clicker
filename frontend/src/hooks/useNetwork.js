@@ -17,7 +17,7 @@ const HIRO_INFO_ENDPOINT = `${CONFIG.API_URL}/v2/info`;
  * @property {string} network - The current network environment (e.g., 'mainnet', 'testnet')
  */
 export function useNetwork() {
-  const [blockHeight, setBlockHeight] = useState(840000); // Realistic baseline
+  const [blockHeight, setBlockHeight] = useState(null);
   const [isConnected, setIsConnected] = useState(true);
   const [network, setNetwork] = useState(CONFIGURED_NETWORK);
   const [isUpdating, setIsUpdating] = useState(false);
