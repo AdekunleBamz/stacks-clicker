@@ -90,25 +90,25 @@ export default {
   HIRO_EXPLORER_TX_BASE,
 };
 
-export const CLICK_REWARD_AMOUNT = 10
+export const CLICK_REWARD_AMOUNT = 10;
 
-export const MAX_CLICKS_PER_SESSION = 1000
+export const MAX_CLICKS_PER_SESSION = 1000;
 
-export const CLICK_COOLDOWN_MS = 100
+export const CLICK_COOLDOWN_MS = 100;
 
-export const UPGRADE_BASE_COST = 100
+export const UPGRADE_BASE_COST = 100;
 
-export const UPGRADE_COST_MULTIPLIER = 1.5
+export const UPGRADE_COST_MULTIPLIER = 1.5;
 
-export const MAX_UPGRADE_LEVEL = 50
+export const MAX_UPGRADE_LEVEL = 50;
 
-export const PRESTIGE_THRESHOLD = 1000000
+export const PRESTIGE_THRESHOLD = 1_000_000;
 
-export const PRESTIGE_MULTIPLIER = 2
+export const PRESTIGE_MULTIPLIER = 2;
 
-export const LEADERBOARD_PAGE_SIZE = 20
+export const LEADERBOARD_PAGE_SIZE = 20;
 
-export const SCORE_PRECISION = 2
+export const SCORE_PRECISION = 2;
 
 export const SESSION_EXPIRY_MS = 3600000
 
