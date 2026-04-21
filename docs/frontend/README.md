@@ -26,7 +26,7 @@ This folder contains focused references for frontend components, hooks, and cont
 ## Quick Links
 
 - Source directory: `frontend/src/`
-- Component tests: `frontend/src/__tests__/` and `frontend/src/components/__tests__/`
+- Component tests: `frontend/src/tests/` and `frontend/src/components/__tests__/`
 - Main app entry: `frontend/src/App.jsx`
 
 ## Related Documentation
