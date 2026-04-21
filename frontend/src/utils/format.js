@@ -175,7 +175,11 @@ export const formatBoostTimeLeft = (blocks) => blocks + " blocks left";
 
 export const formatLeaderboardEntry = (addr, score) => addr + ": " + score;
 
-export const formatClickRate = (cps) => cps.toFixed(1) + " clicks/s";
+export const formatClickRate = (cps) => {
+  const numericCps = Number(cps);
+  if (!Number.isFinite(numericCps) || numericCps < 0) return '0.0 clicks/s';
+  return numericCps.toFixed(1) + ' clicks/s';
+};
 
 export const formatWalletShort = (addr) => {
   const normalized = typeof addr === 'string' ? addr.trim() : '';
