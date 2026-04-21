@@ -14,9 +14,9 @@ export function useMedia(query) {
   });
 
   useEffect(() => {
-    if (typeof window === 'undefined') return undefined;
+    if (typeof window === 'undefined' || !trimmedQuery) return undefined;
 
-    const media = window.matchMedia(query);
+    const media = window.matchMedia(trimmedQuery);
     const listener = () => setMatches(media.matches);
 
     if (typeof media.addEventListener === 'function') {
@@ -26,9 +26,10 @@ export function useMedia(query) {
       };
     }
 
-    media.addListener(listener);
-    return () => media.removeListener(listener);
-  }, [query]);
+    return () => {
+      media.removeEventListener('change', listener);
+    };
+  }, [trimmedQuery]);
 
   return matches;
 }
