@@ -19,20 +19,15 @@ export function useMedia(query) {
     const media = window.matchMedia(query);
     const listener = () => setMatches(media.matches);
 
-    // Modern browsers use addEventListener, older ones use addListener
-    if (media.addEventListener) {
+    if (typeof media.addEventListener === 'function') {
       media.addEventListener('change', listener);
-    } else {
-      media.addListener(listener);
+      return () => {
+        media.removeEventListener('change', listener);
+      };
     }
 
-    return () => {
-      if (media.removeEventListener) {
-        media.removeEventListener('change', listener);
-      } else {
-        media.removeListener(listener);
-      }
-    };
+    media.addListener(listener);
+    return () => media.removeListener(listener);
   }, [query]);
 
   return matches;
