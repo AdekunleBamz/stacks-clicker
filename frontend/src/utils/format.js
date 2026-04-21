@@ -163,3 +163,5 @@ export const formatDuration = (ms) => (ms / 1000).toFixed(1) + "s";
 export const formatRank = (n) => "#" + n;
 
 export const formatBoostName = (name) => name.charAt(0).toUpperCase() + name.slice(1);
+
+export const formatCombo = (n) => n + "x combo";
