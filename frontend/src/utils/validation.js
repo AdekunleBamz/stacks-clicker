@@ -105,3 +105,5 @@ export function validatePayload(payload, schema) {
   }
   return true;
 }
+
+export const isValidClickCount = (v) => Number.isInteger(Number(v)) && Number(v) >= 0;
