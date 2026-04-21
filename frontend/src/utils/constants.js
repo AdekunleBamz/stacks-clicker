@@ -105,3 +105,5 @@ export const MAX_UPGRADE_LEVEL = 50
 export const PRESTIGE_THRESHOLD = 1000000
 
 export const PRESTIGE_MULTIPLIER = 2
+
+export const LEADERBOARD_PAGE_SIZE = 20
