@@ -116,8 +116,6 @@ export const AUTO_SAVE_INTERVAL_MS = 30000
 
 export const COMBO_WINDOW_MS = 500
 
-export const MAX_COMBO_MULTIPLIER = 10
-
 export const CRITICAL_CLICK_CHANCE = 0.05
 
 export const CRITICAL_CLICK_MULTIPLIER = 5
