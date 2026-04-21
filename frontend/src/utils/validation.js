@@ -111,3 +111,5 @@ export const isValidClickCount = (v) => Number.isInteger(Number(v)) && Number(v)
 export const isValidUpgradeLevel = (v) => Number.isInteger(Number(v)) && Number(v) >= 0 && Number(v) <= 50;
 
 export const isValidScore = (v) => !isNaN(Number(v)) && Number(v) >= 0;
+
+export const isValidMultiplier = (v) => !isNaN(Number(v)) && Number(v) >= 1;
