@@ -39,7 +39,7 @@ For smart contract changes, use [Clarinet](https://github.com/hirosystems/clarin
 For frontend verification before opening a PR:
 - Run `npm run test -- --run` to execute tests
 - Run `npm run lint` to check code quality
-- Run `npm run format:check` to verify formatting
+- Run `npm --prefix frontend run format:check` to verify formatting
 
 ## License
 
