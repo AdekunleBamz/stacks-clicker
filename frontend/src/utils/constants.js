@@ -89,3 +89,5 @@ export default {
   CONFIG,
   HIRO_EXPLORER_TX_BASE,
 };
+
+export const CLICK_REWARD_AMOUNT = 10
