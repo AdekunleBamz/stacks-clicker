@@ -1,5 +1,13 @@
 import { describe, it, expect } from 'vitest';
-import { isValidStacksAddress, validatePayload, SCHEMAS } from '../validation';
+import {
+  isPositiveInteger,
+  isValidMicroStxAmount,
+  isValidPollOptionId,
+  isValidStacksAddress,
+  isValidWalletAddress,
+  validatePayload,
+  SCHEMAS,
+} from '../validation';
 
 describe('isValidStacksAddress', () => {
   it('should return true for valid mainnet addresses', () => {
@@ -51,5 +59,27 @@ describe('validatePayload', () => {
     expect(() => validatePayload(null, SCHEMAS.CLICK)).toThrow();
     expect(() => validatePayload('string', SCHEMAS.CLICK)).toThrow();
     expect(() => validatePayload(123, SCHEMAS.CLICK)).toThrow();
+  });
+});
+
+describe('numeric helpers', () => {
+  it('accepts numeric strings for integer checks', () => {
+    expect(isPositiveInteger('2')).toBe(true);
+    expect(isPositiveInteger('0')).toBe(false);
+  });
+
+  it('accepts numeric strings for micro-STX amounts', () => {
+    expect(isValidMicroStxAmount('25')).toBe(true);
+    expect(isValidMicroStxAmount('-1')).toBe(false);
+  });
+
+  it('validates poll option ids with explicit bounds', () => {
+    expect(isValidPollOptionId('2', 4)).toBe(true);
+    expect(isValidPollOptionId('4', 4)).toBe(false);
+  });
+
+  it('uses full Stacks address validation for wallet addresses', () => {
+    expect(isValidWalletAddress('SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT')).toBe(true);
+    expect(isValidWalletAddress('SP123')).toBe(false);
   });
 });
