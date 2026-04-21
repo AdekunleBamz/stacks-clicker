@@ -15,6 +15,8 @@ Stacks Clicker aims to be more than just a game; it is a gateway for users to ex
 - `settings/`: Clarinet network configuration files (simnet/devnet).
 - `docs/`: Additional technical documentation and guides.
 - `tests/`: Clarinet test suites for smart contracts.
+- `CHANGELOG.md`: Chronological release and change history.
+- `Makefile`: Root-level automation for development and deployment.
 
 ## Features 🌟
 
