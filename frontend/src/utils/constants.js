@@ -123,3 +123,5 @@ export const CRITICAL_CLICK_CHANCE = 0.05
 export const CRITICAL_CLICK_MULTIPLIER = 5
 
 export const ANIMATION_DURATION_MS = 200
+
+export const TOAST_DURATION_MS = 3000
