@@ -57,7 +57,13 @@ export function useNetwork() {
     }
   }, []);
 
-  useInterval(fetchStatus, isFocused && isVisible ? NETWORK_POLL_INTERVAL_MS : null);
+  useEffect(() => {
+    if (isFocused && isVisible) {
+      fetchStatus();
+    }
+  }, [fetchStatus, isFocused, isVisible]);
+
+  useInterval(fetchStatus, isFocused && isVisible ? NETWORK_POLL_INTERVAL_MS : null); // Update every 30s only when active
 
   const blocksSince = useCallback(
     (referenceHeight) => {
