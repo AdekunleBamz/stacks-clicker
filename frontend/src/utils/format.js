@@ -177,3 +177,5 @@ export const formatCriticalLabel = (isCrit) => isCrit ? "CRITICAL!" : "";
 export const formatBoostTimeLeft = (blocks) => blocks + " blocks left";
 
 export const formatLeaderboardEntry = (addr, score) => addr + ": " + score;
+
+export const formatClickRate = (cps) => cps.toFixed(1) + " clicks/s";
