@@ -15,6 +15,9 @@ const HIRO_INFO_ENDPOINT = `${CONFIG.API_URL}/v2/info`;
  * @property {number} blockHeight - The current tip height of the Stacks blockchain
  * @property {boolean} isConnected - True if the network is reachable and responding
  * @property {string} network - The current network environment (e.g., 'mainnet', 'testnet')
+ * @property {boolean} isUpdating - True while a network status check is in flight
+ * @property {number|null} lastUpdated - Unix timestamp (ms) of the last successful refresh
+ * @property {Function} blocksSince - Helper that returns block distance from a reference height
  */
 export function useNetwork() {
   const [blockHeight, setBlockHeight] = useState(840000); // Realistic baseline
