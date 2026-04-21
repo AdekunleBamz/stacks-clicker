@@ -10,7 +10,7 @@ function getSystemTheme() {
 
 /**
  * Custom hook for managing the application theme (light/dark).
- * Synchronizes with localStorage and update the document's data-theme attribute.
+ * Synchronizes with localStorage and updates the document's data-theme attribute.
  *
  * @returns {Object} { theme, toggleTheme, setTheme }
  */
