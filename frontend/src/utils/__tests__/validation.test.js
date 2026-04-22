@@ -85,6 +85,10 @@ describe('validatePayload', () => {
   it('should throw for non-object schemas', () => {
     expect(() => validatePayload({ amount: 1 }, null)).toThrow('schema must be an object');
   });
+
+  it('should throw when schema entries are not validators', () => {
+    expect(() => validatePayload({ amount: 1 }, { amount: true })).toThrow('not a validator function');
+  });
 });
 
 describe('numeric helpers', () => {
