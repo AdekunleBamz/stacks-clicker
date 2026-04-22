@@ -23,6 +23,7 @@ import {
   isValidUpgradeCost,
   isValidClickReward,
   isValidCriticalChance,
+  isValidUsername,
 } from '../validation';
 
 describe('isValidStacksAddress', () => {
@@ -177,5 +178,10 @@ describe('numeric helpers', () => {
   it('validates critical chance bounds', () => {
     expect(isValidCriticalChance(1)).toBe(true);
     expect(isValidCriticalChance(1.1)).toBe(false);
+  });
+
+  it('validates username length after trimming', () => {
+    expect(isValidUsername(' ace ')).toBe(true);
+    expect(isValidUsername('xy')).toBe(false);
   });
 });
