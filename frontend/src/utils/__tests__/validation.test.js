@@ -25,6 +25,7 @@ import {
   isValidCriticalChance,
   isValidUsername,
   isValidPage,
+  isValidPageSize,
 } from '../validation';
 
 describe('isValidStacksAddress', () => {
@@ -189,5 +190,10 @@ describe('numeric helpers', () => {
   it('validates page numbers from one upward', () => {
     expect(isValidPage(1)).toBe(true);
     expect(isValidPage(0)).toBe(false);
+  });
+
+  it('validates page size upper bounds', () => {
+    expect(isValidPageSize(100)).toBe(true);
+    expect(isValidPageSize(101)).toBe(false);
   });
 });
