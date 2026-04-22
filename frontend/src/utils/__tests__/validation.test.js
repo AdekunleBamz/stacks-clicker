@@ -18,6 +18,7 @@ import {
   isValidPrestigeCount,
   isValidClickRate,
   isValidSessionDuration,
+  isValidLeaderboardRank,
 } from '../validation';
 
 describe('isValidStacksAddress', () => {
@@ -147,5 +148,10 @@ describe('numeric helpers', () => {
   it('validates session durations as non-negative numbers', () => {
     expect(isValidSessionDuration(0)).toBe(true);
     expect(isValidSessionDuration(-10)).toBe(false);
+  });
+
+  it('validates leaderboard ranks from one upward', () => {
+    expect(isValidLeaderboardRank(1)).toBe(true);
+    expect(isValidLeaderboardRank(0)).toBe(false);
   });
 });
