@@ -112,6 +112,10 @@ describe('format utilities', () => {
     test('formats minute-scale relative timestamps', () => {
       expect(formatRelativeTime(10_000, 130_000)).toBe('2m ago');
     });
+
+    test('formats hour-scale relative timestamps', () => {
+      expect(formatRelativeTime(0, 7_200_000)).toBe('2h ago');
+    });
   });
 
   describe('formatStx', () => {
