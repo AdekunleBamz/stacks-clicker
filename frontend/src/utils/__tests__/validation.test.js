@@ -11,6 +11,7 @@ import {
   SCHEMAS,
   isValidClickCount,
   isValidUpgradeLevel,
+  isValidScore,
 } from '../validation';
 
 describe('isValidStacksAddress', () => {
@@ -105,5 +106,10 @@ describe('numeric helpers', () => {
   it('validates upgrade level bounds', () => {
     expect(isValidUpgradeLevel(50)).toBe(true);
     expect(isValidUpgradeLevel(51)).toBe(false);
+  });
+
+  it('validates non-negative scores', () => {
+    expect(isValidScore('10')).toBe(true);
+    expect(isValidScore(-0.1)).toBe(false);
   });
 });
