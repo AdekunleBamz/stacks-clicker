@@ -138,6 +138,10 @@ describe('format utilities', () => {
     test('honors signed number precision', () => {
       expect(formatSignedNumber(1.234, 1)).toBe('+1.2');
     });
+
+    test('returns zero for invalid signed numbers', () => {
+      expect(formatSignedNumber(undefined)).toBe('0');
+    });
   });
 
   describe('formatStx', () => {
