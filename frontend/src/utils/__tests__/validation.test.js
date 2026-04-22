@@ -10,6 +10,7 @@ import {
   validatePayload,
   SCHEMAS,
   isValidClickCount,
+  isValidUpgradeLevel,
 } from '../validation';
 
 describe('isValidStacksAddress', () => {
@@ -99,5 +100,10 @@ describe('numeric helpers', () => {
   it('validates non-negative click counts', () => {
     expect(isValidClickCount(0)).toBe(true);
     expect(isValidClickCount(-1)).toBe(false);
+  });
+
+  it('validates upgrade level bounds', () => {
+    expect(isValidUpgradeLevel(50)).toBe(true);
+    expect(isValidUpgradeLevel(51)).toBe(false);
   });
 });
