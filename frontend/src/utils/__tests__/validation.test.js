@@ -17,6 +17,7 @@ import {
   isValidComboCount,
   isValidPrestigeCount,
   isValidClickRate,
+  isValidSessionDuration,
 } from '../validation';
 
 describe('isValidStacksAddress', () => {
@@ -141,5 +142,10 @@ describe('numeric helpers', () => {
   it('validates click rates as non-negative numbers', () => {
     expect(isValidClickRate(0.5)).toBe(true);
     expect(isValidClickRate(Number.NaN)).toBe(false);
+  });
+
+  it('validates session durations as non-negative numbers', () => {
+    expect(isValidSessionDuration(0)).toBe(true);
+    expect(isValidSessionDuration(-10)).toBe(false);
   });
 });
