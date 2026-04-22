@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { formatBytes, formatClickCount, formatCompact, formatDuration, formatPercent, formatRelativeTime, formatScore, formatSignedNumber, formatUpgradeLevel, truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
+import { formatBytes, formatClickCount, formatCompact, formatDuration, formatMultiplier, formatPercent, formatRelativeTime, formatScore, formatSignedNumber, formatUpgradeLevel, truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
 
 describe('format utilities', () => {
   describe('truncateAddress', () => {
@@ -173,6 +173,10 @@ describe('format utilities', () => {
 
     test('formats upgrade levels', () => {
       expect(formatUpgradeLevel(4)).toBe('Level 4');
+    });
+
+    test('formats multiplier labels', () => {
+      expect(formatMultiplier(2)).toBe('2x');
     });
   });
 
