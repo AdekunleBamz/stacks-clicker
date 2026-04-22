@@ -15,6 +15,7 @@ import {
   isValidMultiplier,
   isValidBoostDuration,
   isValidComboCount,
+  isValidPrestigeCount,
 } from '../validation';
 
 describe('isValidStacksAddress', () => {
@@ -129,5 +130,10 @@ describe('numeric helpers', () => {
   it('validates combo counts as non-negative integers', () => {
     expect(isValidComboCount(0)).toBe(true);
     expect(isValidComboCount(1.5)).toBe(false);
+  });
+
+  it('validates prestige counts as non-negative integers', () => {
+    expect(isValidPrestigeCount('2')).toBe(true);
+    expect(isValidPrestigeCount(-1)).toBe(false);
   });
 });
