@@ -71,6 +71,11 @@ describe('validatePayload', () => {
     expect(validatePayload(payload, SCHEMAS.TIP)).toBe(true);
   });
 
+  it('should validate poll payloads', () => {
+    const payload = { optionId: 0, pollId: 2 };
+    expect(validatePayload(payload, SCHEMAS.POLL)).toBe(true);
+  });
+
   it('should throw for invalid payload', () => {
     const payload = { amount: -1 };
     expect(() => validatePayload(payload, SCHEMAS.CLICK)).toThrow();
