@@ -19,6 +19,7 @@ import {
   isValidClickRate,
   isValidSessionDuration,
   isValidLeaderboardRank,
+  isValidAutoClickerCount,
 } from '../validation';
 
 describe('isValidStacksAddress', () => {
@@ -153,5 +154,10 @@ describe('numeric helpers', () => {
   it('validates leaderboard ranks from one upward', () => {
     expect(isValidLeaderboardRank(1)).toBe(true);
     expect(isValidLeaderboardRank(0)).toBe(false);
+  });
+
+  it('validates auto-clicker counts as non-negative integers', () => {
+    expect(isValidAutoClickerCount(2)).toBe(true);
+    expect(isValidAutoClickerCount(2.5)).toBe(false);
   });
 });
