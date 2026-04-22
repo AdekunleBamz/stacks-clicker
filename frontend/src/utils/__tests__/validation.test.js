@@ -258,4 +258,8 @@ describe('numeric helpers', () => {
     expect(isValidUpgradeType('crit')).toBe(true);
     expect(isValidUpgradeType('range')).toBe(false);
   });
+
+  it('accepts damage upgrade types', () => {
+    expect(isValidUpgradeType('damage')).toBe(true);
+  });
 });
