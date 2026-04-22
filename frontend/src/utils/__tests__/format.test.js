@@ -130,6 +130,10 @@ describe('format utilities', () => {
     test('adds a plus sign for positive deltas', () => {
       expect(formatSignedNumber(1.5)).toBe('+1.50');
     });
+
+    test('keeps a minus sign for negative deltas', () => {
+      expect(formatSignedNumber(-0.3)).toBe('-0.30');
+    });
   });
 
   describe('formatStx', () => {
