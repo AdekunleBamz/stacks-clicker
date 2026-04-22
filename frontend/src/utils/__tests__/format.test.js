@@ -120,6 +120,10 @@ describe('format utilities', () => {
     test('formats day-scale relative timestamps', () => {
       expect(formatRelativeTime(0, 172_800_000)).toBe('2d ago');
     });
+
+    test('returns unknown for invalid timestamps', () => {
+      expect(formatRelativeTime('nope', 10_000)).toBe('unknown');
+    });
   });
 
   describe('formatStx', () => {
