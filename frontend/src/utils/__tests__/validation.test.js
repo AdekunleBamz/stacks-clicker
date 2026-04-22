@@ -21,6 +21,7 @@ import {
   isValidLeaderboardRank,
   isValidAutoClickerCount,
   isValidUpgradeCost,
+  isValidClickReward,
 } from '../validation';
 
 describe('isValidStacksAddress', () => {
@@ -165,5 +166,10 @@ describe('numeric helpers', () => {
   it('validates upgrade costs as positive numbers', () => {
     expect(isValidUpgradeCost(10)).toBe(true);
     expect(isValidUpgradeCost(0)).toBe(false);
+  });
+
+  it('validates click rewards as positive numbers', () => {
+    expect(isValidClickReward(1)).toBe(true);
+    expect(isValidClickReward(-1)).toBe(false);
   });
 });
