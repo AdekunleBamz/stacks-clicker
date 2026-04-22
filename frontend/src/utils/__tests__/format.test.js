@@ -71,6 +71,10 @@ describe('format utilities', () => {
     test('returns zero for invalid compact values', () => {
       expect(formatCompact(Number.POSITIVE_INFINITY)).toBe('0');
     });
+
+    test('formats numeric string compact values', () => {
+      expect(formatCompact('2500')).toBe('2.5K');
+    });
   });
 
   describe('formatPercent', () => {
