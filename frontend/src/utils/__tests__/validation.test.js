@@ -121,6 +121,10 @@ describe('numeric helpers', () => {
     expect(isValidMicroStxAmount('-1')).toBe(false);
   });
 
+  it('rejects fractional micro-STX amounts', () => {
+    expect(isValidMicroStxAmount(1.5)).toBe(false);
+  });
+
   it('validates tip amounts against the minimum', () => {
     expect(isValidTipAmount(100)).toBe(true);
     expect(isValidTipAmount(99)).toBe(false);
