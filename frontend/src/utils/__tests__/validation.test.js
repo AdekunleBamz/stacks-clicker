@@ -35,6 +35,10 @@ describe('isValidStacksAddress', () => {
     expect(isValidStacksAddress('SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT')).toBe(true);
   });
 
+  it('should trim addresses before validation', () => {
+    expect(isValidStacksAddress('  SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT  ')).toBe(true);
+  });
+
   it('should return true for valid testnet addresses', () => {
     expect(isValidStacksAddress('ST5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT')).toBe(true);
   });
