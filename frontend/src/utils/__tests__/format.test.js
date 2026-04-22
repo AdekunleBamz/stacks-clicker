@@ -90,6 +90,10 @@ describe('format utilities', () => {
     test('formats exact minute durations', () => {
       expect(formatDuration(120000)).toBe('2m');
     });
+
+    test('formats mixed minute and second durations', () => {
+      expect(formatDuration(150000)).toBe('2m 30s');
+    });
   });
 
   describe('formatStx', () => {
