@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { formatBlockHeight, formatBoostName, formatBoostTimeLeft, formatBytes, formatClickCount, formatClickRate, formatCombo, formatCompact, formatCost, formatCriticalLabel, formatDuration, formatLeaderboardEntry, formatMultiplier, formatPercent, formatPrestigeCount, formatRank, formatRelativeTime, formatScore, formatSessionTime, formatSignedNumber, formatUpgradeLevel, formatUpgradeName, truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
+import { formatAutoClicker, formatBlockHeight, formatBoostName, formatBoostTimeLeft, formatBytes, formatClickCount, formatClickRate, formatCombo, formatCompact, formatCost, formatCriticalLabel, formatDuration, formatLeaderboardEntry, formatMultiplier, formatPercent, formatPrestigeCount, formatRank, formatRelativeTime, formatScore, formatSessionTime, formatSignedNumber, formatUpgradeLevel, formatUpgradeName, truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
 
 describe('format utilities', () => {
   describe('truncateAddress', () => {
@@ -233,6 +233,10 @@ describe('format utilities', () => {
 
     test('formats block height labels', () => {
       expect(formatBlockHeight(42)).toBe('Block #42');
+    });
+
+    test('formats auto-clicker labels', () => {
+      expect(formatAutoClicker(3)).toBe('3 auto-clickers');
     });
   });
 
