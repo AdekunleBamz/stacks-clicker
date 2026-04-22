@@ -134,6 +134,10 @@ describe('format utilities', () => {
     test('keeps a minus sign for negative deltas', () => {
       expect(formatSignedNumber(-0.3)).toBe('-0.30');
     });
+
+    test('honors signed number precision', () => {
+      expect(formatSignedNumber(1.234, 1)).toBe('+1.2');
+    });
   });
 
   describe('formatStx', () => {
