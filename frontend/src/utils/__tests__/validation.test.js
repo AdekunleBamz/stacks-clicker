@@ -81,8 +81,8 @@ describe('numeric helpers', () => {
   });
 
   it('validates tip amounts against the minimum', () => {
-    expect(isValidTipAmount(1000)).toBe(true);
-    expect(isValidTipAmount(999)).toBe(false);
+    expect(isValidTipAmount(100)).toBe(true);
+    expect(isValidTipAmount(99)).toBe(false);
   });
 
   it('validates poll option ids with explicit bounds', () => {
