@@ -86,6 +86,10 @@ describe('format utilities', () => {
     test('formats second-only durations', () => {
       expect(formatDuration(45000)).toBe('45s');
     });
+
+    test('formats exact minute durations', () => {
+      expect(formatDuration(120000)).toBe('2m');
+    });
   });
 
   describe('formatStx', () => {
