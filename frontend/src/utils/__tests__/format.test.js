@@ -156,6 +156,10 @@ describe('format utilities', () => {
     test('honors byte precision options', () => {
       expect(formatBytes(1536, 0)).toBe('2 KB');
     });
+
+    test('returns zero bytes for invalid values', () => {
+      expect(formatBytes(-1)).toBe('0 B');
+    });
   });
 
   describe('formatStx', () => {
