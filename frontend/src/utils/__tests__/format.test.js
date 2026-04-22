@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { formatBoostName, formatBytes, formatClickCount, formatCombo, formatCompact, formatCost, formatDuration, formatMultiplier, formatPercent, formatRank, formatRelativeTime, formatScore, formatSignedNumber, formatUpgradeLevel, truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
+import { formatBoostName, formatBytes, formatClickCount, formatCombo, formatCompact, formatCost, formatDuration, formatMultiplier, formatPercent, formatPrestigeCount, formatRank, formatRelativeTime, formatScore, formatSignedNumber, formatUpgradeLevel, truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
 
 describe('format utilities', () => {
   describe('truncateAddress', () => {
@@ -193,6 +193,10 @@ describe('format utilities', () => {
 
     test('formats combo labels', () => {
       expect(formatCombo(12)).toBe('12x combo');
+    });
+
+    test('formats prestige labels', () => {
+      expect(formatPrestigeCount(3)).toBe('Prestige 3');
     });
   });
 
