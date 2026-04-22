@@ -104,6 +104,10 @@ describe('format utilities', () => {
     test('formats recent past timestamps in seconds', () => {
       expect(formatRelativeTime(9_000, 10_000)).toBe('1s ago');
     });
+
+    test('formats future timestamps with from-now suffix', () => {
+      expect(formatRelativeTime(11_000, 10_000)).toBe('1s from now');
+    });
   });
 
   describe('formatStx', () => {
