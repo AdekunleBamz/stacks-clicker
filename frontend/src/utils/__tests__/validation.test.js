@@ -116,6 +116,10 @@ describe('numeric helpers', () => {
     expect(isPositiveInteger('0')).toBe(false);
   });
 
+  it('rejects fractional positive integer values', () => {
+    expect(isPositiveInteger(1.5)).toBe(false);
+  });
+
   it('accepts numeric strings for micro-STX amounts', () => {
     expect(isValidMicroStxAmount('25')).toBe(true);
     expect(isValidMicroStxAmount('-1')).toBe(false);
