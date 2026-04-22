@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { formatBytes, formatClickCount, formatCompact, formatCost, formatDuration, formatMultiplier, formatPercent, formatRank, formatRelativeTime, formatScore, formatSignedNumber, formatUpgradeLevel, truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
+import { formatBoostName, formatBytes, formatClickCount, formatCompact, formatCost, formatDuration, formatMultiplier, formatPercent, formatRank, formatRelativeTime, formatScore, formatSignedNumber, formatUpgradeLevel, truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
 
 describe('format utilities', () => {
   describe('truncateAddress', () => {
@@ -185,6 +185,10 @@ describe('format utilities', () => {
 
     test('formats rank labels', () => {
       expect(formatRank(7)).toBe('#7');
+    });
+
+    test('formats boost names with title casing', () => {
+      expect(formatBoostName('haste')).toBe('Haste');
     });
   });
 
