@@ -58,6 +58,10 @@ describe('format utilities', () => {
     test('uses compact notation for large values', () => {
       expect(formatCompact(1200)).toBe('1.2K');
     });
+
+    test('returns zero for invalid compact values', () => {
+      expect(formatCompact(Number.POSITIVE_INFINITY)).toBe('0');
+    });
   });
 
   describe('formatStx', () => {
