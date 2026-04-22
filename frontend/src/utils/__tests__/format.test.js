@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { formatBoostName, formatBytes, formatClickCount, formatCombo, formatCompact, formatCost, formatCriticalLabel, formatDuration, formatMultiplier, formatPercent, formatPrestigeCount, formatRank, formatRelativeTime, formatScore, formatSessionTime, formatSignedNumber, formatUpgradeLevel, formatUpgradeName, truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
+import { formatBoostName, formatBoostTimeLeft, formatBytes, formatClickCount, formatCombo, formatCompact, formatCost, formatCriticalLabel, formatDuration, formatMultiplier, formatPercent, formatPrestigeCount, formatRank, formatRelativeTime, formatScore, formatSessionTime, formatSignedNumber, formatUpgradeLevel, formatUpgradeName, truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
 
 describe('format utilities', () => {
   describe('truncateAddress', () => {
@@ -213,6 +213,10 @@ describe('format utilities', () => {
 
     test('returns empty critical labels for normal clicks', () => {
       expect(formatCriticalLabel(false)).toBe('');
+    });
+
+    test('formats boost time remaining labels', () => {
+      expect(formatBoostTimeLeft(8)).toBe('8 blocks left');
     });
   });
 
