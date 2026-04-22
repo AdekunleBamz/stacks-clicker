@@ -20,6 +20,7 @@ import {
   isValidSessionDuration,
   isValidLeaderboardRank,
   isValidAutoClickerCount,
+  isValidUpgradeCost,
 } from '../validation';
 
 describe('isValidStacksAddress', () => {
@@ -159,5 +160,10 @@ describe('numeric helpers', () => {
   it('validates auto-clicker counts as non-negative integers', () => {
     expect(isValidAutoClickerCount(2)).toBe(true);
     expect(isValidAutoClickerCount(2.5)).toBe(false);
+  });
+
+  it('validates upgrade costs as positive numbers', () => {
+    expect(isValidUpgradeCost(10)).toBe(true);
+    expect(isValidUpgradeCost(0)).toBe(false);
   });
 });
