@@ -264,6 +264,10 @@ describe('format utilities', () => {
       expect(formatStx(0)).toBe('0.00 STX');
     });
 
+    test('handles numeric string micro-STX amounts', () => {
+      expect(formatStx('1500000')).toBe('1.50 STX');
+    });
+
     test('handles small micro-STX amounts', () => {
       expect(formatStx(1)).toBe('0.00 STX');
       expect(formatStx(99)).toBe('0.00 STX');
