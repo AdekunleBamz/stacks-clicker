@@ -33,6 +33,10 @@ describe('format utilities', () => {
     test('trims surrounding whitespace before truncation', () => {
       expect(truncateAddress(`  ${address}  `)).toBe('SP3K...PP4Y');
     });
+
+    test('truncates fractional prefix and suffix options', () => {
+      expect(truncateAddress(address, { prefix: 5.9, suffix: 3.8 })).toBe('SP3K8...P4Y');
+    });
   });
 
   describe('formatNumber', () => {
