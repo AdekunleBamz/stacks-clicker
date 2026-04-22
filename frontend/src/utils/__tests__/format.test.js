@@ -68,6 +68,10 @@ describe('format utilities', () => {
     test('formats decimal ratios as percentages', () => {
       expect(formatPercent(0.125)).toBe('12.5%');
     });
+
+    test('honors explicit percentage precision', () => {
+      expect(formatPercent(0.125, 2)).toBe('12.50%');
+    });
   });
 
   describe('formatStx', () => {
