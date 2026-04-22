@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import {
   isPositiveInteger,
+  isNonEmptyString,
   isValidMicroStxAmount,
   isValidPollOptionId,
   isValidStacksAddress,
@@ -63,6 +64,11 @@ describe('validatePayload', () => {
 });
 
 describe('numeric helpers', () => {
+  it('validates non-empty strings after trimming', () => {
+    expect(isNonEmptyString(' player ')).toBe(true);
+    expect(isNonEmptyString('   ')).toBe(false);
+  });
+
   it('accepts numeric strings for integer checks', () => {
     expect(isPositiveInteger('2')).toBe(true);
     expect(isPositiveInteger('0')).toBe(false);
