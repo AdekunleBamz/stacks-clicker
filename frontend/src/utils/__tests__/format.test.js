@@ -55,6 +55,7 @@ describe('format utilities', () => {
     test('returns 0 for non-finite input', () => {
       expect(formatNumber(undefined)).toBe('0');
       expect(formatNumber(Number.NaN)).toBe('0');
+      expect(formatNumber(Number.POSITIVE_INFINITY)).toBe('0');
     });
 
     test('formats numeric string input', () => {
