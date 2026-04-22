@@ -227,6 +227,10 @@ describe('numeric helpers', () => {
     expect(isValidUsername('xy')).toBe(false);
   });
 
+  it('rejects usernames above the maximum length', () => {
+    expect(isValidUsername('x'.repeat(33))).toBe(false);
+  });
+
   it('validates page numbers from one upward', () => {
     expect(isValidPage(1)).toBe(true);
     expect(isValidPage(0)).toBe(false);
