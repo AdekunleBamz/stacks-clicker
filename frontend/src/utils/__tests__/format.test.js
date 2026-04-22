@@ -76,6 +76,10 @@ describe('format utilities', () => {
     test('returns zero percent for invalid values', () => {
       expect(formatPercent(Number.NaN)).toBe('0%');
     });
+
+    test('falls back for invalid percentage precision', () => {
+      expect(formatPercent(0.2, -1)).toBe('20.0%');
+    });
   });
 
   describe('formatStx', () => {
