@@ -16,6 +16,7 @@ import {
   isValidBoostDuration,
   isValidComboCount,
   isValidPrestigeCount,
+  isValidClickRate,
 } from '../validation';
 
 describe('isValidStacksAddress', () => {
@@ -135,5 +136,10 @@ describe('numeric helpers', () => {
   it('validates prestige counts as non-negative integers', () => {
     expect(isValidPrestigeCount('2')).toBe(true);
     expect(isValidPrestigeCount(-1)).toBe(false);
+  });
+
+  it('validates click rates as non-negative numbers', () => {
+    expect(isValidClickRate(0.5)).toBe(true);
+    expect(isValidClickRate(Number.NaN)).toBe(false);
   });
 });
