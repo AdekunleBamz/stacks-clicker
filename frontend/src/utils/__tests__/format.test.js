@@ -226,6 +226,10 @@ describe('format utilities', () => {
     test('formats click rate labels', () => {
       expect(formatClickRate(3.25)).toBe('3.3 clicks/s');
     });
+
+    test('returns zero click rate for invalid values', () => {
+      expect(formatClickRate(-1)).toBe('0.0 clicks/s');
+    });
   });
 
   describe('formatStx', () => {
