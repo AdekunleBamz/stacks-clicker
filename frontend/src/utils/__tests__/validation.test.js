@@ -26,6 +26,7 @@ import {
   isValidUsername,
   isValidPage,
   isValidPageSize,
+  isValidBoostType,
 } from '../validation';
 
 describe('isValidStacksAddress', () => {
@@ -195,5 +196,10 @@ describe('numeric helpers', () => {
   it('validates page size upper bounds', () => {
     expect(isValidPageSize(100)).toBe(true);
     expect(isValidPageSize(101)).toBe(false);
+  });
+
+  it('validates supported boost types', () => {
+    expect(isValidBoostType('combo')).toBe(true);
+    expect(isValidBoostType('luck')).toBe(false);
   });
 });
