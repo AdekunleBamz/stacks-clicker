@@ -152,6 +152,10 @@ describe('format utilities', () => {
     test('formats kilobyte values', () => {
       expect(formatBytes(1536)).toBe('1.5 KB');
     });
+
+    test('honors byte precision options', () => {
+      expect(formatBytes(1536, 0)).toBe('2 KB');
+    });
   });
 
   describe('formatStx', () => {
