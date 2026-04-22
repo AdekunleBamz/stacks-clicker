@@ -81,6 +81,10 @@ describe('validatePayload', () => {
     expect(() => validatePayload('string', SCHEMAS.CLICK)).toThrow();
     expect(() => validatePayload(123, SCHEMAS.CLICK)).toThrow();
   });
+
+  it('should throw for non-object schemas', () => {
+    expect(() => validatePayload({ amount: 1 }, null)).toThrow('schema must be an object');
+  });
 });
 
 describe('numeric helpers', () => {
