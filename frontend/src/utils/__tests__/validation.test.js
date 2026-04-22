@@ -12,6 +12,7 @@ import {
   isValidClickCount,
   isValidUpgradeLevel,
   isValidScore,
+  isValidMultiplier,
 } from '../validation';
 
 describe('isValidStacksAddress', () => {
@@ -111,5 +112,10 @@ describe('numeric helpers', () => {
   it('validates non-negative scores', () => {
     expect(isValidScore('10')).toBe(true);
     expect(isValidScore(-0.1)).toBe(false);
+  });
+
+  it('validates multiplier minimums', () => {
+    expect(isValidMultiplier(1)).toBe(true);
+    expect(isValidMultiplier(0.5)).toBe(false);
   });
 });
