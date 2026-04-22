@@ -27,6 +27,7 @@ import {
   isValidPage,
   isValidPageSize,
   isValidBoostType,
+  isValidUpgradeType,
 } from '../validation';
 
 describe('isValidStacksAddress', () => {
@@ -201,5 +202,10 @@ describe('numeric helpers', () => {
   it('validates supported boost types', () => {
     expect(isValidBoostType('combo')).toBe(true);
     expect(isValidBoostType('luck')).toBe(false);
+  });
+
+  it('validates supported upgrade types', () => {
+    expect(isValidUpgradeType('crit')).toBe(true);
+    expect(isValidUpgradeType('range')).toBe(false);
   });
 });
