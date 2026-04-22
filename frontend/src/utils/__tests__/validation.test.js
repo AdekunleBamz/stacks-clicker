@@ -14,6 +14,7 @@ import {
   isValidScore,
   isValidMultiplier,
   isValidBoostDuration,
+  isValidComboCount,
 } from '../validation';
 
 describe('isValidStacksAddress', () => {
@@ -123,5 +124,10 @@ describe('numeric helpers', () => {
   it('validates boost durations as positive integers', () => {
     expect(isValidBoostDuration(5)).toBe(true);
     expect(isValidBoostDuration(0)).toBe(false);
+  });
+
+  it('validates combo counts as non-negative integers', () => {
+    expect(isValidComboCount(0)).toBe(true);
+    expect(isValidComboCount(1.5)).toBe(false);
   });
 });
