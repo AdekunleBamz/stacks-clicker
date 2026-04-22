@@ -151,6 +151,10 @@ describe('numeric helpers', () => {
     expect(isValidPollOptionId('4', 4)).toBe(false);
   });
 
+  it('uses default poll option bounds', () => {
+    expect(isValidPollOptionId(3)).toBe(true);
+  });
+
   it('rejects poll option checks with invalid bounds', () => {
     expect(isValidPollOptionId(0, 0)).toBe(false);
   });
