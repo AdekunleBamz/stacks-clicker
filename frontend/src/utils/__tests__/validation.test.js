@@ -66,6 +66,11 @@ describe('validatePayload', () => {
     expect(validatePayload(payload, SCHEMAS.CLICK)).toBe(true);
   });
 
+  it('should validate complete tip payloads', () => {
+    const payload = { amount: 100, recipient: 'SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT' };
+    expect(validatePayload(payload, SCHEMAS.TIP)).toBe(true);
+  });
+
   it('should throw for invalid payload', () => {
     const payload = { amount: -1 };
     expect(() => validatePayload(payload, SCHEMAS.CLICK)).toThrow();
