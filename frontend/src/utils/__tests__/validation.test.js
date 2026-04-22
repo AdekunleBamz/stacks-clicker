@@ -13,6 +13,7 @@ import {
   isValidUpgradeLevel,
   isValidScore,
   isValidMultiplier,
+  isValidBoostDuration,
 } from '../validation';
 
 describe('isValidStacksAddress', () => {
@@ -117,5 +118,10 @@ describe('numeric helpers', () => {
   it('validates multiplier minimums', () => {
     expect(isValidMultiplier(1)).toBe(true);
     expect(isValidMultiplier(0.5)).toBe(false);
+  });
+
+  it('validates boost durations as positive integers', () => {
+    expect(isValidBoostDuration(5)).toBe(true);
+    expect(isValidBoostDuration(0)).toBe(false);
   });
 });
