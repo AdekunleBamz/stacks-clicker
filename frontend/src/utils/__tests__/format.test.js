@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { formatCompact, formatDuration, formatPercent, formatRelativeTime, formatSignedNumber, truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
+import { formatBytes, formatCompact, formatDuration, formatPercent, formatRelativeTime, formatSignedNumber, truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
 
 describe('format utilities', () => {
   describe('truncateAddress', () => {
@@ -141,6 +141,12 @@ describe('format utilities', () => {
 
     test('returns zero for invalid signed numbers', () => {
       expect(formatSignedNumber(undefined)).toBe('0');
+    });
+  });
+
+  describe('formatBytes', () => {
+    test('formats zero bytes', () => {
+      expect(formatBytes(0)).toBe('0 B');
     });
   });
 
