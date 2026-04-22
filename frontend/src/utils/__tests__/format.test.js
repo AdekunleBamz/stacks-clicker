@@ -265,5 +265,9 @@ describe('format utilities', () => {
     test('shortens long wallet labels', () => {
       expect(formatWalletShort('SP123456789')).toBe('SP123456...');
     });
+
+    test('returns empty wallet labels for missing values', () => {
+      expect(formatWalletShort(null)).toBe('');
+    });
   });
 });
