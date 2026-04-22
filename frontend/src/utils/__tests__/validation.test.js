@@ -22,6 +22,7 @@ import {
   isValidAutoClickerCount,
   isValidUpgradeCost,
   isValidClickReward,
+  isValidCriticalChance,
 } from '../validation';
 
 describe('isValidStacksAddress', () => {
@@ -171,5 +172,10 @@ describe('numeric helpers', () => {
   it('validates click rewards as positive numbers', () => {
     expect(isValidClickReward(1)).toBe(true);
     expect(isValidClickReward(-1)).toBe(false);
+  });
+
+  it('validates critical chance bounds', () => {
+    expect(isValidCriticalChance(1)).toBe(true);
+    expect(isValidCriticalChance(1.1)).toBe(false);
   });
 });
