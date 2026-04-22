@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { formatBytes, formatClickCount, formatCompact, formatDuration, formatPercent, formatRelativeTime, formatScore, formatSignedNumber, truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
+import { formatBytes, formatClickCount, formatCompact, formatDuration, formatPercent, formatRelativeTime, formatScore, formatSignedNumber, formatUpgradeLevel, truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
 
 describe('format utilities', () => {
   describe('truncateAddress', () => {
@@ -169,6 +169,10 @@ describe('format utilities', () => {
 
     test('formats scores with two decimals', () => {
       expect(formatScore(3.456)).toBe('3.46');
+    });
+
+    test('formats upgrade levels', () => {
+      expect(formatUpgradeLevel(4)).toBe('Level 4');
     });
   });
 
