@@ -62,6 +62,10 @@ describe('isValidStacksAddress', () => {
   it('should return false for addresses with lowercase characters', () => {
     expect(isValidStacksAddress('sp5k2rhmsbh4pap4pgx77mcvnk1zeed07cwx9tjt')).toBe(false);
   });
+
+  it('should return false for addresses with disallowed characters', () => {
+    expect(isValidStacksAddress('SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TIO')).toBe(false);
+  });
 });
 
 describe('validatePayload', () => {
