@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { formatCompact, formatPercent, truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
+import { formatCompact, formatDuration, formatPercent, truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
 
 describe('format utilities', () => {
   describe('truncateAddress', () => {
@@ -79,6 +79,12 @@ describe('format utilities', () => {
 
     test('falls back for invalid percentage precision', () => {
       expect(formatPercent(0.2, -1)).toBe('20.0%');
+    });
+  });
+
+  describe('formatDuration', () => {
+    test('formats second-only durations', () => {
+      expect(formatDuration(45000)).toBe('45s');
     });
   });
 
