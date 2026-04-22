@@ -250,6 +250,10 @@ describe('numeric helpers', () => {
     expect(isValidBoostType('luck')).toBe(false);
   });
 
+  it('accepts auto boost types', () => {
+    expect(isValidBoostType('auto')).toBe(true);
+  });
+
   it('validates supported upgrade types', () => {
     expect(isValidUpgradeType('crit')).toBe(true);
     expect(isValidUpgradeType('range')).toBe(false);
