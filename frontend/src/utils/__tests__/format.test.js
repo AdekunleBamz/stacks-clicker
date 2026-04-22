@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { formatBoostName, formatBytes, formatClickCount, formatCombo, formatCompact, formatCost, formatDuration, formatMultiplier, formatPercent, formatPrestigeCount, formatRank, formatRelativeTime, formatScore, formatSessionTime, formatSignedNumber, formatUpgradeLevel, formatUpgradeName, truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
+import { formatBoostName, formatBytes, formatClickCount, formatCombo, formatCompact, formatCost, formatCriticalLabel, formatDuration, formatMultiplier, formatPercent, formatPrestigeCount, formatRank, formatRelativeTime, formatScore, formatSessionTime, formatSignedNumber, formatUpgradeLevel, formatUpgradeName, truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
 
 describe('format utilities', () => {
   describe('truncateAddress', () => {
@@ -205,6 +205,10 @@ describe('format utilities', () => {
 
     test('formats upgrade keys as names', () => {
       expect(formatUpgradeName('AUTO_CLICK')).toBe('auto click');
+    });
+
+    test('formats critical click labels', () => {
+      expect(formatCriticalLabel(true)).toBe('CRITICAL!');
     });
   });
 
