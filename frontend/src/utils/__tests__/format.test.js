@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { formatCompact, formatDuration, formatPercent, formatRelativeTime, truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
+import { formatCompact, formatDuration, formatPercent, formatRelativeTime, formatSignedNumber, truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
 
 describe('format utilities', () => {
   describe('truncateAddress', () => {
@@ -123,6 +123,12 @@ describe('format utilities', () => {
 
     test('returns unknown for invalid timestamps', () => {
       expect(formatRelativeTime('nope', 10_000)).toBe('unknown');
+    });
+  });
+
+  describe('formatSignedNumber', () => {
+    test('adds a plus sign for positive deltas', () => {
+      expect(formatSignedNumber(1.5)).toBe('+1.50');
     });
   });
 
