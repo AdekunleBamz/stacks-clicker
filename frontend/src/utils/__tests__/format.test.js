@@ -210,6 +210,10 @@ describe('format utilities', () => {
     test('formats critical click labels', () => {
       expect(formatCriticalLabel(true)).toBe('CRITICAL!');
     });
+
+    test('returns empty critical labels for normal clicks', () => {
+      expect(formatCriticalLabel(false)).toBe('');
+    });
   });
 
   describe('formatStx', () => {
