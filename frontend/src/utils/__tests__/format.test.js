@@ -261,5 +261,9 @@ describe('format utilities', () => {
     test('returns trimmed value without ellipsis when short', () => {
       expect(formatWalletShort('  SP1234  ')).toBe('SP1234');
     });
+
+    test('shortens long wallet labels', () => {
+      expect(formatWalletShort('SP123456789')).toBe('SP123456...');
+    });
   });
 });
