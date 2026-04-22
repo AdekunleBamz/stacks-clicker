@@ -3,6 +3,7 @@ import {
   isPositiveInteger,
   isNonEmptyString,
   isValidMicroStxAmount,
+  isValidTipAmount,
   isValidPollOptionId,
   isValidStacksAddress,
   isValidWalletAddress,
@@ -77,6 +78,11 @@ describe('numeric helpers', () => {
   it('accepts numeric strings for micro-STX amounts', () => {
     expect(isValidMicroStxAmount('25')).toBe(true);
     expect(isValidMicroStxAmount('-1')).toBe(false);
+  });
+
+  it('validates tip amounts against the minimum', () => {
+    expect(isValidTipAmount(1000)).toBe(true);
+    expect(isValidTipAmount(999)).toBe(false);
   });
 
   it('validates poll option ids with explicit bounds', () => {
