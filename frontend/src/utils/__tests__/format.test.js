@@ -94,6 +94,10 @@ describe('format utilities', () => {
     test('formats mixed minute and second durations', () => {
       expect(formatDuration(150000)).toBe('2m 30s');
     });
+
+    test('returns zero seconds for invalid durations', () => {
+      expect(formatDuration(-1)).toBe('0s');
+    });
   });
 
   describe('formatStx', () => {
