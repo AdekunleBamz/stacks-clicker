@@ -241,6 +241,10 @@ describe('numeric helpers', () => {
     expect(isValidPageSize(101)).toBe(false);
   });
 
+  it('rejects zero page sizes', () => {
+    expect(isValidPageSize(0)).toBe(false);
+  });
+
   it('validates supported boost types', () => {
     expect(isValidBoostType('combo')).toBe(true);
     expect(isValidBoostType('luck')).toBe(false);
