@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { formatCompact, truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
+import { formatCompact, formatPercent, truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
 
 describe('format utilities', () => {
   describe('truncateAddress', () => {
@@ -61,6 +61,12 @@ describe('format utilities', () => {
 
     test('returns zero for invalid compact values', () => {
       expect(formatCompact(Number.POSITIVE_INFINITY)).toBe('0');
+    });
+  });
+
+  describe('formatPercent', () => {
+    test('formats decimal ratios as percentages', () => {
+      expect(formatPercent(0.125)).toBe('12.5%');
     });
   });
 
