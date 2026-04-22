@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
+import { formatCompact, truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
 
 describe('format utilities', () => {
   describe('truncateAddress', () => {
@@ -51,6 +51,12 @@ describe('format utilities', () => {
 
     test('formats numeric string input', () => {
       expect(formatNumber('1200')).toBe('1,200');
+    });
+  });
+
+  describe('formatCompact', () => {
+    test('uses compact notation for large values', () => {
+      expect(formatCompact(1200)).toBe('1.2K');
     });
   });
 
