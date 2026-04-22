@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { formatBoostName, formatBoostTimeLeft, formatBytes, formatClickCount, formatCombo, formatCompact, formatCost, formatCriticalLabel, formatDuration, formatLeaderboardEntry, formatMultiplier, formatPercent, formatPrestigeCount, formatRank, formatRelativeTime, formatScore, formatSessionTime, formatSignedNumber, formatUpgradeLevel, formatUpgradeName, truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
+import { formatBoostName, formatBoostTimeLeft, formatBytes, formatClickCount, formatClickRate, formatCombo, formatCompact, formatCost, formatCriticalLabel, formatDuration, formatLeaderboardEntry, formatMultiplier, formatPercent, formatPrestigeCount, formatRank, formatRelativeTime, formatScore, formatSessionTime, formatSignedNumber, formatUpgradeLevel, formatUpgradeName, truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
 
 describe('format utilities', () => {
   describe('truncateAddress', () => {
@@ -221,6 +221,10 @@ describe('format utilities', () => {
 
     test('formats leaderboard entries', () => {
       expect(formatLeaderboardEntry('SP123', 42)).toBe('SP123: 42');
+    });
+
+    test('formats click rate labels', () => {
+      expect(formatClickRate(3.25)).toBe('3.3 clicks/s');
     });
   });
 
