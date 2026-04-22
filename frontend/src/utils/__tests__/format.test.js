@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { formatCompact, formatDuration, formatPercent, truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
+import { formatCompact, formatDuration, formatPercent, formatRelativeTime, truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
 
 describe('format utilities', () => {
   describe('truncateAddress', () => {
@@ -97,6 +97,12 @@ describe('format utilities', () => {
 
     test('returns zero seconds for invalid durations', () => {
       expect(formatDuration(-1)).toBe('0s');
+    });
+  });
+
+  describe('formatRelativeTime', () => {
+    test('formats recent past timestamps in seconds', () => {
+      expect(formatRelativeTime(9_000, 10_000)).toBe('1s ago');
     });
   });
 
