@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { formatBoostName, formatBytes, formatClickCount, formatCombo, formatCompact, formatCost, formatDuration, formatMultiplier, formatPercent, formatPrestigeCount, formatRank, formatRelativeTime, formatScore, formatSessionTime, formatSignedNumber, formatUpgradeLevel, truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
+import { formatBoostName, formatBytes, formatClickCount, formatCombo, formatCompact, formatCost, formatDuration, formatMultiplier, formatPercent, formatPrestigeCount, formatRank, formatRelativeTime, formatScore, formatSessionTime, formatSignedNumber, formatUpgradeLevel, formatUpgradeName, truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
 
 describe('format utilities', () => {
   describe('truncateAddress', () => {
@@ -201,6 +201,10 @@ describe('format utilities', () => {
 
     test('formats session times', () => {
       expect(formatSessionTime(125000)).toBe('2m 5s');
+    });
+
+    test('formats upgrade keys as names', () => {
+      expect(formatUpgradeName('AUTO_CLICK')).toBe('auto click');
     });
   });
 
