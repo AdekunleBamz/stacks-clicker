@@ -134,6 +134,10 @@ describe('numeric helpers', () => {
     expect(isValidTipAmount(99)).toBe(false);
   });
 
+  it('rejects non-finite tip amounts', () => {
+    expect(isValidTipAmount(Number.POSITIVE_INFINITY)).toBe(false);
+  });
+
   it('validates poll option ids with explicit bounds', () => {
     expect(isValidPollOptionId('2', 4)).toBe(true);
     expect(isValidPollOptionId('4', 4)).toBe(false);
