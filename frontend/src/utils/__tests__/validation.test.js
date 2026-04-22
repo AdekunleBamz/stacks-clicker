@@ -131,6 +131,10 @@ describe('numeric helpers', () => {
     expect(isValidPollOptionId('4', 4)).toBe(false);
   });
 
+  it('rejects poll option checks with invalid bounds', () => {
+    expect(isValidPollOptionId(0, 0)).toBe(false);
+  });
+
   it('uses full Stacks address validation for wallet addresses', () => {
     expect(isValidWalletAddress('SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT')).toBe(true);
     expect(isValidWalletAddress('SP123')).toBe(false);
