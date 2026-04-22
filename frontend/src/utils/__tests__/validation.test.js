@@ -24,6 +24,7 @@ import {
   isValidClickReward,
   isValidCriticalChance,
   isValidUsername,
+  isValidPage,
 } from '../validation';
 
 describe('isValidStacksAddress', () => {
@@ -183,5 +184,10 @@ describe('numeric helpers', () => {
   it('validates username length after trimming', () => {
     expect(isValidUsername(' ace ')).toBe(true);
     expect(isValidUsername('xy')).toBe(false);
+  });
+
+  it('validates page numbers from one upward', () => {
+    expect(isValidPage(1)).toBe(true);
+    expect(isValidPage(0)).toBe(false);
   });
 });
