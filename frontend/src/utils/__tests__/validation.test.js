@@ -85,6 +85,10 @@ describe('validatePayload', () => {
     expect(() => validatePayload(payload, SCHEMAS.CLICK)).toThrow();
   });
 
+  it('should include invalid field names in payload errors', () => {
+    expect(() => validatePayload({ amount: -1 }, SCHEMAS.CLICK)).toThrow('"amount"');
+  });
+
   it('should throw for missing required fields', () => {
     const payload = {};
     expect(() => validatePayload(payload, SCHEMAS.CLICK)).toThrow();
