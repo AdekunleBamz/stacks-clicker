@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { formatBytes, formatClickCount, formatCompact, formatDuration, formatPercent, formatRelativeTime, formatSignedNumber, truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
+import { formatBytes, formatClickCount, formatCompact, formatDuration, formatPercent, formatRelativeTime, formatScore, formatSignedNumber, truncateAddress, formatNumber, formatStx, formatWalletShort } from '../format';
 
 describe('format utilities', () => {
   describe('truncateAddress', () => {
@@ -165,6 +165,10 @@ describe('format utilities', () => {
   describe('game display helpers', () => {
     test('formats click counts with separators', () => {
       expect(formatClickCount(1200)).toBe('1,200');
+    });
+
+    test('formats scores with two decimals', () => {
+      expect(formatScore(3.456)).toBe('3.46');
     });
   });
 
