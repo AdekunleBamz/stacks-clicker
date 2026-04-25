@@ -59,6 +59,9 @@ export const COMBO_TIMEOUT_MS = 2500;
 /** @type {number} Interval in ms between STX price refreshes */
 export const PRICE_REFRESH_INTERVAL_MS = 45_000;
 
+/** @type {number} Maximum cache age in milliseconds before refresh (15 minutes) */
+export const MAX_CACHE_AGE_MS = 15 * 60 * 1000;
+
 /** @type {number} Maximum number of options allowed in a quick poll */
 export const MAX_POLL_OPTIONS = 4;
 
