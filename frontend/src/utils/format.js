@@ -168,6 +168,39 @@ export function formatTransactionId(txId, { prefix = 8, suffix = 8 } = {}) {
   return `${normalizedTxId.substring(0, safePrefix)}...${normalizedTxId.substring(normalizedTxId.length - safeSuffix)}`;
 }
 
+/**
+ * Formats a countdown delay in milliseconds with precision control for UI display.
+ *
+ * @param {number} ms - Delay in milliseconds
+ * @param {Object} [options] - Formatting options
+ * @param {boolean} [options.showMs=false] - Include milliseconds (only if under 1 second)
+ * @param {number} [options.maxUnits=2] - Maximum number of time units to show
+ * @returns {string} Formatted countdown, e.g. "1m 30s" or "500ms"
+ */
+export function formatCountdown(ms, { showMs = false, maxUnits = 2 } = {}) {
+  const numericMs = Number(ms);
+  if (!Number.isFinite(numericMs) || numericMs < 0) return '0s';
+  
+  if (numericMs < 1000 && showMs) {
+    return `${Math.ceil(numericMs)}ms`;
+  }
+  
+  const totalSeconds = Math.floor(numericMs / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+  const seconds = totalSeconds % 60;
+  const unitCount = Math.max(1, Math.trunc(maxUnits));
+  
+  const parts = [];
+  if (days > 0) parts.push(`${days}d`);
+  if (hours % 24 > 0) parts.push(`${hours % 24}h`);
+  if (minutes % 60 > 0) parts.push(`${minutes % 60}m`);
+  if (seconds > 0 || parts.length === 0) parts.push(`${seconds}s`);
+  
+  return parts.slice(0, unitCount).join(' ');
+}
+
 export const formatScore = (n) => Number(n).toFixed(2);
 
 export const formatUpgradeLevel = (lvl) => "Level " + lvl;
