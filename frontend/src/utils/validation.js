@@ -5,7 +5,7 @@
  * @module utils/validation
  */
 
-import { MAX_POLL_OPTIONS, MIN_TIP_MICRO_STX, MAX_UPGRADE_LEVEL } from './constants';
+import { MAX_POLL_OPTIONS, MIN_TIP_MICRO_STX, MAX_UPGRADE_LEVEL, MAX_TX_RETRY_ATTEMPTS } from './constants';
 
 /**
  * Validates a Stacks address format.
@@ -128,6 +128,8 @@ export const isValidComboCount = (v) => Number.isInteger(Number(v)) && Number(v)
 export const isValidPrestigeCount = (v) => Number.isInteger(Number(v)) && Number(v) >= 0;
 
 export const isValidClickRate = (v) => !isNaN(Number(v)) && Number(v) >= 0;
+
+export const isValidRetryAttempts = (v) => Number.isInteger(Number(v)) && Number(v) >= 0 && Number(v) <= MAX_TX_RETRY_ATTEMPTS;
 
 export const isValidSessionDuration = (v) => !isNaN(Number(v)) && Number(v) >= 0;
 

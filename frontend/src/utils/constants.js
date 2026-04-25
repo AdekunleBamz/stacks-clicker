@@ -50,6 +50,9 @@ export const MIN_TIP_MICRO_STX = 100;
 /** @type {number} Maximum upgrade level allowed for any game upgrade */
 export const MAX_UPGRADE_LEVEL = 50;
 
+/** @type {number} Maximum transaction retry attempts before failure */
+export const MAX_TX_RETRY_ATTEMPTS = 3;
+
 /** @type {number} Minimum multiplier threshold before reset */
 export const COMBO_TIMEOUT_MS = 2500;
 
