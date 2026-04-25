@@ -149,6 +149,25 @@ export function formatBytes(bytes, decimals = 1) {
 
 export const formatClickCount = (n) => Number(n).toLocaleString();
 
+/**
+ * Truncates a transaction ID for display while preserving start and end for verification.
+ *
+ * @param {string} txId - The full transaction ID (256-character hex string)
+ * @param {Object} [options] - Truncation options
+ * @param {number} [options.prefix=8] - Characters to show at start
+ * @param {number} [options.suffix=8] - Characters to show at end
+ * @returns {string} Truncated transaction ID, e.g. "a1b2c3d4...x5y6z7w8"
+ */
+export function formatTransactionId(txId, { prefix = 8, suffix = 8 } = {}) {
+  if (typeof txId !== 'string' || txId.length === 0) return '';
+  const normalizedTxId = txId.trim().toLowerCase();
+  const safePrefix = Number.isFinite(prefix) ? Math.max(0, Math.trunc(prefix)) : 8;
+  const safeSuffix = Number.isFinite(suffix) ? Math.max(0, Math.trunc(suffix)) : 8;
+  if (safePrefix + safeSuffix === 0) return normalizedTxId;
+  if (normalizedTxId.length <= safePrefix + safeSuffix) return normalizedTxId;
+  return `${normalizedTxId.substring(0, safePrefix)}...${normalizedTxId.substring(normalizedTxId.length - safeSuffix)}`;
+}
+
 export const formatScore = (n) => Number(n).toFixed(2);
 
 export const formatUpgradeLevel = (lvl) => "Level " + lvl;
