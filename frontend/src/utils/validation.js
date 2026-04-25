@@ -5,7 +5,7 @@
  * @module utils/validation
  */
 
-import { MAX_POLL_OPTIONS, MIN_TIP_MICRO_STX } from './constants';
+import { MAX_POLL_OPTIONS, MIN_TIP_MICRO_STX, MAX_UPGRADE_LEVEL } from './constants';
 
 /**
  * Validates a Stacks address format.
@@ -115,7 +115,7 @@ export function validatePayload(payload, schema) {
 
 export const isValidClickCount = (v) => Number.isInteger(Number(v)) && Number(v) >= 0;
 
-export const isValidUpgradeLevel = (v) => Number.isInteger(Number(v)) && Number(v) >= 0 && Number(v) <= 50;
+export const isValidUpgradeLevel = (v) => Number.isInteger(Number(v)) && Number(v) >= 0 && Number(v) <= MAX_UPGRADE_LEVEL;
 
 export const isValidScore = (v) => !isNaN(Number(v)) && Number(v) >= 0;
 

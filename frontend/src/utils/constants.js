@@ -47,7 +47,10 @@ export const MAX_TX_LOG_SIZE = 50;
 /** @type {number} Minimum tip amount in micro-STX */
 export const MIN_TIP_MICRO_STX = 100;
 
-/** @type {number} Milliseconds before a combo resets after the last interaction */
+/** @type {number} Maximum upgrade level allowed for any game upgrade */
+export const MAX_UPGRADE_LEVEL = 50;
+
+/** @type {number} Minimum multiplier threshold before reset */
 export const COMBO_TIMEOUT_MS = 2500;
 
 /** @type {number} Interval in ms between STX price refreshes */
