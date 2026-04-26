@@ -225,6 +225,11 @@ export const formatLevel = (lvl) => "Lv." + Math.max(0, Math.floor(Number(lvl)))
 
 export const formatPlayerTag = (id) => "Player #" + Number(id);
 
+export const formatBoostRemaining = (ms) => {
+  const secs = Math.max(0, Math.ceil(Number(ms) / 1000));
+  return secs >= 60 ? Math.floor(secs / 60) + "m " + (secs % 60) + "s" : secs + "s left";
+};
+
 export const formatUpgradeName = (key) => key.replace(/_/g, " ").toLowerCase();
 
 export const formatCriticalLabel = (isCrit) => isCrit ? "CRITICAL!" : "";
