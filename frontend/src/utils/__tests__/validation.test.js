@@ -316,4 +316,9 @@ describe('numeric helpers', () => {
     expect(isValidCacheAge(1000)).toBe(true);
     expect(isValidCacheAge(900001)).toBe(false);
   });
+
+  it('validates prestige multiplier minimum', () => {
+    expect(isValidPrestigeMultiplier(1)).toBe(true);
+    expect(isValidPrestigeMultiplier(0.99)).toBe(false);
+  });
 });
