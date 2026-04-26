@@ -164,3 +164,5 @@ export const isValidBoostLevel = (v) => Number.isInteger(Number(v)) && Number(v)
 
 import { MAX_POLL_TITLE_LENGTH } from './constants';
 export const isValidPollTitle = (v) => typeof v === "string" && v.trim().length > 0 && v.trim().length <= MAX_POLL_TITLE_LENGTH;
+
+export const isValidNotificationId = (v) => isNonEmptyString(String(v));
