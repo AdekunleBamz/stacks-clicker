@@ -391,4 +391,8 @@ describe('numeric helpers', () => {
   it('rejects negative retry attempts', () => {
     expect(isValidRetryAttempts(-1)).toBe(false);
   });
+
+  it('accepts cache age at upper bound', () => {
+    expect(isValidCacheAge(900000)).toBe(true);
+  });
 });
