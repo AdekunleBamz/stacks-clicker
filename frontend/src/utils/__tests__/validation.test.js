@@ -28,6 +28,16 @@ import {
   isValidPageSize,
   isValidBoostType,
   isValidUpgradeType,
+  isValidRetryAttempts,
+  isValidCacheAge,
+  isValidPrestigeMultiplier,
+  isValidBoostLevel,
+  isValidPollTitle,
+  isValidNotificationId,
+  isValidGameVersion,
+  isValidUpgradeSlot,
+  isValidWalletBalance,
+  isValidMinClickAmount,
 } from '../validation';
 
 describe('isValidStacksAddress', () => {
