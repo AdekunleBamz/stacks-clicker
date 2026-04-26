@@ -180,24 +180,24 @@ export function formatTransactionId(txId, { prefix = 8, suffix = 8 } = {}) {
 export function formatCountdown(ms, { showMs = false, maxUnits = 2 } = {}) {
   const numericMs = Number(ms);
   if (!Number.isFinite(numericMs) || numericMs < 0) return '0s';
-  
+
   if (numericMs < 1000 && showMs) {
     return `${Math.ceil(numericMs)}ms`;
   }
-  
+
   const totalSeconds = Math.floor(numericMs / 1000);
   const minutes = Math.floor(totalSeconds / 60);
   const hours = Math.floor(minutes / 60);
   const days = Math.floor(hours / 24);
   const seconds = totalSeconds % 60;
   const unitCount = Math.max(1, Math.trunc(maxUnits));
-  
+
   const parts = [];
   if (days > 0) parts.push(`${days}d`);
   if (hours % 24 > 0) parts.push(`${hours % 24}h`);
   if (minutes % 60 > 0) parts.push(`${minutes % 60}m`);
   if (seconds > 0 || parts.length === 0) parts.push(`${seconds}s`);
-  
+
   return parts.slice(0, unitCount).join(' ');
 }
 
