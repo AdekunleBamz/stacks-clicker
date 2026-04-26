@@ -142,6 +142,10 @@ describe('numeric helpers', () => {
     expect(isValidTipAmount(99)).toBe(false);
   });
 
+  it('accepts numeric-string tip amounts at the minimum', () => {
+    expect(isValidTipAmount('100')).toBe(true);
+  });
+
   it('rejects non-finite tip amounts', () => {
     expect(isValidTipAmount(Number.POSITIVE_INFINITY)).toBe(false);
   });
