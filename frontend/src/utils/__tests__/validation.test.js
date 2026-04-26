@@ -403,4 +403,8 @@ describe('numeric helpers', () => {
   it('accepts zero boost level', () => {
     expect(isValidBoostLevel(0)).toBe(true);
   });
+
+  it('accepts trimmed poll titles within limits', () => {
+    expect(isValidPollTitle('  launch now  ')).toBe(true);
+  });
 });
