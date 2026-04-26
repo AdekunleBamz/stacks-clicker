@@ -236,6 +236,13 @@ export const formatUpgradeCount = (n) => Number(n) === 1 ? "1 upgrade" : Number(
 
 export const formatWinRate = (ratio) => (Number(ratio) * 100).toFixed(1) + "% win rate";
 
+export const formatLeaderboardPosition = (pos) => {
+  const n = Math.floor(Number(pos));
+  const suffixes = ["th","st","nd","rd"];
+  const v = n % 100;
+  return n + (suffixes[(v - 20) % 10] || suffixes[v] || suffixes[0]) + " place";
+};
+
 export const formatUpgradeName = (key) => key.replace(/_/g, " ").toLowerCase();
 
 export const formatCriticalLabel = (isCrit) => isCrit ? "CRITICAL!" : "";
