@@ -419,4 +419,8 @@ describe('numeric helpers', () => {
   it('rejects negative wallet balances provided as strings', () => {
     expect(isValidWalletBalance('-1')).toBe(false);
   });
+
+  it('rejects negative minimum click amounts', () => {
+    expect(isValidMinClickAmount(-0.1)).toBe(false);
+  });
 });
