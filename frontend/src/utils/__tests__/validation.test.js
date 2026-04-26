@@ -399,4 +399,8 @@ describe('numeric helpers', () => {
   it('rejects non-numeric prestige multipliers', () => {
     expect(isValidPrestigeMultiplier('abc')).toBe(false);
   });
+
+  it('accepts zero boost level', () => {
+    expect(isValidBoostLevel(0)).toBe(true);
+  });
 });
