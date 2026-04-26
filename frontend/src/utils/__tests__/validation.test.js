@@ -119,6 +119,10 @@ describe('numeric helpers', () => {
     expect(isNonEmptyString('   ')).toBe(false);
   });
 
+  it('rejects non-string values for non-empty string checks', () => {
+    expect(isNonEmptyString(42)).toBe(false);
+  });
+
   it('accepts numeric strings for integer checks', () => {
     expect(isPositiveInteger('2')).toBe(true);
     expect(isPositiveInteger('0')).toBe(false);
