@@ -321,4 +321,9 @@ describe('numeric helpers', () => {
     expect(isValidPrestigeMultiplier(1)).toBe(true);
     expect(isValidPrestigeMultiplier(0.99)).toBe(false);
   });
+
+  it('validates boost level caps', () => {
+    expect(isValidBoostLevel(5)).toBe(true);
+    expect(isValidBoostLevel(6)).toBe(false);
+  });
 });
