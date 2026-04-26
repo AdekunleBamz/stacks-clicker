@@ -176,6 +176,10 @@ describe('numeric helpers', () => {
     expect(isValidWalletAddress('SP123')).toBe(false);
   });
 
+  it('accepts wallet addresses with surrounding whitespace', () => {
+    expect(isValidWalletAddress('  SP5K2RHMSBH4PAP4PGX77MCVNK1ZEED07CWX9TJT  ')).toBe(true);
+  });
+
   it('validates non-negative click counts', () => {
     expect(isValidClickCount(0)).toBe(true);
     expect(isValidClickCount(-1)).toBe(false);
