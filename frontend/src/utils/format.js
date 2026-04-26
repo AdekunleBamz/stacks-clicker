@@ -230,6 +230,8 @@ export const formatBoostRemaining = (ms) => {
   return secs >= 60 ? Math.floor(secs / 60) + "m " + (secs % 60) + "s" : secs + "s left";
 };
 
+export const formatCritHit = (dmg) => "CRIT! +" + Number(dmg).toLocaleString();
+
 export const formatUpgradeName = (key) => key.replace(/_/g, " ").toLowerCase();
 
 export const formatCriticalLabel = (isCrit) => isCrit ? "CRITICAL!" : "";
