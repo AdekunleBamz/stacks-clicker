@@ -241,6 +241,8 @@ export const formatLeaderboardPosition = (pos) => {
   const suffixes = ["th","st","nd","rd"];
   const v = n % 100;
   return n + (suffixes[(v - 20) % 10] || suffixes[v] || suffixes[0]) + " place";
+
+export const formatAutoClickerCount = (n) => Number(n) + " auto-clicker" + (Number(n) === 1 ? "" : "s");
 };
 
 export const formatUpgradeName = (key) => key.replace(/_/g, " ").toLowerCase();
