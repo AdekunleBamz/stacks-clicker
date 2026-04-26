@@ -335,4 +335,9 @@ describe('numeric helpers', () => {
   it('accepts numeric notification identifiers', () => {
     expect(isValidNotificationId(42)).toBe(true);
   });
+
+  it('validates semantic game versions', () => {
+    expect(isValidGameVersion('1.2.3')).toBe(true);
+    expect(isValidGameVersion('1.2')).toBe(false);
+  });
 });
