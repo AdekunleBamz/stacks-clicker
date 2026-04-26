@@ -166,3 +166,5 @@ import { MAX_POLL_TITLE_LENGTH } from './constants';
 export const isValidPollTitle = (v) => typeof v === "string" && v.trim().length > 0 && v.trim().length <= MAX_POLL_TITLE_LENGTH;
 
 export const isValidNotificationId = (v) => isNonEmptyString(String(v));
+
+export const isValidGameVersion = (v) => typeof v === "string" && /^\d+\.\d+\.\d+$/.test(v.trim());
