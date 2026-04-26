@@ -161,3 +161,6 @@ export const isValidPrestigeMultiplier = (v) => !isNaN(Number(v)) && Number(v) >
 
 import { BOOST_LEVEL_CAP } from './constants';
 export const isValidBoostLevel = (v) => Number.isInteger(Number(v)) && Number(v) >= 0 && Number(v) <= BOOST_LEVEL_CAP;
+
+import { MAX_POLL_TITLE_LENGTH } from './constants';
+export const isValidPollTitle = (v) => typeof v === "string" && v.trim().length > 0 && v.trim().length <= MAX_POLL_TITLE_LENGTH;
