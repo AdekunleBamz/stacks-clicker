@@ -170,3 +170,5 @@ export const isValidNotificationId = (v) => isNonEmptyString(String(v));
 export const isValidGameVersion = (v) => typeof v === "string" && /^\d+\.\d+\.\d+$/.test(v.trim());
 
 export const isValidUpgradeSlot = (v) => Number.isInteger(Number(v)) && Number(v) >= 0 && Number(v) < MAX_UPGRADE_LEVEL;
+
+export const isValidWalletBalance = (v) => Number.isFinite(Number(v)) && Number(v) >= 0;
