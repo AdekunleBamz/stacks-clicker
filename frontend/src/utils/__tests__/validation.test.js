@@ -306,4 +306,9 @@ describe('numeric helpers', () => {
   it('accepts damage upgrade types', () => {
     expect(isValidUpgradeType('damage')).toBe(true);
   });
+
+  it('validates retry attempt bounds', () => {
+    expect(isValidRetryAttempts(3)).toBe(true);
+    expect(isValidRetryAttempts(4)).toBe(false);
+  });
 });
