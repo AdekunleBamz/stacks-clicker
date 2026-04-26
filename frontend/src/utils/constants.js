@@ -125,6 +125,8 @@ export const MIN_USERNAME_LENGTH = 3;
 
 export const MAX_POLL_TITLE_LENGTH = 120;
 
+export const NOTIFICATION_DISMISS_MS = 5000;
+
 export const SESSION_EXPIRY_MS = 3_600_000;
 
 export const AUTO_SAVE_INTERVAL_MS = 30_000;
