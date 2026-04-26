@@ -326,4 +326,9 @@ describe('numeric helpers', () => {
     expect(isValidBoostLevel(5)).toBe(true);
     expect(isValidBoostLevel(6)).toBe(false);
   });
+
+  it('validates poll title max length', () => {
+    expect(isValidPollTitle('A'.repeat(120))).toBe(true);
+    expect(isValidPollTitle('B'.repeat(121))).toBe(false);
+  });
 });
