@@ -423,4 +423,8 @@ describe('numeric helpers', () => {
   it('rejects negative minimum click amounts', () => {
     expect(isValidMinClickAmount(-0.1)).toBe(false);
   });
+
+  it('rejects cache age strings above the maximum', () => {
+    expect(isValidCacheAge('900001')).toBe(false);
+  });
 });
