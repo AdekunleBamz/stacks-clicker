@@ -223,6 +223,8 @@ export const formatClickRate = (cps) => Number(cps).toFixed(1) + " clicks/s";
 
 export const formatLevel = (lvl) => "Lv." + Math.max(0, Math.floor(Number(lvl)));
 
+export const formatPlayerTag = (id) => "Player #" + Number(id);
+
 export const formatUpgradeName = (key) => key.replace(/_/g, " ").toLowerCase();
 
 export const formatCriticalLabel = (isCrit) => isCrit ? "CRITICAL!" : "";
