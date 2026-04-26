@@ -172,3 +172,5 @@ export const isValidGameVersion = (v) => typeof v === "string" && /^\d+\.\d+\.\d
 export const isValidUpgradeSlot = (v) => Number.isInteger(Number(v)) && Number(v) >= 0 && Number(v) < MAX_UPGRADE_LEVEL;
 
 export const isValidWalletBalance = (v) => Number.isFinite(Number(v)) && Number(v) >= 0;
+
+export const isValidMinClickAmount = (v) => Number.isFinite(Number(v)) && Number(v) > 0;
