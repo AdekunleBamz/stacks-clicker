@@ -331,4 +331,8 @@ describe('numeric helpers', () => {
     expect(isValidPollTitle('A'.repeat(120))).toBe(true);
     expect(isValidPollTitle('B'.repeat(121))).toBe(false);
   });
+
+  it('accepts numeric notification identifiers', () => {
+    expect(isValidNotificationId(42)).toBe(true);
+  });
 });
