@@ -151,6 +151,10 @@ describe('numeric helpers', () => {
     expect(isValidPollOptionId('4', 4)).toBe(false);
   });
 
+  it('rejects negative poll option ids', () => {
+    expect(isValidPollOptionId(-1, 4)).toBe(false);
+  });
+
   it('uses default poll option bounds', () => {
     expect(isValidPollOptionId(3)).toBe(true);
   });
