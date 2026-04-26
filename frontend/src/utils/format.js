@@ -221,6 +221,8 @@ export const formatSessionTime = (ms) => Math.floor(ms / 60000) + "m " + Math.fl
 
 export const formatClickRate = (cps) => Number(cps).toFixed(1) + " clicks/s";
 
+export const formatLevel = (lvl) => "Lv." + Math.max(0, Math.floor(Number(lvl)));
+
 export const formatUpgradeName = (key) => key.replace(/_/g, " ").toLowerCase();
 
 export const formatCriticalLabel = (isCrit) => isCrit ? "CRITICAL!" : "";
