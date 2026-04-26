@@ -129,6 +129,8 @@ export const NOTIFICATION_DISMISS_MS = 5000;
 
 export const AUTO_CLICKER_BASE_RATE = 1;
 
+export const BOOST_LEVEL_CAP = 5;
+
 export const SESSION_EXPIRY_MS = 3_600_000;
 
 export const AUTO_SAVE_INTERVAL_MS = 30_000;
