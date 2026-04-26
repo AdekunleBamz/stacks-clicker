@@ -340,4 +340,51 @@ describe('numeric helpers', () => {
     expect(isValidGameVersion('1.2.3')).toBe(true);
     expect(isValidGameVersion('1.2')).toBe(false);
   });
+
+  it('validates upgrade slot upper bound', () => {
+    expect(isValidUpgradeSlot(49)).toBe(true);
+    expect(isValidUpgradeSlot(50)).toBe(false);
+  });
+
+  it('validates wallet balance finiteness and sign', () => {
+    expect(isValidWalletBalance(0)).toBe(true);
+    expect(isValidWalletBalance(Number.POSITIVE_INFINITY)).toBe(false);
+  });
+
+  it('validates minimum click amount positivity', () => {
+    expect(isValidMinClickAmount(0.01)).toBe(true);
+    expect(isValidMinClickAmount(0)).toBe(false);
+  });
+
+  it('accepts numeric-string retry attempts within range', () => {
+    expect(isValidRetryAttempts('2')).toBe(true);
+  });
+
+  it('rejects NaN cache ages', () => {
+    expect(isValidCacheAge(Number.NaN)).toBe(false);
+  });
+
+  it('rejects fractional boost levels', () => {
+    expect(isValidBoostLevel(2.5)).toBe(false);
+  });
+
+  it('rejects blank poll titles', () => {
+    expect(isValidPollTitle('   ')).toBe(false);
+  });
+
+  it('rejects empty notification identifiers', () => {
+    expect(isValidNotificationId('   ')).toBe(false);
+  });
+
+  it('accepts trimmed semantic game versions', () => {
+    expect(isValidGameVersion(' 2.0.1 ')).toBe(true);
+  });
+
+  it('accepts numeric-string wallet balances', () => {
+    expect(isValidWalletBalance('10.5')).toBe(true);
+  });
+
+  it('rejects zero as minimum click amount string', () => {
+    expect(isValidMinClickAmount('0')).toBe(false);
+  });
 });
