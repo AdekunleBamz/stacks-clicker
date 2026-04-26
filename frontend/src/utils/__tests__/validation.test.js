@@ -415,4 +415,8 @@ describe('numeric helpers', () => {
   it('rejects negative upgrade slots', () => {
     expect(isValidUpgradeSlot(-1)).toBe(false);
   });
+
+  it('rejects negative wallet balances provided as strings', () => {
+    expect(isValidWalletBalance('-1')).toBe(false);
+  });
 });
