@@ -395,4 +395,8 @@ describe('numeric helpers', () => {
   it('accepts cache age at upper bound', () => {
     expect(isValidCacheAge(900000)).toBe(true);
   });
+
+  it('rejects non-numeric prestige multipliers', () => {
+    expect(isValidPrestigeMultiplier('abc')).toBe(false);
+  });
 });
