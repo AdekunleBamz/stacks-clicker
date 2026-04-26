@@ -234,6 +234,8 @@ export const formatCritHit = (dmg) => "CRIT! +" + Number(dmg).toLocaleString();
 
 export const formatUpgradeCount = (n) => Number(n) === 1 ? "1 upgrade" : Number(n) + " upgrades";
 
+export const formatWinRate = (ratio) => (Number(ratio) * 100).toFixed(1) + "% win rate";
+
 export const formatUpgradeName = (key) => key.replace(/_/g, " ").toLowerCase();
 
 export const formatCriticalLabel = (isCrit) => isCrit ? "CRITICAL!" : "";
