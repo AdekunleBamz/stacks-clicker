@@ -158,3 +158,6 @@ export const isValidBoostType = (v) => ["click","auto","combo","prestige"].inclu
 export const isValidUpgradeType = (v) => ["damage","speed","crit","auto"].includes(v);
 
 export const isValidPrestigeMultiplier = (v) => !isNaN(Number(v)) && Number(v) >= 1;
+
+import { BOOST_LEVEL_CAP } from './constants';
+export const isValidBoostLevel = (v) => Number.isInteger(Number(v)) && Number(v) >= 0 && Number(v) <= BOOST_LEVEL_CAP;
