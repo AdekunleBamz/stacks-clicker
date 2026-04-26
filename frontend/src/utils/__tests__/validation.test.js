@@ -387,4 +387,8 @@ describe('numeric helpers', () => {
   it('rejects zero as minimum click amount string', () => {
     expect(isValidMinClickAmount('0')).toBe(false);
   });
+
+  it('rejects negative retry attempts', () => {
+    expect(isValidRetryAttempts(-1)).toBe(false);
+  });
 });
