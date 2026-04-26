@@ -93,6 +93,12 @@ describe('validatePayload', () => {
     expect(() => validatePayload({ amount: -1 }, SCHEMAS.CLICK)).toThrow('"amount"');
   });
 
+  it('should include recipient field names when tip recipient validation fails', () => {
+    expect(() =>
+      validatePayload({ amount: 100, recipient: 'SP123' }, SCHEMAS.TIP),
+    ).toThrow('"recipient"');
+  });
+
   it('should throw for missing required fields', () => {
     const payload = {};
     expect(() => validatePayload(payload, SCHEMAS.CLICK)).toThrow();
