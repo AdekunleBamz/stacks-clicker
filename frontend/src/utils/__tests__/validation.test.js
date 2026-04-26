@@ -411,4 +411,8 @@ describe('numeric helpers', () => {
   it('rejects prefixed semantic versions', () => {
     expect(isValidGameVersion('v1.2.3')).toBe(false);
   });
+
+  it('rejects negative upgrade slots', () => {
+    expect(isValidUpgradeSlot(-1)).toBe(false);
+  });
 });
