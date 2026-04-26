@@ -133,6 +133,8 @@ export const BOOST_LEVEL_CAP = 5;
 
 export const MAX_NOTIFICATION_COUNT = 10;
 
+export const PRESTIGE_BONUS_BPS = 500;
+
 export const SESSION_EXPIRY_MS = 3_600_000;
 
 export const AUTO_SAVE_INTERVAL_MS = 30_000;
