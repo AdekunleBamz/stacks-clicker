@@ -407,4 +407,8 @@ describe('numeric helpers', () => {
   it('accepts trimmed poll titles within limits', () => {
     expect(isValidPollTitle('  launch now  ')).toBe(true);
   });
+
+  it('rejects prefixed semantic versions', () => {
+    expect(isValidGameVersion('v1.2.3')).toBe(false);
+  });
 });
