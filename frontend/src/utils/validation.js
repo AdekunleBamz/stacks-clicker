@@ -168,3 +168,5 @@ export const isValidPollTitle = (v) => typeof v === "string" && v.trim().length 
 export const isValidNotificationId = (v) => isNonEmptyString(String(v));
 
 export const isValidGameVersion = (v) => typeof v === "string" && /^\d+\.\d+\.\d+$/.test(v.trim());
+
+export const isValidUpgradeSlot = (v) => Number.isInteger(Number(v)) && Number(v) >= 0 && Number(v) < MAX_UPGRADE_LEVEL;
