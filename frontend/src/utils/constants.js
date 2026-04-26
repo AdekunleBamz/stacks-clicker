@@ -109,8 +109,6 @@ export const UPGRADE_BASE_COST = 100;
 
 export const UPGRADE_COST_MULTIPLIER = 1.5;
 
-export const MAX_UPGRADE_LEVEL = 50;
-
 export const PRESTIGE_THRESHOLD = 1_000_000;
 
 export const PRESTIGE_MULTIPLIER = 2;
