@@ -311,4 +311,9 @@ describe('numeric helpers', () => {
     expect(isValidRetryAttempts(3)).toBe(true);
     expect(isValidRetryAttempts(4)).toBe(false);
   });
+
+  it('validates cache age limits', () => {
+    expect(isValidCacheAge(1000)).toBe(true);
+    expect(isValidCacheAge(900001)).toBe(false);
+  });
 });
