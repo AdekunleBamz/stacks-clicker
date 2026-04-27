@@ -71,6 +71,6 @@ Card.propTypes = {
   interactive: PropTypes.bool,
   className: PropTypes.string,
   headerAction: PropTypes.node,
-});
+};
 
-export default Card;
+export default memo(Card);
