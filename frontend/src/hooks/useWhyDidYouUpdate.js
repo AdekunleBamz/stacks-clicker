@@ -12,15 +12,16 @@ export function useWhyDidYouUpdate(name, props) {
   const safeName = typeof name === 'string' && name.trim() ? name.trim() : 'UnknownComponent';
 
   useEffect(() => {
+    const safeProps = props != null && typeof props === 'object' ? props : {};
     if (previousProps.current) {
-      const allKeys = Object.keys({ ...previousProps.current, ...props });
+      const allKeys = Object.keys({ ...previousProps.current, ...safeProps });
       const changesObj = {};
 
       allKeys.forEach((key) => {
-        if (previousProps.current[key] !== props[key]) {
+        if (previousProps.current[key] !== safeProps[key]) {
           changesObj[key] = {
             from: previousProps.current[key],
-            to: props[key],
+            to: safeProps[key],
           };
         }
       });
@@ -32,6 +33,6 @@ export function useWhyDidYouUpdate(name, props) {
       }
     }
 
-    previousProps.current = props;
+    previousProps.current = safeProps;
   });
 }
