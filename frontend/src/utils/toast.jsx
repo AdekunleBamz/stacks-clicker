@@ -1,4 +1,3 @@
-import React from 'react';
 import { toast } from 'react-hot-toast';
 import { motion } from 'framer-motion';
 
@@ -19,7 +18,7 @@ const toastStyle = {
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center'
-});
+};
 
 /**
  * Premium glassmorphic toast notification component.
