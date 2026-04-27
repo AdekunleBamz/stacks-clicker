@@ -19,6 +19,8 @@ export default function ActionButton({
       className={`action-btn ${className}`}
       onClick={onClick}
       disabled={disabled || isLoading}
+      aria-busy={isLoading}
+      aria-disabled={disabled || isLoading}
       whileHover={{ scale: 1.02, translateY: -2 }}
       whileTap={{ scale: 0.98, translateY: 0 }}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
