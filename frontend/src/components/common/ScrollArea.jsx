@@ -29,7 +29,7 @@ const ScrollArea = memo(function ScrollArea({ children, className = '', style = 
     handleScroll(); // Init
     window.addEventListener('resize', handleScroll);
     return () => window.removeEventListener('resize', handleScroll);
-  }, []);
+  }, [handleScroll]);
 
   const showVerticalThumb = scrollState.scrollHeight > scrollState.clientHeight;
   const showHorizontalThumb = scrollState.scrollWidth > scrollState.clientWidth;
@@ -84,7 +84,7 @@ const ScrollArea = memo(function ScrollArea({ children, className = '', style = 
         </div>
       )}
 
-      <style jsx>{`
+      <style>{`
         .scroll-area-wrapper {
           position: relative;
           overflow: hidden;
