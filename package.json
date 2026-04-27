@@ -23,6 +23,7 @@
     "frontend:build": "npm --prefix frontend run build",
     "build": "npm run frontend:build",
     "frontend:test": "npm --prefix frontend run test",
+    "test": "npm run frontend:test",
     "contracts:check": "clarinet check",
     "contracts:test": "clarinet test"
   },
