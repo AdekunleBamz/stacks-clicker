@@ -110,6 +110,9 @@ npm ci && cp frontend/.env.example frontend/.env && npm run dev
 
 # Run frontend tests
 npm run test
+
+# Run contract checks
+npm run check
 ```
 
 ## Key Interactions 🎮
