@@ -90,6 +90,9 @@ export const BOOST_DURATION_BLOCKS = 10;
 /** Minimum tip in micro-STX (1000 = 0.001 STX) */
 export const MIN_TIP_MICRO_STX = 1000;
 
+/** STX price polling interval in ms (60 seconds) */
+export const PRICE_REFRESH_INTERVAL_MS = 60_000;
+
 /** Streak threshold levels for badge unlocks */
 export const STREAK_THRESHOLDS = {
   BRONZE: 5,
