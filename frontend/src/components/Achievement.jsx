@@ -30,7 +30,7 @@ function Achievement({ achievement }) {
             whileHover={unlocked ? { y: -5, boxShadow: '0 0 20px hsla(var(--pulse-purple) / 0.2)' } : {}}
         >
             <div className="achievement-icon-wrapper">
-                <span className="achievement-icon">{icon}</span>
+                <span className="achievement-icon" aria-hidden="true">{icon}</span>
                 {!unlocked && <div className="achievement-lock">🔒</div>}
             </div>
 
