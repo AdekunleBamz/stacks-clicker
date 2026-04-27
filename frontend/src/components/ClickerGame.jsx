@@ -1,5 +1,4 @@
-import { useState, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useCallback } from 'react';import { motion } from 'framer-motion';
 import { useWallet } from '../context/WalletContext';
 import { callContract } from '../utils/walletconnect';
 import { useSound } from '../hooks/useSound';
@@ -20,6 +19,7 @@ export default function ClickerGame({ onTxSubmit }) {
   const [clickCount, setClickCount] = useState(0);
   const [multiClickAmount, setMultiClickAmount] = useState(5);
   const [clickEvents, setClickEvents] = useState([]);
+  const [showMulti, setShowMulti] = useState(false);
 
   const addClickEvent = (e) => {
     const newEvent = {
