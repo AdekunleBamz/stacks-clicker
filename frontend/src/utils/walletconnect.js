@@ -34,6 +34,15 @@ const STACKS_NETWORK = String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').
   : 'mainnet';
 const STACKS_CHAIN = STACKS_NETWORK === 'testnet' ? 'stacks:2147483648' : 'stacks:1';
 
+/**
+ * Returns the active Stacks CAIP-2 chain identifier.
+ *
+ * @returns {string} Resolved chain identifier
+ */
+export function getStacksChainId() {
+  return STACKS_CHAIN;
+}
+
 // App metadata - MUST have valid icons array
 const metadata = {
   name: 'StacksClicker',
