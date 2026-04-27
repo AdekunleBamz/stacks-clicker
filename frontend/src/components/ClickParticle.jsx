@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import PropTypes from 'prop-types';
 
 /**
  * ClickParticle Component
@@ -11,6 +12,7 @@ const ClickParticle = ({ x, y, onComplete }) => {
     return (
         <div
             className="particle-container"
+            aria-hidden="true"
             style={{
                 position: 'fixed',
                 left: x,
@@ -52,7 +54,13 @@ const ClickParticle = ({ x, y, onComplete }) => {
     );
 };
 
-export default function ParticleSystem({ clickEvents, removeEvent }) {
+ClickParticle.propTypes = {
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired,
+    onComplete: PropTypes.func,
+};
+
+export default memo(function ParticleSystem({ clickEvents, removeEvent }) {
     return (
         <AnimatePresence>
             {clickEvents.map(event => (
@@ -65,4 +73,4 @@ export default function ParticleSystem({ clickEvents, removeEvent }) {
             ))}
         </AnimatePresence>
     );
-}
+});
