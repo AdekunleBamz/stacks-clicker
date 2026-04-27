@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Modal from './common/Modal';
 import { useModal } from '../context/ModalContext';
 import { useTheme } from '../hooks/useTheme';
