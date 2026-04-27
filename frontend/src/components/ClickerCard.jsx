@@ -70,4 +70,8 @@ ClickerCard.propTypes = {
   }).isRequired,
 };
 
+ClickerCard.defaultProps = {
+  address: null,
+};
+
 export default memo(ClickerCard);
