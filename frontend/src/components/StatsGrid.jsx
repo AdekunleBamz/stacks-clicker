@@ -29,7 +29,7 @@ function StatsGrid({ stats }) {
                     whileHover={{ y: -5, borderColor: 'hsla(var(--pulse-cyan) / 0.4)' }}
                 >
                     <div className="stat-card-header">
-                        <span className="stat-icon">{item.icon}</span>
+                        <span className="stat-icon" aria-hidden="true">{item.icon}</span>
                         <span className="stat-card-label">{item.label}</span>
                     </div>
                     <div className="stat-card-value">
