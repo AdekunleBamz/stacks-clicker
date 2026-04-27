@@ -5,9 +5,10 @@ import PropTypes from 'prop-types';
 /**
  * A custom tooltip component for accessible and premium descriptions.
  */
-export default function Tooltip({ text, children }) {
+export default function Tooltip({ text, content, children }) {
   const [isVisible, setIsVisible] = useState(false);
   const tooltipId = useId();
+  const tooltipText = text ?? content;
 
   return (
     <div
@@ -31,7 +32,7 @@ export default function Tooltip({ text, children }) {
             exit={{ opacity: 0, y: 5, scale: 0.95 }}
             className="tooltip-content"
           >
-            {text}
+            {tooltipText}
             <div className="tooltip-arrow" />
           </motion.div>
         )}
@@ -41,6 +42,7 @@ export default function Tooltip({ text, children }) {
 }
 
 Tooltip.propTypes = {
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
+  content: PropTypes.node,
   children: PropTypes.node.isRequired,
 };
