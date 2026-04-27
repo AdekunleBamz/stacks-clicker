@@ -60,6 +60,7 @@ For watch mode during development:
 npm run test
 ```
 Use `npm run lint` before opening a pull request if you touched application code.
+Use `npm run format:check` before opening a pull request if you touched UI code.
 
 ## 🧰 Troubleshooting
 - If wallet connection does not appear, verify `VITE_WALLETCONNECT_PROJECT_ID` is set.
