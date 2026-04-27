@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useInterval } from './useInterval';
 import { useWindowFocus } from './useWindowFocus';
 import { useDocumentVisibility } from './useDocumentVisibility';
