@@ -63,6 +63,7 @@ export function useOnlineStatus(options = {}) {
     wasOffline,
     lastOfflineAt,
     lastOnlineAt,
+    offlineDuration: lastOnlineAt && lastOfflineAt ? lastOnlineAt - lastOfflineAt : null,
   };
 }
 

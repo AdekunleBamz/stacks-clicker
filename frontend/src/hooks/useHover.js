@@ -1,9 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 /**
  * Custom hook for tracking the hover state of an element.
  *
- * @returns {[Object, boolean]} [ref, isHovered]
+ * @returns {[Object, boolean, Function]} [ref, isHovered, resetHover]
  */
 export function useHover() {
   const [isHovered, setIsHovered] = useState(false);
@@ -26,7 +26,9 @@ export function useHover() {
     return undefined;
   }, []);
 
-  return [ref, isHovered];
+  const resetHover = useCallback(() => setIsHovered(false), []);
+
+  return [ref, isHovered, resetHover];
 }
 
 /**

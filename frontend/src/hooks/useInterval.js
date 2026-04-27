@@ -40,5 +40,6 @@ export function useInterval(callback, delay) {
   export function useCountup(delay) {
     const [count, setCount] = useState(0);
     useInterval(() => setCount((c) => c + 1), delay);
-    return count;
+    const reset = () => setCount(0);
+    return { count, reset };
   }

@@ -41,7 +41,17 @@ export function useMedia(query) {
  * @returns {boolean}
  */
 export function useIsSmallScreen() {
-  return useMedia('(max-width: 639px)');
+  const isSmall = useMedia('(max-width: 639px)');
+  const isMobile = useMedia('(max-width: 480px)');
+  return isSmall;
+}
+
+/**
+ * Returns true for mobile devices (max-width: 480px).
+ * @returns {boolean}
+ */
+export function useIsMobile() {
+  return useMedia('(max-width: 480px)');
 }
 
 /**

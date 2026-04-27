@@ -27,5 +27,6 @@ export function useFocus() {
   }, []);
 
   const blur = () => ref.current?.blur();
-  return [ref, isFocused, blur];
+  const focus = () => ref.current?.focus();
+  return [ref, isFocused, blur, focus];
 }

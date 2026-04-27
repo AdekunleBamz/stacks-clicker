@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { useWallet } from '../context/WalletContext';
 import { callContract } from '../utils/walletconnect';
 import { DEPLOYER_ADDRESS, CONTRACT_NAMES } from '../config/contracts';
@@ -15,6 +15,7 @@ const CONTRACT_NAME = CONTRACT_NAMES.clicker;
 export function useClicker({ onTxSubmit } = {}) {
   const { isConnected } = useWallet();
   const [loadingStates, setLoadingStates] = useState({});
+  const actionCountRef = useRef(0);
 
   const setLoading = (key, val) => {
     setLoadingStates((prev) => ({ ...prev, [key]: val }));
@@ -40,6 +41,7 @@ export function useClicker({ onTxSubmit } = {}) {
     async (displayName, functionName, functionArgs = []) => {
       const key = `clicker-${functionName}`;
       setLoading(key, true);
+      actionCountRef.current += 1;
       try {
         const result = await callContract({
           contractAddress: DEPLOYER_ADDRESS,
@@ -74,5 +76,6 @@ export function useClicker({ onTxSubmit } = {}) {
     click,
     multiClick,
     ping,
+    actionCount: actionCountRef.current,
   };
 }
