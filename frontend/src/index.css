@@ -494,6 +494,9 @@ body::before {
   text-decoration: none;
   font-family: monospace;
   width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
 }
 
 .tx-explorer-link:hover {
