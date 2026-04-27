@@ -4,7 +4,7 @@ export function useRateLimiter(options = {}) {
   const { interval = 1000, onRejected } = options;
   const lastCallTimeRef = useRef(0);
   const timeoutRef = useRef(null);
-  const [, forceUpdate] = useState({});
+  const [, forceUpdate] = useState(0);
 
   const canCall = useCallback(() => {
     const now = Date.now();
@@ -30,14 +30,14 @@ export function useRateLimiter(options = {}) {
           return fn(...args);
         } finally {
           // Force re-render to update isLimited state even if the callback throws.
-          forceUpdate({});
+          forceUpdate((n) => n + 1);
 
           if (timeoutRef.current) {
             clearTimeout(timeoutRef.current);
           }
 
           timeoutRef.current = setTimeout(() => {
-            forceUpdate({});
+            forceUpdate((n) => n + 1);
             timeoutRef.current = null;
           }, interval);
         }
@@ -54,7 +54,7 @@ export function useRateLimiter(options = {}) {
       timeoutRef.current = null;
     }
 
-    forceUpdate({});
+    forceUpdate((n) => n + 1);
   }, []);
 
   // Cleanup on unmount
