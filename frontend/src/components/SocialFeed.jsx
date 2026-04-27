@@ -10,11 +10,11 @@ function SocialFeed({ activities }) {
     return (
         <div className="game-card social-feed">
             <div className="game-header">
-                <h2>🔥 Live Activity</h2>
+            <h2><span aria-hidden="true">🔥</span> Live Activity</h2>
                 <span className="game-badge">Community</span>
             </div>
 
-            <div className="activity-list">
+            <div className="activity-list" role="feed" aria-label="Community live activity">
                 <AnimatePresence initial={false}>
                     {activities.map((activity) => (
                         <motion.div
