@@ -63,7 +63,7 @@ function TransactionItem({
             <button type="button" className="text-btn" onClick={() => onDetails(tx)} title="View full transaction details">
               View Details <span aria-hidden="true">→</span>
             </button>
-            <span className="tx-action-separator">•</span>
+            <span className="tx-action-separator" aria-hidden="true">•</span>
             <button type="button" className="text-btn" onClick={() => onCopy(tx.id)} aria-label="Copy transaction ID" title="Copy transaction ID to clipboard">
               Copy ID
             </button>
