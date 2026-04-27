@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useLocalStorage } from './useLocalStorage';
 import { notify } from '../utils/toast';
-import { useDocumentVisibility } from './useDocumentVisibility';
+
 import { MAX_TX_LOG_SIZE, CONFIG, STACKS_NETWORK } from '../utils/constants';
 
 /**
@@ -15,20 +15,12 @@ import { MAX_TX_LOG_SIZE, CONFIG, STACKS_NETWORK } from '../utils/constants';
  */
 export function useTransactionHistory({ playSound, onTxAdded }) {
   const [txLog, setTxLog] = useLocalStorage('stacks-tx-log', []);
-  const isVisible = useDocumentVisibility();
-
-  // Memoized derived stats
   const pendingTxs = useMemo(() => txLog.filter((tx) => tx.isPending), [txLog]);
   const successTxs = useMemo(() => txLog.filter((tx) => tx.status === 'success'), [txLog]);
   const failedTxs = useMemo(() => txLog.filter((tx) => tx.status === 'failed' || tx.status === 'error'), [txLog]);
   const txCount = useMemo(() => txLog.length, [txLog]);
 
-  useEffect(() => {
-    // tab visibility changes pauses/resumes background updates
-  }, [isVisible]);
-
-  /**
-   * Adds a transaction record to the local session log.
+  // Memoized derived stats
    *
    * @param {string} action - Human-readable label for the interaction
    * @param {string} txId - The unique transaction hash
