@@ -63,6 +63,7 @@ const TransactionModal = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="primary-button explorer-btn"
+            aria-label={`View transaction ${truncateAddress(txId)} on explorer`}
           >
             View on Explorer ↗
           </a>
