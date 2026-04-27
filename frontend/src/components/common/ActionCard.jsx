@@ -43,3 +43,5 @@ ActionCard.propTypes = {
   iconClass: PropTypes.string,
   children: PropTypes.node,
 };
+
+export default memo(ActionCard);
