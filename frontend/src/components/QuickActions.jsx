@@ -33,7 +33,7 @@ export default function QuickActions({ address, onClearLog, onPingAll }) {
           onClick={() => handleAction(onClearLog)}
         />
         <ActionButton
-          label="Support"
+          label="Stacks Docs"
           icon="💬"
           className="secondary btn-sm"
           onClick={() =>
