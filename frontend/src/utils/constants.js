@@ -86,3 +86,14 @@ export const TOAST_DURATION_MS = 3_000;
 export const MAX_ACTIVE_BOOSTS = 5;
 
 export const BOOST_DURATION_BLOCKS = 10;
+
+/** Minimum tip in micro-STX (1000 = 0.001 STX) */
+export const MIN_TIP_MICRO_STX = 1000;
+
+/** Streak threshold levels for badge unlocks */
+export const STREAK_THRESHOLDS = {
+  BRONZE: 5,
+  SILVER: 25,
+  GOLD: 100,
+  VETERAN: 500,
+};
