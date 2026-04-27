@@ -38,6 +38,7 @@ export default function ClickerGame({ onTxSubmit }) {
   const handleClick = async (e) => {
     if (!isConnected) return;
     addClickEvent(e);
+    playSound('click');
 
     setLoading(true);
     try {

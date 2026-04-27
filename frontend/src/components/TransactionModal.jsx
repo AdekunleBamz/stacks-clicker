@@ -20,6 +20,7 @@ const TransactionModal = memo(() => {
   const { txId, action, timestamp, status = 'success' } = modalData;
 
   const getExplorerLink = () => {
+    if (!txId) return '#';
     return `https://explorer.hiro.so/txid/${txId}?chain=${STACKS_NETWORK}`;
   };
 

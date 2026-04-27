@@ -1,4 +1,4 @@
-import { useEffect, useState, memo } from 'react';
+import { useEffect, useState, useRef, memo } from 'react';
 import { animate } from 'framer-motion';
 import PropTypes from 'prop-types';
 
@@ -14,17 +14,19 @@ import PropTypes from 'prop-types';
  */
 const AnimatedNumber = ({ value, duration = 1 }) => {
   const [displayValue, setDisplayValue] = useState(() => typeof value === 'number' ? value : 0);
+  const fromRef = useRef(displayValue);
 
   useEffect(() => {
     if (typeof value !== 'number') return;
 
-    const controls = animate(displayValue, value, {
+    const controls = animate(fromRef.current, value, {
       duration,
       onUpdate: (latest) => setDisplayValue(Math.floor(latest)),
     });
+    fromRef.current = value;
 
     return () => controls.stop();
-  }, [value, duration]); // Intentionally not including displayValue to avoid infinite loops
+  }, [value, duration]);
 
   return (
     <span

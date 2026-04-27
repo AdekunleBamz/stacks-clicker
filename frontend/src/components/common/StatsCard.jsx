@@ -1,5 +1,5 @@
-import { useEffect, useState, memo } from 'react';
-import { motion, animate } from 'framer-motion';
+import { memo } from 'react';
+import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import AnimatedNumber from './AnimatedNumber';
 import Tooltip from './Tooltip';

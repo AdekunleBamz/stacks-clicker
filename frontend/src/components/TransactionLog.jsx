@@ -1,8 +1,4 @@
 import PropTypes from 'prop-types';
-const STACKS_NETWORK =
-  String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
-    ? 'testnet'
-    : 'mainnet';
 
 /**
  * Transaction Log Component

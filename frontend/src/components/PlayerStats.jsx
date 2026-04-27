@@ -1,7 +1,6 @@
 import { memo, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { animate } from 'framer-motion';
-import StatsCard from './common/StatsCard';
+import { animate } from 'framer-motion';import StatsCard from './common/StatsCard';
 
 /**
  * Animated number component for smooth counting transitions.
@@ -37,16 +36,6 @@ function PlayerStats({ stats, txCount }) {
     { label: 'Transactions', value: txCount, icon: '⚡', color: '#ec4899' },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    }
-  };
 
   return (
     <section
