@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 
+let audioContext = null;
 let compressor = null;
 
 function getAudioContext() {

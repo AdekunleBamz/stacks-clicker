@@ -16,7 +16,7 @@ export function useKeyboardShortcuts({ isEnabled, actions, playSound }) {
         activeElement?.tagName === 'INPUT' ||
         activeElement?.tagName === 'SELECT' ||
         activeElement?.tagName === 'TEXTAREA' ||
-        activeElement?.tagName === 'SELECT' ||
+
         activeElement?.isContentEditable;
 
       if (isTyping || e.metaKey || e.ctrlKey || e.altKey || e.repeat || !isEnabled) {
