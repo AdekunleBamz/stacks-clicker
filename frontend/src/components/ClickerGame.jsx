@@ -129,7 +129,7 @@ export default function ClickerGame({ onTxSubmit }) {
           title="Click to generate a transaction manually"
         >
           {loading ? '⏳' : '👆'} Click!
-        </motion.button>
+        </button>
 
         <div className="multi-click-group" role="group" aria-label="Multi-Click Interventions">
           <input
