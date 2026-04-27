@@ -72,6 +72,10 @@ const Modal = memo(function Modal({ isOpen, onClose, title, children, maxWidth =
   );
 });
 
+Modal.defaultProps = {
+  maxWidth: '500px',
+};
+
 Modal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
