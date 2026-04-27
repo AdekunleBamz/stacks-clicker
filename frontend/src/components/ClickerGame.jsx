@@ -1,6 +1,8 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
+import { motion } from 'framer-motion';
 import { useWallet } from '../context/WalletContext';
 import { callContract } from '../utils/walletconnect';
+import { useSound } from '../hooks/useSound';
 import ParticleSystem from './ClickParticle';
 import CountUp from './CountUp';
 
@@ -13,6 +15,7 @@ const DEPLOYER = 'SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N';
  */
 export default function ClickerGame({ onTxSubmit }) {
   const { isConnected } = useWallet();
+  const { playSound } = useSound();
   const [loading, setLoading] = useState(false);
   const [clickCount, setClickCount] = useState(0);
   const [multiClickAmount, setMultiClickAmount] = useState(5);
@@ -56,7 +59,7 @@ export default function ClickerGame({ onTxSubmit }) {
   const handleMultiClick = async (e) => {
     if (!isConnected) return;
     addClickEvent(e);
-    soundEngine.play('click');
+    playSound('click');
 
     setLoading(true);
     try {
