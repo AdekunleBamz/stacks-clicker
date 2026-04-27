@@ -9,7 +9,6 @@ import versionData from '../version.json';
  * @component
  * @returns {JSX.Element} The rendered footer
  */
-/** @type {string} */
 const VERSION = versionData.version || '1.0.0';
 
 const Footer = memo(function Footer() {

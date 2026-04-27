@@ -21,12 +21,6 @@ export function useTransactionHistory({ playSound, onTxAdded }) {
   const txCount = useMemo(() => txLog.length, [txLog]);
 
   // Memoized derived stats
-   *
-   * @param {string} action - Human-readable label for the interaction
-   * @param {string} txId - The unique transaction hash
-   * @param {string} [status='success'] - Current lifecycle state
-   * @returns {Object} The formatted transaction object
-   */
   const addTxToLog = useCallback(
     (action, txId, status = 'success') => {
       const submittedAt = new Date();
