@@ -5,6 +5,7 @@ import { callContract } from '../utils/walletconnect';
 import { useSound } from '../hooks/useSound';
 import ParticleSystem from './ClickParticle';
 import CountUp from './CountUp';
+import soundEngine from '../utils/SoundEngine';
 
 // Contract deployer address
 const DEPLOYER = 'SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N';
@@ -51,8 +52,10 @@ export default function ClickerGame({ onTxSubmit }) {
 
       setClickCount((prev) => prev + 1);
       onTxSubmit?.('click', result.txId);
+      soundEngine.play('success');
     } catch (err) {
       console.error('Click failed:', err);
+      soundEngine.play('error');
     } finally {
       setLoading(false);
     }
@@ -74,8 +77,10 @@ export default function ClickerGame({ onTxSubmit }) {
 
       setClickCount((prev) => prev + multiClickAmount);
       onTxSubmit?.('multi-click', result.txId);
+      soundEngine.play('success');
     } catch (err) {
       console.error('Multi-click failed:', err);
+      soundEngine.play('error');
     } finally {
       setLoading(false);
     }
@@ -84,6 +89,8 @@ export default function ClickerGame({ onTxSubmit }) {
   const handlePing = async (e) => {
     if (!isConnected) return;
     addClickEvent(e);
+    soundEngine.play('click');
+    if (window.navigator?.vibrate) window.navigator.vibrate(20);
 
     setLoading(true);
     try {
@@ -95,8 +102,10 @@ export default function ClickerGame({ onTxSubmit }) {
       });
 
       onTxSubmit?.('ping', result.txId);
+      soundEngine.play('success');
     } catch (err) {
       console.error('Ping failed:', err);
+      soundEngine.play('error');
     } finally {
       setLoading(false);
     }

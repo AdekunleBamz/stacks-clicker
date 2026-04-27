@@ -26,7 +26,13 @@ function Leaderboard({ players }) {
                         role="listitem"
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: i * 0.05 }}
+                        transition={{ delay: i * 0.1, type: "spring", stiffness: 100 }}
+                        whileHover={{
+                            scale: 1.02,
+                            x: 10,
+                            backgroundColor: "hsla(var(--bg-black) / 0.5)",
+                            borderColor: "hsla(var(--pulse-cyan) / 0.4)"
+                        }}
                     >
                         <div className="rank-indicator" aria-label={`Rank ${i + 1}`}>{i + 1}</div>
                         <div className="player-info">
