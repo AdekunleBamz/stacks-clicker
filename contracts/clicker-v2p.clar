@@ -17,19 +17,24 @@
 ;; ============================================
 ;; ERROR CODES
 ;; ============================================
-;; Fee errors (100-109)
+;; @desc Error code returned when the required fee is not provided
 (define-constant ERR-INSUFFICIENT-FEE (err u100))
+;; @desc Error code returned when the STX transfer fails
 (define-constant ERR-TRANSFER-FAILED (err u101))
 
-;; Authorization errors (110-119)
+;; @desc Error code returned when a non-owner tries to call an owner-only function
 (define-constant ERR-NOT-OWNER (err u110))
+;; @desc Error code returned when a caller is not authorized for an operation
 (define-constant ERR-UNAUTHORIZED (err u111))
+;; @desc Error code returned when an operation is performed on an unauthorized principal
+(define-constant ERR-INVALID-PRINCIPAL (err u112))
 
-;; State errors (120-129)
+;; @desc Error code returned when the contract is currently paused
 (define-constant ERR-CONTRACT-PAUSED (err u120))
 
-;; Input validation errors (130-139)
+;; @desc Error code returned when an invalid count is provided
 (define-constant ERR-INVALID-COUNT (err u130))
+;; @desc Error code returned when a zero value is provided where prohibited
 (define-constant ERR-ZERO-VALUE (err u131))
 
 ;; ============================================
