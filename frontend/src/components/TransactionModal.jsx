@@ -71,7 +71,7 @@ const TransactionModal = memo(() => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .tx-details-container {
           display: flex;
           flex-direction: column;
