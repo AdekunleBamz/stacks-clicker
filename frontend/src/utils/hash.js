@@ -53,3 +53,30 @@ export function shortHash(str, len = 8) {
   const safeLen = Math.min(16, Math.max(1, Math.trunc(Number(len)) || 8));
   return simpleHash(str).toString(16).padStart(8, '0').slice(0, safeLen);
 }
+
+/**
+ * Finds the most frequently occurring hash value in an array of strings.
+ * Useful for statistical analysis of distributed transaction types.
+ *
+ * @param {string[]} strings - Array of strings to hash
+ * @returns {number|null} Most common hash value, or null if array is empty
+ */
+export function getMostFrequentHash(strings) {
+  if (!Array.isArray(strings) || strings.length === 0) return null;
+  
+  const hashCounts = {};
+  let maxHash = null;
+  let maxCount = 0;
+  
+  for (const str of strings) {
+    const hash = simpleHash(str);
+    hashCounts[hash] = (hashCounts[hash] || 0) + 1;
+    
+    if (hashCounts[hash] > maxCount) {
+      maxCount = hashCounts[hash];
+      maxHash = hash;
+    }
+  }
+  
+  return maxHash;
+}
