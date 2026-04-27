@@ -36,3 +36,13 @@ export function validatePayload(payload, schema) {
   }
   return true;
 }
+
+/**
+ * Returns true if the value looks like a valid Stacks mainnet address (SP…).
+ *
+ * @param {string} value - The address string to test
+ * @returns {boolean}
+ */
+export function isStacksAddress(value) {
+  return typeof value === 'string' && /^SP[0-9A-Z]{28,41}$/.test(value);
+}
