@@ -63,6 +63,7 @@ function InteractionStreaks({ totalInteractions }) {
             <motion.div
               key={badge.id}
               className="badge-item"
+              role="listitem"
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               whileHover={{ y: -5 }}
