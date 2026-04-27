@@ -64,12 +64,13 @@ function InteractionStreaks({ totalInteractions }) {
               key={badge.id}
               className="badge-item"
               role="listitem"
+              aria-label={`Achievement: ${badge.label}`}
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               whileHover={{ y: -5 }}
               style={{ borderColor: badge.color }}
             >
-              <span className="badge-text" title={`Achievement Badge: ${badge.label}`}>{badge.label}</span>
+              <span className="badge-text" title={`Achievement Badge: ${badge.label}`} aria-hidden="true">{badge.label}</span>
             </motion.div>
           ))}
         </AnimatePresence>
