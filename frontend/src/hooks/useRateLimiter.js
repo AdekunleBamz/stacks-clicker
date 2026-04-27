@@ -4,6 +4,7 @@ export function useRateLimiter(options = {}) {
   const { interval = 1000, onRejected } = options;
   const lastCallTimeRef = useRef(0);
   const timeoutRef = useRef(null);
+  const callCountRef = useRef(0);
   const [, forceUpdate] = useState(0);
 
   const canCall = useCallback(() => {
@@ -26,6 +27,7 @@ export function useRateLimiter(options = {}) {
         }
 
         lastCallTimeRef.current = Date.now();
+        callCountRef.current += 1;
         try {
           return fn(...args);
         } finally {
@@ -71,6 +73,7 @@ export function useRateLimiter(options = {}) {
     isLimited: !canCall(),
     remainingMs: getRemainingMs(),
     reset,
+    callCount: callCountRef.current,
   };
 }
 

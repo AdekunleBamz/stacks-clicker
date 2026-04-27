@@ -31,7 +31,7 @@ export function useMilestones({ stats, onMilestone }) {
     return () => window.clearTimeout(celebrationTimeoutRef.current);
   }, [clicks, tips, votes, onMilestone]);
 
-  return { celebration };
+  return { celebration, dismissCelebration: () => setCelebration(null) };
 }
 
 /**

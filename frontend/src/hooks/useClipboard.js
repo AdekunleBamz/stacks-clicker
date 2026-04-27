@@ -88,5 +88,5 @@ export function useClipboard({ timeout = 2000 } = {}) {
     };
   }, []);
 
-  return { copied, copyToClipboard };
+  return { copied, copyToClipboard, reset: () => setCopied(false) };
 }

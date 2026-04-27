@@ -10,11 +10,12 @@ export function useWindowFocus() {
   const [isFocused, setIsFocused] = useState(
     typeof window !== 'undefined' ? document.hasFocus() : true
   );
+  const [focusCount, setFocusCount] = useState(0);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    const handleFocus = () => setIsFocused(true);
+    const handleFocus = () => { setIsFocused(true); setFocusCount((c) => c + 1); };
     const handleBlur = () => setIsFocused(false);
     const handleVisibilityChange = () => {
       setIsFocused(!document.hidden);
@@ -31,5 +32,5 @@ export function useWindowFocus() {
     };
   }, []);
 
-  return isFocused;
+  return { isFocused, focusCount };
 }

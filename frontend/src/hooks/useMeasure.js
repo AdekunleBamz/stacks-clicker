@@ -26,7 +26,10 @@ export function useMeasure() {
     const initialRect = ref.current.getBoundingClientRect();
     setDimensions(initialRect);
 
-    if (typeof ResizeObserver === 'undefined') return;
+    if (typeof ResizeObserver === 'undefined') {
+      // Fallback: keep the initial rect; no reactive updates available
+      return;
+    }
 
     const observer = new ResizeObserver(([entry]) => {
       if (entry && entry.contentRect) {
