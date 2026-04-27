@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 const STACKS_NETWORK =
@@ -11,7 +10,6 @@ const STACKS_NETWORK =
  * Displays recent transactions with status
  */
 export default function TransactionLog({ transactions = [] }) {
-  const network = STACKS_NETWORK;
 
   const getStatusIcon = (status) => {
     switch (status) {
@@ -44,14 +42,16 @@ export default function TransactionLog({ transactions = [] }) {
     <div className="tx-log">
       <h3>📋 Transaction Log</h3>
       <div className="tx-list" role="log" aria-live="polite" aria-relevant="additions text">
-        {transactions.map((tx, index) => (
+        {transactions.map((tx, index) => {
+          const explorerLink = getExplorerLink(tx.id, tx.network);
+          return (
           <div key={tx.id || index} className={`tx-item ${tx.status}`}>
             <span className="tx-status">{getStatusIcon(tx.status)}</span>
             <span className="tx-action">{tx.action}</span>
             <span className="tx-time">{tx.time}</span>
-            {getExplorerLink(tx.id, tx.network) && (
+            {explorerLink && (
               <a
-                href={getExplorerLink(tx.id, tx.network)}
+                href={explorerLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="tx-link"
@@ -62,7 +62,8 @@ export default function TransactionLog({ transactions = [] }) {
               </a>
             )}
           </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState, memo, useCallback, useEffect } from 'react';
+import { useState, memo, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 import ActionCard from './common/ActionCard';

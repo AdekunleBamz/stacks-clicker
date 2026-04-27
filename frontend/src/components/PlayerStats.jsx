@@ -1,7 +1,9 @@
 import React, { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { animate } from 'framer-motion';
-import StatsCard from './common/StatsCard';/**
+import StatsCard from './common/StatsCard';
+
+/**
  * Animated number component for smooth counting transitions.
  */
 function AnimatedNumber({ value }) {
@@ -49,7 +51,6 @@ function PlayerStats({ stats, txCount }) {
       className="stats-bar"
       aria-label="Player Statistics"
       role="region"
-      tabIndex={0}
       title="Your Personal Player Statistics Overview"
     >
       <div className={`stats-cards ${txCount === 0 && stats.clicks === 0 ? 'shimmer' : ''}`} role="group" aria-label="Aggregate Player Performance Metrics">
