@@ -48,7 +48,11 @@ ProgressDashboard.propTypes = {
     nextLevelXP: PropTypes.number,
     stats: PropTypes.object,
     achievements: PropTypes.array,
-  }).isRequired,
+  }),
+};
+
+ProgressDashboard.defaultProps = {
+  userData: { level: 1, xp: 0, nextLevelXP: 100, stats: {}, achievements: [] },
 };
 
 export default memo(ProgressDashboard);
