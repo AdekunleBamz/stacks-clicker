@@ -66,7 +66,7 @@ If you wish to modify, test, or deploy the Stacks smart contracts locally:
    npm ci
    npm run frontend:install
    ```
-   Note: `npm ci` is recommended for deterministic installs. Use `npm install` for manual package updates.
+   Note: `npm ci` is recommended for deterministic installs. Use `npm install` only when intentionally updating dependencies.
    From the project root, you can also use:
    ```bash
    npm run frontend:install
