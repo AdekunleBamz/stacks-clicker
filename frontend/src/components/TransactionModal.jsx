@@ -64,6 +64,7 @@ const TransactionModal = () => {
             rel="noopener noreferrer"
             className="primary-button explorer-btn"
             aria-label={`View transaction ${truncateAddress(txId)} on explorer`}
+            title="Open in Stacks explorer (new tab)"
           >
             View on Explorer ↗
           </a>
