@@ -5,7 +5,13 @@ import { motion } from 'framer-motion';
 /**
  * Animated SVG logo for the Stacks Clicker dApp.
  */
-export default function NetworkLogo({ isSyncing = false }) {
+NetworkLogo.propTypes = {
+  isSyncing: PropTypes.bool,
+};
+
+export default memo(NetworkLogo);
+
+function NetworkLogo({ isSyncing = false }) {
   return (
     <motion.div
       className={`logo-glow ${isSyncing ? 'syncing' : ''}`}
