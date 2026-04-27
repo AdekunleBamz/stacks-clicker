@@ -31,7 +31,7 @@ function ActionCard({ title, subtitle, icon, iconClass, children }) {
           <p className="contract-subtitle">{subtitle}</p>
         </div>
       </div>
-      <div className="actions">
+      <div className="actions" role="group" aria-label={`${title} actions`}>
         {children}
       </div>
     </motion.div>
