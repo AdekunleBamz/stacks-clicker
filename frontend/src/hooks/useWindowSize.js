@@ -37,6 +37,16 @@ export function useWindowSize() {
 }
 
 /**
+ * Custom hook that returns true when the viewport is considered mobile (width < 768px).
+ *
+ * @returns {boolean} True if window width is less than 768
+ */
+export function useIsMobile() {
+  const { width } = useWindowSize();
+  return width > 0 && width < 768;
+}
+
+/**
  * Custom hook that returns true when the viewport is in portrait orientation.
  *
  * @returns {boolean} True if height >= width
