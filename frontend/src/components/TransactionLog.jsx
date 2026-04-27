@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CONFIG, STACKS_NETWORK } from '../utils/constants';
+import { CONFIG } from '../utils/constants';
 
 const STACKS_NETWORK =
   String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
