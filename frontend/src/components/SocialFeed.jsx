@@ -23,8 +23,10 @@ function SocialFeed({ activities }) {
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, x: 20 }}
                             className="activity-item"
+                            role="article"
+                            aria-label={`${activity.user}: ${activity.text}`}
                         >
-                            <span className="activity-icon">
+                            <span className="activity-icon" aria-hidden="true">
                                 {activity.type === 'click' && '👆'}
                                 {activity.type === 'tip' && '💰'}
                                 {activity.type === 'poll' && '🗳️'}
@@ -34,7 +36,7 @@ function SocialFeed({ activities }) {
                                 <span className="activity-user">{activity.user}</span>
                                 <span className="activity-text">{activity.text}</span>
                             </div>
-                            <span className="activity-time">{activity.time}</span>
+                            <span className="activity-time" aria-label={`Posted ${activity.time} ago`}>{activity.time}</span>
                         </motion.div>
                     ))}
                 </AnimatePresence>
