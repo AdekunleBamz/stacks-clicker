@@ -62,6 +62,7 @@ export default function WalletConnectQRModal({ uri, onClose }) {
               className="qr-copy-btn"
               onClick={handleCopy}
               title="Copy pairing link"
+              aria-label="Copy WalletConnect pairing URI to clipboard"
             >
               <span aria-hidden="true">📋</span> Copy Pairing URI
             </button>
