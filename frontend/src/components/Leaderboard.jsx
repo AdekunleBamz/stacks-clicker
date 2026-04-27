@@ -39,7 +39,7 @@ function Leaderboard({ players }) {
                             <span className="player-address">{player.address}</span>
                             <span className="player-stats">{player.clicks} Clicks • LVL {player.level}</span>
                         </div>
-                        {i < 3 && <div className="medal-icon">{i === 0 ? '🥇' : i === 1 ? '🥈' : '🥉'}</div>}
+                        {i < 3 && <div className="medal-icon" aria-hidden="true">{i === 0 ? '🥇' : i === 1 ? '🥈' : '🥉'}</div>}
                     </motion.div>
                 ))}
             </div>
