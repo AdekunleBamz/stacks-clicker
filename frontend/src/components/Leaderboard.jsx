@@ -34,7 +34,7 @@ function Leaderboard({ players }) {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: i * 0.05 }}
                     >
-                        <div className="rank-indicator">{i + 1}</div>
+                        <div className="rank-indicator" aria-label={`Rank ${i + 1}`}>{i + 1}</div>
                         <div className="player-info">
                             <span className="player-address">{player.address}</span>
                             <span className="player-stats">{player.clicks} Clicks • LVL {player.level}</span>
