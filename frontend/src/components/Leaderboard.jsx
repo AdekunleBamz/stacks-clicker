@@ -41,17 +41,16 @@ function Leaderboard({ players }) {
     );
 }
 
-Leaderboard.propTypes = {
-    Leaderboard.defaultProps = {
-        players: [],
-    };
+Leaderboard.defaultProps = {
+    players: [],
+};
 
-    Leaderboard.propTypes = {
+Leaderboard.propTypes = {
     players: PropTypes.arrayOf(PropTypes.shape({
         address: PropTypes.string.isRequired,
         clicks: PropTypes.number,
         level: PropTypes.number,
-    })).isRequired,
+    })),
 };
 
 export default memo(Leaderboard);
