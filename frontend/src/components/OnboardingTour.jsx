@@ -86,7 +86,7 @@ export default function OnboardingTour() {
                 <div key={i} className={`step-dot ${i === currentStep ? 'active' : ''}`} />
               ))}
             </div>
-            <button type="button" className="tour-close-top" onClick={dismiss} aria-label="Close tour overlay" title="Close tour">×</button>
+            <button type="button" className="tour-close-top" onClick={dismiss} aria-label="Close tour overlay" title="Close tour"><span aria-hidden="true">×</span></button>
           </div>
           <div className="tour-progress" aria-live="polite" style={{ fontVariantNumeric: 'tabular-nums' }}>Step {currentStep + 1} of {steps.length}</div>
           <p className="tour-content">{steps[currentStep].content}</p>
