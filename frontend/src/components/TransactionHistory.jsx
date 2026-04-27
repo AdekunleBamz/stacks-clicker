@@ -9,7 +9,7 @@ import SkeletonLoader from './common/SkeletonLoader';
  * @param {Array} props.txLog - Array of transaction objects.
  * @returns {JSX.Element} The rendered transaction history section.
  */
-export default function TransactionHistory({ txLog }) {
+function TransactionHistory({ txLog }) {
   return (
     <section className="tx-log" aria-labelledby="tx-history-title">
       <div className="log-header">
