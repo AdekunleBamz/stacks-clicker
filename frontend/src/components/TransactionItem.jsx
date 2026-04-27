@@ -115,4 +115,8 @@ TransactionItem.propTypes = {
   onOpenExplorer: PropTypes.func.isRequired,
 };
 
+TransactionItem.defaultProps = {
+  searchTerm: '',
+};
+
 export default memo(TransactionItem);

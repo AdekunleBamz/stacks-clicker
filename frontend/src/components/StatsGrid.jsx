@@ -51,7 +51,11 @@ StatsGrid.propTypes = {
     clickRate: PropTypes.number,
     totalStreaks: PropTypes.number,
     rank: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  }).isRequired,
+  }),
+};
+
+StatsGrid.defaultProps = {
+  stats: {},
 };
 
 export default memo(StatsGrid);

@@ -48,4 +48,10 @@ CountUp.propTypes = {
     suffix: PropTypes.string
 };
 
+CountUp.defaultProps = {
+    decimals: 0,
+    prefix: '',
+    suffix: '',
+};
+
 export default CountUp;

@@ -81,7 +81,11 @@ function InteractionStreaks({ totalInteractions }) {
 }
 
 InteractionStreaks.propTypes = {
-  totalInteractions: PropTypes.number.isRequired
+  totalInteractions: PropTypes.number,
+};
+
+InteractionStreaks.defaultProps = {
+  totalInteractions: 0,
 };
 
 export default memo(InteractionStreaks);

@@ -56,12 +56,16 @@ function PlayerStats({ stats, txCount }) {
 
 PlayerStats.propTypes = {
   stats: PropTypes.shape({
-    clicks: PropTypes.number.isRequired,
-    tips: PropTypes.number.isRequired,
-    votes: PropTypes.number.isRequired
-  }).isRequired,
-  txCount: PropTypes.number.isRequired
+    clicks: PropTypes.number,
+    tips: PropTypes.number,
+    votes: PropTypes.number,
+  }),
+  txCount: PropTypes.number,
+};
+
+PlayerStats.defaultProps = {
+  stats: { clicks: 0, tips: 0, votes: 0 },
+  txCount: 0,
 };
 
 export default memo(PlayerStats);
-
