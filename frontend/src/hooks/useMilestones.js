@@ -14,9 +14,10 @@ const MILESTONE_THRESHOLDS = [10, 50, 100, 200, 500, 1000, 2000];
 export function useMilestones({ stats, onMilestone }) {
   const [celebration, setCelebration] = useState(null);
   const celebrationTimeoutRef = useRef(null);
+  const { clicks = 0, tips = 0, votes = 0 } = stats;
 
   useEffect(() => {
-    const total = stats.clicks + stats.tips + stats.votes;
+    const total = clicks + tips + votes;
 
     if (MILESTONE_THRESHOLDS.includes(total) && total > 0) {
       const message = `Level Up: ${total} Interactions!`;
@@ -28,7 +29,7 @@ export function useMilestones({ stats, onMilestone }) {
     }
 
     return () => window.clearTimeout(celebrationTimeoutRef.current);
-  }, [stats, onMilestone]);
+  }, [clicks, tips, votes, onMilestone]);
 
   return { celebration };
 }
