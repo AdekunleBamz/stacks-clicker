@@ -27,7 +27,7 @@ const SettingsModal = () => {
       onClose={closeModal}
       title="⚙️ Application Settings"
     >
-      <div className="settings-container">
+      <div className="settings-container" role="form" aria-label="Application settings">
         <section className="settings-section">
           <h4 className="settings-label">Appearance</h4>
           <div className="settings-row">
