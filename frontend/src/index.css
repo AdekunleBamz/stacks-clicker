@@ -176,6 +176,10 @@ body::before {
 }
 
 @media (max-width: 768px) {
+  .app-header {
+    height: 72px;
+  }
+
   .header-content {
     padding: 0 1rem;
   }
