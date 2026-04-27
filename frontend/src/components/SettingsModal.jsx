@@ -31,7 +31,7 @@ const SettingsModal = () => {
         <section className="settings-section">
           <h4 className="settings-label">Appearance</h4>
           <div className="settings-row">
-            <span>Theme Mode</span>
+            <span id="theme-mode-label">Theme Mode</span>
             <button 
               type="button"
               className="theme-toggle-btn secondary-button btn-sm"
