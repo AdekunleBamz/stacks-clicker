@@ -41,11 +41,10 @@ function InteractionStreaks({ totalInteractions }) {
   return (
     <div className="streak-panel" role="status" aria-live="polite" aria-atomic="true">
       <div className="streak-stats" role="group" aria-label="Current Interaction Streaks">
-        <div className="streak-count">
+        <div className="streak-count" aria-label={`Current streak: ${streak}`}>
           <motion.span
             className="streak-fire"
-            style={{ filter: 'drop-shadow(0 2px 4px rgba(245,158,11,0.4))' }}
-            style={{ willChange: 'transform, filter' }}
+            style={{ filter: 'drop-shadow(0 2px 4px rgba(245,158,11,0.4))', willChange: 'transform, filter' }}
             animate={{ scale: [1, 1.2, 1], filter: ["drop-shadow(0 0 0px #ff4500)", "drop-shadow(0 0 10px #ff4500)", "drop-shadow(0 0 0px #ff4500)"] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", opacity: { duration: 0.2 } }}
             role="img"
@@ -54,16 +53,17 @@ function InteractionStreaks({ totalInteractions }) {
           >
             🔥
           </motion.span>
-          <span className="streak-value">{streak}</span>
+          <span className="streak-value" aria-hidden="true">{streak}</span>
           <span className="streak-label" id="streak-label-desc" aria-hidden="true">Streak</span>
         </div>
       </div>
-      <div className="badges-grid">
+      <div className="badges-grid" role="list" aria-label="Earned achievement badges">
         <AnimatePresence>
           {badges.map(badge => (
             <motion.div
               key={badge.id}
               className="badge-item"
+              role="listitem"
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               whileHover={{ y: -5 }}
