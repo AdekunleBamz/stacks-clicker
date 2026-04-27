@@ -168,7 +168,10 @@ export function formatBytes(bytes, decimals = 1) {
   return `${value.toFixed(safeDecimals)} ${units[index]}`;
 }
 
-export const formatClickCount = (n) => Number(n).toLocaleString();
+export const formatClickCount = (n) => {
+  const value = Number(n);
+  return Number.isFinite(value) ? value.toLocaleString() : '0';
+};
 
 /**
  * Truncates a transaction ID for display while preserving start and end for verification.
