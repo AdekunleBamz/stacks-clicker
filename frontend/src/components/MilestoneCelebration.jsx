@@ -31,6 +31,11 @@ function MilestoneCelebration({ celebration }) {
 }
 
 MilestoneCelebration.propTypes = {
+  MilestoneCelebration.defaultProps = {
+    celebration: null,
+  };
+
+  MilestoneCelebration.propTypes = {
   celebration: PropTypes.string
 };
 

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 /**
  * Custom hook for declarative intervals.
@@ -30,3 +30,15 @@ export function useInterval(callback, delay) {
     return undefined;
   }, [delay]);
 }
+
+  /**
+   * Custom hook that counts up from 0 by 1 every `delay` ms.
+   *
+   * @param {number|null} delay - Tick interval in ms. Pass null to pause.
+   * @returns {number} The current count
+   */
+  export function useCountup(delay) {
+    const [count, setCount] = useState(0);
+    useInterval(() => setCount((c) => c + 1), delay);
+    return count;
+  }

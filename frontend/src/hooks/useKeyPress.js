@@ -33,5 +33,7 @@ export function useKeyPress(targetKey) {
     };
   }, [targetKey]);
 
-  return keyPressed;
+    const reset = () => setKeyPressed(false);
+
+    return { isPressed: keyPressed, reset };
 }

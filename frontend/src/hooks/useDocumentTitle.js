@@ -17,7 +17,8 @@ export function useDocumentTitle({ title, count = 0, restoreOnUnmount = true }) 
     if (!title || typeof title !== 'string') return;
     const trimmedTitle = title.trim();
     if (!trimmedTitle) return;
-    document.title = count > 0 ? `(${count}) ${trimmedTitle}` : trimmedTitle;
+    const safeCount = Number.isFinite(count) && count > 0 ? Math.floor(count) : 0;
+    document.title = safeCount > 0 ? `(${safeCount}) ${trimmedTitle}` : trimmedTitle;
     return () => {
       if (restoreOnUnmount) {
         document.title = previousTitle.current;

@@ -41,6 +41,15 @@ function Achievement({ achievement }) {
     );
 }
 
+Achievement.defaultProps = {
+    achievement: {
+        icon: '',
+        description: '',
+        unlocked: false,
+        date: null,
+    },
+};
+
 Achievement.propTypes = {
     achievement: PropTypes.shape({
         icon: PropTypes.string,
