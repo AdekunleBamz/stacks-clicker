@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import PlayerStats from './components/PlayerStats';
 import TransactionHistory from './components/TransactionHistory';

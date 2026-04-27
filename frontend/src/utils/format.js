@@ -279,3 +279,33 @@ export const formatWalletShort = (addr) => {
 export const formatBlockHeight = (h) => "Block #" + h;
 
 export const formatAutoClicker = (n) => n + " auto-clickers";
+
+/**
+ * Formats a date as a relative time string (e.g., "2 minutes ago").
+ * Falls back to a locale date string when Intl.RelativeTimeFormat is unavailable.
+ * @param {Date|string|number} date - The date to format
+ * @returns {string} Human-readable relative time
+ */
+export function formatRelativeTime(date) {
+  const now = Date.now();
+  const then = new Date(date).getTime();
+  const diff = Math.round((then - now) / 1000);
+  const rtf = typeof Intl !== 'undefined' && typeof Intl.RelativeTimeFormat === 'function'
+    ? new Intl.RelativeTimeFormat('en', { numeric: 'auto' })
+    : null;
+  if (!rtf) return new Date(date).toLocaleString();
+  const units = [
+    { unit: 'year', sec: 31536000 },
+    { unit: 'month', sec: 2592000 },
+    { unit: 'day', sec: 86400 },
+    { unit: 'hour', sec: 3600 },
+    { unit: 'minute', sec: 60 },
+    { unit: 'second', sec: 1 },
+  ];
+  for (const { unit, sec } of units) {
+    if (Math.abs(diff) >= sec || unit === 'second') {
+      return rtf.format(Math.round(diff / sec), unit);
+    }
+  }
+  return new Date(date).toLocaleString();
+}

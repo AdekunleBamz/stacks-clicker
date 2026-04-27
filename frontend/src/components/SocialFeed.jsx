@@ -1,19 +1,20 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import PropTypes from 'prop-types';
 
 /**
  * SocialFeed Component
  * Real-time community activity stream
  */
-export default function SocialFeed({ activities }) {
+function SocialFeed({ activities }) {
     return (
         <div className="game-card social-feed">
             <div className="game-header">
-                <h2>🔥 Live Activity</h2>
+            <h2><span aria-hidden="true">🔥</span> Live Activity</h2>
                 <span className="game-badge">Community</span>
             </div>
 
-            <div className="activity-list">
+            <div className="activity-list" role="feed" aria-label="Community live activity">
                 <AnimatePresence initial={false}>
                     {activities.map((activity) => (
                         <motion.div
@@ -22,8 +23,10 @@ export default function SocialFeed({ activities }) {
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, x: 20 }}
                             className="activity-item"
+                            role="article"
+                            aria-label={`${activity.user}: ${activity.text}`}
                         >
-                            <span className="activity-icon">
+                            <span className="activity-icon" aria-hidden="true">
                                 {activity.type === 'click' && '👆'}
                                 {activity.type === 'tip' && '💰'}
                                 {activity.type === 'poll' && '🗳️'}
@@ -33,7 +36,7 @@ export default function SocialFeed({ activities }) {
                                 <span className="activity-user">{activity.user}</span>
                                 <span className="activity-text">{activity.text}</span>
                             </div>
-                            <span className="activity-time">{activity.time}</span>
+                            <span className="activity-time" aria-label={`Posted ${activity.time} ago`}>{activity.time}</span>
                         </motion.div>
                     ))}
                 </AnimatePresence>
@@ -41,3 +44,15 @@ export default function SocialFeed({ activities }) {
         </div>
     );
 }
+
+SocialFeed.propTypes = {
+    activities: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+        type: PropTypes.string,
+        user: PropTypes.string,
+        text: PropTypes.string,
+        time: PropTypes.string,
+    })).isRequired,
+};
+
+export default memo(SocialFeed);
