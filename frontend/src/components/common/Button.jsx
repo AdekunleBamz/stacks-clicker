@@ -60,7 +60,7 @@ const Button = ({
       )}
     </motion.button>
   );
-});
+};
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,
