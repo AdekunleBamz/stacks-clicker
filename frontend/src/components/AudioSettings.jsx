@@ -26,7 +26,7 @@ export default function AudioSettings({ isOpen, onClose, settings, onUpdate }) {
                     >
                         <div className="panel-header">
                             <h2><span aria-hidden="true">🔊</span> Audio Settings</h2>
-                            <button type="button" className="close-btn" onClick={onClose} aria-label="Close audio settings">✕</button>
+                            <button type="button" className="close-btn" onClick={onClose} aria-label="Close audio settings"><span aria-hidden="true">✕</span></button>
                         </div>
 
                         <div className="settings-list">
