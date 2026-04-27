@@ -69,7 +69,7 @@ export default function OnboardingTour() {
 
   return (
     <AnimatePresence>
-      <div className="tour-overlay-backdrop" onClick={dismiss} aria-hidden="true" role="presentation">
+      <div className="tour-overlay-backdrop" onClick={dismiss} role="presentation">
         <motion.div
           className="tour-card"
           role="dialog"
