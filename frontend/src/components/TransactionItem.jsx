@@ -86,7 +86,8 @@ function TransactionItem({
               </div>
             </div>
             {tx.explorerUrl && (
-              <button type="button" onClick={() => onOpenExplorer(tx)} className="tx-explorer-link">
+              <button type="button" onClick={() => onOpenExplorer(tx)} className="tx-explorer-link" title="View on Stacks Explorer"
+                aria-label={`Open transaction ${txId.slice(0, 8)} in explorer`}>
                 {highlightText(txId.slice(0, 8), searchTerm)}...
                 {highlightText(txId.slice(-6), searchTerm)} ↗
               </button>
