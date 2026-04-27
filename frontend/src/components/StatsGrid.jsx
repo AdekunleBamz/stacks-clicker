@@ -21,6 +21,8 @@ function StatsGrid({ stats }) {
                 <motion.div
                     key={item.label}
                     className="stat-card-mini"
+                    role="listitem"
+                    aria-label={item.label}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.1 }}
