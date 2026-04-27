@@ -52,7 +52,7 @@ const TransactionModal = memo(() => {
 
         <div className="detail-row">
           <span className="detail-label">Transaction ID</span>
-          <span className="detail-value monospace">
+          <span className="detail-value monospace" title={txId} aria-label={`Full transaction ID: ${txId}`}>
             {truncateAddress(txId)}
           </span>
         </div>
