@@ -152,7 +152,7 @@ export default function TipJar({ onTxSubmit }) {
 
         <div className="tip-custom" role="form" aria-label="Custom Tip Amount Entry">
           <div className="input-group">
-            <label className="input-label">Recipient Address</label>
+            <label className="input-label" htmlFor="tip-recipient-input">Recipient Address</label>
             <input
               id="tip-recipient-input"
               type="text"
