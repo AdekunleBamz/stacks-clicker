@@ -343,6 +343,7 @@ body::before {
 .action-btn:hover:not(:disabled) { transform: translateY(-2px); filter: brightness(1.1); }
 .action-btn:active:not(:disabled) { transform: translateY(0); }
 .action-btn:disabled { opacity: 0.5; cursor: not-allowed; filter: none; }
+.action-btn:focus-visible { box-shadow: 0 0 0 3px var(--primary-glow); }
 
 /* Stats Bar */
 .stats-bar {
