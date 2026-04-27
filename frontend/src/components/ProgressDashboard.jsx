@@ -14,9 +14,9 @@ function ProgressDashboard({ userData }) {
     const { level, xp, nextLevelXP, stats, achievements } = userData;
 
     return (
-        <section className="progress-dashboard" aria-label="Progress Dashboard">
+        <section className="progress-dashboard" aria-labelledby="progress-dashboard-title">
             <div className="dashboard-section-header">
-                <h2><span aria-hidden="true">🏆</span> Progress Dashboard</h2>
+                <h2 id="progress-dashboard-title"><span aria-hidden="true">🏆</span> Progress Dashboard</h2>
                 <p>Your journey in the Stacks Ecosystem</p>
             </div>
 
