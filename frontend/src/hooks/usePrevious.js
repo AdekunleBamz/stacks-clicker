@@ -25,7 +25,8 @@ export function usePrevious(value) {
  */
 export function useHasChanged(value) {
   const previous = usePrevious(value);
-  return previous !== undefined && previous !== value;
+  const hasChanged = previous !== undefined && previous !== value;
+  return { hasChanged, previous };
 }
 
   /**
