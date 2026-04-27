@@ -35,3 +35,11 @@ function ActionCard({ title, subtitle, icon, iconClass, children }) {
     </motion.div>
   );
 }
+
+ActionCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string,
+  icon: PropTypes.node,
+  iconClass: PropTypes.string,
+  children: PropTypes.node,
+};
