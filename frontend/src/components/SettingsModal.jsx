@@ -37,6 +37,7 @@ const SettingsModal = () => {
               className="theme-toggle-btn secondary-button btn-sm"
               onClick={toggleTheme}
               title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+              aria-labelledby="theme-mode-label"
             >
               {theme === 'dark' ? <><span aria-hidden="true">🌙</span> Dark</> : <><span aria-hidden="true">☀️</span> Light</>}
             </button>
