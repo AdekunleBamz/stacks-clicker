@@ -163,7 +163,7 @@ export default function TipJar({ onTxSubmit }) {
             />
           </div>
           <div className="input-group">
-            <label className="input-label">Amount (uSTX)</label>
+            <label className="input-label" htmlFor="tip-amount-input-primary">Amount (uSTX)</label>
             <div className="tip-amount-group">
               <input
                 id="tip-amount-input-primary"
