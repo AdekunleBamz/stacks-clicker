@@ -41,5 +41,6 @@ export function useLongPress(callback, { delay = 500 } = {}) {
     onTouchStart: start,
     onTouchEnd: stop,
     onTouchCancel: stop,
+    'aria-pressed': isPressing,
   };
 }
