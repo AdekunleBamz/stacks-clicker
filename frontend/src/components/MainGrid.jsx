@@ -58,4 +58,8 @@ MainGrid.propTypes = {
   }).isRequired
 };
 
+MainGrid.defaultProps = {
+  address: null,
+};
+
 export default memo(MainGrid);

@@ -15,26 +15,27 @@ import PropTypes from 'prop-types';
  * @returns {JSX.Element} The rendered animated number
  */
 const CountUp = memo(function CountUp({ value, decimals = 0, prefix = '', suffix = '' }) {
-    const [displayValue, setDisplayValue] = useState(() => Number(value).toFixed(decimals));
-    const prevValue = useRef(value);
+    const safeValue = Number.isFinite(value) ? value : 0;
+    const [displayValue, setDisplayValue] = useState(() => Number(safeValue).toFixed(decimals));
+    const prevValue = useRef(safeValue);
 
     useEffect(() => {
-        const controls = animate(prevValue.current, value, {
+        const controls = animate(prevValue.current, safeValue, {
             duration: 1,
             onUpdate: (latest) => {
                 setDisplayValue(latest.toFixed(decimals));
             }
         });
 
-        prevValue.current = value;
+        prevValue.current = safeValue;
         return () => controls.stop();
-    }, [value, decimals]);
+    }, [safeValue, decimals]);
 
     return (
         <span className="count-up" aria-hidden="true">
             {prefix}{displayValue}{suffix}
             <span className="sr-only" aria-live="polite" aria-atomic="true">
-                {prefix}{Number(value).toFixed(decimals)}{suffix}
+                {prefix}{Number(safeValue).toFixed(decimals)}{suffix}
             </span>
         </span>
     );
