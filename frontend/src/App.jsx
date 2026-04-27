@@ -31,8 +31,6 @@ export default function App() {
   const [particleTrigger, setParticleTrigger] = useState(0);
 
   // Global Keyboard Shortcuts
-
-  // Global Keyboard Shortcuts
   useEffect(() => {
     const handleKeyDown = (e) => {
       // Toggle Mute with 'M' key
