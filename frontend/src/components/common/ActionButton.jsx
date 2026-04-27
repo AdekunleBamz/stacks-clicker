@@ -18,6 +18,7 @@ export default function ActionButton({
       className={`action-btn ${className}`}
       onClick={onClick}
       disabled={disabled || isLoading}
+      aria-label={label}
       aria-busy={isLoading}
       aria-disabled={disabled || isLoading}
       whileHover={disabled || isLoading ? undefined : { scale: 1.02, translateY: -2 }}
@@ -37,6 +38,7 @@ export default function ActionButton({
           ) : (
             <motion.span
               key="icon"
+              aria-hidden="true"
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.5 }}
@@ -47,7 +49,7 @@ export default function ActionButton({
         </AnimatePresence>
         <span>{label}</span>
       </div>
-      {cost && <span className="btn-cost">{cost}</span>}
+      {cost && <span className="btn-cost" aria-hidden="true">{cost}</span>}
     </motion.button>
   );
 }
