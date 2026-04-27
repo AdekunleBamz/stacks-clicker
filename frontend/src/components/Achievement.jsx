@@ -24,6 +24,7 @@ function Achievement({ achievement }) {
     return (
         <motion.div
             className={`achievement-card ${unlocked ? 'unlocked' : 'locked'}`}
+            aria-label={`${title} achievement, ${unlocked ? 'unlocked' : 'locked'}`}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             whileHover={unlocked ? { y: -5, boxShadow: '0 0 20px hsla(var(--pulse-purple) / 0.2)' } : {}}
