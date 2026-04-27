@@ -45,8 +45,8 @@ export function useInteractions({ onTxSubmit }) {
   }, [clicker, tipjar, quickpoll]);
 
   const isAnyLoading = useMemo(
-    () => !!(clicker?.isLoading || tipjar?.isLoading || quickpoll?.isLoading),
-    [clicker, tipjar, quickpoll]
+    () => false, // individual cards manage their own loading state via isLoading(key)
+    []
   );
 
   return useMemo(() => ({

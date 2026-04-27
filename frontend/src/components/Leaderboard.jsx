@@ -30,7 +30,7 @@ function Leaderboard({ players }) {
                     >
                         <div className="rank-indicator" aria-label={`Rank ${i + 1}`}>{i + 1}</div>
                         <div className="player-info">
-                            <span className="player-address" title={player.address}>{truncateAddress(player.address, 6)}</span>
+                            <span className="player-address" title={player.address}>{truncateAddress(player.address, { prefix: 6, suffix: 4 })}</span>
                             <span className="player-stats">{player.clicks} Clicks • LVL {player.level}</span>
                         </div>
                         {i < 3 && <div className="medal-icon" aria-hidden="true">{i === 0 ? '🥇' : i === 1 ? '🥈' : '🥉'}</div>}
