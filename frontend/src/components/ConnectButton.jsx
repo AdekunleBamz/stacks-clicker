@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useWallet } from '../context/WalletContext';
 import { truncateAddress } from '../utils/format';
@@ -44,7 +44,7 @@ export default function ConnectButton() {
   }, [disconnectWallet]);
 
   // Clear announcement after 3 seconds
-  React.useEffect(() => {
+  useEffect(() => {
     if (announcement) {
       const timer = setTimeout(() => setAnnouncement(''), 3000);
       return () => {

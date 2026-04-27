@@ -166,6 +166,9 @@ body::before {
   border: 1px solid var(--error);
 }
 
+.btn-connect:focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
+.btn-disconnect:focus-visible { outline: 3px solid var(--error); outline-offset: 2px; }
+
 /* Main Content */
 .app-main {
   flex: 1;

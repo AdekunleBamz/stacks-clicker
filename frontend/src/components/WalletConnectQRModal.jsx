@@ -10,10 +10,6 @@ import { notify } from '../utils/toast';
  * Also shows a camera-friendly link for mobile users.
  */
 export default function WalletConnectQRModal({ uri, onClose }) {
-  if (!uri) return null;
-
-  // Camera-friendly link (wc: URIs don't work with phone cameras)
-  const wcLink = getWalletConnectLink(uri);
   const handleCopy = useCallback(async () => {
     if (!navigator?.clipboard?.writeText) {
       notify.error('Clipboard not available');
@@ -26,6 +22,11 @@ export default function WalletConnectQRModal({ uri, onClose }) {
       notify.error('Unable to copy pairing URI');
     }
   }, [uri]);
+
+  if (!uri) return null;
+
+  // Camera-friendly link (wc: URIs don't work with phone cameras)
+  const wcLink = getWalletConnectLink(uri);
 
   return (
     <div className="qr-modal-overlay" onClick={onClose} aria-hidden="true">
