@@ -41,7 +41,7 @@ function InteractionStreaks({ totalInteractions }) {
   return (
     <div className="streak-panel" role="status" aria-live="polite" aria-atomic="true">
       <div className="streak-stats" role="group" aria-label="Current Interaction Streaks">
-        <div className="streak-count">
+        <div className="streak-count" aria-label={`Current streak: ${streak}`}>
           <motion.span
             className="streak-fire"
             style={{ filter: 'drop-shadow(0 2px 4px rgba(245,158,11,0.4))', willChange: 'transform, filter' }}
