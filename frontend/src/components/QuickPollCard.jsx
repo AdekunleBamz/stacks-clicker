@@ -101,7 +101,7 @@ function QuickPollCard({ address, quickpoll }) {
               icon="🗳️"
               cost="0.001 STX"
               className="secondary-button success"
-              onClick={pollPingAction}
+              onClick={handlePollPing}
               isLoading={isLoading('poll-ping')}
               isError={errorField === 'poll-ping'}
               disabled={isLoading('poll-ping')}
