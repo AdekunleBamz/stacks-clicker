@@ -29,6 +29,7 @@
 (define-data-var total-fees-collected uint u0)
 (define-data-var last-activity-block uint u0)
 (define-data-var unique-voters uint u0)
+(define-data-var is-paused bool false)
 
 ;; ============================================
 ;; DATA MAPS
@@ -39,6 +40,16 @@
 ;; ============================================
 ;; PRIVATE FUNCTIONS
 ;; ============================================
+
+;; Check if contract is active
+(define-private (check-not-paused)
+  (ok (asserts! (not (var-get is-paused)) ERR-CONTRACT-PAUSED))
+)
+
+;; Check if caller is owner
+(define-private (check-owner)
+  (ok (asserts! (is-eq tx-sender contract-owner) ERR-NOT-OWNER))
+)
 
 ;; Collect interaction fee
 (define-private (collect-fee)
@@ -146,7 +157,9 @@
 
 ;; Vote yes - costs 0.0001 STX
 (define-public (vote-yes)
-  (let
+  (begin
+    (try! (check-not-paused))
+    (let
     (
       (user-votes (get-user-vote-count tx-sender))
       (new-total (+ (var-get total-votes) u1))
@@ -181,7 +194,9 @@
 
 ;; Vote no - costs 0.0001 STX
 (define-public (vote-no)
-  (let
+  (begin
+    (try! (check-not-paused))
+    (let
     (
       (user-votes (get-user-vote-count tx-sender))
       (new-total (+ (var-get total-votes) u1))
@@ -217,6 +232,7 @@
 ;; Ping - costs 0.0001 STX
 (define-public (ping)
   (begin
+    (try! (check-not-paused))
     (try! (collect-fee))
     (var-set last-activity-block block-height)
     (print {
@@ -226,5 +242,35 @@
       block: block-height
     })
     (ok block-height)
+  )
+)
+
+;; Pause contract (owner only)
+(define-public (pause)
+  (begin
+    (try! (check-owner))
+    (var-set is-paused true)
+    (print {
+      event: "contract-paused",
+      version: VERSION,
+      by: tx-sender,
+      block: block-height
+    })
+    (ok true)
+  )
+)
+
+;; Unpause contract (owner only)
+(define-public (unpause)
+  (begin
+    (try! (check-owner))
+    (var-set is-paused false)
+    (print {
+      event: "contract-unpaused",
+      version: VERSION,
+      by: tx-sender,
+      block: block-height
+    })
+    (ok true)
   )
 )
