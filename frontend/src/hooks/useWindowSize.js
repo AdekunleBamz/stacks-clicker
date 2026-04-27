@@ -55,3 +55,15 @@ export function useIsPortrait() {
   const { width, height } = useWindowSize();
   return height >= width;
 }
+
+/**
+ * Returns the window aspect ratio as a number (width / height).
+ * Returns null during SSR when dimensions are 0.
+ *
+ * @returns {number | null}
+ */
+export function useAspectRatio() {
+  const { width, height } = useWindowSize();
+  if (width === 0 || height === 0) return null;
+  return width / height;
+}
