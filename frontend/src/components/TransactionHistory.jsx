@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { memo } from 'react';
+import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 import SkeletonLoader from './common/SkeletonLoader';
 
@@ -8,12 +9,12 @@ import SkeletonLoader from './common/SkeletonLoader';
  * @param {Array} props.txLog - Array of transaction objects.
  * @returns {JSX.Element} The rendered transaction history section.
  */
-export default function TransactionHistory({ txLog }) {
+function TransactionHistory({ txLog }) {
   return (
     <section className="tx-log" aria-labelledby="tx-history-title">
       <div className="log-header">
         <h3 id="tx-history-title">📜 Recent Activity</h3>
-        <span className="tx-count-badge">{txLog.length}</span>
+        <span className="tx-count-badge" aria-label={`${txLog.length} transactions in history`}>{txLog.length}</span>
       </div>
 
       <div className="tx-list">
@@ -25,7 +26,7 @@ export default function TransactionHistory({ txLog }) {
               className="empty-state"
             >
               <div className="empty-icon">📂</div>
-              <p>No transactions yet.</p>
+              <p>No transactions yet. Trigger an action to populate activity.</p>
               <div className="skeleton-placeholder">
                 <SkeletonLoader height="60px" borderRadius="12px" className="mb-2" />
                 <SkeletonLoader height="60px" borderRadius="12px" opacity={0.5} />
