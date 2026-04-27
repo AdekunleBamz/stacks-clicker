@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, memo } from 'react';
 import { motion } from 'framer-motion';
 import { notify } from '../utils/toast';
 
@@ -9,7 +9,7 @@ const INITIAL_ROADMAP_ITEMS = [
   { quarter: 'Q4 2026', title: 'Social Integration & DAOs', status: 'planned', votes: 412 },
 ];
 
-export default function RoadmapBoard() {
+function RoadmapBoard() {
   const [items, setItems] = useState(INITIAL_ROADMAP_ITEMS);
 
   const handleVote = useCallback((title) => {
@@ -22,7 +22,7 @@ export default function RoadmapBoard() {
   return (
     <section className="roadmap-board" aria-labelledby="roadmap-title">
       <div className="roadmap-header">
-        <h2 className="section-title" id="roadmap-title" aria-label="Upcoming Project Roadmap">🚀 Project Roadmap</h2>
+        <h2 className="section-title" id="roadmap-title" aria-label="Upcoming Project Roadmap"><span aria-hidden="true">🚀</span> Project Roadmap</h2>
         <p className="section-desc">Vote on upcoming features you want to see most.</p>
       </div>
       <div className="roadmap-items" role="feed" aria-live="polite" aria-busy="false" aria-label="Dynamically Updating Roadmap Feed">
@@ -73,3 +73,5 @@ export default function RoadmapBoard() {
     </section>
   );
 }
+
+export default memo(RoadmapBoard);
