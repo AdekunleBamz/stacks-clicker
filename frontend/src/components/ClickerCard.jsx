@@ -39,6 +39,7 @@ function ClickerCard({ address, clicker }) {
             label="Turbo 10x"
             icon="🔥"
             cost="0.005 STX"
+            title="Batch 10 clicks in a single transaction"
             className="secondary"
             onClick={() => multiClick(10)}
             isLoading={isLoading('clicker-multi-click')}
