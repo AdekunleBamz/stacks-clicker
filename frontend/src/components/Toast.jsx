@@ -23,6 +23,7 @@ export default function Toast({ toasts = [] }) {
             transition={{ type: "spring", damping: 20, stiffness: 300 }}
             className={`toast toast-${toast.type}`}
             role="alert"
+            aria-label={`${toast.type || 'info'} notification`}
           >
             <span className="toast-icon">
               {toast.type === 'success' && '✅'}
