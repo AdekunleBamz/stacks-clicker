@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import PropTypes from 'prop-types';
 
 /**
  * Toast notification component with smooth framer-motion animations.
@@ -11,7 +12,7 @@ import { motion, AnimatePresence } from 'framer-motion';
  */
 export default function Toast({ toasts = [] }) {
   return (
-    <div className="toast-container">
+    <div className="toast-container" role="status" aria-live="polite" aria-atomic="true">
       <AnimatePresence>
         {toasts.map((toast) => (
           <motion.div
@@ -21,29 +22,32 @@ export default function Toast({ toasts = [] }) {
             exit={{ opacity: 0, x: 20, scale: 0.95 }}
             transition={{ type: "spring", damping: 20, stiffness: 300 }}
             className={`toast toast-${toast.type}`}
+            role="alert"
+            aria-label={`${toast.type || 'info'} notification`}
+            title={toast.message || 'Notification'}
           >
-            <span className="toast-icon">
+            <span className="toast-icon" aria-hidden="true">
               {toast.type === 'success' && '✅'}
               {toast.type === 'error' && '❌'}
               {toast.type === 'info' && 'ℹ️'}
               {toast.type === 'warning' && '⚠️'}
             </span>
-            <span className="toast-message">{toast.message}</span>
+            <span className="toast-message">{toast.message || 'Notification'}</span>
           </motion.div>
         ))}
       </AnimatePresence>
     </div>
   );
-});
+}
 
 Toast.propTypes = {
   toasts: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-      type: PropTypes.string,
+      type: PropTypes.oneOf(['success', 'error', 'info', 'warning']),
       message: PropTypes.string,
     })
   ),
 };
 
-export default Toast;
+export default memo(Toast);
