@@ -5,7 +5,7 @@
 export const STACKS_NETWORK = import.meta.env.VITE_STACKS_NETWORK || 'mainnet';
 
 /** @type {string} Smart contract deployer address */
-export const DEPLOYER = DEFAULT_DEPLOYER;
+export const DEPLOYER = import.meta.env.VITE_DEPLOYER_ADDRESS || '';
 
 /** @type {Object} Contract naming schema */
 export const CONTRACTS = {
