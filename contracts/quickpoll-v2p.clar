@@ -16,9 +16,17 @@
 ;; ============================================
 ;; ERROR CODES
 ;; ============================================
+;; @desc Error code returned when a user tries to vote more than once
 (define-constant ERR-ALREADY-VOTED (err u100))
+;; @desc Error code returned when the STX transfer for the fee fails
 (define-constant ERR-TRANSFER-FAILED (err u101))
+
+;; @desc Error code returned when a non-owner tries to call an owner-only function
 (define-constant ERR-NOT-OWNER (err u110))
+;; @desc Error code returned when a caller is not authorized for an operation
+(define-constant ERR-UNAUTHORIZED (err u111))
+;; @desc Error code returned when an operation is performed on an unauthorized principal
+(define-constant ERR-INVALID-PRINCIPAL (err u112))
 
 ;; ============================================
 ;; DATA VARIABLES
