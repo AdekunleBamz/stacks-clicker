@@ -4,6 +4,7 @@ import { useLocalStorage } from '../hooks/useLocalStorage';
 const translations = Object.freeze({
   en: {
     welcome: 'Welcome to Stacks Clicker V2',
+    accessibility_mode: 'Accessibility Mode',
     interactions: 'Interactions',
     stats: 'Stats',
     recent_activity: 'Recent Activity',
@@ -25,6 +26,7 @@ const translations = Object.freeze({
   },
   fr: {
     welcome: 'Bienvenue sur Stacks Clicker V2',
+    accessibility_mode: 'Mode d\'accessibilité',
     interactions: 'Interactions',
     stats: 'Statistiques',
     recent_activity: 'Activité Récente',
@@ -35,6 +37,7 @@ const translations = Object.freeze({
   },
   pt: {
     welcome: 'Bem-vindo ao Stacks Clicker V2',
+    accessibility_mode: 'Modo de Acessibilidade',
     interactions: 'Interações',
     stats: 'Estatísticas',
     recent_activity: 'Atividade Recente',
