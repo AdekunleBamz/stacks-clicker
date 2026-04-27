@@ -48,7 +48,7 @@ function TransactionHistory({ txLog }) {
                     <span className="tx-timestamp">{tx.time}</span>
                   </div>
                   <div className="tx-status-visualizer">
-                    <div className="status-steps">
+                    <div className="status-steps" aria-label="Transaction progress">
                       <div className="step active">
                         <span className="step-dot"></span>
                         <span className="step-label">Submitted</span>
@@ -68,6 +68,7 @@ function TransactionHistory({ txLog }) {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="tx-explorer-link"
+                        title="Open transaction in Hiro Explorer"
                       >
                         {tx.id.slice(0, 8)}...{tx.id.slice(-6)} ↗
                       </a>

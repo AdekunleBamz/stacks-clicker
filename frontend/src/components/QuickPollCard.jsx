@@ -109,7 +109,7 @@ function QuickPollCard({ address, quickpoll }) {
             />
           </Tooltip>
 
-          <button 
+          <button
             type="button"
             className={`toggle-create-btn secondary-button btn-sm ${isCreating ? 'active' : ''}`}
             onClick={() => setIsCreating(!isCreating)}

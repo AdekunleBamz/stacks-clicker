@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { motion, useSpring, useTransform, animate } from 'framer-motion';
-
-/**
+import React, { memo, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import { animate } from 'framer-motion';
+import StatsCard from './common/StatsCard';/**
  * Animated number component for smooth counting transitions.
  */
 function AnimatedNumber({ value }) {
@@ -25,7 +25,7 @@ function AnimatedNumber({ value }) {
  * @param {number} props.txCount - Total transaction count.
  * @returns {JSX.Element} The rendered stats bar.
  */
-export default function PlayerStats({ stats, txCount }) {
+function PlayerStats({ stats, txCount }) {
   const statItems = [
     { label: 'Clicks', value: stats.clicks, icon: '🎯', color: '#6366f1' },
     { label: 'Tips Sent', value: stats.tips, icon: '💰', color: '#10b981' },

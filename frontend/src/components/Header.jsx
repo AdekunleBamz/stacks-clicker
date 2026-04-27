@@ -85,6 +85,7 @@ export default function Header({ theme, toggleTheme }) {
               className="btn-connect"
               onClick={connectWallet}
               aria-label="Connect Stacks Wallet to begin playing"
+              title="Connect Stacks wallet"
             >
               Connect Wallet
             </button>
