@@ -129,7 +129,7 @@ export default function ClickerGame({ onTxSubmit }) {
           title="Click to generate a transaction manually"
         >
           {loading ? '⏳' : '👆'} Click!
-        </motion.button>
+        </button>
 
         <div className="multi-click-group" role="group" aria-label="Multi-Click Interventions">
           <input
@@ -143,6 +143,7 @@ export default function ClickerGame({ onTxSubmit }) {
             aria-label="Multi-click amount"
           />
           <motion.button
+            type="button"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             className="action-btn secondary"
@@ -155,6 +156,7 @@ export default function ClickerGame({ onTxSubmit }) {
         </div>
 
         <motion.button
+          type="button"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           className="action-btn outline"

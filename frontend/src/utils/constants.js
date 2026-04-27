@@ -100,3 +100,6 @@ export const STREAK_THRESHOLDS = {
   GOLD: 100,
   VETERAN: 500,
 };
+
+/** Maximum number of transactions to keep in the local tx log */
+export const MAX_TX_LOG_SIZE = 100;
