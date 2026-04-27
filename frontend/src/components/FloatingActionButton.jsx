@@ -49,6 +49,7 @@ export default function FloatingActionButton({ onAction = () => {} }) {
         aria-expanded={isOpen}
         aria-haspopup="menu"
         aria-label={isOpen ? 'Close quick actions menu' : 'Open quick actions menu'}
+        title={isOpen ? 'Close quick actions' : 'Open quick actions'}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
