@@ -47,6 +47,7 @@ function BackgroundParticles() {
                         borderRadius: '50%',
                         background: p.id % 2 === 0 ? 'hsl(var(--pulse-cyan))' : 'hsl(var(--pulse-purple))',
                         filter: 'blur(2px)',
+                        willChange: 'transform, opacity',
                     }}
                 />
             ))}
