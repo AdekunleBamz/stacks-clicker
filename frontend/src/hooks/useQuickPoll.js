@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useWallet } from '../context/WalletContext';
 import { callContract } from '../utils/walletconnect';
 import { DEPLOYER_ADDRESS, CONTRACT_NAMES } from '../config/contracts';
