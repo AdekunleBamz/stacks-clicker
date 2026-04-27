@@ -16,8 +16,8 @@ export const CONTRACTS = {
 
 /** @type {Object} External API and Explorer URLs */
 export const CONFIG = {
-  EXPLORER_URL: STACKS_NETWORK === 'mainnet' 
-    ? 'https://explorer.hiro.so' 
+  EXPLORER_URL: STACKS_NETWORK === 'mainnet'
+    ? 'https://explorer.hiro.so'
     : 'https://explorer.hiro.so/?chain=testnet',
   API_URL: STACKS_NETWORK === 'mainnet'
     ? 'https://api.mainnet.hiro.so'

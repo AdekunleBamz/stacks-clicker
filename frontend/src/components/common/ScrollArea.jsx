@@ -43,15 +43,15 @@ const ScrollArea = memo(function ScrollArea({ children, className = '', style = 
   const thumbLeft = (scrollState.scrollLeft / (scrollState.scrollWidth - scrollState.clientWidth)) * (trackWidth - thumbWidth);
 
   return (
-    <div 
-      className={`scroll-area-wrapper ${className}`} 
+    <div
+      className={`scroll-area-wrapper ${className}`}
       style={{ ...style, height: height || '100%' }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       role="region"
       aria-label="Scrollable content area"
     >
-      <div 
+      <div
         className={`scroll-viewport ${orientation}`}
         ref={scrollRef}
         onScroll={handleScroll}
@@ -61,11 +61,11 @@ const ScrollArea = memo(function ScrollArea({ children, className = '', style = 
 
       {showVerticalThumb && orientation !== 'horizontal' && (
         <div className={`scroll-track vertical ${isHovered ? 'visible' : ''}`}>
-          <div 
+          <div
             className="scroll-thumb"
-            style={{ 
-              height: `${thumbHeight}px`, 
-              transform: `translateY(${thumbTop || 0}px)` 
+            style={{
+              height: `${thumbHeight}px`,
+              transform: `translateY(${thumbTop || 0}px)`
             }}
           />
         </div>
@@ -73,11 +73,11 @@ const ScrollArea = memo(function ScrollArea({ children, className = '', style = 
 
       {showHorizontalThumb && orientation !== 'vertical' && (
         <div className={`scroll-track horizontal ${isHovered ? 'visible' : ''}`}>
-          <div 
+          <div
             className="scroll-thumb"
-            style={{ 
-              width: `${thumbWidth}px`, 
-              transform: `translateX(${thumbLeft || 0}px)` 
+            style={{
+              width: `${thumbWidth}px`,
+              transform: `translateX(${thumbLeft || 0}px)`
             }}
           />
         </div>
