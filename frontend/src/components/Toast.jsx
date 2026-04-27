@@ -40,12 +40,11 @@ function Toast({ toasts = [] }) {
   );
 }
 
-Toast.propTypes = {
-  Toast.defaultProps = {
-    toasts: [],
-  };
+Toast.defaultProps = {
+  toasts: [],
+};
 
-  Toast.propTypes = {
+Toast.propTypes = {
   toasts: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
