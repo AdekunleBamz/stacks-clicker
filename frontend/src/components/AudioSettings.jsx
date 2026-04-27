@@ -133,6 +133,10 @@ AudioSettings.propTypes = {
         masterVolume: PropTypes.number,
         sfxEnabled: PropTypes.bool,
         musicEnabled: PropTypes.bool,
-    }).isRequired,
+    }),
     onUpdate: PropTypes.func.isRequired,
+};
+
+AudioSettings.defaultProps = {
+    settings: { masterVolume: 1, sfxEnabled: true, musicEnabled: true },
 };
