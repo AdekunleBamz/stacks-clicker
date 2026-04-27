@@ -103,28 +103,6 @@ export function formatDuration(ms) {
 }
 
 /**
- * Formats a timestamp or epoch ms into a relative time string.
- *
- * @param {number} timestamp - The epoch timestamp in milliseconds
- * @param {number} [now=Date.now()] - Reference timestamp to compute relative to
- * @returns {string} Human-readable relative time, e.g. "2 minutes ago"
- */
-export function formatRelativeTime(timestamp, now = Date.now()) {
-  const diffMs = now - Number(timestamp);
-  if (!Number.isFinite(diffMs)) return 'unknown';
-  const diffSeconds = Math.floor(Math.abs(diffMs) / 1000);
-  const isFuture = diffMs < 0;
-  const suffix = isFuture ? 'from now' : 'ago';
-  if (diffSeconds < 60) return `${diffSeconds}s ${suffix}`;
-  const diffMinutes = Math.floor(diffSeconds / 60);
-  if (diffMinutes < 60) return `${diffMinutes}m ${suffix}`;
-  const diffHours = Math.floor(diffMinutes / 60);
-  if (diffHours < 24) return `${diffHours}h ${suffix}`;
-  const diffDays = Math.floor(diffHours / 24);
-  return `${diffDays}d ${suffix}`;
-}
-
-/**
  * Formats a number with an explicit sign prefix for delta values.
  *
  * @param {number} value - The numeric delta value
@@ -229,8 +207,6 @@ export const formatPrestigeCount = (n) => "Prestige " + n;
 
 export const formatSessionTime = (ms) => Math.floor(ms / 60000) + "m " + Math.floor((ms % 60000) / 1000) + "s";
 
-export const formatClickRate = (cps) => Number(cps).toFixed(1) + " clicks/s";
-
 export const formatLevel = (lvl) => "Lv." + Math.max(0, Math.floor(Number(lvl)));
 
 export const formatPlayerTag = (id) => "Player #" + Number(id);
@@ -251,9 +227,9 @@ export const formatLeaderboardPosition = (pos) => {
   const suffixes = ["th","st","nd","rd"];
   const v = n % 100;
   return n + (suffixes[(v - 20) % 10] || suffixes[v] || suffixes[0]) + " place";
+};
 
 export const formatAutoClickerCount = (n) => Number(n) + " auto-clicker" + (Number(n) === 1 ? "" : "s");
-};
 
 export const formatUpgradeName = (key) => key.replace(/_/g, " ").toLowerCase();
 

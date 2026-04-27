@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
-import { COMBO_TIMEOUT_MS } from '../utils/constants';
+import { COMBO_WINDOW_MS } from '../utils/constants';
 
 /**
  * Custom hook for managing interaction combos.
@@ -9,11 +9,11 @@ import { COMBO_TIMEOUT_MS } from '../utils/constants';
  * @param {number} [options.timeout=2000] - Time in ms before the combo resets
  * @returns {Object} { combo, incrementCombo, resetCombo }
  */
-export function useCombo({ timeout = COMBO_TIMEOUT_MS } = {}) {
+export function useCombo({ timeout = COMBO_WINDOW_MS } = {}) {
   const [combo, setCombo] = useState(0);
   const [maxCombo, setMaxCombo] = useState(0);
   const timerRef = useRef(null);
-  const safeTimeout = Number.isFinite(timeout) && timeout > 0 ? timeout : COMBO_TIMEOUT_MS;
+  const safeTimeout = Number.isFinite(timeout) && timeout > 0 ? timeout : COMBO_WINDOW_MS;
 
   const resetCombo = useCallback(() => {
     setCombo(0);

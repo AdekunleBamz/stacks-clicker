@@ -54,7 +54,7 @@ export function useClipboard({ timeout = 2000 } = {}) {
         timeoutRef.current = setTimeout(() => {
           setCopied(false);
           timeoutRef.current = null;
-        }, timeout);
+        }, safeTimeout);
         return true;
       } catch (error) {
         if (fallbackCopy(text)) {
@@ -68,7 +68,7 @@ export function useClipboard({ timeout = 2000 } = {}) {
           timeoutRef.current = setTimeout(() => {
             setCopied(false);
             timeoutRef.current = null;
-          }, timeout);
+          }, safeTimeout);
           return true;
         }
 
