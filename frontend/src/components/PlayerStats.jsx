@@ -44,6 +44,7 @@ function PlayerStats({ stats, txCount }) {
       aria-label="Player Statistics"
       role="region"
       title="Your Personal Player Statistics Overview"
+      style={{ textRendering: 'optimizeLegibility' }}
     >
       <div className={`stats-cards ${txCount === 0 && stats.clicks === 0 ? 'shimmer' : ''}`} role="group" aria-label="Aggregate Player Performance Metrics">
         {statItems.map((item, index) => (
