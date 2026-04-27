@@ -45,6 +45,10 @@ export function useBattery() {
       batteryInstance.addEventListener('chargingchange', onBatteryChange);
 
       updateBattery(batt);
+    }).catch(() => {
+      if (!cancelled) {
+        setBattery((prev) => ({ ...prev, supported: false }));
+      }
     });
 
     return () => {
