@@ -24,7 +24,7 @@ function LevelBadge({ level }) {
         >
             <div className="level-badge-glow"></div>
             <div className="level-badge-inner">
-                <span className="level-text">LVL</span>
+                <span className="level-text" aria-hidden="true">LVL</span>
                 <span className="level-number">{level}</span>
             </div>
 
