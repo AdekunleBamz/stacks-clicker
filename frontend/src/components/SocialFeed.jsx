@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import PropTypes from 'prop-types';
 
 /**
  * SocialFeed Component
  * Real-time community activity stream
  */
-export default function SocialFeed({ activities }) {
+function SocialFeed({ activities }) {
     return (
         <div className="game-card social-feed">
             <div className="game-header">
@@ -41,3 +42,15 @@ export default function SocialFeed({ activities }) {
         </div>
     );
 }
+
+SocialFeed.propTypes = {
+    activities: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+        type: PropTypes.string,
+        user: PropTypes.string,
+        text: PropTypes.string,
+        time: PropTypes.string,
+    })).isRequired,
+};
+
+export default memo(SocialFeed);
