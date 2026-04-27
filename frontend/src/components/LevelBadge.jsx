@@ -47,6 +47,7 @@ function LevelBadge({ level }) {
                         marginLeft: '-2px',
                         marginTop: '-2px',
                         transformOrigin: `${25 + i * 5}px center`,
+                        willChange: 'transform',
                     }}
                 />
             ))}
