@@ -43,23 +43,17 @@ export function useLocalStorage(key, initialValue) {
           return;
         }
 
-          // Prevent redundant writes if values are deep-equal (simple check for now)
-          if (JSON.stringify(valueToStore) === JSON.stringify(previousValue)) {
-            return previousValue;
-          }
+        if (typeof window !== 'undefined') {
+          window.localStorage.setItem(trimmedKey, JSON.stringify(valueToStore));
+          window.dispatchEvent(new CustomEvent('local-storage', { detail: { key: trimmedKey } }));
+        }
 
-          if (typeof window !== 'undefined') {
-            window.localStorage.setItem(trimmedKey, JSON.stringify(valueToStore));
-            window.dispatchEvent(new CustomEvent('local-storage', { detail: { key: trimmedKey } }));
-          }
-
-          return valueToStore;
-        });
+        setStoredValue(valueToStore);
       } catch (error) {
         console.error(`[useLocalStorage] Error setting key "${trimmedKey}":`, error);
       }
     },
-    [trimmedKey]
+    [trimmedKey, storedValue]
   );
 
   useEffect(() => {
