@@ -1,4 +1,5 @@
-import { useState, useCallback } from 'react';import { motion } from 'framer-motion';
+import { useState, useCallback } from 'react';
+import { motion } from 'framer-motion';
 import { useWallet } from '../context/WalletContext';
 import { callContract } from '../utils/walletconnect';
 import { useSound } from '../hooks/useSound';
