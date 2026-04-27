@@ -19,6 +19,7 @@ const ERROR_MAP = Object.freeze({
   '401': 'User Rejected: The transaction request was cancelled in your wallet.',
   '403': 'Contract Paused: This interaction is currently disabled by the maintainers.',
   '408': 'Request Timeout: The transaction request timed out. Please retry.',
+  '409': 'Conflict: This action conflicts with the current contract state.',
   '500': 'Network Error: Failed to broadcast the transaction. Please try again.',
   '1001': 'Invalid Amount: Please specify a positive number for this interaction.',
 });
