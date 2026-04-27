@@ -1,5 +1,4 @@
-import React from 'react';
-import { memo } from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 
@@ -7,7 +6,13 @@ import { motion } from 'framer-motion';
  * LevelBadge Component
  * Displays the current level with a premium, animated badge
  */
-export default function LevelBadge({ level }) {
+LevelBadge.propTypes = {
+    level: PropTypes.number.isRequired,
+};
+
+export default memo(LevelBadge);
+
+function LevelBadge({ level }) {
     return (
         <motion.div
             className="level-badge-container"
