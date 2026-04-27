@@ -20,6 +20,7 @@
     "frontend:install": "npm --prefix frontend ci",
     "frontend:dev": "npm --prefix frontend run dev",
     "frontend:build": "npm --prefix frontend run build",
+    "build": "npm run frontend:build",
     "frontend:test": "npm --prefix frontend run test",
     "contracts:check": "clarinet check",
     "contracts:test": "clarinet test"
