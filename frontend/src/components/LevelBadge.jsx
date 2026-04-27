@@ -60,4 +60,8 @@ LevelBadge.propTypes = {
     level: PropTypes.number.isRequired,
 };
 
+LevelBadge.defaultProps = {
+    level: 1,
+};
+
 export default memo(LevelBadge);
