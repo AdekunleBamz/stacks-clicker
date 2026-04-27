@@ -16,7 +16,7 @@ export default function QuickActions({ address, onClearLog, onPingAll }) {
 
   return (
     <div className="quick-actions-panel" role="region" aria-label="Quick manual actions">
-      <h4 className="panel-title">⚡ Quick Actions</h4>
+      <h4 className="panel-title">⚡ Quick Tools</h4>
       <div className="actions-stack">
         <ActionButton
           label="Ping All"
