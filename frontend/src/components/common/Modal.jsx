@@ -56,7 +56,7 @@ const Modal = memo(function Modal({ isOpen, onClose, title, children, maxWidth =
               aria-label="Close modal"
               type="button"
             >
-              ✕
+              <span aria-hidden="true">✕</span>
             </button>
             <div className="modal-header">
               <h2 id="modal-title" className="modal-title">
