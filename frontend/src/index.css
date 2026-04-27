@@ -40,7 +40,6 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -51,6 +50,7 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
+  color-scheme: dark;
 }
 
 body::before {
@@ -104,6 +104,7 @@ body::before {
   position: sticky;
   top: 0;
   z-index: 100;
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 .header-content {
@@ -175,6 +176,10 @@ body::before {
 }
 
 @media (max-width: 768px) {
+  .app-header {
+    height: 72px;
+  }
+
   .header-content {
     padding: 0 1rem;
   }
@@ -341,7 +346,8 @@ body::before {
 
 .action-btn:hover:not(:disabled) { transform: translateY(-2px); filter: brightness(1.1); }
 .action-btn:active:not(:disabled) { transform: translateY(0); }
-.action-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.action-btn:disabled { opacity: 0.5; cursor: not-allowed; filter: none; }
+.action-btn:focus-visible { box-shadow: 0 0 0 3px var(--primary-glow); }
 
 /* Stats Bar */
 .stats-bar {
@@ -399,6 +405,7 @@ body::before {
   flex-direction: column;
   gap: 0.75rem;
   padding-right: 0.5rem;
+  scrollbar-gutter: stable;
 }
 
 .tx-item {
@@ -453,6 +460,7 @@ body::before {
   display: flex;
   align-items: center;
   gap: 0.25rem;
+  flex-wrap: wrap;
 }
 
 .step {
@@ -491,6 +499,9 @@ body::before {
   text-decoration: none;
   font-family: monospace;
   width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
 }
 
 .tx-explorer-link:hover {
@@ -526,6 +537,7 @@ body::before {
   pointer-events: none;
   font-weight: 500;
   text-align: center;
+  line-height: 1.35;
 }
 
 .tooltip-arrow {
