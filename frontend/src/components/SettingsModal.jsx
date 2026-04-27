@@ -38,6 +38,7 @@ const SettingsModal = () => {
               onClick={toggleTheme}
               title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
               aria-labelledby="theme-mode-label"
+              aria-pressed={theme === 'dark'}
             >
               {theme === 'dark' ? <><span aria-hidden="true">🌙</span> Dark</> : <><span aria-hidden="true">☀️</span> Light</>}
             </button>
