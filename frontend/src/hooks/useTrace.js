@@ -12,7 +12,8 @@ export function useTrace(componentName, props) {
   const safeName = typeof componentName === 'string' && componentName.trim() ? componentName.trim() : 'Unknown';
 
   useEffect(() => {
-    const changedProps = Object.entries(props).reduce((ps, [k, v]) => {
+    const safeProps = props != null && typeof props === 'object' ? props : {};
+    const changedProps = Object.entries(safeProps).reduce((ps, [k, v]) => {
       if (prevProps.current[k] !== v) {
         ps[k] = [prevProps.current[k], v];
       }
@@ -23,6 +24,6 @@ export function useTrace(componentName, props) {
       console.debug(`[useTrace] ${safeName} changed:`, changedProps);
     }
 
-    prevProps.current = props;
+    prevProps.current = safeProps;
   });
 }
