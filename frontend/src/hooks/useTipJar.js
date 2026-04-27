@@ -55,5 +55,6 @@ export function useTipJar({ onTxSubmit } = {}) {
     tip,
     withdraw,
     selfPing: handleSelfPing,
+    handleSelfPing,
   };
 }
