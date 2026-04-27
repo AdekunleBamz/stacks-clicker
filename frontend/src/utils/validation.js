@@ -96,3 +96,13 @@ export function isNonNegativeNumber(value) {
 export function isFiniteNumber(value) {
   return typeof value === 'number' && Number.isFinite(value);
 }
+
+/**
+ * Returns true if value is a boolean.
+ *
+ * @param {*} value
+ * @returns {boolean}
+ */
+export function isBooleanValue(value) {
+  return typeof value === 'boolean';
+}
