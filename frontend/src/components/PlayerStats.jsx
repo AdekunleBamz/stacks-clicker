@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { motion, useSpring, useTransform, animate } from 'framer-motion';
-/**
+import StatsCard from './common/StatsCard';/**
  * Animated number component for smooth counting transitions.
  */
 function AnimatedNumber({ value }) {
