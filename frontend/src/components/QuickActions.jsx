@@ -15,7 +15,7 @@ export default function QuickActions({ address, onClearLog, onPingAll }) {
   };
 
   return (
-    <div className="quick-actions-panel" role="region" aria-label="Quick tools panel">
+    <div className="quick-actions-panel" role="region" aria-label="Quick tools panel" title="Quick utility actions">
       <h4 className="panel-title">⚡ Quick Tools</h4>
       <div className="actions-stack">
         <ActionButton
@@ -34,7 +34,7 @@ export default function QuickActions({ address, onClearLog, onPingAll }) {
         />
         <ActionButton
           label="Stacks Docs"
-          icon="💬"
+          icon="�"
           className="secondary btn-sm"
           onClick={() =>
             handleAction(() => window.open('https://stacks.org', '_blank', 'noopener,noreferrer'))

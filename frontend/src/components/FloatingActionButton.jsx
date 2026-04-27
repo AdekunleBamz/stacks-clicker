@@ -18,7 +18,7 @@ export default function FloatingActionButton({ onAction = () => {} }) {
     <div className="fab-container">
       <AnimatePresence>
         {isOpen && (
-          <div className="fab-menu">
+          <div className="fab-menu" role="menu" aria-label="Quick actions menu">
             {actions.map((action, index) => (
               <motion.button
                 type="button"
@@ -26,6 +26,7 @@ export default function FloatingActionButton({ onAction = () => {} }) {
                 className="fab-item"
                 title={action.label}
                 aria-label={action.label}
+                role="menuitem"
                 initial={{ opacity: 0, scale: 0, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0, y: 20 }}
@@ -49,6 +50,7 @@ export default function FloatingActionButton({ onAction = () => {} }) {
         aria-expanded={isOpen}
         aria-haspopup="menu"
         aria-label={isOpen ? 'Close quick actions menu' : 'Open quick actions menu'}
+        title={isOpen ? 'Close quick actions' : 'Open quick actions'}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >

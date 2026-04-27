@@ -35,8 +35,8 @@ export default function Header({ theme, toggleTheme }) {
       <div className="header-content">
         <div
           className="logo"
-          role="banner"
-          aria-label="Application Logo"
+          role="img"
+          aria-label="Stacks Clicker logo"
           title="Stacks Clicker V2 Logo"
         >
           <NetworkLogo isSyncing={isScrolled} />
