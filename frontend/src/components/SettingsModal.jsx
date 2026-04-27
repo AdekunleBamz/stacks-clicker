@@ -67,7 +67,7 @@ const SettingsModal = () => {
             <span>Interaction Sounds</span>
             <div className="toggle-switch">
               {/* Simplified toggle for demonstration */}
-              <button className="secondary-button btn-sm">Enabled</button>
+              <button type="button" className="secondary-button btn-sm" aria-label="Toggle interaction sounds">Enabled</button>
             </div>
           </div>
         </section>
