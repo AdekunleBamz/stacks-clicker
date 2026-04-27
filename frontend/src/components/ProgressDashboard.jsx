@@ -10,7 +10,7 @@ import Achievement from './Achievement';
  * ProgressDashboard Component
  * Aggregate view for player progression
  */
-export default function ProgressDashboard({ userData }) {
+function ProgressDashboard({ userData }) {
     const { level, xp, nextLevelXP, stats, achievements } = userData;
 
     return (
@@ -40,3 +40,15 @@ export default function ProgressDashboard({ userData }) {
         </section>
     );
 }
+
+ProgressDashboard.propTypes = {
+  userData: PropTypes.shape({
+    level: PropTypes.number,
+    xp: PropTypes.number,
+    nextLevelXP: PropTypes.number,
+    stats: PropTypes.object,
+    achievements: PropTypes.array,
+  }).isRequired,
+};
+
+export default memo(ProgressDashboard);
