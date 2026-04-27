@@ -51,6 +51,7 @@ function ClickerCard({ address, clicker }) {
             label="Network Ping"
             icon="📡"
             cost="0.001 STX"
+            title="Ping the network to verify contract state"
             className="success"
             onClick={ping}
             isLoading={isLoading('clicker-ping')}
