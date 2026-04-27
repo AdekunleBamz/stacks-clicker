@@ -1,4 +1,4 @@
-import React, { useState, memo, useCallback } from 'react';
+import { useState, memo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import ActionCard from './common/ActionCard';
 import ActionButton from './common/ActionButton';
