@@ -79,7 +79,12 @@ export default function OnboardingTour() {
           <div className="tour-header">
             <div className="tour-step-dots">
               {steps.map((_, i) => (
-                <div key={i} className={`step-dot ${i === currentStep ? 'active' : ''}`} />
+                 <div
+                  key={i}
+                  className={`step-dot ${i === currentStep ? 'active' : ''}`}
+                  aria-label={`Step ${i + 1}${i === currentStep ? ', current' : ''}`}
+                  role="img"
+                 />
               ))}
             </div>
             <button type="button" className="tour-close-top" onClick={dismiss} aria-label="Close tour overlay" title="Close tour"><span aria-hidden="true">×</span></button>
