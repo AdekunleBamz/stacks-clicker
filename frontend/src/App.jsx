@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import PlayerStats from './components/PlayerStats';
 import TransactionHistory from './components/TransactionHistory';
 import ClickerCard from './components/ClickerCard';
