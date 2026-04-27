@@ -115,3 +115,14 @@ export function getErrorCode(error) {
   const match = msg.match(/\d+/);
   return match ? match[0] : null;
 }
+
+/**
+ * Returns true if the error was triggered by user rejection (wallet cancel).
+ *
+ * @param {any} error
+ * @returns {boolean}
+ */
+export function isUserRejection(error) {
+  const msg = (typeof error === 'string' ? error : error?.message || String(error)).toLowerCase();
+  return msg.includes('user rejected') || msg.includes('cancelled') || msg.includes('canceled');
+}
