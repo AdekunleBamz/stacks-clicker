@@ -62,6 +62,16 @@ const Card = ({
   );
 };
 
+Card.defaultProps = {
+  title: undefined,
+  subtitle: undefined,
+  icon: null,
+  depth: 1,
+  interactive: false,
+  className: '',
+  headerAction: null,
+};
+
 Card.propTypes = {
   children: PropTypes.node.isRequired,
   title: PropTypes.string,
