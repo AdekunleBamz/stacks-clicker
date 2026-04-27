@@ -126,6 +126,7 @@ npm run check
 ## Security & Verification 🔑
 
 Shared branch commits should be signed (SSH or GPG) before they are pushed. You can confirm the latest signature locally with `git log -1 --show-signature` and verify the pushed commit through GitHub's `Verified` badge.
+Before pushing to `main`, run `npm run verify:local` from the repository root.
 
 ## Troubleshooting 🔍
 
