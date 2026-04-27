@@ -30,21 +30,6 @@ export default function App() {
   const [stats, setStats] = useState({ clicks: 0, tips: 0, votes: 0 });
   const [particleTrigger, setParticleTrigger] = useState(0);
 
-  // Global Keyboard Shortcuts
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      // Toggle Mute with 'M' key
-      if (e.key.toLowerCase() === 'm' && !isAudioOpen) {
-        const isMuted = settings.masterVolume === 0;
-        updateSetting('masterVolume', isMuted ? 0.5 : 0);
-        showToast(isMuted ? 'Audio Unmuted 🔊' : 'Audio Muted 🔇', 'info');
-        play(isMuted ? 'success' : 'click');
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [settings.masterVolume, updateSetting, showToast, isAudioOpen]);
-
   // Mock Social Data
   const [players] = useState([
     { address: 'SP1...A2B', clicks: 12500, level: 42 },
