@@ -28,7 +28,7 @@ import { useState, useEffect, useCallback } from 'react';
 export function useOnlineStatus(options = {}) {
   const { onOnline, onOffline } = options;
 
-  const [isOnline, setIsOnline] = useState(() => navigator.onLine);
+  const [isOnline, setIsOnline] = useState(() => typeof navigator !== 'undefined' ? navigator.onLine : true);
   const [wasOffline, setWasOffline] = useState(false);
   const [lastOfflineAt, setLastOfflineAt] = useState(null);
   const [lastOnlineAt, setLastOnlineAt] = useState(null);
