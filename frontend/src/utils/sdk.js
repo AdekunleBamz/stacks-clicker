@@ -14,3 +14,12 @@ export const stacksClickerSdk = new StacksClickerSDK({
 export function isSdkReady() {
   return !!stacksClickerSdk && !!STACKS_NETWORK;
 }
+
+/**
+ * Returns the normalized SDK network string.
+ *
+ * @returns {'mainnet' | 'testnet'} Active SDK network
+ */
+export function getSdkNetwork() {
+  return STACKS_NETWORK === 'testnet' ? 'testnet' : 'mainnet';
+}
