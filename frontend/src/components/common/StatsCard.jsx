@@ -92,7 +92,7 @@ function StatsCard({ label, value, icon, color, isPrice = false, isGrowing = fal
     </motion.div>
   );
 
-  return tooltip ? <Tooltip content={tooltip}>{cardContent}</Tooltip> : cardContent;
+  return tooltip ? <Tooltip text={tooltip}>{cardContent}</Tooltip> : cardContent;
 }
 
 StatsCard.propTypes = {
