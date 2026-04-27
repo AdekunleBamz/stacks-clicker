@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { useNetwork } from '../hooks/useNetwork';
 import Tooltip from './common/Tooltip';
 
