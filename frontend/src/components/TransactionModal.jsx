@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { memo } from 'react';
+import PropTypes from 'prop-types';
 import Modal from './common/Modal';
 import { useModal } from '../context/ModalContext';
 import { truncateAddress } from '../utils/format';
@@ -11,7 +12,7 @@ const STACKS_NETWORK =
 /**
  * Modal to view detailed information about a specific transaction.
  */
-const TransactionModal = () => {
+const TransactionModal = memo(() => {
   const { activeModal, modalData, closeModal } = useModal();
 
   if (activeModal !== 'transaction' || !modalData) return null;
@@ -51,7 +52,7 @@ const TransactionModal = () => {
 
         <div className="detail-row">
           <span className="detail-label">Transaction ID</span>
-          <span className="detail-value monospace">
+          <span className="detail-value monospace" title={txId} aria-label={`Full transaction ID: ${txId}`}>
             {truncateAddress(txId)}
           </span>
         </div>
@@ -62,6 +63,8 @@ const TransactionModal = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="primary-button explorer-btn"
+            aria-label={`View transaction ${truncateAddress(txId)} on explorer`}
+            title="Open in Stacks explorer (new tab)"
           >
             View on Explorer ↗
           </a>

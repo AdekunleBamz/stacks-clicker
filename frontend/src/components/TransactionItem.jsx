@@ -57,14 +57,14 @@ function TransactionItem({
         <div className="tx-main">
           <div className="tx-header">
             <span className="tx-action-label">{highlightText(tx.action, searchTerm)}</span>
-            <span className="tx-timestamp">{tx.time}</span>
+            <span className="tx-timestamp" title={tx.time} aria-label={`Transaction time: ${tx.time}`}>{tx.time}</span>
           </div>
           <div className="tx-actions-inline">
             <button type="button" className="text-btn" onClick={() => onDetails(tx)} title="View full transaction details">
-              View Details <span>→</span>
+              View Details <span aria-hidden="true">→</span>
             </button>
-            <span className="tx-action-separator">•</span>
-            <button type="button" className="text-btn" onClick={() => onCopy(tx.id)} aria-label="Copy transaction ID">
+            <span className="tx-action-separator" aria-hidden="true">•</span>
+            <button type="button" className="text-btn" onClick={() => onCopy(tx.id)} aria-label="Copy transaction ID" title="Copy transaction ID to clipboard">
               Copy ID
             </button>
           </div>
@@ -86,7 +86,8 @@ function TransactionItem({
               </div>
             </div>
             {tx.explorerUrl && (
-              <button type="button" onClick={() => onOpenExplorer(tx)} className="tx-explorer-link">
+              <button type="button" onClick={() => onOpenExplorer(tx)} className="tx-explorer-link" title="View on Stacks Explorer"
+                aria-label={`Open transaction ${txId.slice(0, 8)} in explorer`}>
                 {highlightText(txId.slice(0, 8), searchTerm)}...
                 {highlightText(txId.slice(-6), searchTerm)} ↗
               </button>
