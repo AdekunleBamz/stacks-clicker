@@ -20,6 +20,15 @@ import UniversalProvider from '@walletconnect/universal-provider';
 const PROJECT_ID = import.meta.env.VITE_WALLETCONNECT_PROJECT_ID;
 const DEBUG = import.meta.env.VITE_DEBUG === 'true';
 
+/**
+ * Validates that a WalletConnect Project ID is configured correctly.
+ *
+ * @returns {boolean} True if PROJECT_ID exists and is a non-empty string
+ */
+export function isValidProjectId() {
+  return typeof PROJECT_ID === 'string' && PROJECT_ID.trim().length > 0;
+}
+
 const STACKS_NETWORK = String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
   ? 'testnet'
   : 'mainnet';
