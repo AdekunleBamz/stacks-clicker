@@ -54,7 +54,7 @@ export default function FloatingActionButton({ onAction = () => {} }) {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
-        <span className="fab-main-icon">{isOpen ? '×' : '⚡'}</span>
+        <span className="fab-main-icon" aria-hidden="true">{isOpen ? '×' : '⚡'}</span>
       </motion.button>
     </div>
   );

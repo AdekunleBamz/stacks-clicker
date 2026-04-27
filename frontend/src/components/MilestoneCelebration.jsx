@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
  * @param {Object} props - Component props.
  * @param {string|null} props.celebration - The celebration message to display.
  */
-export default function MilestoneCelebration({ celebration }) {
+function MilestoneCelebration({ celebration }) {
   return (
     <AnimatePresence>
       {celebration && (
