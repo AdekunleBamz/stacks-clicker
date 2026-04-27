@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { memo } from 'react';
+import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 
 /**
  * Animated SVG logo for the Stacks Clicker dApp.
  */
-export default function NetworkLogo({ isSyncing = false }) {
+NetworkLogo.propTypes = {
+  isSyncing: PropTypes.bool,
+};
+
+export default memo(NetworkLogo);
+
+function NetworkLogo({ isSyncing = false }) {
   return (
     <motion.div
       className={`logo-glow ${isSyncing ? 'syncing' : ''}`}
@@ -21,7 +28,7 @@ export default function NetworkLogo({ isSyncing = false }) {
       aria-label="Stacks Clicker animated diamond logo"
       title="Stacks Clicker Network Logo"
     >
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stacks Clicker logo">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
         <path d="M16 2L4 16L16 30L28 16L16 2Z" fill="url(#logo-grad)" />
         <path d="M16 6L8 16L16 26L24 16L16 6Z" fill="white" fillOpacity="0.2" />
         <defs>
