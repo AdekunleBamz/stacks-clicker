@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
  * @param {React.ReactNode} props.children - Card actions and content.
  * @returns {JSX.Element} The rendered action card.
  */
-export default function ActionCard({ title, subtitle, icon, iconClass, children }) {
+function ActionCard({ title, subtitle, icon, iconClass, children }) {
   return (
     <motion.div
       className="contract-card"
