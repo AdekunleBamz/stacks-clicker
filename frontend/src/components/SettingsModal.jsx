@@ -8,7 +8,7 @@ import { useSound } from '../hooks/useSound';
 /**
  * Modal component for user settings and preferences.
  */
-const SettingsModal = () => {
+const SettingsModal = memo(function SettingsModal() {
   const { isOpen, closeModal } = useModal();
   const { theme, toggleTheme } = useTheme();
   const { lang, setLang } = useI18n();
@@ -75,7 +75,7 @@ const SettingsModal = () => {
         </section>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .settings-container {
           display: flex;
           flex-direction: column;
@@ -101,6 +101,6 @@ const SettingsModal = () => {
       `}</style>
     </Modal>
   );
-};
+});
 
 export default SettingsModal;
