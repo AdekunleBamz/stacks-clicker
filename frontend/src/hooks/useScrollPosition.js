@@ -49,7 +49,7 @@ export function useIsAtTop() {
  */
 export function useIsAtBottom(threshold = 50) {
   const { y } = useScrollPosition();
-  if (typeof window === 'undefined') return false;
+  if (typeof window === 'undefined' || typeof document === 'undefined') return false;
   const distanceFromBottom = document.documentElement.scrollHeight - window.innerHeight - y;
   return distanceFromBottom <= threshold;
 }
