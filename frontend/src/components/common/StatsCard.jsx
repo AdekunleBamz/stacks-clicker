@@ -26,9 +26,9 @@ function StatsCard({ label, value, icon, color, isPrice = false, isGrowing = fal
 
   const itemVariants = {
     hidden: { opacity: 0, scale: 0.9, y: 20 },
-    visible: { 
-      opacity: 1, 
-      scale: 1, 
+    visible: {
+      opacity: 1,
+      scale: 1,
       y: 0,
       transition: {
         type: "spring",
@@ -104,6 +104,13 @@ StatsCard.propTypes = {
   isGrowing: PropTypes.bool,
   index: PropTypes.number,
   tooltip: PropTypes.string
+};
+
+StatsCard.defaultProps = {
+  isPrice: false,
+  isGrowing: false,
+  index: 0,
+  tooltip: undefined,
 };
 
 StatsCard.displayName = 'StatsCard';

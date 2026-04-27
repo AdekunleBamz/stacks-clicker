@@ -31,10 +31,15 @@ export function useTheme() {
     setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
   }, [setTheme]);
 
+  const resetTheme = useCallback(() => {
+    setTheme(getSystemTheme());
+  }, [setTheme]);
+
   return {
     theme,
     toggleTheme,
     setTheme,
+    resetTheme,
     isDark: theme === 'dark',
     isLight: theme === 'light',
   };

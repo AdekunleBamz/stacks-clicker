@@ -4,7 +4,7 @@
 
 /**
  * Truncates a Stacks address for display with flexible sizing.
- * 
+ *
  * @param {string} address - The full Stacks address
  * @param {Object} [options] - Truncation options
  * @param {number} [options.prefix=4] - Chars to show at start

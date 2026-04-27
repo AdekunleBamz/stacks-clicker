@@ -35,6 +35,10 @@ class SoundEngine {
         this.sounds[name].pause();
         this.sounds[name].currentTime = 0;
     }
+
+    get isMuted() {
+        return !this.sfxEnabled || this.masterVolume === 0;
+    }
 }
 
 const engine = new SoundEngine();

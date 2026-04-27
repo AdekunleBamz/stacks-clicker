@@ -13,7 +13,7 @@ import Tooltip from './common/Tooltip';
 const NetworkHeartbeat = memo(function NetworkHeartbeat() {
   const { blockHeight, isConnected, network } = useNetwork();
   const heartbeatTitle = isConnected
-    ? `Stacks ${network} live at block ${blockHeight}`
+    ? `Stacks ${network} live at block ${blockHeight ?? 'loading...'}`
     : 'Stacks interactive network currently unavailable';
 
   return (
