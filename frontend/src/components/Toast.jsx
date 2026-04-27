@@ -31,7 +31,7 @@ export default function Toast({ toasts = [] }) {
               {toast.type === 'info' && 'ℹ️'}
               {toast.type === 'warning' && '⚠️'}
             </span>
-            <span className="toast-message">{toast.message}</span>
+            <span className="toast-message">{toast.message || 'Notification'}</span>
           </motion.div>
         ))}
       </AnimatePresence>
