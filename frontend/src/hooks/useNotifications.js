@@ -38,6 +38,13 @@ export function useNotifications() {
     notify.dismiss?.(toastId);
   }, []);
 
+  const showPromise = useCallback((promise, { loading, success, error } = {}) => {
+    if (loading) notify.loading(loading);
+    return Promise.resolve(promise)
+      .then((result) => { if (success) notify.success(success); return result; })
+      .catch((err) => { if (error) notify.error(typeof error === 'function' ? error(err) : error); throw err; });
+  }, []);
+
   return {
     showNotification,
     showSuccess,
@@ -46,5 +53,6 @@ export function useNotifications() {
     showInfo,
     showWarning,
     dismiss,
+    showPromise,
   };
 }
