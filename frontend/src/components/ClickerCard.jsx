@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { memo } from 'react';
+import PropTypes from 'prop-types';
 import ActionCard from './common/ActionCard';
 import ActionButton from './common/ActionButton';
 import Tooltip from './common/Tooltip';
@@ -9,7 +10,7 @@ import Tooltip from './common/Tooltip';
  * @param {string} props.address - Connected wallet address.
  * @param {Object} props.clicker - Clicker hook object containing actions and loading state.
  */
-export default function ClickerCard({ address, clicker }) {
+function ClickerCard({ address, clicker }) {
   const { isLoading, click, multiClick, ping } = clicker;
 
   return (
