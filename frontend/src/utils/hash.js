@@ -41,3 +41,15 @@ export function stringToColor(str) {
     if (!length || length <= 0) return 0;
     return simpleHash(str) % length;
   }
+
+/**
+ * Returns a short hex substring of a string's hash, useful for display IDs.
+ *
+ * @param {string} str - Input string
+ * @param {number} [len=8] - Desired output length (1-16)
+ * @returns {string} Short hex digest
+ */
+export function shortHash(str, len = 8) {
+  const safeLen = Math.min(16, Math.max(1, Math.trunc(Number(len)) || 8));
+  return simpleHash(str).toString(16).padStart(8, '0').slice(0, safeLen);
+}
