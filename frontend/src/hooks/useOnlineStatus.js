@@ -48,6 +48,7 @@ export function useOnlineStatus(options = {}) {
   }, [onOffline]);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
 
