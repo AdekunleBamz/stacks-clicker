@@ -135,6 +135,7 @@ export default function TipJar({ onTxSubmit }) {
           onClick={handleQuickTip}
           disabled={!isConnected || loading}
           aria-label="Send a quick tip of 0.001 STX"
+          title="Send a quick tip"
         >
           {loading ? '⏳' : '⚡'} Quick Tip (0.001 STX)
         </motion.button>
@@ -152,7 +153,7 @@ export default function TipJar({ onTxSubmit }) {
 
         <div className="tip-custom" role="form" aria-label="Custom Tip Amount Entry">
           <div className="input-group">
-            <label className="input-label">Recipient Address</label>
+            <label className="input-label" htmlFor="tip-recipient-input">Recipient Address</label>
             <input
               id="tip-recipient-input"
               type="text"
@@ -163,13 +164,13 @@ export default function TipJar({ onTxSubmit }) {
             />
           </div>
           <div className="input-group">
-            <label className="input-label">Amount (uSTX)</label>
+            <label className="input-label" htmlFor="tip-amount-input-primary">Amount (uSTX)</label>
             <div className="tip-amount-group">
               <input
                 id="tip-amount-input-primary"
                 type="number"
                 min="1"
-                max="100"0"
+                max="1000000"
                 value={tipAmount}
                 onChange={(e) => setTipAmount(parseInt(e.target.value) || 1000)}
                 className="amount-input"

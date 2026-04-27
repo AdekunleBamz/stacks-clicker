@@ -45,8 +45,9 @@ const Button = ({
       aria-busy={isLoading}
       aria-disabled={disabled || isLoading}
       aria-label={isLoading ? `Processing ${typeof children === 'string' ? children : 'action'}` : undefined}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
+      title={typeof children === 'string' ? children : undefined}
+      whileHover={disabled || isLoading ? undefined : { scale: 1.02 }}
+      whileTap={disabled || isLoading ? undefined : { scale: 0.98 }}
       {...props}
     >
       {isLoading ? (

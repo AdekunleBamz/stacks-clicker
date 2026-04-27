@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CONFIG, STACKS_NETWORK } from '../utils/constants';
-
 const STACKS_NETWORK =
   String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
     ? 'testnet'
@@ -13,8 +11,7 @@ const STACKS_NETWORK =
  * Displays recent transactions with status
  */
 export default function TransactionLog({ transactions = [] }) {
-  const network = (import.meta.env.VITE_STACKS_NETWORK || 'mainnet').toLowerCase();
-  const explorerChain = network === 'testnet' ? 'testnet' : 'mainnet';
+  const network = STACKS_NETWORK;
 
   const getStatusIcon = (status) => {
     switch (status) {
@@ -59,6 +56,7 @@ export default function TransactionLog({ transactions = [] }) {
                 rel="noopener noreferrer"
                 className="tx-link"
                 title="View on Explorer"
+                aria-label={`Open transaction ${tx.id} on Hiro Explorer`}
               >
                 🔗
               </a>
