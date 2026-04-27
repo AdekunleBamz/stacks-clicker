@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 /**
  * Custom hook for debugging unnecessary re-renders.
@@ -9,6 +9,7 @@ import { useEffect, useRef } from 'react';
  */
 export function useWhyDidYouUpdate(name, props) {
   const previousProps = useRef();
+  const [changeCount, setChangeCount] = useState(0);
   const safeName = typeof name === 'string' && name.trim() ? name.trim() : 'UnknownComponent';
 
   useEffect(() => {
@@ -27,6 +28,7 @@ export function useWhyDidYouUpdate(name, props) {
       });
 
       if (Object.keys(changesObj).length && import.meta.env.DEV) {
+        setChangeCount((c) => c + 1);
         console.group(`[why-did-you-update] ${safeName}`);
         console.log('Changed props:', changesObj);
         console.groupEnd();
@@ -35,4 +37,6 @@ export function useWhyDidYouUpdate(name, props) {
 
     previousProps.current = safeProps;
   });
+
+  return changeCount;
 }

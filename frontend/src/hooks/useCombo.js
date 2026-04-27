@@ -47,5 +47,6 @@ export function useCombo({ timeout = COMBO_WINDOW_MS } = {}) {
     resetCombo,
     isActive: combo > 0,
     hasPendingReset: timerRef.current !== null,
+    comboLabel: combo > 1 ? `${combo}x combo!` : null,
   };
 }

@@ -42,5 +42,6 @@ export function useTheme() {
     resetTheme,
     isDark: theme === 'dark',
     isLight: theme === 'light',
+    systemTheme: getSystemTheme(),
   };
 }

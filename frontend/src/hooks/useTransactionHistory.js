@@ -87,5 +87,6 @@ export function useTransactionHistory({ playSound, onTxAdded }) {
     successTxs,
     failedTxs,
     txCount,
+    hasPending: pendingTxs.length > 0,
   };
 }

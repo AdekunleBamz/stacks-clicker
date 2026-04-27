@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 
 /**
  * Custom hook for dynamically updating the document title.
@@ -25,4 +25,12 @@ export function useDocumentTitle({ title, count = 0, restoreOnUnmount = true }) 
       }
     };
   }, [title, count, restoreOnUnmount]);
+
+  const resetTitle = useCallback(() => {
+    if (typeof document !== 'undefined') {
+      document.title = previousTitle.current;
+    }
+  }, []);
+
+  return { resetTitle };
 }
