@@ -11,6 +11,7 @@ Quick reference:
 | `VITE_WALLETCONNECT_PROJECT_ID` | Yes | Required for wallet pairing and QR flow |
 | `VITE_DEBUG` | No | Enables verbose debug logging |
 | `VITE_STACKS_NETWORK` | No | Defaults to `mainnet` when omitted |
+| `VITE_DEPLOYER_ADDRESS` | No | Defaults to the value shipped in `frontend/.env.example` |
 | `VITE_COINGECKO_API_KEY` | No | Enables higher-limit price lookups |
 
 Before local startup:
