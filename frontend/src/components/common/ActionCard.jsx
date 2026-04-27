@@ -28,7 +28,7 @@ function ActionCard({ title, subtitle, icon, iconClass, children }) {
         <div className={`contract-icon ${iconClass}`} aria-hidden="true">{icon}</div>
         <div>
           <h3 className="contract-title">{title}</h3>
-          <div className="contract-subtitle">{subtitle}</div>
+          <p className="contract-subtitle">{subtitle}</p>
         </div>
       </div>
       <div className="actions">
