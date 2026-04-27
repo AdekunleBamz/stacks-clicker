@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const steps = [
@@ -43,27 +43,27 @@ export default function OnboardingTour() {
     return undefined;
   }, []);
 
-  const handleNext = () => {
-    if (currentStep < steps.length - 1) {
-      setCurrentStep(prev => prev + 1);
-    } else {
-      dismiss();
-    }
-  };
-
-  const handleBack = () => {
-    if (currentStep > 0) {
-      setCurrentStep(prev => prev - 1);
-    }
-  };
-
-  const dismiss = () => {
+  const dismiss = useCallback(() => {
     setIsVisible(false);
     if (typeof window === 'undefined') {
       return;
     }
     localStorage.setItem('hasSeenTour', 'true');
-  };
+  }, []);
+
+  const handleNext = useCallback(() => {
+    if (currentStep < steps.length - 1) {
+      setCurrentStep(prev => prev + 1);
+    } else {
+      dismiss();
+    }
+  }, [currentStep, dismiss]);
+
+  const handleBack = useCallback(() => {
+    if (currentStep > 0) {
+      setCurrentStep(prev => prev - 1);
+    }
+  }, [currentStep]);
 
   if (!isVisible) return null;
 
