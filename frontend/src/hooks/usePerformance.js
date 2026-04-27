@@ -9,7 +9,7 @@ export function usePerformance() {
   const [fps, setFps] = useState(0);
   const [memory, setMemory] = useState(null);
   const framesRef = useRef(0);
-  const prevTimeRef = useRef(performance.now());
+  const prevTimeRef = useRef(typeof performance !== 'undefined' ? performance.now() : 0);
   const requestRef = useRef();
 
   useEffect(() => {
