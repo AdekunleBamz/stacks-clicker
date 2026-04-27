@@ -201,4 +201,8 @@ TipJarCard.propTypes = {
   }).isRequired,
 };
 
+TipJarCard.defaultProps = {
+  address: null,
+};
+
 export default memo(TipJarCard);
