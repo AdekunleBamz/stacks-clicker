@@ -14,19 +14,15 @@ export default function OnboardingTour() {
 
   // Effect to manage body overflow and initial focus when the tour becomes visible
   useEffect(() => {
+    if (typeof document === 'undefined') return undefined;
+    const original = document.body.style.overflow;
     if (isVisible) {
       document.body.style.overflow = 'hidden';
-      // Initial focus on the tour modal
-      // Note: The selector '.tour-btn.primary' is used as per instruction.
-      // If no element matches, focus will not be set.
       const firstBtn = document.querySelector('.tour-btn.primary');
       firstBtn?.focus();
-    } else {
-      document.body.style.overflow = 'unset';
     }
-    // Cleanup function to ensure overflow is reset if component unmounts while tour is visible
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = original;
     };
   }, [isVisible]); // Re-run this effect when isVisible changes
 
