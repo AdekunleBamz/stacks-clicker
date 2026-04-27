@@ -36,6 +36,27 @@ export function formatNumber(value, options = {}) {
 }
 
 /**
+ * Formats a large number into compact notation (e.g., 1500 -> "1.5K", 2000000 -> "2M").
+ *
+ * @param {number} value - The numeric value to format
+ * @param {number} [decimals=1] - Number of decimal places in compact form
+ * @returns {string} The compacted number string
+ */
+export function formatNumberCompact(value, decimals = 1) {
+  const numericValue = Number(value);
+  if (!Number.isFinite(numericValue)) return '0';
+  
+  const abs = Math.abs(numericValue);
+  if (abs >= 1_000_000) {
+    return `${(numericValue / 1_000_000).toFixed(decimals)}M`;
+  }
+  if (abs >= 1_000) {
+    return `${(numericValue / 1_000).toFixed(decimals)}K`;
+  }
+  return numericValue.toString();
+}
+
+/**
  * Formats a STX micro-amount into a human-readable string.
  *
  * @param {number} microStx - The amount in micro-STX

@@ -65,6 +65,26 @@ export function parseContractError(error) {
     return ERROR_MAP['401'];
   }
 
+  return errorMessage;
+}
+
+/**
+ * Extracts the numeric error code from an error message.
+ * Returns null if no numeric code is found.
+ *
+ * @param {any} error - The error object or string to parse
+ * @returns {string|null} The numeric error code, or null if not found
+ */
+export function getErrorCode(error) {
+  if (!error) return null;
+  const errorMessage =
+    typeof error === 'string'
+      ? error
+      : error?.message || error?.reason || error?.error?.message || String(error);
+  const match = errorMessage.match(/\d+/);
+  return match ? match[0] : null;
+  }
+
   if (lowerMessage.includes('disconnected') || lowerMessage.includes('connection lost')) {
     return 'Wallet Disconnected: Please reconnect your wallet and try again.';
   }

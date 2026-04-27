@@ -1,6 +1,28 @@
 import { toast } from 'react-hot-toast';
 import { motion } from 'framer-motion';
 
+/**
+ * Default toast configuration options for react-hot-toast.
+ */
+export const TOAST_CONFIG = Object.freeze({
+  DURATION: 3000,
+  SUCCESS: {
+    duration: 3000,
+    position: 'top-center',
+    ariaLive: 'polite',
+  },
+  ERROR: {
+    duration: 4000,
+    position: 'top-center',
+    ariaLive: 'assertive',
+  },
+  INFO: {
+    duration: 3000,
+    position: 'top-center',
+    ariaLive: 'polite',
+  },
+});
+
 const getIconForType = (type) => {
   switch (type) {
     case 'success':
