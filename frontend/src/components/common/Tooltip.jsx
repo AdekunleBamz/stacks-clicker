@@ -1,5 +1,6 @@
 import { useState, useId } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import PropTypes from 'prop-types';
 
 /**
  * A custom tooltip component for accessible and premium descriptions.
@@ -38,3 +39,8 @@ export default function Tooltip({ text, children }) {
     </div>
   );
 }
+
+Tooltip.propTypes = {
+  text: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+};
