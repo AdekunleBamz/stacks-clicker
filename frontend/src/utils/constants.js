@@ -59,6 +59,8 @@ export const MIN_USERNAME_LENGTH = 3;
 
 export const MAX_POLL_TITLE_LENGTH = 120;
 
+export const MAX_POLL_OPTION_COUNT = 10;
+
 export const NOTIFICATION_DISMISS_MS = 5000;
 
 export const AUTO_CLICKER_BASE_RATE = 1;
