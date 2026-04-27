@@ -6,16 +6,6 @@ import { motion } from 'framer-motion';
  * Leaderboard Component
  * Displays top players in a vibrant, ranked list
  */
-Leaderboard.propTypes = {
-    players: PropTypes.arrayOf(PropTypes.shape({
-        address: PropTypes.string.isRequired,
-        clicks: PropTypes.number,
-        level: PropTypes.number,
-    })).isRequired,
-};
-
-export default memo(Leaderboard);
-
 function Leaderboard({ players }) {
     return (
         <div className="game-card leaderboard">
@@ -46,3 +36,13 @@ function Leaderboard({ players }) {
         </div>
     );
 }
+
+Leaderboard.propTypes = {
+    players: PropTypes.arrayOf(PropTypes.shape({
+        address: PropTypes.string.isRequired,
+        clicks: PropTypes.number,
+        level: PropTypes.number,
+    })).isRequired,
+};
+
+export default memo(Leaderboard);
