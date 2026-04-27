@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useWallet } from '../context/WalletContext';
 import { callContract } from '../utils/walletconnect';
+import { useSound } from '../context/AudioContext';
 import CountUp from './CountUp';
 
 const DEPLOYER = 'SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N';
+const QUICKPOLL_CONTRACT = 'quickpoll-v2p';
 
 /**
  * QuickPoll Component
@@ -12,6 +14,7 @@ const DEPLOYER = 'SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N';
  */
 export default function QuickPoll({ onTxSubmit }) {
   const { isConnected } = useWallet();
+  const { play } = useSound();
   const [loading, setLoading] = useState(false);
   const [pollQuestion, setPollQuestion] = useState('');
   const [pollId, setPollId] = useState(1);
@@ -52,7 +55,7 @@ export default function QuickPoll({ onTxSubmit }) {
 
       setVotes(prev => ({ ...prev, yes: prev.yes + 1 }));
       onTxSubmit?.('vote-yes', result.txId);
-      soundEngine.play('success');
+      play('success');
     } catch (err) {
       console.error('Vote yes failed:', err);
     } finally {
@@ -74,7 +77,7 @@ export default function QuickPoll({ onTxSubmit }) {
 
       setVotes(prev => ({ ...prev, no: prev.no + 1 }));
       onTxSubmit?.('vote-no', result.txId);
-      soundEngine.play('success');
+      play('success');
     } catch (err) {
       console.error('Vote no failed:', err);
     } finally {
