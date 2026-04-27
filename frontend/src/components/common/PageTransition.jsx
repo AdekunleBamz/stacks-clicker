@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
  * Standard page transition wrapper using Framer Motion.
  * Provides a subtle fade and slide-up animation for main content areas.
  */
-const PageTransition = ({ children, className = '' }) => {
+const PageTransition = memo(function PageTransition({ children, className = '' }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 15 }}
@@ -21,7 +21,7 @@ const PageTransition = ({ children, className = '' }) => {
       {children}
     </motion.div>
   );
-};
+});
 
 PageTransition.propTypes = {
   children: PropTypes.node.isRequired,
