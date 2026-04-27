@@ -14,7 +14,7 @@ function TransactionHistory({ txLog }) {
     <section className="tx-log" aria-labelledby="tx-history-title">
       <div className="log-header">
         <h3 id="tx-history-title">📜 Recent Activity</h3>
-        <span className="tx-count-badge">{txLog.length}</span>
+        <span className="tx-count-badge" aria-label={`${txLog.length} transactions in history`}>{txLog.length}</span>
       </div>
 
       <div className="tx-list">
