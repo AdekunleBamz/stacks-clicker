@@ -12,6 +12,8 @@ export default function Tooltip({ text, children }) {
       className="tooltip-wrapper"
       onMouseEnter={() => setIsVisible(true)}
       onMouseLeave={() => setIsVisible(false)}
+      onFocus={() => setIsVisible(true)}
+      onBlur={() => setIsVisible(false)}
       style={{ position: 'relative', display: 'inline-block', width: '100%' }}
     >
       {children}
