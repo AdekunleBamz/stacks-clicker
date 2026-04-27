@@ -15,7 +15,6 @@
  */
 
 import UniversalProvider from '@walletconnect/universal-provider';
-import { STACKS_NETWORK } from './constants';
 
 // WalletConnect Project ID from environment
 const PROJECT_ID = import.meta.env.VITE_WALLETCONNECT_PROJECT_ID;

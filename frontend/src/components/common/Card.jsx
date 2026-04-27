@@ -60,7 +60,7 @@ const Card = ({
       </div>
     </motion.div>
   );
-});
+};
 
 Card.propTypes = {
   children: PropTypes.node.isRequired,

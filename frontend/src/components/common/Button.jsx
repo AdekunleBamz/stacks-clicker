@@ -54,13 +54,13 @@ const Button = ({
         <span className="btn-spinner" role="progressbar" aria-label="Loading" aria-live="polite"></span>
       ) : (
         <>
-          {icon && <span className="btn-icon">{icon}</span>}
+          {icon && <span className="btn-icon" aria-hidden="true">{icon}</span>}
           {children}
         </>
       )}
     </motion.button>
   );
-});
+};
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,
@@ -74,4 +74,4 @@ Button.propTypes = {
   icon: PropTypes.node,
 };
 
-export default Button;
+export default memo(Button);

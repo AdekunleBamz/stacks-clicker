@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useId } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 /**
@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
  */
 export default function Tooltip({ text, children }) {
   const [isVisible, setIsVisible] = useState(false);
+  const tooltipId = useId();
 
   return (
     <div
@@ -14,12 +15,14 @@ export default function Tooltip({ text, children }) {
       onMouseLeave={() => setIsVisible(false)}
       onFocus={() => setIsVisible(true)}
       onBlur={() => setIsVisible(false)}
+      aria-describedby={isVisible ? tooltipId : undefined}
       style={{ position: 'relative', display: 'inline-block', width: '100%' }}
     >
       {children}
       <AnimatePresence>
         {isVisible && (
           <motion.div
+            id={tooltipId}
             role="tooltip"
             aria-hidden={!isVisible}
             initial={{ opacity: 0, y: 10, scale: 0.95 }}
