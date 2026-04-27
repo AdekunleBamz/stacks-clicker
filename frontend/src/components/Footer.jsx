@@ -20,7 +20,7 @@ const Footer = memo(function Footer() {
           <p>Built with <span role="img" aria-label="love">❤️</span> on Stacks</p>
           <span className="app-version" title="Current Interface Version" style={{ opacity: 0.9 }}>v{VERSION}</span>
         </div>
-        <div className="footer-links" role="navigation" aria-label="Footer Secondary Architecture">
+        <div className="footer-links" role="navigation" aria-label="Footer links">
         <a 
           href="https://twitter.com/stacks" 
           target="_blank" 
