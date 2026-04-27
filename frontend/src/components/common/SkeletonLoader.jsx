@@ -28,7 +28,7 @@ function SkeletonLoader({
       aria-busy="true"
       role="status"
       aria-live="polite"
-      aria-label="Loading content..."
+      aria-label={`Loading ${label}...`}
       style={{
         width,
         height,

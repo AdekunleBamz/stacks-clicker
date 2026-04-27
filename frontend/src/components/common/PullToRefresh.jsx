@@ -77,7 +77,7 @@ const PullToRefresh = memo(function PullToRefresh({ onRefresh, children }) {
           aria-valuemin="0"
           aria-valuemax="100"
         >
-          {refreshing ? '⏳' : '↓'}
+          <span aria-hidden="true">{refreshing ? '⏳' : '↓'}</span>
         </div>
       </div>
       <div style={{ transform: `translateY(${pullDistance > 0 ? pullDistance : 0}px)` }}>
