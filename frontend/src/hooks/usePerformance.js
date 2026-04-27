@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 /**
  * Custom hook for tracking real-time performance metrics (FPS, Memory).
  *
- * @returns {Object} { fps, memory }
+ * @returns {{ fps: number, memory: {used: number, total: number} | null, isLowFps: boolean }} Performance metrics
  */
 export function usePerformance() {
   const [fps, setFps] = useState(0);
@@ -45,5 +45,5 @@ export function usePerformance() {
     };
   }, []);
 
-  return { fps, memory };
+  return { fps, memory, isLowFps: fps > 0 && fps < 30 };
 }
