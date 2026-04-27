@@ -13,6 +13,7 @@ import { STREAK_THRESHOLDS } from '../utils/constants';
  * @returns {JSX.Element} The rendered interaction streaks and badges panel
  */
 function InteractionStreaks({ totalInteractions }) {
+  const safeTotalInteractions = Math.max(0, Number.isFinite(totalInteractions) ? totalInteractions : 0);
   const [streak, setStreak] = useState(0);
   const [badges, setBadges] = useState([]);
 
@@ -21,22 +22,22 @@ function InteractionStreaks({ totalInteractions }) {
    * In a production environment, this would ideally be calculated from timestamped transaction logs.
    */
   useEffect(() => {
-    if (totalInteractions > 0) {
+    if (safeTotalInteractions > 0) {
       setStreak(prev => prev + 1);
     }
-  }, [totalInteractions]);
+  }, [safeTotalInteractions]);
 
   /**
    * Effect to calculate and update earned badges based on total interaction milestones.
    */
   useEffect(() => {
     const newBadges = [];
-    if (totalInteractions >= STREAK_THRESHOLDS.BRONZE) newBadges.push({ id: 'bronze', label: '🥉 Novice', color: '#cd7f32' });
-    if (totalInteractions >= STREAK_THRESHOLDS.SILVER) newBadges.push({ id: 'silver', label: '🥈 Regular', color: '#c0c0c0' });
-    if (totalInteractions >= STREAK_THRESHOLDS.GOLD) newBadges.push({ id: 'gold', label: '🥇 Pro', color: '#ffd700' });
-    if (totalInteractions >= STREAK_THRESHOLDS.VETERAN) newBadges.push({ id: 'veteran', label: '🏅 Veteran', color: '#4fc3f7' });
+    if (safeTotalInteractions >= STREAK_THRESHOLDS.BRONZE) newBadges.push({ id: 'bronze', label: '🥉 Novice', color: '#cd7f32' });
+    if (safeTotalInteractions >= STREAK_THRESHOLDS.SILVER) newBadges.push({ id: 'silver', label: '🥈 Regular', color: '#c0c0c0' });
+    if (safeTotalInteractions >= STREAK_THRESHOLDS.GOLD) newBadges.push({ id: 'gold', label: '🥇 Pro', color: '#ffd700' });
+    if (safeTotalInteractions >= STREAK_THRESHOLDS.VETERAN) newBadges.push({ id: 'veteran', label: '🏅 Veteran', color: '#4fc3f7' });
     setBadges(newBadges);
-  }, [totalInteractions]);
+  }, [safeTotalInteractions]);
 
   return (
     <div className="streak-panel" role="status" aria-live="polite" aria-atomic="true">
