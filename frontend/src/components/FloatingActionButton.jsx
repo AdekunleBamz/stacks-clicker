@@ -26,6 +26,7 @@ export default function FloatingActionButton({ onAction = () => {} }) {
                 className="fab-item"
                 title={action.label}
                 aria-label={action.label}
+                role="menuitem"
                 initial={{ opacity: 0, scale: 0, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0, y: 20 }}
