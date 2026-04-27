@@ -26,7 +26,7 @@ function TransactionHistory({ txLog }) {
               className="empty-state"
             >
               <div className="empty-icon">📂</div>
-              <p>No transactions yet.</p>
+              <p>No transactions yet. Trigger an action to populate activity.</p>
               <div className="skeleton-placeholder">
                 <SkeletonLoader height="60px" borderRadius="12px" className="mb-2" />
                 <SkeletonLoader height="60px" borderRadius="12px" opacity={0.5} />
