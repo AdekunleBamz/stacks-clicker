@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useWallet } from '../context/WalletContext';
 import { callContract } from '../utils/walletconnect';
-import { useSound } from '../context/AudioContext';
+import { useSound } from '../hooks/useSound';
 import CountUp from './CountUp';
 
 const DEPLOYER = 'SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N';
@@ -14,7 +14,7 @@ const QUICKPOLL_CONTRACT = 'quickpoll-v2p';
  */
 export default function QuickPoll({ onTxSubmit }) {
   const { isConnected } = useWallet();
-  const { play } = useSound();
+  const { playSound: play } = useSound();
   const [loading, setLoading] = useState(false);
   const [pollQuestion, setPollQuestion] = useState('');
   const [pollId, setPollId] = useState(1);

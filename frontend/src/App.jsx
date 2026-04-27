@@ -6,7 +6,7 @@ import ClickerCard from './components/ClickerCard';
 import TipJarCard from './components/TipJarCard';
 import QuickPollCard from './components/QuickPollCard';
 import { useWallet } from './context/WalletContext';
-import { useSound } from './context/AudioContext';
+import { useSound } from './hooks/useSound';
 import { motion, AnimatePresence } from 'framer-motion';
 import ParticleOverlay from './components/common/ParticleOverlay';
 
@@ -23,7 +23,7 @@ import { useQuickPoll } from './hooks/useQuickPoll';
 export default function App() {
   // Global Wallet State
   const { address, connectWallet, disconnectWallet } = useWallet();
-  const { play } = useSound();
+  const { playSound: play } = useSound();
 
   // Application State
   const [txLog, setTxLog] = useState([]);
