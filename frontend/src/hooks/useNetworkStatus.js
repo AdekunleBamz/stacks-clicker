@@ -12,12 +12,14 @@ export function useNetworkStatus() {
   );
   const [lastChanged, setLastChanged] = useState(null);
   const [connectionCount, setConnectionCount] = useState(0);
+  const [offlineCount, setOfflineCount] = useState(0);
+
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
     const handleOnline = () => { setIsOnline(true); setLastChanged(Date.now()); setConnectionCount((c) => c + 1); };
-    const handleOffline = () => { setIsOnline(false); setLastChanged(Date.now()); };
+    const handleOffline = () => { setIsOnline(false); setLastChanged(Date.now()); setOfflineCount((c) => c + 1); };
 
     window.addEventListener('online', handleOnline, { passive: true });
     window.addEventListener('offline', handleOffline, { passive: true });
@@ -28,5 +30,5 @@ export function useNetworkStatus() {
     };
   }, []);
 
-  return { isOnline, lastChanged, connectionCount };
+  return { isOnline, lastChanged, connectionCount, offlineCount };
 }

@@ -29,3 +29,15 @@ export function stringToColor(str) {
   const hue = hash % 360;
   return `hsl(${hue}, 70%, 65%)`;
 }
+
+  /**
+   * Maps a string hash to an array index deterministically.
+   *
+   * @param {string} str - String to hash
+   * @param {number} length - Length of the target array
+   * @returns {number} A valid index in range [0, length)
+   */
+  export function hashToIndex(str, length) {
+    if (!length || length <= 0) return 0;
+    return simpleHash(str) % length;
+  }

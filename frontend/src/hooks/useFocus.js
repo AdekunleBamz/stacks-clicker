@@ -26,5 +26,6 @@ export function useFocus() {
     return undefined;
   }, []);
 
-  return [ref, isFocused];
+  const blur = () => ref.current?.blur();
+  return [ref, isFocused, blur];
 }

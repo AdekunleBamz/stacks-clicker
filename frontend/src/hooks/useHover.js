@@ -15,12 +15,12 @@ export function useHover() {
 
     const node = ref.current;
     if (node) {
-      node.addEventListener('mouseenter', handleMouseEnter);
-      node.addEventListener('mouseleave', handleMouseLeave);
+      node.addEventListener('mouseenter', handleMouseEnter, { passive: true });
+      node.addEventListener('mouseleave', handleMouseLeave, { passive: true });
 
       return () => {
-        node.removeEventListener('mouseenter', handleMouseEnter);
-        node.removeEventListener('mouseleave', handleMouseLeave);
+        node.removeEventListener('mouseenter', handleMouseEnter, { passive: true });
+        node.removeEventListener('mouseleave', handleMouseLeave, { passive: true });
       };
     }
     return undefined;

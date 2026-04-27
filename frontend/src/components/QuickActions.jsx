@@ -45,6 +45,11 @@ export default function QuickActions({ address, onClearLog, onPingAll }) {
 }
 
 QuickActions.propTypes = {
+  QuickActions.defaultProps = {
+    address: null,
+  };
+
+  QuickActions.propTypes = {
   onClearLog: PropTypes.func.isRequired,
   onPingAll: PropTypes.func.isRequired,
   address: PropTypes.string
