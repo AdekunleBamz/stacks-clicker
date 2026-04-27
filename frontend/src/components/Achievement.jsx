@@ -6,17 +6,6 @@ import { motion } from 'framer-motion';
  * Achievement Component
  * Displays individual player milestones
  */
-Achievement.propTypes = {
-    achievement: PropTypes.shape({
-        icon: PropTypes.string,
-        title: PropTypes.string.isRequired,
-        description: PropTypes.string,
-        unlocked: PropTypes.bool,
-        date: PropTypes.string,
-    }).isRequired,
-};
-
-export default memo(Achievement);
 
 function Achievement({ achievement }) {
     const { icon, title, description, unlocked, date } = achievement;
@@ -50,3 +39,15 @@ function Achievement({ achievement }) {
         </motion.div>
     );
 }
+
+Achievement.propTypes = {
+    achievement: PropTypes.shape({
+        icon: PropTypes.string,
+        title: PropTypes.string.isRequired,
+        description: PropTypes.string,
+        unlocked: PropTypes.bool,
+        date: PropTypes.string,
+    }).isRequired,
+};
+
+export default memo(Achievement);
