@@ -1,4 +1,4 @@
-import { useState, memo, useCallback } from 'react';
+import { useState, memo, useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { notify } from '../../utils/toast';
 
@@ -14,6 +14,9 @@ import { notify } from '../../utils/toast';
  */
 function AddressBadge({ address, onDisconnect }) {
   const [copied, setCopied] = useState(false);
+  const timerRef = useRef(null);
+
+  useEffect(() => () => clearTimeout(timerRef.current), []);
 
   /**
    * Copies the full address to the system clipboard and provides visual feedback.
@@ -30,7 +33,7 @@ function AddressBadge({ address, onDisconnect }) {
       .then(() => {
         setCopied(true);
         notify.success('Address copied!');
-        setTimeout(() => setCopied(false), 2000);
+        timerRef.current = setTimeout(() => setCopied(false), 2000);
       })
       .catch(() => notify.error('Unable to copy address'));
   }, [address]);
@@ -44,7 +47,7 @@ function AddressBadge({ address, onDisconnect }) {
         className="address-badge"
         onClick={handleCopy}
         title="Copy address to clipboard"
-        aria-label="Copy wallet address"
+        aria-label={copied ? 'Address copied to clipboard' : 'Copy wallet address'}
       >
         <span className="address-text">
           {address.slice(0, 6)}...{address.slice(-4)}
