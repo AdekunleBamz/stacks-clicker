@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { motion, useSpring, useTransform, animate } from 'framer-motion';
-
 /**
  * Animated number component for smooth counting transitions.
  */
