@@ -68,6 +68,7 @@ function TransactionHistory({ txLog }) {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="tx-explorer-link"
+                        title="Open transaction in Hiro Explorer"
                       >
                         {tx.id.slice(0, 8)}...{tx.id.slice(-6)} ↗
                       </a>
