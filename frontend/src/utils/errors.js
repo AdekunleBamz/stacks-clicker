@@ -21,7 +21,7 @@ const ERROR_MAP = Object.freeze({
   '408': 'Request Timeout: The transaction request timed out. Please retry.',
   '500': 'Network Error: Failed to broadcast the transaction. Please try again.',
   '1001': 'Invalid Amount: Please specify a positive number for this interaction.',
-};
+});
 
 /**
  * Parses a raw error from the Stacks blockchain or wallet provider.
