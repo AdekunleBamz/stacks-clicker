@@ -34,7 +34,7 @@ export default function QuickActions({ address, onClearLog, onPingAll }) {
         />
         <ActionButton
           label="Stacks Docs"
-          icon="💬"
+          icon="�"
           className="secondary btn-sm"
           onClick={() =>
             handleAction(() => window.open('https://stacks.org', '_blank', 'noopener,noreferrer'))
