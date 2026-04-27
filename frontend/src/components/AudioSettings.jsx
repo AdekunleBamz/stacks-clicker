@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import PropTypes from 'prop-types';
 
 /**
  * AudioSettings Component
@@ -24,8 +25,8 @@ export default function AudioSettings({ isOpen, onClose, settings, onUpdate }) {
                         onClick={(e) => e.stopPropagation()}
                     >
                         <div className="panel-header">
-                            <h2>🔊 Audio Settings</h2>
-                            <button className="close-btn" onClick={onClose}>✕</button>
+                            <h2><span aria-hidden="true">🔊</span> Audio Settings</h2>
+                            <button type="button" className="close-btn" onClick={onClose} aria-label="Close audio settings">✕</button>
                         </div>
 
                         <div className="settings-list">
@@ -62,6 +63,9 @@ export default function AudioSettings({ isOpen, onClose, settings, onUpdate }) {
                                     whileTap={{ scale: 0.95 }}
                                     className={`toggle-switch ${settings.sfxEnabled ? 'on' : 'off'}`}
                                     onClick={() => onUpdate('sfxEnabled', !settings.sfxEnabled)}
+                                    type="button"
+                                    aria-pressed={settings.sfxEnabled}
+                                    aria-label="Toggle sound effects"
                                 >
                                     <motion.div
                                         className="toggle-handle"
@@ -83,6 +87,9 @@ export default function AudioSettings({ isOpen, onClose, settings, onUpdate }) {
                                     whileTap={{ scale: 0.95 }}
                                     className={`toggle-switch ${settings.musicEnabled ? 'on' : 'off'}`}
                                     onClick={() => onUpdate('musicEnabled', !settings.musicEnabled)}
+                                    type="button"
+                                    aria-pressed={settings.musicEnabled}
+                                    aria-label="Toggle ambient music"
                                 >
                                     <motion.div
                                         className="toggle-handle"
@@ -100,10 +107,12 @@ export default function AudioSettings({ isOpen, onClose, settings, onUpdate }) {
                                 className="action-btn secondary"
                                 onClick={() => soundEngine.play('click')}
                                 style={{ marginRight: '1rem' }}
+                                type="button"
+                                aria-label="Test sound preview"
                             >
-                                Test Sound 🔊
+                                Test Sound <span aria-hidden="true">🔊</span>
                             </motion.button>
-                            <button className="action-btn primary" onClick={onClose}>Done</button>
+                            <button type="button" className="action-btn primary" onClick={onClose}>Done</button>
                         </div>
                     </motion.div>
                 </motion.div>
@@ -111,3 +120,14 @@ export default function AudioSettings({ isOpen, onClose, settings, onUpdate }) {
         </AnimatePresence>
     );
 }
+
+AudioSettings.propTypes = {
+    isOpen: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
+    settings: PropTypes.shape({
+        masterVolume: PropTypes.number,
+        sfxEnabled: PropTypes.bool,
+        musicEnabled: PropTypes.bool,
+    }).isRequired,
+    onUpdate: PropTypes.func.isRequired,
+};
