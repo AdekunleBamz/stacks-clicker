@@ -211,4 +211,8 @@ QuickPollCard.propTypes = {
   }).isRequired,
 };
 
+QuickPollCard.defaultProps = {
+  address: null,
+};
+
 export default memo(QuickPollCard);
