@@ -22,7 +22,7 @@ export function useBattery() {
     }
 
     let batteryInstance = null;
-    let handleChange = null;
+    let onBatteryChange = null;
     let cancelled = false;
 
     function updateBattery(batt) {
@@ -39,21 +39,19 @@ export function useBattery() {
       if (cancelled) return;
       batteryInstance = batt;
 
-      const handleChange = () => updateBattery(batt);
+      onBatteryChange = () => updateBattery(batt);
 
-      batteryInstance.addEventListener('levelchange', handleChange);
-      batteryInstance.addEventListener('chargingchange', handleChange);
-
-      updateBattery(batt);
+      batteryInstance.addEventListener('levelchange', onBatteryChange);
+      batteryInstance.addEventListener('chargingchange', onBatteryChange);
 
       updateBattery(batt);
     });
 
     return () => {
       cancelled = true;
-      if (batteryInstance && handleChange) {
-        batteryInstance.removeEventListener('levelchange', handleChange);
-        batteryInstance.removeEventListener('chargingchange', handleChange);
+      if (batteryInstance && onBatteryChange) {
+        batteryInstance.removeEventListener('levelchange', onBatteryChange);
+        batteryInstance.removeEventListener('chargingchange', onBatteryChange);
       }
     };
   }, []);
