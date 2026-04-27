@@ -15,6 +15,10 @@ class SoundEngine {
         this.sfxEnabled = settings.sfxEnabled ?? this.sfxEnabled;
     }
 
+    setMuted(isMuted) {
+        this.sfxEnabled = !Boolean(isMuted);
+    }
+
     loadSound(name, url) {
         const audio = new Audio(url);
         audio.preload = 'auto';

@@ -80,3 +80,13 @@ export function getMostFrequentHash(strings) {
   
   return maxHash;
 }
+
+/**
+ * Returns true when the hash of the given string is an even number.
+ *
+ * @param {string} str - Input string
+ * @returns {boolean} True if hash is even
+ */
+export function isHashEven(str) {
+  return simpleHash(str) % 2 === 0;
+}
