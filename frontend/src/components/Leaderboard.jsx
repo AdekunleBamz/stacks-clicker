@@ -24,7 +24,7 @@ function Leaderboard({ players }) {
                 <span className="game-badge">Top Clickers</span>
             </div>
 
-            <div className="leaderboard-list">
+            <div className="leaderboard-list" role="list" aria-label="Top clicker players">
                 {players.map((player, i) => (
                     <motion.div
                         key={player.address}
