@@ -35,7 +35,7 @@ export default function Toast({ toasts = [] }) {
       </AnimatePresence>
     </div>
   );
-});
+}
 
 Toast.propTypes = {
   toasts: PropTypes.arrayOf(
