@@ -54,3 +54,27 @@ export function useDebouncedCallback(callback, delay) {
     [delay]
   );
 }
+
+/**
+ * Returns the pending state of a debounced value — true while the debounce delay is active.
+ *
+ * @param {any} value - The raw (undebounced) value
+ * @param {number} delay - Debounce delay in ms
+ * @returns {{ debouncedValue: any, isPending: boolean }}
+ */
+export function useDebounceWithPending(value, delay) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+  const [isPending, setIsPending] = useState(false);
+
+  useEffect(() => {
+    const resolvedDelay = Number.isFinite(delay) && delay >= 0 ? delay : 300;
+    setIsPending(true);
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+      setIsPending(false);
+    }, resolvedDelay);
+    return () => clearTimeout(handler);
+  }, [value, delay]);
+
+  return { debouncedValue, isPending };
+}
