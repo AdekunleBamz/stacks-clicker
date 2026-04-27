@@ -1,4 +1,5 @@
 import { memo, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import { QRCodeSVG } from 'qrcode.react';
 import { getWalletConnectLink } from '../utils/walletconnect';
 import { notify } from '../utils/toast';
@@ -80,3 +81,13 @@ export default function WalletConnectQRModal({ uri, onClose }) {
     </div>
   );
 }
+
+WalletConnectQRModal.propTypes = {
+  uri: PropTypes.string,
+  onClose: PropTypes.func.isRequired,
+};
+
+WalletConnectQRModal.defaultProps = {
+  uri: '',
+};
+
