@@ -66,3 +66,23 @@ export function isStacksAddress(value) {
 export function isNonEmptyString(value) {
   return typeof value === 'string' && value.trim().length > 0;
 }
+
+/**
+ * Returns true if value is a valid positive number (not including 0).
+ *
+ * @param {*} value
+ * @returns {boolean}
+ */
+export function isPositiveNumber(value) {
+  return typeof value === 'number' && isFinite(value) && value > 0;
+}
+
+/**
+ * Returns true if value is a valid non-negative number (including 0).
+ *
+ * @param {*} value
+ * @returns {boolean}
+ */
+export function isNonNegativeNumber(value) {
+  return typeof value === 'number' && isFinite(value) && value >= 0;
+}
