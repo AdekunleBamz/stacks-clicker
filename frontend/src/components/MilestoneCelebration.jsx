@@ -30,13 +30,12 @@ function MilestoneCelebration({ celebration }) {
   );
 }
 
-MilestoneCelebration.propTypes = {
-  MilestoneCelebration.defaultProps = {
-    celebration: null,
-  };
+MilestoneCelebration.defaultProps = {
+  celebration: null,
+};
 
-  MilestoneCelebration.propTypes = {
-  celebration: PropTypes.string
+MilestoneCelebration.propTypes = {
+  celebration: PropTypes.string,
 };
 
 export default memo(MilestoneCelebration);
