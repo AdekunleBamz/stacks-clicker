@@ -30,5 +30,5 @@ export function useNetworkStatus() {
     };
   }, []);
 
-  return { isOnline, lastChanged, connectionCount, offlineCount };
+  return { isOnline, lastChanged, connectionCount, offlineCount, hasEverGoneOffline: offlineCount > 0 };
 }
