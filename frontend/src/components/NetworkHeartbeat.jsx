@@ -18,9 +18,9 @@ const NetworkHeartbeat = memo(function NetworkHeartbeat() {
 
   return (
     <Tooltip text={heartbeatTitle}>
-      <div className="heartbeat-container" aria-live="polite" aria-atomic="true" aria-label={heartbeatTitle}>
+      <div className="heartbeat-container" aria-live={isConnected ? "polite" : "assertive"} aria-atomic="true" aria-label={heartbeatTitle}>
         <div className={`heartbeat-pulse ${isConnected ? 'online' : 'offline'}`} aria-hidden="true"></div>
-        <div className="heartbeat-info" aria-label="Network Vitality Metadata" aria-live={isConnected ? "off" : "assertive"}>
+        <div className="heartbeat-info">
           <span className="network-name">{isConnected ? network : 'Disconnected'}</span>
           <span className={`block-height ${!blockHeight ? 'shimmer' : ''}`}>{isConnected ? `#${blockHeight}` : 'Offline'}</span>
         </div>
