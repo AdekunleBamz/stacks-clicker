@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { memo } from 'react';
+import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import XPProgress from './XPProgress';
 import LevelBadge from './LevelBadge';
@@ -9,13 +10,13 @@ import Achievement from './Achievement';
  * ProgressDashboard Component
  * Aggregate view for player progression
  */
-export default function ProgressDashboard({ userData }) {
+function ProgressDashboard({ userData }) {
     const { level, xp, nextLevelXP, stats, achievements } = userData;
 
     return (
-        <section className="progress-dashboard">
+        <section className="progress-dashboard" aria-label="Progress Dashboard">
             <div className="dashboard-section-header">
-                <h2>🏆 Progress Dashboard</h2>
+                <h2><span aria-hidden="true">🏆</span> Progress Dashboard</h2>
                 <p>Your journey in the Stacks Ecosystem</p>
             </div>
 
@@ -31,11 +32,23 @@ export default function ProgressDashboard({ userData }) {
             <div className="achievements-section" style={{ marginTop: '3rem' }}>
                 <h3 style={{ marginBottom: '1.5rem', fontWeight: 800 }}>Milestones</h3>
                 <div className="achievements-list">
-                    {achievements.map((ach, i) => (
-                        <Achievement key={i} achievement={ach} />
+                    {achievements.map((ach) => (
+                        <Achievement key={ach.id || ach.title} achievement={ach} />
                     ))}
                 </div>
             </div>
         </section>
     );
 }
+
+ProgressDashboard.propTypes = {
+  userData: PropTypes.shape({
+    level: PropTypes.number,
+    xp: PropTypes.number,
+    nextLevelXP: PropTypes.number,
+    stats: PropTypes.object,
+    achievements: PropTypes.array,
+  }).isRequired,
+};
+
+export default memo(ProgressDashboard);
