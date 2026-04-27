@@ -29,45 +29,12 @@ const ButtonBadge = memo(function ButtonBadge({ count, showDotOnly = false, maxC
           transition={{ type: 'spring', stiffness: 500, damping: 25 }}
           className={`button-badge ${showDotOnly ? 'dot-only' : 'with-count'}`}
           style={{ backgroundColor: color }}
-          aria-label={showDotOnly ? "New notification" : `${count} new notifications`}
+          aria-label={showDotOnly ? 'New notification' : `${count} new notifications`}
+          role="status"
         >
-          {!showDotOnly && <span className="badge-text">{displayCount}</span>}
+          {!showDotOnly && <span className="badge-text" aria-hidden="true">{displayCount}</span>}
         </motion.div>
       )}
-
-      <style jsx>{`
-        .button-badge {
-          position: absolute;
-          top: -4px;
-          right: -4px;
-          border-radius: 9999px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          border: 2px solid var(--bg-card);
-          box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-          pointer-events: none;
-          z-index: 10;
-        }
-
-        .dot-only {
-          width: 10px;
-          height: 10px;
-        }
-
-        .with-count {
-          min-width: 18px;
-          height: 18px;
-          padding: 0 4px;
-        }
-
-        .badge-text {
-          font-size: 0.65rem;
-          font-weight: 800;
-          line-height: 1;
-        }
-      `}</style>
     </AnimatePresence>
   );
 });
