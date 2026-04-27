@@ -35,7 +35,7 @@ export function useKeyboardShortcuts({ isEnabled, actions, playSound }) {
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener('keydown', handleKeyDown, { passive: false });
+    return () => window.removeEventListener('keydown', handleKeyDown, { passive: false });
   }, [isEnabled, actions, playSound]);
 }
