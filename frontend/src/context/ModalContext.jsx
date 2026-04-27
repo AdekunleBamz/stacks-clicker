@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
+import React, { createContext, useContext, useState, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 const ModalContext = createContext(null);
@@ -20,13 +20,13 @@ export const ModalProvider = ({ children }) => {
     setModalData(null);
   }, []);
 
-  const value = {
+  const value = useMemo(() => ({
     activeModal,
     modalData,
     openModal,
     closeModal,
     isOpen: (type) => activeModal === type,
-  };
+  }), [activeModal, modalData, openModal, closeModal]);
 
   return (
     <ModalContext.Provider value={value}>

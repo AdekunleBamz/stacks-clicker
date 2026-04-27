@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
 
@@ -16,6 +16,7 @@ export default function MilestoneCelebration({ celebration }) {
           className="milestone-celebration"
           role="status"
           aria-live="assertive"
+          aria-label={`Milestone reached: ${celebration}`}
           aria-atomic="true"
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -32,3 +33,5 @@ export default function MilestoneCelebration({ celebration }) {
 MilestoneCelebration.propTypes = {
   celebration: PropTypes.string
 };
+
+export default memo(MilestoneCelebration);

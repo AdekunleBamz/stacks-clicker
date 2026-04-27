@@ -44,13 +44,12 @@ function AddressBadge({ address, onDisconnect }) {
         className="address-badge"
         onClick={handleCopy}
         title="Copy address to clipboard"
-        tabIndex={0}
         aria-label="Copy wallet address"
       >
         <span className="address-text">
           {address.slice(0, 6)}...{address.slice(-4)}
         </span>
-        <span className="copy-icon" aria-live="polite">
+        <span className="copy-icon" aria-hidden="true">
           {copied ? '✅' : '📋'}
         </span>
       </button>

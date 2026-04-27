@@ -1,5 +1,6 @@
 import React, { useState, useEffect, memo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useSound } from '../../hooks/useSound';
 
 /**
  * Floating Action Button (FAB) that appears when the user scrolls down,
@@ -10,6 +11,7 @@ import { motion, AnimatePresence } from 'framer-motion';
  * @returns {JSX.Element|null} The rendered scroll-to-top button or null
  */
 const ScrollToTop = memo(function ScrollToTop() {
+  const { playSound } = useSound();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
