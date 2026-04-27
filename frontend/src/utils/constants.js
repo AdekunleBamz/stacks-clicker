@@ -79,6 +79,16 @@ export const CRITICAL_CLICK_CHANCE = 0.05;
 
 export const CRITICAL_CLICK_MULTIPLIER = 5;
 
+/**
+ * Timeout configurations for various async operations (in milliseconds).
+ */
+export const TIMEOUT_CONFIG = Object.freeze({
+  API_CALL: 10_000,
+  WALLET_CONNECT: 30_000,
+  TRANSACTION_CONFIRM: 60_000,
+  NETWORK_RETRY: 3_000,
+});
+
 export const ANIMATION_DURATION_MS = 200;
 
 export const TOAST_DURATION_MS = 3_000;
