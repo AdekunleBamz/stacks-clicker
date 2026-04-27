@@ -2,6 +2,7 @@ import { memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 import SkeletonLoader from './common/SkeletonLoader';
+import { STACKS_NETWORK } from '../utils/constants';
 
 /**
  * Component to display a list of recent transactions with status indicators.
@@ -53,18 +54,18 @@ function TransactionHistory({ txLog }) {
                         <span className="step-dot"></span>
                         <span className="step-label">Submitted</span>
                       </div>
-                      <div className={`step ${tx.id.startsWith('pending') ? 'pending' : 'active'}`}>
+                      <div className={`step ${tx.id?.startsWith('pending') ? 'pending' : 'active'}`}>
                         <span className="step-dot"></span>
                         <span className="step-label">Mempool</span>
                       </div>
-                      <div className={`step ${tx.id.startsWith('pending') ? '' : 'active'}`}>
+                      <div className={`step ${tx.id?.startsWith('pending') ? '' : 'active'}`}>
                         <span className="step-dot"></span>
                         <span className="step-label">Confirmed</span>
                       </div>
                     </div>
-                    {!tx.id.startsWith('pending') && (
+                    {tx.id && !tx.id.startsWith('pending') && (
                       <a
-                        href={`https://explorer.hiro.so/txid/${tx.id}?chain=mainnet`}
+                        href={`https://explorer.hiro.so/txid/${tx.id}?chain=${STACKS_NETWORK}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="tx-explorer-link"
