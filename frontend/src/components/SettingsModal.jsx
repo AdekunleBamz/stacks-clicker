@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Modal from './common/Modal';
 import { useModal } from '../context/ModalContext';
 import { useTheme } from '../hooks/useTheme';
@@ -27,28 +27,32 @@ const SettingsModal = () => {
       onClose={closeModal}
       title="⚙️ Application Settings"
     >
-      <div className="settings-container">
+      <div className="settings-container" role="form" aria-label="Application settings">
         <section className="settings-section">
           <h4 className="settings-label">Appearance</h4>
           <div className="settings-row">
-            <span>Theme Mode</span>
+            <span id="theme-mode-label">Theme Mode</span>
             <button 
+              type="button"
               className="theme-toggle-btn secondary-button btn-sm"
               onClick={toggleTheme}
+              title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+              aria-labelledby="theme-mode-label"
             >
-              {theme === 'dark' ? '🌙 Dark' : '☀️ Light'}
+              {theme === 'dark' ? <><span aria-hidden="true">🌙</span> Dark</> : <><span aria-hidden="true">☀️</span> Light</>}
             </button>
           </div>
         </section>
 
-        <section className="settings-section">
-          <h4 className="settings-label">Localization</h4>
+        <section className="settings-section" aria-labelledby="settings-l10n-label">
+          <h4 className="settings-label" id="settings-l10n-label">Localization</h4>
           <div className="settings-row">
             <span>Preferred Language</span>
             <select 
               className="lang-select-input input-field"
               value={lang}
               onChange={(e) => handleLanguageChange(e.target.value)}
+              aria-label="Preferred language"
             >
               <option value="en">English</option>
               <option value="es">Español</option>
@@ -58,13 +62,13 @@ const SettingsModal = () => {
           </div>
         </section>
 
-        <section className="settings-section">
-          <h4 className="settings-label">Acoustics</h4>
+        <section className="settings-section" aria-labelledby="settings-acoustics-label">
+          <h4 className="settings-label" id="settings-acoustics-label">Acoustics</h4>
           <div className="settings-row">
             <span>Interaction Sounds</span>
             <div className="toggle-switch">
               {/* Simplified toggle for demonstration */}
-              <button className="secondary-button btn-sm">Enabled</button>
+              <button type="button" className="secondary-button btn-sm" aria-label="Toggle interaction sounds">Enabled</button>
             </div>
           </div>
         </section>
