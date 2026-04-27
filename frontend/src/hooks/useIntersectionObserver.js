@@ -18,6 +18,7 @@ export function useIntersectionObserver({
 } = {}) {
   const safeThreshold = Number.isFinite(threshold) ? Math.min(1, Math.max(0, threshold)) : 0.1;
   const [isIntersecting, setIntersecting] = useState(false);
+  const [intersectionRatio, setIntersectionRatio] = useState(0);
   const elementRef = useRef(null);
 
   useEffect(() => {
@@ -27,6 +28,7 @@ export function useIntersectionObserver({
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIntersecting(entry.isIntersecting);
+        setIntersectionRatio(entry.intersectionRatio);
         if (entry.isIntersecting && triggerOnce) {
           observer.unobserve(element);
         }
@@ -43,5 +45,5 @@ export function useIntersectionObserver({
     };
   }, [root, rootMargin, safeThreshold, triggerOnce]);
 
-  return [elementRef, isIntersecting];
+  return [elementRef, isIntersecting, intersectionRatio];
 }
