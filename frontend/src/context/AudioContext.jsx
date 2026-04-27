@@ -4,12 +4,16 @@ const AudioContext = createContext();
 
 export function AudioProvider({ children }) {
     const [settings, setSettings] = useState(() => {
-        const saved = localStorage.getItem('audio-settings');
-        return saved ? JSON.parse(saved) : {
-            masterVolume: 0.5,
-            sfxEnabled: true,
-            musicEnabled: false
-        };
+        try {
+            const saved = localStorage.getItem('audio-settings');
+            return saved ? JSON.parse(saved) : {
+                masterVolume: 0.5,
+                sfxEnabled: true,
+                musicEnabled: false
+            };
+        } catch {
+            return { masterVolume: 0.5, sfxEnabled: true, musicEnabled: false };
+        }
     });
 
     useEffect(() => {
