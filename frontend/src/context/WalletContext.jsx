@@ -53,7 +53,7 @@ export function WalletProvider({ children }) {
             : userData?.addresses?.mainnet || userData?.addresses?.testnet;
 
         if (nextAddress) {
-          setAddress(nextAddress);
+          setAddress(nextAddress.trim());
           return;
         }
       }
