@@ -61,7 +61,7 @@ function TransactionItem({
           </div>
           <div className="tx-actions-inline">
             <button type="button" className="text-btn" onClick={() => onDetails(tx)} title="View full transaction details">
-              View Details <span>→</span>
+              View Details <span aria-hidden="true">→</span>
             </button>
             <span className="tx-action-separator">•</span>
             <button type="button" className="text-btn" onClick={() => onCopy(tx.id)} aria-label="Copy transaction ID" title="Copy transaction ID to clipboard">
