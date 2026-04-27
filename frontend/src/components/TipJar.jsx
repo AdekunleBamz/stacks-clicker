@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useWallet } from '../context/WalletContext';
 import { callContract } from '../utils/walletconnect';
+import { useSound } from '../context/AudioContext';
 import CountUp from './CountUp';
 
 const DEPLOYER = 'SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N';
@@ -15,6 +16,7 @@ const DEPLOYER = 'SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N';
  */
 export default function TipJar({ onTxSubmit }) {
   const { isConnected } = useWallet();
+  const { play } = useSound();
   const [loading, setLoading] = useState(false);
   const [tipAmount, setTipAmount] = useState(1000); // 1000 uSTX = 0.001 STX
   const [recipientAddress, setRecipientAddress] = useState('');
@@ -34,10 +36,10 @@ export default function TipJar({ onTxSubmit }) {
 
       setTotalTipped((prev) => prev + 1000);
       onTxSubmit?.('quick-tip', result.txId);
-      soundEngine.play('success');
+      play('success');
     } catch (err) {
       console.error('Quick tip failed:', err);
-      soundEngine.play('error');
+      play('error');
     } finally {
       setLoading(false);
     }
@@ -56,10 +58,10 @@ export default function TipJar({ onTxSubmit }) {
       });
 
       onTxSubmit?.('self-ping', result.txId);
-      soundEngine.play('success');
+      play('success');
     } catch (err) {
       console.error('Self-ping failed:', err);
-      soundEngine.play('error');
+      play('error');
     } finally {
       setLoading(false);
     }
