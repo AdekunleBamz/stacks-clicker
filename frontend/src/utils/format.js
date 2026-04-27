@@ -229,8 +229,6 @@ export const formatPrestigeCount = (n) => "Prestige " + n;
 
 export const formatSessionTime = (ms) => Math.floor(ms / 60000) + "m " + Math.floor((ms % 60000) / 1000) + "s";
 
-export const formatClickRate = (cps) => Number(cps).toFixed(1) + " clicks/s";
-
 export const formatLevel = (lvl) => "Lv." + Math.max(0, Math.floor(Number(lvl)));
 
 export const formatPlayerTag = (id) => "Player #" + Number(id);
