@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -8,11 +8,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 export default function FloatingActionButton({ onAction = () => {} }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const actions = [
+  const handleClose = useCallback(() => setIsOpen(false), []);
+
+  const actions = useMemo(() => [
     { id: 'ping', icon: '📡', label: 'Ping All', onClick: () => onAction('ping') },
     { id: 'clear', icon: '🗑️', label: 'Clear', onClick: () => onAction('clear') },
     { id: 'top', icon: '⬆️', label: 'Top', onClick: () => window.scrollTo({ top: 0, behavior: 'smooth' }) },
-  ];
+  ], [onAction]);
 
   return (
     <div className="fab-container">
@@ -33,7 +35,7 @@ export default function FloatingActionButton({ onAction = () => {} }) {
                 transition={{ delay: index * 0.05 }}
                 onClick={() => {
                   action.onClick();
-                  setIsOpen(false);
+                  handleClose();
                 }}
               >
                 <span className="fab-label">{action.label}</span>
