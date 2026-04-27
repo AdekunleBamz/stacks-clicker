@@ -62,3 +62,16 @@ export function useBattery() {
 
   return battery;
 }
+
+/**
+ * Returns a string label summarizing battery status for display.
+ *
+ * @param {{ level: number, charging: boolean, isCritical: boolean, isLowBattery: boolean }} battery
+ * @returns {string}
+ */
+export function getBatteryStatusLabel({ level, charging, isCritical, isLowBattery } = {}) {
+  if (charging) return `Charging (${Math.round((level ?? 1) * 100)}%)`;
+  if (isCritical) return `Critical (${Math.round((level ?? 0) * 100)}%)`;
+  if (isLowBattery) return `Low battery (${Math.round((level ?? 0) * 100)}%)`;
+  return `${Math.round((level ?? 1) * 100)}%`;
+}

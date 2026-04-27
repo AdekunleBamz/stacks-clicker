@@ -47,7 +47,9 @@ const TransactionModal = memo(() => {
         <div className="detail-row">
           <span className="detail-label">Time</span>
           <span className="detail-value">
-            {new Date(timestamp).toLocaleString()}
+            <time dateTime={new Date(timestamp).toISOString()}>
+              {new Date(timestamp).toLocaleString()}
+            </time>
           </span>
         </div>
 

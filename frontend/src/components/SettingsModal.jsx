@@ -16,6 +16,8 @@ const SettingsModal = memo(function SettingsModal() {
 
   if (!isOpen('settings')) return null;
 
+  const themeLabel = theme === 'dark' ? 'dark' : 'light';
+
   const handleLanguageChange = (newLang) => {
     setLang(newLang);
     playSound('click');
@@ -39,6 +41,7 @@ const SettingsModal = memo(function SettingsModal() {
               title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
               aria-labelledby="theme-mode-label"
               aria-pressed={theme === 'dark'}
+              aria-description={`Current theme: ${themeLabel}`}
             >
               {theme === 'dark' ? <><span aria-hidden="true">🌙</span> Dark</> : <><span aria-hidden="true">☀️</span> Light</>}
             </button>

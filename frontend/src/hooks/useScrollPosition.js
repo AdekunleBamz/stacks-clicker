@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 /**
  * Custom hook for tracking the window scroll position.
@@ -52,4 +52,23 @@ export function useIsAtBottom(threshold = 50) {
   if (typeof window === 'undefined' || typeof document === 'undefined') return false;
   const distanceFromBottom = document.documentElement.scrollHeight - window.innerHeight - y;
   return distanceFromBottom <= threshold;
+}
+
+/**
+ * Custom hook that returns the scroll direction ('up', 'down', or null on init).
+ *
+ * @returns {'up' | 'down' | null}
+ */
+export function useScrollDirection() {
+  const { y } = useScrollPosition();
+  const [direction, setDirection] = useState(null);
+  const prevY = useRef(y);
+
+  useEffect(() => {
+    if (y > prevY.current) setDirection('down');
+    else if (y < prevY.current) setDirection('up');
+    prevY.current = y;
+  }, [y]);
+
+  return direction;
 }
