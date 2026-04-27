@@ -20,7 +20,7 @@ export function useQuickPoll({ onTxSubmit } = {}) {
     setLoadingStates((prev) => ({ ...prev, [key]: val }));
   };
 
-  const executeAction = async (key, functionName, functionArgs = []) => {
+  const executeAction = useCallback(async (key, functionName, functionArgs = []) => {
     if (!isConnected) return;
     setLoading(key, true);
     try {
@@ -38,7 +38,7 @@ export function useQuickPoll({ onTxSubmit } = {}) {
     } finally {
       setLoading(key, false);
     }
-  }, [onTxSubmit]);
+  }, [isConnected, onTxSubmit]);
 
   const vote = useCallback((pollId, option) => {
     const voteYesFlag = option === true || option === 1 || option === 'yes';
@@ -56,8 +56,8 @@ export function useQuickPoll({ onTxSubmit } = {}) {
 
   return {
     isLoading: (key) => !!loadingStates[key],
-    voteYes: () => executeAction('quickpoll-vote-yes', 'vote-yes'),
-    voteNo: () => executeAction('quickpoll-vote-no', 'vote-no'),
-    ping: () => executeAction('quickpoll-ping', 'poll-ping'),
+    vote,
+    createPoll,
+    handlePollPing,
   };
 }
