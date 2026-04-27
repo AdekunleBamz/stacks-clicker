@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import { getWalletConnectLink } from '../utils/walletconnect';
 import { notify } from '../utils/toast';
