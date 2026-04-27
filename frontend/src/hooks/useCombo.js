@@ -46,5 +46,6 @@ export function useCombo({ timeout = COMBO_WINDOW_MS } = {}) {
     incrementCombo,
     resetCombo,
     isActive: combo > 0,
+    hasPendingReset: timerRef.current !== null,
   };
 }
