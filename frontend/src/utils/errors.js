@@ -85,6 +85,18 @@ export function getErrorCode(error) {
   return match ? match[0] : null;
   }
 
+/**
+ * Returns true if an error appears retryable based on known transient codes.
+ *
+ * @param {any} error - Error object or message
+ * @returns {boolean} True when retrying may succeed
+ */
+export function isRetryableError(error) {
+  const retryableCodes = new Set(['408', '500']);
+  const code = getErrorCode(error);
+  return code ? retryableCodes.has(code) : false;
+}
+
   if (lowerMessage.includes('disconnected') || lowerMessage.includes('connection lost')) {
     return 'Wallet Disconnected: Please reconnect your wallet and try again.';
   }
