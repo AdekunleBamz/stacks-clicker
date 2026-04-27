@@ -1,4 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
+import PropTypes from 'prop-types';
 
 /**
  * Reusable action button component with motion effects.
@@ -53,3 +54,13 @@ export default function ActionButton({
     </motion.button>
   );
 }
+
+ActionButton.propTypes = {
+  label: PropTypes.string.isRequired,
+  icon: PropTypes.node,
+  onClick: PropTypes.func,
+  isLoading: PropTypes.bool,
+  disabled: PropTypes.bool,
+  className: PropTypes.string,
+  cost: PropTypes.string,
+};
