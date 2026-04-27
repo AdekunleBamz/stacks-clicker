@@ -10,6 +10,7 @@
  * @returns {number} 32-bit hash value
  */
 export function simpleHash(str) {
+  if (!str || typeof str !== 'string') return 0;
   let hash = 5381;
   for (let i = 0; i < str.length; i++) {
     hash = (hash * 33) ^ str.charCodeAt(i);

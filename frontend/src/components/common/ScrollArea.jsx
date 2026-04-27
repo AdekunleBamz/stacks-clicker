@@ -16,7 +16,6 @@ const ScrollArea = memo(function ScrollArea({ children, className = '', style = 
     clientWidth: 0,
   });
   const [isHovered, setIsHovered] = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
 
   const handleScroll = useCallback(() => {
     if (scrollRef.current) {
@@ -61,7 +60,7 @@ const ScrollArea = memo(function ScrollArea({ children, className = '', style = 
       </div>
 
       {showVerticalThumb && orientation !== 'horizontal' && (
-        <div className={`scroll-track vertical ${isHovered || isDragging ? 'visible' : ''}`}>
+        <div className={`scroll-track vertical ${isHovered ? 'visible' : ''}`}>
           <div 
             className="scroll-thumb"
             style={{ 
@@ -73,7 +72,7 @@ const ScrollArea = memo(function ScrollArea({ children, className = '', style = 
       )}
 
       {showHorizontalThumb && orientation !== 'vertical' && (
-        <div className={`scroll-track horizontal ${isHovered || isDragging ? 'visible' : ''}`}>
+        <div className={`scroll-track horizontal ${isHovered ? 'visible' : ''}`}>
           <div 
             className="scroll-thumb"
             style={{ 

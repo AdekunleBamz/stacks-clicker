@@ -26,8 +26,10 @@ export function useMedia(query) {
       };
     }
 
+    // Legacy Safari fallback
+    media.addListener(listener);
     return () => {
-      media.removeEventListener('change', listener);
+      media.removeListener(listener);
     };
   }, [trimmedQuery]);
 
