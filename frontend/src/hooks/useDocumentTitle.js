@@ -13,6 +13,7 @@ export function useDocumentTitle({ title, count = 0, restoreOnUnmount = true }) 
   const previousTitle = useRef(typeof document !== 'undefined' ? document.title : '');
 
   useEffect(() => {
+    if (typeof document === 'undefined') return;
     if (!title || typeof title !== 'string') return;
     const trimmedTitle = title.trim();
     if (!trimmedTitle) return;
