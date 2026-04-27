@@ -42,4 +42,10 @@ XPProgress.propTypes = {
   level: PropTypes.number.isRequired,
 };
 
+XPProgress.defaultProps = {
+  currentXP: 0,
+  nextLevelXP: 100,
+  level: 1,
+};
+
 export default memo(XPProgress);
