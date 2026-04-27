@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import ActionButton from './common/ActionButton';
 import { useSound } from '../hooks/useSound';
@@ -16,7 +15,7 @@ export default function QuickActions({ address, onClearLog, onPingAll }) {
 
   return (
     <div className="quick-actions-panel" role="region" aria-label="Quick tools panel" title="Quick utility actions">
-      <h4 className="panel-title">⚡ Quick Tools</h4>
+      <h4 className="panel-title"><span aria-hidden="true">⚡</span> Quick Tools</h4>
       <div className="actions-stack">
         <ActionButton
           label="Ping All"
@@ -24,7 +23,7 @@ export default function QuickActions({ address, onClearLog, onPingAll }) {
           className="secondary btn-sm"
           onClick={() => handleAction(onPingAll)}
           disabled={!address}
-          isLoading={!address}
+          isLoading={false}
         />
         <ActionButton
           label="Clear Log"
