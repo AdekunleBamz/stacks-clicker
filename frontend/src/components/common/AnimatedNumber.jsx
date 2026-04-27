@@ -31,6 +31,7 @@ const AnimatedNumber = ({ value, duration = 1 }) => {
       role="status"
       aria-live="polite"
       aria-atomic="true"
+      aria-label={typeof value === 'number' ? value.toLocaleString() : String(value)}
       className="animated-number"
     >
       {typeof value === 'number' ? displayValue.toLocaleString() : value}
