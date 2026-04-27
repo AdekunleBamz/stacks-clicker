@@ -39,6 +39,13 @@ const ButtonBadge = memo(function ButtonBadge({ count, showDotOnly = false, maxC
   );
 });
 
+ButtonBadge.defaultProps = {
+  count: 0,
+  showDotOnly: false,
+  maxCount: 99,
+  color: 'var(--error)',
+};
+
 ButtonBadge.propTypes = {
   count: PropTypes.number,
   showDotOnly: PropTypes.bool,
