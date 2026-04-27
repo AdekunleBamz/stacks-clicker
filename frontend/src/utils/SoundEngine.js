@@ -29,6 +29,12 @@ class SoundEngine {
         sound.volume = this.masterVolume;
         sound.play().catch(e => console.warn('Audio playback failed:', e));
     }
+
+    stop(name) {
+        if (!this.sounds[name]) return;
+        this.sounds[name].pause();
+        this.sounds[name].currentTime = 0;
+    }
 }
 
 const engine = new SoundEngine();
