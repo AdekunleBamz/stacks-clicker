@@ -20,7 +20,7 @@ function Leaderboard({ players }) {
     return (
         <div className="game-card leaderboard">
             <div className="game-header">
-                <h2>🏆 Hall of Fame</h2>
+                <h2><span aria-hidden="true">🏆</span> Hall of Fame</h2>
                 <span className="game-badge">Top Clickers</span>
             </div>
 
