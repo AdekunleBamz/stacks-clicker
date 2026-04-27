@@ -46,6 +46,17 @@ const translations = Object.freeze({
     loading: 'Carregando...',
     error: 'Algo deu errado',
   },
+  de: {
+    welcome: 'Willkommen bei Stacks Clicker V2',
+    accessibility_mode: 'Barrierefreiheitsmodus',
+    interactions: 'Interaktionen',
+    stats: 'Statistiken',
+    recent_activity: 'Letzte Aktivität',
+    connect_wallet: 'Wallet verbinden',
+    disconnect: 'Trennen',
+    loading: 'Wird geladen...',
+    error: 'Etwas ist schiefgelaufen',
+  },
 });
 
 const I18nContext = createContext(null);
