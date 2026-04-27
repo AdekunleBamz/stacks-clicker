@@ -106,6 +106,13 @@ StatsCard.propTypes = {
   tooltip: PropTypes.string
 };
 
+StatsCard.defaultProps = {
+  isPrice: false,
+  isGrowing: false,
+  index: 0,
+  tooltip: undefined,
+};
+
 StatsCard.displayName = 'StatsCard';
 
 export default memo(StatsCard);
