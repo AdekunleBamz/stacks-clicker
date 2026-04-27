@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useMemo } from 'react';
+import { createContext, useContext, useMemo } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
 const translations = Object.freeze({
