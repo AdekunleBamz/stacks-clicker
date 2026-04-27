@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { showConnect, disconnect } from '@stacks/connect';
 import toast from 'react-hot-toast';

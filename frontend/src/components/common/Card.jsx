@@ -1,4 +1,4 @@
-import React, { useId, memo } from 'react';
+import { useId, memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 

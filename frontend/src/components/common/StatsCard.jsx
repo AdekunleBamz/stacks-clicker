@@ -1,4 +1,4 @@
-import React, { useEffect, useState, memo } from 'react';
+import { useEffect, useState, memo } from 'react';
 import { motion, animate } from 'framer-motion';
 import PropTypes from 'prop-types';
 import AnimatedNumber from './AnimatedNumber';
