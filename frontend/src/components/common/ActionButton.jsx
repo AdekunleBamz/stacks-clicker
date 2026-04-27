@@ -15,6 +15,7 @@ export default function ActionButton({
 }) {
   return (
     <motion.button
+      type="button"
       className={`action-btn ${className}`}
       onClick={onClick}
       disabled={disabled || isLoading}
