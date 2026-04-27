@@ -33,6 +33,7 @@ function LevelBadge({ level }) {
                 <motion.div
                     key={i}
                     className="level-particle"
+                    aria-hidden="true"
                     animate={{
                         rotate: 360,
                     }}
