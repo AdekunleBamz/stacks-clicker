@@ -43,7 +43,7 @@ const BaseModal = memo(function BaseModal({ isOpen, onClose, title, children, fo
   if (!isOpen) return null;
 
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       {isOpen && (
         <motion.div
           key="modal-overlay"
