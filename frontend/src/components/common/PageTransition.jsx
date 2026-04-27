@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 
@@ -28,4 +28,4 @@ PageTransition.propTypes = {
   className: PropTypes.string
 };
 
-export default PageTransition;
+export default memo(PageTransition);
