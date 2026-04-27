@@ -108,6 +108,8 @@
   (default-to u0 (map-get? user-vote-count user))
 )
 
+;; @desc Retrieves the current voting results (yes, no, total).
+;; @returns (response {yes: uint, no: uint, total: uint} uint)
 (define-read-only (get-results)
   {
     yes: (var-get yes-votes),
@@ -116,6 +118,8 @@
   }
 )
 
+;; @desc Provides a comprehensive summary of poll metrics and fee data.
+;; @returns (response {total-votes: uint, yes-votes: uint, no-votes: uint, fees-collected: uint, unique-voters: uint} uint)
 (define-read-only (get-stats)
   {
     total-votes: (var-get total-votes),
@@ -126,6 +130,8 @@
   }
 )
 
+;; @desc Returns general contract metadata and current state.
+;; @returns (response {name: (string-ascii 16), version: uint, total-votes: uint, yes-votes: uint, no-votes: uint, unique-voters: uint, fee: uint, last-activity: uint, owner: principal} uint)
 (define-read-only (get-contract-info)
   {
     name: CONTRACT-NAME,
