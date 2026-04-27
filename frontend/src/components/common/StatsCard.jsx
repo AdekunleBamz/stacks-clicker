@@ -42,7 +42,6 @@ function StatsCard({ label, value, icon, color, isPrice = false, isGrowing = fal
     <motion.div
       ref={measureRef}
       className={`stat-card glass-card ${isGrowing ? 'stat-growing' : ''}`}
-      tabIndex={0}
       role="article"
       aria-labelledby={`stat-label-${index}`}
       aria-describedby={`stat-value-${index}`}
@@ -58,7 +57,7 @@ function StatsCard({ label, value, icon, color, isPrice = false, isGrowing = fal
         '--card-height': `${height}px`
       }}
     >
-      <div className="stat-icon" style={{ filter: `drop-shadow(0 0 8px ${color}44)` }}>
+      <div className="stat-icon" style={{ filter: `drop-shadow(0 0 8px ${color}44)` }} aria-hidden="true">
         {icon}
       </div>
       <div className="stat-content">
