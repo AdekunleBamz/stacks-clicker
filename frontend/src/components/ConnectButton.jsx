@@ -115,6 +115,7 @@ export default function ConnectButton() {
             className="connect-btn primary-button"
             onClick={handleConnect}
             aria-label={isConnecting ? 'Connecting wallet...' : 'Connect Stacks Wallet'}
+            title={isConnecting ? 'Connecting wallet' : 'Connect Stacks wallet'}
             aria-haspopup="dialog"
             aria-busy={isConnecting}
             disabled={isConnecting}
