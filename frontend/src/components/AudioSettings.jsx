@@ -1,12 +1,14 @@
 import { memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
+import { useSound } from '../hooks/useSound';
 
 /**
  * AudioSettings Component
  * Control panel for game sounds and music
  */
 export default function AudioSettings({ isOpen, onClose, settings, onUpdate }) {
+    const { playSound } = useSound();
     return (
         <AnimatePresence>
             {isOpen && (
@@ -105,7 +107,7 @@ export default function AudioSettings({ isOpen, onClose, settings, onUpdate }) {
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 className="action-btn secondary"
-                                onClick={() => soundEngine.play('click')}
+                                onClick={() => playSound('click')}
                                 style={{ marginRight: '1rem' }}
                                 type="button"
                                 aria-label="Test sound preview"
