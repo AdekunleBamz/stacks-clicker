@@ -20,6 +20,9 @@ export function useNotifications() {
       case 'loading':
         notify.loading(message);
         break;
+      case 'warning':
+        notify.error(message);
+        break;
       default:
         notify.info(message);
     }

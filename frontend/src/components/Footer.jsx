@@ -9,15 +9,16 @@ import versionData from '../version.json';
  * @component
  * @returns {JSX.Element} The rendered footer
  */
+/** @type {string} */
 const VERSION = versionData.version || '1.0.0';
-const CURRENT_YEAR = new Date().getFullYear();
 
 const Footer = memo(function Footer() {
+  const currentYear = new Date().getFullYear();
   return (
     <footer className="app-footer" role="contentinfo" aria-label="Global Application Footer">
       <div className="footer-content">
         <div className="footer-left">
-          <p>Built with <span role="img" aria-label="love">❤️</span> on Stacks • {CURRENT_YEAR}</p>
+          <p>Built with <span role="img" aria-label="love">❤️</span> on Stacks • {currentYear}</p>
           <span className="app-version" title="Current Interface Version" style={{ opacity: 0.9 }}>v{VERSION}</span>
         </div>
         <div className="footer-links" role="navigation" aria-label="Community links">

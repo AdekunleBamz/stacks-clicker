@@ -25,6 +25,9 @@ export default function AudioSettings({ isOpen, onClose, settings, onUpdate }) {
                         animate={{ scale: 1, y: 0 }}
                         exit={{ scale: 0.9, y: 20 }}
                         onClick={(e) => e.stopPropagation()}
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label="Audio Settings"
                     >
                         <div className="panel-header">
                             <h2><span aria-hidden="true">🔊</span> Audio Settings</h2>

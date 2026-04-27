@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
+import { truncateAddress } from '../utils/format';
 
 /**
  * Leaderboard Component
@@ -15,6 +16,9 @@ function Leaderboard({ players }) {
             </div>
 
             <div className="leaderboard-list" role="list" aria-label="Top clicker players">
+                {players.length === 0 && (
+                    <p className="leaderboard-empty" role="listitem">No players yet. Be the first!</p>
+                )}
                 {players.map((player, i) => (
                     <motion.div
                         key={player.address}
@@ -26,7 +30,7 @@ function Leaderboard({ players }) {
                     >
                         <div className="rank-indicator" aria-label={`Rank ${i + 1}`}>{i + 1}</div>
                         <div className="player-info">
-                            <span className="player-address">{player.address}</span>
+                            <span className="player-address" title={player.address}>{truncateAddress(player.address, 6)}</span>
                             <span className="player-stats">{player.clicks} Clicks • LVL {player.level}</span>
                         </div>
                         {i < 3 && <div className="medal-icon" aria-hidden="true">{i === 0 ? '🥇' : i === 1 ? '🥈' : '🥉'}</div>}

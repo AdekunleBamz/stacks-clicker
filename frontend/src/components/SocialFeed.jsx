@@ -15,6 +15,9 @@ function SocialFeed({ activities }) {
             </div>
 
             <div className="activity-list" role="feed" aria-label="Community live activity">
+                {activities.length === 0 && (
+                    <p className="feed-empty" role="article">No recent activity. Start interacting!</p>
+                )}
                 <AnimatePresence initial={false}>
                     {activities.map((activity) => (
                         <motion.div
