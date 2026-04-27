@@ -57,7 +57,7 @@ function InteractionStreaks({ totalInteractions }) {
           <span className="streak-label" id="streak-label-desc" aria-hidden="true">Streak</span>
         </div>
       </div>
-      <div className="badges-grid">
+      <div className="badges-grid" role="list" aria-label="Earned achievement badges">
         <AnimatePresence>
           {badges.map(badge => (
             <motion.div
