@@ -56,3 +56,13 @@ export function isStacksAddress(value) {
   export function isPositiveInteger(value) {
     return Number.isInteger(value) && value > 0;
   }
+
+/**
+ * Returns true if value is a non-empty string after trimming.
+ *
+ * @param {*} value
+ * @returns {boolean}
+ */
+export function isNonEmptyString(value) {
+  return typeof value === 'string' && value.trim().length > 0;
+}

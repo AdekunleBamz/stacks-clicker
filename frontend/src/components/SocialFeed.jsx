@@ -55,7 +55,11 @@ SocialFeed.propTypes = {
         user: PropTypes.string,
         text: PropTypes.string,
         time: PropTypes.string,
-    })).isRequired,
+    })),
+};
+
+SocialFeed.defaultProps = {
+    activities: [],
 };
 
 export default memo(SocialFeed);

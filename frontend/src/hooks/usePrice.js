@@ -87,5 +87,9 @@ export function usePrice() {
     ? Date.now() - lastFetched > PRICE_REFRESH_INTERVAL_MS * 2
     : false;
 
-  return { price, loading, error, lastFetched, stxValueOf, isStale };
+  const formattedPrice = price !== null && Number.isFinite(price)
+    ? new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 4 }).format(price)
+    : null;
+
+  return { price, loading, error, lastFetched, stxValueOf, isStale, formattedPrice };
 }
