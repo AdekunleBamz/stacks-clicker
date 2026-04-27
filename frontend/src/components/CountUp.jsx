@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, memo } from 'react';
+import { useEffect, useState, useRef, memo } from 'react';
 import { animate } from 'framer-motion';
 import PropTypes from 'prop-types';
 
