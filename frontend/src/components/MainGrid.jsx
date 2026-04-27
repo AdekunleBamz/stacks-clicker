@@ -1,3 +1,5 @@
+import { memo } from 'react';
+import PropTypes from 'prop-types';
 import { motion, LayoutGroup } from 'framer-motion';
 import InteractionStreaks from './InteractionStreaks';
 import ClickerCard from './ClickerCard';
