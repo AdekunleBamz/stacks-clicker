@@ -87,6 +87,10 @@ const PullToRefresh = memo(function PullToRefresh({ onRefresh, children }) {
   );
 });
 
+PullToRefresh.defaultProps = {
+  children: null,
+};
+
 PullToRefresh.propTypes = {
   onRefresh: PropTypes.func.isRequired,
   children: PropTypes.node

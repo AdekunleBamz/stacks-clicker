@@ -14,10 +14,12 @@ export function useLockBodyScroll(isLocked = true) {
 
     // Prevent scrolling on mount
     document.body.style.overflow = 'hidden';
+    document.body.style.touchAction = 'none';
 
     // Re-enable scrolling on unmount
     return () => {
       document.body.style.overflow = originalStyle;
+      document.body.style.touchAction = '';
     };
   }, [isLocked]);
 }

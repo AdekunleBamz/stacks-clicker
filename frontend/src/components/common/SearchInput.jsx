@@ -52,6 +52,11 @@ function SearchInput({ value, onChange, onClear, placeholder = 'Search...', coun
   );
 }
 
+SearchInput.defaultProps = {
+  placeholder: 'Search...',
+  count: undefined,
+};
+
 SearchInput.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,

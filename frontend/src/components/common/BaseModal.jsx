@@ -119,6 +119,13 @@ function ModalContent({ onClose, title, children, footer, className, closeBtnRef
   );
 }
 
+BaseModal.defaultProps = {
+  onClose: undefined,
+  title: '',
+  footer: null,
+  className: '',
+};
+
 BaseModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func,

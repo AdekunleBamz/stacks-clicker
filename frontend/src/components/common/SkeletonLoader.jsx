@@ -61,6 +61,16 @@ function SkeletonLoader({
   );
 }
 
+SkeletonLoader.defaultProps = {
+  width: '100%',
+  height: '20px',
+  borderRadius: '8px',
+  className: '',
+  label: 'content',
+  gradientAngle: 90,
+  shimmerColor: 'rgba(255, 255, 255, 0.05)',
+};
+
 SkeletonLoader.propTypes = {
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

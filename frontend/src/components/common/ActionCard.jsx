@@ -38,6 +38,13 @@ function ActionCard({ title, subtitle, icon, iconClass, children }) {
   );
 }
 
+ActionCard.defaultProps = {
+  subtitle: '',
+  icon: null,
+  iconClass: '',
+  children: null,
+};
+
 ActionCard.propTypes = {
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string,
