@@ -165,6 +165,9 @@
 ;; ============================================
 
 ;; Simple click - costs 0.0001 STX
+;; @desc Increments the global click counter and the user's personal counter.
+;; @desc Costs a fixed interaction fee defined in the contract.
+;; @returns (ok uint) The new personal click count of the sender.
 (define-public (click)
   (let
     (
@@ -199,6 +202,10 @@
 )
 
 ;; Multi-click - costs 0.0001 STX (capped at 100)
+;; @desc Performs multiple clicks in a single transaction, up to a defined maximum.
+;; @desc Costs a fixed interaction fee regardless of count.
+;; @param count The number of clicks to perform.
+;; @returns (ok uint) The actual number of clicks added (capped by MAX-MULTI-CLICK).
 (define-public (multi-click (count uint))
   (let
     (
@@ -235,6 +242,9 @@
 )
 
 ;; Reset streak - costs 0.0001 STX
+;; @desc Resets the user's interaction streak to zero.
+;; @desc Costs a fixed interaction fee.
+;; @returns (ok bool) A success indicator.
 (define-public (reset-streak)
   (begin
     (try! (check-not-paused))
@@ -252,6 +262,9 @@
 )
 
 ;; Ping - costs 0.0001 STX
+;; @desc Core heartbeat function to record activity without state changes beyond last-activity-block.
+;; @desc Costs a fixed interaction fee.
+;; @returns (ok uint) The current block height.
 (define-public (ping)
   (begin
     (try! (check-not-paused))
