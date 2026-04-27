@@ -21,6 +21,32 @@ const toastStyle = {
 };
 
 /**
+ * Returns the icon emoji for a given toast type.
+ */
+function getIconForType(type) {
+  const icons = {
+    success: '✅',
+    error: '❌',
+    info: 'ℹ️',
+    warning: '⚠️',
+    loading: '⏳',
+    custom: '💬',
+  };
+  return icons[type] || '💬';
+}
+
+/**
+ * Returns glassmorphic style object with color accent.
+ */
+function getGlassStyle(color) {
+  return {
+    ...toastStyle,
+    border: `1px solid ${color}30`,
+    boxShadow: `0 20px 40px rgba(0,0,0,0.4), 0 0 0 1px ${color}10`,
+  };
+}
+
+/**
  * Premium glassmorphic toast notification component.
  */
 const GlassToast = ({ t, message, type, isLoading = false }) => {
