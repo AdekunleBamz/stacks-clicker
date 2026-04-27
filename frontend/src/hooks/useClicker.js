@@ -70,11 +70,9 @@ export function useClicker({ onTxSubmit } = {}) {
   const ping = useCallback(() => executeAction('📡 Ping', 'ping'), [executeAction]);
 
   return {
-    isLoading: (key) => !!loadingStates[key],
-    click: () => executeAction('clicker-click', 'click'),
-    multiClick: (count = 10) => executeAction('clicker-multi-click', 'multi-click', [
-      { type: 'uint128', value: count.toString() }
-    ]),
-    ping: () => executeAction('clicker-ping', 'ping'),
+    isLoading,
+    click,
+    multiClick,
+    ping,
   };
 }
