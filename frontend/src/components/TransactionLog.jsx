@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { motion, AnimatePresence } from 'framer-motion';
 const STACKS_NETWORK =
   String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
     ? 'testnet'
