@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
 
@@ -49,4 +49,4 @@ Toast.propTypes = {
   ),
 };
 
-export default Toast;
+export default memo(Toast);
