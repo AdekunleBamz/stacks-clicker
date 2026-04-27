@@ -11,12 +11,13 @@ export default function ActionButton({
   isLoading,
   disabled,
   className = '',
-  cost
+  cost,
+  isError = false
 }) {
   return (
     <motion.button
       type="button"
-      className={`action-btn ${className}`}
+      className={`action-btn ${className}${isError ? ' btn-error' : ''}`}
       onClick={onClick}
       disabled={disabled || isLoading}
       aria-label={label}
@@ -63,4 +64,5 @@ ActionButton.propTypes = {
   disabled: PropTypes.bool,
   className: PropTypes.string,
   cost: PropTypes.string,
+  isError: PropTypes.bool,
 };
