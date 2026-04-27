@@ -71,7 +71,7 @@ const PerformanceOverlay = memo(function PerformanceOverlay() {
       </div>
       {memory && (
         <div className="perf-stat">
-          <span className="perf-label">MEM:</span>
+          <span className="perf-label" aria-hidden="true">MEM:</span>
           <span className="perf-value">{memory.used}MB</span>
         </div>
       )}
