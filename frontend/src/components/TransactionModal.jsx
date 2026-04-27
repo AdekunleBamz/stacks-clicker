@@ -12,7 +12,7 @@ const STACKS_NETWORK =
 /**
  * Modal to view detailed information about a specific transaction.
  */
-const TransactionModal = () => {
+const TransactionModal = memo(() => {
   const { activeModal, modalData, closeModal } = useModal();
 
   if (activeModal !== 'transaction' || !modalData) return null;
