@@ -209,6 +209,24 @@ export const formatSessionTime = (ms) => Math.floor(ms / 60000) + "m " + Math.fl
 
 export const formatLevel = (lvl) => "Lv." + Math.max(0, Math.floor(Number(lvl)));
 
+/**
+ * Formats a relative time (past or future) into a human-readable label.
+ *
+ * @param {number} ms - Timestamp in milliseconds (e.g. Date.now())
+ * @returns {string} Relative label like "just now", "2m ago", "in 5h"
+ */
+export function formatRelativeTime(ms) {
+  const diff = Date.now() - Number(ms);
+  const abs = Math.abs(diff);
+  const suffix = diff >= 0 ? ' ago' : '';
+  const prefix = diff < 0 ? 'in ' : '';
+  if (abs < 10_000) return 'just now';
+  if (abs < 60_000) return `${prefix}${Math.floor(abs / 1000)}s${suffix}`;
+  if (abs < 3_600_000) return `${prefix}${Math.floor(abs / 60_000)}m${suffix}`;
+  if (abs < 86_400_000) return `${prefix}${Math.floor(abs / 3_600_000)}h${suffix}`;
+  return `${prefix}${Math.floor(abs / 86_400_000)}d${suffix}`;
+}
+
 export const formatPlayerTag = (id) => "Player #" + Number(id);
 
 export const formatBoostRemaining = (ms) => {
