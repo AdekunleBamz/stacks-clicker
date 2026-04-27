@@ -14,7 +14,7 @@ function MilestoneCelebration({ celebration }) {
       {celebration && (
         <motion.div
           className="milestone-celebration"
-          role="status"
+          role="alert"
           aria-live="assertive"
           aria-label={`Milestone reached: ${celebration}`}
           aria-atomic="true"

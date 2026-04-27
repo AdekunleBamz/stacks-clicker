@@ -49,7 +49,7 @@ function RoadmapBoard() {
               <h3 className="roadmap-card-title" id={`roadmap-item-title-${index}`}>{item.title}</h3>
             </div>
             <div className="roadmap-card-footer">
-              <div className="vote-count" role="status" aria-live="polite">
+              <div className="vote-count" role="status" aria-live="polite" aria-label={`${item.votes} votes`}>
                 <span className="vote-icon" aria-hidden="true">🔥</span>
                 {item.votes} votes
               </div>

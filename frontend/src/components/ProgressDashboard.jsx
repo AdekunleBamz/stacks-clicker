@@ -31,7 +31,7 @@ function ProgressDashboard({ userData }) {
 
             <div className="achievements-section" style={{ marginTop: '3rem' }}>
                 <h3 style={{ marginBottom: '1.5rem', fontWeight: 800 }}>Milestones</h3>
-                <div className="achievements-list">
+                <div className="achievements-list" role="list" aria-label="Player achievements">
                     {achievements.map((ach) => (
                         <Achievement key={ach.id || ach.title} achievement={ach} />
                     ))}

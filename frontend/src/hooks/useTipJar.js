@@ -20,7 +20,7 @@ export function useTipJar({ onTxSubmit } = {}) {
     setLoadingStates((prev) => ({ ...prev, [key]: val }));
   };
 
-  const executeAction = async (key, functionName, functionArgs = []) => {
+  const executeAction = useCallback(async (key, functionName, functionArgs = []) => {
     if (!isConnected) return;
     setLoading(key, true);
     try {
@@ -38,7 +38,7 @@ export function useTipJar({ onTxSubmit } = {}) {
     } finally {
       setLoading(key, false);
     }
-  }, [onTxSubmit]);
+  }, [isConnected, onTxSubmit]);
 
   const tip = useCallback(
     (amount = 1000) => {
@@ -52,11 +52,8 @@ export function useTipJar({ onTxSubmit } = {}) {
 
   return {
     isLoading: (key) => !!loadingStates[key],
-    quickTip: () => executeAction('tipjar-quick-tip', 'quick-tip'),
-    tipUser: (recipient, amount) => executeAction('tipjar-tip-user', 'tip-user', [
-      { type: 'principal', value: recipient },
-      { type: 'uint128', value: (parseFloat(amount) * 1000000).toString() }
-    ]),
-    selfPing: () => executeAction('tipjar-ping', 'self-ping'),
+    tip,
+    withdraw,
+    selfPing: handleSelfPing,
   };
 }
