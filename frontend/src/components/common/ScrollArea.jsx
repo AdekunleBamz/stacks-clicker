@@ -1,11 +1,11 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback, memo } from 'react';
 import PropTypes from 'prop-types';
 
 /**
  * ScrollArea provides custom scrollbars while using native scrolling performance.
  * It hides the default browser scrollbars and replaces them with sleek, theme-aware ones.
  */
-const ScrollArea = ({ children, className = '', style = {}, height, orientation = 'vertical' }) => {
+const ScrollArea = memo(function ScrollArea({ children, className = '', style = {}, height, orientation = 'vertical' }) {
   const scrollRef = useRef(null);
   const [scrollState, setScrollState] = useState({
     scrollTop: 0,
@@ -18,12 +18,12 @@ const ScrollArea = ({ children, className = '', style = {}, height, orientation 
   const [isHovered, setIsHovered] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
 
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     if (scrollRef.current) {
       const { scrollTop, scrollHeight, clientHeight, scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
       setScrollState({ scrollTop, scrollHeight, clientHeight, scrollLeft, scrollWidth, clientWidth });
     }
-  };
+  }, []);
 
   useEffect(() => {
     handleScroll(); // Init
@@ -49,6 +49,8 @@ const ScrollArea = ({ children, className = '', style = {}, height, orientation 
       style={{ ...style, height: height || '100%' }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      role="region"
+      aria-label="Scrollable content area"
     >
       <div 
         className={`scroll-viewport ${orientation}`}
@@ -149,7 +151,7 @@ const ScrollArea = ({ children, className = '', style = {}, height, orientation 
       `}</style>
     </div>
   );
-};
+});
 
 ScrollArea.propTypes = {
   children: PropTypes.node.isRequired,
