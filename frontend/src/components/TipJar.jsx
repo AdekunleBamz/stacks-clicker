@@ -135,6 +135,7 @@ export default function TipJar({ onTxSubmit }) {
           onClick={handleQuickTip}
           disabled={!isConnected || loading}
           aria-label="Send a quick tip of 0.001 STX"
+          title="Send a quick tip"
         >
           {loading ? '⏳' : '⚡'} Quick Tip (0.001 STX)
         </motion.button>
