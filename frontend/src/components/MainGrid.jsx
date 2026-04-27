@@ -19,7 +19,7 @@ function MainGrid({
 }) {
   return (
     <section className="interaction-section" aria-labelledby="interactions-title" aria-live="polite">
-      <h2 className="section-title" id="interactions-title" aria-label="Available Interactions Dashboard">Interactions</h2>
+      <h2 className="section-title" id="interactions-title">Interactions</h2>
       <InteractionStreaks totalInteractions={stats.clicks + stats.tips + stats.votes} />
       <LayoutGroup>
         <div className="cards-container main-interaction-grid" role="group" aria-label="Available Interaction Panels">
