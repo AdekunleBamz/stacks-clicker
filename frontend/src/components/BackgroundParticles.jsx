@@ -1,40 +1,51 @@
-import React from 'react';
+import React, { memo, useMemo } from 'react';
 import { motion } from 'framer-motion';
 
 /**
  * BackgroundParticles Component
  * Persistent floating particles for atmosphere
  */
-export default function BackgroundParticles() {
-    const particles = Array.from({ length: 15 });
+function BackgroundParticles() {
+    const particles = useMemo(() => Array.from({ length: 15 }, (_, i) => ({
+        id: i,
+        x: Math.random() * 100 + '%',
+        y: Math.random() * 100 + '%',
+        opacity: Math.random() * 0.3 + 0.1,
+        scale: Math.random() * 0.5 + 0.5,
+        width: Math.random() * 10 + 2,
+        height: Math.random() * 10 + 2,
+        duration: Math.random() * 20 + 20,
+        delay: Math.random() * -20,
+        driftX: (Math.random() - 0.5) * 10 + '%',
+    })), []);
 
     return (
-        <div className="bg-particles">
-            {particles.map((_, i) => (
+        <div className="bg-particles" aria-hidden="true">
+            {particles.map((p) => (
                 <motion.div
-                    key={i}
+                    key={p.id}
                     initial={{
-                        x: Math.random() * 100 + "%",
-                        y: Math.random() * 100 + "%",
-                        opacity: Math.random() * 0.3 + 0.1,
-                        scale: Math.random() * 0.5 + 0.5
+                        x: p.x,
+                        y: p.y,
+                        opacity: p.opacity,
+                        scale: p.scale,
                     }}
                     animate={{
-                        y: [null, "-20%", "120%"],
-                        x: [null, (Math.random() - 0.5) * 10 + "%"]
+                        y: [null, '-20%', '120%'],
+                        x: [null, p.driftX],
                     }}
                     transition={{
-                        duration: Math.random() * 20 + 20,
+                        duration: p.duration,
                         repeat: Infinity,
-                        ease: "linear",
-                        delay: Math.random() * -20
+                        ease: 'linear',
+                        delay: p.delay,
                     }}
                     style={{
                         position: 'absolute',
-                        width: Math.random() * 10 + 2 + 'px',
-                        height: Math.random() * 10 + 2 + 'px',
+                        width: p.width + 'px',
+                        height: p.height + 'px',
                         borderRadius: '50%',
-                        background: i % 2 === 0 ? 'hsl(var(--pulse-cyan))' : 'hsl(var(--pulse-purple))',
+                        background: p.id % 2 === 0 ? 'hsl(var(--pulse-cyan))' : 'hsl(var(--pulse-purple))',
                         filter: 'blur(2px)',
                     }}
                 />
@@ -42,3 +53,5 @@ export default function BackgroundParticles() {
         </div>
     );
 }
+
+export default memo(BackgroundParticles);
