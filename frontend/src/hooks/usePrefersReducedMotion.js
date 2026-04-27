@@ -36,3 +36,17 @@ export function usePrefersReducedMotion() {
 
   return prefersReducedMotion;
 }
+
+/**
+ * Returns animation variants with motion disabled when reduced-motion is preferred.
+ *
+ * @param {Object} fullVariants - Full animation variants object
+ * @returns {Object} Variants with transitions stripped if reduced motion is preferred
+ */
+export function useReducedMotionVariants(fullVariants) {
+  const prefersReducedMotion = usePrefersReducedMotion();
+  if (!prefersReducedMotion) return fullVariants;
+  return Object.fromEntries(
+    Object.entries(fullVariants).map(([key, val]) => [key, { ...val, transition: { duration: 0 } }])
+  );
+}
