@@ -28,4 +28,4 @@ PageTransition.propTypes = {
   className: PropTypes.string
 };
 
-export default memo(PageTransition);
+export default PageTransition;
