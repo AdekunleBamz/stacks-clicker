@@ -97,7 +97,7 @@ function QuickPollCard({ address, quickpoll }) {
         <div className="actions-header-row">
           <Tooltip content="Ping the QuickPoll network contract to test live connection state.">
             <ActionButton
-              label="Poll Ping"
+              label="Ping Poll"
               icon="🗳️"
               cost="0.001 STX"
               className="secondary-button success"
