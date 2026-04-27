@@ -23,6 +23,16 @@ export const TOAST_CONFIG = Object.freeze({
   },
 });
 
+/**
+ * Checks whether a value is a supported toast type.
+ *
+ * @param {string} type
+ * @returns {boolean}
+ */
+export function isToastType(type) {
+  return ['success', 'error', 'info', 'warning', 'loading'].includes(type);
+}
+
 const getIconForType = (type) => {
   switch (type) {
     case 'success':
