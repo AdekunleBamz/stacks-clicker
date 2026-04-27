@@ -16,6 +16,8 @@ function LevelBadge({ level }) {
     return (
         <motion.div
             className="level-badge-container"
+            role="img"
+            aria-label={`Level ${level} badge`}
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ type: "spring", damping: 12, stiffness: 200 }}
