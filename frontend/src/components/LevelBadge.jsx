@@ -6,12 +6,6 @@ import { motion } from 'framer-motion';
  * LevelBadge Component
  * Displays the current level with a premium, animated badge
  */
-LevelBadge.propTypes = {
-    level: PropTypes.number.isRequired,
-};
-
-export default memo(LevelBadge);
-
 function LevelBadge({ level }) {
     return (
         <motion.div
@@ -59,3 +53,9 @@ function LevelBadge({ level }) {
         </motion.div>
     );
 }
+
+LevelBadge.propTypes = {
+    level: PropTypes.number.isRequired,
+};
+
+export default memo(LevelBadge);
