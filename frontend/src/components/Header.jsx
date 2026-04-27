@@ -97,6 +97,10 @@ export default function Header({ theme, toggleTheme }) {
 }
 
 Header.propTypes = {
-  theme: PropTypes.oneOf(['dark', 'light']).isRequired,
+  theme: PropTypes.oneOf(['dark', 'light']),
   toggleTheme: PropTypes.func.isRequired,
+};
+
+Header.defaultProps = {
+  theme: 'dark',
 };
