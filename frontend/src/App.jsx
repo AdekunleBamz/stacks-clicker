@@ -6,6 +6,7 @@ import ClickerCard from './components/ClickerCard';
 import TipJarCard from './components/TipJarCard';
 import QuickPollCard from './components/QuickPollCard';
 import { useWallet } from './context/WalletContext';
+import { useSound } from './context/AudioContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import ParticleOverlay from './components/common/ParticleOverlay';
 
@@ -22,16 +23,14 @@ import { useQuickPoll } from './hooks/useQuickPoll';
 export default function App() {
   // Global Wallet State
   const { address, connectWallet, disconnectWallet } = useWallet();
+  const { play } = useSound();
 
   // Application State
   const [txLog, setTxLog] = useState([]);
   const [stats, setStats] = useState({ clicks: 0, tips: 0, votes: 0 });
   const [particleTrigger, setParticleTrigger] = useState(0);
 
-  // Synchronize SoundEngine with settings
-  useEffect(() => {
-    soundEngine.setSettings(settings);
-  }, [settings]);
+  // Global Keyboard Shortcuts
 
   // Global Keyboard Shortcuts
   useEffect(() => {
@@ -41,7 +40,7 @@ export default function App() {
         const isMuted = settings.masterVolume === 0;
         updateSetting('masterVolume', isMuted ? 0.5 : 0);
         showToast(isMuted ? 'Audio Unmuted 🔊' : 'Audio Muted 🔇', 'info');
-        soundEngine.play(isMuted ? 'success' : 'click');
+        play(isMuted ? 'success' : 'click');
       }
     };
     window.addEventListener('keydown', handleKeyDown);
