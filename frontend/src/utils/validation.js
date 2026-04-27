@@ -86,3 +86,13 @@ export function isPositiveNumber(value) {
 export function isNonNegativeNumber(value) {
   return typeof value === 'number' && isFinite(value) && value >= 0;
 }
+
+/**
+ * Returns true if value is a finite number.
+ *
+ * @param {*} value
+ * @returns {boolean}
+ */
+export function isFiniteNumber(value) {
+  return typeof value === 'number' && Number.isFinite(value);
+}
