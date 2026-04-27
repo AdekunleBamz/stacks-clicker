@@ -24,6 +24,7 @@ export default function Toast({ toasts = [] }) {
             className={`toast toast-${toast.type}`}
             role="alert"
             aria-label={`${toast.type || 'info'} notification`}
+            title={toast.message || 'Notification'}
           >
             <span className="toast-icon" aria-hidden="true">
               {toast.type === 'success' && '✅'}
