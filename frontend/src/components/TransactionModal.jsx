@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { memo } from 'react';
+import PropTypes from 'prop-types';
 import Modal from './common/Modal';
 import { useModal } from '../context/ModalContext';
 import { truncateAddress } from '../utils/format';
