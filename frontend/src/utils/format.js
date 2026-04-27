@@ -107,6 +107,18 @@ export function formatPercent(value, decimals = 1) {
 }
 
 /**
+ * Normalizes decimal precision input for formatting helpers.
+ *
+ * @param {number} value - Requested decimal places
+ * @param {number} [fallback=2] - Fallback decimal places
+ * @returns {number} Safe decimal place value
+ */
+export function normalizeDecimalPlaces(value, fallback = 2) {
+  if (Number.isInteger(value) && value >= 0) return value;
+  return Number.isInteger(fallback) && fallback >= 0 ? fallback : 2;
+}
+
+/**
  * Formats a duration in milliseconds into a human-readable string.
  *
  * @param {number} ms - Duration in milliseconds
