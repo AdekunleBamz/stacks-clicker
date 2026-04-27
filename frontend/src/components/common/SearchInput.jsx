@@ -40,13 +40,13 @@ function SearchInput({ value, onChange, onClear, placeholder = 'Search...', coun
               aria-label="Clear search"
               aria-controls="global-transaction-search"
             >
-              ✕
+              <span aria-hidden="true">✕</span>
             </motion.button>
           )}
         </AnimatePresence>
       </div>
       {count !== undefined && (
-        <span className="search-count-badge" aria-live="polite" title="Matching items found">{count}</span>
+        <span className="search-count-badge" aria-live="polite" aria-label={`${count} matching items`} title="Matching items found">{count}</span>
       )}
     </div>
   );
