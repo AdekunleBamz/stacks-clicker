@@ -57,7 +57,7 @@ function TransactionItem({
         <div className="tx-main">
           <div className="tx-header">
             <span className="tx-action-label">{highlightText(tx.action, searchTerm)}</span>
-            <span className="tx-timestamp">{tx.time}</span>
+            <span className="tx-timestamp" title={tx.time} aria-label={`Transaction time: ${tx.time}`}>{tx.time}</span>
           </div>
           <div className="tx-actions-inline">
             <button type="button" className="text-btn" onClick={() => onDetails(tx)} title="View full transaction details">
