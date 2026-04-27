@@ -7,7 +7,7 @@ import CountUp from './CountUp';
  * StatsGrid Component
  * Displays advanced game metrics in a grid
  */
-export default function StatsGrid({ stats }) {
+function StatsGrid({ stats }) {
     const statItems = [
         { label: 'Total STX Tipped', value: stats.totalTipped || 0, decimals: 4, unit: 'STX', icon: '💰' },
         { label: 'Click Rate', value: stats.clickRate || 0, decimals: 1, unit: 'c/s', icon: '⚡' },
@@ -42,3 +42,14 @@ export default function StatsGrid({ stats }) {
         </div>
     );
 }
+
+StatsGrid.propTypes = {
+  stats: PropTypes.shape({
+    totalTipped: PropTypes.number,
+    clickRate: PropTypes.number,
+    totalStreaks: PropTypes.number,
+    rank: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  }).isRequired,
+};
+
+export default memo(StatsGrid);
