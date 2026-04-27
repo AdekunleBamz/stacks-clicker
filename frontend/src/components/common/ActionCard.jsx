@@ -25,7 +25,7 @@ function ActionCard({ title, subtitle, icon, iconClass, children }) {
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
     >
       <div className="contract-header">
-        <div className={`contract-icon ${iconClass}`}>{icon}</div>
+        <div className={`contract-icon ${iconClass}`} aria-hidden="true">{icon}</div>
         <div>
           <div className="contract-title">{title}</div>
           <div className="contract-subtitle">{subtitle}</div>
