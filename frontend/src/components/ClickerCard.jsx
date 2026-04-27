@@ -5,6 +5,7 @@ import ActionCard from './common/ActionCard';
 import ActionButton from './common/ActionButton';
 import Tooltip from './common/Tooltip';
 import { useSound } from '../hooks/useSound';
+import { THEME } from '../utils/constants';
 
 /**
  * Component for the Clicker game interaction card.
@@ -60,7 +61,8 @@ function ClickerCard({ address, clicker }) {
       title="🎯 Power Clicker"
       subtitle="Click to generate on-chain activity."
       icon="🚀"
-      iconClass="bg-indigo-500/20 text-indigo-400"
+      iconClass={`bg-indigo-500/20 text-indigo-400`}
+      style={{ borderColor: THEME.COLORS.PRIMARY }}
     >
       <div className="clicker-header">
         <AnimatePresence>
@@ -68,16 +70,16 @@ function ClickerCard({ address, clicker }) {
             <motion.div
               style={{ willChange: 'transform, opacity' }}
               initial={{ opacity: 0, scale: 0.2, y: 40, rotate: -15 }}
-              animate={{ 
-                opacity: 1, 
-                scale: Math.min(1 + combo * 0.05, 1.5), 
-                y: 0, 
-                rotate: 0 
+              animate={{
+                opacity: 1,
+                scale: Math.min(1 + combo * 0.05, 1.5),
+                y: 0,
+                rotate: 0
               }}
               exit={{ opacity: 0, scale: 2, y: -40, filter: 'blur(10px)' }}
-              transition={{ 
-                type: 'spring', 
-                stiffness: 600, 
+              transition={{
+                type: 'spring',
+                stiffness: 600,
                 damping: 20,
                 mass: 0.8
               }}
@@ -99,6 +101,7 @@ function ClickerCard({ address, clicker }) {
       <div className="actions" role="group" aria-label="Clicker Contract Controls">
         <Tooltip content="Perform a single on-chain click interaction instantly (fixed cost).">
           <ActionButton
+            id="btn-click-express"
             label="Express Click"
             icon="⚡"
             cost="0.001 STX"
@@ -110,6 +113,7 @@ function ClickerCard({ address, clicker }) {
         </Tooltip>
         <Tooltip content="Boost your activity by performing 10 clicks in one batch for better efficiency.">
           <ActionButton
+            id="btn-click-turbo"
             label="Turbo 10x"
             icon="🔥"
             cost="0.005 STX"
@@ -121,6 +125,7 @@ function ClickerCard({ address, clicker }) {
         </Tooltip>
         <Tooltip content="Ping the network to verify connection and emit a heartbeat event.">
           <ActionButton
+            id="btn-network-ping"
             label="Network Ping"
             icon="📡"
             cost="0.001 STX"
