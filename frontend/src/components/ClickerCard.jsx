@@ -21,7 +21,7 @@ function ClickerCard({ address, clicker }) {
       icon="🚀"
       accentColor="#5546FF"
     >
-      <div className="actions">
+      <div className="actions" role="group" aria-label="Clicker actions">
         <Tooltip text="Perform a single on-chain click interaction instantly.">
           <ActionButton
             label="Express Click"
