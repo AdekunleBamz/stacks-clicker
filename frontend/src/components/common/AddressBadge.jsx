@@ -70,6 +70,10 @@ function AddressBadge({ address, onDisconnect }) {
   );
 }
 
+AddressBadge.defaultProps = {
+  onDisconnect: null,
+};
+
 AddressBadge.propTypes = {
   address: PropTypes.string.isRequired,
   onDisconnect: PropTypes.func
