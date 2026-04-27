@@ -46,11 +46,6 @@ function QuickPollCard({ address, quickpoll }) {
    * Triggers a 'YES' vote transaction for the current poll.
    */
   const handleVoteYes = useCallback(() => vote(1, 1), [vote]);
-
-  /**
-   * Triggers a 'NO' vote transaction for the current poll.
-   */
-  const handleVoteNo = useCallback(() => vote(1, 0), [vote]);
   const [isCreating, setIsCreating] = useState(false);
 
   const handleCreateNewPoll = useCallback(() => {
