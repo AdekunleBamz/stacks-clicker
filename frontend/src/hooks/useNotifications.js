@@ -21,7 +21,7 @@ export function useNotifications() {
         notify.loading(message);
         break;
       case 'warning':
-        notify.error(message);
+        notify.warning?.(message) ?? notify.error(message);
         break;
       default:
         notify.info(message);
