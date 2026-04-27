@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
  * @param {Array} [props.toasts=[]] - Array of toast notification objects
  * @returns {JSX.Element} The rendered toast container
  */
-export default function Toast({ toasts = [] }) {
+function Toast({ toasts = [] }) {
   return (
     <div className="toast-container" role="status" aria-live="polite" aria-atomic="true">
       <AnimatePresence>

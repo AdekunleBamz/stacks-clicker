@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { animate } from 'framer-motion';
 import StatsCard from './common/StatsCard';
@@ -8,12 +8,14 @@ import StatsCard from './common/StatsCard';
  */
 function AnimatedNumber({ value }) {
   const [displayValue, setDisplayValue] = useState(value);
+  const fromRef = useRef(value);
 
   useEffect(() => {
-    const controls = animate(displayValue, value, {
+    const controls = animate(fromRef.current, value, {
       duration: 1,
       onUpdate: (latest) => setDisplayValue(Math.floor(latest)),
     });
+    fromRef.current = value;
     return () => controls.stop();
   }, [value]);
 
