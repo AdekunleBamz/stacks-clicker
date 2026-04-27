@@ -56,6 +56,7 @@ export default function TransactionLog({ transactions = [] }) {
                 rel="noopener noreferrer"
                 className="tx-link"
                 title="View on Explorer"
+                aria-label={`Open transaction ${tx.id} on Hiro Explorer`}
               >
                 🔗
               </a>
