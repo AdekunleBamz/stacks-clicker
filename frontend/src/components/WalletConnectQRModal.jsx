@@ -32,8 +32,8 @@ export default function WalletConnectQRModal({ uri, onClose }) {
       <div className="qr-modal" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="qr-modal-title" tabIndex="-1">
         <div className="qr-modal-header">
           <h3 id="qr-modal-title" aria-label="Connect Wallet Modal Header">Connect Wallet</h3>
-          <button type="button" className="qr-modal-close" onClick={onClose} aria-label="Close URI Pairing Modal">
-            ×
+          <button type="button" className="qr-modal-close" onClick={onClose} aria-label="Close URI Pairing Modal" title="Close">
+            <span aria-hidden="true">×</span>
           </button>
         </div>
 
@@ -52,9 +52,9 @@ export default function WalletConnectQRModal({ uri, onClose }) {
           </div>
 
           <div className="qr-mobile-help">
-            <p className="qr-help-text">📱 On mobile? Open your wallet app and scan the QR, or:</p>
-            <a href={wcLink} target="_blank" rel="noopener noreferrer" className="qr-mobile-link">
-              Open in Wallet App →
+            <p className="qr-help-text"><span aria-hidden="true">📱</span> On mobile? Open your wallet app and scan the QR, or:</p>
+            <a href={wcLink} target="_blank" rel="noopener noreferrer" className="qr-mobile-link" aria-label="Open pairing link in wallet app">
+              Open in Wallet App <span aria-hidden="true">→</span>
             </a>
             <button
               type="button"
