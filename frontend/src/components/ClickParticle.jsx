@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
 
@@ -7,7 +7,15 @@ import PropTypes from 'prop-types';
  * Creates a visual "burst" effect at the click location
  */
 const ClickParticle = ({ x, y, onComplete }) => {
-    const particles = Array.from({ length: 8 });
+    const particles = useMemo(() => Array.from({ length: 8 }, (_, i) => {
+        const angle = (i * 45) * (Math.PI / 180);
+        const distance = 40 + Math.random() * 40;
+        return {
+            i,
+            targetX: Math.cos(angle) * distance,
+            targetY: Math.sin(angle) * distance,
+        };
+    }), []);
 
     return (
         <div
@@ -21,12 +29,7 @@ const ClickParticle = ({ x, y, onComplete }) => {
                 zIndex: 9999
             }}
         >
-            {particles.map((_, i) => {
-                const angle = (i * 45) * (Math.PI / 180);
-                const distance = 40 + Math.random() * 40;
-                const targetX = Math.cos(angle) * distance;
-                const targetY = Math.sin(angle) * distance;
-
+            {particles.map(({ i, targetX, targetY }) => {
                 return (
                     <motion.div
                         key={i}
