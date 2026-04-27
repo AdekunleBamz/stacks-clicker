@@ -38,7 +38,7 @@ const SettingsModal = () => {
               onClick={toggleTheme}
               title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
             >
-              {theme === 'dark' ? '🌙 Dark' : '☀️ Light'}
+              {theme === 'dark' ? <><span aria-hidden="true">🌙</span> Dark</> : <><span aria-hidden="true">☀️</span> Light</>}
             </button>
           </div>
         </section>
