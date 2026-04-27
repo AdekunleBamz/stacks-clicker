@@ -16,7 +16,7 @@ function ProgressDashboard({ userData }) {
     return (
         <section className="progress-dashboard" aria-label="Progress Dashboard">
             <div className="dashboard-section-header">
-                <h2>🏆 Progress Dashboard</h2>
+                <h2><span aria-hidden="true">🏆</span> Progress Dashboard</h2>
                 <p>Your journey in the Stacks Ecosystem</p>
             </div>
 
