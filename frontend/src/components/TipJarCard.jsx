@@ -85,14 +85,13 @@ function TipJarCard({ address, tipjar }) {
 
   return (
     <ActionCard
-      id="tipjar-card"
       title="💰 TipJar"
       subtitle="Send tips to generate transactions."
       icon="💎"
       iconClass="bg-amber-500/20 text-amber-500"
     >
       <div className="actions" role="group" aria-label="Tipping Controls">
-        <Tooltip content="Ping the TipJar contract to verify active connectivity.">
+        <Tooltip text="Ping the TipJar contract to verify active connectivity.">
           <ActionButton
             label="Self Ping"
             icon="🏓"
@@ -104,7 +103,7 @@ function TipJarCard({ address, tipjar }) {
             disabled={isLoading('self-ping')}
           />
         </Tooltip>
-        <Tooltip content="Send a quick 0.001 STX tip instantly.">
+        <Tooltip text="Send a quick 0.001 STX tip instantly.">
           <ActionButton
             label="Quick Tip"
             icon="💰"

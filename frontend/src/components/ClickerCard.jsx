@@ -15,13 +15,11 @@ function ClickerCard({ address, clicker }) {
 
   return (
     <ActionCard
-      id="clicker-card"
       title="🎯 Power Clicker"
       subtitle="Click to generate on-chain activity."
       icon="🚀"
-      accentColor="#5546FF"
+      iconClass="clicker-icon"
     >
-      <div className="actions" role="group" aria-label="Clicker actions">
         <Tooltip text="Perform a single on-chain click interaction instantly.">
           <ActionButton
             label="Express Click"
@@ -58,7 +56,6 @@ function ClickerCard({ address, clicker }) {
             disabled={!address}
           />
         </Tooltip>
-      </div>
     </ActionCard>
   );
 }

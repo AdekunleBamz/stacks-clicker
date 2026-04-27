@@ -87,7 +87,6 @@ function QuickPollCard({ address, quickpoll }) {
 
   return (
     <ActionCard
-      id="quickpoll-card"
       title="🗳️ QuickPoll"
       subtitle="Vote to generate transactions."
       icon="🗳️"
@@ -95,7 +94,7 @@ function QuickPollCard({ address, quickpoll }) {
     >
       <div className="actions" role="group" aria-label="Polling Controls">
         <div className="actions-header-row">
-          <Tooltip content="Ping the QuickPoll network contract to test live connection state.">
+          <Tooltip text="Ping the QuickPoll network contract to test live connection state.">
             <ActionButton
               label="Ping Poll"
               icon="🗳️"
@@ -148,7 +147,7 @@ function QuickPollCard({ address, quickpoll }) {
                 <span className="input-help-text" aria-hidden="true">{trimmedQuestion.length}/100</span>
               </div>
 
-              <Tooltip content="Create a new poll on the Stacks blockchain.">
+              <Tooltip text="Create a new poll on the Stacks blockchain.">
                 <ActionButton
                   label="Submit Poll"
                   icon="📋"
@@ -168,7 +167,7 @@ function QuickPollCard({ address, quickpoll }) {
         </AnimatePresence>
 
         <div className="actions-row">
-          <Tooltip content="Vote YES on the active community poll.">
+          <Tooltip text="Vote YES on the active community poll.">
             <ActionButton
               label="Yes"
               icon="👍"
