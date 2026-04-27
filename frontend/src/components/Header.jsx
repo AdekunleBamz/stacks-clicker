@@ -53,7 +53,7 @@ export default function Header({ theme, toggleTheme }) {
             <option value="en">EN</option>
             <option value="es">ES</option>
           </select>
-          <Tooltip content={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}>
+          <Tooltip text={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}>
             <button
               type="button"
               className="theme-toggle"
