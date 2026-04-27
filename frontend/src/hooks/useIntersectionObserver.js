@@ -41,7 +41,7 @@ export function useIntersectionObserver({
         observer.unobserve(element);
       }
     };
-  }, [root, rootMargin, threshold, triggerOnce]);
+  }, [root, rootMargin, safeThreshold, triggerOnce]);
 
   return [elementRef, isIntersecting];
 }
