@@ -94,6 +94,7 @@ export default function ConnectButton() {
               className="disconnect-btn secondary-button btn-sm"
               onClick={handleDisconnect}
               aria-label="Disconnect Stacks Wallet"
+              title="Disconnect Stacks wallet"
               aria-describedby="disconnect-description"
               disabled={isConnecting}
             >
