@@ -9,24 +9,27 @@ function getAudioContext() {
   const AudioContextCtor = window.AudioContext || window.webkitAudioContext;
   if (!AudioContextCtor) return null;
 
-  if (!audioContext || audioContext.state === 'closed') {
-    audioContext = new AudioContextCtor();
-    
-    // Create a master compressor to prevent clipping during overlapping sounds
-    compressor = audioContext.createDynamicsCompressor();
-    compressor.threshold.setValueAtTime(-24, audioContext.currentTime);
-    compressor.knee.setValueAtTime(40, audioContext.currentTime);
-    compressor.ratio.setValueAtTime(12, audioContext.currentTime);
-    compressor.attack.setValueAtTime(0, audioContext.currentTime);
-    compressor.release.setValueAtTime(0.25, audioContext.currentTime);
-    compressor.connect(audioContext.destination);
-  }
+  try {
+    if (!audioContext || audioContext.state === 'closed') {
+      audioContext = new AudioContextCtor();
+      // Create a master compressor to prevent clipping during overlapping sounds
+      compressor = audioContext.createDynamicsCompressor();
+      compressor.threshold.setValueAtTime(-24, audioContext.currentTime);
+      compressor.knee.setValueAtTime(40, audioContext.currentTime);
+      compressor.ratio.setValueAtTime(12, audioContext.currentTime);
+      compressor.attack.setValueAtTime(0, audioContext.currentTime);
+      compressor.release.setValueAtTime(0.25, audioContext.currentTime);
+      compressor.connect(audioContext.destination);
+    }
 
-  if (audioContext.state === 'suspended') {
-    audioContext.resume().catch(() => {});
-  }
+    if (audioContext.state === 'suspended') {
+      audioContext.resume().catch(() => {});
+    }
 
-  return { ctx: audioContext, destination: compressor };
+    return { ctx: audioContext, destination: compressor };
+  } catch (e) {
+    return null;
+  }
 }
 
 /**
