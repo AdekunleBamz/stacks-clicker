@@ -77,6 +77,6 @@ Modal.propTypes = {
   title: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
   maxWidth: PropTypes.string,
-});
+};
 
 export default Modal;
