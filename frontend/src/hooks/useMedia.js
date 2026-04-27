@@ -51,3 +51,11 @@ export function useIsSmallScreen() {
 export function useIsLargeScreen() {
   return useMedia('(min-width: 1024px)');
 }
+
+/**
+ * Returns true when viewport width is between 640px and 1023px (tablet).
+ * @returns {boolean}
+ */
+export function useIsTablet() {
+  return useMedia('(min-width: 640px) and (max-width: 1023px)');
+}
