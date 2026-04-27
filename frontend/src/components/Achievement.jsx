@@ -31,7 +31,7 @@ function Achievement({ achievement }) {
         >
             <div className="achievement-icon-wrapper">
                 <span className="achievement-icon" aria-hidden="true">{icon}</span>
-                {!unlocked && <div className="achievement-lock">🔒</div>}
+                {!unlocked && <div className="achievement-lock" aria-hidden="true">🔒</div>}
             </div>
 
             <div className="achievement-info">
