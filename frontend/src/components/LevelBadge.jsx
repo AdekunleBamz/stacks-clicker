@@ -1,21 +1,30 @@
-import React from 'react';
+import React, { memo } from 'react';
+import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 
 /**
  * LevelBadge Component
  * Displays the current level with a premium, animated badge
  */
-export default function LevelBadge({ level }) {
+LevelBadge.propTypes = {
+    level: PropTypes.number.isRequired,
+};
+
+export default memo(LevelBadge);
+
+function LevelBadge({ level }) {
     return (
         <motion.div
             className="level-badge-container"
+            role="img"
+            aria-label={`Level ${level} badge`}
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ type: "spring", damping: 12, stiffness: 200 }}
         >
             <div className="level-badge-glow"></div>
             <div className="level-badge-inner">
-                <span className="level-text">LVL</span>
+                <span className="level-text" aria-hidden="true">LVL</span>
                 <span className="level-number">{level}</span>
             </div>
 
@@ -24,6 +33,7 @@ export default function LevelBadge({ level }) {
                 <motion.div
                     key={i}
                     className="level-particle"
+                    aria-hidden="true"
                     animate={{
                         rotate: 360,
                     }}
