@@ -11,8 +11,7 @@ const STACKS_NETWORK =
  * Displays recent transactions with status
  */
 export default function TransactionLog({ transactions = [] }) {
-  const network = (import.meta.env.VITE_STACKS_NETWORK || 'mainnet').toLowerCase();
-  const explorerChain = network === 'testnet' ? 'testnet' : 'mainnet';
+  const network = STACKS_NETWORK;
 
   const getStatusIcon = (status) => {
     switch (status) {
