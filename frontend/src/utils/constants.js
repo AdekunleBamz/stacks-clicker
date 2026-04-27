@@ -41,6 +41,23 @@ export const CONFIG = {
 /** @type {string} Explorer tx URL prefix */
 export const HIRO_EXPLORER_TX_BASE = `${CONFIG.EXPLORER_URL}/txid/`;
 
+/** @type {Object} UI Theme constants */
+export const THEME = {
+  COLORS: {
+    PRIMARY: '#6366f1', // indigo-500
+    SECONDARY: '#8b5cf6', // violet-500
+    SUCCESS: '#10b981', // emerald-500
+    DANGER: '#ef4444', // red-500
+    WARNING: '#f59e0b', // amber-500
+    INFO: '#3b82f6', // blue-500
+    BACKGROUND: '#0f172a', // slate-900
+  },
+  GRADIENTS: {
+    PRIMARY: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
+    SURFACE: 'linear-gradient(180deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.8) 100%)',
+  },
+};
+
 export default {
   DEPLOYER,
   CLICKER_CONTRACT,
@@ -50,4 +67,5 @@ export default {
   STACKS_NETWORK,
   CONFIG,
   HIRO_EXPLORER_TX_BASE,
+  THEME,
 };
