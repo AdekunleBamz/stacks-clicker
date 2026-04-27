@@ -25,6 +25,7 @@
     "frontend:test": "npm --prefix frontend run test",
     "test": "npm run frontend:test",
     "contracts:check": "clarinet check",
+    "check": "npm run contracts:check",
     "contracts:test": "clarinet test"
   },
   "engines": {
