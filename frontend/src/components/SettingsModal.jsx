@@ -62,8 +62,8 @@ const SettingsModal = () => {
           </div>
         </section>
 
-        <section className="settings-section">
-          <h4 className="settings-label">Acoustics</h4>
+        <section className="settings-section" aria-labelledby="settings-acoustics-label">
+          <h4 className="settings-label" id="settings-acoustics-label">Acoustics</h4>
           <div className="settings-row">
             <span>Interaction Sounds</span>
             <div className="toggle-switch">
