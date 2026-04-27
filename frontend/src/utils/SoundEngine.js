@@ -39,6 +39,20 @@ class SoundEngine {
     get isMuted() {
         return !this.sfxEnabled || this.masterVolume === 0;
     }
+
+    /**
+     * Returns an object describing the current sound engine status.
+     *
+     * @returns {Object} Status object with sfxEnabled, masterVolume, and isMuted flags
+     */
+    getSoundStatus() {
+        return {
+            sfxEnabled: this.sfxEnabled,
+            masterVolume: this.masterVolume,
+            isMuted: this.isMuted,
+            soundCount: Object.keys(this.sounds).length,
+        };
+    }
 }
 
 const engine = new SoundEngine();
