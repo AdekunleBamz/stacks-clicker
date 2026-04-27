@@ -29,6 +29,7 @@ function Leaderboard({ players }) {
                     <motion.div
                         key={player.address}
                         className={`leaderboard-item rank-${i + 1}`}
+                        role="listitem"
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: i * 0.05 }}
