@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { motion } from 'framer-motion';
+import PropTypes from 'prop-types';
 
 /**
  * Common Action Card layout component.
@@ -11,10 +12,12 @@ import { motion } from 'framer-motion';
  * @param {React.ReactNode} props.children - Card actions and content.
  * @returns {JSX.Element} The rendered action card.
  */
-export default function ActionCard({ title, subtitle, icon, iconClass, children }) {
+function ActionCard({ title, subtitle, icon, iconClass, children }) {
   return (
     <motion.div
       className="contract-card"
+      role="region"
+      aria-label={title}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
@@ -22,15 +25,25 @@ export default function ActionCard({ title, subtitle, icon, iconClass, children 
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
     >
       <div className="contract-header">
-        <div className={`contract-icon ${iconClass}`}>{icon}</div>
+        <div className={`contract-icon ${iconClass}`} aria-hidden="true">{icon}</div>
         <div>
-          <div className="contract-title">{title}</div>
-          <div className="contract-subtitle">{subtitle}</div>
+          <h3 className="contract-title">{title}</h3>
+          <p className="contract-subtitle">{subtitle}</p>
         </div>
       </div>
-      <div className="actions">
+      <div className="actions" role="group" aria-label={`${title} actions`}>
         {children}
       </div>
     </motion.div>
   );
 }
+
+ActionCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string,
+  icon: PropTypes.node,
+  iconClass: PropTypes.string,
+  children: PropTypes.node,
+};
+
+export default memo(ActionCard);
