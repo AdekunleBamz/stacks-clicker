@@ -63,6 +63,10 @@ ClickParticle.propTypes = {
     onComplete: PropTypes.func,
 };
 
+ClickParticle.defaultProps = {
+    onComplete: undefined,
+};
+
 export default memo(function ParticleSystem({ clickEvents, removeEvent }) {
     return (
         <AnimatePresence>
