@@ -32,8 +32,8 @@ const CountUp = memo(function CountUp({ value, decimals = 0, prefix = '', suffix
     }, [safeValue, decimals]);
 
     return (
-        <span className="count-up" aria-hidden="true">
-            {prefix}{displayValue}{suffix}
+        <span className="count-up">
+            <span aria-hidden="true">{prefix}{displayValue}{suffix}</span>
             <span className="sr-only" aria-live="polite" aria-atomic="true">
                 {prefix}{Number(safeValue).toFixed(decimals)}{suffix}
             </span>
