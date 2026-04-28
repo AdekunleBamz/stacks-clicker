@@ -153,7 +153,7 @@ export default function App() {
   });
 
   // Keyboard Shortcuts
-  useState(() => {
+  useEffect(() => {
     const handleKeyDown = (e) => {
       // Ignore if typing in an input
       if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') return;
@@ -167,7 +167,7 @@ export default function App() {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  });
+  }, [clicker, tipjar]);
 
   // Milestone Celebration
   const [celebration, setCelebration] = useState(null);
