@@ -6,5 +6,6 @@
 - Heavy transaction bursts can still hit external API rate limits.
 - Client-side broadcast backoff reduces repeated quota failures but cannot bypass provider-enforced limits.
 - Add a next-review date whenever introducing a new known limitation.
+- Note whether each limitation is mainnet-only, testnet-only, or network-agnostic.
 
 Companion index: [Operations docs](README.md).
