@@ -21,22 +21,11 @@ export function useClicker({ onTxSubmit } = {}) {
     setLoadingStates((prev) => ({ ...prev, [key]: val }));
   };
 
-  /**
-   * Checks if a specific contract function is currently loading.
-   * @param {string} functionName - Name of the contract function
-   * @returns {boolean} True if loading
-   */
   const isLoading = useCallback(
     (functionName) => !!loadingStates[`clicker-${functionName}`],
     [loadingStates]
   );
 
-  /**
-   * Core executor for contract calls.
-   * @param {string} displayName - Human readable name for the action
-   * @param {string} functionName - Contract function name
-   * @param {Array} functionArgs - Arguments for the contract call
-   */
   const executeAction = useCallback(
     async (displayName, functionName, functionArgs = []) => {
       const key = `clicker-${functionName}`;
@@ -58,7 +47,7 @@ export function useClicker({ onTxSubmit } = {}) {
         setLoading(key, false);
       }
     },
-    [onTxSubmit]
+    [onTxSubmit, setLoading, showError, showLoading]
   );
 
   const click = useCallback(() => executeAction('🎯 Click', 'click'), [executeAction]);
@@ -69,6 +58,18 @@ export function useClicker({ onTxSubmit } = {}) {
       ]),
     [executeAction]
   );
+
+  const multiClick = useThrottle(
+    useCallback(
+      (amount = 1) =>
+        executeAction('🔥 Multi-Click', 'multi-click', [
+          { type: 'uint128', value: amount.toString() },
+        ]),
+      [executeAction]
+    ),
+    1000
+  );
+
   const ping = useCallback(() => executeAction('📡 Ping', 'ping'), [executeAction]);
 
   return {
