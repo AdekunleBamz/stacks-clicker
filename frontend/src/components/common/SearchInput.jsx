@@ -39,6 +39,7 @@ function SearchInput({ value, onChange, onClear, placeholder = 'Search...', coun
               className="search-clear"
               onClick={onClear}
               aria-label="Clear search"
+              title="Clear search query"
               aria-controls="global-transaction-search"
             >
               <span aria-hidden="true">✕</span>
