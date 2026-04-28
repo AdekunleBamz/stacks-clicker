@@ -50,7 +50,7 @@ Clarinet.test({
     block = chain.mineBlock([
       Tx.contractCall('clicker-v2p', 'click', [], wallet1.address),
     ]);
-    
+
     result = chain.callReadOnlyFn('clicker-v2p', 'get-unique-users', [], deployer.address);
     result.result.expectUint(3);
   },
@@ -74,7 +74,7 @@ Clarinet.test({
   name: "clicker-v2p: get-version returns correct version",
   async fn(chain: Chain, accounts: Map<string, Account>) {
     const deployer = accounts.get('deployer')!;
-    
+
     let result = chain.callReadOnlyFn('clicker-v2p', 'get-version', [], deployer.address);
     result.result.expectUint(2);
   },
@@ -90,7 +90,7 @@ Clarinet.test({
     chain.mineBlock([
       Tx.contractCall('clicker-v2p', 'click', [], wallet1.address),
     ]);
-    
+
     let result = chain.callReadOnlyFn('clicker-v2p', 'get-contract-info', [], deployer.address);
     const info = result.result.expectTuple();
 
@@ -128,7 +128,7 @@ Clarinet.test({
     let block = chain.mineBlock([
       Tx.contractCall('clicker-v2p', 'click', [], wallet1.address),
     ]);
-    
+
     let result = chain.callReadOnlyFn('clicker-v2p', 'get-user-first-click', [types.principal(wallet1.address)], deployer.address);
     // Should have a value (not none)
     assertNotEquals(result.result, 'none');
@@ -174,7 +174,7 @@ Clarinet.test({
       Tx.contractCall('clicker-v2p', 'click', [], wallet1.address),
       Tx.contractCall('clicker-v2p', 'multi-click', [types.uint(5)], wallet1.address),
     ]);
-    
+
     let result = chain.callReadOnlyFn('clicker-v2p', 'get-stats', [types.principal(wallet1.address)], deployer.address);
     const stats = result.result.expectTuple();
 
