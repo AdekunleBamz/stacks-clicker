@@ -2,7 +2,7 @@
 import { Clarinet, Tx, Chain, Account, types } from 'https://deno.land/x/clarinet@v1.7.0/index.ts';
 import { assertEquals } from 'https://deno.land/std@0.170.0/testing/asserts.ts';
 
-// Edge case tests for v2j contracts
+// Edge case tests for v2p contracts
 
 Clarinet.test({
   name: "edge: clicker multi-click with zero returns zero",
