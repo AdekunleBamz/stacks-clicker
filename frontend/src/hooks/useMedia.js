@@ -42,7 +42,6 @@ export function useMedia(query) {
  */
 export function useIsSmallScreen() {
   const isSmall = useMedia('(max-width: 639px)');
-  const isMobile = useMedia('(max-width: 480px)');
   return isSmall;
 }
 
