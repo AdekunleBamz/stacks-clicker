@@ -20,7 +20,6 @@ export default function ActionButton({
       className={`action-btn ${className}${isError ? ' btn-error' : ''}`}
       onClick={onClick}
       disabled={disabled || isLoading}
-      aria-label={label}
       title={label}
       aria-busy={isLoading}
       whileHover={disabled || isLoading ? undefined : { scale: 1.02, translateY: -2 }}
