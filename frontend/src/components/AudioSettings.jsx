@@ -26,10 +26,10 @@ export default function AudioSettings({ isOpen, onClose, settings, onUpdate }) {
                         onClick={(e) => e.stopPropagation()}
                         role="dialog"
                         aria-modal="true"
-                        aria-label="Audio Settings"
+                        aria-labelledby="audio-settings-title"
                     >
                         <div className="panel-header">
-                            <h2><span aria-hidden="true">🔊</span> Audio Settings</h2>
+                            <h2 id="audio-settings-title"><span aria-hidden="true">🔊</span> Audio Settings</h2>
                             <button type="button" className="close-btn" onClick={onClose} aria-label="Close audio settings"><span aria-hidden="true">✕</span></button>
                         </div>
 
