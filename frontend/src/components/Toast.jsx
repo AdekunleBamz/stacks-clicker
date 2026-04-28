@@ -22,8 +22,6 @@ function Toast({ toasts = [] }) {
             exit={{ opacity: 0, x: 20, scale: 0.95 }}
             transition={{ type: "spring", damping: 20, stiffness: 300 }}
             className={`toast toast-${toast.type}`}
-            role="alert"
-            aria-label={`${toast.type || 'info'} notification`}
             title={toast.message || 'Notification'}
           >
             <span className={`toast-icon icon-${toast.type}`} aria-hidden="true">
