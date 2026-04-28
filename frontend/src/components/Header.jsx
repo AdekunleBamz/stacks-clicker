@@ -40,7 +40,7 @@ export default function Header({ theme, toggleTheme }) {
           title="Stacks Clicker V2 Logo"
         >
           <NetworkLogo isSyncing={isScrolled} />
-          <h1 className="header-title text-gradient" aria-label="Stacks Clicker Dashboard">Stacks Clicker</h1>
+          <h1 className="header-title text-gradient">Stacks Clicker</h1>
         </div>
 
         <div className="wallet-section" role="group" aria-label="Wallet Connection Utilities">
