@@ -66,7 +66,6 @@ const ParticleOverlay = memo(function ParticleOverlay({ trigger }) {
     <div
       className="particle-container"
       aria-hidden="true"
-      role="presentation"
       style={{
         position: 'fixed',
         top: '50%',
