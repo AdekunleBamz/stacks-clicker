@@ -11,7 +11,6 @@ function LevelBadge({ level }) {
         <motion.div
             className="level-badge-container"
             role="img"
-            title={`Level ${level}`}
             aria-label={`Level ${level} badge`}
             aria-roledescription="level badge"
             initial={{ scale: 0.8, opacity: 0 }}
