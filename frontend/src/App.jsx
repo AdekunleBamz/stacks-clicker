@@ -127,9 +127,8 @@ export default function App() {
         description: 'Sent more than 1 STX in total tips',
         unlocked: false
       }
+      ]
     });
-    return tx;
-  };
 
   // Initialize Hooks
   const clicker = useClicker({
