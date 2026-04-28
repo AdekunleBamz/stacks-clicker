@@ -61,11 +61,11 @@ function TransactionItem({
             <span className="tx-timestamp" title={tx.time} aria-label={`Transaction time: ${tx.time}`}>{tx.time}</span>
           </div>
           <div className="tx-actions-inline">
-            <button type="button" className="text-btn" onClick={() => onDetails(tx)} title="View full transaction details">
+            <button type="button" className="text-btn" onClick={() => onDetails(tx)} title="View full transaction details" aria-label="View full transaction details">
               View Details <span aria-hidden="true">→</span>
             </button>
             <span className="tx-action-separator" aria-hidden="true">•</span>
-            <button type="button" className="text-btn" onClick={() => onCopy(tx.id)} aria-label="Copy transaction ID" title="Copy transaction ID to clipboard">
+            <button type="button" className="text-btn" onClick={() => onCopy(tx.id)} aria-label="Copy full transaction ID" title="Copy transaction ID to clipboard">
               Copy ID
             </button>
           </div>
