@@ -45,7 +45,7 @@ export function formatNumber(value, options = {}) {
 export function formatNumberCompact(value, decimals = 1) {
   const numericValue = Number(value);
   if (!Number.isFinite(numericValue)) return '0';
-  
+
   const abs = Math.abs(numericValue);
   if (abs >= 1_000_000) {
     return `${(numericValue / 1_000_000).toFixed(decimals)}M`;
