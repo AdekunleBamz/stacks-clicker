@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useSound } from '../hooks/useSound';
