@@ -50,7 +50,7 @@ const Button = ({
       {...props}
     >
       {isLoading ? (
-        <span className="btn-spinner" role="progressbar" aria-label="Loading" aria-live="polite"></span>
+        <span className="btn-spinner" role="progressbar" aria-label="Loading"></span>
       ) : (
         <>
           {icon && <span className="btn-icon" aria-hidden="true">{icon}</span>}
