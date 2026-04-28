@@ -124,18 +124,20 @@ export function useInfiniteScroll({
     };
   }, []);
 
+  const loadMore = useCallback(() => {
+    if (!isLoadingRef.current && !hasLoadedAll) {
+      setIsLoading(true);
+      isLoadingRef.current = true;
+      setPage((prevPage) => prevPage + 1);
+    }
+  }, [hasLoadedAll]);
+
   return {
     targetRef,
     isLoading,
     hasLoadedAll,
     page,
-    loadMore: () => {
-      if (!isLoadingRef.current && !hasLoadedAll) {
-        setIsLoading(true);
-        isLoadingRef.current = true;
-        setPage((prevPage) => prevPage + 1);
-      }
-    },
+    loadMore,
     reset,
     onLoadComplete,
     setAllLoaded,
