@@ -5,7 +5,7 @@
 /**
  * Generates a simple DJB2 hash of a string.
  * Useful for mapping transaction IDs to colors or icons deterministically.
- * 
+ *
  * @param {string} str - String to hash
  * @returns {number} 32-bit hash value
  */
@@ -20,7 +20,7 @@ export function simpleHash(str) {
 
 /**
  * Generates a deterministic HSL color from a string hash.
- * 
+ *
  * @param {string} str - String to colorize
  * @returns {string} HSL color string
  */
@@ -63,21 +63,21 @@ export function shortHash(str, len = 8) {
  */
 export function getMostFrequentHash(strings) {
   if (!Array.isArray(strings) || strings.length === 0) return null;
-  
+
   const hashCounts = {};
   let maxHash = null;
   let maxCount = 0;
-  
+
   for (const str of strings) {
     const hash = simpleHash(str);
     hashCounts[hash] = (hashCounts[hash] || 0) + 1;
-    
+
     if (hashCounts[hash] > maxCount) {
       maxCount = hashCounts[hash];
       maxHash = hash;
     }
   }
-  
+
   return maxHash;
 }
 
