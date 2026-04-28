@@ -51,8 +51,10 @@ export default function Header({ theme, toggleTheme }) {
             aria-label="Select application language"
           >
             <option value="en">EN</option>
-            <option value="es">ES</option>              <option value="fr">FR</option>
-              <option value="de">DE</option>          </select>
+            <option value="es">ES</option>
+            <option value="fr">FR</option>
+            <option value="de">DE</option>
+          </select>
           <Tooltip text={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}>
             <button
               type="button"
