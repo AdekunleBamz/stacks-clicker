@@ -17,10 +17,6 @@ export function useClicker({ onTxSubmit } = {}) {
   const [loadingStates, setLoadingStates] = useState({});
   const actionCountRef = useRef(0);
 
-  const setLoading = (key, val) => {
-    setLoadingStates((prev) => ({ ...prev, [key]: val }));
-  };
-
   const isLoading = useCallback(
     (functionName) => !!loadingStates[`clicker-${functionName}`],
     [loadingStates]
@@ -29,7 +25,7 @@ export function useClicker({ onTxSubmit } = {}) {
   const executeAction = useCallback(
     async (displayName, functionName, functionArgs = []) => {
       const key = `clicker-${functionName}`;
-      setLoading(key, true);
+      setLoadingStates((prev) => ({ ...prev, [key]: true }));
       actionCountRef.current += 1;
       try {
         const result = await callContract({
@@ -44,10 +40,10 @@ export function useClicker({ onTxSubmit } = {}) {
         console.error(`${displayName} failed:`, err);
         throw err;
       } finally {
-        setLoading(key, false);
+        setLoadingStates((prev) => ({ ...prev, [key]: false }));
       }
     },
-    [onTxSubmit, setLoading]
+    [onTxSubmit]
   );
 
   const click = useCallback(() => executeAction('🎯 Click', 'click'), [executeAction]);
