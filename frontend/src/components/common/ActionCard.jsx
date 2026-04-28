@@ -12,12 +12,13 @@ import PropTypes from 'prop-types';
  * @param {React.ReactNode} props.children - Card actions and content.
  * @returns {JSX.Element} The rendered action card.
  */
-function ActionCard({ title, subtitle, icon, iconClass, children }) {
+function ActionCard({ title, subtitle, icon, iconClass, children, id }) {
+  const headingId = id || `action-card-heading-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
   return (
     <motion.div
       className="contract-card"
       role="region"
-      aria-label={title}
+      aria-labelledby={headingId}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
@@ -27,7 +28,7 @@ function ActionCard({ title, subtitle, icon, iconClass, children }) {
       <div className="contract-header">
         <div className={`contract-icon ${iconClass}`} aria-hidden="true">{icon}</div>
         <div>
-          <h3 className="contract-title">{title}</h3>
+          <h3 id={headingId} className="contract-title">{title}</h3>
           <p className="contract-subtitle">{subtitle}</p>
         </div>
       </div>
