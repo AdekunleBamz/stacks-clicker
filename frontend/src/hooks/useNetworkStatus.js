@@ -14,7 +14,6 @@ export function useNetworkStatus() {
   const [connectionCount, setConnectionCount] = useState(0);
   const [offlineCount, setOfflineCount] = useState(0);
 
-
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
@@ -25,8 +24,8 @@ export function useNetworkStatus() {
     window.addEventListener('offline', handleOffline, { passive: true });
 
     return () => {
-      window.removeEventListener('online', handleOnline, { passive: true });
-      window.removeEventListener('offline', handleOffline, { passive: true });
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
     };
   }, []);
 
