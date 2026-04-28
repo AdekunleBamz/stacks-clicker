@@ -3,6 +3,7 @@
 `WalletContext` manages wallet session state and exposes:
 - `address`
 - `isConnected`
+- `isConnecting`
 - `connectWallet()`
 - `disconnectWallet()`
 - `appDetails`
