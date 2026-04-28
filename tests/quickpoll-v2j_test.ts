@@ -2,7 +2,7 @@
 import { Clarinet, Tx, Chain, Account, types } from 'https://deno.land/x/clarinet@v1.7.0/index.ts';
 import { assertEquals, assertNotEquals } from 'https://deno.land/std@0.170.0/testing/asserts.ts';
 
-// QuickPoll v2j Tests - Enhanced with event testing and analytics
+// QuickPoll v2p Tests - Enhanced with event testing and analytics
 
 Clarinet.test({
   name: "quickpoll-v2p: create-poll creates poll and emits event",
