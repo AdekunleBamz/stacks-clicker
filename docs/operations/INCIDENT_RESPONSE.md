@@ -6,6 +6,7 @@
 - Apply mitigation, then prepare root-cause notes.
 - Publish a short post-incident summary.
 - Track customer-facing status updates in a single incident thread.
+- Assign one incident owner per shift to avoid split decisions during active mitigation.
 
 ## Maintenance Note
 - Reconfirm escalation contacts and communication channels each release cycle.
