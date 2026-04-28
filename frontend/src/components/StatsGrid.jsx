@@ -22,7 +22,7 @@ function StatsGrid({ stats }) {
                     key={item.label}
                     className="stat-card-mini"
                     role="listitem"
-                    aria-label={item.label}
+                    aria-label={`${item.label}: ${item.value}${item.unit ? ' ' + item.unit : ''}`}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.1 }}
