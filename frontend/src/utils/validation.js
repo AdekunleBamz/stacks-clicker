@@ -47,15 +47,15 @@ export function isStacksAddress(value) {
   return typeof value === 'string' && /^SP[0-9A-Z]{28,41}$/.test(value);
 }
 
-  /**
-   * Returns true if the value is a positive integer (> 0).
-   *
-   * @param {any} value - The value to test
-   * @returns {boolean}
-   */
-  export function isPositiveInteger(value) {
-    return Number.isInteger(value) && value > 0;
-  }
+/**
+ * Returns true if the value is a positive integer (> 0).
+ *
+ * @param {any} value - The value to test
+ * @returns {boolean}
+ */
+export function isPositiveInteger(value) {
+  return Number.isInteger(value) && value > 0;
+}
 
 /**
  * Returns true if value is a non-empty string after trimming.
