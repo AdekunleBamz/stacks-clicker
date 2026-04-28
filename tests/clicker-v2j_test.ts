@@ -2,7 +2,7 @@
 import { Clarinet, Tx, Chain, Account, types } from 'https://deno.land/x/clarinet@v1.7.0/index.ts';
 import { assertEquals, assertNotEquals } from 'https://deno.land/std@0.170.0/testing/asserts.ts';
 
-// Clicker v2j Tests - Enhanced with event testing and analytics
+// Clicker v2p Tests - Enhanced with event testing and analytics
 
 Clarinet.test({
   name: "clicker-v2p: click increments counter and tracks user",
