@@ -100,4 +100,10 @@ TransactionHistory.propTypes = {
   onRetry: PropTypes.func,
 };
 
+TransactionHistory.defaultProps = {
+  isLoading: false,
+  showError: false,
+  onRetry: undefined,
+};
+
 export default memo(TransactionHistory);
