@@ -47,7 +47,7 @@ export function useClicker({ onTxSubmit } = {}) {
         setLoading(key, false);
       }
     },
-    [onTxSubmit, setLoading, showError, showLoading]
+    [onTxSubmit, setLoading]
   );
 
   const click = useCallback(() => executeAction('🎯 Click', 'click'), [executeAction]);
