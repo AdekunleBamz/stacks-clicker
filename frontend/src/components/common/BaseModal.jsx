@@ -102,7 +102,7 @@ function ModalContent({ onClose, title, children, footer, className, closeBtnRef
           onClick={onClose}
           ref={closeBtnRef}
           aria-label="Close modal"
-          title="Close"
+          title="Close dialog"
         >
           <span aria-hidden="true">×</span>
         </button>
