@@ -40,4 +40,8 @@ NetworkLogo.propTypes = {
   isSyncing: PropTypes.bool,
 };
 
+NetworkLogo.defaultProps = {
+  isSyncing: false,
+};
+
 export default memo(NetworkLogo);
