@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 /**
  * XP Progress bar component for displaying player experience points.
  */
-function XPProgress({ currentXP, nextLevelXP, level }) {
+function XPProgress({ currentXP, nextLevelXP }) {
   const safeCurrentXP = Math.max(0, Number.isFinite(currentXP) ? currentXP : 0);
   const safeNextLevelXP = nextLevelXP > 0 ? nextLevelXP : 100;
   const percentage = Math.min(100, Math.floor((safeCurrentXP / safeNextLevelXP) * 100));
@@ -40,13 +40,11 @@ function XPProgress({ currentXP, nextLevelXP, level }) {
 XPProgress.propTypes = {
   currentXP: PropTypes.number.isRequired,
   nextLevelXP: PropTypes.number.isRequired,
-  level: PropTypes.number.isRequired,
 };
 
 XPProgress.defaultProps = {
   currentXP: 0,
   nextLevelXP: 100,
-  level: 1,
 };
 
 export default memo(XPProgress);
