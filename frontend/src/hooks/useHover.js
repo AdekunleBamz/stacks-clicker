@@ -19,8 +19,8 @@ export function useHover() {
       node.addEventListener('mouseleave', handleMouseLeave, { passive: true });
 
       return () => {
-        node.removeEventListener('mouseenter', handleMouseEnter, { passive: true });
-        node.removeEventListener('mouseleave', handleMouseLeave, { passive: true });
+        node.removeEventListener('mouseenter', handleMouseEnter);
+        node.removeEventListener('mouseleave', handleMouseLeave);
       };
     }
     return undefined;
