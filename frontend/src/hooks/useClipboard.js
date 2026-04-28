@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { notify } from '../utils/toast';
 
 function fallbackCopy(text) {
@@ -88,5 +89,13 @@ export function useClipboard({ timeout = 2000 } = {}) {
     };
   }, []);
 
-  return { copied, copyToClipboard, reset: () => setCopied(false) };
+  const reset = useCallback(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    setCopied(false);
+  }, []);
+
+  return { copied, copyToClipboard, reset };
 }
