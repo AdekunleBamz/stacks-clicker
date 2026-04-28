@@ -632,8 +632,8 @@ body {
 
 .toast-container {
   position: fixed;
-  bottom: var(--space-lg);
-  right: var(--space-lg);
+  bottom: calc(var(--space-lg) + env(safe-area-inset-bottom, 0px));
+  right: calc(var(--space-lg) + env(safe-area-inset-right, 0px));
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
