@@ -70,12 +70,13 @@ export default function OnboardingTour() {
           className="tour-card"
           role="dialog"
           aria-modal="true"
-          aria-label="Application Onboarding Tour"
+          aria-labelledby="tour-title"
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
           onClick={(e) => e.stopPropagation()}
         >
+          <h2 id="tour-title" className="sr-only">Application Onboarding Tour</h2>
           <div className="tour-header">
             <div className="tour-step-dots">
               {steps.map((_, i) => (
