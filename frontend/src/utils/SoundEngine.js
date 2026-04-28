@@ -16,7 +16,7 @@ class SoundEngine {
     }
 
     setMuted(isMuted) {
-        this.sfxEnabled = !Boolean(isMuted);
+        this.sfxEnabled = !isMuted;
     }
 
     loadSound(name, url) {
