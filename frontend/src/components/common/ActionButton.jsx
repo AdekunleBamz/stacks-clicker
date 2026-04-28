@@ -23,7 +23,6 @@ export default function ActionButton({
       aria-label={label}
       title={label}
       aria-busy={isLoading}
-      aria-disabled={disabled || isLoading}
       whileHover={disabled || isLoading ? undefined : { scale: 1.02, translateY: -2 }}
       whileTap={disabled || isLoading ? undefined : { scale: 0.98, translateY: 0 }}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
