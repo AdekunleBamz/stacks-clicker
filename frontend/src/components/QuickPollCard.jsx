@@ -6,6 +6,7 @@ import ActionButton from './common/ActionButton';
 import Tooltip from './common/Tooltip';
 import { useSound } from '../hooks/useSound';
 import { notify } from '../utils/toast';
+import { MAX_POLL_TITLE_LENGTH } from '../utils/constants';
 
 /**
  * Component for the QuickPoll interaction card.
@@ -178,7 +179,7 @@ function QuickPollCard({ address, quickpoll }) {
                   value={pollQuestion}
                   onChange={(e) => setPollQuestion(e.target.value)}
                   placeholder="Enter poll question..."
-                  maxLength={100}
+                  maxLength={MAX_POLL_TITLE_LENGTH}
                   aria-invalid={!trimmedQuestion && errorField === 'create-poll'}
                   aria-required="true"
                 />
