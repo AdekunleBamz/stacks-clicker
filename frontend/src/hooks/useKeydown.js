@@ -29,6 +29,6 @@ export function useKeydown(keyMap) {
     }
 
     window.addEventListener('keydown', handleKeyDown, { passive: true });
-    return () => window.removeEventListener('keydown', handleKeyDown, { passive: true });
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 }
