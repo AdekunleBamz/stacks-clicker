@@ -34,14 +34,13 @@ const SettingsModal = memo(function SettingsModal() {
           <h4 className="settings-label">Appearance</h4>
           <div className="settings-row">
             <span id="theme-mode-label">Theme Mode</span>
-            <button 
+            <button
               type="button"
               className="theme-toggle-btn secondary-button btn-sm"
               onClick={toggleTheme}
               title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
               aria-labelledby="theme-mode-label"
               aria-pressed={theme === 'dark'}
-              aria-description={`Current theme: ${themeLabel}`}
             >
               {theme === 'dark' ? <><span aria-hidden="true">🌙</span> Dark</> : <><span aria-hidden="true">☀️</span> Light</>}
             </button>
@@ -52,7 +51,7 @@ const SettingsModal = memo(function SettingsModal() {
           <h4 className="settings-label" id="settings-l10n-label">Localization</h4>
           <div className="settings-row">
             <span id="preferred-language-label">Preferred Language</span>
-            <select 
+            <select
               className="lang-select-input input-field"
               value={lang}
               onChange={(e) => handleLanguageChange(e.target.value)}
