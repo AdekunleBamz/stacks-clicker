@@ -18,7 +18,6 @@ const PullToRefresh = memo(function PullToRefresh({ onRefresh, children }) {
   const [pullDistance, setPullDistance] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
 
-
   const handleTouchStart = useCallback((e) => {
     if (window.scrollY === 0) {
       setStartY(e.touches[0].pageY);
