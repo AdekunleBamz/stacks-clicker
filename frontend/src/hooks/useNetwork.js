@@ -8,6 +8,15 @@ const CONFIGURED_NETWORK = STACKS_NETWORK;
 const HIRO_INFO_ENDPOINT = `${CONFIG.API_URL}/v2/info`;
 const NETWORK_POLL_INTERVAL_MS = 30_000;
 
+const CONFIGURED_NETWORK =
+  String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
+    ? 'testnet'
+    : 'mainnet';
+const HIRO_INFO_ENDPOINT =
+  CONFIGURED_NETWORK === 'testnet'
+    ? 'https://api.testnet.hiro.so/v2/info'
+    : 'https://api.mainnet.hiro.so/v2/info';
+
 /**
  * Custom hook to monitor the Stacks network status and current block height.
  * Periodically polls the Hiro API to provide real-time blockchain telemetry.
