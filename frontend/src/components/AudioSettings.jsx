@@ -42,7 +42,7 @@ export default function AudioSettings({ isOpen, onClose, settings, onUpdate }) {
                                 className="setting-item"
                             >
                                 <div className="setting-info">
-                                    <span className="setting-label">Master Volume</span>
+                                    <span className="setting-label" id="master-volume-label">Master Volume</span>
                                     <span className="setting-value" aria-live="polite" aria-atomic="true">{Math.round(settings.masterVolume * 100)}%</span>
                                 </div>
                                 <input
@@ -53,7 +53,7 @@ export default function AudioSettings({ isOpen, onClose, settings, onUpdate }) {
                                     value={settings.masterVolume}
                                     onChange={(e) => onUpdate('masterVolume', parseFloat(e.target.value))}
                                     className="volume-slider"
-                                    aria-label="Master Volume Slider"
+                                    aria-labelledby="master-volume-label"
                                 />
                             </motion.div>
 
