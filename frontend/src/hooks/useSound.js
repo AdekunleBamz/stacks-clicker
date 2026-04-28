@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { useCallback } from 'react';
 
 let audioContext = null;
 let compressor = null;
@@ -41,7 +41,6 @@ function getAudioContext() {
  * @property {Function} playSound - Function to trigger a sound effect: (type: 'click' | 'success' | 'error') => void
  */
 export function useSound() {
-  const playCountRef = useRef(0);
   /**
    * Triggers a specific synthesized sound effect.
    * @param {'click'|'success'|'error'} type - The category of sound to play
@@ -60,7 +59,6 @@ export function useSound() {
 
     osc.connect(gain);
     gain.connect(destination);
-    playCountRef.current += 1;
 
     const now = ctx.currentTime;
 
@@ -109,5 +107,5 @@ export function useSound() {
     }
   }, []);
 
-  return { playSound, playCount: playCountRef.current };
+  return { playSound };
 }
