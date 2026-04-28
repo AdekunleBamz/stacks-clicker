@@ -14,7 +14,7 @@ const VERSION = versionData.version || '1.0.0';
 const Footer = memo(function Footer() {
   const currentYear = new Date().getFullYear();
   return (
-    <footer className="app-footer" role="contentinfo" aria-label="Global Application Footer">
+    <footer className="app-footer" role="contentinfo">
       <div className="footer-content">
         <div className="footer-left">
           <p>Built with <span role="img" aria-label="love">❤️</span> on Stacks • {currentYear}</p>
