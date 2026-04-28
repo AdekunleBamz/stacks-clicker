@@ -25,7 +25,6 @@ function ClickerCard({ address, clicker }) {
             label="Express Click"
             icon="⚡"
             cost="0.001 STX"
-            title="Perform a single on-chain click"
             onClick={click}
             isLoading={isLoading('clicker-click')}
             disabled={!address}
@@ -37,7 +36,6 @@ function ClickerCard({ address, clicker }) {
             label="Turbo 10x"
             icon="🔥"
             cost="0.005 STX"
-            title="Batch 10 clicks in a single transaction"
             className="secondary"
             onClick={() => multiClick(10)}
             isLoading={isLoading('clicker-multi-click')}
@@ -49,7 +47,6 @@ function ClickerCard({ address, clicker }) {
             label="Network Ping"
             icon="📡"
             cost="0.001 STX"
-            title="Ping the network to verify contract state"
             className="success"
             onClick={ping}
             isLoading={isLoading('clicker-ping')}
