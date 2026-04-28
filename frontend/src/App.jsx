@@ -22,7 +22,7 @@ import { useQuickPoll } from './hooks/useQuickPoll';
  */
 export default function App() {
   // Global Wallet State
-  const { address, connectWallet, disconnectWallet } = useWallet();
+  const { address, connectWallet, disconnectWallet, isConnected } = useWallet();
   const { playSound: play } = useSound();
 
   // Application State
