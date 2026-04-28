@@ -28,7 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - `stringToColor` now varies saturation for more visually distinct colors.
 - `useThrottle`, `useDebounce`, `useLongPress`, `useCombo`, `useClipboard` all use `Number.isFinite` for delay validation.
-- `useScrollPosition` removal call now passes `passive: true` to match registration.
+- `useScrollPosition` removal call no longer passes unnecessary passive option.
 - `useDocumentTitle` trims whitespace from title before setting.
 - `useIntersectionObserver` clamps `threshold` to `[0, 1]`.
 - `useWindowSize` extracts debounce delay as a named constant.
