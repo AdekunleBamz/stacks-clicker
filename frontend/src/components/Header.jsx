@@ -76,7 +76,6 @@ export default function Header({ theme, toggleTheme }) {
                 className="btn-logout"
                 onClick={disconnectWallet}
                 aria-label="Disconnect wallet session"
-                title="Disconnect wallet session"
               >
                 <span className="logout-icon" aria-hidden="true">🚪</span>
               </button>
