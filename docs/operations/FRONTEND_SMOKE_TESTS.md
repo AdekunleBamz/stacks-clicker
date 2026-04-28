@@ -6,5 +6,6 @@
 - Refresh the app and verify recent state still renders as expected.
 - Confirm error toast content is readable and actionable when a transaction fails.
 - Validate one user-rejected transaction path so cancellation messaging stays clear.
+- Dismiss and reopen the wallet popup once to confirm reconnect UX remains stable.
 
 Companion index: [Operations docs](README.md).
