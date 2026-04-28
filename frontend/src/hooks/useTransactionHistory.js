@@ -15,8 +15,8 @@ import { MAX_TX_LOG_SIZE, CONFIG, STACKS_NETWORK } from '../utils/constants';
  */
 export function useTransactionHistory({ playSound, onTxAdded }) {
   const [txLog, setTxLog] = useLocalStorage('stacks-tx-log', []);
-    // Memoized derived stats
-    const pendingTxs = useMemo(() => txLog.filter((tx) => tx.isPending), [txLog]);
+  // Memoized derived stats
+  const pendingTxs = useMemo(() => txLog.filter((tx) => tx.isPending), [txLog]);
   const successTxs = useMemo(() => txLog.filter((tx) => tx.status === 'success'), [txLog]);
   const failedTxs = useMemo(() => txLog.filter((tx) => tx.status === 'failed' || tx.status === 'error'), [txLog]);
   const txCount = useMemo(() => txLog.length, [txLog]);
