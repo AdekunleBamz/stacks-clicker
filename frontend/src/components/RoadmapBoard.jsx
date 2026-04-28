@@ -45,7 +45,7 @@ function RoadmapBoard() {
             }}
             transition={{ delay: index * 0.1 }}
           >
-            <div className={`status-tag ${item.status}`} aria-label={`Project status: ${item.status}`}>{item.status}</div>
+            <div className={`status-tag ${item.status}`}>{item.status}</div>
             <div className="roadmap-card-body">
               <span className="q-badge" aria-label={`Quarter: ${item.quarter}`}>{item.quarter}</span>
               <h3 className="roadmap-card-title" id={`roadmap-item-title-${index}`}>{item.title}</h3>
