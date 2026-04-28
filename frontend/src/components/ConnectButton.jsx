@@ -82,6 +82,7 @@ export default function ConnectButton() {
               className="wallet-address glass-card"
               title={`Full Stacks address: ${address}`}
               aria-label={`Connected address ${truncateAddress(address, { prefix: 4 })}`}
+              aria-live="polite"
               tabIndex={0}
               role="status"
             >
