@@ -42,6 +42,7 @@ const Button = ({
       className={`${baseClass} ${variantClass} ${sizeClass} ${loadingClass} glass-card ${className}`}
       onClick={onClick}
       disabled={disabled || isLoading}
+      aria-disabled={disabled || isLoading}
       aria-busy={isLoading}
       aria-label={isLoading ? `Processing ${typeof children === 'string' ? children : 'action'}` : undefined}
       title={typeof children === 'string' ? children : undefined}
