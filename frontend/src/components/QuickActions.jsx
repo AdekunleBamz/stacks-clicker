@@ -14,7 +14,7 @@ export default function QuickActions({ address, onClearLog, onPingAll }) {
   };
 
   return (
-    <div className="quick-actions-panel" role="region" aria-label="Quick tools panel" title="Quick utility actions">
+    <div className="quick-actions-panel" role="region" aria-label="Quick tools panel">
       <h4 className="panel-title"><span aria-hidden="true">⚡</span> Quick Tools</h4>
       <div className="actions-stack">
         <ActionButton
