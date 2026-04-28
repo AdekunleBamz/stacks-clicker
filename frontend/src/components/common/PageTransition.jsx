@@ -23,6 +23,10 @@ const PageTransition = memo(function PageTransition({ children, className = '' }
   );
 });
 
+PageTransition.defaultProps = {
+  className: '',
+};
+
 PageTransition.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string
