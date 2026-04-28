@@ -108,7 +108,7 @@ export function useInfiniteScroll({
 
     element.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
-      element.removeEventListener('scroll', handleScroll, { passive: true });
+      element.removeEventListener('scroll', handleScroll);
       if (debounceTimerRef.current) {
         clearTimeout(debounceTimerRef.current);
       }
