@@ -33,12 +33,12 @@ export function useKeyPress(targetKey) {
     window.addEventListener('keyup', upHandler, { passive: true });
 
     return () => {
-      window.removeEventListener('keydown', downHandler, { passive: true });
-      window.removeEventListener('keyup', upHandler, { passive: true });
+      window.removeEventListener('keydown', downHandler);
+      window.removeEventListener('keyup', upHandler);
     };
   }, [targetKey]);
 
-    const reset = () => setKeyPressed(false);
+  const reset = () => setKeyPressed(false);
 
-    return { isPressed: keyPressed, reset, pressCount: pressCountRef.current };
+  return { isPressed: keyPressed, reset, pressCount: pressCountRef.current };
 }
