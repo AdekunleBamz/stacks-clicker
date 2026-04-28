@@ -218,7 +218,6 @@ export default function QuickPoll({ onTxSubmit }) {
             type="number"
             min="1"
             value={pollId}
-            aria-label="Specific poll ID lookup string"
             onChange={(e) => setPollId(Math.max(1, Number.parseInt(e.target.value, 10) || 1))}
             className="poll-id-input"
             placeholder="Poll ID"
