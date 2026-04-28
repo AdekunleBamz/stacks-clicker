@@ -31,15 +31,15 @@ export function useInterval(callback, delay) {
   }, [delay]);
 }
 
-  /**
-   * Custom hook that counts up from 0 by 1 every `delay` ms.
-   *
-   * @param {number|null} delay - Tick interval in ms. Pass null to pause.
-   * @returns {number} The current count
-   */
-  export function useCountup(delay) {
-    const [count, setCount] = useState(0);
-    useInterval(() => setCount((c) => c + 1), delay);
-    const reset = () => setCount(0);
-    return { count, reset };
-  }
+/**
+ * Custom hook that counts up from 0 by 1 every `delay` ms.
+ *
+ * @param {number|null} delay - Tick interval in ms. Pass null to pause.
+ * @returns {number} The current count
+ */
+export function useCountup(delay) {
+  const [count, setCount] = useState(0);
+  useInterval(() => setCount((c) => c + 1), delay);
+  const reset = () => setCount(0);
+  return { count, reset };
+}
