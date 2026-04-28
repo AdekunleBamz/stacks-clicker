@@ -43,7 +43,6 @@ const Button = ({
       onClick={onClick}
       disabled={disabled || isLoading}
       aria-busy={isLoading}
-      aria-disabled={disabled || isLoading}
       aria-label={isLoading ? `Processing ${typeof children === 'string' ? children : 'action'}` : undefined}
       title={typeof children === 'string' ? children : undefined}
       whileHover={disabled || isLoading ? undefined : { scale: 1.02 }}
