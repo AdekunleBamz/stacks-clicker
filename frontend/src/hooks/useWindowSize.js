@@ -28,7 +28,7 @@ export function useWindowSize() {
 
     window.addEventListener('resize', handleResize, { passive: true });
     return () => {
-      window.removeEventListener('resize', handleResize, { passive: true });
+      window.removeEventListener('resize', handleResize);
       clearTimeout(timeoutId);
     };
   }, []);
