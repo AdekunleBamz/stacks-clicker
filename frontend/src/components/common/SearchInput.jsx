@@ -47,7 +47,7 @@ function SearchInput({ value, onChange, onClear, placeholder = 'Search...', coun
         </AnimatePresence>
       </div>
       {count !== undefined && (
-        <span className="search-count-badge" aria-live="polite" aria-label={`${count} matching items`} title="Matching items found">{count}</span>
+        <span className="search-count-badge" aria-live="polite" aria-atomic="true" aria-label={`${count} matching items`} title="Matching items found">{count}</span>
       )}
     </div>
   );
