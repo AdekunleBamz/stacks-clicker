@@ -51,12 +51,12 @@ const SettingsModal = memo(function SettingsModal() {
         <section className="settings-section" aria-labelledby="settings-l10n-label">
           <h4 className="settings-label" id="settings-l10n-label">Localization</h4>
           <div className="settings-row">
-            <span>Preferred Language</span>
+            <span id="preferred-language-label">Preferred Language</span>
             <select 
               className="lang-select-input input-field"
               value={lang}
               onChange={(e) => handleLanguageChange(e.target.value)}
-              aria-label="Preferred language"
+              aria-labelledby="preferred-language-label"
             >
               <option value="en">English</option>
               <option value="es">Español</option>
