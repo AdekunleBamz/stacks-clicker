@@ -20,8 +20,7 @@ const NetworkHeartbeat = memo(function NetworkHeartbeat() {
     <Tooltip text={heartbeatTitle}>
       <div
         className="heartbeat-container"
-        role="status"
-        aria-live={isConnected ? "polite" : "assertive"}
+        role={isConnected ? "status" : "alert"}
         aria-atomic="true"
         aria-label={heartbeatTitle}
         aria-busy={isUpdating}
