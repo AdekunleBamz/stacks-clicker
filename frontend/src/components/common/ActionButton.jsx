@@ -27,7 +27,26 @@ export default function ActionButton({
       whileTap={disabled || isLoading ? undefined : { scale: 0.98, translateY: 0 }}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
     >
-      <div className="btn-content">
+      {/* Micro-shimmer effect on hover */}
+      {!disabled && !isLoading && (
+        <motion.div
+          className="btn-shimmer"
+          initial={{ x: '-100%', skewX: -20 }}
+          whileHover={{ x: '200%' }}
+          transition={{ duration: 0.6, ease: "easeInOut" }}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '50%',
+            height: '100%',
+            background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent)',
+            zIndex: 1,
+            pointerEvents: 'none'
+          }}
+        />
+      )}
+      <div className="btn-content" style={{ zIndex: 2, position: 'relative' }}>
         <AnimatePresence mode="wait">
           {isLoading ? (
             <motion.div
