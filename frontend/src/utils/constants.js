@@ -59,7 +59,7 @@ export const DEFAULT_CLICK_MULTIPLIER = 1;
 
 export const MIN_USERNAME_LENGTH = 3;
 
-export const MAX_POLL_TITLE_LENGTH = 120;
+export const MAX_POLL_TITLE_LENGTH = 100;
 
 export const MAX_POLL_OPTION_COUNT = 10;
 
