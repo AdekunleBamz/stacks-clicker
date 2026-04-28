@@ -36,15 +36,6 @@ function PlayerStats({ stats, txCount }) {
     { label: 'Votes Cast', value: stats.votes, icon: '🗳️', color: '#f59e0b' },
     { label: 'Transactions', value: txCount, icon: '⚡', color: '#ec4899' },
   ];
-  const containerVariants = {
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    }
-  };
 
   return (
     <section
