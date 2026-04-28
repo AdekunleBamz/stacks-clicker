@@ -59,17 +59,6 @@ export function useClicker({ onTxSubmit } = {}) {
     [executeAction]
   );
 
-  const multiClick = useThrottle(
-    useCallback(
-      (amount = 1) =>
-        executeAction('🔥 Multi-Click', 'multi-click', [
-          { type: 'uint128', value: amount.toString() },
-        ]),
-      [executeAction]
-    ),
-    1000
-  );
-
   const ping = useCallback(() => executeAction('📡 Ping', 'ping'), [executeAction]);
 
   return {
