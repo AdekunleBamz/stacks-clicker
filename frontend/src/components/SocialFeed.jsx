@@ -27,7 +27,6 @@ function SocialFeed({ activities }) {
                             exit={{ opacity: 0, x: 20 }}
                             className="activity-item"
                             role="article"
-                            aria-label={`${activity.user}: ${activity.text}`}
                         >
                             <span className="activity-icon" aria-hidden="true">
                                 {activity.type === 'click' && '👆'}
