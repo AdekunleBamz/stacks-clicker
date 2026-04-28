@@ -16,13 +16,9 @@ export function useTipJar({ onTxSubmit } = {}) {
   const { isConnected } = useWallet();
   const [loadingStates, setLoadingStates] = useState({});
 
-  const setLoading = (key, val) => {
-    setLoadingStates((prev) => ({ ...prev, [key]: val }));
-  };
-
   const executeAction = useCallback(async (key, functionName, functionArgs = []) => {
     if (!isConnected) return;
-    setLoading(key, true);
+    setLoadingStates((prev) => ({ ...prev, [key]: true }));
     try {
       const result = await callContract({
         contractAddress: DEPLOYER_ADDRESS,
@@ -36,7 +32,7 @@ export function useTipJar({ onTxSubmit } = {}) {
       console.error(`TipJar action ${key} failed:`, err);
       throw err;
     } finally {
-      setLoading(key, false);
+      setLoadingStates((prev) => ({ ...prev, [key]: false }));
     }
   }, [isConnected, onTxSubmit]);
 
