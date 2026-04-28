@@ -15,6 +15,7 @@
  */
 
 import UniversalProvider from '@walletconnect/universal-provider';
+import { STACKS_NETWORK } from './constants';
 
 // WalletConnect Project ID from environment
 const PROJECT_ID = import.meta.env.VITE_WALLETCONNECT_PROJECT_ID;
@@ -28,10 +29,6 @@ const DEBUG = import.meta.env.VITE_DEBUG === 'true';
 export function isValidProjectId() {
   return typeof PROJECT_ID === 'string' && PROJECT_ID.trim().length > 0;
 }
-
-const STACKS_NETWORK = String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
-  ? 'testnet'
-  : 'mainnet';
 const STACKS_CHAIN = STACKS_NETWORK === 'testnet' ? 'stacks:2147483648' : 'stacks:1';
 
 /**
