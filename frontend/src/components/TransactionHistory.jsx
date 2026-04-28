@@ -4,6 +4,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import SkeletonLoader from './common/SkeletonLoader';
 import { STACKS_NETWORK } from '../utils/constants';
 
+const DEFAULT_NETWORK =
+  String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
+    ? 'testnet'
+    : 'mainnet';
+
 /**
  * Component to display a list of recent transactions with status indicators.
  * @param {Object} props - Component props.
