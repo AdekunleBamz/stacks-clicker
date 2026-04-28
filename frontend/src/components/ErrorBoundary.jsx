@@ -51,7 +51,7 @@ class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="error-boundary-container" role="alertdialog" aria-live="assertive" aria-labelledby="error-boundary-title">
+        <div className="error-boundary-container" role="alertdialog" aria-labelledby="error-boundary-title">
           <div className="error-content">
             <div className="error-icon">⚠️</div>
             <h2 id="error-boundary-title" className="error-title" style={{ color: 'var(--error)' }}>Something went wrong</h2>
@@ -70,7 +70,6 @@ class ErrorBoundary extends React.Component {
                 type="button"
                 className="action-btn secondary"
                 onClick={() => window.location.reload()}
-                title="Reload the application completely"
                 aria-label="Reload the application"
               >
                 🌐 Reload App
