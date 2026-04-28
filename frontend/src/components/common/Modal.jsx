@@ -1,4 +1,4 @@
-import { useEffect, useCallback, memo } from 'react';
+import { useEffect, useCallback, memo, useId } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
 
@@ -16,6 +16,7 @@ import PropTypes from 'prop-types';
  * @returns {JSX.Element} The rendered modal dialog
  */
 const Modal = memo(function Modal({ isOpen, onClose, title, children, maxWidth = '500px' }) {
+  const modalTitleId = useId();
   const handleKeyDown = useCallback(
     (e) => {
       if (e.key === 'Escape') onClose();
@@ -49,7 +50,7 @@ const Modal = memo(function Modal({ isOpen, onClose, title, children, maxWidth =
             onClick={(e) => e.stopPropagation()}
             role="dialog"
             aria-modal="true"
-            aria-labelledby="modal-title"
+            aria-labelledby={modalTitleId}
           >
             <button
               className="modal-close-btn"
@@ -61,7 +62,7 @@ const Modal = memo(function Modal({ isOpen, onClose, title, children, maxWidth =
               <span aria-hidden="true">✕</span>
             </button>
             <div className="modal-header">
-              <h2 id="modal-title" className="modal-title">
+              <h2 id={modalTitleId} className="modal-title">
                 {title}
               </h2>
             </div>
