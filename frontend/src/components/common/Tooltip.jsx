@@ -26,7 +26,6 @@ export default function Tooltip({ text, content, children }) {
           <motion.div
             id={tooltipId}
             role="tooltip"
-            aria-hidden={!isVisible}
             initial={{ opacity: 0, y: 10, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 5, scale: 0.95 }}
