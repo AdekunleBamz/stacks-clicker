@@ -32,3 +32,4 @@ The bridge between the frontend and the blockchain:
 - **Non-Custodial**: Users always retain control of their private keys.
 - **Clarity Safety**: Contracts are written to be human-readable and predictable.
 - **Environment Safety**: Private keys and mnemonics are never committed or exposed on the frontend.
+- **Input Validation**: All user-supplied inputs (poll questions, tip amounts, addresses) are validated before contract calls.
