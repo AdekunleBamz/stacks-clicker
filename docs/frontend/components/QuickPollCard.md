@@ -19,7 +19,7 @@ The `QuickPollCard` component supports quick poll creation and voting on the Sta
 
 ## Validation Rules
 
-- **Question max length**: 140 characters
+- **Question max length**: 100 characters
 - **Question validation**: Trimmed non-empty text required
 - **One vote per address**: Enforced at contract level
 
