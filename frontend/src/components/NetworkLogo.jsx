@@ -12,8 +12,8 @@ function NetworkLogo({ isSyncing = false }) {
       style={{ willChange: 'transform' }}
       whileHover={{ scale: 1.15, filter: 'brightness(1.2) drop-shadow(0 0 8px var(--primary-glow))' }}
       animate={isSyncing ? { rotate: 360 } : { rotate: [0, 5, -5, 0] }}
-      transition={{ 
-        rotate: isSyncing 
+      transition={{
+        rotate: isSyncing
           ? { duration: 2, repeat: Infinity, ease: "linear" }
           : { duration: 4, repeat: Infinity, ease: "easeInOut" },
         scale: { type: 'spring', stiffness: 300, damping: 15 }
