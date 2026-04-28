@@ -5,11 +5,16 @@
 Exported helpers:
 - `truncateAddress(address, options)`
 - `formatNumber(value, options)`
+- `formatNumberCompact(value, decimals)`
 - `formatStx(microStx)`
+- `formatCompact(value)`
+- `formatPercent(value, decimals)`
+- `normalizeDecimalPlaces(value, fallback)`
+- `formatDuration(ms)`
 
 Behavior notes:
-- `formatNumber` and `formatStx` return safe fallback strings for non-finite input.
-- `truncateAddress` normalizes negative prefix/suffix values before slicing.
+- `formatNumber`, `formatStx`, and other helpers return safe fallback strings for non-finite input.
+- `truncateAddress` returns the original address unchanged if it is shorter than the combined prefix/suffix length.
 
 ## Maintenance Note
 - Keep truncation examples synced with `frontend/src/utils/__tests__/format.test.js`.
