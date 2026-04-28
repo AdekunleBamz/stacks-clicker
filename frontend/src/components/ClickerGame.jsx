@@ -122,7 +122,7 @@ export default function ClickerGame({ onTxSubmit }) {
 
       <div className="game-stats">
         <div className="stat">
-          <span className="stat-value">
+          <span className="stat-value" aria-live="polite" aria-atomic="true">
             <CountUp value={clickCount} />
           </span>
           <span className="stat-label">Session Clicks</span>
