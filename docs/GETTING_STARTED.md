@@ -71,16 +71,7 @@ Use `npm run format:check` before opening a pull request if you touched UI code.
 The dApp interacts with pre-deployed contracts on the network configured by `VITE_STACKS_NETWORK` (default: Stacks Mainnet). You can find the contract source code in the `contracts/` directory for reference.
 
 Current active contract names used by the frontend:
-- `clicker-v2p`
-- `tipjar-v2p`
-- `quickpoll-v2p`
 
-Current active contract names used by the frontend:
-- `clicker-v2p`
-- `tipjar-v2p`
-- `quickpoll-v2p`
-
----
 Need help? Open an issue on [GitHub](https://github.com/AdekunleBamz/stacks-clicker/issues).
 
 Tip: Keep local env values network-specific when switching between test and main environments.
