@@ -95,51 +95,6 @@ export default function App() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [settings.masterVolume, updateSetting, showToast, isAudioOpen]);
 
-  // Mock Social Data
-  const [players] = useState([
-    { address: 'SP1...A2B', clicks: 12500, level: 42 },
-    { address: 'SP3...X9Y', clicks: 8420, level: 28 },
-    { address: 'SP2...K7L', clicks: 5100, level: 19 },
-    { address: 'SP5...M3N', clicks: 3200, level: 12 },
-    { address: 'SP4...Q1P', clicks: 1500, level: 5 }
-  ]);
-
-  const [activities, setActivities] = useState([
-    { id: 1, user: 'SP1...A2B', text: 'just clicked 5 times!', type: 'click', time: 'Just now' },
-    { id: 2, user: 'SP3...X9Y', text: 'sent a 0.5 STX tip!', type: 'tip', time: '2m ago' },
-    { id: 3, user: 'DEGEN', text: 'voted YES on Poll #4!', type: 'poll', time: '5m ago' }
-  ]);
-
-  // Simulate live community activity
-  useEffect(() => {
-    if (!isConnected) return;
-
-    const interval = setInterval(() => {
-      const users = ['SP2...K7L', 'SP4...Q1P', 'DEGEN', 'ANON', 'WHALE'];
-      const actions = [
-        { text: 'is on a clicking spree!', type: 'click' },
-        { text: 'just tipped 0.01 STX', type: 'tip' },
-        { text: 'reached Level 10!', type: 'streak' },
-        { text: 'created a new poll', type: 'poll' }
-      ];
-
-      const user = users[Math.floor(Math.random() * users.length)];
-      const action = actions[Math.floor(Math.random() * actions.length)];
-
-      const newActivity = {
-        id: Date.now(),
-        user,
-        text: action.text,
-        type: action.type,
-        time: 'Just now'
-      };
-
-      setActivities(prev => [newActivity, ...prev.slice(0, 9)]);
-    }, 8000);
-
-    return () => clearInterval(interval);
-  }, [isConnected]);
-
   // Mock User Data for Progress Dashboard
   const [userData, setUserData] = useState({
     level: 12,
