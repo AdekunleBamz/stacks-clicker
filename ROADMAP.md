@@ -21,7 +21,7 @@ Our vision is to build the premier GameFi intersection for the Stacks ecosystem.
 - [ ] **Leaderboards**: Real-time ranking of top players and tippers by activity volume.
 - [ ] **Social Profiles**: Connect BNS (Bitcoin Name System) names to accounts for on-chain identity resolution.
 - [ ] **Custom Notification Tones**: Unlockable sounds for high-streak players.
-- [ ] **Multi-language UI**: Expand i18n support beyond EN/ES/FR/PT.
+- [ ] **Multi-language UI**: Expand i18n support beyond EN/ES/FR/PT/DE.
 
 ## 🟡 Q3 2026: Advanced Gameplay
 - [ ] **Staking Mechanics**: Stake STX to earn "Click Power" multipliers.
