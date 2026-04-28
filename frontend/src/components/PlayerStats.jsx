@@ -41,7 +41,6 @@ function PlayerStats({ stats, txCount }) {
     <section
       className="stats-bar"
       aria-label="Player Statistics"
-      role="region"
       title="Your Personal Player Statistics Overview"
       style={{ textRendering: 'optimizeLegibility' }}
     >
