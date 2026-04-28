@@ -18,7 +18,7 @@ function MainGrid({
   quickpoll
 }) {
   return (
-    <section className="interaction-section" aria-labelledby="interactions-title" aria-live="polite">
+    <section className="interaction-section" aria-labelledby="interactions-title">
       <h2 className="section-title" id="interactions-title">Interactions</h2>
       <InteractionStreaks totalInteractions={(stats.clicks || 0) + (stats.tips || 0) + (stats.votes || 0)} />
       <LayoutGroup>
