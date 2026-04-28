@@ -24,6 +24,23 @@ function ActionCard({ title, subtitle, icon, iconClass, children }) {
       whileHover={{ y: -5, boxShadow: '0 25px 50px -12px rgba(99, 102, 241, 0.2)' }}
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
     >
+      {/* Dynamic Mouse Spotlight Glow */}
+      <motion.div
+        className="highlight-spotlight"
+        style={{
+          background: motion.useMotionTemplate`
+            radial-gradient(
+              400px circle at ${mouseX}px ${mouseY}px,
+              rgba(99, 102, 241, 0.15),
+              transparent 80%
+            )
+          `,
+          position: 'absolute',
+          inset: -1,
+          pointerEvents: 'none',
+          zIndex: 0
+        }}
+      />
       <div className="contract-header">
         <div className={`contract-icon ${iconClass}`} aria-hidden="true">{icon}</div>
         <div>
