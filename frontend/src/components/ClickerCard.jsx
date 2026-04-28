@@ -20,6 +20,7 @@ function ClickerCard({ address, clicker }) {
       icon="🚀"
       iconClass="clicker-icon"
     >
+        <div className="actions" role="group" aria-label="Clicker actions">
         <Tooltip text="Perform a single on-chain click interaction instantly.">
           <ActionButton
             label="Express Click"
@@ -56,6 +57,7 @@ function ClickerCard({ address, clicker }) {
             disabled={!address}
           />
         </Tooltip>
+        </div>
     </ActionCard>
   );
 }
