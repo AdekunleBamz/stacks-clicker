@@ -171,7 +171,7 @@ export default function App() {
 
   // Milestone Celebration
   const [celebration, setCelebration] = useState(null);
-  useState(() => {
+  useEffect(() => {
     const milestones = [10, 50, 100, 500];
     const checkMilestones = () => {
       const total = stats.clicks + stats.tips + stats.votes;
