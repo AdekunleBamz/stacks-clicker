@@ -71,6 +71,7 @@ class ErrorBoundary extends React.Component {
                 className="action-btn secondary"
                 onClick={() => window.location.reload()}
                 title="Reload the application completely"
+                aria-label="Reload the application"
               >
                 🌐 Reload App
               </button>
