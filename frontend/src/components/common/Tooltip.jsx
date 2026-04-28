@@ -17,6 +17,11 @@ export default function Tooltip({ text, content, children }) {
       onMouseLeave={() => setIsVisible(false)}
       onFocus={() => setIsVisible(true)}
       onBlur={() => setIsVisible(false)}
+      onKeyDown={(event) => {
+        if (event.key === 'Escape') {
+          setIsVisible(false);
+        }
+      }}
       aria-describedby={isVisible ? tooltipId : undefined}
       style={{ position: 'relative', display: 'inline-block', width: '100%' }}
     >
