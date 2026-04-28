@@ -249,8 +249,8 @@ function QuickPollCard({ address, quickpoll }) {
           <button
             type="button"
             className="share-poll-btn"
-            aria-label="Share Poll Results"
-            title="Copy Results Link"
+            aria-label="Share poll results link"
+            title="Copy poll results link"
             onClick={() => {
               if (navigator.clipboard?.writeText) {
                 navigator.clipboard.writeText(window.location.href);
