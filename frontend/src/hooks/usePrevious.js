@@ -29,15 +29,15 @@ export function useHasChanged(value) {
   return { hasChanged, previous };
 }
 
-  /**
-   * Custom hook that returns true only on the very first render.
-   *
-   * @returns {boolean} True on the first render, false thereafter
-   */
-  export function useIsFirstRender() {
-    const isFirstRender = useRef(true);
-    useEffect(() => {
-      isFirstRender.current = false;
-    }, []);
-    return isFirstRender.current;
-  }
+/**
+ * Custom hook that returns true only on the very first render.
+ *
+ * @returns {boolean} True on the first render, false thereafter
+ */
+export function useIsFirstRender() {
+  const isFirstRender = useRef(true);
+  useEffect(() => {
+    isFirstRender.current = false;
+  }, []);
+  return isFirstRender.current;
+}
