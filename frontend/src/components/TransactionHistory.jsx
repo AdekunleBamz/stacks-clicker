@@ -10,10 +10,7 @@ const DEFAULT_NETWORK =
     : 'mainnet';
 
 /**
- * Component to display a list of recent transactions with status indicators.
- * @param {Object} props - Component props.
- * @param {Array} props.txLog - Array of transaction objects.
- * @returns {JSX.Element} The rendered transaction history section.
+ * Error fallback component for transaction history
  */
 function TransactionHistory({ txLog }) {
   return (
