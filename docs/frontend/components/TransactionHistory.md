@@ -1,10 +1,9 @@
 # TransactionHistory
 
-`TransactionHistory.jsx` provides searchable activity history with:
-- status filtering
-- JSON/CSV export
-- context menu actions
-- modal detail view (summary/raw)
+`TransactionHistory.jsx` renders the local transaction log with per-entry status tracking:
+- Shows submitted, mempool, and confirmed progress steps
+- Links confirmed transactions to the Hiro Explorer
+- Displays skeleton loaders when the log is empty
 
 It expects `txLog` entries with at least `id`, `action`, `status`, and `time`.
 Treat unknown status values as neutral badges instead of dropping entries.
