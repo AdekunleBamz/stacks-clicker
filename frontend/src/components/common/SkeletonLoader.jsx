@@ -27,7 +27,6 @@ function SkeletonLoader({
       className={`skeleton-wrapper ${className}`}
       aria-busy="true"
       role="status"
-      aria-live="polite"
       aria-label={`Loading ${label}...`}
       style={{
         width,
