@@ -2,7 +2,9 @@
  * Centralized constants for the Stacks Clicker application.
  */
 
-export const STACKS_NETWORK = import.meta.env.VITE_STACKS_NETWORK || 'mainnet';
+export const STACKS_NETWORK = String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
+  ? 'testnet'
+  : 'mainnet';
 
 /** @type {string} Smart contract deployer address */
 export const DEPLOYER = import.meta.env.VITE_DEPLOYER_ADDRESS || '';
