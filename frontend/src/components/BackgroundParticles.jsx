@@ -20,7 +20,7 @@ function BackgroundParticles() {
     })), []);
 
     return (
-        <div className="bg-particles" aria-hidden="true" role="presentation">
+        <div className="bg-particles" aria-hidden="true">
             {particles.map((p) => (
                 <motion.div
                     key={p.id}
