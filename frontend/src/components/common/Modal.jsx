@@ -55,7 +55,6 @@ const Modal = memo(function Modal({ isOpen, onClose, title, children, maxWidth =
               className="modal-close-btn"
               onClick={onClose}
               aria-label="Close modal"
-              title="Close dialog"
               type="button"
             >
               <span aria-hidden="true">✕</span>
