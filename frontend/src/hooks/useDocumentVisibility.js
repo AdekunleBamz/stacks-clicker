@@ -28,7 +28,7 @@ export function useDocumentVisibility() {
     document.addEventListener('visibilitychange', handleVisibilityChange, { passive: true });
 
     return () => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange, { passive: true });
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, []);
 
