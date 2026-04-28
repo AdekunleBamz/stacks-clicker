@@ -27,7 +27,6 @@ const Footer = memo(function Footer() {
             rel="noopener noreferrer"
             className="social-link"
             aria-label="Follow Stacks on Twitter"
-            title="Follow Stacks on Twitter"
           >
             <span aria-hidden="true">🐦</span> Twitter
           </a>
@@ -37,7 +36,6 @@ const Footer = memo(function Footer() {
             rel="noopener noreferrer"
             className="social-link"
             aria-label="Join Stacks Discord"
-            title="Join Stacks Discord"
           >
             <span aria-hidden="true">💬</span> Discord
           </a>
@@ -47,7 +45,6 @@ const Footer = memo(function Footer() {
             rel="noopener noreferrer"
             className="social-link"
             aria-label="View Stacks Clicker Source on GitHub"
-            title="View Stacks Clicker Source on GitHub"
           >
             <span aria-hidden="true">🐙</span> GitHub
           </a>
