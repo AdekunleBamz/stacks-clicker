@@ -72,9 +72,8 @@ const PullToRefresh = memo(function PullToRefresh({ onRefresh, children }) {
           className={`ptr-spinner ${refreshing ? 'spinning' : ''}`}
           role={refreshing ? "progressbar" : "img"}
           aria-label={refreshing ? "Refreshing content" : "Pull to refresh"}
-          aria-valuenow={refreshing ? undefined : Math.min((pullDistance / PULL_THRESHOLD) * 100, 100)}
-          aria-valuemin="0"
-          aria-valuemax="100"
+          aria-valuemin={refreshing ? "0" : undefined}
+          aria-valuemax={refreshing ? "100" : undefined}
         >
           <span aria-hidden="true">{refreshing ? '⏳' : '↓'}</span>
         </div>
