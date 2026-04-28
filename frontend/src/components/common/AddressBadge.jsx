@@ -61,8 +61,6 @@ function AddressBadge({ address, onDisconnect }) {
           type="button"
           className="btn-disconnect"
           onClick={onDisconnect}
-          aria-label="Disconnect wallet"
-          title="Disconnect wallet"
         >
           Disconnect
         </button>
