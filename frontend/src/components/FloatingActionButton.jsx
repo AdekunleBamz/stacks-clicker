@@ -39,7 +39,7 @@ export default function FloatingActionButton({ onAction = () => {} }) {
                 }}
               >
                 <span className="fab-label">{action.label}</span>
-                <span className="fab-icon">{action.icon}</span>
+                <span className="fab-icon" aria-hidden="true">{action.icon}</span>
               </motion.button>
             ))}
           </div>
