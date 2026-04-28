@@ -1,4 +1,5 @@
 import { createContext, useContext, useMemo } from 'react';
+import PropTypes from 'prop-types';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
 const translations = Object.freeze({
@@ -83,6 +84,10 @@ export function I18nProvider({ children }) {
 
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>;
 }
+
+I18nProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export const useI18n = () => {
   const context = useContext(I18nContext);
