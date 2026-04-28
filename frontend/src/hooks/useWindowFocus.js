@@ -26,9 +26,9 @@ export function useWindowFocus() {
     document.addEventListener('visibilitychange', handleVisibilityChange, { passive: true });
 
     return () => {
-      window.removeEventListener('focus', handleFocus, { passive: true });
-      window.removeEventListener('blur', handleBlur, { passive: true });
-      document.removeEventListener('visibilitychange', handleVisibilityChange, { passive: true });
+      window.removeEventListener('focus', handleFocus);
+      window.removeEventListener('blur', handleBlur);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, []);
 
