@@ -6,5 +6,6 @@
 - Verify mobile scrolling and animation smoothness.
 - Capture one before/after performance trace when tuning hot paths.
 - Re-check performance after enabling debug logging flags.
+- Include at least one trace from a low-end mobile profile when performance regressions are suspected.
 
 Companion index: [Operations docs](README.md).
