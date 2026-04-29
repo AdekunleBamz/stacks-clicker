@@ -6,5 +6,6 @@
 - Evidence: include at least one representative transaction/explorer link when on-chain behavior changed.
 - Rollback plan: note the quickest revert path if the release causes regressions.
 - Known limitations: note anything intentionally deferred to a follow-up release.
+- Support note: include one sentence support can reuse when answering user questions.
 
 Companion index: [Operations docs](README.md).
