@@ -9,3 +9,5 @@ Keep tooltip content short enough to avoid obscuring nearby controls.
 - Recheck hover/focus delay values whenever interaction timing is tuned globally.
 
 - Re-test trigger delay and escape behavior after tooltip interaction changes.
+
+- Reconfirm tooltip portal stacking order when modal layering changes.
