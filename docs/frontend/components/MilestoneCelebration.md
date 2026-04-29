@@ -6,3 +6,5 @@ The parent component controls the `celebration` message and visibility timing.
 Respect reduced-motion preferences when tuning celebration animation intensity.
 
 - Keep celebration copy short enough for quick screen-reader announcements.
+
+- Reconfirm announcement text remains concise during new milestone additions.
