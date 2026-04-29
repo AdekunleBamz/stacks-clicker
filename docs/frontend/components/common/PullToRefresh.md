@@ -7,3 +7,5 @@ Debounce repeated pulls while an async refresh is already in progress.
 
 ## Maintenance Note
 - Reconfirm drag-threshold values if touch gesture sensitivity defaults are changed.
+
+- Revalidate pull threshold behavior after mobile gesture tuning.
