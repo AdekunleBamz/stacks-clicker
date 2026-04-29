@@ -9,3 +9,5 @@ From the repository root, `npm run frontend:test` is the equivalent helper comma
 - Keep flaky-test triage guidance updated as CI retry policy evolves.
 
 Source directory: `frontend/src/tests/`.
+
+- Keep this index in sync when adding new targeted frontend test docs.
