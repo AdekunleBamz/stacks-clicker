@@ -8,5 +8,6 @@
 - Include at least one low-balance wallet scenario in matrix coverage.
 - Include a burst-transaction run to verify client-side backoff behavior under provider limits.
 - Run one matrix pass in a clean browser profile to rule out extension cache artifacts.
+- Capture at least one matrix run where wallet app language is non-English.
 
 Companion index: [Operations docs](README.md).
