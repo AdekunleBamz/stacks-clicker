@@ -66,6 +66,7 @@ Use `npm run format:check` before opening a pull request if you touched UI code.
 - If wallet connection does not appear, verify `VITE_WALLETCONNECT_PROJECT_ID` is set.
 - If UI changes do not reflect, restart `npm run dev` after editing `.env`.
 - Keep local env values network-specific when switching between test and main environments.
+- If contract calls fail, confirm `VITE_STACKS_NETWORK` matches the contracts deployed for that wallet.
 
 ## 📜 Contract Interaction
 The dApp interacts with pre-deployed contracts on the network configured by `VITE_STACKS_NETWORK` (default: Stacks Mainnet). You can find the contract source code in the `contracts/` directory for reference.
