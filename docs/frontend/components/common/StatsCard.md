@@ -7,3 +7,5 @@ Avoid animating rapidly changing values to keep motion readable.
 
 ## Maintenance Note
 - Keep numeric formatting examples aligned with locale and precision defaults.
+
+- Revalidate numeric formatting assumptions when stats units are revised.
