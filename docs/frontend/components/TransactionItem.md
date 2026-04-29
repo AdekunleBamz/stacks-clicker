@@ -13,3 +13,5 @@
 Source file: `frontend/src/components/TransactionItem.jsx`.
 
 - Recheck status badge wording during transaction state model changes.
+
+- Validate transaction status icon meaning when new states are added.
