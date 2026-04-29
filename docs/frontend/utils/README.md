@@ -9,3 +9,5 @@ Current references:
 - [walletconnect.js](walletconnect.md)
 
 Source directory: `frontend/src/utils/`.
+
+- Add new utility docs here whenever frontend helper modules are introduced.
