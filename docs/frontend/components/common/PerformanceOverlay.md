@@ -7,3 +7,5 @@ Keep this overlay disabled in production builds to avoid noisy metrics output.
 
 ## Maintenance Note
 - Reconfirm metric sampling frequency notes when profiling defaults are updated.
+
+- Recheck sampling interval notes when telemetry cadence changes.
