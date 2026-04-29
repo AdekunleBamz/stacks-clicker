@@ -9,3 +9,5 @@ Checks:
 
 ## Maintenance Note
 - Revalidate timer-related assertions whenever click cooldown semantics are adjusted.
+
+- Add an assertion reminder for click cooldown edge paths during future test updates.
