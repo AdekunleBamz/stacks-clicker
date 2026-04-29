@@ -41,3 +41,5 @@ Complete all items before and during a release to ensure quality and traceabilit
 
 ## Maintenance Note
 - Re-audit this checklist whenever release gate criteria are updated.
+
+- Reconfirm release checklist ownership before each scheduled release train.
