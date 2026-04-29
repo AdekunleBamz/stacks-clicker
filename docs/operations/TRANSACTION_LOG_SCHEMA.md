@@ -9,5 +9,6 @@ Common tx-log fields:
 - `explorerUrl`
 - `network`
 - `errorCode` (optional, for rejected/failed flows)
+- `walletType` (optional, useful for wallet-specific support patterns)
 
 Companion index: [Operations docs](README.md).
