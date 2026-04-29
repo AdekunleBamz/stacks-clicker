@@ -10,3 +10,5 @@ Covers:
 - Keep fallback-locale test cases updated when language packs are added.
 
 - Revisit fallback key coverage whenever locale bootstrap behavior changes.
+
+- Recheck missing-key fallback assertions when locale bundles are reorganized.
