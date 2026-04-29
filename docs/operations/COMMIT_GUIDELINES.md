@@ -8,5 +8,6 @@
 - Spot-check the latest signature locally with `git log -1 --show-signature`.
 - Confirm the pushed commit shows a `Verified` badge on GitHub before requesting review.
 - Keep subject lines specific to the user-visible or operational outcome.
+- Avoid force-pushing shared review branches unless a reviewer has already approved the rewrite.
 
 Companion index: [Operations docs](README.md).
