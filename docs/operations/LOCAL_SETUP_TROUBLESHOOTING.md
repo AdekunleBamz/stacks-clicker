@@ -26,6 +26,7 @@ Common issues and solutions for local development setup.
 - Check browser extension is installed and unlocked.
 - Verify wallet is connected to correct network (mainnet/testnet).
 - Try disconnecting and reconnecting the wallet.
+- Confirm system clock is accurate when wallet signatures appear to fail unexpectedly.
 
 ## Common Issues
 
