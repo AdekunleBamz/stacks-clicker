@@ -13,3 +13,5 @@ Checks:
 Source file: `frontend/src/tests/TipJarCard.test.jsx`.
 
 - Reconfirm min-tip and invalid-input scenarios after fee rule changes.
+
+- Re-run invalid amount test coverage after precision rule updates.
