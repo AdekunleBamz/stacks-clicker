@@ -67,6 +67,7 @@ function TransactionHistory({ txLog }) {
                         rel="noopener noreferrer"
                         className="tx-explorer-link"
                         title="Open transaction in Hiro Explorer"
+                        aria-label={`Open transaction ${tx.id.slice(0, 8)} in Hiro Explorer`}
                       >
                         {tx.id.slice(0, 8)}...{tx.id.slice(-6)} ↗
                       </a>
