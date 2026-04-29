@@ -11,3 +11,5 @@
 - Avoid force-pushing shared review branches unless a reviewer has already approved the rewrite.
 
 Companion index: [Operations docs](README.md).
+
+- Recheck signature verification wording when team signing policy changes.
