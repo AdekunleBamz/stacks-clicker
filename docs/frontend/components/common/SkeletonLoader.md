@@ -7,3 +7,5 @@ Match skeleton dimensions to final content to reduce layout shifts.
 
 ## Maintenance Note
 - Validate shimmer duration against motion-budget guidance during design refreshes.
+
+- Recheck motion budget whenever skeleton animation style is updated.
