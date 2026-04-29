@@ -183,7 +183,7 @@ function QuickPollCard({ address, quickpoll }) {
                   aria-invalid={!trimmedQuestion && errorField === 'create-poll'}
                   aria-required="true"
                 />
-                <span className="input-help-text" aria-hidden="true">{trimmedQuestion.length}/100</span>
+                <span className="input-help-text" aria-hidden="true">{trimmedQuestion.length}/{MAX_POLL_TITLE_LENGTH}</span>
               </div>
 
               <Tooltip text="Create a new poll on the Stacks blockchain.">
