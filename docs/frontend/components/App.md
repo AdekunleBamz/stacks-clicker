@@ -9,3 +9,5 @@ Keep global side effects centralized here to minimize prop drilling complexity.
 - Update this document whenever keyboard shortcuts change to keep support docs accurate.
 
 - Re-verify global side effects here when app-level providers are reordered.
+
+- Keep this doc updated when app-level error handling boundaries are reorganized.
