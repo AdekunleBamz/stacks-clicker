@@ -14,3 +14,5 @@ Render fallbacks when `price` is unavailable instead of blocking interactions.
 - Reconfirm staleness threshold guidance when price source refresh cadence changes.
 
 - Recheck staleness threshold assumptions when price provider limits change.
+
+- Revalidate stale data handling when refresh interval values are tuned.
