@@ -315,23 +315,24 @@ export async function callContract({
 
   log('Requesting stx_callContract:', contractName, functionName);
 
-  const result = await provider.request(
-    {
-      method: 'stx_callContract',
-      params: {
-        contractAddress,
-        contractName,
-        functionName,
-        functionArgs: functionArgs || [],
-        // Post-conditions are essential for security.
-        // they ensure that the smart contract doesn't transfer more assets
-        // than authorized by the user.
-        postConditions: postConditions || [],
-        network: STACKS_NETWORK,
+  try {
+    const result = await provider.request(
+      {
+        method: 'stx_callContract',
+        params: {
+          contractAddress,
+          contractName,
+          functionName,
+          functionArgs: functionArgs || [],
+          // Post-conditions are essential for security.
+          // they ensure that the smart contract doesn't transfer more assets
+          // than authorized by the user.
+          postConditions: postConditions || [],
+          network: STACKS_NETWORK,
+        },
       },
-    },
-    STACKS_CHAIN
-  );
+      STACKS_CHAIN
+    );
 
     callBackoffUntilByKey.delete(backoffKey);
     log('Contract call result:', result);

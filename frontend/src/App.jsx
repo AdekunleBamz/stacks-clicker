@@ -20,7 +20,7 @@ import { useQuickPoll } from './hooks/useQuickPoll';
  * Manages global state, contract interaction via custom hooks, and UI layout.
  * @returns {JSX.Element} The rendered application.
  */
-export default function App() {
+function AppContent() {
   // Global Wallet State
   const { address, connectWallet, disconnectWallet, isConnected } = useWallet();
   const { playSound: play } = useSound();
