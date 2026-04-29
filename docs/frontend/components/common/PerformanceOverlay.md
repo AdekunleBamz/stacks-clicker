@@ -9,3 +9,5 @@ Keep this overlay disabled in production builds to avoid noisy metrics output.
 - Reconfirm metric sampling frequency notes when profiling defaults are updated.
 
 - Recheck sampling interval notes when telemetry cadence changes.
+
+- Keep telemetry labels stable to preserve dashboard comparison continuity.
