@@ -26,6 +26,7 @@ In the interest of fostering an open and welcoming environment, we as contributo
 ## Reporting
 
 Report unacceptable behavior to `security@stacksclicker.io`.
+For urgent safety issues, state that urgency clearly in the first line of your report.
 
 ### What to Include
 
@@ -43,4 +44,3 @@ Project maintainers are responsible for clarifying and enforcing these standards
 ## Attribution
 
 This Code of Conduct is adapted from the [Contributor Covenant](https://www.contributor-covenant.org/), version 2.1.
-
