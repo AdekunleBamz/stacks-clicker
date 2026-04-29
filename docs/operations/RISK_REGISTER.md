@@ -7,6 +7,7 @@ Track active risks with:
 - current status
 - next review date
 - decision date for the current mitigation plan
+- detection signal used to spot this risk early in production
 
 Update this register during incident and release reviews.
 
