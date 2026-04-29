@@ -12,3 +12,5 @@ This folder contains focused references for frontend components, hooks, and cont
 - Add links to newly introduced feature docs in this index as part of the same pull request.
 
 - Keep this index aligned whenever new frontend doc folders are introduced.
+
+- Keep frontend docs index links synchronized after moving hook references.
