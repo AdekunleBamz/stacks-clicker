@@ -27,6 +27,7 @@ const Footer = memo(function Footer() {
             rel="noopener noreferrer"
             className="social-link"
             aria-label="Follow Stacks on Twitter"
+            title="Follow Stacks on Twitter"
           >
             <span aria-hidden="true">🐦</span> Twitter
           </a>
