@@ -38,6 +38,7 @@ Deployments are split by network plan files in `deployments/`:
 2. **Execution**
    - Run deployment with Clarinet: `clarinet deploy`
    - Monitor transaction confirmations
+   - Save terminal output for the deployment record when running on shared environments
    - Record deployment transaction IDs
 
 3. **Verification**
