@@ -16,3 +16,5 @@ Loading key note:
 - Keep click/ping error copy synchronized with broadcast backoff handling.
 
 Source file: `frontend/src/hooks/useClicker.js`.
+
+- Revalidate loading-key names after any contract method rename.
