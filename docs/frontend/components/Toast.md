@@ -7,3 +7,5 @@ Include recovery hints for failures that users can immediately retry.
 
 ## Maintenance Note
 - Revalidate timeout durations with accessibility guidance whenever toast variants change.
+
+- Reconfirm toast timeout accessibility after changing default durations.
