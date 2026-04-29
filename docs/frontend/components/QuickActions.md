@@ -12,3 +12,5 @@ Keep external support links reviewed to avoid stale destinations.
 - Keep clear-log behavior discoverable and reversible to reduce accidental data loss.
 
 - Recheck shortcut labels whenever quick action mappings are updated.
+
+- Re-test shortcut discoverability when action grouping changes.
