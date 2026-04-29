@@ -8,3 +8,5 @@ Avoid flashing animations during reconnect loops to reduce visual noise.
 - Prefer plain status wording that matches wallet/network troubleshooting language.
 
 - Re-test status wording when heartbeat polling cadence is adjusted.
+
+- Confirm heartbeat fallback text remains useful when API calls timeout.
