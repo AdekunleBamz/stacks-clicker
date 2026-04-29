@@ -49,6 +49,7 @@ export default function Header({ theme, toggleTheme }) {
             value={lang}
             onChange={(e) => setLang(e.target.value)}
             aria-label="Select application language"
+            title="Select language"
           >
             <option value="en">EN</option>
             <option value="es">ES</option>
