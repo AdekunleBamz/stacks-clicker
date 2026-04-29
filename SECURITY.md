@@ -23,6 +23,7 @@ Please include:
 - Location in source code.
 - Steps to reproduce.
 - Impact assessment.
+- Any temporary mitigation already tested, if available.
 
 ## User Best Practices
 
