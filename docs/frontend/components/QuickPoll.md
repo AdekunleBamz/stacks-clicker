@@ -13,3 +13,5 @@ Prefer `QuickPollCard` in production-facing layouts to reduce duplicated logic.
 - Keep vote-option labeling aligned with `QuickPollCard` to avoid inconsistent wording.
 
 Source file: `frontend/src/components/QuickPoll.jsx`.
+
+- Revalidate default poll expiry copy when contract defaults evolve.
