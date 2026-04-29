@@ -2,3 +2,5 @@
 
 Audit truncation lengths for readability across desktop and mobile breakpoints.
 Over-truncated addresses make account confirmation harder.
+
+- Recheck truncation logic when address checksum display rules are revised.
