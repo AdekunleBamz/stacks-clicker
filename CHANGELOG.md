@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Use `YYYY-MM-DD` release dates and move shipped entries out of `Unreleased`.
 - Group changes by type: Added, Changed, Deprecated, Removed, Fixed, Security.
 - Link version tags to GitHub release pages when available.
+- Mention when a release includes support-facing copy or runbook changes.
 
 ## [Unreleased]
 ### Added
