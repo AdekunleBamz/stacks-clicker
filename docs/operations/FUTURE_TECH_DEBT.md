@@ -5,5 +5,6 @@
 - Standardize network selection to reduce hardcoded mainnet assumptions.
 - Isolate explorer URL generation behind a shared utility module.
 - Review and reduce duplicate contract deployer address constants across components.
+- Add lightweight end-to-end coverage for wallet reconnect after hard refresh.
 
 Companion index: [Operations docs](README.md).
