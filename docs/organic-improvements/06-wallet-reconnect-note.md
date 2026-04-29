@@ -4,3 +4,5 @@
 - Ensure stale sessions clear when network changes.
 - Validate disconnect action resets guarded UI states.
 - Re-check transaction buttons after reconnect flow.
+
+- Re-test reconnect messaging after wallet provider package updates.
