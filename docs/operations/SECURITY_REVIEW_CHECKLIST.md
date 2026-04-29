@@ -5,6 +5,7 @@
 - Confirm wallet/session handling errors fail safely.
 - Route sensitive reports through private channels.
 - Check that debug flags do not leak sensitive payload details in production.
+- Reconfirm wallet-provider SDK versions are still within supported security patch windows.
 
 ## Maintenance Note
 - Refresh threat-model references when authentication or wallet flows are modified.
