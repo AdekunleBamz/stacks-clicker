@@ -7,3 +7,5 @@ Prefer this view for lightweight embeds where filters/export are unnecessary.
 
 ## Maintenance Note
 - Revisit retention and truncation notes if log paging strategy changes.
+
+- Revisit retention assumptions when transaction log persistence changes.
