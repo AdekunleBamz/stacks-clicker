@@ -2,3 +2,5 @@
 
 When adjusting click throughput rules, re-check server and client limits together.
 Unaligned limits create false failure states and noisy support reports.
+
+- Reconfirm rate-limit fallback copy stays actionable for user retries.
