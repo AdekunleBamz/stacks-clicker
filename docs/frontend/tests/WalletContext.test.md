@@ -11,3 +11,5 @@ Covers:
 - Recheck reconnect-path assertions when wallet session bootstrap logic changes.
 
 - Recheck reconnect behavior assertions after wallet adapter upgrades.
+
+- Reconfirm disconnect recovery assertions after wallet reconnect refactors.
