@@ -7,5 +7,6 @@
 - Confirm error toast content is readable and actionable when a transaction fails.
 - Validate one user-rejected transaction path so cancellation messaging stays clear.
 - Dismiss and reopen the wallet popup once to confirm reconnect UX remains stable.
+- Verify transaction buttons return to enabled state after a rejected signature.
 
 Companion index: [Operations docs](README.md).
