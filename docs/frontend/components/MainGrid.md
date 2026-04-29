@@ -14,3 +14,5 @@ Prefer adding new cards through this layout to keep dashboard ordering explicit.
 - Add new interaction cards here in a predictable order to keep keyboard navigation consistent.
 
 - Revalidate card order assumptions before introducing new primary dashboard tiles.
+
+- Recheck responsive breakpoints after introducing additional dashboard widgets.
