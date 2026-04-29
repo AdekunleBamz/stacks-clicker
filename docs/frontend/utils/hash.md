@@ -14,3 +14,5 @@ Behavior notes:
 - Keep deterministic behavior expectations aligned with `frontend/src/utils/__tests__/hash.test.js`.
 
 Source file: `frontend/src/utils/hash.js`.
+
+- Reconfirm hash stability assumptions before changing any cache-key derivation logic.
