@@ -7,5 +7,6 @@
 - Record the first successful postdeploy transaction ID in release notes for quick audit lookup.
 - Announce deploy status to contributors.
 - Confirm telemetry dashboards show expected traffic after release.
+- Confirm wallet connect still works from a fresh private browsing session.
 
 Companion index: [Operations docs](README.md).
