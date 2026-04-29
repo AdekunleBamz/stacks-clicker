@@ -15,6 +15,7 @@ The frontend for StacksClicker is a modern React application built with Vite, Fr
 ```bash
 npm install
 ```
+Use `npm ci` when you need deterministic installs that match the lockfile.
 
 ### 2. Environment Variables
 Create a `.env` file based on `.env.example`:
