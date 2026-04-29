@@ -20,3 +20,5 @@ Behavior notes:
 - Keep truncation examples synced with `frontend/src/utils/__tests__/format.test.js`.
 
 Source file: `frontend/src/utils/format.js`.
+
+- Revalidate rounding expectations when displayed token precision rules change.
