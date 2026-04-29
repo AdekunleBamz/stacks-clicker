@@ -38,6 +38,8 @@ The `main` branch is the primary branch and represents the current production-re
 3. Ensure all commits are signed (`git commit -S`).
 
 ### Pull Request Process
+
+- Delete merged feature and bug-fix branches promptly to keep branch lists readable.
 1. Request review from at least one maintainer.
 2. Address all review feedback.
 3. Ensure CI passes on the PR.
