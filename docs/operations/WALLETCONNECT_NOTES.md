@@ -6,5 +6,6 @@
 - Log only non-sensitive session diagnostics.
 - Re-test reconnect behavior after wallet app version upgrades.
 - Check for chain/network mismatches first when sessions connect but contract calls fail.
+- Confirm session expiry copy clearly tells users when a fresh pairing is required.
 
 Companion index: [Operations docs](README.md).
