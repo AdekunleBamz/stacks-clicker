@@ -4,3 +4,5 @@
 - Confirm streak counters update after transaction confirmation.
 - Validate error messaging for rejected transactions.
 - Capture explorer links for smoke transaction records.
+
+- Include one disconnected-wallet run in this smoke path to validate error handling.
