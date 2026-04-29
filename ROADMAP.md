@@ -8,6 +8,7 @@ Our vision is to build the premier GameFi intersection for the Stacks ecosystem.
 - Roadmap priorities may shift when security, reliability, or protocol changes require immediate attention.
 - Major feature development should be discussed in GitHub Issues before implementation.
 - Community feedback helps shape roadmap priorities - feel free to contribute your ideas.
+- Each quarter should include at least one quality-of-life item for supportability or operations.
 
 ## Progress Legend
 
