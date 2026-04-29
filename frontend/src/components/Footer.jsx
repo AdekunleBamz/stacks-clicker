@@ -45,6 +45,7 @@ const Footer = memo(function Footer() {
             rel="noopener noreferrer"
             className="social-link"
             aria-label="View Stacks Clicker Source on GitHub"
+            title="View source on GitHub"
           >
             <span aria-hidden="true">🐙</span> GitHub
           </a>
