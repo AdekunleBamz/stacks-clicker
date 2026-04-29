@@ -12,3 +12,5 @@ Validates:
 Source file: `frontend/src/tests/useLocalStorage.test.jsx`.
 
 - Re-run migration-path assertions whenever local storage key versions change.
+
+- Revalidate migration rollback tests when storage schema changes.
