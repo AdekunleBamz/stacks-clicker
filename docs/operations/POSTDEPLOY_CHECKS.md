@@ -10,3 +10,5 @@
 - Confirm wallet connect still works from a fresh private browsing session.
 
 Companion index: [Operations docs](README.md).
+
+- Record postdeploy check operator initials in release notes for audit clarity.
