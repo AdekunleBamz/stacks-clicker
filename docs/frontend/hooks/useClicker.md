@@ -18,3 +18,5 @@ Loading key note:
 Source file: `frontend/src/hooks/useClicker.js`.
 
 - Revalidate loading-key names after any contract method rename.
+
+- Revalidate multi-click argument guards when contract input limits evolve.
