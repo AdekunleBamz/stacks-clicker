@@ -9,3 +9,5 @@ Props:
 
 - Keep language selector defaults aligned with i18n fallback settings to avoid mismatched initial state.
 - Ensure network status fallback text remains user-friendly when heartbeat data is unavailable.
+
+- Revisit language fallback behavior when locale defaults are updated.
