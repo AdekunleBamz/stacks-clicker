@@ -9,3 +9,5 @@ Prefer status labels that map directly to your release checklist states.
 - Keep status legend definitions synchronized with roadmap card badge states.
 
 - Revisit status legend wording when roadmap state names are revised.
+
+- Keep roadmap tag colors readable in both high and low contrast modes.
