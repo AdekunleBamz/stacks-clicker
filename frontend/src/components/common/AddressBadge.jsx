@@ -61,6 +61,7 @@ function AddressBadge({ address, onDisconnect }) {
           type="button"
           className="btn-disconnect"
           onClick={onDisconnect}
+          title="Disconnect wallet"
         >
           Disconnect
         </button>
