@@ -14,3 +14,5 @@ Keep stat labels consistent with transaction history terminology.
 - Keep stat labels synchronized with transaction history terminology for easier cross-reference.
 
 - Reconfirm value formatting consistency when stats derivation logic changes.
+
+- Confirm stat labels stay consistent between compact and expanded layouts.
