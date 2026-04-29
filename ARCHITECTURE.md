@@ -33,3 +33,4 @@ The bridge between the frontend and the blockchain:
 - **Clarity Safety**: Contracts are written to be human-readable and predictable.
 - **Environment Safety**: Private keys and mnemonics are never committed or exposed on the frontend.
 - **Input Validation**: All user-supplied inputs (poll questions, tip amounts, addresses) are validated before contract calls.
+- **Operational Traceability**: Release and incident docs should map user-impacting behavior changes back to specific components.
