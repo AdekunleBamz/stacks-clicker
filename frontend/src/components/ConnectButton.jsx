@@ -84,6 +84,7 @@ export default function ConnectButton() {
               aria-label={`Connected address ${truncateAddress(address, { prefix: 4 })}`}
               tabIndex={0}
               role="status"
+              aria-live="polite"
             >
               {truncateAddress(address, isMobile ? { prefix: 4 } : { prefix: 6 })}
             </motion.span>
