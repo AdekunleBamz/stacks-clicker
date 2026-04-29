@@ -15,3 +15,5 @@ Behavior notes:
 - Keep mappings and fallback expectations aligned with `frontend/src/utils/__tests__/errors.test.js`.
 
 Source file: `frontend/src/utils/errors.js`.
+
+- Recheck error normalization examples when wallet or provider error shapes evolve.
