@@ -40,6 +40,7 @@ For frontend verification before opening a PR:
 - Run `npm run test -- --run` to execute tests
 - Run `npm run frontend:lint` to check code quality
 - Run `npm run format:check` to verify formatting
+- Include a short note in the PR about which wallets and networks were smoke-tested.
 
 ## License
 
