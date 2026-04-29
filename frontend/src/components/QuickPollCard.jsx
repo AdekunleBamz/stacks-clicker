@@ -152,6 +152,7 @@ function QuickPollCard({ address, quickpoll }) {
             className={`toggle-create-btn secondary-button btn-sm ${isCreating ? 'active' : ''}`}
             onClick={() => setIsCreating(!isCreating)}
             aria-expanded={isCreating}
+            aria-label={isCreating ? 'Hide new poll form' : 'Show new poll form'}
             title={isCreating ? 'Cancel creating a new poll' : 'Create a new poll'}
           >
             {isCreating ? '✕ Cancel' : '➕ Create New Poll'}
