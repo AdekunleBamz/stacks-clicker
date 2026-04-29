@@ -69,3 +69,5 @@ interface QuickPollCardProps {
 Source file: `frontend/src/components/QuickPollCard.jsx`.
 
 - Re-test clipboard fallback behavior after poll card action refactors.
+
+- Recheck copy success feedback after clipboard helper changes.
