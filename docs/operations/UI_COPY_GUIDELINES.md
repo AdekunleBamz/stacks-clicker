@@ -6,5 +6,6 @@
 - Keep error messages specific and recoverable.
 - Reuse the same retry phrasing across toast, modal, and inline error states.
 - Keep network naming/capitalization consistent across banners, toasts, and settings screens.
+- Prefer explicit action text like "Try again" over vague phrases like "Something went wrong".
 
 Companion index: [Operations docs](README.md).
