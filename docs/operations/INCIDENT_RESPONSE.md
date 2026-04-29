@@ -7,6 +7,7 @@
 - Publish a short post-incident summary.
 - Track customer-facing status updates in a single incident thread.
 - Assign one incident owner per shift to avoid split decisions during active mitigation.
+- Log when rollback is considered and why it was accepted or rejected.
 
 ## Maintenance Note
 - Reconfirm escalation contacts and communication channels each release cycle.
