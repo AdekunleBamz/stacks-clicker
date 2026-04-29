@@ -2,3 +2,5 @@
 
 Show poll expiry context in plain language near voting controls.
 Users make better choices when they understand remaining decision windows.
+
+- Recheck expiry copy when poll duration presets are changed.
