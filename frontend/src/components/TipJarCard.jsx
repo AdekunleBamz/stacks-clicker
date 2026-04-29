@@ -130,6 +130,7 @@ function TipJarCard({ address, tipjar }) {
                 type="button"
                 className="predefined-btn"
                 aria-label={`Tip ${amt} STX preset`}
+                title={`Tip ${amt} STX`}
                 onClick={() => handlePredefinedTip(amt)}
                 disabled={isLoading('tip')}
               >
