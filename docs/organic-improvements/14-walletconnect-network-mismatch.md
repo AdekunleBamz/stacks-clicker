@@ -2,3 +2,5 @@
 
 Before approving a WalletConnect session, verify the wallet and app are both on the same Stacks network.
 A mismatched network produces confusing explorer links and failed confirmation handoffs.
+
+- Reconfirm mismatch guidance against the latest walletconnect namespace settings.
