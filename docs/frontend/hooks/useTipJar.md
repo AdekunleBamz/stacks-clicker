@@ -13,3 +13,5 @@ Input guard:
 
 ## Maintenance Note
 - Update retry and rate-limit notes whenever tip submission behavior changes.
+
+- Recheck retry and cooldown guidance when tip submission backoff changes.
