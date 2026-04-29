@@ -11,3 +11,5 @@ Surface transaction callbacks from this level to keep card components lean.
 
 ## Maintenance Note
 - Recheck interaction payload fields whenever backend event schema changes.
+
+- Recheck payload schema expectations when interaction event fields change.
