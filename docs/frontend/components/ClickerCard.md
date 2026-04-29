@@ -10,3 +10,5 @@ Keep button disabled/loading state tied to hook-level function keys.
 - Align displayed action cost labels with current on-chain fee assumptions before each release.
 
 - Recheck action labels when click cost display rules are updated.
+
+- Confirm button disable logic still prevents duplicate click submits.
