@@ -60,3 +60,5 @@ interface TipJarCardProps {
 Source file: `frontend/src/components/TipJarCard.jsx`.
 
 - Re-verify minimum amount hints whenever fee assumptions are tuned.
+
+- Reconfirm inline validation timing after custom input behavior changes.
