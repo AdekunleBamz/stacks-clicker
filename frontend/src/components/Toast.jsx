@@ -65,7 +65,7 @@ function Toast({ toasts = [] }) {
                 </svg>
               )}
             </span>
-            <span className="toast-message">{toast.message || 'Notification'}</span>
+            <span className="toast-message" title={toast.message || 'Notification'}>{toast.message || 'Notification'}</span>
           </motion.div>
         ))}
       </AnimatePresence>
