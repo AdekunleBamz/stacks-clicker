@@ -12,3 +12,5 @@ Treat unknown network responses as degraded state instead of hard failure.
 - Keep fallback-network handling guidance synced with wallet provider updates.
 
 - Reconfirm fallback network state behavior after polling logic updates.
+
+- Recheck polling fallback copy after network provider endpoint changes.
