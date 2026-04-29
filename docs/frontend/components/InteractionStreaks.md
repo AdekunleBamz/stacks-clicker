@@ -9,3 +9,5 @@ Milestones currently award:
 - keep thresholds synced with any future gamification copy changes
 
 - Re-validate streak thresholds whenever gamification rewards are rebalanced.
+
+- Recheck milestone threshold copy when streak level tuning changes.
