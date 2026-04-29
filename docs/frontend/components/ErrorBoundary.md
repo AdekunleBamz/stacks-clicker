@@ -8,3 +8,5 @@ Fallback behavior:
 - avoid exposing sensitive stack details in user-facing copy
 
 - Include likely user recovery steps beside retry when the failure source is known.
+
+- Re-test retry flow messaging after any fallback boundary logic change.
