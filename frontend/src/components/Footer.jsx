@@ -36,6 +36,7 @@ const Footer = memo(function Footer() {
             rel="noopener noreferrer"
             className="social-link"
             aria-label="Join Stacks Discord"
+            title="Join Stacks Discord"
           >
             <span aria-hidden="true">💬</span> Discord
           </a>
