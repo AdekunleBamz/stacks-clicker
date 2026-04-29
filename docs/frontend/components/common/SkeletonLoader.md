@@ -9,3 +9,5 @@ Match skeleton dimensions to final content to reduce layout shifts.
 - Validate shimmer duration against motion-budget guidance during design refreshes.
 
 - Recheck motion budget whenever skeleton animation style is updated.
+
+- Keep placeholder animation speed within documented motion limits.
