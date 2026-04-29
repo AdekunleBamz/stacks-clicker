@@ -7,3 +7,5 @@ Prefer status labels that map directly to your release checklist states.
 
 ## Maintenance Note
 - Keep status legend definitions synchronized with roadmap card badge states.
+
+- Revisit status legend wording when roadmap state names are revised.
