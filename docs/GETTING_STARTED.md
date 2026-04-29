@@ -70,6 +70,7 @@ Use `npm run format:check` before opening a pull request if you touched UI code.
 
 ## 📜 Contract Interaction
 The dApp interacts with pre-deployed contracts on the network configured by `VITE_STACKS_NETWORK` (default: Stacks Mainnet). You can find the contract source code in the `contracts/` directory for reference.
+If you change contract names locally, update `frontend/src/config/contracts.js` before running interactions.
 
 Current active contract names used by the frontend:
 
