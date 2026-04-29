@@ -11,3 +11,5 @@ Exposed methods:
 
 ## Maintenance Note
 - Revisit poll expiry/window assumptions when backend polling cadence is adjusted.
+
+- Reconfirm vote expiry defaults when contract-level timing windows change.
