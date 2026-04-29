@@ -13,3 +13,5 @@ Keep recipient validation strict to avoid malformed address submissions.
 
 ## Maintenance Note
 - Keep displayed fee caveats aligned with current network fee behavior.
+
+- Recheck helper copy when tip presets or recommended amounts are adjusted.
