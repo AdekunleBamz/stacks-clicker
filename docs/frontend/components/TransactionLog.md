@@ -9,3 +9,5 @@ Prefer this view for lightweight embeds where filters/export are unnecessary.
 - Revisit retention and truncation notes if log paging strategy changes.
 
 - Revisit retention assumptions when transaction log persistence changes.
+
+- Reconfirm retention wording if log pruning behavior changes.
