@@ -11,3 +11,5 @@
 - Record whether wallet rejection happened before or after user confirmation to improve UX follow-up.
 
 Companion index: [Operations docs](README.md).
+
+- Reconfirm failure playbook escalation path after support rota changes.
