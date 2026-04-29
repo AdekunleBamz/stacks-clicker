@@ -12,3 +12,5 @@ Provide an accessible label when icon-only variants are introduced.
 
 ## Maintenance Note
 - Keep loading/disabled state guidance synchronized with async action patterns.
+
+- Re-test loading label clarity whenever async button states are renamed.
