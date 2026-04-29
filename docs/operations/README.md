@@ -11,6 +11,7 @@ Use relative links when adding new references so docs stay portable across branc
 - **Update** the relevant runbook in the same PR whenever a process changes.
 - **Use relative links** when adding new references so docs stay portable across branches and forks.
 - **Keep it current**: Review and update runbooks quarterly or after major incidents.
+- **Close the loop**: Link incidents and release notes back to any runbook updates they prompted.
 
 ## Key Documents
 
