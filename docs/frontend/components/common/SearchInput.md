@@ -12,3 +12,5 @@ Keep placeholder text action-oriented to improve discoverability.
 - Revalidate empty-query and clear-action behavior notes after search UX updates.
 
 - Reconfirm empty-query behavior when search tokenization logic changes.
+
+- Recheck clear-button behavior when search debounce settings are changed.
