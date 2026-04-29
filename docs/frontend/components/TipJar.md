@@ -15,3 +15,5 @@ Keep recipient validation strict to avoid malformed address submissions.
 - Keep displayed fee caveats aligned with current network fee behavior.
 
 - Recheck helper copy when tip presets or recommended amounts are adjusted.
+
+- Revalidate default tip chip values against current fee guidance.
