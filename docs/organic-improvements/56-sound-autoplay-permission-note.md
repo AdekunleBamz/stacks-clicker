@@ -2,3 +2,5 @@
 
 Document expected browser autoplay behavior for interaction sounds.
 Permission differences across browsers can otherwise look like audio bugs.
+
+- Recheck browser permission prompts after audio dependency updates.
