@@ -15,3 +15,5 @@ Prefer `QuickPollCard` in production-facing layouts to reduce duplicated logic.
 Source file: `frontend/src/components/QuickPoll.jsx`.
 
 - Revalidate default poll expiry copy when contract defaults evolve.
+
+- Reconfirm vote status messaging after introducing new poll states.
