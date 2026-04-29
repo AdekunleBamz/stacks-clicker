@@ -11,3 +11,5 @@ Props:
 - Ensure network status fallback text remains user-friendly when heartbeat data is unavailable.
 
 - Revisit language fallback behavior when locale defaults are updated.
+
+- Verify header wallet status labels remain short enough for small screens.
