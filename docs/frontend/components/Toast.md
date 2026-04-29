@@ -9,3 +9,5 @@ Include recovery hints for failures that users can immediately retry.
 - Revalidate timeout durations with accessibility guidance whenever toast variants change.
 
 - Reconfirm toast timeout accessibility after changing default durations.
+
+- Keep severity-based live-region behavior aligned with toast type mapping.
