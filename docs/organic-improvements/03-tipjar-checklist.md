@@ -4,3 +4,5 @@
 - Confirm insufficient balance errors are user friendly.
 - Check success toast appears only after confirmation.
 - Verify activity feed reflects completed tips.
+
+- Reconfirm recipient validation behavior when tip input rules are updated.
