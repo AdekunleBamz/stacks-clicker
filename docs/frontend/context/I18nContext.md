@@ -16,3 +16,5 @@ Keep translation keys stable to prevent runtime fallback churn.
 Source file: `frontend/src/context/I18nContext.jsx`.
 
 - Reconfirm provider boundary assumptions when locale bootstrapping changes.
+
+- Revisit locale fallback strategy after adding a new default language.
