@@ -10,3 +10,5 @@
 - Reconfirm QR session-expiry wording when walletconnect timeout defaults are updated.
 
 - Reconfirm QR session expiry messaging whenever walletconnect behavior changes.
+
+- Re-test QR fallback actions after walletconnect modal style updates.
