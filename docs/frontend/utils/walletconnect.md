@@ -22,3 +22,5 @@ Behavior notes:
 - Keep helper behavior synchronized with `frontend/src/utils/__tests__/walletconnect.test.js`.
 
 Source file: `frontend/src/utils/walletconnect.js`.
+
+- Re-test session parsing notes after walletconnect protocol updates.
