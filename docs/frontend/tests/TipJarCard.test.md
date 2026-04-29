@@ -11,3 +11,5 @@ Checks:
 - Revisit minimum-tip validation test notes whenever fee assumptions are updated.
 
 Source file: `frontend/src/tests/TipJarCard.test.jsx`.
+
+- Reconfirm min-tip and invalid-input scenarios after fee rule changes.
