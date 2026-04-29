@@ -6,5 +6,6 @@
 - Capture before-and-after measurements when tuning rendering or network polling.
 - Prefer budget checks on both low-power mobile and laptop-class hardware.
 - Include a cold-start load measurement after any major bundle or route change.
+- Recheck animation-heavy paths with reduced-motion enabled to avoid accessibility regressions.
 
 Companion index: [Operations docs](README.md).
