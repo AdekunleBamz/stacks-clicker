@@ -8,5 +8,6 @@
 - Confirm explorer lookups use the correct network to avoid false negatives during triage.
 - Capture provider throttle details (`TooMuchChaining`, quota retry seconds) when present.
 - When retrying after throttling, document the cooldown used before the next broadcast attempt.
+- Record whether wallet rejection happened before or after user confirmation to improve UX follow-up.
 
 Companion index: [Operations docs](README.md).
