@@ -4,3 +4,5 @@
 - Update operations docs after behavior changes.
 - Link new runbooks from docs operations index.
 - Remove stale notes during monthly maintenance.
+
+- Recheck cross-doc links after moving or renaming runbook files.
