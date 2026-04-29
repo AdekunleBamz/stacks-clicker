@@ -10,3 +10,5 @@ Supported sound types:
 
 ## Maintenance Note
 - Revalidate browser autoplay handling whenever audio asset paths or playback defaults change.
+
+- Re-test autoplay fallback notes whenever browser policy behavior changes.
