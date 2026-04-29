@@ -13,3 +13,5 @@ Interaction model:
 Source file: `frontend/src/components/OnboardingTour.jsx`.
 
 - Re-test skip and dismiss persistence when onboarding step order changes.
+
+- Recheck focus restoration targets when onboarding steps are reordered.
