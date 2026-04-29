@@ -11,3 +11,5 @@ Interaction model:
 - Persist dismissal state only after explicit user intent to avoid hiding first-run guidance accidentally.
 
 Source file: `frontend/src/components/OnboardingTour.jsx`.
+
+- Re-test skip and dismiss persistence when onboarding step order changes.
