@@ -6,5 +6,6 @@
 - Draft notes before deployment so the release summary is ready once checks pass.
 - Mention contract names when an entry changes on-chain behavior.
 - Reference incident/hotfix IDs when release notes are tied to outage recovery work.
+- Include the pull request link for entries that alter support or recovery instructions.
 
 Companion index: [Operations docs](README.md).
