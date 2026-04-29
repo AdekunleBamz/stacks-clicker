@@ -148,6 +148,7 @@ function TipJarCard({ address, tipjar }) {
             onChange={(e) => setTipAmount(e.target.value)}
             placeholder="Min 0.001"
             title="Enter custom tip amount in STX"
+            aria-label="Custom tip amount in STX"
             aria-invalid={!isTipAmountValid || errorField === 'custom-tip'}
           />
         </div>
