@@ -13,3 +13,5 @@ Exposed methods:
 - Revisit poll expiry/window assumptions when backend polling cadence is adjusted.
 
 - Reconfirm vote expiry defaults when contract-level timing windows change.
+
+- Reconfirm default option validation when poll form constraints shift.
