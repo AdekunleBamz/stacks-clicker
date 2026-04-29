@@ -4,3 +4,5 @@
 - Check fallback behavior for missing translations.
 - Confirm dynamic values interpolate correctly.
 - Test reduced-motion and localization together.
+
+- Capture untranslated fallback keys seen during smoke tests for cleanup.
