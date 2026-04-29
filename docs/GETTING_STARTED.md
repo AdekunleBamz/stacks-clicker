@@ -79,4 +79,4 @@ Current active contract names used by the frontend:
 
 Need help? Open an issue on [GitHub](https://github.com/AdekunleBamz/stacks-clicker/issues).
 
-Tip: Keep local env values network-specific when switching between test and main environments.
+Tip: Run one click transaction after setup to confirm wallet, network, and contract wiring all match.
