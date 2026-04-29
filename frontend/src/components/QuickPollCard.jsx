@@ -228,7 +228,7 @@ function QuickPollCard({ address, quickpoll }) {
             <ActionButton
               label="No"
               icon="👎"
-              cost="0.001"
+              cost="0.001 STX"
               className="danger"
               onClick={() => handleAction(handleVoteNo, 'vote-no')}
               isLoading={isLoading('vote')}
