@@ -153,6 +153,7 @@ function QuickPollCard({ address, quickpoll }) {
             onClick={() => setIsCreating(!isCreating)}
             aria-expanded={isCreating}
             aria-controls="quickpoll-create-panel"
+            aria-label={isCreating ? 'Hide new poll form' : 'Show new poll form'}
             title={isCreating ? 'Cancel creating a new poll' : 'Create a new poll'}
           >
             {isCreating ? '✕ Cancel' : '➕ Create New Poll'}
