@@ -12,3 +12,5 @@ Current content is intentionally minimal and can be extended with:
 - If release hash is shown, link it to changelog or deployment notes for quick verification.
 
 - Reconfirm legal and support links remain reachable after footer copy edits.
+
+- Recheck legal text and contact links during quarterly policy reviews.
