@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
  */
 function Toast({ toasts = [] }) {
   return (
-    <div className="toast-container" role="status" aria-live="polite" aria-atomic="true">
+    <div className="toast-container" role="status" aria-live="polite" aria-atomic="true" aria-label="Notifications">
       <AnimatePresence>
         {toasts.map((toast) => (
           <motion.div
