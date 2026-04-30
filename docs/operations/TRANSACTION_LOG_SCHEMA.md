@@ -12,3 +12,6 @@ Common tx-log fields:
 - `walletType` (optional, useful for wallet-specific support patterns)
 
 Companion index: [Operations docs](README.md).
+
+### Schema Reminder
+- Keep status enum values aligned with frontend badge mapping before release.
