@@ -15,3 +15,4 @@ Fallback behavior:
 
 ### Maintenance Note
 - Reconfirm retry behavior surfaces useful context after recoverable runtime failures.
+- Audit prompt: ensure retry affordance still clears stale error state.
