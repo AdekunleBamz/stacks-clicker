@@ -12,6 +12,7 @@
 - Reconfirm QR session expiry messaging whenever walletconnect behavior changes.
 
 - Re-test QR fallback actions after walletconnect modal style updates.
+- Keep deep-link fallback visible when camera scanning is unavailable or blocked.
 
 ### Maintenance Note
 - Re-verify modal focus behavior after wallet connector SDK upgrades.
