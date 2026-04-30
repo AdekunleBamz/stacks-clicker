@@ -81,3 +81,6 @@ Current active contract names used by the frontend:
 Need help? Open an issue on [GitHub](https://github.com/AdekunleBamz/stacks-clicker/issues).
 
 Tip: Run one click transaction after setup to confirm wallet, network, and contract wiring all match.
+
+### Setup Reminder
+- Reconfirm frontend env defaults after switching deployment targets.
