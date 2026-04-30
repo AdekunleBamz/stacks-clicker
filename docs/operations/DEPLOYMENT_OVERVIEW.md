@@ -34,6 +34,7 @@ Deployments are split by network plan files in `deployments/`:
    - Review [PREDEPLOY_CHECKS.md](PREDEPLOY_CHECKS.md)
    - Ensure wallet has sufficient balance for gas fees
    - Verify deployment plan file is correct
+   - Confirm the configured chain ID matches the target environment before broadcast
 
 2. **Execution**
    - Run deployment with Clarinet: `clarinet deploy`
