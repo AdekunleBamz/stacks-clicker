@@ -22,7 +22,7 @@ function RoadmapBoard() {
   const totalVotes = items.reduce((sum, item) => sum + item.votes, 0);
 
   return (
-    <section className="roadmap-board" aria-labelledby="roadmap-title">
+    <section className="roadmap-board" aria-labelledby="roadmap-title" title="Project roadmap">
       <div className="roadmap-header">
         <h2 className="section-title" id="roadmap-title"><span aria-hidden="true">🚀</span> Project Roadmap</h2>
         <p className="section-desc">Vote on upcoming features you want to see most. <span className="vote-total" aria-label={`${totalVotes} total votes cast`}>{totalVotes} total votes</span></p>
