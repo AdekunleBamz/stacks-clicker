@@ -46,6 +46,7 @@ interface QuickPollCardProps {
 ### UI Updates
 - Keep optimistic UI labels in sync with final transaction status updates
 - Show loading states during pending transactions
+- Disable vote buttons while a vote transaction is pending to prevent accidental retries
 - Display transaction confirmations with explorer links
 
 ### Clipboard
