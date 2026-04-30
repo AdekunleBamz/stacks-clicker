@@ -13,6 +13,7 @@ Source directory: `frontend/src/utils/`.
 - Add new utility docs here whenever frontend helper modules are introduced.
 
 - Add references here whenever new shared utility docs are introduced.
+- Cross-link utility docs to matching test files when behavior contracts are updated.
 
 ### Maintenance Note
 - Keep utility index links current as helpers are added or renamed.
