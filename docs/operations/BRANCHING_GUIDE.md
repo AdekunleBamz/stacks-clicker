@@ -65,3 +65,6 @@ The `main` branch is the primary branch and represents the current production-re
 Companion index: [Operations docs](README.md).
 
 - Reconfirm branch naming examples when workflow conventions evolve.
+
+### Team Reminder
+- Reconfirm branch naming and back-merge expectations before cutting a hotfix.
