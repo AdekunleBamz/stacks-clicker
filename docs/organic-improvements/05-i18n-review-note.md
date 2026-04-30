@@ -9,3 +9,4 @@
 
 ### Follow-up
 - Capture any newly added fallback keys during i18n review passes.
+- Reconfirm date/number locale formatting for transaction and stats views.
