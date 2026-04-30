@@ -9,3 +9,6 @@
 - Prefer explicit action text like "Try again" over vague phrases like "Something went wrong".
 
 Companion index: [Operations docs](README.md).
+
+### Copy Reminder
+- Keep network names consistent across toasts, cards, and modal labels.
