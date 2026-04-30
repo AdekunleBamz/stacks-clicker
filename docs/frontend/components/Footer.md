@@ -10,6 +10,7 @@ Current content is intentionally minimal and can be extended with:
 
 - Prefer stable support and status links here so users always have a reliable fallback path.
 - If release hash is shown, link it to changelog or deployment notes for quick verification.
+- Include a stable status or incident link so users can self-serve outage context.
 
 - Reconfirm legal and support links remain reachable after footer copy edits.
 
