@@ -6,3 +6,6 @@
 - Test reduced-motion and localization together.
 
 - Capture untranslated fallback keys seen during smoke tests for cleanup.
+
+### Follow-up
+- Capture any newly added fallback keys during i18n review passes.
