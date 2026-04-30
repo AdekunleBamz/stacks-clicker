@@ -18,3 +18,4 @@ Source file: `frontend/src/components/FloatingActionButton.jsx`.
 
 ### Maintenance Note
 - Ensure FAB shortcuts stay in sync with the visible action labels.
+- Audit prompt: align shortcut hints with the active FAB action order.
