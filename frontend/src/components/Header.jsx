@@ -24,6 +24,7 @@ export default function Header({ theme, toggleTheme }) {
     <header
       className={`app-header ${isScrolled ? 'header-scrolled' : ''}`}
       role="banner"
+      title="Main application header"
       style={{
         backdropFilter: isScrolled ? 'blur(16px)' : 'blur(0px)',
         backgroundColor: isScrolled ? 'var(--glass-bg-scrolled)' : 'transparent',
