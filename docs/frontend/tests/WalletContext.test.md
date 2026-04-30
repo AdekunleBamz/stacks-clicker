@@ -13,3 +13,6 @@ Covers:
 - Recheck reconnect behavior assertions after wallet adapter upgrades.
 
 - Reconfirm disconnect recovery assertions after wallet reconnect refactors.
+
+### Maintenance Note
+- Confirm reconnect-path assertions after wallet provider dependency upgrades.
