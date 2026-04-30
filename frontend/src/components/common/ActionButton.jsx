@@ -21,6 +21,7 @@ export default function ActionButton({
       onClick={onClick}
       disabled={disabled || isLoading}
       title={label}
+      aria-label={label}
       aria-busy={isLoading}
       whileHover={disabled || isLoading ? undefined : { scale: 1.02, translateY: -2 }}
       whileTap={disabled || isLoading ? undefined : { scale: 0.98, translateY: 0 }}
