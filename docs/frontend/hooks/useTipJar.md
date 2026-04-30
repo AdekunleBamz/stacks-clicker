@@ -17,3 +17,6 @@ Input guard:
 - Recheck retry and cooldown guidance when tip submission backoff changes.
 
 - Recheck amount parsing edge cases after decimal precision rule changes.
+
+### Maintenance Note
+- Verify tip retry guidance reflects current network rate-limit handling.
