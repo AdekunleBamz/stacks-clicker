@@ -7,3 +7,4 @@ Status indicators must remain readable under reduced brightness.
 
 ### Follow-up
 - Recheck contrast values whenever theme variables are modified.
+- Validate contrast for warning and error variants, not only healthy state colors.
