@@ -10,3 +10,6 @@
 - Confirm the rollback commit is included in the next release communication summary.
 
 Companion index: [Operations docs](README.md).
+
+### Rollback Reminder
+- Verify rollback instructions include cache-bust and wallet reconnect guidance.
