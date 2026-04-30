@@ -26,7 +26,7 @@ const TransactionModal = memo(() => {
       onClose={closeModal}
       title="🔍 Transaction Details"
     >
-      <div className="tx-details-container">
+      <div className="tx-details-container" title="Transaction details">
 
         <div className="detail-row">
           <span className="detail-label">Action</span>
