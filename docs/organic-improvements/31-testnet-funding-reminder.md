@@ -7,3 +7,4 @@ Low-balance failures can mask unrelated UI or contract behavior changes.
 
 ### Follow-up
 - Revalidate funding instructions whenever faucet sources change.
+- Include minimum balance targets per flow (click, tip, poll) in funding docs.
