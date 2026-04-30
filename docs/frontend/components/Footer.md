@@ -14,3 +14,6 @@ Current content is intentionally minimal and can be extended with:
 - Reconfirm legal and support links remain reachable after footer copy edits.
 
 - Recheck legal text and contact links during quarterly policy reviews.
+
+### Maintenance Note
+- Verify community links and aria labels remain accurate after branding changes.
