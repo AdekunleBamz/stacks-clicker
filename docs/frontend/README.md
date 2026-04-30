@@ -14,6 +14,7 @@ This folder contains focused references for frontend components, hooks, and cont
 - Keep this index aligned whenever new frontend doc folders are introduced.
 
 - Keep frontend docs index links synchronized after moving hook references.
+- Reconfirm source-file paths in docs after component or hook file moves.
 
 ### Navigation Reminder
 - Keep this index updated when adding new component or hook documentation pages.
