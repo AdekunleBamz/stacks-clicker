@@ -24,6 +24,7 @@ function SearchInput({ value, onChange, onClear, placeholder = 'Search...', coun
           type="text"
           spellCheck={false}
           enterKeyHint="search"
+          inputMode="search"
           placeholder={placeholder}
           className="search-input"
           value={value}
