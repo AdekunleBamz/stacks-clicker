@@ -9,3 +9,6 @@
 
 ## Maintenance Note
 - Revisit terminology consistency examples when product naming conventions change.
+
+### Writing Reminder
+- Prefer stable relative links when referencing local runbooks from operations docs.
