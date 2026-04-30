@@ -6,3 +6,6 @@
 - Capture explorer links for smoke transaction records.
 
 - Include one disconnected-wallet run in this smoke path to validate error handling.
+
+### Follow-up
+- Revalidate rapid-click smoke criteria after adjusting click cooldown parameters.
