@@ -18,3 +18,4 @@ Source file: `frontend/src/components/OnboardingTour.jsx`.
 
 ### Maintenance Note
 - Verify dismissal persistence still works after onboarding flow updates.
+- Audit prompt: retest dismissal persistence across storage migration changes.
