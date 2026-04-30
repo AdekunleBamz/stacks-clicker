@@ -13,3 +13,4 @@ Companion index: [Operations docs](README.md).
 
 ### Checklist Reminder
 - Include at least one low-memory mobile run when validating performance regressions.
+- Recheck performance after tab background/resume cycles on mobile browsers.
