@@ -24,3 +24,6 @@ Source file: `frontend/src/utils/format.js`.
 - Revalidate rounding expectations when displayed token precision rules change.
 
 - Reconfirm number formatting edge cases for very small STX values.
+
+### Maintenance Note
+- Revalidate bigint and locale formatting examples during utility updates.
