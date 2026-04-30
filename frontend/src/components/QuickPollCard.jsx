@@ -249,7 +249,7 @@ function QuickPollCard({ address, quickpoll }) {
         <div className="poll-footer">
           <div className="stat" aria-live="polite">
             <span className="stat-label">Total Votes</span>
-            <span className="timer-text">Ends in: {formatTime(timeLeft)}</span>
+            <span className="timer-text" title="Time remaining until poll closes">Ends in: {formatTime(timeLeft)}</span>
           </div>
           <button
             type="button"
