@@ -68,3 +68,4 @@ Companion index: [Operations docs](README.md).
 
 ### Team Reminder
 - Reconfirm branch naming and back-merge expectations before cutting a hotfix.
+- Confirm hotfix branches are deleted after merge to reduce accidental reuse risk.
