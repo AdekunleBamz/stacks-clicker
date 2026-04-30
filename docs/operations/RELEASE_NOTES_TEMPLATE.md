@@ -9,3 +9,6 @@
 - Support note: include one sentence support can reuse when answering user questions.
 
 Companion index: [Operations docs](README.md).
+
+### Template Reminder
+- Capture network, wallet, and contract versions in every release note draft.
