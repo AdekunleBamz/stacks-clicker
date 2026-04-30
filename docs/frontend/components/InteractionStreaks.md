@@ -13,6 +13,7 @@ Milestones currently award:
 - Recheck milestone threshold copy when streak level tuning changes.
 
 - Revalidate animation readability when new streak levels are introduced.
+- Check large streak values for text wrapping so badges stay readable at high counts.
 
 ### Maintenance Note
 - Check streak thresholds whenever reward pacing is tuned.
