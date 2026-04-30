@@ -15,3 +15,6 @@ Exposed methods:
 - Reconfirm vote expiry defaults when contract-level timing windows change.
 
 - Reconfirm default option validation when poll form constraints shift.
+
+### Maintenance Note
+- Keep expiry and validation notes aligned with current poll contract behavior.
