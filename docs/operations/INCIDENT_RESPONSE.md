@@ -2,6 +2,7 @@
 
 - Acknowledge incident and freeze non-critical merges.
 - Capture failing flow, timestamps, and affected network.
+- Capture browser, wallet provider, and device details when reproducing frontend incidents.
 - Preserve failed transaction `tx-result`/repr details when available to accelerate root-cause analysis.
 - Apply mitigation, then prepare root-cause notes.
 - Publish a short post-incident summary.
