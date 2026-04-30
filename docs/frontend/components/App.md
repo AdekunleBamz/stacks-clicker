@@ -11,6 +11,7 @@ Keep global side effects centralized here to minimize prop drilling complexity.
 - Re-verify global side effects here when app-level providers are reordered.
 
 - Keep this doc updated when app-level error handling boundaries are reorganized.
+- Reconfirm any global loading fallback copy when app-level provider order is changed.
 
 ### Maintenance Note
 - Keep global side-effect ownership notes aligned with provider updates.
