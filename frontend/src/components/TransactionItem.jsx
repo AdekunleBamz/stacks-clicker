@@ -82,7 +82,7 @@ function TransactionItem({
                 </span>
               </div>
               <div className={`step ${isPending ? '' : 'active'}`}>
-                <span className="step-dot"></span>
+                <span className="step-dot" aria-hidden="true"></span>
                 <span className="step-label">Confirmed</span>
               </div>
             </div>
