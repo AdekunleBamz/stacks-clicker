@@ -11,3 +11,4 @@ Keep tooltip content short enough to avoid obscuring nearby controls.
 - Re-test trigger delay and escape behavior after tooltip interaction changes.
 
 - Reconfirm tooltip portal stacking order when modal layering changes.
+- Re-test tooltip discoverability on touch devices where hover is unavailable.
