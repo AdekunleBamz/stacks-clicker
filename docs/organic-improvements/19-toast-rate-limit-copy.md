@@ -4,3 +4,6 @@ Use one consistent toast message for temporary rate limits across click, tip, an
 Consistent language helps users understand when retrying is safe.
 
 - Re-test rapid duplicate notifications to keep message wording clear.
+
+### Follow-up
+- Reconfirm toast copy still matches active rate-limit behavior.
