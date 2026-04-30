@@ -116,7 +116,7 @@ function TipJarCard({ address, tipjar }) {
           />
         </Tooltip>
 
-        <div className="stat" aria-live="polite">
+        <div className="stat" aria-live="polite" title="Total tips sent">
           <span className="stat-label">Total Tipped</span>
         </div>
         <div className="input-group">
