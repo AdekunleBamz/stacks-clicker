@@ -65,3 +65,4 @@ Source file: `frontend/src/components/TipJarCard.jsx`.
 
 ### Maintenance Note
 - Confirm preset and custom tip affordances share consistent validation messaging.
+- Audit prompt: retest custom amount validation wording with localized numbers.
