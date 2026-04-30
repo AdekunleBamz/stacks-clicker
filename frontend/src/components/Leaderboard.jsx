@@ -12,7 +12,7 @@ function Leaderboard({ players }) {
         <div className="game-card leaderboard">
             <div className="game-header">
                 <h2><span aria-hidden="true">🏆</span> Hall of Fame</h2>
-                <span className="game-badge">Top Clickers</span>
+                <span className="game-badge" title="Players ranked by click volume">Top Clickers</span>
             </div>
 
             <div className="leaderboard-list" role="list" aria-label="Top clicker players">
