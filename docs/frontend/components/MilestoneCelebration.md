@@ -10,3 +10,6 @@ Respect reduced-motion preferences when tuning celebration animation intensity.
 - Reconfirm announcement text remains concise during new milestone additions.
 
 - Keep celebration timing in sync with reduced-motion preferences.
+
+### Maintenance Note
+- Recheck celebration copy for reduced-motion fallback compatibility.
