@@ -9,7 +9,7 @@ import { truncateAddress } from '../utils/format';
  */
 function Leaderboard({ players }) {
     return (
-        <div className="game-card leaderboard">
+        <div className="game-card leaderboard" title="Top clicker rankings">
             <div className="game-header">
                 <h2><span aria-hidden="true">🏆</span> Hall of Fame</h2>
                 <span className="game-badge">Top Clickers</span>
