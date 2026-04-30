@@ -27,6 +27,7 @@ function SearchInput({ value, onChange, onClear, placeholder = 'Search...', coun
           value={value}
           onChange={(e) => onChange(e.target.value)}
           aria-label="Global transaction search"
+          title={placeholder}
           autoComplete="off"
         />
         <AnimatePresence>
