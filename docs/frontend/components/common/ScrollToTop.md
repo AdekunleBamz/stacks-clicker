@@ -11,3 +11,4 @@ Keep reveal threshold high enough to avoid showing the button on minor scrolls.
 - Re-test reveal threshold after major layout height adjustments.
 
 - Reconfirm scroll trigger offsets after major page layout changes.
+- Recheck smooth-scroll behavior against reduced-motion user preferences.
