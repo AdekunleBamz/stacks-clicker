@@ -10,3 +10,6 @@
 - Capture whether the failure reproduces with and without network mocks enabled.
 
 Companion index: [Operations docs](README.md).
+
+### Triage Reminder
+- Flag flaky tests that depend on timing or clipboard APIs for focused follow-up.
