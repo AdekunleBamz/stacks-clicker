@@ -7,3 +7,4 @@ Consistent language helps users understand when retrying is safe.
 
 ### Follow-up
 - Reconfirm toast copy still matches active rate-limit behavior.
+- Verify repeated rate-limit events do not stack multiple identical toasts.
