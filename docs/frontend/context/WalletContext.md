@@ -17,3 +17,6 @@ Treat missing provider state as disconnected and recover on next explicit connec
 - Recheck reconnect state transitions when wallet adapters are upgraded.
 
 - Recheck wallet provider cleanup on unmount during adapter updates.
+
+### Maintenance Note
+- Confirm wallet provider capability notes match currently supported extensions.
