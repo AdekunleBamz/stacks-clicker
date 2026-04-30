@@ -117,7 +117,7 @@ export default function AudioSettings({ isOpen, onClose, settings, onUpdate }) {
                             >
                                 Test Sound <span aria-hidden="true">🔊</span>
                             </motion.button>
-                            <button type="button" className="action-btn primary" onClick={onClose}>Done</button>
+                            <button type="button" className="action-btn primary" onClick={onClose} title="Save and close audio settings">Done</button>
                         </div>
                     </motion.div>
                 </motion.div>
