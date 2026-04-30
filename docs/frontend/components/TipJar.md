@@ -20,3 +20,4 @@ Keep recipient validation strict to avoid malformed address submissions.
 
 ### Maintenance Note
 - Revalidate minimum tip guidance whenever on-chain fee assumptions change.
+- Audit prompt: verify minimum and preset tip copy for consistency.
