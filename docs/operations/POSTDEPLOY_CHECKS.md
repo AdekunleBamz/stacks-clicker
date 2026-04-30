@@ -8,6 +8,7 @@
 - Announce deploy status to contributors.
 - Confirm telemetry dashboards show expected traffic after release.
 - Confirm wallet connect still works from a fresh private browsing session.
+- Re-open the app after a hard refresh and confirm cached state does not break wallet reconnect.
 
 Companion index: [Operations docs](README.md).
 
