@@ -12,3 +12,6 @@ Covers:
 - Revisit fallback key coverage whenever locale bootstrap behavior changes.
 
 - Recheck missing-key fallback assertions when locale bundles are reorganized.
+
+### Maintenance Note
+- Ensure fallback language expectations stay aligned with translation updates.
