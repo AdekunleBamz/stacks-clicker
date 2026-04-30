@@ -185,6 +185,7 @@ function QuickPollCard({ address, quickpoll }) {
                   maxLength={MAX_POLL_TITLE_LENGTH}
                   aria-invalid={!trimmedQuestion && errorField === 'create-poll'}
                   aria-required="true"
+                  title="Enter the question for your new poll"
                 />
                 <span className="input-help-text" aria-hidden="true">{trimmedQuestion.length}/{MAX_POLL_TITLE_LENGTH}</span>
               </div>
