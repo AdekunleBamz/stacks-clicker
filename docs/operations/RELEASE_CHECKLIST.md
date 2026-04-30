@@ -10,6 +10,7 @@ Complete all items before and during a release to ensure quality and traceabilit
 - [ ] Run full test suite and confirm all tests pass.
 - [ ] Run linter and fix any violations.
 - [ ] Confirm version numbers are updated in package.json files.
+- [ ] Verify there are no unstaged changes before cutting the final release tag.
 
 ### Git Verification
 - [ ] Confirm the latest release commit has a good local signature:
