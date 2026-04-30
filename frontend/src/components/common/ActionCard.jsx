@@ -19,6 +19,7 @@ function ActionCard({ title, subtitle, icon, iconClass, children, id }) {
       className="contract-card"
       role="region"
       aria-labelledby={headingId}
+      title={title}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
