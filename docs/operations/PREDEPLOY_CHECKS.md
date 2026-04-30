@@ -10,3 +10,6 @@
 - Reconfirm deploy wallet can sign transactions before entering the release window.
 
 Companion index: [Operations docs](README.md).
+
+### Predeploy Reminder
+- Confirm the release branch is rebased against the latest signed main commit.
