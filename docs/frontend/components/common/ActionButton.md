@@ -16,3 +16,4 @@ Provide an accessible label when icon-only variants are introduced.
 - Re-test loading label clarity whenever async button states are renamed.
 
 - Ensure loading text remains specific to the action being executed.
+- Recheck disabled-state helper text so blocked actions still communicate next steps.
