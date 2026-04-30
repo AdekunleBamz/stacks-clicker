@@ -24,6 +24,7 @@ const NetworkHeartbeat = memo(function NetworkHeartbeat() {
         aria-atomic="true"
         aria-label={heartbeatTitle}
         aria-busy={isUpdating}
+        title={heartbeatTitle}
       >
         <div className={`heartbeat-pulse ${isConnected ? 'online' : 'offline'}`} aria-hidden="true"></div>
         <div className="heartbeat-info">
