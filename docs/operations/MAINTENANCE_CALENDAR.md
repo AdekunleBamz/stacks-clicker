@@ -12,3 +12,4 @@ Companion index: [Operations docs](README.md).
 
 ### Calendar Reminder
 - Reserve time for wallet-extension compatibility checks before major releases.
+- Add a monthly release-notes draft rehearsal to keep communication cadence healthy.
