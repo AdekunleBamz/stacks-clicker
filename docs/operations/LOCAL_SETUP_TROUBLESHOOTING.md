@@ -48,3 +48,6 @@ When reporting setup issues, include:
 ---
 
 Companion index: [Operations docs](README.md).
+
+### Setup Reminder
+- Re-run installation checks with npm ci after lockfile updates to isolate env drift.
