@@ -15,3 +15,6 @@ Surface transaction callbacks from this level to keep card components lean.
 - Recheck payload schema expectations when interaction event fields change.
 
 - Reconfirm analytics event fields before publishing interaction schema changes.
+
+### Maintenance Note
+- Keep payload shape examples in sync with current interaction utilities.
