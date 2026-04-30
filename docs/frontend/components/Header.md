@@ -13,3 +13,6 @@ Props:
 - Revisit language fallback behavior when locale defaults are updated.
 
 - Verify header wallet status labels remain short enough for small screens.
+
+### Maintenance Note
+- Revalidate language selector defaults when introducing new locales.
