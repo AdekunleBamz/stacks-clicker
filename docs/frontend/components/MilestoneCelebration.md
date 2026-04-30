@@ -10,6 +10,7 @@ Respect reduced-motion preferences when tuning celebration animation intensity.
 - Reconfirm announcement text remains concise during new milestone additions.
 
 - Keep celebration timing in sync with reduced-motion preferences.
+- Verify celebration overlays do not block primary actions longer than intended.
 
 ### Maintenance Note
 - Recheck celebration copy for reduced-motion fallback compatibility.
