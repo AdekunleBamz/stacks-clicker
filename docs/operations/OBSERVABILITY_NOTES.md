@@ -8,6 +8,7 @@ Track these signals during runtime checks:
 - upstream API rate-limit (`429`) frequency during peak interaction windows
 - compare runtime signals against a recent baseline window before escalating anomalies
 - monitor wallet reconnect success rate after browser refresh across supported wallets
+- watch for sudden drops in click submission success after wallet extension updates
 
 Companion index: [Operations docs](README.md).
 
