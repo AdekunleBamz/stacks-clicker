@@ -7,3 +7,4 @@ Visual regressions are easier to catch with before-and-after references.
 
 ### Follow-up
 - Re-audit contrast snapshots after each theme variable update.
+- Include high-contrast system mode snapshots when supported by the platform.
