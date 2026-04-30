@@ -10,3 +10,6 @@ Track these signals during runtime checks:
 - monitor wallet reconnect success rate after browser refresh across supported wallets
 
 Companion index: [Operations docs](README.md).
+
+### Signal Reminder
+- Track API latency spikes alongside rate-limit warnings during incident triage.
