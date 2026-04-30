@@ -25,7 +25,7 @@ function RoadmapBoard() {
     <section className="roadmap-board" aria-labelledby="roadmap-title">
       <div className="roadmap-header">
         <h2 className="section-title" id="roadmap-title"><span aria-hidden="true">🚀</span> Project Roadmap</h2>
-        <p className="section-desc">Vote on upcoming features you want to see most. <span className="vote-total" aria-label={`${totalVotes} total votes cast`}>{totalVotes} total votes</span></p>
+        <p className="section-desc">Vote on upcoming features you want to see most. <span className="vote-total" aria-label={`${totalVotes} total votes cast`} title="Total roadmap votes">{totalVotes} total votes</span></p>
       </div>
       <div className="roadmap-items" role="feed" aria-live="polite" aria-busy="false" aria-label="Dynamically Updating Roadmap Feed">
         {items.map((item, index) => (
