@@ -9,3 +9,6 @@
 - Confirm session expiry copy clearly tells users when a fresh pairing is required.
 
 Companion index: [Operations docs](README.md).
+
+### WalletConnect Reminder
+- Validate project id, chain, and redirect metadata together during setup checks.
