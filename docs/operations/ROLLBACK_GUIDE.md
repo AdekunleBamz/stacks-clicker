@@ -1,6 +1,7 @@
 # Rollback Guide
 
 - Identify first bad commit from deployment window.
+- Pause automated deployment jobs before applying rollback changes.
 - Revert with a focused commit; avoid history rewrites.
 - Validate critical wallet and interaction flows.
 - Confirm the rollback commit is signed locally and appears as `Verified` after push.
