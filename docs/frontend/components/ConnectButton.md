@@ -64,6 +64,7 @@ interface ConnectButtonProps {
 Source file: `frontend/src/components/ConnectButton.jsx`.
 
 - Reconfirm mobile copy length whenever session-state labels are revised.
+- Reconfirm copy-to-clipboard failure fallback messaging for restricted browser contexts.
 
 - Reconfirm reconnect CTA copy remains consistent with support scripts.
 
