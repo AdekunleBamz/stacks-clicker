@@ -7,3 +7,4 @@ Admin-path regressions are easier to catch immediately after release.
 
 ### Follow-up
 - Confirm postdeploy smoke ownership includes the wallet used for verification.
+- Record the network and wallet label used for owner-path smoke transactions.
