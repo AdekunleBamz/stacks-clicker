@@ -7,3 +7,4 @@ Decision speed improves when this tradeoff is documented in advance.
 
 ### Follow-up
 - Re-evaluate rollforward guidance after major infra or dependency shifts.
+- Capture decision timestamp and approver when choosing rollforward under pressure.
