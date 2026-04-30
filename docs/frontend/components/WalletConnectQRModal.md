@@ -12,3 +12,6 @@
 - Reconfirm QR session expiry messaging whenever walletconnect behavior changes.
 
 - Re-test QR fallback actions after walletconnect modal style updates.
+
+### Maintenance Note
+- Re-verify modal focus behavior after wallet connector SDK upgrades.
