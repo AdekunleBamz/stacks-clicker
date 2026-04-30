@@ -13,3 +13,6 @@ Source directory: `frontend/src/tests/`.
 - Keep this index in sync when adding new targeted frontend test docs.
 
 - Keep this test-doc index aligned with any newly documented suites.
+
+### Maintenance Note
+- Keep this test index synchronized with newly added frontend test suites.
