@@ -13,3 +13,4 @@ Source file: `frontend/src/components/common/ParticleOverlay.jsx`.
 - Revisit particle density limits after adding new celebratory effects.
 
 - Re-run particle performance checks after introducing additional overlay layers.
+- Reconfirm reduced-motion behavior can disable particle bursts when user preference is set.
