@@ -7,3 +7,4 @@ Unexpected default flips can alter production behavior silently.
 
 ### Follow-up
 - Recheck default flag values before each production deploy window.
+- Track owning team for each flag so default changes have clear accountability.
