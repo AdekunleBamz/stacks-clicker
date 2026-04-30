@@ -7,3 +7,4 @@ Fallback states should remain informative rather than blank.
 
 ### Follow-up
 - Reconfirm fallback UI behavior when contract read calls time out.
+- Include stale-data timestamp hints when cached values are shown in fallback mode.
