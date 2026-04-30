@@ -4,3 +4,6 @@ Prepare user-facing release highlights alongside technical changelog entries.
 Clear communication reduces confusion when behavior changes are intentional.
 
 - Include support and community channels in release communication dry runs.
+
+### Follow-up
+- Keep release communications aligned with incident and support playbooks.
