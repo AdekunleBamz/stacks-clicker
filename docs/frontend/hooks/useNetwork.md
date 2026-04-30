@@ -14,6 +14,7 @@ Treat unknown network responses as degraded state instead of hard failure.
 - Reconfirm fallback network state behavior after polling logic updates.
 
 - Recheck polling fallback copy after network provider endpoint changes.
+- Reconfirm retry cadence does not overwhelm providers during prolonged outages.
 
 ### Maintenance Note
 - Confirm network fallback behavior remains consistent with environment defaults.
