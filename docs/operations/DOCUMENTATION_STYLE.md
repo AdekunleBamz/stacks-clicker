@@ -12,3 +12,4 @@
 
 ### Writing Reminder
 - Prefer stable relative links when referencing local runbooks from operations docs.
+- Use explicit dates in incident docs to avoid ambiguity around relative time wording.
