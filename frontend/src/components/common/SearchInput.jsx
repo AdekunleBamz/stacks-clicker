@@ -28,6 +28,7 @@ function SearchInput({ value, onChange, onClear, placeholder = 'Search...', coun
           onChange={(e) => onChange(e.target.value)}
           onKeyDown={(e) => { if (e.key === 'Escape' && value) { e.preventDefault(); onClear(); } }}
           aria-label="Global transaction search"
+          aria-describedby={count !== undefined ? 'global-transaction-search-count' : undefined}
           autoComplete="off"
         />
         <AnimatePresence>
@@ -49,7 +50,7 @@ function SearchInput({ value, onChange, onClear, placeholder = 'Search...', coun
         </AnimatePresence>
       </div>
       {count !== undefined && (
-        <span className="search-count-badge" aria-live="polite" aria-atomic="true" aria-label={`${count} matching items`} title="Matching items found">{count}</span>
+        <span id="global-transaction-search-count" className="search-count-badge" aria-live="polite" aria-atomic="true" aria-label={`${count} matching items`} title="Matching items found">{count}</span>
       )}
     </div>
   );
