@@ -7,3 +7,4 @@ Predictable focus order improves keyboard and assistive-technology navigation.
 
 ### Follow-up
 - Verify QR modal focus order after any modal composition changes.
+- Recheck focus return target after modal close to keep keyboard flow predictable.
