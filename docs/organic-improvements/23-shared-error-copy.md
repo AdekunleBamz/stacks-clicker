@@ -7,3 +7,4 @@ Unified phrasing reduces confusion when the same issue appears across features.
 
 ### Follow-up
 - Keep shared error copy aligned with contract code mappings.
+- Reconfirm localized variants preserve the same recovery guidance as default copy.
