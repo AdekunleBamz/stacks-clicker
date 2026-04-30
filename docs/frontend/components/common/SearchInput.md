@@ -14,3 +14,4 @@ Keep placeholder text action-oriented to improve discoverability.
 - Reconfirm empty-query behavior when search tokenization logic changes.
 
 - Recheck clear-button behavior when search debounce settings are changed.
+- Preserve caret position when search input formatting or normalization is applied.
