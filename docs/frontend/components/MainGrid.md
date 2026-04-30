@@ -16,6 +16,7 @@ Prefer adding new cards through this layout to keep dashboard ordering explicit.
 - Revalidate card order assumptions before introducing new primary dashboard tiles.
 
 - Recheck responsive breakpoints after introducing additional dashboard widgets.
+- Keep heading and landmark order stable when rearranging cards for accessibility consistency.
 
 ### Maintenance Note
 - Keep card ordering guidance in sync with product priority updates.
