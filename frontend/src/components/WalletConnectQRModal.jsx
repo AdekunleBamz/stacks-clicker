@@ -55,7 +55,7 @@ export default function WalletConnectQRModal({ uri, onClose }) {
 
           <div className="qr-mobile-help">
             <p className="qr-help-text"><span aria-hidden="true">📱</span> On mobile? Open your wallet app and scan the QR, or:</p>
-            <a href={wcLink} target="_blank" rel="noopener noreferrer" className="qr-mobile-link" aria-label="Open pairing link in wallet app">
+            <a href={wcLink} target="_blank" rel="noopener noreferrer" className="qr-mobile-link" aria-label="Open pairing link in wallet app" title="Open pairing link in wallet app">
               Open in Wallet App <span aria-hidden="true">→</span>
             </a>
             <button
@@ -90,4 +90,3 @@ WalletConnectQRModal.propTypes = {
 WalletConnectQRModal.defaultProps = {
   uri: '',
 };
-
