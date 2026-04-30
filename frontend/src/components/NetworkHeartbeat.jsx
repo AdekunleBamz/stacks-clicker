@@ -27,7 +27,7 @@ const NetworkHeartbeat = memo(function NetworkHeartbeat() {
       >
         <div className={`heartbeat-pulse ${isConnected ? 'online' : 'offline'}`} aria-hidden="true"></div>
         <div className="heartbeat-info">
-          <span className="network-name">{isConnected ? network : 'Disconnected'}</span>
+          <span className="network-name" title="Current Stacks network">{isConnected ? network : 'Disconnected'}</span>
           <span className={`block-height ${!blockHeight ? 'shimmer' : ''}`}>{isConnected ? `#${blockHeight}` : 'Offline'}</span>
         </div>
       </div>
