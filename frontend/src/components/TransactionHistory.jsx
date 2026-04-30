@@ -23,7 +23,7 @@ function TransactionHistory({ txLog }) {
               animate={{ opacity: 1 }}
               className="empty-state"
             >
-              <div className="empty-icon">📂</div>
+              <div className="empty-icon" aria-hidden="true">📂</div>
               <p>No transactions yet. Trigger an action to populate activity.</p>
               <div className="skeleton-placeholder">
                 <SkeletonLoader height="60px" borderRadius="12px" className="mb-2" />
