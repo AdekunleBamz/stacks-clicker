@@ -69,3 +69,4 @@ Source file: `frontend/src/components/ConnectButton.jsx`.
 
 ### Maintenance Note
 - Confirm connect and disconnect affordances remain keyboard and screen-reader friendly.
+- Audit prompt: check connect-button narration after locale additions.
