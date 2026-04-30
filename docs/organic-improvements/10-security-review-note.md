@@ -9,3 +9,4 @@
 
 ### Follow-up
 - Recheck third-party key storage assumptions during security reviews.
+- Confirm secret scanning covers newly added configuration and docs files.
