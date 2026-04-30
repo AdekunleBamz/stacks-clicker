@@ -29,7 +29,7 @@ function ProgressDashboard({ userData }) {
 
             <StatsGrid stats={stats} />
 
-            <div className="achievements-section" style={{ marginTop: '3rem' }}>
+            <div className="achievements-section" style={{ marginTop: '3rem' }} title="Milestone achievements">
                 <h3 id="milestones-title" style={{ marginBottom: '1.5rem', fontWeight: 800 }}>Milestones</h3>
                 <div className="achievements-list" role="list" aria-labelledby="milestones-title">
                     {(achievements ?? []).map((ach) => (
