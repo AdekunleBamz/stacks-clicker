@@ -150,6 +150,7 @@ export default function ClickerGame({ onTxSubmit }) {
             onChange={(e) => setMultiClickAmount(Number.parseInt(e.target.value, 10) || 1)}
             className="multi-input"
             aria-label="Multi-click amount"
+            title="Set multi-click batch amount"
           />
           <motion.button
             type="button"
