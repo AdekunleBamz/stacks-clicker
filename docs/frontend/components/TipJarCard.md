@@ -48,6 +48,7 @@ interface TipJarCardProps {
 - Keep empty-state copy and min-tip validation notes aligned during UX copy updates
 - Update minimum tip amount display if contract changes
 - Verify sound feedback works across browsers
+- Re-check max tip validation against spendable balance when pending transactions exist
 
 ## Related Components
 
