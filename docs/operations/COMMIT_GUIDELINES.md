@@ -13,3 +13,6 @@
 Companion index: [Operations docs](README.md).
 
 - Recheck signature verification wording when team signing policy changes.
+
+### Signing Reminder
+- Double-check commit signature status locally before opening a release PR.
