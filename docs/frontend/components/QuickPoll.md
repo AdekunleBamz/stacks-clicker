@@ -17,6 +17,7 @@ Source file: `frontend/src/components/QuickPoll.jsx`.
 - Revalidate default poll expiry copy when contract defaults evolve.
 
 - Reconfirm vote status messaging after introducing new poll states.
+- Disable poll creation controls while submit transactions are pending to prevent duplicate polls.
 
 ### Maintenance Note
 - Recheck vote and create-poll copy after contract validation rule updates.
