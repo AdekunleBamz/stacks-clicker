@@ -13,3 +13,4 @@ Companion index: [Operations docs](README.md).
 
 ### Update Reminder
 - Prioritize dependency patches that affect transaction signing and wallet connection paths.
+- Avoid non-critical dependency merges within 24 hours of scheduled production releases.
