@@ -43,3 +43,6 @@ Complete all items before and during a release to ensure quality and traceabilit
 - Re-audit this checklist whenever release gate criteria are updated.
 
 - Reconfirm release checklist ownership before each scheduled release train.
+
+### Release Reminder
+- Attach verifier output for local checks in the release handoff notes.
