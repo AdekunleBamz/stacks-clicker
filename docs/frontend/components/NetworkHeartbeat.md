@@ -10,3 +10,6 @@ Avoid flashing animations during reconnect loops to reduce visual noise.
 - Re-test status wording when heartbeat polling cadence is adjusted.
 
 - Confirm heartbeat fallback text remains useful when API calls timeout.
+
+### Maintenance Note
+- Validate heartbeat status copy against current API fallback behavior.
