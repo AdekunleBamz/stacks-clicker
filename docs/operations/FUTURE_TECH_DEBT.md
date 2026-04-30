@@ -11,3 +11,4 @@ Companion index: [Operations docs](README.md).
 
 ### Debt Reminder
 - Tag debt items that block release confidence so they surface in weekly triage.
+- Mark debt items that repeatedly trigger support tickets for earlier prioritization.
