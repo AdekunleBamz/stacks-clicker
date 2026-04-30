@@ -74,3 +74,4 @@ Source file: `frontend/src/components/QuickPollCard.jsx`.
 
 ### Maintenance Note
 - Verify toggle accessibility text stays aligned with expanded panel behavior.
+- Audit prompt: recheck toggle guidance with panel accessibility attributes.
