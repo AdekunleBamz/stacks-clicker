@@ -6,3 +6,6 @@
 - Include one tie-case scenario in manual QA notes.
 
 - Verify vote button loading states reset correctly after rejected signatures.
+
+### Follow-up
+- Recheck quickpoll smoke steps whenever poll payload validation changes.
