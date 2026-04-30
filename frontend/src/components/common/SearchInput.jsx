@@ -29,6 +29,7 @@ function SearchInput({ value, onChange, onClear, placeholder = 'Search...', coun
           onKeyDown={(e) => { if (e.key === 'Escape' && value) { e.preventDefault(); onClear(); } }}
           aria-label="Global transaction search"
           aria-describedby={count !== undefined ? 'global-transaction-search-count' : undefined}
+          title={placeholder}
           autoComplete="off"
         />
         <AnimatePresence>
