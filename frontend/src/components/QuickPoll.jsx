@@ -207,6 +207,7 @@ export default function QuickPoll({ onTxSubmit }) {
             className="action-btn vote-no"
             onClick={handleQuickVoteNo}
             disabled={!isConnected || loading}
+            title="Quick cast No vote"
           >
             👎 Quick No
           </motion.button>
