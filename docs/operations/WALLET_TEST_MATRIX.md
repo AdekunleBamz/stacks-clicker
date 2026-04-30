@@ -9,6 +9,7 @@
 - Include a burst-transaction run to verify client-side backoff behavior under provider limits.
 - Run one matrix pass in a clean browser profile to rule out extension cache artifacts.
 - Capture at least one matrix run where wallet app language is non-English.
+- Run one matrix pass with a non-UTC system timezone to catch date/time formatting regressions.
 
 Companion index: [Operations docs](README.md).
 
