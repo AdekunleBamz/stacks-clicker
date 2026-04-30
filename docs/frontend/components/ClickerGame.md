@@ -16,3 +16,4 @@ Treat this module as non-primary UI unless parity tests are updated.
 
 ### Maintenance Note
 - Validate ping and click action labels against the latest wallet flow wording.
+- Audit prompt: retest ping and click labels after wallet copy updates.
