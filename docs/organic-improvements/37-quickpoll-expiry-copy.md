@@ -7,3 +7,4 @@ Users make better choices when they understand remaining decision windows.
 
 ### Follow-up
 - Keep expiry copy synchronized with poll timeout constants.
+- Verify expiry text updates correctly after tab inactivity and resume.
