@@ -11,3 +11,6 @@ Prefer this view for lightweight embeds where filters/export are unnecessary.
 - Revisit retention assumptions when transaction log persistence changes.
 
 - Reconfirm retention wording if log pruning behavior changes.
+
+### Maintenance Note
+- Keep retention expectations aligned with transaction-log schema updates.
