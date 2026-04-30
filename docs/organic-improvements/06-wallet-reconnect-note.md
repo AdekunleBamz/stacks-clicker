@@ -9,3 +9,4 @@
 
 ### Follow-up
 - Repeat wallet reconnect checks after extension updates or provider changes.
+- Run one reconnect validation in a private window to catch session edge cases.
