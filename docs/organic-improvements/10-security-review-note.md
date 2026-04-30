@@ -6,3 +6,6 @@
 - Confirm dependency advisories are reviewed each release.
 
 - Reconfirm security review scope whenever wallet session flows are expanded.
+
+### Follow-up
+- Recheck third-party key storage assumptions during security reviews.
