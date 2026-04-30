@@ -12,3 +12,6 @@ Track active risks with:
 Update this register during incident and release reviews.
 
 Companion index: [Operations docs](README.md).
+
+### Risk Reminder
+- Record mitigation owner and review date for every open high-risk item.
