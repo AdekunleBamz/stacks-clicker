@@ -12,3 +12,4 @@ Companion index: [Operations docs](README.md).
 
 ### Budget Reminder
 - Capture baseline measurements before and after UI animation changes.
+- Include both cold-cache and warm-cache measurements when tracking budget drift.
