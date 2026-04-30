@@ -9,3 +9,6 @@
 
 ## Maintenance Note
 - Refresh threat-model references when authentication or wallet flows are modified.
+
+### Security Reminder
+- Include wallet connector dependencies in each quarterly security review pass.
