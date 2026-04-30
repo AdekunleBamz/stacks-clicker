@@ -10,3 +10,6 @@
 - Assign an owner for each high-risk upgrade so follow-up validation does not drift.
 
 Companion index: [Operations docs](README.md).
+
+### Update Reminder
+- Prioritize dependency patches that affect transaction signing and wallet connection paths.
