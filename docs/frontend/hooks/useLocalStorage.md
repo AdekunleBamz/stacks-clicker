@@ -13,3 +13,6 @@ Prefer JSON-safe values to keep parsing and migration predictable.
 - Revisit key versioning notes whenever storage migrations are introduced.
 
 - Keep migration notes updated when stored value shapes are expanded.
+
+### Maintenance Note
+- Revisit key versioning notes whenever storage schema changes are introduced.
