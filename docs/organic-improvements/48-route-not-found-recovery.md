@@ -7,3 +7,4 @@ Dead-end pages increase bounce rates during deep-link sharing.
 
 ### Follow-up
 - Keep not-found recovery links synchronized with active support channels.
+- Reconfirm not-found recovery actions preserve selected locale context.
