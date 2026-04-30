@@ -199,6 +199,7 @@ export default function TipJar({ onTxSubmit }) {
           className="action-btn outline"
           onClick={handleDonate}
           disabled={!isConnected || loading}
+          title="Donate the selected amount to the project"
         >
           🎁 Donate {tipAmount} uSTX
         </motion.button>
