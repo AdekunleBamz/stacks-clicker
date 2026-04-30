@@ -38,7 +38,7 @@ function SocialFeed({ activities }) {
                                 <span className="activity-user">{activity.user}</span>
                                 <span className="activity-text">{activity.text}</span>
                             </div>
-                            <span className="activity-time">{activity.time}</span>
+                            <span className="activity-time" title={`Activity time: ${activity.time}`}>{activity.time}</span>
                         </motion.div>
                     ))}
                 </AnimatePresence>
