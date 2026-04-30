@@ -16,3 +16,4 @@ Props:
 
 ### Maintenance Note
 - Revalidate language selector defaults when introducing new locales.
+- Audit prompt: review language fallback ordering before each release cut.
