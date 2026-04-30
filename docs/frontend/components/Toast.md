@@ -11,3 +11,6 @@ Include recovery hints for failures that users can immediately retry.
 - Reconfirm toast timeout accessibility after changing default durations.
 
 - Keep severity-based live-region behavior aligned with toast type mapping.
+
+### Maintenance Note
+- Keep severity-to-live-region mappings aligned with current notification policy.
