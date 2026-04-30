@@ -143,6 +143,7 @@ function TipJarCard({ address, tipjar }) {
             type="number"
             step="1"
             min="0.001"
+            inputMode="decimal"
             className={`amount-input ${errorField === 'custom-tip' ? 'input-error' : ''}`}
             value={tipAmount}
             onChange={(e) => setTipAmount(e.target.value)}
