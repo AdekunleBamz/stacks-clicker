@@ -7,3 +7,4 @@ Clear communication reduces confusion when behavior changes are intentional.
 
 ### Follow-up
 - Keep release communications aligned with incident and support playbooks.
+- Include a brief known-issues section when shipping changes with accepted limitations.
