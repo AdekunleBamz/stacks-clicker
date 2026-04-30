@@ -71,3 +71,6 @@ Source file: `frontend/src/components/QuickPollCard.jsx`.
 - Re-test clipboard fallback behavior after poll card action refactors.
 
 - Recheck copy success feedback after clipboard helper changes.
+
+### Maintenance Note
+- Verify toggle accessibility text stays aligned with expanded panel behavior.
