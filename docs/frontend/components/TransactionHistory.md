@@ -7,6 +7,7 @@
 
 It expects `txLog` entries with at least `id`, `action`, `status`, and `time`.
 Treat unknown status values as neutral badges instead of dropping entries.
+Prefer locale-aware timestamp formatting so support logs align with user-reported local times.
 
 ## Maintenance Note
 - Re-check filter and sort behavior notes when history query defaults change.
