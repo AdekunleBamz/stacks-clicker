@@ -163,6 +163,7 @@ export default function TipJar({ onTxSubmit }) {
               value={recipientAddress}
               onChange={(e) => setRecipientAddress(e.target.value)}
               className="address-input"
+              aria-label="Recipient wallet address"
             />
           </div>
           <div className="input-group">
