@@ -17,3 +17,4 @@ Current content is intentionally minimal and can be extended with:
 
 ### Maintenance Note
 - Verify community links and aria labels remain accurate after branding changes.
+- Audit prompt: revalidate social link descriptions after branding refreshes.
