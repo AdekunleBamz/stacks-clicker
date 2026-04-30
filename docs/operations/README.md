@@ -29,3 +29,6 @@ Use relative links when adding new references so docs stay portable across branc
 - Project onboarding: [Getting started](../GETTING_STARTED.md)
 - Contributing guide: [CONTRIBUTING.md](../../CONTRIBUTING.md)
 - Main README: [README.md](../../README.md)
+
+### Index Reminder
+- Update this index whenever a new operations runbook is added or renamed.
