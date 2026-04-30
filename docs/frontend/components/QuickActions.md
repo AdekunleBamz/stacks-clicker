@@ -17,3 +17,4 @@ Keep external support links reviewed to avoid stale destinations.
 
 ### Maintenance Note
 - Keep quick action labels aligned with shortcut behavior and disable states.
+- Audit prompt: verify disabled-state messaging across quick action entries.
