@@ -56,3 +56,6 @@ Deployments are split by network plan files in `deployments/`:
 ---
 
 Companion index: [Operations docs](README.md).
+
+### Deployment Reminder
+- Record the wallet address used for deployment in the release artifact notes.
