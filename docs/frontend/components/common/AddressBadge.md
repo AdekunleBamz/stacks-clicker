@@ -11,3 +11,4 @@ Confirm copy success feedback is visible for keyboard-only users.
 - Reconfirm truncation format when wallet address display rules are updated.
 
 - Revalidate copy hint content when address formatting rules evolve.
+- Keep manual copy fallback text available for restricted clipboard permissions.
