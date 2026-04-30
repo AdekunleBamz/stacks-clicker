@@ -9,3 +9,6 @@
 - Include short translator notes for ambiguous blockchain terms when adding new keys.
 
 Companion index: [Operations docs](README.md).
+
+### Translation Reminder
+- Recheck placeholder parity whenever adding new wallet or transaction copy keys.
