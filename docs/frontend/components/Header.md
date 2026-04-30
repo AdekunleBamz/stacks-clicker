@@ -13,6 +13,7 @@ Props:
 - Revisit language fallback behavior when locale defaults are updated.
 
 - Verify header wallet status labels remain short enough for small screens.
+- Test the connected wallet label with long addresses to avoid overflow at common mobile widths.
 
 ### Maintenance Note
 - Revalidate language selector defaults when introducing new locales.
