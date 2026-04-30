@@ -33,3 +33,6 @@ Our vision is to build the premier GameFi intersection for the Stacks ecosystem.
 - [ ] **Governance Hub**: Use QuickPoll results to trigger automated contract parameter updates.
 - [ ] **Cross-Chain Bridging**: Interact with other Bitcoin L2s from the same UI.
 - [ ] **Developer SDK**: Allow other dApps to integrate the Stacks Clicker activity feed.
+
+## Planning Note
+- Annotate roadmap items that require contract and frontend coordination.
