@@ -12,6 +12,7 @@ Fallback behavior:
 - Re-test retry flow messaging after any fallback boundary logic change.
 
 - Ensure fallback path references match the latest transaction status patterns.
+- Capture a lightweight correlation ID in fallback copy when incidents require support follow-up.
 
 ### Maintenance Note
 - Reconfirm retry behavior surfaces useful context after recoverable runtime failures.
