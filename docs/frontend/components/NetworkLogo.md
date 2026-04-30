@@ -13,3 +13,4 @@ Provide descriptive `alt` text when this component is wrapped in an image tag.
 
 ### Maintenance Note
 - Confirm network logo source and sizing stay aligned with active branding assets.
+- Audit prompt: verify logo asset dimensions after icon pack updates.
