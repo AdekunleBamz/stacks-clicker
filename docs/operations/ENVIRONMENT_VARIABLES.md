@@ -27,3 +27,4 @@ Companion index: [Operations docs](README.md).
 
 ### Environment Reminder
 - Revalidate required env vars whenever network defaults change between testnet and mainnet.
+- Reconfirm CI and local env var names stay aligned after configuration refactors.
