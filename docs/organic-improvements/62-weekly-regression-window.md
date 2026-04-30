@@ -7,3 +7,4 @@ A predictable schedule helps prevent last-minute pre-release scramble.
 
 ### Follow-up
 - Reconfirm regression windows around high-risk wallet and tx changes.
+- Rotate ownership periodically so regression knowledge is shared across the team.
