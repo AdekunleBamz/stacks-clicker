@@ -26,6 +26,7 @@ function SearchInput({ value, onChange, onClear, placeholder = 'Search...', coun
           className="search-input"
           value={value}
           onChange={(e) => onChange(e.target.value)}
+          onKeyDown={(e) => { if (e.key === 'Escape' && value) { e.preventDefault(); onClear(); } }}
           aria-label="Global transaction search"
           autoComplete="off"
         />
