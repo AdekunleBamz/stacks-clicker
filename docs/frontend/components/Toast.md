@@ -14,3 +14,4 @@ Include recovery hints for failures that users can immediately retry.
 
 ### Maintenance Note
 - Keep severity-to-live-region mappings aligned with current notification policy.
+- Audit prompt: confirm severity announcements still map to toast semantics.
