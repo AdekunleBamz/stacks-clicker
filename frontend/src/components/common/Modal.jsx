@@ -17,6 +17,7 @@ import PropTypes from 'prop-types';
  */
 const Modal = memo(function Modal({ isOpen, onClose, title, children, maxWidth = '500px' }) {
   const modalTitleId = useId();
+  const modalBodyId = useId();
   const handleKeyDown = useCallback(
     (e) => {
       if (e.key === 'Escape') onClose();
@@ -51,6 +52,7 @@ const Modal = memo(function Modal({ isOpen, onClose, title, children, maxWidth =
             role="dialog"
             aria-modal="true"
             aria-labelledby={modalTitleId}
+            aria-describedby={modalBodyId}
           >
             <button
               className="modal-close-btn"
@@ -66,7 +68,7 @@ const Modal = memo(function Modal({ isOpen, onClose, title, children, maxWidth =
                 {title}
               </h2>
             </div>
-            <div className="modal-body">{children}</div>
+            <div className="modal-body" id={modalBodyId}>{children}</div>
           </motion.div>
         </div>
       )}
