@@ -6,3 +6,6 @@
 - Verify activity feed reflects completed tips.
 
 - Reconfirm recipient validation behavior when tip input rules are updated.
+
+### Follow-up
+- Confirm tipjar checklist reflects current minimum amount and fee assumptions.
