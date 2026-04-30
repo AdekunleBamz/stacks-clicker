@@ -41,7 +41,7 @@ export default function TransactionLog({ transactions = [] }) {
           const explorerLink = getExplorerLink(tx.id, tx.network);
           return (
           <div key={tx.id || index} className={`tx-item ${tx.status}`}>
-            <span className="tx-status">{getStatusIcon(tx.status)}</span>
+            <span className="tx-status" aria-label={`Transaction status: ${tx.status}`}>{getStatusIcon(tx.status)}</span>
             <span className="tx-action">{tx.action}</span>
             <span className="tx-time">{tx.time}</span>
             {explorerLink && (
