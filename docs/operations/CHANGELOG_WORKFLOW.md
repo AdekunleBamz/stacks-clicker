@@ -9,3 +9,6 @@
 - Include the pull request link for entries that alter support or recovery instructions.
 
 Companion index: [Operations docs](README.md).
+
+### Process Reminder
+- Link each release note entry to at least one validating commit hash before publishing.
