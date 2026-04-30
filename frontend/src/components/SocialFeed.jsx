@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
  */
 function SocialFeed({ activities }) {
     return (
-        <div className="game-card social-feed">
+        <div className="game-card social-feed" title="Live community activity feed">
             <div className="game-header">
                 <h2><span aria-hidden="true">🔥</span> Live Activity</h2>
                 <span className="game-badge">Community</span>
