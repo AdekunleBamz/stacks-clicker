@@ -22,6 +22,7 @@ function SearchInput({ value, onChange, onClear, placeholder = 'Search...', coun
         <input
           id="global-transaction-search"
           type="text"
+          spellCheck={false}
           placeholder={placeholder}
           className="search-input"
           value={value}
