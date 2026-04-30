@@ -11,3 +11,6 @@
 - Capture at least one matrix run where wallet app language is non-English.
 
 Companion index: [Operations docs](README.md).
+
+### Matrix Reminder
+- Re-run private window checks after wallet extension updates.
