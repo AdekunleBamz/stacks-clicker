@@ -97,6 +97,7 @@ export default function ConnectButton() {
               aria-label="Disconnect Stacks Wallet"
               title="Disconnect Stacks wallet"
               aria-describedby="disconnect-description"
+              aria-busy={isConnecting}
               disabled={isConnecting}
             >
               Disconnect
