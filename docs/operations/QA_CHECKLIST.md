@@ -10,3 +10,6 @@
 
 ## Maintenance Note
 - Update regression focus areas after every major feature rollout.
+
+### QA Reminder
+- Include one wallet reconnect flow in every smoke cycle before approval.
