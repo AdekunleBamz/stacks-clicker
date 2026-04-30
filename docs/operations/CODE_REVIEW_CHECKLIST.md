@@ -13,3 +13,4 @@ Companion index: [Operations docs](README.md).
 
 ### Review Reminder
 - Verify rollback notes mention both UI and contract-facing changes when applicable.
+- Confirm reviewer can reproduce key wallet flow locally when risk is high.
