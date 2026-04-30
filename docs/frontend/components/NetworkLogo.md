@@ -10,3 +10,6 @@ Provide descriptive `alt` text when this component is wrapped in an image tag.
 - Recheck logo asset weight whenever replacing network icon variants.
 
 - Revalidate icon contrast after any header theme palette changes.
+
+### Maintenance Note
+- Confirm network logo source and sizing stay aligned with active branding assets.
