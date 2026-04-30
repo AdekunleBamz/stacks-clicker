@@ -17,6 +17,7 @@ Keep recipient validation strict to avoid malformed address submissions.
 - Recheck helper copy when tip presets or recommended amounts are adjusted.
 
 - Revalidate default tip chip values against current fee guidance.
+- Keep recipient address trimming and validation behavior aligned with wallet paste workflows.
 
 ### Maintenance Note
 - Revalidate minimum tip guidance whenever on-chain fee assumptions change.
