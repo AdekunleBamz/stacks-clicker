@@ -20,7 +20,7 @@ export default function FloatingActionButton({ onAction = () => {} }) {
     <div className="fab-container">
       <AnimatePresence>
         {isOpen && (
-          <div className="fab-menu" id="fab-menu" role="menu" aria-label="Quick actions menu">
+          <div className="fab-menu" id="fab-menu" role="menu" aria-label="Quick actions menu" title="Quick actions">
             {actions.map((action, index) => (
               <motion.button
                 type="button"
