@@ -16,3 +16,4 @@ Companion index: [Operations docs](README.md).
 
 ### Recovery Reminder
 - Confirm user wallet remains connected before retrying failed transactions.
+- Capture whether nonce or mempool state looked stale before re-broadcast attempts.
