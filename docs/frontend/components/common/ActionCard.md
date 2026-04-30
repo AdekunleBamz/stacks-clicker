@@ -11,3 +11,4 @@ Avoid embedding unrelated layout concerns so this wrapper stays reusable.
 - Recheck spacing density before introducing new card footer actions.
 
 - Recheck heading hierarchy whenever new action card slots are introduced.
+- Keep empty and populated card states on matching padding to reduce layout jitter.
