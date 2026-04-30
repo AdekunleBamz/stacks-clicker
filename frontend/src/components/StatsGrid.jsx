@@ -16,7 +16,7 @@ function StatsGrid({ stats }) {
     ];
 
     return (
-        <div className="stats-grid-container" role="list" aria-label="Player statistics">
+        <div className="stats-grid-container" role="list" aria-label="Player statistics" title="Detailed player metrics">
             {statItems.map((item, i) => (
                 <motion.div
                     key={item.label}
