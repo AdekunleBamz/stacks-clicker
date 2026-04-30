@@ -10,3 +10,6 @@
 - Verify transaction buttons return to enabled state after a rejected signature.
 
 Companion index: [Operations docs](README.md).
+
+### Smoke Reminder
+- Include at least one wallet connect-disconnect cycle in every frontend smoke run.
