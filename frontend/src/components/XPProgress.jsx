@@ -11,7 +11,7 @@ function XPProgress({ currentXP, nextLevelXP }) {
   const percentage = Math.min(100, Math.floor((safeCurrentXP / safeNextLevelXP) * 100));
 
   return (
-    <div className="xp-progress">
+    <div className="xp-progress" title="Experience progress">
       <div className="xp-labels">
         <span className="xp-current">{safeCurrentXP.toLocaleString()} XP</span>
         <span className="xp-next">{safeNextLevelXP.toLocaleString()} XP</span>
