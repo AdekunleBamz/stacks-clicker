@@ -13,3 +13,6 @@ Checks:
 - Add an assertion reminder for click cooldown edge paths during future test updates.
 
 - Reconfirm click cooldown assertions after updating click batching behavior.
+
+### Maintenance Note
+- Recheck cooldown assertions when click throttling configuration changes.
