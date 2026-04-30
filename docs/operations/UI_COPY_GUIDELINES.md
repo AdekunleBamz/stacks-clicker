@@ -12,3 +12,4 @@ Companion index: [Operations docs](README.md).
 
 ### Copy Reminder
 - Keep network names consistent across toasts, cards, and modal labels.
+- Keep failure messages neutral and action-oriented without blaming user behavior.
