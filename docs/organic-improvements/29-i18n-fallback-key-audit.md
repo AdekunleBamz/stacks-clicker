@@ -4,3 +4,6 @@ Review missing translation keys with fallback logging enabled before tagging rel
 Silent fallback gaps can hide production copy regressions.
 
 - Include pluralization checks for dynamic values in fallback audits.
+
+### Follow-up
+- Reconfirm fallback key coverage after each translation expansion.
