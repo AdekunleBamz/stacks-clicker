@@ -20,3 +20,4 @@ Source file: `frontend/src/components/QuickPoll.jsx`.
 
 ### Maintenance Note
 - Recheck vote and create-poll copy after contract validation rule updates.
+- Audit prompt: align poll creation hints with latest validation boundaries.
