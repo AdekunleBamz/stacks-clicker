@@ -11,3 +11,4 @@ Match skeleton dimensions to final content to reduce layout shifts.
 - Recheck motion budget whenever skeleton animation style is updated.
 
 - Keep placeholder animation speed within documented motion limits.
+- Confirm decorative skeletons stay `aria-hidden` so assistive tech focuses on real content.
