@@ -14,3 +14,4 @@ Keep global side effects centralized here to minimize prop drilling complexity.
 
 ### Maintenance Note
 - Keep global side-effect ownership notes aligned with provider updates.
+- Audit prompt: verify provider boundary notes when adding new global effects.
