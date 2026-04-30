@@ -11,3 +11,6 @@
 
 ## Maintenance Note
 - Reconfirm escalation contacts and communication channels each release cycle.
+
+### Incident Reminder
+- Always attach the first failing transaction hash when opening an incident channel thread.
