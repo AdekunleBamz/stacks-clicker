@@ -15,3 +15,4 @@ Keep button disabled/loading state tied to hook-level function keys.
 
 ### Maintenance Note
 - Recheck click cost copy whenever contract fee constants change.
+- Audit prompt: confirm displayed click costs still match runtime estimates.
