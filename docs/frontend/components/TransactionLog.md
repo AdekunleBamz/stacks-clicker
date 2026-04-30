@@ -11,6 +11,7 @@ Prefer this view for lightweight embeds where filters/export are unnecessary.
 - Revisit retention assumptions when transaction log persistence changes.
 
 - Reconfirm retention wording if log pruning behavior changes.
+- Distinguish local submit time from chain confirmation time when both are displayed.
 
 ### Maintenance Note
 - Keep retention expectations aligned with transaction-log schema updates.
