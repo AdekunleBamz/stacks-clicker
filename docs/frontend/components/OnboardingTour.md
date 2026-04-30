@@ -15,6 +15,7 @@ Source file: `frontend/src/components/OnboardingTour.jsx`.
 - Re-test skip and dismiss persistence when onboarding step order changes.
 
 - Recheck focus restoration targets when onboarding steps are reordered.
+- Verify local-storage write failures do not trap users in repeated onboarding loops.
 
 ### Maintenance Note
 - Verify dismissal persistence still works after onboarding flow updates.
