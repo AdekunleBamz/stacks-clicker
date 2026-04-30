@@ -6,3 +6,6 @@
 - Run smoke flows after rollback completion.
 
 - Link rollback entries to the follow-up patch that restored functionality.
+
+### Follow-up
+- Confirm rollback notes include cache-bust and reconnect guidance.
