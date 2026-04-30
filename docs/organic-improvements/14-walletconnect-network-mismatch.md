@@ -4,3 +4,6 @@ Before approving a WalletConnect session, verify the wallet and app are both on 
 A mismatched network produces confusing explorer links and failed confirmation handoffs.
 
 - Reconfirm mismatch guidance against the latest walletconnect namespace settings.
+
+### Follow-up
+- Revalidate mismatch messaging when supported networks are expanded.
