@@ -16,6 +16,7 @@ Keep stat labels consistent with transaction history terminology.
 - Reconfirm value formatting consistency when stats derivation logic changes.
 
 - Confirm stat labels stay consistent between compact and expanded layouts.
+- Keep rounding rules consistent across cards so totals match transaction log expectations.
 
 ### Maintenance Note
 - Revisit number formatting examples when telemetry units are updated.
