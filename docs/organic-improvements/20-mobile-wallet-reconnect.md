@@ -7,3 +7,4 @@ Expose a reconnect action near critical transaction entry points.
 
 ### Follow-up
 - Repeat mobile reconnect testing when wallet extension prompts change.
+- Re-run reconnect checks after long background idle periods on mobile browsers.
