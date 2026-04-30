@@ -4,3 +4,6 @@ Surface the current minimum tip amount near the input field and in validation me
 Consistent copy reduces failed submissions and duplicate retries.
 
 - Add explicit validation for custom amount precision in regression passes.
+
+### Follow-up
+- Recheck minimum tip guidance after fee model changes.
