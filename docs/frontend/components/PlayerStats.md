@@ -19,3 +19,4 @@ Keep stat labels consistent with transaction history terminology.
 
 ### Maintenance Note
 - Revisit number formatting examples when telemetry units are updated.
+- Audit prompt: confirm stat units remain clear in all supported locales.
