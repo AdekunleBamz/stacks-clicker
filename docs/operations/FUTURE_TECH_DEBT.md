@@ -8,3 +8,6 @@
 - Add lightweight end-to-end coverage for wallet reconnect after hard refresh.
 
 Companion index: [Operations docs](README.md).
+
+### Debt Reminder
+- Tag debt items that block release confidence so they surface in weekly triage.
