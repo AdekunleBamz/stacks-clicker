@@ -7,3 +7,4 @@ Hidden submit controls can look like app freezes to end users.
 
 ### Follow-up
 - Repeat keyboard-overlap validation after mobile layout updates.
+- Recheck iOS safe-area offsets when keyboard and sticky controls are both active.
