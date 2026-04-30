@@ -7,3 +7,4 @@ This resolves stale provider state in many reconnect scenarios.
 
 ### Follow-up
 - Check session reset behavior after auth and wallet state refactors.
+- Confirm reset guidance preserves non-wallet preferences like language and theme.
