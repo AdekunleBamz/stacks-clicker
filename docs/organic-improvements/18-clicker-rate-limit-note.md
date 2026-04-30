@@ -4,3 +4,6 @@ When adjusting click throughput rules, re-check server and client limits togethe
 Unaligned limits create false failure states and noisy support reports.
 
 - Reconfirm rate-limit fallback copy stays actionable for user retries.
+
+### Follow-up
+- Validate clicker rate-limit notes against current throttling constants.
