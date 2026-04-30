@@ -15,3 +15,6 @@ Source file: `frontend/src/components/FloatingActionButton.jsx`.
 - Revalidate support-link behavior after quick action menu changes.
 
 - Validate collapsed and expanded states on narrow mobile viewports.
+
+### Maintenance Note
+- Ensure FAB shortcuts stay in sync with the visible action labels.
