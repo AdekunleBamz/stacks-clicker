@@ -12,3 +12,4 @@ Companion index: [Operations docs](README.md).
 
 ### Support Reminder
 - Ask reporters for network and wallet type before escalating transaction bugs.
+- Request one screenshot of the visible error state before escalation when possible.
