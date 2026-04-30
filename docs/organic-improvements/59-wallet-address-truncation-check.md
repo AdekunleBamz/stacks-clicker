@@ -7,3 +7,4 @@ Over-truncated addresses make account confirmation harder.
 
 ### Follow-up
 - Revalidate truncation format examples when wallet display rules change.
+- Verify full-address tooltip and copy actions remain available after truncation updates.
