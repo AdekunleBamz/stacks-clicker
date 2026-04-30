@@ -16,3 +16,4 @@ Milestones currently award:
 
 ### Maintenance Note
 - Check streak thresholds whenever reward pacing is tuned.
+- Audit prompt: compare streak thresholds against reward configuration updates.
