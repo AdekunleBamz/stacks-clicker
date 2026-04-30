@@ -6,3 +6,6 @@
 - Remove stale notes during monthly maintenance.
 
 - Recheck cross-doc links after moving or renaming runbook files.
+
+### Follow-up
+- Keep doc sync reminders linked to the latest release checklist revision.
