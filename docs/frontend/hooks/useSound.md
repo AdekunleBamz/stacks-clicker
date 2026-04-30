@@ -14,6 +14,7 @@ Supported sound types:
 - Re-test autoplay fallback notes whenever browser policy behavior changes.
 
 - Verify mute toggle behavior after browser autoplay policy updates.
+- Confirm suspended audio contexts are resumed or recreated safely after tab restores.
 
 ### Maintenance Note
 - Reconfirm autoplay fallback wording whenever browser policies shift.
