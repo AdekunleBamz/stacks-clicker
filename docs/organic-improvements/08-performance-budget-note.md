@@ -9,3 +9,4 @@
 
 ### Follow-up
 - Rebaseline budget expectations when animation density changes across cards.
+- Capture one throttled-network run when updating performance budget assumptions.
