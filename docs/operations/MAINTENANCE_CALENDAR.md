@@ -9,3 +9,6 @@ Suggested recurring tasks:
 - Quarterly: review shared default contract address values against latest deployment records
 
 Companion index: [Operations docs](README.md).
+
+### Calendar Reminder
+- Reserve time for wallet-extension compatibility checks before major releases.
