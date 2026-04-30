@@ -9,3 +9,6 @@ Confirm the active Node.js version matches project expectations before retrying 
 If a build fails only in CI, compare local and CI environment variable sets before retrying.
 
 Companion index: [Operations docs](README.md).
+
+### Build Reminder
+- Capture the exact node and npm versions used for reproducible frontend builds.
