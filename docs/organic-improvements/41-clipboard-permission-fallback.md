@@ -7,3 +7,4 @@ Users should still be able to copy critical addresses and txids.
 
 ### Follow-up
 - Reconfirm clipboard fallbacks still work in constrained browser permission states.
+- Verify manual-copy fallback remains keyboard accessible in modal contexts.
