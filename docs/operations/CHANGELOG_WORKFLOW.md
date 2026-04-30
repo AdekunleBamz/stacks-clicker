@@ -12,3 +12,4 @@ Companion index: [Operations docs](README.md).
 
 ### Process Reminder
 - Link each release note entry to at least one validating commit hash before publishing.
+- Include rollout date in ISO format for entries tied to incident or hotfix work.
