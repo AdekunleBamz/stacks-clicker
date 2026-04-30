@@ -7,3 +7,4 @@ Animation fallback paths should preserve timing cues and hierarchy.
 
 ### Follow-up
 - Re-run reduced-motion checks when introducing new animations.
+- Confirm reduced-motion mode still exposes progress and success cues clearly.
