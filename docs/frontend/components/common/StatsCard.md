@@ -11,3 +11,4 @@ Avoid animating rapidly changing values to keep motion readable.
 - Revalidate numeric formatting assumptions when stats units are revised.
 
 - Revalidate unit suffixes whenever metric naming conventions are updated.
+- Verify non-finite values gracefully fall back instead of rendering raw `NaN` text.
