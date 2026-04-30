@@ -12,3 +12,4 @@ Companion index: [Operations docs](README.md).
 
 ### WalletConnect Reminder
 - Validate project id, chain, and redirect metadata together during setup checks.
+- Recheck deep-link behavior on both iOS and Android wallet app flows.
