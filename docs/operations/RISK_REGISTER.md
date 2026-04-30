@@ -15,3 +15,4 @@ Companion index: [Operations docs](README.md).
 
 ### Risk Reminder
 - Record mitigation owner and review date for every open high-risk item.
+- Include a simple likelihood/severity score to prioritize mitigation work.
