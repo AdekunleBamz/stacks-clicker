@@ -18,3 +18,6 @@ Source file: `frontend/src/utils/hash.js`.
 - Reconfirm hash stability assumptions before changing any cache-key derivation logic.
 
 - Revalidate deterministic output assumptions if hash input normalization changes.
+
+### Maintenance Note
+- Recheck hashing edge-case examples whenever truncation rules evolve.
