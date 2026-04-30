@@ -19,3 +19,4 @@ Prefer adding new cards through this layout to keep dashboard ordering explicit.
 
 ### Maintenance Note
 - Keep card ordering guidance in sync with product priority updates.
+- Audit prompt: verify priority card placement with updated product goals.
