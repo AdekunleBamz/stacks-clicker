@@ -9,3 +9,6 @@
 - Recheck animation-heavy paths with reduced-motion enabled to avoid accessibility regressions.
 
 Companion index: [Operations docs](README.md).
+
+### Budget Reminder
+- Capture baseline measurements before and after UI animation changes.
