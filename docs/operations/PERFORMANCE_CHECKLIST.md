@@ -10,3 +10,6 @@
 - Compare trace results with and without a connected wallet session for parity.
 
 Companion index: [Operations docs](README.md).
+
+### Checklist Reminder
+- Include at least one low-memory mobile run when validating performance regressions.
