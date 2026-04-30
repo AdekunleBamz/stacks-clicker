@@ -10,3 +10,6 @@
 - Pair each limitation with the customer-facing workaround used by support.
 
 Companion index: [Operations docs](README.md).
+
+### Scope Reminder
+- Note whether a limitation is testnet-only, mainnet-only, or shared across networks.
