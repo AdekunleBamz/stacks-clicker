@@ -30,3 +30,6 @@ Please include:
 - **Private Keys**: We will NEVER ask for your seed phrase.
 - **Official Domain**: Only interact with `stacksclicker.io`.
 - **Review Transactions**: Always check Hiro/Leather wallet popups for detailed transaction context.
+
+## Review Note
+- Re-validate disclosure contact paths whenever maintainer ownership changes.
