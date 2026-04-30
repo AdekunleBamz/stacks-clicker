@@ -53,6 +53,7 @@ const Modal = memo(function Modal({ isOpen, onClose, title, children, maxWidth =
             aria-modal="true"
             aria-labelledby={modalTitleId}
             aria-describedby={modalBodyId}
+            title={title}
           >
             <button
               className="modal-close-btn"
