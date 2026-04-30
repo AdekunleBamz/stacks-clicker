@@ -12,3 +12,6 @@
 Companion index: [Operations docs](README.md).
 
 - Record postdeploy check operator initials in release notes for audit clarity.
+
+### Postdeploy Reminder
+- Verify explorer links from both transaction history and modal views after deployment.
