@@ -8,6 +8,7 @@ Common tx-log fields:
 - `submittedAt`
 - `explorerUrl`
 - `network`
+- `chainTipHeight` (optional, useful for diagnosing delayed confirmations)
 - `errorCode` (optional, for rejected/failed flows)
 - `walletType` (optional, useful for wallet-specific support patterns)
 
