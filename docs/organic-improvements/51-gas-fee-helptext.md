@@ -7,3 +7,4 @@ Users are less likely to misinterpret wallet prompts when fee context is nearby.
 
 ### Follow-up
 - Keep gas fee help text aligned with current network fee trends.
+- Reconfirm fee helptext uses the same unit naming as wallet confirmation screens.
