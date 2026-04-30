@@ -24,3 +24,6 @@ Keep secrets in local `.env` files and never commit sensitive values.
 Document new variables in `frontend/.env.example` as soon as they are introduced.
 
 Companion index: [Operations docs](README.md).
+
+### Environment Reminder
+- Revalidate required env vars whenever network defaults change between testnet and mainnet.
