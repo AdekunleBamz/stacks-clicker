@@ -45,3 +45,6 @@ For frontend verification before opening a PR:
 ## License
 
 By contributing, you agree that your work will be licensed under the MIT License.
+
+## Collaboration Note
+- Include the exact local verification command output in non-trivial PRs.
