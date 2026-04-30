@@ -76,6 +76,7 @@ export default function ConnectButton() {
             className="wallet-connected"
             role="region"
             aria-label="Wallet connection info"
+            aria-live="polite"
           >
             <motion.span
               whileHover={{ scale: 1.05 }}
