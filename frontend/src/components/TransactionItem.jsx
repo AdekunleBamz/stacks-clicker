@@ -72,7 +72,7 @@ function TransactionItem({
           <div className="tx-status-visualizer">
             <div className="status-steps" aria-label="Transaction Confirmation Flow">
               <div className="step active">
-                <span className="step-dot"></span>
+                <span className="step-dot" aria-hidden="true"></span>
                 <span className="step-label">Submitted</span>
               </div>
               <div className={`step ${isPending ? 'pending' : (tx.status === 'failed' ? 'error' : 'active')}`}>
