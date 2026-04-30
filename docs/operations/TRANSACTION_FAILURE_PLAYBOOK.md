@@ -13,3 +13,6 @@
 Companion index: [Operations docs](README.md).
 
 - Reconfirm failure playbook escalation path after support rota changes.
+
+### Recovery Reminder
+- Confirm user wallet remains connected before retrying failed transactions.
