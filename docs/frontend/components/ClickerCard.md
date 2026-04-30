@@ -12,3 +12,6 @@ Keep button disabled/loading state tied to hook-level function keys.
 - Recheck action labels when click cost display rules are updated.
 
 - Confirm button disable logic still prevents duplicate click submits.
+
+### Maintenance Note
+- Recheck click cost copy whenever contract fee constants change.
