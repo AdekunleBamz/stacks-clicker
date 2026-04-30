@@ -9,3 +9,6 @@
 - Ask if the issue reproduces in a private browsing window to isolate extension cache side effects.
 
 Companion index: [Operations docs](README.md).
+
+### Support Reminder
+- Ask reporters for network and wallet type before escalating transaction bugs.
