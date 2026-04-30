@@ -10,3 +10,6 @@
 - Verify modal dialogs trap focus until dismissed, then release focus safely.
 
 Companion index: [Operations docs](README.md).
+
+### Maintenance Reminder
+- Confirm skip-link and modal focus checks are still part of every release smoke pass.
