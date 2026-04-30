@@ -12,3 +12,4 @@
 
 ### Security Reminder
 - Include wallet connector dependencies in each quarterly security review pass.
+- Recheck expiration dates for any accepted vulnerability exceptions.
