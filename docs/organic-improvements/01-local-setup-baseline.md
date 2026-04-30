@@ -9,3 +9,4 @@
 
 ### Follow-up
 - Keep local setup baseline checks tied to the current lockfile and Node LTS version.
+- Reconfirm README setup instructions stay consistent with this baseline checklist.
