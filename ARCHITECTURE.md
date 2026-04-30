@@ -34,3 +34,6 @@ The bridge between the frontend and the blockchain:
 - **Environment Safety**: Private keys and mnemonics are never committed or exposed on the frontend.
 - **Input Validation**: All user-supplied inputs (poll questions, tip amounts, addresses) are validated before contract calls.
 - **Operational Traceability**: Release and incident docs should map user-impacting behavior changes back to specific components.
+
+## Diagram Hygiene
+- Recheck architecture diagrams after contract interface or provider changes.
