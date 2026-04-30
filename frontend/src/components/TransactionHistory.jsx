@@ -15,7 +15,7 @@ function TransactionHistory({ txLog }) {
         <span className="tx-count-badge" aria-label={`${txLog.length} transactions in history`} title="Transactions currently shown">{txLog.length}</span>
       </div>
 
-      <div className="tx-list">
+      <div className="tx-list" title="Recent transaction activity">
         <AnimatePresence mode="popLayout">
           {txLog.length === 0 ? (
             <motion.div
