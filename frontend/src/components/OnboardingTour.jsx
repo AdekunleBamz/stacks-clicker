@@ -94,7 +94,7 @@ export default function OnboardingTour() {
           <p className="tour-content">{steps[currentStep].content}</p>
           <div className="tour-footer" role="navigation" aria-label="Tour Navigation">
             <div className="footer-left">
-              <button type="button" className="tour-skip" onClick={dismiss}>
+              <button type="button" className="tour-skip" onClick={dismiss} title="Skip onboarding tour">
                 Skip
               </button>
               {currentStep > 0 && (
