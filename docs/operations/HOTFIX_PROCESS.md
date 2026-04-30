@@ -11,3 +11,6 @@
 
 ## Maintenance Note
 - Verify rollback-link references whenever hotfix approval flow is updated.
+
+### Hotfix Reminder
+- Capture rollback owner and communication channel before starting emergency deploys.
