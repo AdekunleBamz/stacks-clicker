@@ -13,3 +13,4 @@ Companion index: [Operations docs](README.md).
 
 ### Triage Reminder
 - Flag flaky tests that depend on timing or clipboard APIs for focused follow-up.
+- Record retry count used during triage so flake frequency is measurable.
