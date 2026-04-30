@@ -62,3 +62,6 @@ Source file: `frontend/src/components/TipJarCard.jsx`.
 - Re-verify minimum amount hints whenever fee assumptions are tuned.
 
 - Reconfirm inline validation timing after custom input behavior changes.
+
+### Maintenance Note
+- Confirm preset and custom tip affordances share consistent validation messaging.
