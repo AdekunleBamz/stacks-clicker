@@ -222,6 +222,7 @@ export default function QuickPoll({ onTxSubmit }) {
             className="poll-id-input"
             placeholder="Poll ID"
             aria-label="Target Poll ID"
+            title="Enter the poll ID you want to vote on"
           />
           <motion.button
             whileHover={{ scale: 1.02 }}
