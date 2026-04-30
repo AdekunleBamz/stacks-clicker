@@ -6,3 +6,6 @@
 - Keep at least one funded wallet for click and tip flows.
 
 - Confirm this baseline still matches the default Node and wallet setup before each major release.
+
+### Follow-up
+- Keep local setup baseline checks tied to the current lockfile and Node LTS version.
