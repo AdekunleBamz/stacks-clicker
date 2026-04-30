@@ -143,3 +143,6 @@ When release timing is tight, prefer a brief smoke pass over skipping verificati
 MIT License. See [LICENSE](LICENSE) for details.
 
 ---
+
+## Maintenance Note
+- Run root verification helpers before merging release-facing updates.
