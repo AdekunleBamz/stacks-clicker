@@ -10,3 +10,6 @@
 - Verify default network assumptions are explicit when config values are optional.
 
 Companion index: [Operations docs](README.md).
+
+### Review Reminder
+- Verify rollback notes mention both UI and contract-facing changes when applicable.
