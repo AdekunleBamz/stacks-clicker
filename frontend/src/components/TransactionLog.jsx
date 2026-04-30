@@ -34,7 +34,7 @@ export default function TransactionLog({ transactions = [] }) {
   }
 
   return (
-    <div className="tx-log">
+    <div className="tx-log" title="Recent transaction log">
       <h3><span aria-hidden="true">📋</span> Transaction Log</h3>
       <div className="tx-list" role="log" aria-live="polite" aria-relevant="additions text">
         {transactions.map((tx, index) => {
