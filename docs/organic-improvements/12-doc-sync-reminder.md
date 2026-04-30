@@ -9,3 +9,4 @@
 
 ### Follow-up
 - Keep doc sync reminders linked to the latest release checklist revision.
+- Run a quarterly dead-link check across operations and frontend doc indexes.
