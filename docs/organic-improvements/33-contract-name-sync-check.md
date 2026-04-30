@@ -4,3 +4,6 @@ Confirm frontend contract constants match deployed contract names after every mi
 Name drift causes silent read/write failures that look like wallet issues.
 
 - Reconcile this check with contract alias changes before deployment windows.
+
+### Follow-up
+- Reconfirm contract-name references when deployment manifests are updated.
