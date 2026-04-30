@@ -12,3 +12,4 @@ Companion index: [Operations docs](README.md).
 
 ### Build Reminder
 - Capture the exact node and npm versions used for reproducible frontend builds.
+- Record build artifact checksum or commit hash in release handoff notes.
