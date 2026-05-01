@@ -15,3 +15,5 @@ Companion index: [Operations docs](README.md).
 - Include both cold-cache and warm-cache measurements when tracking budget drift.
 
 Operational note: Track budget exceptions with expiry dates so temporary allowances do not become permanent.
+
+Operational note: Track median and p95 together so budget drift is easier to spot.
