@@ -14,3 +14,5 @@
 - Re-verify modal focus behavior after wallet connector SDK upgrades.
 
 Maintenance note: Reconfirm mobile deep-link behavior after WalletConnect package or browser updates.
+
+Operational note: Verify focus returns to the trigger after QR modal dismissal.
