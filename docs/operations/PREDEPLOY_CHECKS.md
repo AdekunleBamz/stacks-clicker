@@ -18,3 +18,5 @@ Companion index: [Operations docs](README.md).
 Operational note: Confirm preview and production environment variables are both validated before giving deploy approval.
 
 Operational note: Keep a fallback wallet funded before predeploy validation starts.
+
+Quarterly follow-up: Verify predeploy checklist still matches current release tooling.
