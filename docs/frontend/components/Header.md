@@ -15,3 +15,5 @@ Props:
 - Test the connected wallet label with long addresses to avoid overflow at common mobile widths.
 - Revalidate language selector defaults when introducing new locales.
 - Audit prompt: review language fallback ordering before each release cut.
+
+Maintenance note: Keep header language and wallet-control behavior notes in sync with accessibility attributes.
