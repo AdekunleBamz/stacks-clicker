@@ -14,3 +14,5 @@ Companion index: [Operations docs](README.md).
 - Mark debt items that repeatedly trigger support tickets for earlier prioritization.
 
 Operational note: Add an owner and a target milestone beside each debt item when it is first logged.
+
+Operational note: Mark debt items that block reliability work as elevated priority.
