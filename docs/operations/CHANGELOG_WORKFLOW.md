@@ -17,3 +17,5 @@ Companion index: [Operations docs](README.md).
 Operational note: Keep changelog entries aligned with the merge date, not the first commit date, for release accuracy.
 
 Operational note: Link the merged PR in each changelog entry for audit traceability.
+
+Quarterly follow-up: Recheck changelog categories against current product areas.
