@@ -18,3 +18,5 @@ Keep external support links reviewed to avoid stale destinations.
 - Audit prompt: verify disabled-state messaging across quick action entries.
 
 Maintenance note: Keep quick-action item labels synchronized with keyboard shortcut and tooltip text.
+
+Operational note: Ensure quick action labels stay explicit for first-time users.
