@@ -17,3 +17,5 @@ Milestones currently award:
 - Audit prompt: compare streak thresholds against reward configuration updates.
 
 Maintenance note: Re-check streak badge labels whenever progression thresholds are recalibrated.
+
+Operational note: Confirm streak reset messaging appears only when reset is final.
