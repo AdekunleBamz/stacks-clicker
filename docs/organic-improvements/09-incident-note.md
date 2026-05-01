@@ -10,3 +10,5 @@
 ### Follow-up
 - Attach first failing tx hash when documenting incident symptoms.
 - Include a short list of affected transaction IDs once scope is known.
+
+Follow-up note: Include incident start and detection times in UTC for consistency.
