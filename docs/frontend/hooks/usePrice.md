@@ -18,3 +18,5 @@ Render fallbacks when `price` is unavailable instead of blocking interactions.
 - Recheck staleness thresholds after changing refresh cadence or API providers.
 
 Maintenance note: Include stale-price handling expectations whenever polling intervals are revised.
+
+Operational note: Note stale quote threshold assumptions near pricing logic updates.
