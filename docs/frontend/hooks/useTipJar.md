@@ -17,3 +17,5 @@ Input guard:
 - Recheck amount parsing edge cases after decimal precision rule changes.
 - Reconfirm zero and dust-value rejection paths after amount parser updates.
 - Verify tip retry guidance reflects current network rate-limit handling.
+
+Maintenance note: Reconfirm minimum tip thresholds after any contract upgrade that touches denomination rules.
