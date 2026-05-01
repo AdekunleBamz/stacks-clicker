@@ -17,3 +17,5 @@ Provide an accessible label when icon-only variants are introduced.
 
 - Ensure loading text remains specific to the action being executed.
 - Recheck disabled-state helper text so blocked actions still communicate next steps.
+
+Operational note: Verify disabled-state styling remains distinguishable in high-contrast mode.
