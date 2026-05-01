@@ -15,3 +15,5 @@ Companion index: [Operations docs](README.md).
 - Ask for approximate timestamp and timezone to improve incident correlation speed.
 
 Operational note: Ask reporters for expected behavior and observed behavior as separate fields to speed triage.
+
+Operational note: Ask reporters to include expected behavior alongside actual behavior.
