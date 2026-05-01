@@ -43,7 +43,7 @@ interface TipJarCardProps {
 - Error messages are announced to screen readers
 - Keyboard-accessible amount input
 
-## Maintenance
+## Maintenance Note
 
 - Keep empty-state copy and min-tip validation notes aligned during UX copy updates
 - Update minimum tip amount display if contract changes
@@ -61,9 +61,6 @@ interface TipJarCardProps {
 Source file: `frontend/src/components/TipJarCard.jsx`.
 
 - Re-verify minimum amount hints whenever fee assumptions are tuned.
-
 - Reconfirm inline validation timing after custom input behavior changes.
-
-### Maintenance Note
 - Confirm preset and custom tip affordances share consistent validation messaging.
 - Audit prompt: retest custom amount validation wording with localized numbers.
