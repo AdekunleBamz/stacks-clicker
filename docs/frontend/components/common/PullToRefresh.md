@@ -12,3 +12,5 @@ Debounce repeated pulls while an async refresh is already in progress.
 
 - Verify touch gesture sensitivity remains accessible on older mobile devices.
 - Ensure in-flight refresh callbacks are safely ignored when the component unmounts.
+
+Operational note: Test pull threshold behavior with both short and long lists.
