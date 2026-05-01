@@ -17,3 +17,5 @@ Companion index: [Operations docs](README.md).
 Operational note: Tag recurring maintenance tasks with cadence and owner to reduce orphaned backlog entries.
 
 Operational note: Reserve one slot each month for dependency health verification.
+
+Quarterly follow-up: Validate calendar owners and backups for upcoming maintenance tasks.
