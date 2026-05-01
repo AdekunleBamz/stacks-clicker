@@ -8,3 +8,5 @@ Version drift is a common source of inconsistent connect behavior.
 ### Follow-up
 - Capture provider version changes in release notes whenever wallet deps bump.
 - Record browser and OS details with provider version notes for reproducibility.
+
+Follow-up note: Capture provider version and release channel during regression runs.
