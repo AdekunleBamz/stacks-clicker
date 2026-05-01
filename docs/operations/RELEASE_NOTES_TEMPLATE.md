@@ -17,3 +17,5 @@ Companion index: [Operations docs](README.md).
 Operational note: Call out user-visible rollback impact explicitly in every release note draft.
 
 Operational note: Include one user-visible risk callout in every release note draft.
+
+Quarterly follow-up: Validate release note sections still match stakeholder expectations.
