@@ -18,3 +18,5 @@
 Operational note: Record timezone and test timestamp when capturing QA evidence for release signoff.
 
 Operational note: Log browser version with each QA signoff artifact.
+
+Quarterly follow-up: Include one assistive tech pass in every major QA cycle.
