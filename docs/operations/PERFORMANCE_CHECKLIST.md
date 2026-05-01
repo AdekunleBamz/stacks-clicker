@@ -16,3 +16,5 @@ Companion index: [Operations docs](README.md).
 - Recheck performance after tab background/resume cycles on mobile browsers.
 
 Operational note: Record browser version and device profile with every captured performance run.
+
+Operational note: Include device model for every performance baseline capture.
