@@ -13,3 +13,5 @@ Keep global side effects centralized here to minimize prop drilling complexity.
 - Reconfirm any global loading fallback copy when app-level provider order is changed.
 - Keep global side-effect ownership notes aligned with provider updates.
 - Audit prompt: verify provider boundary notes when adding new global effects.
+
+Maintenance note: Reconcile this overview with route-level composition whenever top-level layout changes.
