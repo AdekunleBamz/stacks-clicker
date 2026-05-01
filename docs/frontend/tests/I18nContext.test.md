@@ -13,3 +13,5 @@ Covers:
 - Ensure fallback language expectations stay aligned with translation updates.
 
 Maintenance note: Update locale-fallback expectations here whenever default language behavior is adjusted.
+
+Operational note: Assert locale fallback remains stable when unknown locales are requested.
