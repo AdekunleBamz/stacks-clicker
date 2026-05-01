@@ -21,3 +21,5 @@ Companion index: [Operations docs](README.md).
 Operational note: Capture tx status, wallet prompt state, and explorer URL together when diagnosing failure reports.
 
 Operational note: Keep one known-good reference txid handy for regression comparisons.
+
+Quarterly follow-up: Refresh known failure signatures using recent production samples.
