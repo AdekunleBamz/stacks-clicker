@@ -18,3 +18,5 @@ Companion index: [Operations docs](README.md).
 Operational note: Include keyboard-only and screen-reader-only passes in every accessibility audit snapshot.
 
 Operational note: Capture screen-reader output snippets for critical checkout interactions.
+
+Quarterly follow-up: Revalidate keyboard-only completion for all primary transaction actions.
