@@ -8,3 +8,5 @@ Early validation reduces failed transactions and duplicate signing prompts.
 ### Follow-up
 - Verify recipient validation examples remain aligned with latest helper rules.
 - Recheck pasted-recipient whitespace trimming in manual sanity runs.
+
+Follow-up note: Validate recipient checksum handling for mixed-case wallet addresses.
