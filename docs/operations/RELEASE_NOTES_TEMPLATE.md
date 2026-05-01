@@ -15,3 +15,5 @@ Companion index: [Operations docs](README.md).
 - Add a short mitigation summary when releases include behavior-changing bug fixes.
 
 Operational note: Call out user-visible rollback impact explicitly in every release note draft.
+
+Operational note: Include one user-visible risk callout in every release note draft.
