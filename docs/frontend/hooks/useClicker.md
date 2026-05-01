@@ -21,3 +21,5 @@ Source file: `frontend/src/hooks/useClicker.js`.
 - Revalidate multi-click argument guards when contract input limits evolve.
 - Reconfirm multi-click upper-bound validation after contract-side cap adjustments.
 - Recheck cooldown assumptions when interaction throttling settings are tuned.
+
+Maintenance note: Keep click callback examples aligned with the latest optimistic-update behavior.
