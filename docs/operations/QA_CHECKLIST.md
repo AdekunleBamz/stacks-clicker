@@ -14,3 +14,5 @@
 
 ### QA Reminder
 - Include one wallet reconnect flow in every smoke cycle before approval.
+
+Operational note: Record timezone and test timestamp when capturing QA evidence for release signoff.
