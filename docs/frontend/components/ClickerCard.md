@@ -19,3 +19,5 @@ Keep button disabled/loading state tied to hook-level function keys.
 - Audit prompt: confirm displayed click costs still match runtime estimates.
 
 Maintenance note: Keep click-action state transitions documented when cooldown behavior is updated.
+
+Operational note: Validate score delta readability when rapid clicks trigger dense updates.
