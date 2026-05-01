@@ -10,3 +10,5 @@
 ### Follow-up
 - Rebaseline budget expectations when animation density changes across cards.
 - Capture one throttled-network run when updating performance budget assumptions.
+
+Follow-up note: Compare budget drift against the previous two release cycles.
