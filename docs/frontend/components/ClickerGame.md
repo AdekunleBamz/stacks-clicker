@@ -17,3 +17,5 @@ Treat this module as non-primary UI unless parity tests are updated.
 - Audit prompt: retest ping and click labels after wallet copy updates.
 
 Maintenance note: Retest ping-action copy and tooltip wording when network heartbeat semantics change.
+
+Operational note: Validate click animation fallback when GPU acceleration is unavailable.
