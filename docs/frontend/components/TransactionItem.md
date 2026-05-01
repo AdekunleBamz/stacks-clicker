@@ -16,3 +16,5 @@ Source file: `frontend/src/components/TransactionItem.jsx`.
 - Validate transaction status icon meaning when new states are added.
 - Confirm explorer links are hidden or disabled for entries without finalized transaction IDs.
 - Recheck transaction status badge copy for consistency with failure playbooks.
+
+Maintenance note: Keep status-icon accessibility notes aligned with any visual stepper updates.
