@@ -18,3 +18,5 @@ Prefer adding new cards through this layout to keep dashboard ordering explicit.
 - Keep heading and landmark order stable when rearranging cards for accessibility consistency.
 - Keep card ordering guidance in sync with product priority updates.
 - Audit prompt: verify priority card placement with updated product goals.
+
+Maintenance note: Revalidate section role and heading hierarchy after any main grid slot rearrangement.
