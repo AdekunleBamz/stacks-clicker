@@ -17,3 +17,5 @@ Exposed methods:
 - Keep expiry and validation notes aligned with current poll contract behavior.
 
 Maintenance note: Keep payload validation examples synchronized with current poll schema constraints.
+
+Operational note: Track poll expiration edge cases in integration testing notes.
