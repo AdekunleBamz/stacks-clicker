@@ -8,3 +8,5 @@ Unexpected audio playback hurts trust, especially on shared devices.
 ### Follow-up
 - Confirm default sound-toggle behavior remains stable across fresh sessions.
 - Reconfirm mute preference sync behavior between tabs when settings change.
+
+Follow-up note: Confirm sound toggle default survives hard refresh and new session start.
