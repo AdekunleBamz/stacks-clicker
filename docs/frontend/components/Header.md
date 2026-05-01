@@ -17,3 +17,5 @@ Props:
 - Audit prompt: review language fallback ordering before each release cut.
 
 Maintenance note: Keep header language and wallet-control behavior notes in sync with accessibility attributes.
+
+Operational note: Validate header action visibility at narrow mobile breakpoints.
