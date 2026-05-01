@@ -18,3 +18,5 @@ Current content is intentionally minimal and can be extended with:
 - Audit prompt: revalidate social link descriptions after branding refreshes.
 
 Maintenance note: Verify all social-link labels and titles together whenever footer links are edited.
+
+Operational note: Check footer external links after every docs URL update.
