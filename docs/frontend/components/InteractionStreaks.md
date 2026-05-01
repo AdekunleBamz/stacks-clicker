@@ -15,3 +15,5 @@ Milestones currently award:
 - Check large streak values for text wrapping so badges stay readable at high counts.
 - Check streak thresholds whenever reward pacing is tuned.
 - Audit prompt: compare streak thresholds against reward configuration updates.
+
+Maintenance note: Re-check streak badge labels whenever progression thresholds are recalibrated.
