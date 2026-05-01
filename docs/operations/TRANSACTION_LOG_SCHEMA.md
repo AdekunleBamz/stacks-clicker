@@ -16,3 +16,5 @@ Companion index: [Operations docs](README.md).
 
 ### Schema Reminder
 - Keep status enum values aligned with frontend badge mapping before release.
+
+Operational note: Keep `explorerUrl` nullable for pending records to avoid broken external links in UI clients.
