@@ -19,3 +19,5 @@ Source directory: `frontend/src/utils/`.
 - Keep utility index links current as helpers are added or renamed.
 
 Maintenance note: Keep utility examples synchronized with current import paths after any folder reshuffle.
+
+Operational note: Document utility side effects explicitly to prevent accidental misuse.
