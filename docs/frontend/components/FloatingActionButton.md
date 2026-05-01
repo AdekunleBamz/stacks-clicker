@@ -20,3 +20,5 @@ Source file: `frontend/src/components/FloatingActionButton.jsx`.
 - Audit prompt: align shortcut hints with the active FAB action order.
 
 Maintenance note: Verify focus order whenever floating action menu items are added or removed.
+
+Operational note: Verify floating button placement avoids overlap with wallet prompts.
