@@ -8,3 +8,5 @@ A clear baseline state lowers uncertainty for new users.
 ### Follow-up
 - Keep empty-state guidance aligned with current transaction filter defaults.
 - Reconfirm filtered-empty states explain why entries are hidden.
+
+Follow-up note: Verify empty-state guidance includes at least one immediate user action.
