@@ -16,3 +16,5 @@ Supported sound types:
 - Reconfirm autoplay fallback wording whenever browser policies shift.
 
 Maintenance note: List supported audio-failure fallback behavior for browsers that block autoplay.
+
+Operational note: Document autoplay fallback behavior for browsers blocking initial sound playback.
