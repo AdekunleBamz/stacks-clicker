@@ -12,3 +12,5 @@ Confirm copy success feedback is visible for keyboard-only users.
 
 - Revalidate copy hint content when address formatting rules evolve.
 - Keep manual copy fallback text available for restricted clipboard permissions.
+
+Operational note: Validate truncation rules preserve enough address context for support checks.
