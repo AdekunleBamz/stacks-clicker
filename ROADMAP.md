@@ -36,3 +36,5 @@ Our vision is to build the premier GameFi intersection for the Stacks ecosystem.
 
 ## Planning Note
 - Annotate roadmap items that require contract and frontend coordination.
+
+Operational note: Mark blocked roadmap items with dependencies and owner handoff status.
