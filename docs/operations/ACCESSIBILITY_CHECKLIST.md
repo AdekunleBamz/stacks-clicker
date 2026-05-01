@@ -16,3 +16,5 @@ Companion index: [Operations docs](README.md).
 - Verify live-region announcements are not duplicated during rapid status updates.
 
 Operational note: Include keyboard-only and screen-reader-only passes in every accessibility audit snapshot.
+
+Operational note: Capture screen-reader output snippets for critical checkout interactions.
