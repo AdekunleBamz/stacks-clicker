@@ -18,3 +18,5 @@ Treat missing provider state as disconnected and recover on next explicit connec
 - Confirm wallet provider capability notes match currently supported extensions.
 
 Maintenance note: Validate disconnect and reconnect state transitions after wallet-provider SDK updates.
+
+Operational note: Validate wallet context reset behavior after manual disconnect events.
