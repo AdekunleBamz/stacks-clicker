@@ -20,3 +20,5 @@ Source file: `frontend/src/utils/hash.js`.
 - Recheck hashing edge-case examples whenever truncation rules evolve.
 
 Maintenance note: Treat hash-output changes as breaking for persisted keys and include a migration note.
+
+Operational note: Confirm hash truncation output stays stable for support references.
