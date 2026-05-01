@@ -14,3 +14,5 @@ Companion index: [Operations docs](README.md).
 ### Smoke Reminder
 - Include at least one wallet connect-disconnect cycle in every frontend smoke run.
 - Include one hard-refresh cycle to catch stale-cache UI regressions.
+
+Operational note: Run the smoke checklist once under a throttled network profile to catch slow-path regressions.
