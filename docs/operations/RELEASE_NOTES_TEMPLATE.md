@@ -13,3 +13,5 @@ Companion index: [Operations docs](README.md).
 ### Template Reminder
 - Capture network, wallet, and contract versions in every release note draft.
 - Add a short mitigation summary when releases include behavior-changing bug fixes.
+
+Operational note: Call out user-visible rollback impact explicitly in every release note draft.
