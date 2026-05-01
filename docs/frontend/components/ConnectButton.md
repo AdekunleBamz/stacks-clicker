@@ -70,3 +70,5 @@ Source file: `frontend/src/components/ConnectButton.jsx`.
 - Audit prompt: check connect-button narration after locale additions.
 
 Maintenance note: Keep connect/disconnect button labels synchronized with busy-state accessibility copy.
+
+Operational note: Check loading text for connect actions under slow wallet handshakes.
