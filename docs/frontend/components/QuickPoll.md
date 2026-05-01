@@ -22,3 +22,5 @@ Source file: `frontend/src/components/QuickPoll.jsx`.
 - Audit prompt: align poll creation hints with latest validation boundaries.
 
 Maintenance note: Revisit vote fee copy if contract-side polling costs change.
+
+Operational note: Include expired poll behavior in manual regression runs.
