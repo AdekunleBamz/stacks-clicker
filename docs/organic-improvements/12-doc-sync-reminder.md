@@ -10,3 +10,5 @@
 ### Follow-up
 - Keep doc sync reminders linked to the latest release checklist revision.
 - Run a quarterly dead-link check across operations and frontend doc indexes.
+
+Follow-up note: Add links to merged docs PRs when this sync reminder is applied.
