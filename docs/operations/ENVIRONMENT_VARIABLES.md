@@ -15,10 +15,10 @@ Quick reference:
 | `VITE_COINGECKO_API_KEY` | No | Enables higher-limit price lookups |
 
 Before local startup:
-- verify required variables are present
-- confirm the selected network matches your wallet network
-- keep separate `.env` snapshots per network when switching frequently during QA
-- confirm wallet address and deployer address expectations are aligned for the chosen network
+- Verify required variables are present
+- Confirm the selected network matches your wallet network
+- Keep separate `.env` snapshots per network when switching frequently during QA
+- Confirm wallet address and deployer address expectations are aligned for the chosen network
 
 Keep secrets in local `.env` files and never commit sensitive values.
 Document new variables in `frontend/.env.example` as soon as they are introduced.
