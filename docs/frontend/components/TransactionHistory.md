@@ -14,3 +14,5 @@ Prefer locale-aware timestamp formatting so support logs align with user-reporte
 - Revalidate sorting and filtering defaults when history controls expand.
 - Recheck pagination and filtering interplay after history UI updates.
 - Verify explorer links and network fallbacks after every wallet flow update.
+
+Maintenance note: Reconfirm explorer-link formatting whenever network selection logic is touched.
