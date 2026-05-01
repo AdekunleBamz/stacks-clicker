@@ -18,3 +18,5 @@ Keep stat labels consistent with transaction history terminology.
 - Keep rounding rules consistent across cards so totals match transaction log expectations.
 - Revisit number formatting examples when telemetry units are updated.
 - Audit prompt: confirm stat units remain clear in all supported locales.
+
+Maintenance note: Reconcile stat-card labels with analytics events when metric definitions change.
