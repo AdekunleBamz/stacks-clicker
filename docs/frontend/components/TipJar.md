@@ -18,3 +18,5 @@ Keep recipient validation strict to avoid malformed address submissions.
 - Keep recipient address trimming and validation behavior aligned with wallet paste workflows.
 - Revalidate minimum tip guidance whenever on-chain fee assumptions change.
 - Audit prompt: verify minimum and preset tip copy for consistency.
+
+Maintenance note: Reconcile preset amount labels with current denomination helpers during tip UX changes.
