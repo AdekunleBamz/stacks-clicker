@@ -20,3 +20,5 @@ Companion index: [Operations docs](README.md).
 Operational note: Re-score risks after each production incident to keep probability and impact values current.
 
 Operational note: Add mitigation owner initials beside each newly logged risk.
+
+Quarterly follow-up: Retire mitigated risks so active items remain visible.
