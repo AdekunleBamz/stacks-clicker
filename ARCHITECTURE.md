@@ -39,3 +39,5 @@ The bridge between the frontend and the blockchain:
 - Recheck architecture diagrams after contract interface or provider changes.
 
 Operational note: Update architecture diagrams when contract and frontend event flows diverge.
+
+Quarterly follow-up: Confirm architecture narrative still reflects production data flow boundaries.
