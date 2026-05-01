@@ -13,3 +13,5 @@ Companion index: [Operations docs](README.md).
 ### Translation Reminder
 - Recheck placeholder parity whenever adding new wallet or transaction copy keys.
 - Verify punctuation and capitalization style stays consistent across locale variants.
+
+Operational note: Flag text that is intentionally untranslated so reviewers can distinguish it from missing locale keys.
