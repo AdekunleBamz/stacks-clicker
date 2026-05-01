@@ -16,3 +16,5 @@ Render fallbacks when `price` is unavailable instead of blocking interactions.
 - Revalidate stale data handling when refresh interval values are tuned.
 - Ensure stale-price indicators are shown before cached values drift too far.
 - Recheck staleness thresholds after changing refresh cadence or API providers.
+
+Maintenance note: Include stale-price handling expectations whenever polling intervals are revised.
