@@ -8,3 +8,5 @@ Incorrect links can hide successful transactions from users.
 ### Follow-up
 - Re-verify network query parameters in explorer links after env updates.
 - Keep fallback explorer host mapping documented for incident-mode troubleshooting.
+
+Follow-up note: Reconfirm explorer base URL mapping after network config edits.
