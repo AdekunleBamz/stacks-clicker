@@ -60,3 +60,5 @@ Companion index: [Operations docs](README.md).
 
 ### Deployment Reminder
 - Record the wallet address used for deployment in the release artifact notes.
+
+Operational note: Store the deployed artifact checksum in the deployment ticket for quick rollback verification.
