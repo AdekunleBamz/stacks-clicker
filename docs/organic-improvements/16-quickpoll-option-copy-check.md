@@ -8,3 +8,5 @@ Clear, compact option text improves vote quality and reduces accidental selectio
 ### Follow-up
 - Keep option copy checks aligned with i18n fallback coverage.
 - Revalidate option text wrapping at narrow mobile widths before poll rollouts.
+
+Follow-up note: Revisit copy constraints when locale expansion introduces longer strings.
