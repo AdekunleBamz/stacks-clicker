@@ -167,3 +167,5 @@ MIT License. See [LICENSE](LICENSE) for details.
 ---
 
 Operational note: Revisit this README after each release to keep setup and feature notes aligned.
+
+Quarterly follow-up: Review feature summary text against the latest shipped release.
