@@ -8,3 +8,5 @@ This reduces accidental duplicate confirmations in wallet popups.
 ### Follow-up
 - Validate double-submit guards after any form-state refactor.
 - Include keyboard-triggered submit paths when validating duplicate-vote prevention.
+
+Follow-up note: Validate double-submit guards under high-latency wallet confirmations.
