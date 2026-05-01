@@ -14,3 +14,5 @@ Companion index: [Operations docs](README.md).
 ### Scope Reminder
 - Note whether a limitation is testnet-only, mainnet-only, or shared across networks.
 - Link each limitation to a tracking issue or roadmap item when available.
+
+Operational note: For each listed limitation, add current mitigation status and owner during weekly review.
