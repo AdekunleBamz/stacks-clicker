@@ -10,11 +10,7 @@ Treat unknown network responses as degraded state instead of hard failure.
 
 ## Maintenance Note
 - Keep fallback-network handling guidance synced with wallet provider updates.
-
 - Reconfirm fallback network state behavior after polling logic updates.
-
 - Recheck polling fallback copy after network provider endpoint changes.
 - Reconfirm retry cadence does not overwhelm providers during prolonged outages.
-
-### Maintenance Note
 - Confirm network fallback behavior remains consistent with environment defaults.
