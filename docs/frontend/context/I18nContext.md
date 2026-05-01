@@ -18,3 +18,5 @@ Source file: `frontend/src/context/I18nContext.jsx`.
 - Reconfirm provider boundary assumptions when locale bootstrapping changes.
 - Revisit locale fallback strategy after adding a new default language.
 - Audit fallback keys whenever language packs are expanded.
+
+Maintenance note: Re-run locale persistence checks when storage-key names or language defaults are changed.
