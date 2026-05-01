@@ -11,10 +11,6 @@ Prefer locale-aware timestamp formatting so support logs align with user-reporte
 
 ## Maintenance Note
 - Re-check filter and sort behavior notes when history query defaults change.
-
 - Revalidate sorting and filtering defaults when history controls expand.
-
 - Recheck pagination and filtering interplay after history UI updates.
-
-### Maintenance Note
 - Verify explorer links and network fallbacks after every wallet flow update.
