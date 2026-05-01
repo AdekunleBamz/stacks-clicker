@@ -50,3 +50,5 @@ By contributing, you agree that your work will be licensed under the MIT License
 - Include the exact local verification command output in non-trivial PRs.
 
 Operational note: Encourage contributors to link evidence when updating operational runbooks.
+
+Quarterly follow-up: Reconfirm contributor workflow examples after tooling upgrades.
