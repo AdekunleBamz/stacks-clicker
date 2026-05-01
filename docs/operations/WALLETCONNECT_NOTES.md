@@ -15,3 +15,5 @@ Companion index: [Operations docs](README.md).
 - Recheck deep-link behavior on both iOS and Android wallet app flows.
 
 Operational note: Revalidate the WalletConnect project ID and redirect settings after rotating API credentials.
+
+Operational note: Record connector metadata when diagnosing WalletConnect handshake issues.
