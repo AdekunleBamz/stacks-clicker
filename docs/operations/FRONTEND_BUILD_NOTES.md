@@ -17,3 +17,5 @@ Companion index: [Operations docs](README.md).
 Operational note: Capture the exact Node and npm versions used when documenting build outcomes.
 
 Operational note: Save the build artifact checksum in release notes for reproducibility.
+
+Quarterly follow-up: Verify build output paths remain stable for deployment scripts.
