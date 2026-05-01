@@ -8,3 +8,5 @@ Clear recovery instructions reduce duplicate support tickets.
 ### Follow-up
 - Keep reconnect toast wording consistent with wallet status badges.
 - Recheck duplicate-toast suppression during repeated reconnect failures.
+
+Follow-up note: Confirm reconnect toast wording remains actionable on mobile widths.
