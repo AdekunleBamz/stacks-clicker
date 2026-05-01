@@ -10,3 +10,5 @@
 ### Follow-up
 - Confirm rollback notes include cache-bust and reconnect guidance.
 - Record rollback transaction IDs alongside the incident timeline for auditability.
+
+Follow-up note: Keep rollback verification steps synced with current contract set.
