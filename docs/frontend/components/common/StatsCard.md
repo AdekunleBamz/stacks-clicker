@@ -12,3 +12,5 @@ Avoid animating rapidly changing values to keep motion readable.
 
 - Revalidate unit suffixes whenever metric naming conventions are updated.
 - Verify non-finite values gracefully fall back instead of rendering raw `NaN` text.
+
+Operational note: Verify stat value alignment stays stable with large number magnitudes.
