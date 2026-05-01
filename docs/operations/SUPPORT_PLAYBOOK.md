@@ -17,3 +17,5 @@ Companion index: [Operations docs](README.md).
 Operational note: Include wallet type, network, and recent txid in the first support reply whenever available.
 
 Operational note: Save the first reproducible customer report link in the support timeline.
+
+Quarterly follow-up: Reconfirm support escalation timings in customer-facing templates.
