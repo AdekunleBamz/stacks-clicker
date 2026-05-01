@@ -20,3 +20,5 @@ Companion index: [Operations docs](README.md).
 Operational note: Repeat wallet-connect and transaction submission checks 10 minutes after deploy to catch delayed failures.
 
 Operational note: Record final block height after postdeploy smoke checks complete.
+
+Quarterly follow-up: Validate postdeploy smoke steps cover the newest wallet flows.
