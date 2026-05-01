@@ -12,3 +12,5 @@ Keep this overlay disabled in production builds to avoid noisy metrics output.
 
 - Keep telemetry labels stable to preserve dashboard comparison continuity.
 - Avoid exposing wallet or user-identifying values in developer metric overlays.
+
+Operational note: Ensure performance overlay can be disabled quickly during live demos.
