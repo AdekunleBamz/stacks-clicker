@@ -66,3 +66,5 @@ Source file: `frontend/src/components/TipJarCard.jsx`.
 - Audit prompt: retest custom amount validation wording with localized numbers.
 
 Maintenance note: Keep custom-amount validation notes tied to current minimum micro-STX constraints.
+
+Operational note: Ensure recipient and amount validation errors are not visually ambiguous.
