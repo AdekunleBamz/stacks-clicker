@@ -23,9 +23,6 @@ Behavior notes:
 
 Source file: `frontend/src/utils/walletconnect.js`.
 
-- Re-test session parsing notes after walletconnect protocol updates.
-
-- Recheck session namespace parsing rules when walletconnect upgrades land.
-
-### Maintenance Note
+- Re-test session parsing notes after WalletConnect protocol updates.
+- Recheck session namespace parsing rules when WalletConnect upgrades land.
 - Confirm WalletConnect setup examples track current dashboard field names.
