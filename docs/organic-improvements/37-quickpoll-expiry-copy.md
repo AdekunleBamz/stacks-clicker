@@ -8,3 +8,5 @@ Users make better choices when they understand remaining decision windows.
 ### Follow-up
 - Keep expiry copy synchronized with poll timeout constants.
 - Verify expiry text updates correctly after tab inactivity and resume.
+
+Follow-up note: Recheck expired-state copy tone after product messaging updates.
