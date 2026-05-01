@@ -16,3 +16,5 @@ Companion index: [Operations docs](README.md).
 
 ### Postdeploy Reminder
 - Verify explorer links from both transaction history and modal views after deployment.
+
+Operational note: Repeat wallet-connect and transaction submission checks 10 minutes after deploy to catch delayed failures.
