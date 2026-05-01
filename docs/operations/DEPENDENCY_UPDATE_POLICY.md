@@ -18,3 +18,5 @@ Companion index: [Operations docs](README.md).
 Operational note: Log dependency upgrade rollbacks in the weekly engineering summary for team visibility.
 
 Operational note: Document rollback trigger criteria when bumping major dependencies.
+
+Quarterly follow-up: Reconfirm package freeze windows before major release prep.
