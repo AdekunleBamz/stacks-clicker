@@ -13,3 +13,5 @@ Prefer status labels that map directly to your release checklist states.
 - Keep status legend definitions consistent with roadmap card badges.
 
 Maintenance note: Validate vote-count label formatting after roadmap status taxonomy changes.
+
+Operational note: Keep swimlane labels consistent with roadmap status definitions.
