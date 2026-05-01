@@ -165,3 +165,5 @@ When release timing is tight, prefer a brief smoke pass over skipping verificati
 MIT License. See [LICENSE](LICENSE) for details.
 
 ---
+
+Operational note: Revisit this README after each release to keep setup and feature notes aligned.
