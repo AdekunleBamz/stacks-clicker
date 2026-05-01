@@ -15,3 +15,5 @@ Respect reduced-motion preferences when tuning celebration animation intensity.
 ### Maintenance Note
 - Recheck celebration copy for reduced-motion fallback compatibility.
 - Audit prompt: confirm celebration fallback copy for reduced-motion users.
+
+Maintenance note: Keep celebration trigger thresholds documented alongside their corresponding visual intensity.
