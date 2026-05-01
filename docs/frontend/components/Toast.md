@@ -12,3 +12,5 @@ Include recovery hints for failures that users can immediately retry.
 - Recheck duplicate-toast suppression so repeated failures do not flood the UI.
 - Keep severity-to-live-region mappings aligned with current notification policy.
 - Audit prompt: confirm severity announcements still map to toast semantics.
+
+Maintenance note: Revisit toast priority and live-region text whenever severity ordering is updated.
