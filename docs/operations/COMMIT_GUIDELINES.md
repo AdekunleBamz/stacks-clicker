@@ -17,3 +17,5 @@ Companion index: [Operations docs](README.md).
 ### Signing Reminder
 - Double-check commit signature status locally before opening a release PR.
 - Add a short commit body when the change affects release or incident procedures.
+
+Operational note: Use imperative mood in commit subjects and reserve body lines for rationale when needed.
