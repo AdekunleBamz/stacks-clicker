@@ -11,3 +11,5 @@ Prefer status labels that map directly to your release checklist states.
 - Keep roadmap tag colors readable in both high and low contrast modes.
 - Include timezone context when showing target dates to avoid cross-region confusion.
 - Keep status legend definitions consistent with roadmap card badges.
+
+Maintenance note: Validate vote-count label formatting after roadmap status taxonomy changes.
