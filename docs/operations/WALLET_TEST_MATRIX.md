@@ -17,3 +17,5 @@ Companion index: [Operations docs](README.md).
 - Re-run private window checks after wallet extension updates.
 
 Operational note: Include wallet extension version and operating system in each matrix result row.
+
+Operational note: Note wallet app version for every matrix execution cycle.
