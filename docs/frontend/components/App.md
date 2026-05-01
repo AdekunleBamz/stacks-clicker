@@ -15,3 +15,5 @@ Keep global side effects centralized here to minimize prop drilling complexity.
 - Audit prompt: verify provider boundary notes when adding new global effects.
 
 Maintenance note: Reconcile this overview with route-level composition whenever top-level layout changes.
+
+Operational note: Revisit app-level provider ordering when adding new global state.
