@@ -14,3 +14,5 @@ Companion index: [Operations docs](README.md).
 
 ### Predeploy Reminder
 - Confirm the release branch is rebased against the latest signed main commit.
+
+Operational note: Confirm preview and production environment variables are both validated before giving deploy approval.
