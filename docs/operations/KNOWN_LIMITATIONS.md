@@ -16,3 +16,5 @@ Companion index: [Operations docs](README.md).
 - Link each limitation to a tracking issue or roadmap item when available.
 
 Operational note: For each listed limitation, add current mitigation status and owner during weekly review.
+
+Operational note: Note whether each limitation is user-facing or internal-only.
