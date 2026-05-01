@@ -17,8 +17,5 @@ Behavior notes:
 Source file: `frontend/src/utils/errors.js`.
 
 - Recheck error normalization examples when wallet or provider error shapes evolve.
-
 - Recheck mapped error examples when provider libraries change error text.
-
-### Maintenance Note
 - Sync error-code mappings with current on-chain contract responses.
