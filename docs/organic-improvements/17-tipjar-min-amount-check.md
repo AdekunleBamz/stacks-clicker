@@ -8,3 +8,5 @@ Consistent copy reduces failed submissions and duplicate retries.
 ### Follow-up
 - Recheck minimum tip guidance after fee model changes.
 - Verify min-amount helper copy matches both preset chips and custom input validation.
+
+Follow-up note: Add minimum amount checks for both fiat preview and raw token input.
