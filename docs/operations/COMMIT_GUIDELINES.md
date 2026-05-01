@@ -19,3 +19,5 @@ Companion index: [Operations docs](README.md).
 - Add a short commit body when the change affects release or incident procedures.
 
 Operational note: Use imperative mood in commit subjects and reserve body lines for rationale when needed.
+
+Operational note: Mention impacted area in commit body when scope is not obvious from title.
