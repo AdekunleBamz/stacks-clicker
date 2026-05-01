@@ -16,3 +16,5 @@ Current content is intentionally minimal and can be extended with:
 - Recheck legal text and contact links during quarterly policy reviews.
 - Verify community links and aria labels remain accurate after branding changes.
 - Audit prompt: revalidate social link descriptions after branding refreshes.
+
+Maintenance note: Verify all social-link labels and titles together whenever footer links are edited.
