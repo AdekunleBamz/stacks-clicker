@@ -11,3 +11,5 @@ Prefer this view for lightweight embeds where filters/export are unnecessary.
 - Reconfirm retention wording if log pruning behavior changes.
 - Distinguish local submit time from chain confirmation time when both are displayed.
 - Keep retention expectations aligned with transaction-log schema updates.
+
+Maintenance note: Re-check live-region wording after toast severity or ordering behavior changes.
