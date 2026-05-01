@@ -35,3 +35,5 @@ clarinet console
 - All contracts use **Clarity 2**.
 - NatSpec documentation is included for all public/read-only functions and data variables.
 - Keep frontend contract name references synchronized whenever active contract files change.
+
+Operational note: Reconfirm contract name mappings before publishing deployment artifacts.
