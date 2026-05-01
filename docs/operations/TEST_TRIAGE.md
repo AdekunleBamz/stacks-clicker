@@ -18,3 +18,5 @@ Companion index: [Operations docs](README.md).
 Operational note: Mark flaky tests with quarantine status and link the tracking issue before release cutoff.
 
 Operational note: Label flaky tests with first-seen date to track stability trends.
+
+Quarterly follow-up: Review flaky-test quarantine entries for stale suppressions.
