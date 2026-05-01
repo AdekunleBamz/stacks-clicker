@@ -14,3 +14,5 @@ Companion index: [Operations docs](README.md).
 
 ### Signal Reminder
 - Track API latency spikes alongside rate-limit warnings during incident triage.
+
+Operational note: When escalating logs, include correlation/request IDs to reduce back-and-forth during incident response.
