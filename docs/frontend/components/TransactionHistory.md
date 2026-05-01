@@ -16,3 +16,5 @@ Prefer locale-aware timestamp formatting so support logs align with user-reporte
 - Verify explorer links and network fallbacks after every wallet flow update.
 
 Maintenance note: Reconfirm explorer-link formatting whenever network selection logic is touched.
+
+Operational note: Validate empty-state guidance includes a next action for new users.
