@@ -14,3 +14,5 @@ Fallback behavior:
 - Capture a lightweight correlation ID in fallback copy when incidents require support follow-up.
 - Reconfirm retry behavior surfaces useful context after recoverable runtime failures.
 - Audit prompt: ensure retry affordance still clears stale error state.
+
+Maintenance note: Keep fallback error copy tested whenever boundary reset behavior changes.
