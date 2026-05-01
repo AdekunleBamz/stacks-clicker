@@ -8,3 +8,5 @@ Screen-reader users rely on these cues during long-running confirmations.
 ### Follow-up
 - Reconfirm aria-live announcements after notification copy revisions.
 - Re-test announcement ordering when multiple transaction updates arrive quickly.
+
+Follow-up note: Include aria-live announcement timing checks for rapid state transitions.
