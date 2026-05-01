@@ -84,3 +84,5 @@ Tip: Run one click transaction after setup to confirm wallet, network, and contr
 
 ### Setup Reminder
 - Reconfirm frontend env defaults after switching deployment targets.
+
+Operational note: Confirm Node and npm versions match the project defaults before onboarding.
