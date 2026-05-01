@@ -18,3 +18,5 @@ Companion index: [Operations docs](README.md).
 Operational note: Run the smoke checklist once under a throttled network profile to catch slow-path regressions.
 
 Operational note: Capture one low-bandwidth run in smoke evidence when possible.
+
+Quarterly follow-up: Add one wallet reconnect scenario to each smoke evidence bundle.
