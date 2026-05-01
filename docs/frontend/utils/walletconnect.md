@@ -26,3 +26,5 @@ Source file: `frontend/src/utils/walletconnect.js`.
 - Re-test session parsing notes after WalletConnect protocol updates.
 - Recheck session namespace parsing rules when WalletConnect upgrades land.
 - Confirm WalletConnect setup examples track current dashboard field names.
+
+Maintenance note: Re-test pairing deep links after wallet SDK upgrades and mobile OS updates.
