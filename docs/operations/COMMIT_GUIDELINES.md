@@ -21,3 +21,5 @@ Companion index: [Operations docs](README.md).
 Operational note: Use imperative mood in commit subjects and reserve body lines for rationale when needed.
 
 Operational note: Mention impacted area in commit body when scope is not obvious from title.
+
+Quarterly follow-up: Revisit commit examples so they match current repository conventions.
