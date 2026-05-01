@@ -10,3 +10,5 @@
 ### Follow-up
 - Keep release smoke ownership explicit for each verification step.
 - Capture one screenshot of each core flow success state for release evidence.
+
+Follow-up note: Keep one smoke run result from a clean browser profile.
