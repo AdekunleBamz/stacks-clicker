@@ -8,3 +8,5 @@ Fast recovery paths reduce abandonment after transient frontend faults.
 ### Follow-up
 - Recheck reset-path documentation after changing top-level error boundaries.
 - Verify reset flows preserve enough context for users to retry the failed action.
+
+Follow-up note: Confirm reset path preserves user context needed for quick recovery.
