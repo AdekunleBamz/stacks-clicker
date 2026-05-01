@@ -15,3 +15,5 @@ Prefer JSON-safe values to keep parsing and migration predictable.
 - Revisit key versioning notes whenever storage schema changes are introduced.
 
 Maintenance note: Re-check storage event caveats whenever browser support targets are updated.
+
+Operational note: Note migration handling when storage key shapes change.
