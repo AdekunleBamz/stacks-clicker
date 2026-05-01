@@ -84,3 +84,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - TipJar micro-tipping protocol.
 - Clicker streak mechanics.
 - Initial mainnet deployment plan.
+
+Maintenance note: Keep release links and dates synchronized with tags immediately after publishing.
