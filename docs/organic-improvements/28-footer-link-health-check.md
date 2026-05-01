@@ -8,3 +8,5 @@ Broken trust links disproportionately affect first-time users.
 ### Follow-up
 - Keep footer link health checks paired with accessibility label audits.
 - Reconfirm external footer links use safe target and rel attributes.
+
+Follow-up note: Run footer link checks with ad-blockers enabled to catch blocked URLs.
