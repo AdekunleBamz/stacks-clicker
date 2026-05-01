@@ -28,3 +28,5 @@ Source file: `frontend/src/utils/walletconnect.js`.
 - Confirm WalletConnect setup examples track current dashboard field names.
 
 Maintenance note: Re-test pairing deep links after wallet SDK upgrades and mobile OS updates.
+
+Operational note: Keep session expiry handling notes aligned with wallet provider updates.
