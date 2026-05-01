@@ -78,3 +78,5 @@ Source file: `frontend/src/components/QuickPollCard.jsx`.
 - Audit prompt: recheck toggle guidance with panel accessibility attributes.
 
 Maintenance note: Keep create-panel toggle semantics synchronized with aria-expanded/aria-controls behavior.
+
+Operational note: Verify poll option truncation still preserves decision-critical context.
