@@ -16,3 +16,5 @@ Source file: `frontend/src/tests/useLocalStorage.test.jsx`.
 - Recheck migration and malformed-event coverage when storage logic evolves.
 
 Maintenance note: Include malformed storage-event scenarios whenever browser event handling changes.
+
+Operational note: Validate malformed JSON recovery path in storage tests each quarter.
