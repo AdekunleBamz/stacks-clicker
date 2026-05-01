@@ -35,3 +35,5 @@ Please include:
 - Re-validate disclosure contact paths whenever maintainer ownership changes.
 
 Operational note: Include patch availability estimates in vulnerability triage updates.
+
+Quarterly follow-up: Validate security contact paths and response expectations are current.
