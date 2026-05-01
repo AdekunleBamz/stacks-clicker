@@ -13,11 +13,7 @@ Input guard:
 
 ## Maintenance Note
 - Update retry and rate-limit notes whenever tip submission behavior changes.
-
 - Recheck retry and cooldown guidance when tip submission backoff changes.
-
 - Recheck amount parsing edge cases after decimal precision rule changes.
 - Reconfirm zero and dust-value rejection paths after amount parser updates.
-
-### Maintenance Note
 - Verify tip retry guidance reflects current network rate-limit handling.
