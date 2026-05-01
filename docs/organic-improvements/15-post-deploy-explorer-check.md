@@ -8,3 +8,5 @@ This catches contract-name mismatches early before frontend traffic increases.
 ### Follow-up
 - Include explorer checks from both history list and modal detail views.
 - Confirm explorer links still resolve when transactions remain pending for extended periods.
+
+Follow-up note: Check explorer links on mobile wallets as well as desktop browsers.
