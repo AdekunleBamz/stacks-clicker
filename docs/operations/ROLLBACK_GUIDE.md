@@ -14,3 +14,5 @@ Companion index: [Operations docs](README.md).
 
 ### Rollback Reminder
 - Verify rollback instructions include cache-bust and wallet reconnect guidance.
+
+Operational note: After rollback completes, validate cache headers and trigger a CDN purge if stale bundles persist.
