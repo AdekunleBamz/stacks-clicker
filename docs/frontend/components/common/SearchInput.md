@@ -15,3 +15,5 @@ Keep placeholder text action-oriented to improve discoverability.
 
 - Recheck clear-button behavior when search debounce settings are changed.
 - Preserve caret position when search input formatting or normalization is applied.
+
+Operational note: Confirm search clear controls remain keyboard-accessible.
