@@ -8,3 +8,5 @@ This prevents repeated tours after reconnects and improves retention.
 ### Follow-up
 - Verify onboarding dismissal storage survives locale and theme switches.
 - Reconfirm persistence keys include network context when multiple environments are used.
+
+Follow-up note: Re-test skip persistence when onboarding steps are reordered.
