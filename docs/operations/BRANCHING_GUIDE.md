@@ -71,3 +71,5 @@ Companion index: [Operations docs](README.md).
 - Confirm hotfix branches are deleted after merge to reduce accidental reuse risk.
 
 Operational note: Sync with `origin/main` again right before opening any long-lived feature branch.
+
+Operational note: Confirm hotfix branches include incident reference in the PR body.
