@@ -1,14 +1,14 @@
 # Observability Notes
 
 Track these signals during runtime checks:
-- wallet connect success/cancel rates
-- transaction submission feedback accuracy
-- frontend error boundary trigger frequency
-- transaction confirmation latency from submit to on-chain success
-- upstream API rate-limit (`429`) frequency during peak interaction windows
-- compare runtime signals against a recent baseline window before escalating anomalies
-- monitor wallet reconnect success rate after browser refresh across supported wallets
-- watch for sudden drops in click submission success after wallet extension updates
+- WalletConnect success/cancel rates
+- Transaction submission feedback accuracy
+- Frontend error boundary trigger frequency
+- Transaction confirmation latency from submit to on-chain success
+- Upstream API rate-limit (`429`) frequency during peak interaction windows
+- Compare runtime signals against a recent baseline window before escalating anomalies
+- Monitor wallet reconnect success rate after browser refresh across supported wallets
+- Watch for sudden drops in click submission success after wallet extension updates
 
 Companion index: [Operations docs](README.md).
 
