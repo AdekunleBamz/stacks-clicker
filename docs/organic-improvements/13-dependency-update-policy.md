@@ -10,3 +10,5 @@
 ### Follow-up
 - Prioritize dependency updates that affect signing and wallet handshake code.
 - Include explicit changelog notes when updates alter wallet SDK behavior.
+
+Follow-up note: Record upgrade rollback commands before dependency bumps are merged.
