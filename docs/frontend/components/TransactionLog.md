@@ -13,3 +13,5 @@ Prefer this view for lightweight embeds where filters/export are unnecessary.
 - Keep retention expectations aligned with transaction-log schema updates.
 
 Maintenance note: Re-check live-region wording after toast severity or ordering behavior changes.
+
+Operational note: Capture pagination behavior evidence for wallets with long histories.
