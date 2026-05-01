@@ -14,3 +14,5 @@ Supported sound types:
 - Verify mute toggle behavior after browser autoplay policy updates.
 - Confirm suspended audio contexts are resumed or recreated safely after tab restores.
 - Reconfirm autoplay fallback wording whenever browser policies shift.
+
+Maintenance note: List supported audio-failure fallback behavior for browsers that block autoplay.
