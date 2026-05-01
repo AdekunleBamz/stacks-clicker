@@ -44,3 +44,5 @@ Project maintainers are responsible for clarifying and enforcing these standards
 ## Attribution
 
 This Code of Conduct is adapted from the [Contributor Covenant](https://www.contributor-covenant.org/), version 2.1.
+
+Operational note: Acknowledge conduct reports quickly and share expected response timing with reporters.
