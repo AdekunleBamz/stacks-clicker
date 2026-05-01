@@ -15,3 +15,5 @@ Treat this module as non-primary UI unless parity tests are updated.
 - Reconfirm fallback click controls still mirror primary clicker safety guards.
 - Validate ping and click action labels against the latest wallet flow wording.
 - Audit prompt: retest ping and click labels after wallet copy updates.
+
+Maintenance note: Retest ping-action copy and tooltip wording when network heartbeat semantics change.
