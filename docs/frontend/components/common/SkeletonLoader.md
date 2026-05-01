@@ -12,3 +12,5 @@ Match skeleton dimensions to final content to reduce layout shifts.
 
 - Keep placeholder animation speed within documented motion limits.
 - Confirm decorative skeletons stay `aria-hidden` so assistive tech focuses on real content.
+
+Operational note: Keep skeleton duration short enough to avoid perceived freeze on fast responses.
