@@ -10,3 +10,5 @@
 ### Follow-up
 - Recheck quickpoll smoke steps whenever poll payload validation changes.
 - Include one rapid repeat-vote attempt to confirm duplicate-submit protections.
+
+Follow-up note: Test with long option labels during every poll UI refresh.
