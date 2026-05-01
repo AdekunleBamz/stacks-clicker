@@ -8,3 +8,5 @@ Unaligned limits create false failure states and noisy support reports.
 ### Follow-up
 - Validate clicker rate-limit notes against current throttling constants.
 - Reconfirm retry-window values are consistent between backend responses and UI copy.
+
+Follow-up note: Measure false-positive rate when rate-limit thresholds are tuned.
