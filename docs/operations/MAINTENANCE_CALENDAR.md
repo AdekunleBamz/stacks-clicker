@@ -13,3 +13,5 @@ Companion index: [Operations docs](README.md).
 ### Calendar Reminder
 - Reserve time for wallet-extension compatibility checks before major releases.
 - Add a monthly release-notes draft rehearsal to keep communication cadence healthy.
+
+Operational note: Tag recurring maintenance tasks with cadence and owner to reduce orphaned backlog entries.
