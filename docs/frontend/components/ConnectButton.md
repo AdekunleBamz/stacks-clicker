@@ -47,7 +47,7 @@ interface ConnectButtonProps {
 - Adjust button size on mobile viewports
 - Show full address in tooltip on hover
 
-## Maintenance
+## Maintenance Note
 
 - Verify focus styles meet WCAG contrast requirements
 - Test wallet connection flow with multiple wallet types
@@ -65,9 +65,6 @@ Source file: `frontend/src/components/ConnectButton.jsx`.
 
 - Reconfirm mobile copy length whenever session-state labels are revised.
 - Reconfirm copy-to-clipboard failure fallback messaging for restricted browser contexts.
-
 - Reconfirm reconnect CTA copy remains consistent with support scripts.
-
-### Maintenance Note
 - Confirm connect and disconnect affordances remain keyboard and screen-reader friendly.
 - Audit prompt: check connect-button narration after locale additions.
