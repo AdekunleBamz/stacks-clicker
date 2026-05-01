@@ -15,3 +15,5 @@ Companion index: [Operations docs](README.md).
 - Verify punctuation and capitalization style stays consistent across locale variants.
 
 Operational note: Flag text that is intentionally untranslated so reviewers can distinguish it from missing locale keys.
+
+Operational note: Include fallback behavior examples when adding new localization keys.
