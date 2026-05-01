@@ -76,3 +76,5 @@ Source file: `frontend/src/components/QuickPollCard.jsx`.
 ### Maintenance Note
 - Verify toggle accessibility text stays aligned with expanded panel behavior.
 - Audit prompt: recheck toggle guidance with panel accessibility attributes.
+
+Maintenance note: Keep create-panel toggle semantics synchronized with aria-expanded/aria-controls behavior.
