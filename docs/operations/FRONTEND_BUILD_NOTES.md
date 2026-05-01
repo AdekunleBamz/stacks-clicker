@@ -15,3 +15,5 @@ Companion index: [Operations docs](README.md).
 - Record build artifact checksum or commit hash in release handoff notes.
 
 Operational note: Capture the exact Node and npm versions used when documenting build outcomes.
+
+Operational note: Save the build artifact checksum in release notes for reproducibility.
