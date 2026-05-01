@@ -20,3 +20,5 @@ Source file: `frontend/src/context/I18nContext.jsx`.
 - Audit fallback keys whenever language packs are expanded.
 
 Maintenance note: Re-run locale persistence checks when storage-key names or language defaults are changed.
+
+Operational note: Include fallback key audit results when locale packs change.
