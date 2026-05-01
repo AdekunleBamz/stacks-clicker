@@ -17,3 +17,5 @@
 Operational note: Confirm dependency advisories were reviewed within the last 30 days before final security signoff.
 
 Operational note: Note who validated key rotation status during security review.
+
+Quarterly follow-up: Verify security checklist references current dependency scan tooling.
