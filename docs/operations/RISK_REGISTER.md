@@ -18,3 +18,5 @@ Companion index: [Operations docs](README.md).
 - Include a simple likelihood/severity score to prioritize mitigation work.
 
 Operational note: Re-score risks after each production incident to keep probability and impact values current.
+
+Operational note: Add mitigation owner initials beside each newly logged risk.
