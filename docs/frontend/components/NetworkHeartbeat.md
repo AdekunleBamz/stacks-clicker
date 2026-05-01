@@ -15,3 +15,5 @@ Avoid flashing animations during reconnect loops to reduce visual noise.
 ### Maintenance Note
 - Validate heartbeat status copy against current API fallback behavior.
 - Audit prompt: recheck heartbeat badge wording during API outage drills.
+
+Maintenance note: Keep heartbeat tooltip and status title wording consistent across idle and active states.
