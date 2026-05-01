@@ -16,3 +16,5 @@ Keep external support links reviewed to avoid stale destinations.
 - Re-test shortcut discoverability when action grouping changes.
 - Keep quick action labels aligned with shortcut behavior and disable states.
 - Audit prompt: verify disabled-state messaging across quick action entries.
+
+Maintenance note: Keep quick-action item labels synchronized with keyboard shortcut and tooltip text.
