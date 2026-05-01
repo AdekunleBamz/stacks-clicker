@@ -37,3 +37,5 @@ The bridge between the frontend and the blockchain:
 
 ## Diagram Hygiene
 - Recheck architecture diagrams after contract interface or provider changes.
+
+Operational note: Update architecture diagrams when contract and frontend event flows diverge.
