@@ -21,3 +21,5 @@ Source file: `frontend/src/utils/errors.js`.
 - Sync error-code mappings with current on-chain contract responses.
 
 Maintenance note: Add new error code mappings with a user-facing message and a likely root-cause hint.
+
+Operational note: Map recurring wallet errors to user-friendly fallback guidance.
