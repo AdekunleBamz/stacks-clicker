@@ -20,3 +20,5 @@ Keep stat labels consistent with transaction history terminology.
 - Audit prompt: confirm stat units remain clear in all supported locales.
 
 Maintenance note: Reconcile stat-card labels with analytics events when metric definitions change.
+
+Operational note: Confirm stat labels remain understandable without icon context.
