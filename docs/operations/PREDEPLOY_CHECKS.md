@@ -16,3 +16,5 @@ Companion index: [Operations docs](README.md).
 - Confirm the release branch is rebased against the latest signed main commit.
 
 Operational note: Confirm preview and production environment variables are both validated before giving deploy approval.
+
+Operational note: Keep a fallback wallet funded before predeploy validation starts.
