@@ -16,3 +16,5 @@ Companion index: [Operations docs](README.md).
 - Record retry count used during triage so flake frequency is measurable.
 
 Operational note: Mark flaky tests with quarantine status and link the tracking issue before release cutoff.
+
+Operational note: Label flaky tests with first-seen date to track stability trends.
