@@ -14,3 +14,5 @@ Source file: `frontend/src/components/common/ParticleOverlay.jsx`.
 
 - Re-run particle performance checks after introducing additional overlay layers.
 - Reconfirm reduced-motion behavior can disable particle bursts when user preference is set.
+
+Operational note: Gate heavy particle effects behind performance and motion preferences.
