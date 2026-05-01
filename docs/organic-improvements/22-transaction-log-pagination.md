@@ -8,3 +8,5 @@ Progressive pagination keeps historical visibility without blocking core actions
 ### Follow-up
 - Recheck pagination defaults when tx history retention limits are adjusted.
 - Revalidate pagination reset behavior after filter or network changes.
+
+Follow-up note: Test pagination controls with keyboard-only navigation in long histories.
