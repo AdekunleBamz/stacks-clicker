@@ -15,3 +15,5 @@ Companion index: [Operations docs](README.md).
 - Add a monthly release-notes draft rehearsal to keep communication cadence healthy.
 
 Operational note: Tag recurring maintenance tasks with cadence and owner to reduce orphaned backlog entries.
+
+Operational note: Reserve one slot each month for dependency health verification.
