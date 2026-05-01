@@ -49,3 +49,5 @@ Complete all items before and during a release to ensure quality and traceabilit
 - Attach verifier output for local checks in the release handoff notes.
 
 Operational note: Require a named owner for each unchecked release item before the go/no-go meeting.
+
+Operational note: Add the release operator timezone beside handoff timestamps.
