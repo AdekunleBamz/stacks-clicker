@@ -12,3 +12,5 @@
 - Re-test QR fallback actions after WalletConnect modal style updates.
 - Keep deep-link fallback visible when camera scanning is unavailable or blocked.
 - Re-verify modal focus behavior after wallet connector SDK upgrades.
+
+Maintenance note: Reconfirm mobile deep-link behavior after WalletConnect package or browser updates.
