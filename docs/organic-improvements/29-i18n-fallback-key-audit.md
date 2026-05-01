@@ -8,3 +8,5 @@ Silent fallback gaps can hide production copy regressions.
 ### Follow-up
 - Reconfirm fallback key coverage after each translation expansion.
 - Verify fallback-log sampling does not leak sensitive runtime context.
+
+Follow-up note: Include fallback key screenshots in localization review evidence.
