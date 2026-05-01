@@ -73,3 +73,5 @@ Companion index: [Operations docs](README.md).
 Operational note: Sync with `origin/main` again right before opening any long-lived feature branch.
 
 Operational note: Confirm hotfix branches include incident reference in the PR body.
+
+Quarterly follow-up: Ensure branch naming examples reflect current release train language.
