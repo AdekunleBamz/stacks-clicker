@@ -51,3 +51,5 @@ Complete all items before and during a release to ensure quality and traceabilit
 Operational note: Require a named owner for each unchecked release item before the go/no-go meeting.
 
 Operational note: Add the release operator timezone beside handoff timestamps.
+
+Quarterly follow-up: Ensure release gate owners are current for all checklist sections.
