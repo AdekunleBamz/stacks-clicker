@@ -14,3 +14,5 @@ Include recovery hints for failures that users can immediately retry.
 - Audit prompt: confirm severity announcements still map to toast semantics.
 
 Maintenance note: Revisit toast priority and live-region text whenever severity ordering is updated.
+
+Operational note: Verify toast dismissal timing in reduced-motion mode.
