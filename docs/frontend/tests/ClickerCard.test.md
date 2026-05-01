@@ -14,3 +14,5 @@ Checks:
 - Recheck cooldown assertions when click throttling configuration changes.
 
 Maintenance note: Keep button-state assertions updated when loading or disabled semantics are adjusted.
+
+Operational note: Revalidate click burst expectations after score multiplier changes.
