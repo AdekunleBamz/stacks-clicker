@@ -19,3 +19,5 @@
 Operational note: Back-merge hotfix commits into active release branches within the same working day.
 
 Operational note: Include rollback command draft in every hotfix PR before merge.
+
+Quarterly follow-up: Reconfirm hotfix approval contacts before each release window.
