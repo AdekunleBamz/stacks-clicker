@@ -15,3 +15,5 @@ Exposed methods:
 - Reconfirm default option validation when poll form constraints shift.
 - Recheck poll ID coercion safeguards to avoid submitting malformed vote payloads.
 - Keep expiry and validation notes aligned with current poll contract behavior.
+
+Maintenance note: Keep payload validation examples synchronized with current poll schema constraints.
