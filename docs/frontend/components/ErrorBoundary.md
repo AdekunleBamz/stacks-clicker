@@ -16,3 +16,5 @@ Fallback behavior:
 - Audit prompt: ensure retry affordance still clears stale error state.
 
 Maintenance note: Keep fallback error copy tested whenever boundary reset behavior changes.
+
+Operational note: Confirm retry path messaging is visible after boundary resets.
