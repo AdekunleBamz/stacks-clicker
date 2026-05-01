@@ -64,3 +64,5 @@ Companion index: [Operations docs](README.md).
 Operational note: Store the deployed artifact checksum in the deployment ticket for quick rollback verification.
 
 Operational note: Document which environment secret bundle was used for each deployment pass.
+
+Quarterly follow-up: Confirm deployment flow diagrams still match live automation.
