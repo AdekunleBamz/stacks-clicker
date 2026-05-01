@@ -12,3 +12,5 @@ Keep reveal threshold high enough to avoid showing the button on minor scrolls.
 
 - Reconfirm scroll trigger offsets after major page layout changes.
 - Recheck smooth-scroll behavior against reduced-motion user preferences.
+
+Operational note: Verify scroll restore behavior after modal close and route changes.
