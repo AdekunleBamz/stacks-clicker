@@ -8,3 +8,5 @@ Users should receive immediate confirmation even before final chain settlement.
 ### Follow-up
 - Re-run feedback latency checks after animation timing adjustments.
 - Capture p95 feedback latency alongside averages to detect intermittent lag.
+
+Follow-up note: Sample feedback latency during peak click traffic windows.
