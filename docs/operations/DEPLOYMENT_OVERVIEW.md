@@ -62,3 +62,5 @@ Companion index: [Operations docs](README.md).
 - Record the wallet address used for deployment in the release artifact notes.
 
 Operational note: Store the deployed artifact checksum in the deployment ticket for quick rollback verification.
+
+Operational note: Document which environment secret bundle was used for each deployment pass.
