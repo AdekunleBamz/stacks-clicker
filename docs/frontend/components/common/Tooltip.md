@@ -12,3 +12,5 @@ Keep tooltip content short enough to avoid obscuring nearby controls.
 
 - Reconfirm tooltip portal stacking order when modal layering changes.
 - Re-test tooltip discoverability on touch devices where hover is unavailable.
+
+Operational note: Ensure tooltip content stays readable at 200 percent browser zoom.
