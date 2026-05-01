@@ -11,13 +11,10 @@ It composes:
 Expected props include wallet address, aggregate stats, and the three hook APIs (`clicker`, `tipjar`, `quickpoll`).
 Prefer adding new cards through this layout to keep dashboard ordering explicit.
 
+## Maintenance Note
 - Add new interaction cards here in a predictable order to keep keyboard navigation consistent.
-
 - Revalidate card order assumptions before introducing new primary dashboard tiles.
-
 - Recheck responsive breakpoints after introducing additional dashboard widgets.
 - Keep heading and landmark order stable when rearranging cards for accessibility consistency.
-
-### Maintenance Note
 - Keep card ordering guidance in sync with product priority updates.
 - Audit prompt: verify priority card placement with updated product goals.
