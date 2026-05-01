@@ -13,3 +13,5 @@ Companion index: [Operations docs](README.md).
 ### Intake Reminder
 - Capture wallet extension version and active network whenever a report mentions transaction failure.
 - Ask for approximate timestamp and timezone to improve incident correlation speed.
+
+Operational note: Ask reporters for expected behavior and observed behavior as separate fields to speed triage.
