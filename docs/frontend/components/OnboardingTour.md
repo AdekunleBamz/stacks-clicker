@@ -20,3 +20,5 @@ Source file: `frontend/src/components/OnboardingTour.jsx`.
 - Audit prompt: retest dismissal persistence across storage migration changes.
 
 Maintenance note: Re-test skip action behavior when onboarding step order or modal focus handling changes.
+
+Operational note: Confirm onboarding skip preference persists across full reloads.
