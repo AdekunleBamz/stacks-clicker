@@ -18,3 +18,5 @@ Companion index: [Operations docs](README.md).
 Operational note: Ask reviewers to call out missing tests explicitly in approval comments when accepting risk.
 
 Operational note: Call out any migration or data-shape assumptions in review summaries.
+
+Quarterly follow-up: Recheck review checklist examples against recent production incidents.
