@@ -8,3 +8,5 @@ Visibility into throttle windows improves incident triage quality.
 ### Follow-up
 - Keep rate-limit observability fields aligned with dashboard alert labels.
 - Reconfirm alert thresholds are documented with provider-specific reset windows.
+
+Follow-up note: Track rate-limit header changes from upstream providers.
