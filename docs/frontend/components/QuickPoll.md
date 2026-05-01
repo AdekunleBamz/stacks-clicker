@@ -1,10 +1,10 @@
 # QuickPoll
 
 `QuickPoll.jsx` is a legacy poll interaction card with:
-- poll creation
-- quick yes/no voting
-- poll-id targeted votes
-- poll ping
+- Poll creation
+- Quick yes/no voting
+- Poll-id targeted votes
+- Poll ping
 
 This module can serve as a reference implementation for direct contract-call UIs.
 Prefer `QuickPollCard` in production-facing layouts to reduce duplicated logic.
@@ -14,11 +14,9 @@ Prefer `QuickPollCard` in production-facing layouts to reduce duplicated logic.
 
 Source file: `frontend/src/components/QuickPoll.jsx`.
 
+## Maintenance Note
 - Revalidate default poll expiry copy when contract defaults evolve.
-
 - Reconfirm vote status messaging after introducing new poll states.
 - Disable poll creation controls while submit transactions are pending to prevent duplicate polls.
-
-### Maintenance Note
 - Recheck vote and create-poll copy after contract validation rule updates.
 - Audit prompt: align poll creation hints with latest validation boundaries.
