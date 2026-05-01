@@ -52,3 +52,5 @@ Companion index: [Operations docs](README.md).
 ### Setup Reminder
 - Re-run installation checks with npm ci after lockfile updates to isolate env drift.
 - Capture active shell and package manager details when setup issues are inconsistent.
+
+Operational note: If setup fails after dependency install, suggest clearing lockfile cache before full reinstall.
