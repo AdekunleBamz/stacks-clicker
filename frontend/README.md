@@ -44,3 +44,5 @@ npm run test
 ## 📝 Standards
 - **JSDoc**: Every component and utility function is documented with JSDoc.
 - **Linting**: ESLint and Prettier are configured for code consistency.
+
+Operational note: Verify frontend environment variable docs before each release candidate.
