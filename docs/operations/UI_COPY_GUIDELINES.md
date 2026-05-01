@@ -17,3 +17,5 @@ Companion index: [Operations docs](README.md).
 Operational note: Keep confirmation and error copy parallel in tone so state changes feel predictable to users.
 
 Operational note: Keep error copy actionable with one clear next step per message.
+
+Quarterly follow-up: Audit critical error copy against current support playbook wording.
