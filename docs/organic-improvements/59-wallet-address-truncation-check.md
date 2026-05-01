@@ -8,3 +8,5 @@ Over-truncated addresses make account confirmation harder.
 ### Follow-up
 - Revalidate truncation format examples when wallet display rules change.
 - Verify full-address tooltip and copy actions remain available after truncation updates.
+
+Follow-up note: Confirm truncation still keeps distinct wallet prefixes and suffixes visible.
