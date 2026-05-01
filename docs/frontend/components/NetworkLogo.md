@@ -12,3 +12,5 @@ Provide descriptive `alt` text when this component is wrapped in an image tag.
 - Preserve explicit logo dimensions to avoid layout shift during header hydration.
 - Confirm network logo source and sizing stay aligned with active branding assets.
 - Audit prompt: verify logo asset dimensions after icon pack updates.
+
+Maintenance note: Re-check decorative logo semantics whenever iconography or branding assets are swapped.
