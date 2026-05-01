@@ -14,3 +14,5 @@ Companion index: [Operations docs](README.md).
 ### Maintenance Reminder
 - Confirm skip-link and modal focus checks are still part of every release smoke pass.
 - Verify live-region announcements are not duplicated during rapid status updates.
+
+Operational note: Include keyboard-only and screen-reader-only passes in every accessibility audit snapshot.
