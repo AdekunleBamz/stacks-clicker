@@ -20,3 +20,5 @@ Prefer adding new cards through this layout to keep dashboard ordering explicit.
 - Audit prompt: verify priority card placement with updated product goals.
 
 Maintenance note: Revalidate section role and heading hierarchy after any main grid slot rearrangement.
+
+Operational note: Verify grid collapse order for keyboard navigation on tablets.
