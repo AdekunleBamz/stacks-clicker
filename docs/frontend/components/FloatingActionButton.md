@@ -18,3 +18,5 @@ Source file: `frontend/src/components/FloatingActionButton.jsx`.
 - Verify bottom offset accounts for safe-area insets on modern mobile devices.
 - Ensure FAB shortcuts stay in sync with the visible action labels.
 - Audit prompt: align shortcut hints with the active FAB action order.
+
+Maintenance note: Verify focus order whenever floating action menu items are added or removed.
