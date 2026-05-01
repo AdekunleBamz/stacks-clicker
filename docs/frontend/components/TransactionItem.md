@@ -18,3 +18,5 @@ Source file: `frontend/src/components/TransactionItem.jsx`.
 - Recheck transaction status badge copy for consistency with failure playbooks.
 
 Maintenance note: Keep status-icon accessibility notes aligned with any visual stepper updates.
+
+Operational note: Keep timestamp format consistent with transaction log exports.
