@@ -8,3 +8,5 @@ This prevents mismatch between deployed code and announced release content.
 ### Follow-up
 - Include signed-tag verification output in release handoff notes.
 - Confirm release notes reference the same tag and commit hash shown in CI artifacts.
+
+Follow-up note: Verify release tag points to the same commit as deployment metadata.
