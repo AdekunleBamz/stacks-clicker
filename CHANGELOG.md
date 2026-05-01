@@ -86,3 +86,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial mainnet deployment plan.
 
 Maintenance note: Keep release links and dates synchronized with tags immediately after publishing.
+
+Quarterly follow-up: Ensure changelog links still resolve after repository reorganizations.
