@@ -18,3 +18,5 @@ This folder contains focused references for frontend components, hooks, and cont
 
 ### Navigation Reminder
 - Keep this index updated when adding new component or hook documentation pages.
+
+Maintenance note: Revisit this frontend index when component ownership changes so newcomer onboarding stays accurate.
