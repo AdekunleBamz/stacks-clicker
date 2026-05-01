@@ -8,3 +8,5 @@ Skeletons that disappear too early can cause visual flicker and distrust.
 ### Follow-up
 - Recheck skeleton timing targets when loading behavior is adjusted.
 - Verify skeleton removal is tied to data readiness, not fixed delay-only timers.
+
+Follow-up note: Reassess skeleton duration when backend latency materially improves.
