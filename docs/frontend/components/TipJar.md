@@ -20,3 +20,5 @@ Keep recipient validation strict to avoid malformed address submissions.
 - Audit prompt: verify minimum and preset tip copy for consistency.
 
 Maintenance note: Reconcile preset amount labels with current denomination helpers during tip UX changes.
+
+Operational note: Cross-check default tip amount copy against current product messaging.
