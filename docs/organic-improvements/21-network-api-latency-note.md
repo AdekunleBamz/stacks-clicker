@@ -8,3 +8,5 @@ Increased latency often appears as spinner loops before outright request failure
 ### Follow-up
 - Capture latency samples from multiple regions before updating baseline guidance.
 - Track both median and p95 latency so transient spikes are not missed.
+
+Follow-up note: Include API latency baselines by region for trend comparisons.
