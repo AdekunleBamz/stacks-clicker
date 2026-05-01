@@ -68,3 +68,5 @@ Source file: `frontend/src/components/ConnectButton.jsx`.
 - Reconfirm reconnect CTA copy remains consistent with support scripts.
 - Confirm connect and disconnect affordances remain keyboard and screen-reader friendly.
 - Audit prompt: check connect-button narration after locale additions.
+
+Maintenance note: Keep connect/disconnect button labels synchronized with busy-state accessibility copy.
