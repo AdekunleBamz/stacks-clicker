@@ -18,3 +18,5 @@ Companion index: [Operations docs](README.md).
 Operational note: Record browser version and device profile with every captured performance run.
 
 Operational note: Include device model for every performance baseline capture.
+
+Quarterly follow-up: Rebaseline performance checks after frontend dependency upgrades.
