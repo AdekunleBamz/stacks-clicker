@@ -18,3 +18,5 @@ Source file: `frontend/src/components/OnboardingTour.jsx`.
 - Verify local-storage write failures do not trap users in repeated onboarding loops.
 - Verify dismissal persistence still works after onboarding flow updates.
 - Audit prompt: retest dismissal persistence across storage migration changes.
+
+Maintenance note: Re-test skip action behavior when onboarding step order or modal focus handling changes.
