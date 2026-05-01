@@ -17,3 +17,5 @@
 - Always attach the first failing transaction hash when opening an incident channel thread.
 
 Operational note: Timebox incident timeline updates to 15-minute intervals while the issue is active.
+
+Operational note: Mark when customer-facing updates were posted during incident response.
