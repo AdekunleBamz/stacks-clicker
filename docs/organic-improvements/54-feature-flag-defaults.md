@@ -8,3 +8,5 @@ Unexpected default flips can alter production behavior silently.
 ### Follow-up
 - Recheck default flag values before each production deploy window.
 - Track owning team for each flag so default changes have clear accountability.
+
+Follow-up note: Recheck feature flag defaults after every environment bootstrapping change.
