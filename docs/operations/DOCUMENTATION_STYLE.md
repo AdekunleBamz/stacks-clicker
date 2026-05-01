@@ -15,3 +15,5 @@
 - Use explicit dates in incident docs to avoid ambiguity around relative time wording.
 
 Operational note: Prefer action-first verbs in checklist bullets to keep maintenance steps unambiguous.
+
+Operational note: Prefer active voice in runbooks so action ownership is unambiguous.
