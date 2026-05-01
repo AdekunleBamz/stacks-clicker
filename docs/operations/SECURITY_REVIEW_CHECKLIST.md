@@ -13,3 +13,5 @@
 ### Security Reminder
 - Include wallet connector dependencies in each quarterly security review pass.
 - Recheck expiration dates for any accepted vulnerability exceptions.
+
+Operational note: Confirm dependency advisories were reviewed within the last 30 days before final security signoff.
