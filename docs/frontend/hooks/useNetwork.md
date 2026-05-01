@@ -16,3 +16,5 @@ Treat unknown network responses as degraded state instead of hard failure.
 - Confirm network fallback behavior remains consistent with environment defaults.
 
 Maintenance note: Document fallback RPC behavior whenever network probe logic is adjusted.
+
+Operational note: Log fallback endpoint usage during network degradation drills.
