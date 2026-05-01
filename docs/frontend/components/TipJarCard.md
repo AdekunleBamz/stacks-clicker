@@ -64,3 +64,5 @@ Source file: `frontend/src/components/TipJarCard.jsx`.
 - Reconfirm inline validation timing after custom input behavior changes.
 - Confirm preset and custom tip affordances share consistent validation messaging.
 - Audit prompt: retest custom amount validation wording with localized numbers.
+
+Maintenance note: Keep custom-amount validation notes tied to current minimum micro-STX constraints.
