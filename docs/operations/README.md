@@ -30,3 +30,5 @@ Use relative links when adding new references so docs stay portable across branc
 
 ### Index Reminder
 - Update this index whenever a new operations runbook is added or renamed.
+
+Operational note: Review this index after major reorganizations so navigation links stay current for new contributors.
