@@ -13,3 +13,5 @@ Prefer JSON-safe values to keep parsing and migration predictable.
 - Keep migration notes updated when stored value shapes are expanded.
 - Recheck quota-exceeded fallback handling to avoid hard failures on write.
 - Revisit key versioning notes whenever storage schema changes are introduced.
+
+Maintenance note: Re-check storage event caveats whenever browser support targets are updated.
