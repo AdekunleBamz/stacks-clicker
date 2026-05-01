@@ -14,3 +14,5 @@ Covers:
 - Confirm reconnect-path assertions after wallet provider dependency upgrades.
 
 Maintenance note: Re-check provider-mock setup when wallet session behavior changes.
+
+Operational note: Recheck disconnect cleanup assertions when wallet SDK is upgraded.
