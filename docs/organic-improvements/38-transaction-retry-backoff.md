@@ -8,3 +8,5 @@ Aggressive immediate retries can amplify provider throttling.
 ### Follow-up
 - Revalidate retry backoff guidance after network policy changes.
 - Confirm retry strategy includes a maximum-attempt cap to avoid infinite loops.
+
+Follow-up note: Track retry backoff behavior when mobile network switches between wifi and cellular.
