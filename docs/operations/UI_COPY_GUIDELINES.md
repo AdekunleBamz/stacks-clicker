@@ -15,3 +15,5 @@ Companion index: [Operations docs](README.md).
 - Keep failure messages neutral and action-oriented without blaming user behavior.
 
 Operational note: Keep confirmation and error copy parallel in tone so state changes feel predictable to users.
+
+Operational note: Keep error copy actionable with one clear next step per message.
