@@ -10,3 +10,5 @@
 ### Follow-up
 - Recheck third-party key storage assumptions during security reviews.
 - Confirm secret scanning covers newly added configuration and docs files.
+
+Follow-up note: Confirm security checklist ownership rotates without gaps.
