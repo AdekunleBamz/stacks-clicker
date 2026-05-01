@@ -15,3 +15,5 @@ Companion index: [Operations docs](README.md).
 - Request one screenshot of the visible error state before escalation when possible.
 
 Operational note: Include wallet type, network, and recent txid in the first support reply whenever available.
+
+Operational note: Save the first reproducible customer report link in the support timeline.
