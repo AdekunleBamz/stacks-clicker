@@ -56,3 +56,5 @@ Companion index: [Operations docs](README.md).
 Operational note: If setup fails after dependency install, suggest clearing lockfile cache before full reinstall.
 
 Operational note: Document OS and shell when adding new troubleshooting entries.
+
+Quarterly follow-up: Archive resolved troubleshooting entries to keep this guide focused.
