@@ -12,3 +12,5 @@ Avoid embedding unrelated layout concerns so this wrapper stays reusable.
 
 - Recheck heading hierarchy whenever new action card slots are introduced.
 - Keep empty and populated card states on matching padding to reduce layout jitter.
+
+Operational note: Confirm action card headings remain concise on small screens.
