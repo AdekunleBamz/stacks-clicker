@@ -32,3 +32,5 @@ Use relative links when adding new references so docs stay portable across branc
 - Update this index whenever a new operations runbook is added or renamed.
 
 Operational note: Review this index after major reorganizations so navigation links stay current for new contributors.
+
+Operational note: Assign a rotating owner for quarterly runbook freshness reviews.
