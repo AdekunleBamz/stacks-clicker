@@ -15,3 +15,5 @@ Companion index: [Operations docs](README.md).
 - Include rollout date in ISO format for entries tied to incident or hotfix work.
 
 Operational note: Keep changelog entries aligned with the merge date, not the first commit date, for release accuracy.
+
+Operational note: Link the merged PR in each changelog entry for audit traceability.
