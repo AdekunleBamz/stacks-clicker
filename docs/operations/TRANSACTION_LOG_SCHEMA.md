@@ -18,3 +18,5 @@ Companion index: [Operations docs](README.md).
 - Keep status enum values aligned with frontend badge mapping before release.
 
 Operational note: Keep `explorerUrl` nullable for pending records to avoid broken external links in UI clients.
+
+Operational note: Keep field naming consistent with exported CSV headers to reduce parsing errors.
