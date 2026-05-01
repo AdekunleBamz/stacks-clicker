@@ -16,3 +16,5 @@ Companion index: [Operations docs](README.md).
 - Include one hard-refresh cycle to catch stale-cache UI regressions.
 
 Operational note: Run the smoke checklist once under a throttled network profile to catch slow-path regressions.
+
+Operational note: Capture one low-bandwidth run in smoke evidence when possible.
