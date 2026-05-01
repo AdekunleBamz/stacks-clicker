@@ -10,3 +10,5 @@
 ### Follow-up
 - Capture any newly added fallback keys during i18n review passes.
 - Reconfirm date/number locale formatting for transaction and stats views.
+
+Follow-up note: Verify pluralization changes against current locale snapshots.
