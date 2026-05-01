@@ -17,3 +17,5 @@ Source file: `frontend/src/tests/TipJarCard.test.jsx`.
 - Revalidate minimum amount scenarios after contract-side validation updates.
 
 Maintenance note: Keep min-tip and invalid-recipient assertions together when updating this suite.
+
+Operational note: Confirm invalid amount scenarios still surface actionable helper text.
