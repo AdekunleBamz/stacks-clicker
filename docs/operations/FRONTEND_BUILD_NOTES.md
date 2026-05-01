@@ -13,3 +13,5 @@ Companion index: [Operations docs](README.md).
 ### Build Reminder
 - Capture the exact node and npm versions used for reproducible frontend builds.
 - Record build artifact checksum or commit hash in release handoff notes.
+
+Operational note: Capture the exact Node and npm versions used when documenting build outcomes.
