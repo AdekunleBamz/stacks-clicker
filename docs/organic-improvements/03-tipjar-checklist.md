@@ -10,3 +10,5 @@
 ### Follow-up
 - Confirm tipjar checklist reflects current minimum amount and fee assumptions.
 - Re-run checklist with pending transactions to verify available-balance messaging.
+
+Follow-up note: Include one decimal precision edge case in tip amount checks.
