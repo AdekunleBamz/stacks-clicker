@@ -18,3 +18,5 @@ Companion index: [Operations docs](README.md).
 Operational note: After rollback completes, validate cache headers and trigger a CDN purge if stale bundles persist.
 
 Operational note: Confirm rollback signer wallet has enough balance for emergency retries.
+
+Quarterly follow-up: Dry-run rollback commands in staging to keep playbook current.
