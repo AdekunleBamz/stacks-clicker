@@ -15,3 +15,5 @@ Surface transaction callbacks from this level to keep card components lean.
 - Reconfirm analytics event fields before publishing interaction schema changes.
 - Keep transaction callback ordering deterministic when aggregating hook responses.
 - Keep payload shape examples in sync with current interaction utilities.
+
+Maintenance note: When adding new interaction channels, document callback ordering expectations explicitly.
