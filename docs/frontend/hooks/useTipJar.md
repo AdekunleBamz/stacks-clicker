@@ -19,3 +19,5 @@ Input guard:
 - Verify tip retry guidance reflects current network rate-limit handling.
 
 Maintenance note: Reconfirm minimum tip thresholds after any contract upgrade that touches denomination rules.
+
+Operational note: Include recipient validation behavior in manual tip flow checks.
