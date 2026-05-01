@@ -18,3 +18,5 @@ Companion index: [Operations docs](README.md).
 Operational note: When escalating logs, include correlation/request IDs to reduce back-and-forth during incident response.
 
 Operational note: Capture dashboard permalink for every alert triage entry.
+
+Quarterly follow-up: Revalidate alert thresholds after major feature rollouts.
