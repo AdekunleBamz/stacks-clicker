@@ -15,3 +15,5 @@
 ### Hotfix Reminder
 - Capture rollback owner and communication channel before starting emergency deploys.
 - Define the post-hotfix monitoring window length before announcing resolution.
+
+Operational note: Back-merge hotfix commits into active release branches within the same working day.
