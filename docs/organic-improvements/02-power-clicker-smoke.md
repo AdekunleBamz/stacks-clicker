@@ -10,3 +10,5 @@
 ### Follow-up
 - Revalidate rapid-click smoke criteria after adjusting click cooldown parameters.
 - Include one low-balance wallet pass to confirm failure feedback remains actionable.
+
+Follow-up note: Recheck smoke timing on lower-end Android devices.
