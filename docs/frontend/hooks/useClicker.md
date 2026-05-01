@@ -23,3 +23,5 @@ Source file: `frontend/src/hooks/useClicker.js`.
 - Recheck cooldown assumptions when interaction throttling settings are tuned.
 
 Maintenance note: Keep click callback examples aligned with the latest optimistic-update behavior.
+
+Operational note: Capture click burst throttling behavior under unstable network conditions.
