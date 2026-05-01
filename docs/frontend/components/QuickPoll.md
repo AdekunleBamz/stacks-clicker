@@ -20,3 +20,5 @@ Source file: `frontend/src/components/QuickPoll.jsx`.
 - Disable poll creation controls while submit transactions are pending to prevent duplicate polls.
 - Recheck vote and create-poll copy after contract validation rule updates.
 - Audit prompt: align poll creation hints with latest validation boundaries.
+
+Maintenance note: Revisit vote fee copy if contract-side polling costs change.
