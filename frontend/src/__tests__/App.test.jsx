@@ -16,6 +16,14 @@ vi.mock('../hooks/useSound', () => ({
   useSound: () => ({ playSound: vi.fn() }),
 }));
 
+vi.mock('../utils/walletconnect', () => ({
+  getAddresses: vi.fn(),
+  initProvider: vi.fn(),
+  isValidProjectId: vi.fn(() => true),
+  wcConnect: vi.fn(),
+  wcDisconnect: vi.fn(),
+}));
+
 vi.mock('../hooks/useTheme', () => ({
   useTheme: () => ({ theme: 'dark', toggleTheme: vi.fn() }),
 }));
@@ -72,6 +80,7 @@ vi.mock('../components/PlayerStats', () => ({ default: () => <div data-testid="p
 vi.mock('../components/TransactionHistory', () => ({ default: () => <div data-testid="tx-history" /> }));
 vi.mock('../components/Header', () => ({ default: () => <header data-testid="header" /> }));
 vi.mock('../components/Footer', () => ({ default: () => <footer data-testid="footer" /> }));
+vi.mock('../components/NetworkHeartbeat', () => ({ default: () => <div data-testid="network" /> }));
 
 describe('App Smoke Test', () => {
   it('renders the core application structure without crashing', () => {

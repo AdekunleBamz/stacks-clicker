@@ -1,66 +1,65 @@
 import React from 'react';
-import { render, screen, act } from '@testing-library/react';
+import { render, screen, act, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { WalletProvider, useWallet } from '../context/WalletContext';
-import * as stacksConnect from '@stacks/connect';
+import * as walletConnect from '../utils/walletconnect';
 
-// Mock the openContractCall and showConnect
-vi.mock('@stacks/connect', () => ({
-  showConnect: vi.fn(),
-  disconnect: vi.fn(),
+vi.mock('../utils/walletconnect', () => ({
+  getAddresses: vi.fn(),
+  initProvider: vi.fn(),
+  isValidProjectId: vi.fn(),
+  wcConnect: vi.fn(),
+  wcDisconnect: vi.fn(),
 }));
 
 const TestComponent = () => {
-  const { address, isConnected, connectWallet, disconnectWallet } = useWallet();
+  const {
+    address,
+    isConnected,
+    connectWallet,
+    disconnectWallet,
+    walletConnectUri,
+    closeWalletConnectModal,
+  } = useWallet();
+
   return (
     <div>
       <div data-testid="status">{isConnected ? 'Connected' : 'Disconnected'}</div>
       <div data-testid="address">{address || 'No Address'}</div>
+      <div data-testid="pairing-uri">{walletConnectUri || 'No URI'}</div>
       <button type="button" onClick={connectWallet}>Connect</button>
       <button type="button" onClick={disconnectWallet}>Disconnect</button>
+      <button type="button" onClick={closeWalletConnectModal}>Close QR</button>
     </div>
   );
 };
 
-// Mock localStorage
-const localStorageMock = (function () {
-  let store = {};
-  return {
-    getItem: vi.fn((key) => store[key] || null),
-    setItem: vi.fn((key, value) => {
-      store[key] = value.toString();
-    }),
-    clear: vi.fn(() => {
-      store = {};
-    }),
-    removeItem: vi.fn((key) => {
-      delete store[key];
-    }),
-  };
-})();
-Object.defineProperty(window, 'localStorage', { value: localStorageMock });
-
 describe('WalletContext', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    localStorage.clear();
+    walletConnect.isValidProjectId.mockReturnValue(true);
+    walletConnect.initProvider.mockResolvedValue({});
+    walletConnect.getAddresses.mockRejectedValue(new Error('No active session'));
+    walletConnect.wcConnect.mockImplementation(async (onDisplayUri) => {
+      onDisplayUri?.('wc:test-pairing-uri');
+      return { topic: 'test-topic' };
+    });
+    walletConnect.wcDisconnect.mockResolvedValue();
   });
 
-  it('provides disconnected state by default', () => {
+  it('provides disconnected state by default', async () => {
     render(
       <WalletProvider>
         <TestComponent />
       </WalletProvider>
     );
-    expect(screen.getByTestId('status')).toHaveTextContent('Disconnected');
+
+    await waitFor(() => expect(screen.getByTestId('status')).toHaveTextContent('Disconnected'));
     expect(screen.getByTestId('address')).toHaveTextContent('No Address');
   });
 
-  it('restores connection from localStorage if available', () => {
-    const mockStorage = {
-      addresses: { mainnet: 'SP123ABCD' },
-    };
-    localStorage.setItem('stacks-session', JSON.stringify(mockStorage));
+  it('restores an existing WalletConnect session if available', async () => {
+    walletConnect.getAddresses.mockResolvedValueOnce({ address: 'SP123ABCD' });
 
     render(
       <WalletProvider>
@@ -68,39 +67,31 @@ describe('WalletContext', () => {
       </WalletProvider>
     );
 
-    expect(screen.getByTestId('status')).toHaveTextContent('Connected');
+    await waitFor(() => expect(screen.getByTestId('status')).toHaveTextContent('Connected'));
     expect(screen.getByTestId('address')).toHaveTextContent('SP123ABCD');
   });
 
-  it('calls showConnect when connectWallet is triggered', () => {
+  it('connects through WalletConnect and stores the resolved address', async () => {
     render(
       <WalletProvider>
         <TestComponent />
       </WalletProvider>
     );
 
-    const connectBtn = screen.getByText('Connect');
-    act(() => {
-      connectBtn.click();
+    await waitFor(() => expect(screen.getByTestId('status')).toHaveTextContent('Disconnected'));
+    walletConnect.getAddresses.mockResolvedValueOnce({ address: 'SP9CONNECTED' });
+
+    await act(async () => {
+      screen.getByText('Connect').click();
     });
 
-    expect(stacksConnect.showConnect).toHaveBeenCalledTimes(1);
-    expect(stacksConnect.showConnect).toHaveBeenCalledWith(
-      expect.objectContaining({
-        appDetails: expect.anything(),
-        onFinish: expect.any(Function),
-        onCancel: expect.any(Function),
-      })
-    );
+    expect(walletConnect.wcConnect).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(screen.getByTestId('status')).toHaveTextContent('Connected'));
+    expect(screen.getByTestId('address')).toHaveTextContent('SP9CONNECTED');
   });
 
-  it('calls disconnect when disconnectWallet is triggered', () => {
-    localStorage.setItem(
-      'stacks-session',
-      JSON.stringify({
-        addresses: { mainnet: 'SP123ABCD' },
-      })
-    );
+  it('disconnects the active WalletConnect session', async () => {
+    walletConnect.getAddresses.mockResolvedValueOnce({ address: 'SP123ABCD' });
 
     render(
       <WalletProvider>
@@ -108,70 +99,37 @@ describe('WalletContext', () => {
       </WalletProvider>
     );
 
-    const disconnectBtn = screen.getByText('Disconnect');
-    act(() => {
-      disconnectBtn.click();
+    await waitFor(() => expect(screen.getByTestId('status')).toHaveTextContent('Connected'));
+
+    await act(async () => {
+      screen.getByText('Disconnect').click();
     });
 
-    expect(stacksConnect.disconnect).toHaveBeenCalledTimes(1);
-    expect(localStorage.removeItem).toHaveBeenCalledWith('stacks-session');
-    expect(screen.getByTestId('status')).toHaveTextContent('Disconnected');
-  });
-
-  it('reacts to storage updates from another tab', () => {
-    render(
-      <WalletProvider>
-        <TestComponent />
-      </WalletProvider>
-    );
-
-    localStorage.setItem(
-      'stacks-session',
-      JSON.stringify({
-        addresses: { mainnet: 'SP9UPDATED' },
-      })
-    );
-
-    act(() => {
-      window.dispatchEvent(
-        new StorageEvent('storage', {
-          key: 'stacks-session',
-          newValue: JSON.stringify({ addresses: { mainnet: 'SP9UPDATED' } }),
-        })
-      );
-    });
-
-    expect(screen.getByTestId('status')).toHaveTextContent('Connected');
-    expect(screen.getByTestId('address')).toHaveTextContent('SP9UPDATED');
-  });
-
-  it('handles logout event from another tab', () => {
-    localStorage.setItem(
-      'stacks-session',
-      JSON.stringify({
-        addresses: { mainnet: 'SP123ABCD' },
-      })
-    );
-
-    render(
-      <WalletProvider>
-        <TestComponent />
-      </WalletProvider>
-    );
-
-    // Verify initially connected
-    expect(screen.getByTestId('status')).toHaveTextContent('Connected');
-
-    act(() => {
-      window.dispatchEvent(
-        new StorageEvent('storage', {
-          key: 'stacks-session',
-          newValue: null,
-        })
-      );
-    });
-
+    expect(walletConnect.wcDisconnect).toHaveBeenCalledTimes(1);
     expect(screen.getByTestId('status')).toHaveTextContent('Disconnected');
     expect(screen.getByTestId('address')).toHaveTextContent('No Address');
+  });
+
+  it('hides the pairing QR modal state when requested', async () => {
+    render(
+      <WalletProvider>
+        <TestComponent />
+      </WalletProvider>
+    );
+
+    await waitFor(() => expect(screen.getByTestId('status')).toHaveTextContent('Disconnected'));
+    walletConnect.getAddresses.mockRejectedValueOnce(new Error('User closed wallet'));
+
+    await act(async () => {
+      screen.getByText('Connect').click();
+    });
+
+    expect(screen.getByTestId('pairing-uri')).toHaveTextContent('wc:test-pairing-uri');
+
+    act(() => {
+      screen.getByText('Close QR').click();
+    });
+
+    expect(screen.getByTestId('pairing-uri')).toHaveTextContent('No URI');
   });
 });
