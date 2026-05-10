@@ -126,3 +126,6 @@ export const DEFAULT_THEME = 'dark';
 
 /** Upper cap for the combo multiplier applied to click rewards */
 export const MAX_COMBO_MULTIPLIER = 8;
+
+/** Leaderboard polling interval in ms (refreshes every 30 seconds) */
+export const LEADERBOARD_REFRESH_MS = 30_000;
