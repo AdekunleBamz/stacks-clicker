@@ -241,6 +241,19 @@ export function formatBlockHeight(height) {
   return `Block #${Math.floor(numericHeight).toLocaleString('en-US')}`;
 }
 
+/**
+ * Formats a Unix timestamp (ms or seconds) as a locale date string.
+ *
+ * @param {number|string|Date} timestamp - The timestamp to format
+ * @returns {string} Formatted date string using the user's locale, or '--' if invalid
+ */
+export function formatTimestamp(timestamp) {
+  if (timestamp === null || timestamp === undefined) return '--';
+  const date = new Date(timestamp);
+  if (isNaN(date.getTime())) return '--';
+  return date.toLocaleDateString(undefined, { dateStyle: 'medium' });
+}
+
 export const formatMultiplier = (m) => m + "x";
 
 export const formatCost = (n) => Number(n).toLocaleString() + " pts";
