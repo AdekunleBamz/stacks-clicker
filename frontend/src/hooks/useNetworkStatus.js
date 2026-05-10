@@ -17,8 +17,16 @@ export function useNetworkStatus() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    const handleOnline = () => { setIsOnline(true); setLastChanged(Date.now()); setConnectionCount((c) => c + 1); };
-    const handleOffline = () => { setIsOnline(false); setLastChanged(Date.now()); setOfflineCount((c) => c + 1); };
+    const handleOnline = () => {
+      setIsOnline(true);
+      setLastChanged(Date.now());
+      setConnectionCount((c) => c + 1);
+    };
+    const handleOffline = () => {
+      setIsOnline(false);
+      setLastChanged(Date.now());
+      setOfflineCount((c) => c + 1);
+    };
 
     window.addEventListener('online', handleOnline, { passive: true });
     window.addEventListener('offline', handleOffline, { passive: true });
