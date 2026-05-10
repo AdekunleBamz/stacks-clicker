@@ -22,10 +22,11 @@ function fallbackCopy(text) {
 /**
  * Custom hook for interacting with the system clipboard.
  * Provides a clean interface for copying text and tracking copy status.
+ * Falls back to the legacy `execCommand` API when the Clipboard API is unavailable.
  *
  * @param {Object} options - Hook options
  * @param {number} [options.timeout=2000] - Duration in ms before the copied state resets
- * @returns {Object} { copied, copyToClipboard }
+ * @returns {{ copied: boolean, copyToClipboard: Function }} Clipboard state and copy action
  */
 export function useClipboard({ timeout = 2000 } = {}) {
   const safeTimeout = Number.isFinite(timeout) && timeout > 0 ? timeout : 2000;
