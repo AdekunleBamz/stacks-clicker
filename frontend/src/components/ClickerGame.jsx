@@ -37,7 +37,7 @@ export default function ClickerGame({ onTxSubmit }) {
   const handleClick = async (e) => {
     if (!isConnected) return;
     addClickEvent(e);
-    playSound('click');
+    soundEngine.play('click');
 
     setLoading(true);
     try {
@@ -62,7 +62,7 @@ export default function ClickerGame({ onTxSubmit }) {
   const handleMultiClick = async (e) => {
     if (!isConnected) return;
     addClickEvent(e);
-    playSound('click');
+    soundEngine.play('click');
 
     setLoading(true);
     try {
@@ -136,7 +136,7 @@ export default function ClickerGame({ onTxSubmit }) {
           title="Click to generate a transaction manually"
         >
           {loading ? '⏳' : '👆'} Click!
-        </motion.button>
+        </button>
 
         <div className="multi-click-group" role="group" aria-label="Multi-Click Interventions">
           <input
