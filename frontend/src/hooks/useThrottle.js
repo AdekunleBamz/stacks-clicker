@@ -6,7 +6,11 @@ import { useRef, useCallback, useState } from 'react';
  *
  * @param {Function} callback - The function to throttle
  * @param {number} delay - Throttle delay in ms
- * @returns {{ throttled: Function, reset: Function, isThrottled: boolean, callCount: number }} Throttled callback, reset helper, throttle state, and call count
+ * @returns {{ throttled: Function, reset: Function, isThrottled: boolean, callCount: number }}
+ *   - `throttled`: wrapped function that enforces the delay between calls
+ *   - `reset`: resets the throttle timer and call counter
+ *   - `isThrottled`: true while a call is being suppressed
+ *   - `callCount`: number of calls that have passed through
  */
 export function useThrottle(callback, delay) {
   const lastCall = useRef(0);
