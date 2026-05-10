@@ -6,8 +6,9 @@ import { useEffect, useRef, useCallback } from 'react';
  *
  * @param {Object} options - Hook options
  * @param {string} options.title - Base title for the document
- * @param {number} [options.count=0] - Numerical value to display in parentheses
+ * @param {number} [options.count=0] - Numerical value to display in parentheses before the title
  * @param {boolean} [options.restoreOnUnmount=true] - Whether to restore the previous title on unmount
+ * @returns {{ resetTitle: Function }} Object with a `resetTitle` function to manually restore the previous title
  */
 export function useDocumentTitle({ title, count = 0, restoreOnUnmount = true }) {
   const previousTitle = useRef(typeof document !== 'undefined' ? document.title : '');
