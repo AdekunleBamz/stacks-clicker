@@ -117,3 +117,6 @@ export const STREAK_THRESHOLDS = {
 
 /** Maximum number of transactions to keep in the local tx log */
 export const MAX_TX_LOG_SIZE = 100;
+
+/** Default application language code (ISO 639-1) */
+export const DEFAULT_LANG = 'en';
