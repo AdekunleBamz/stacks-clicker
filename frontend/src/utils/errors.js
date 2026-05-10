@@ -16,6 +16,7 @@ const ERROR_MAP = Object.freeze({
   '104': 'Limit Reached: You have reached the maximum allowed for this interaction.',
   '105': 'Poll Expired: This poll is no longer accepting votes.',
   '106': 'Already Voted: You have already cast your vote in this poll.',
+  '107': 'Feature Disabled: This feature has been temporarily disabled by governance.',
   '401': 'User Rejected: The transaction request was cancelled in your wallet.',
   '403': 'Contract Paused: This interaction is currently disabled by the maintainers.',
   '408': 'Request Timeout: The transaction request timed out. Please retry.',
