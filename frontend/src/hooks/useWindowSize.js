@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 
 /**
  * Custom hook for tracking the current window dimensions.
- * Useful for programmatic responsive layout logic.
+ * Uses a 250ms debounce on resize events to avoid excessive renders.
+ * Returns `{ width: 0, height: 0 }` during server-side rendering.
  *
- * @returns {Object} { width, height }
+ * @returns {{ width: number, height: number }} Current viewport dimensions in pixels
  */
 export function useWindowSize() {
   const [windowSize, setWindowSize] = useState({
