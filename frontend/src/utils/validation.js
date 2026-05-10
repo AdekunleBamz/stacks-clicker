@@ -5,12 +5,14 @@
  * @module utils/validation
  */
 
+import { MIN_TIP_MICRO_STX } from './constants';
+
 export const SCHEMAS = {
   CLICK: {
     amount: (val) => typeof val === 'number' && val > 0,
   },
   TIP: {
-    amount: (val) => typeof val === 'number' && val >= 100,
+    amount: (val) => typeof val === 'number' && val >= MIN_TIP_MICRO_STX,
     recipient: (val) => typeof val === 'string' && val.startsWith('SP'),
   },
   POLL: {
