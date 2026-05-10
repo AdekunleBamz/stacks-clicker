@@ -138,3 +138,6 @@ export const SOUND_ENABLED_DEFAULT = true;
 
 /** Delay in ms before an achievement unlock animation is shown */
 export const ACHIEVEMENT_UNLOCK_DELAY_MS = 500;
+
+/** Maximum number of tip transactions to retain in the tip history list */
+export const TIPJAR_HISTORY_LIMIT = 50;
