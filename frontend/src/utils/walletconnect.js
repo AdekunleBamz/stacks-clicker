@@ -1,296 +1,74 @@
 /**
- * WalletConnect / Reown AppKit Integration for Stacks
+ * Stacks Native Wallet Integration (replaces WalletConnect)
  *
- * This module handles WalletConnect pairing and Stacks JSON-RPC methods.
- * It provides a unified interface for connecting to Stacks wallets (Xverse, Leather)
- * using the @walletconnect/universal-provider.
- *
- * Supported RPC Methods:
- * - stx_getAddresses: Discovery of account addresses and public keys.
- * - stx_signTransaction: Signing serialized transaction payloads.
- * - stx_callContract: Simplified contract call triggering.
- * - stx_transferStx: Native STX token transfers.
+ * This module uses @stacks/connect to natively interact with Stacks wallets
+ * like Leather, Xverse, and Asigna. It keeps the same exported function names
+ * as the old walletconnect implementation to minimize changes in other files.
  *
  * @module utils/walletconnect
  */
 
-import UniversalProvider from '@walletconnect/universal-provider';
+import { AppConfig, UserSession, showConnect, openContractCall, openSTXTransfer, openSignatureRequestPopup } from '@stacks/connect';
+import { StacksMainnet, StacksTestnet } from '@stacks/network';
 import { STACKS_NETWORK } from './constants';
 
-// WalletConnect Project ID from environment
-const PROJECT_ID = import.meta.env.VITE_WALLETCONNECT_PROJECT_ID;
 const DEBUG = import.meta.env.VITE_DEBUG === 'true';
 
-/**
- * Validates that a WalletConnect Project ID is configured correctly.
- *
- * @returns {boolean} True if PROJECT_ID exists and is a non-empty string
- */
+const appConfig = new AppConfig(['store_write', 'publish_data']);
+export const userSession = new UserSession({ appConfig });
+
+function log(...args) {
+  if (DEBUG) console.log('[StacksConnect]', ...args);
+}
+
 export function isValidProjectId() {
-  return typeof PROJECT_ID === 'string' && PROJECT_ID.trim().length > 0;
+  return true; // Not needed for native Stacks Connect
 }
-const STACKS_CHAIN = STACKS_NETWORK === 'testnet' ? 'stacks:2147483648' : 'stacks:1';
 
-/**
- * Returns the active Stacks CAIP-2 chain identifier.
- *
- * @returns {string} Resolved chain identifier
- */
 export function getStacksChainId() {
-  return STACKS_CHAIN;
+  return STACKS_NETWORK === 'testnet' ? 'stacks:2147483648' : 'stacks:1';
 }
 
-// App metadata - MUST have valid icons array
-const metadata = {
+export async function initProvider() {
+  log('initProvider called');
+  return true;
+}
+
+const getAppDetails = () => ({
   name: 'StacksClicker',
   description: 'Gamified Stacks dApp - Click to earn, tip creators, vote on polls',
-  url: typeof window !== 'undefined' ? window.location.origin : 'https://stacks-clicker.vercel.app',
-  icons: [
-    typeof window !== 'undefined'
-      ? new URL('/favicon.svg', window.location.origin).toString()
-      : 'https://stacks-clicker.vercel.app/favicon.svg',
-  ],
-};
+  icon: typeof window !== 'undefined' ? new URL('/favicon.svg', window.location.origin).toString() : 'https://stacks-clicker.vercel.app/favicon.svg',
+});
 
-// Singleton provider instance
-let provider = null;
-let session = null;
-const callBackoffUntilByKey = new Map();
+const network = STACKS_NETWORK === 'testnet' ? new StacksTestnet() : new StacksMainnet();
 
-function getBackoffKey(contractAddress, contractName, functionName) {
-  return `${contractAddress}.${contractName}.${functionName}`;
-}
-
-function getErrorMessage(error) {
-  if (typeof error === 'string') return error;
-  if (error?.message) return error.message;
-  return String(error);
-}
-
-function parseRetryAfterSeconds(errorMessage) {
-  const explicitWait = errorMessage.match(/try again in\s+(\d+)\s*seconds?/i);
-  if (explicitWait) return Number(explicitWait[1]);
-  if (/toomuchchaining/i.test(errorMessage)) return 8;
-  if (/rate limit/i.test(errorMessage)) return 15;
-  return 0;
-}
-
-/**
- * Debug logger
- */
-function log(...args) {
-  if (DEBUG) {
-    console.log('[WalletConnect]', ...args);
-  }
-}
-
-/**
- * Initialize the WalletConnect Universal Provider
- */
-export async function initProvider() {
-  if (provider) {
-    log('Provider already initialized');
-    return provider;
-  }
-
-  if (!PROJECT_ID) {
-    throw new Error('VITE_WALLETCONNECT_PROJECT_ID is not set');
-  }
-
-  log('Initializing provider with project ID:', PROJECT_ID.slice(0, 8) + '...');
-
-  provider = await UniversalProvider.init({
-    projectId: PROJECT_ID,
-    metadata,
-    relayUrl: 'wss://relay.walletconnect.com',
-  });
-
-  // Set up event listeners
-  provider.on('display_uri', (uri) => {
-    log('Display URI event:', uri.slice(0, 50) + '...');
-  });
-
-  provider.on('session_ping', ({ id, topic }) => {
-    log('Session ping:', id, topic);
-  });
-
-  provider.on('session_event', ({ event, chainId }) => {
-    log('Session event:', event, chainId);
-  });
-
-  provider.on('session_update', ({ topic, params }) => {
-    log('Session update:', topic, params);
-  });
-
-  provider.on('session_delete', ({ topic }) => {
-    log('Session deleted:', topic);
-    session = null;
-  });
-
-  // Check for existing session
-  if (provider.session) {
-    session = provider.session;
-    log('Restored existing session');
-  }
-
-  return provider;
-}
-
-/**
- * Connect to a Stacks wallet via WalletConnect
- * @param {Function} onDisplayUri - Callback when pairing URI is available (for QR display)
- * @returns {Promise<Object>} Session object
- */
 export async function wcConnect(onDisplayUri) {
-  if (!provider) {
-    await initProvider();
-  }
-
-  // Subscribe to display_uri before connecting
-  const uriPromise = new Promise((resolve) => {
-    const handler = (uri) => {
-      log('Got pairing URI');
-      if (onDisplayUri) {
-        onDisplayUri(uri);
-      }
-      resolve(uri);
-      provider.off('display_uri', handler);
-    };
-    provider.on('display_uri', handler);
+  log('Initiating Stacks native connection');
+  return new Promise((resolve, reject) => {
+    showConnect({
+      appDetails: getAppDetails(),
+      redirectTo: '/',
+      onFinish: () => resolve(userSession.loadUserData()),
+      onCancel: () => reject(new Error('User cancelled connection')),
+      userSession,
+    });
   });
-
-  log('Initiating connection with required namespaces');
-
-  // CRITICAL: Use requiredNamespaces, not just optionalNamespaces
-  // This is what generates the pairing URI (fixes blank QR issue)
-  const connectPromise = provider.connect({
-    requiredNamespaces: {
-      stacks: {
-        chains: [STACKS_CHAIN],
-        methods: ['stx_getAddresses', 'stx_signTransaction', 'stx_callContract', 'stx_transferStx'],
-        events: ['accountsChanged', 'chainChanged'],
-      },
-    },
-  });
-
-  // Wait for both URI and session
-  const [, newSession] = await Promise.all([
-    uriPromise.catch(() => null), // Don't fail if URI doesn't fire
-    connectPromise,
-  ]);
-
-  session = newSession;
-  log('Connected! Session topic:', session.topic);
-
-  return session;
 }
 
-/**
- * Get Stacks addresses from connected wallet
- * Uses stx_getAddresses JSON-RPC method with timeout fallback
- * @returns {Promise<Object>} Address info { address, publicKey }
- */
 export async function getAddresses() {
-  if (!session || !provider) {
+  if (!userSession.isUserSignedIn()) {
     throw new Error('Not connected');
   }
-
-  log('Requesting stx_getAddresses');
-
-  // Timeout wrapper (15 seconds)
-  let timeoutId;
-  const timeoutPromise = new Promise((_, reject) => {
-    timeoutId = setTimeout(() => reject(new Error('stx_getAddresses timed out')), 15000);
-  });
-
-  try {
-    const result = await Promise.race([
-      provider.request(
-        {
-          method: 'stx_getAddresses',
-          params: {},
-        },
-        STACKS_CHAIN
-      ),
-      timeoutPromise,
-    ]);
-
-    log('Got addresses:', result);
-
-    // Find STX address (look for symbol === 'STX' or use first)
-    const addresses = result?.addresses || result;
-    if (Array.isArray(addresses) && addresses.length > 0) {
-      const stxEntry = addresses.find((a) => a.symbol === 'STX') || addresses[0];
-      return {
-        address: stxEntry.address,
-        publicKey: stxEntry.publicKey || null,
-      };
-    }
-
-    // Fallback to parsing session accounts
-    return parseSessionAddress();
-  } catch (err) {
-    log('stx_getAddresses failed, falling back to session parse:', err.message);
-    return parseSessionAddress();
-  } finally {
-    if (timeoutId) clearTimeout(timeoutId);
-  }
+  const userData = userSession.loadUserData();
+  const address = STACKS_NETWORK === 'testnet' ? userData.profile.stxAddress.testnet : userData.profile.stxAddress.mainnet;
+  log('Got address:', address);
+  return { address, publicKey: null };
 }
 
-/**
- * Parse address from session namespaces (fallback)
- */
-function parseSessionAddress() {
-  if (!session?.namespaces?.stacks?.accounts?.[0]) {
-    throw new Error('No address in session');
-  }
-
-  // Format: stacks:1:SP123...
-  const account = session.namespaces.stacks.accounts[0];
-  const parts = account.split(':');
-  const address = parts[parts.length - 1];
-
-  log('Parsed address from session:', address);
-
-  return {
-    address,
-    publicKey: null,
-  };
-}
-
-/**
- * Sign and broadcast a transaction via stx_signTransaction
- * @param {string} txHex - Serialized unsigned transaction (hex)
- * @param {boolean} broadcast - Whether wallet should broadcast
- * @returns {Promise<Object>} { txId, txRaw }
- */
 export async function signTransaction(txHex, broadcast = true) {
-  if (!session || !provider) {
-    throw new Error('Not connected');
-  }
-
-  log('Requesting stx_signTransaction, broadcast:', broadcast);
-
-  const result = await provider.request(
-    {
-      method: 'stx_signTransaction',
-      params: {
-        transaction: txHex,
-        broadcast,
-      },
-    },
-    STACKS_CHAIN
-  );
-
-  log('Transaction result:', result);
-
-  return result;
+  throw new Error('signTransaction not supported directly via StacksConnect helper yet');
 }
 
-/**
- * Call a contract function via stx_callContract (wallet builds tx)
- * This is a fallback when public key isn't available
- */
 export async function callContract({
   contractAddress,
   contractName,
@@ -298,122 +76,72 @@ export async function callContract({
   functionArgs,
   postConditions,
 }) {
-  if (!session || !provider) {
+  if (!userSession.isUserSignedIn()) {
     throw new Error('Not connected');
   }
 
-  const backoffKey = getBackoffKey(contractAddress, contractName, functionName);
-  const backoffUntil = callBackoffUntilByKey.get(backoffKey) || 0;
-  if (backoffUntil > Date.now()) {
-    const waitSeconds = Math.max(1, Math.ceil((backoffUntil - Date.now()) / 1000));
-    throw new Error(
-      `Broadcast backoff active for ${contractName}.${functionName}. Please try again in ${waitSeconds} seconds`
-    );
-  } else if (backoffUntil > 0) {
-    callBackoffUntilByKey.delete(backoffKey);
-  }
+  log('Requesting contract call:', contractName, functionName);
 
-  log('Requesting stx_callContract:', contractName, functionName);
-
-  try {
-    const result = await provider.request(
-      {
-        method: 'stx_callContract',
-        params: {
-          contractAddress,
-          contractName,
-          functionName,
-          functionArgs: functionArgs || [],
-          // Post-conditions are essential for security.
-          // they ensure that the smart contract doesn't transfer more assets
-          // than authorized by the user.
-          postConditions: postConditions || [],
-          network: STACKS_NETWORK,
-        },
+  return new Promise((resolve, reject) => {
+    openContractCall({
+      network,
+      contractAddress,
+      contractName,
+      functionName,
+      functionArgs: functionArgs || [],
+      postConditions: postConditions || [],
+      postConditionMode: 1, // Allow mode if no specific conditions are set
+      appDetails: getAppDetails(),
+      onFinish: (data) => {
+        log('Contract call result:', data);
+        resolve({ txId: data.txId, txRaw: data.txRaw });
       },
-      STACKS_CHAIN
-    );
-
-    callBackoffUntilByKey.delete(backoffKey);
-    log('Contract call result:', result);
-    return result;
-  } catch (error) {
-    const errorMessage = getErrorMessage(error);
-    const retryAfterSeconds = parseRetryAfterSeconds(errorMessage);
-    if (retryAfterSeconds > 0) {
-      callBackoffUntilByKey.set(backoffKey, Date.now() + retryAfterSeconds * 1000);
-      if (!/try again in\s+\d+\s*seconds?/i.test(errorMessage)) {
-        throw new Error(`${errorMessage}. Please try again in ${retryAfterSeconds} seconds`);
-      }
-    }
-    throw error;
-  }
-
+      onCancel: () => {
+        log('Contract call cancelled');
+        reject(new Error('User cancelled transaction'));
+      },
+    });
+  });
 }
 
-/**
- * Transfer STX via stx_transferStx
- */
 export async function transferStx(recipient, amount, memo) {
-  if (!session || !provider) {
+  if (!userSession.isUserSignedIn()) {
     throw new Error('Not connected');
   }
 
-  log('Requesting stx_transferStx:', recipient, amount);
+  log('Requesting STX transfer:', recipient, amount);
 
-  const result = await provider.request(
-    {
-      method: 'stx_transferStx',
-      params: {
-        recipient,
-        amount: amount.toString(),
-        memo: memo || '',
+  return new Promise((resolve, reject) => {
+    openSTXTransfer({
+      network,
+      recipient,
+      amount: amount.toString(),
+      memo: memo || '',
+      appDetails: getAppDetails(),
+      onFinish: (data) => {
+        log('Transfer result:', data);
+        resolve({ txId: data.txId });
       },
-    },
-    STACKS_CHAIN
-  );
-
-  return result;
+      onCancel: () => reject(new Error('User cancelled transfer')),
+    });
+  });
 }
 
-/**
- * Disconnect the current session
- */
 export async function wcDisconnect() {
-  if (session && provider) {
-    log('Disconnecting session:', session.topic);
-    try {
-      await provider.disconnect();
-    } catch (err) {
-      log('Disconnect error:', err);
-    }
-    session = null;
+  if (userSession.isUserSignedIn()) {
+    log('Disconnecting session');
+    userSession.signUserOut();
   }
 }
 
-/**
- * Check if currently connected
- */
 export function isConnected() {
-  return !!(session && provider);
+  return userSession.isUserSignedIn();
 }
 
-/**
- * Get current session
- */
 export function getSession() {
-  return session;
+  return userSession.isUserSignedIn() ? userSession.loadUserData() : null;
 }
 
-/**
- * Generate a camera-friendly WalletConnect link
- * Phone cameras can't open wc: URIs directly
- */
 export function getWalletConnectLink(wcUri) {
-  if (!wcUri) return '';
-  const normalizedUri = String(wcUri).trim();
-  if (!normalizedUri) return '';
-  if (!/^wc:/i.test(normalizedUri)) return '';
-  const canonicalUri = normalizedUri.replace(/^wc:/i, 'wc:');
-  return `https://walletconnect.com/wc?uri=${encodeURIComponent(canonicalUri)}`;
+  return ''; // Unused in native Stacks connection
 }
