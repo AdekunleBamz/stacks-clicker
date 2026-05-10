@@ -9,6 +9,11 @@ import { useRef, useCallback, useEffect, useState } from 'react';
  * @param {number} [options.interval=1000] - Minimum milliseconds between allowed calls
  * @param {Function} [options.onRejected] - Callback invoked when a call is rejected
  * @returns {{withRateLimit: Function, isLimited: boolean, remainingMs: number, reset: Function, callCount: number}}
+ *
+ * @example
+ * const { withRateLimit, isLimited } = useRateLimiter({ interval: 2000 });
+ * const safeMint = withRateLimit(mintNFT);
+ * // safeMint will be a no-op until 2 seconds have elapsed since the last call
  */
 export function useRateLimiter(options = {}) {
   const { interval = 1000, onRejected } = options;
