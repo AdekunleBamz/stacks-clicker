@@ -228,6 +228,19 @@ export const formatScore = (n) => Number(n).toFixed(2);
 
 export const formatUpgradeLevel = (lvl) => "Level " + lvl;
 
+/**
+ * Formats a Stacks block height into a human-readable string.
+ *
+ * @param {number|string|null|undefined} height - The block height to format
+ * @returns {string} Formatted block height (e.g. "Block #123,456") or '--' if invalid
+ */
+export function formatBlockHeight(height) {
+  if (height === null || height === undefined || height === '') return '--';
+  const numericHeight = Number(height);
+  if (!Number.isFinite(numericHeight) || numericHeight < 0) return '--';
+  return `Block #${Math.floor(numericHeight).toLocaleString('en-US')}`;
+}
+
 export const formatMultiplier = (m) => m + "x";
 
 export const formatCost = (n) => Number(n).toLocaleString() + " pts";
