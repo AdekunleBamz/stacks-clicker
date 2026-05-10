@@ -135,3 +135,6 @@ export const POLL_RESULT_REFRESH_MS = 15_000;
 
 /** Whether audio feedback is enabled by default on first load */
 export const SOUND_ENABLED_DEFAULT = true;
+
+/** Delay in ms before an achievement unlock animation is shown */
+export const ACHIEVEMENT_UNLOCK_DELAY_MS = 500;
