@@ -120,3 +120,6 @@ export const MAX_TX_LOG_SIZE = 100;
 
 /** Default application language code (ISO 639-1) */
 export const DEFAULT_LANG = 'en';
+
+/** Default UI theme applied on first load */
+export const DEFAULT_THEME = 'dark';
