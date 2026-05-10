@@ -141,3 +141,6 @@ export const ACHIEVEMENT_UNLOCK_DELAY_MS = 500;
 
 /** Maximum number of tip transactions to retain in the tip history list */
 export const TIPJAR_HISTORY_LIMIT = 50;
+
+/** Number of transactions fetched per page in the transaction history view */
+export const TRANSACTION_HISTORY_PAGE_SIZE = 25;
