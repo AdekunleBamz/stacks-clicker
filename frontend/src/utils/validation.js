@@ -126,3 +126,13 @@ export function isPositiveFiniteNumber(value) {
 export function isTestnetAddress(value) {
   return typeof value === 'string' && /^ST[0-9A-Z]{28,41}$/.test(value);
 }
+
+/**
+ * Returns true if the given interval value is a valid positive integer in milliseconds.
+ *
+ * @param {*} value - The interval value to check
+ * @returns {boolean}
+ */
+export function isValidPollingInterval(value) {
+  return Number.isInteger(value) && value > 0;
+}
