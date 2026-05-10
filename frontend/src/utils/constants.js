@@ -123,3 +123,6 @@ export const DEFAULT_LANG = 'en';
 
 /** Default UI theme applied on first load */
 export const DEFAULT_THEME = 'dark';
+
+/** Upper cap for the combo multiplier applied to click rewards */
+export const MAX_COMBO_MULTIPLIER = 8;
