@@ -106,3 +106,23 @@ export function isFiniteNumber(value) {
 export function isBooleanValue(value) {
   return typeof value === 'boolean';
 }
+
+/**
+ * Returns true if value is a positive finite number (not 0, not NaN, not Infinity).
+ *
+ * @param {*} value
+ * @returns {boolean}
+ */
+export function isPositiveFiniteNumber(value) {
+  return typeof value === 'number' && Number.isFinite(value) && value > 0;
+}
+
+/**
+ * Returns true if value is a valid Stacks testnet address (ST…).
+ *
+ * @param {string} value - The address string to test
+ * @returns {boolean}
+ */
+export function isTestnetAddress(value) {
+  return typeof value === 'string' && /^ST[0-9A-Z]{28,41}$/.test(value);
+}
