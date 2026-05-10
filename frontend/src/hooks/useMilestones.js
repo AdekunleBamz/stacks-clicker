@@ -2,6 +2,9 @@ import { useState, useEffect, useRef } from 'react';
 
 const MILESTONE_THRESHOLDS = [10, 50, 100, 200, 500, 1000, 2000];
 
+/** Number of defined milestone thresholds. */
+export const MILESTONE_COUNT = MILESTONE_THRESHOLDS.length;
+
 /**
  * Custom hook for managing gameplay milestones and celebrations.
  * Monitors interaction stats and triggers celebration events at specific thresholds.
