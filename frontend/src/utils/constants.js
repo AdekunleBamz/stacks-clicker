@@ -129,3 +129,6 @@ export const MAX_COMBO_MULTIPLIER = 8;
 
 /** Leaderboard polling interval in ms (refreshes every 30 seconds) */
 export const LEADERBOARD_REFRESH_MS = 30_000;
+
+/** Poll results polling interval in ms (refreshes every 15 seconds) */
+export const POLL_RESULT_REFRESH_MS = 15_000;
