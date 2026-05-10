@@ -132,3 +132,6 @@ export const LEADERBOARD_REFRESH_MS = 30_000;
 
 /** Poll results polling interval in ms (refreshes every 15 seconds) */
 export const POLL_RESULT_REFRESH_MS = 15_000;
+
+/** Whether audio feedback is enabled by default on first load */
+export const SOUND_ENABLED_DEFAULT = true;
