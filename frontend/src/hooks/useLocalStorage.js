@@ -4,9 +4,10 @@ import { useState, useEffect, useCallback } from 'react';
  * Custom hook for synchronizing state with window.localStorage.
  * Provides a reactive state that persists across page reloads and synchronizes across multiple tabs/windows.
  *
+ * @template T
  * @param {string} key - The localStorage key to subscribe to
- * @param {any} initialValue - Default value if no existing value is found in storage
- * @returns {[any, Function]} A stateful value and a function to update it.
+ * @param {T|Function} initialValue - Default value (or factory function) if no existing value is found in storage
+ * @returns {[T, Function]} A tuple of the stored value and a setter that also writes to localStorage
  */
 export function useLocalStorage(key, initialValue) {
   if (!key || typeof key !== 'string' || !key.trim()) {
