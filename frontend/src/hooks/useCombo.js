@@ -7,7 +7,16 @@ import { COMBO_WINDOW_MS } from '../utils/constants';
  *
  * @param {Object} options - Hook options
  * @param {number} [options.timeout=2000] - Time in ms before the combo resets
- * @returns {Object} { combo, incrementCombo, resetCombo }
+ * @returns {{
+ *   combo: number,
+ *   maxCombo: number,
+ *   isPeak: boolean,
+ *   incrementCombo: Function,
+ *   resetCombo: Function,
+ *   isActive: boolean,
+ *   hasPendingReset: boolean,
+ *   comboLabel: string|null
+ * }} Combo state and control functions
  */
 export function useCombo({ timeout = COMBO_WINDOW_MS } = {}) {
   const [combo, setCombo] = useState(0);
