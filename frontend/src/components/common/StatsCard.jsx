@@ -20,6 +20,8 @@ import { useMeasure } from '../../hooks/useMeasure';
  * @param {number} [props.index=0] - Index in the grid for staggered entrance animation
  * @param {string} [props.tooltip] - Optional description for the tooltip
  * @returns {JSX.Element} The rendered stats card
+ * @example
+ * <StatsCard label="Total Clicks" value={1024} icon="🖱️" color="#7c3aed" isGrowing />
  */
 function StatsCard({ label, value, icon, color, isPrice = false, isGrowing = false, index = 0, tooltip }) {
   const [measureRef, { width, height }] = useMeasure();
