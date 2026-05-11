@@ -23,6 +23,7 @@ function XPProgress({ currentXP, nextLevelXP }) {
         aria-valuemin={0}
         aria-valuemax={safeNextLevelXP}
         aria-label={`${percentage}% to next level`}
+        aria-valuetext={`${safeCurrentXP.toLocaleString()} of ${safeNextLevelXP.toLocaleString()} XP — ${percentage}% to next level`}
         title={`${safeCurrentXP} / ${safeNextLevelXP} XP`}
       >
         <motion.div
