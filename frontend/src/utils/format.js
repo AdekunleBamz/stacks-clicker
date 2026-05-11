@@ -51,6 +51,11 @@ export function formatNumber(value, options = {}) {
  * @param {number} value - The numeric value to format
  * @param {number} [decimals=1] - Number of decimal places in compact form
  * @returns {string} The compacted number string
+ * @example
+ * formatNumberCompact(1500)
+ * // => '1.5K'
+ * formatNumberCompact(2000000)
+ * // => '2.0M'
  */
 export function formatNumberCompact(value, decimals = 1) {
   const numericValue = Number(value);
