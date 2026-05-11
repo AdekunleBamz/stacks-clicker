@@ -9,6 +9,7 @@ import { notify } from '../utils/toast';
  *
  * Displays the pairing QR code for WalletConnect.
  * Also shows a camera-friendly link for mobile users.
+ * Returns null when no URI is provided.
  */
 export default function WalletConnectQRModal({ uri, onClose }) {
   if (!uri) return null;
