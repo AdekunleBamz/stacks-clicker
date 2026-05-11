@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
  * Base Modal component for shared UI interactions.
  * Provides a reusable dialog with smooth Framer Motion animations,
  * escape key handling, and proper ARIA accessibility attributes.
+ * Locks body scroll while open and restores it on close.
  *
  * @param {Object} props - Component props
  * @param {boolean} props.isOpen - Whether the modal is currently open
