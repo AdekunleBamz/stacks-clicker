@@ -63,6 +63,7 @@ class ErrorBoundary extends React.Component {
                 type="button"
                 className="action-btn primary"
                 onClick={() => this.setState({ hasError: false, error: null })}
+                aria-label="Try rendering the component again"
               >
                 <span aria-hidden="true">🔄</span> Try Again
               </button>
