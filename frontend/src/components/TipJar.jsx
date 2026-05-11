@@ -18,7 +18,7 @@ export default function TipJar({ onTxSubmit }) {
   const { isConnected } = useWallet();
   const { playSound: play } = useSound();
   const [loading, setLoading] = useState(false);
-  const [tipAmount, setTipAmount] = useState(1000); // 1000 uSTX = 0.001 STX
+  const [tipAmount, setTipAmount] = useState(1000); // 1000 uSTX = 0.001 STX (minimum tip)
   const [recipientAddress, setRecipientAddress] = useState('');
   const [totalTipped, setTotalTipped] = useState(0);
 
