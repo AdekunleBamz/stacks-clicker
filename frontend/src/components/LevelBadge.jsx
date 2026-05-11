@@ -21,7 +21,7 @@ function LevelBadge({ level }) {
             <div className="level-badge-glow"></div>
             <div className="level-badge-inner">
                 <span className="level-text" aria-hidden="true">LVL</span>
-                <span className="level-number">{level}</span>
+                <span className="level-number" aria-live="polite" aria-atomic="true">{level}</span>
             </div>
 
             {/* Mini orbiting particles */}
