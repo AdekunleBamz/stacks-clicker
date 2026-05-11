@@ -39,6 +39,10 @@ function getAudioContext() {
  *
  * @returns {Object} { playSound }
  * @property {Function} playSound - Function to trigger a sound effect: (type: 'click' | 'success' | 'error') => void
+ * @example
+ * const { playSound } = useSound();
+ * playSound('success'); // plays a success chime
+ * playSound('error');   // plays an error tone
  */
 export function useSound() {
   /**
