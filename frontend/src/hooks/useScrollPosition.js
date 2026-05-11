@@ -3,8 +3,9 @@ import { useState, useEffect, useRef } from 'react';
 /**
  * Custom hook for tracking the window scroll position.
  * Useful for scroll-based animations and UI state changes.
+ * Uses a passive scroll listener for performance.
  *
- * @returns {Object} { x, y }
+ * @returns {{ x: number, y: number }} Current horizontal and vertical scroll offsets
  */
 export function useScrollPosition() {
   const [scrollPosition, setScrollPosition] = useState({
