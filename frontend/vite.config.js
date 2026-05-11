@@ -16,6 +16,18 @@ export default defineConfig({
     },
   },
   build: {
-    sourcemap: true,
+    sourcemap: false,
+    chunkSizeWarningLimit: 1000,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom'],
+          'walletconnect-vendor': ['@walletconnect/universal-provider', '@walletconnect/sign-client'],
+          'framer-vendor': ['framer-motion'],
+          'reown-vendor': ['@reown/appkit'],
+          'stacks-vendor': ['@stacks/connect', '@stacks/network', '@stacks/transactions'],
+        },
+      },
+    },
   },
 });

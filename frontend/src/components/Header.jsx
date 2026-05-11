@@ -15,7 +15,7 @@ import { useScrollPosition } from '../hooks/useScrollPosition';
  * @param {Function} props.toggleTheme - Function to toggle between themes.
  */
 export default function Header({ theme, toggleTheme }) {
-  const { address, connectWallet, disconnectWallet } = useWallet();
+  const { address, connectWallet, disconnectWallet, setShowWalletPicker } = useWallet();
   const { lang, setLang } = useI18n();
   const { y } = useScrollPosition();
   const isScrolled = y > 12;
@@ -87,7 +87,7 @@ export default function Header({ theme, toggleTheme }) {
             <button
               type="button"
               className="btn-connect"
-              onClick={connectWallet}
+              onClick={() => setShowWalletPicker(true)}
               aria-label="Connect Stacks Wallet to begin playing"
               title="Connect Stacks wallet"
             >

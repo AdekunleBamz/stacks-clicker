@@ -17,22 +17,17 @@ import { useMedia } from '../hooks/useMedia';
  * ```
  */
 export default function ConnectButton() {
-  const { address, connectWallet, disconnectWallet, isConnecting } = useWallet();
+  const { address, disconnectWallet, isConnecting, setShowWalletPicker } = useWallet();
   const [announcement, setAnnouncement] = useState('');
   const isMobile = useMedia('(max-width: 480px)');
 
   /**
-   * Handles wallet connection with accessibility announcements
+   * Opens the wallet picker modal instead of starting WalletConnect directly.
    */
-  const handleConnect = useCallback(async () => {
-    setAnnouncement('Connecting wallet, please wait...');
-    try {
-      await connectWallet();
-      setAnnouncement('Wallet connected successfully');
-    } catch (error) {
-      setAnnouncement('Failed to connect wallet. Please try again.');
-    }
-  }, [connectWallet]);
+  const handleConnect = useCallback(() => {
+    setAnnouncement('Choose a wallet to connect...');
+    setShowWalletPicker(true);
+  }, [setShowWalletPicker]);
 
   /**
    * Handles wallet disconnection with accessibility announcements
@@ -118,20 +113,11 @@ export default function ConnectButton() {
             type="button"
             className="connect-btn primary-button"
             onClick={handleConnect}
-            aria-label={isConnecting ? 'Connecting wallet...' : 'Connect Stacks Wallet'}
-            title={isConnecting ? 'Connecting wallet' : 'Connect Stacks wallet'}
+            aria-label="Connect Stacks Wallet"
+            title="Connect Stacks wallet"
             aria-haspopup="dialog"
-            aria-busy={isConnecting}
-            disabled={isConnecting}
           >
-            {isConnecting ? (
-              <span className="connect-loading">
-                <span className="spinner" aria-hidden="true"></span>
-                Connecting...
-              </span>
-            ) : (
-              'Connect Wallet'
-            )}
+            Connect Wallet
           </motion.button>
         )}
       </AnimatePresence>

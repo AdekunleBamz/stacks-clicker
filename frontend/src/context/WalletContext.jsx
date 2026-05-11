@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import toast from 'react-hot-toast';
+import { showConnect, AppConfig, UserSession } from '@stacks/connect';
 import {
   getAddresses,
   initProvider,
@@ -31,6 +32,10 @@ function getAppDetails() {
   };
 }
 
+// Stable module-level session — survives redirect-based auth flows
+const hiroAppConfig = new AppConfig(['store_write', 'publish_data']);
+export const userSession = new UserSession({ appConfig: hiroAppConfig });
+
 /**
  * Provider component that manages the global Stacks wallet state and authentication lifecycle.
  * Integrates with WalletConnect for Stacks wallet interactions.
@@ -44,6 +49,21 @@ export function WalletProvider({ children }) {
   const [address, setAddress] = useState(null);
   const [isConnecting, setIsConnecting] = useState(false);
   const [walletConnectUri, setWalletConnectUri] = useState(null);
+  const [showWalletPicker, setShowWalletPicker] = useState(false);
+
+  // Restore Hiro/Leather session on mount (handles redirect-based auth flow)
+  useEffect(() => {
+    if (userSession.isSignInPending()) {
+      userSession.handlePendingSignIn().then((userData) => {
+        const addr = userData?.profile?.stxAddress?.mainnet;
+        if (addr) setAddress(addr);
+      }).catch(() => {});
+    } else if (userSession.isUserSignedIn()) {
+      const userData = userSession.loadUserData();
+      const addr = userData?.profile?.stxAddress?.mainnet;
+      if (addr) setAddress(addr);
+    }
+  }, []);
 
   const checkConnection = useCallback(async () => {
     if (typeof window === 'undefined') {
@@ -52,7 +72,6 @@ export function WalletProvider({ children }) {
     }
 
     if (!isValidProjectId()) {
-      setAddress(null);
       return;
     }
 
@@ -61,7 +80,7 @@ export function WalletProvider({ children }) {
       const account = await getAddresses();
       setAddress(account.address.trim());
     } catch (error) {
-      setAddress(null);
+      // WalletConnect not connected — ignore
     }
   }, []);
 
@@ -93,10 +112,28 @@ export function WalletProvider({ children }) {
   }, []);
 
   const disconnectWallet = useCallback(async () => {
+    // Sign out from Hiro/Leather session
+    if (userSession.isUserSignedIn()) {
+      userSession.signUserOut();
+    }
     await wcDisconnect();
     setWalletConnectUri(null);
     setAddress(null);
     toast('Wallet disconnected');
+  }, []);
+
+  const connectWithHiro = useCallback(() => {
+    showConnect({
+      appDetails: getAppDetails(),
+      onFinish: () => {
+        const userData = userSession.loadUserData();
+        const addr = userData?.profile?.stxAddress?.mainnet;
+        if (addr) setAddress(addr);
+        setShowWalletPicker(false);
+      },
+      onCancel: () => {},
+      userSession,
+    });
   }, []);
 
   const closeWalletConnectModal = useCallback(() => {
@@ -110,20 +147,25 @@ export function WalletProvider({ children }) {
       address,
       connectWallet,
       disconnectWallet,
+      connectWithHiro,
       appDetails,
       isConnected: !!address,
       isConnecting,
       walletConnectUri,
       closeWalletConnectModal,
+      showWalletPicker,
+      setShowWalletPicker,
     }),
     [
       address,
       connectWallet,
       disconnectWallet,
+      connectWithHiro,
       appDetails,
       isConnecting,
       walletConnectUri,
       closeWalletConnectModal,
+      showWalletPicker,
     ]
   );
 
