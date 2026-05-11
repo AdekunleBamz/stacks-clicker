@@ -5,6 +5,9 @@ import prettier from 'eslint-plugin-prettier';
 import eslintConfigPrettier from 'eslint-config-prettier';
 
 export default [
+  {
+    ignores: ['dist/**', 'coverage/**', 'node_modules/**'],
+  },
   js.configs.recommended,
   eslintConfigPrettier,
   {
@@ -12,6 +15,11 @@ export default [
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
       globals: {
         document: 'readonly',
         window: 'readonly',
@@ -34,6 +42,7 @@ export default [
     rules: {
       'prettier/prettier': 'error',
       'react/react-in-jsx-scope': 'off',
+      'react/jsx-uses-vars': 'error',
       'react/prop-types': 'off',
       'no-unused-vars': 'warn',
       'react/jsx-no-target-blank': 'warn',

@@ -1,11 +1,12 @@
 import { memo } from 'react';
-import PropTypes from 'prop-types';
 import Modal from './common/Modal';
 import { useModal } from '../context/ModalContext';
 import { truncateAddress } from '../utils/format';
 
 const STACKS_NETWORK =
-  String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
+  String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet')
+    .trim()
+    .toLowerCase() === 'testnet'
     ? 'testnet'
     : 'mainnet';
 
@@ -25,13 +26,8 @@ const TransactionModal = memo(() => {
   };
 
   return (
-    <Modal
-      isOpen={true}
-      onClose={closeModal}
-      title="🔍 Transaction Details"
-    >
+    <Modal isOpen={true} onClose={closeModal} title="🔍 Transaction Details">
       <div className="tx-details-container" title="Transaction details">
-
         <div className="detail-row">
           <span className="detail-label">Action</span>
           <span className="detail-value highlight">{action}</span>
@@ -55,7 +51,11 @@ const TransactionModal = memo(() => {
 
         <div className="detail-row">
           <span className="detail-label">Transaction ID</span>
-          <span className="detail-value monospace" title={txId} aria-label={`Full transaction ID: ${txId}`}>
+          <span
+            className="detail-value monospace"
+            title={txId}
+            aria-label={`Full transaction ID: ${txId}`}
+          >
             {truncateAddress(txId)}
           </span>
         </div>
@@ -96,7 +96,7 @@ const TransactionModal = memo(() => {
           font-size: 0.85rem;
           font-weight: 600;
           text-transform: uppercase;
-          letter-spacing: 0.05em;
+          letter-spacing: 0;
         }
 
         .detail-value {
@@ -130,7 +130,7 @@ const TransactionModal = memo(() => {
 
         .status-badge {
           padding: 4px 8px;
-          border-radius: 12px;
+          border-radius: var(--radius-lg);
           font-size: 0.75rem;
           font-weight: 800;
         }
@@ -141,6 +141,6 @@ const TransactionModal = memo(() => {
       `}</style>
     </Modal>
   );
-};
+});
 
 export default TransactionModal;

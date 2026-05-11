@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import Header from '../Header';
 import { useWallet } from '../../context/WalletContext';
 import { useI18n } from '../../context/I18nContext';
@@ -19,11 +19,11 @@ vi.mock('../../hooks/useScrollPosition', () => ({
 }));
 
 vi.mock('../NetworkLogo', () => ({
-  default: () => <div data-testid="network-logo" />
+  default: () => <div data-testid="network-logo" />,
 }));
 
 vi.mock('../common/AddressBadge', () => ({
-  default: ({ address }) => <div data-testid="address-badge">{address}</div>
+  default: ({ address }) => <div data-testid="address-badge">{address}</div>,
 }));
 
 describe('Header component', () => {
@@ -36,6 +36,7 @@ describe('Header component', () => {
     useI18n.mockReturnValue({
       lang: 'en',
       setLang: vi.fn(),
+      supportedLangs: ['en', 'es', 'fr', 'pt', 'de'],
     });
     useScrollPosition.mockReturnValue({ y: 0 });
   });
@@ -81,8 +82,10 @@ describe('Header component', () => {
     render(<Header theme="dark" toggleTheme={vi.fn()} />);
 
     const select = screen.getByLabelText('Select application language');
-    const options = Array.from(select.querySelectorAll('option')).map((option) => option.textContent);
-    expect(options).toEqual(['EN', 'ES']);
+    const options = Array.from(select.querySelectorAll('option')).map(
+      (option) => option.textContent
+    );
+    expect(options).toEqual(['EN', 'ES', 'FR', 'PT', 'DE']);
   });
 
   it('shows connect button when wallet is not connected', () => {

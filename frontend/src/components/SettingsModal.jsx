@@ -16,19 +16,13 @@ const SettingsModal = memo(function SettingsModal() {
 
   if (!isOpen('settings')) return null;
 
-  const themeLabel = theme === 'dark' ? 'dark' : 'light';
-
   const handleLanguageChange = (newLang) => {
     setLang(newLang);
     playSound('click');
   };
 
   return (
-    <Modal
-      isOpen={true}
-      onClose={closeModal}
-      title="⚙️ Application Settings"
-    >
+    <Modal isOpen={true} onClose={closeModal} title="⚙️ Application Settings">
       <div className="settings-container" role="form" aria-label="Application settings">
         <section className="settings-section">
           <h4 className="settings-label">Appearance</h4>
@@ -42,13 +36,23 @@ const SettingsModal = memo(function SettingsModal() {
               aria-labelledby="theme-mode-label"
               aria-pressed={theme === 'dark'}
             >
-              {theme === 'dark' ? <><span aria-hidden="true">🌙</span> Dark</> : <><span aria-hidden="true">☀️</span> Light</>}
+              {theme === 'dark' ? (
+                <>
+                  <span aria-hidden="true">🌙</span> Dark
+                </>
+              ) : (
+                <>
+                  <span aria-hidden="true">☀️</span> Light
+                </>
+              )}
             </button>
           </div>
         </section>
 
         <section className="settings-section" aria-labelledby="settings-l10n-label">
-          <h4 className="settings-label" id="settings-l10n-label">Localization</h4>
+          <h4 className="settings-label" id="settings-l10n-label">
+            Localization
+          </h4>
           <div className="settings-row">
             <span id="preferred-language-label">Preferred Language</span>
             <select
@@ -64,12 +68,20 @@ const SettingsModal = memo(function SettingsModal() {
         </section>
 
         <section className="settings-section" aria-labelledby="settings-acoustics-label">
-          <h4 className="settings-label" id="settings-acoustics-label">Acoustics</h4>
+          <h4 className="settings-label" id="settings-acoustics-label">
+            Acoustics
+          </h4>
           <div className="settings-row">
             <span>Interaction Sounds</span>
             <div className="toggle-switch">
               {/* Simplified toggle for demonstration */}
-              <button type="button" className="secondary-button btn-sm" aria-label="Toggle interaction sounds">Enabled</button>
+              <button
+                type="button"
+                className="secondary-button btn-sm"
+                aria-label="Toggle interaction sounds"
+              >
+                Enabled
+              </button>
             </div>
           </div>
         </section>
@@ -90,7 +102,7 @@ const SettingsModal = memo(function SettingsModal() {
           font-size: 0.8rem;
           text-transform: uppercase;
           color: var(--text-muted);
-          letter-spacing: 0.05em;
+          letter-spacing: 0;
         }
         .settings-row {
           display: flex;
