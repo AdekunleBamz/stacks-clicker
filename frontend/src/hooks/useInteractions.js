@@ -14,6 +14,10 @@ import { useQuickPoll } from './useQuickPoll';
  * @property {Object} tipjar - API for the TipJar contract
  * @property {Object} quickpoll - API for the QuickPoll contract
  * @property {Function} pingAll - Unified function to trigger heartbeat pings across all contracts
+ * @example
+ * const { clicker, pingAll } = useInteractions({ onTxSubmit: handleTx });
+ * // clicker.click() sends a single click transaction
+ * // pingAll() pings all three contracts simultaneously
  */
 export function useInteractions({ onTxSubmit }) {
   /**
