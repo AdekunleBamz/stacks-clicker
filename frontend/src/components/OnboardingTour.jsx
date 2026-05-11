@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const steps = [
   { target: 'logo', content: 'Welcome to Stacks Clicker V2! This is your gateway to the Stacks ecosystem.' },
-  { target: 'interaction-section', content: 'Here you can interact with various smart contracts - Click, Tip, and Vote!' },
+  { target: 'interaction-section', content: 'Here you can interact with various smart contracts — Click, Tip, and Vote!' },
   { target: 'stats-aside', content: 'Track your real-time performance and transaction history here.' },
   { target: 'wallet-section', content: 'Connect your wallet and monitor network status right here.' }
 ];
