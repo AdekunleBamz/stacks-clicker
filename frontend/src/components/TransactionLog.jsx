@@ -36,7 +36,7 @@ export default function TransactionLog({ transactions = [] }) {
   return (
     <div className="tx-log" title="Recent transaction log">
       <h3><span aria-hidden="true">📋</span> Transaction Log</h3>
-      <div className="tx-list" role="log" aria-live="polite" aria-relevant="additions text">
+        <div className="tx-list" role="log" aria-live="polite" aria-atomic="false" aria-relevant="additions text">
         {transactions.map((tx, index) => {
           const explorerLink = getExplorerLink(tx.id, tx.network);
           return (
