@@ -76,6 +76,11 @@ export function formatNumberCompact(value, decimals = 1) {
  *
  * @param {number} microStx - The amount in micro-STX
  * @returns {string} The formatted STX amount
+ * @example
+ * formatStx(1000000)
+ * // => '1.00 STX'
+ * formatStx(1500000n)
+ * // => '1.50 STX'
  */
 export function formatStx(microStx) {
   if (typeof microStx === 'bigint') {
