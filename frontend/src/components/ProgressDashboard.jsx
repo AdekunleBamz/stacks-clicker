@@ -20,7 +20,7 @@ function ProgressDashboard({ userData }) {
                 <p>Your journey in the Stacks Ecosystem</p>
             </div>
 
-            <div className="dashboard-main-row">
+            <div className="dashboard-main-row" role="group" aria-label="Level and XP overview">
                 <LevelBadge level={level} />
                 <div style={{ flex: 1 }}>
                     <XPProgress currentXP={xp} nextLevelXP={nextLevelXP} level={level} />
