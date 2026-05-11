@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 /**
  * A custom tooltip component for accessible and premium descriptions.
+ * Supports keyboard navigation (Escape to dismiss) and screen reader friendly roles.
  */
 export default function Tooltip({ text, content, children }) {
   const [isVisible, setIsVisible] = useState(false);
