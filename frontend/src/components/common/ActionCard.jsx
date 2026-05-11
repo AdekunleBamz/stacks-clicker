@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { forwardRef, memo } from 'react';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 
@@ -12,24 +12,33 @@ import PropTypes from 'prop-types';
  * @param {React.ReactNode} props.children - Card actions and content.
  * @returns {JSX.Element} The rendered action card.
  */
-function ActionCard({ title, subtitle, icon, iconClass, children, id }) {
+const ActionCard = forwardRef(function ActionCard(
+  { title, subtitle, icon, iconClass, children, id, ...rest },
+  ref
+) {
   const headingId = id || `action-card-heading-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
   return (
     <motion.div
+      ref={ref}
       className="contract-card"
       role="region"
       aria-labelledby={headingId}
       title={title}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
+      viewport={{ once: true, margin: '-50px' }}
       whileHover={{ y: -5, boxShadow: '0 25px 50px -12px rgba(99, 102, 241, 0.2)' }}
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+      {...rest}
     >
       <div className="contract-header">
-        <div className={`contract-icon ${iconClass}`} aria-hidden="true">{icon}</div>
+        <div className={`contract-icon ${iconClass}`} aria-hidden="true">
+          {icon}
+        </div>
         <div>
-          <h3 id={headingId} className="contract-title">{title}</h3>
+          <h3 id={headingId} className="contract-title">
+            {title}
+          </h3>
           <p className="contract-subtitle">{subtitle}</p>
         </div>
       </div>
@@ -38,7 +47,7 @@ function ActionCard({ title, subtitle, icon, iconClass, children, id }) {
       </div>
     </motion.div>
   );
-}
+});
 
 ActionCard.defaultProps = {
   subtitle: '',
@@ -53,6 +62,7 @@ ActionCard.propTypes = {
   icon: PropTypes.node,
   iconClass: PropTypes.string,
   children: PropTypes.node,
+  id: PropTypes.string,
 };
 
 export default memo(ActionCard);

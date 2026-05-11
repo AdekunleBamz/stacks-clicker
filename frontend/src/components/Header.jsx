@@ -15,23 +15,23 @@ import { useScrollPosition } from '../hooks/useScrollPosition';
  * @param {Function} props.toggleTheme - Function to toggle between themes.
  */
 export default function Header({ theme, toggleTheme }) {
-  const { address, connectWallet, disconnectWallet, setShowWalletPicker } = useWallet();
-  const { lang, setLang } = useI18n();
+  const { address, disconnectWallet, setShowWalletPicker } = useWallet();
+  const { lang, setLang, supportedLangs = ['en', 'es', 'fr', 'pt', 'de'] } = useI18n();
   const { y } = useScrollPosition();
   const isScrolled = y > 12;
+  const languageLabels = {
+    en: 'EN',
+    es: 'ES',
+    fr: 'FR',
+    pt: 'PT',
+    de: 'DE',
+  };
 
   return (
     <header
       className={`app-header ${isScrolled ? 'header-scrolled' : ''}`}
       role="banner"
       title="Main application header"
-      style={{
-        backdropFilter: isScrolled ? 'blur(16px)' : 'blur(0px)',
-        backgroundColor: isScrolled ? 'var(--glass-bg-scrolled)' : 'transparent',
-        borderBottom: isScrolled ? '1px solid var(--glass-border)' : '1px solid transparent',
-        boxShadow: isScrolled ? '0 4px 30px rgba(0, 0, 0, 0.1)' : 'none',
-        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-      }}
     >
       <div className="header-content">
         <div
@@ -41,7 +41,10 @@ export default function Header({ theme, toggleTheme }) {
           title="Stacks Clicker V2 Logo"
         >
           <NetworkLogo isSyncing={isScrolled} />
-          <h1 className="header-title text-gradient">Stacks Clicker</h1>
+          <div className="brand-copy">
+            <h1 className="header-title">Stacks Clicker</h1>
+            <span className="brand-subtitle">Bitcoin L2 activity hub</span>
+          </div>
         </div>
 
         <div className="wallet-section" role="group" aria-label="Wallet Connection Utilities">
@@ -52,10 +55,11 @@ export default function Header({ theme, toggleTheme }) {
             aria-label="Select application language"
             title="Application language"
           >
-            <option value="en">EN</option>
-            <option value="es">ES</option>
-            <option value="fr">FR</option>
-            <option value="de">DE</option>
+            {supportedLangs.map((code) => (
+              <option key={code} value={code}>
+                {languageLabels[code] ?? code.toUpperCase()}
+              </option>
+            ))}
           </select>
           <Tooltip text={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}>
             <button
@@ -80,7 +84,9 @@ export default function Header({ theme, toggleTheme }) {
                 aria-label="Disconnect wallet session"
                 title="Disconnect wallet"
               >
-                <span className="logout-icon" aria-hidden="true">🚪</span>
+                <span className="logout-icon" aria-hidden="true">
+                  🚪
+                </span>
               </button>
             </div>
           ) : (
