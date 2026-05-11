@@ -14,7 +14,7 @@ function SocialFeed({ activities }) {
                 <span className="game-badge">Community</span>
             </div>
 
-            <div className="activity-list" role="feed" aria-label="Community live activity">
+            <div className="activity-list" role="feed" aria-live="polite" aria-atomic="false" aria-relevant="additions removals" aria-label="Community live activity">
                 {activities.length === 0 && (
                     <p className="feed-empty" role="article">No recent activity. Start interacting!</p>
                 )}
