@@ -6,6 +6,7 @@ import { useSound } from '../../hooks/useSound';
  * Floating Action Button (FAB) that appears when the user scrolls down,
  * allowing quick smooth scroll back to the top of the page.
  * Uses memoization to prevent unnecessary re-renders during scroll events.
+ * Visibility threshold is 300px from the top of the page.
  *
  * @component
  * @returns {JSX.Element|null} The rendered scroll-to-top button or null
