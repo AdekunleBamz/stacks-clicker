@@ -69,6 +69,7 @@ export const AUTO_CLICKER_BASE_RATE = 1;
 
 export const BOOST_LEVEL_CAP = 5;
 
+/** @type {number} Maximum number of toast notifications to display concurrently. */
 export const MAX_NOTIFICATION_COUNT = 10;
 
 export const PRESTIGE_BONUS_BPS = 500;
