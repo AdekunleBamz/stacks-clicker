@@ -44,7 +44,7 @@ function PlayerStats({ stats, txCount }) {
       title="Your Personal Player Statistics Overview"
       style={{ textRendering: 'optimizeLegibility' }}
     >
-      <div className={`stats-cards ${txCount === 0 && stats.clicks === 0 ? 'shimmer' : ''}`} role="group" aria-label="Aggregate Player Performance Metrics">
+      <div className={`stats-cards ${txCount === 0 && stats.clicks === 0 ? 'shimmer' : ''}`} role="group" aria-label="Aggregate Player Performance Metrics" data-testid="player-stats-grid">
         {statItems.map((item, index) => (
           <StatsCard key={item.label} {...item} index={index} />
         ))}
