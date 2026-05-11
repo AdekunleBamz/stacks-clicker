@@ -11,6 +11,11 @@
  * @param {number} [options.suffix=4] - Chars to show at end
  * @param {string} [options.separator='...'] - Chars to show in middle
  * @returns {string} The truncated address
+ * @example
+ * truncateAddress('SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N')
+ * // => 'SP3F...G6N'
+ * truncateAddress('SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N', { prefix: 6, suffix: 4 })
+ * // => 'SP3FKN...G6N'
  */
 export function truncateAddress(address, { prefix = 4, suffix = 4, separator = '...' } = {}) {
   if (!address) return '';
