@@ -19,6 +19,10 @@ const NETWORK_POLL_INTERVAL_MS = 30_000;
  * @property {boolean} isUpdating - True while a network status check is in flight
  * @property {number|null} lastUpdated - Unix timestamp (ms) of the last successful refresh
  * @property {Function} blocksSince - Helper that returns block distance from a reference height
+ * @example
+ * const { blockHeight, isConnected } = useNetwork();
+ * // isConnected → true
+ * // blockHeight → 145823
  */
 export function useNetwork() {
   const [blockHeight, setBlockHeight] = useState(null);
