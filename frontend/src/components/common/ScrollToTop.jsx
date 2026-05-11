@@ -45,11 +45,11 @@ const ScrollToTop = memo(function ScrollToTop() {
           initial={{ opacity: 0, scale: 0.3, y: 50 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.3, y: 50, transition: { duration: 0.2 } }}
-          whileHover={{ 
-            y: -5, 
-            scale: 1.1, 
+          whileHover={{
+            y: -5,
+            scale: 1.1,
             backgroundColor: 'var(--primary)',
-            boxShadow: '0 10px 25px -5px var(--primary-glow)' 
+            boxShadow: '0 10px 25px -5px var(--primary-glow)'
           }}
           whileTap={{ scale: 0.9, y: 0 }}
           onHoverStart={() => playSound('hover')}
@@ -57,7 +57,7 @@ const ScrollToTop = memo(function ScrollToTop() {
           aria-label="Scroll back to top of the page"
           title="Scroll to Top"
         >
-          <motion.span 
+          <motion.span
             initial={{ y: 2 }}
             animate={{ y: [2, -2, 2] }}
             transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}

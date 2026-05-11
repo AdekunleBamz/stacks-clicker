@@ -14,11 +14,11 @@ import { motion } from 'framer-motion';
  * @param {string} [props.label='content'] - Describes what is loading, used in aria-label
  * @returns {JSX.Element} The rendered skeleton loader
  */
-function SkeletonLoader({ 
-  width = '100%', 
-  height = '20px', 
-  borderRadius = '8px', 
-  className = '', 
+function SkeletonLoader({
+  width = '100%',
+  height = '20px',
+  borderRadius = '8px',
+  className = '',
   label = 'content',
   gradientAngle = 90,
   shimmerColor = 'rgba(255, 255, 255, 0.05)'

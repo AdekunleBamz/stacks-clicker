@@ -6,16 +6,16 @@ Manage environment configuration for the Stacks Clicker frontend.
 
 Quick reference:
 
-| Variable | Required | Notes |
-|----------|----------|-------|
-| `VITE_WALLETCONNECT_PROJECT_ID` | Yes | Required for wallet pairing and QR flow |
-| `VITE_DEBUG` | No | Enables verbose debug logging |
-| `VITE_STACKS_NETWORK` | No | Defaults to `mainnet` when omitted |
-| `VITE_DEPLOYER_ADDRESS` | No | Defaults to the value shipped in `frontend/.env.example` |
-| `VITE_COINGECKO_API_KEY` | No | Enables higher-limit price lookups |
+| Variable                 | Required | Notes                                                    |
+| ------------------------ | -------- | -------------------------------------------------------- |
+| `VITE_DEBUG`             | No       | Enables verbose debug logging                            |
+| `VITE_STACKS_NETWORK`    | No       | Defaults to `mainnet` when omitted                       |
+| `VITE_DEPLOYER_ADDRESS`  | No       | Defaults to the value shipped in `frontend/.env.example` |
+| `VITE_COINGECKO_API_KEY` | No       | Enables higher-limit price lookups                       |
 
 Before local startup:
-- Verify required variables are present
+
+- Verify optional variables match the environment you intend to test
 - Confirm the selected network matches your wallet network
 - Keep separate `.env` snapshots per network when switching frequently during QA
 - Confirm wallet address and deployer address expectations are aligned for the chosen network
@@ -26,6 +26,7 @@ Document new variables in `frontend/.env.example` as soon as they are introduced
 Companion index: [Operations docs](README.md).
 
 ### Environment Reminder
+
 - Revalidate required env vars whenever network defaults change between testnet and mainnet.
 - Reconfirm CI and local env var names stay aligned after configuration refactors.
 

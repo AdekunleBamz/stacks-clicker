@@ -2,7 +2,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import TipJar from '../TipJar';
 import { WalletContext } from '../../context/WalletContext';
-import { callContract } from '../../utils/walletconnect';
+import { callContract } from '../../utils/stacksWallet';
 
 // Mock WalletContext
 const mockWalletValue = {
@@ -11,7 +11,7 @@ const mockWalletValue = {
 };
 
 // Mock callContract
-vi.mock('../../utils/walletconnect', () => ({
+vi.mock('../../utils/stacksWallet', () => ({
   callContract: vi.fn(),
 }));
 
@@ -43,9 +43,11 @@ describe('TipJar component', () => {
     const quickTipBtn = screen.getByText(/Quick Tip/i);
     fireEvent.click(quickTipBtn);
 
-    expect(callContract).toHaveBeenCalledWith(expect.objectContaining({
-      functionName: 'quick-tip'
-    }));
+    expect(callContract).toHaveBeenCalledWith(
+      expect.objectContaining({
+        functionName: 'quick-tip',
+      })
+    );
   });
 
   it('prevents tipping when not connected', () => {
@@ -70,11 +72,11 @@ describe('TipJar component', () => {
     const tipUserBtn = screen.getByText(/Tip User/i);
     fireEvent.click(tipUserBtn);
 
-    expect(callContract).toHaveBeenCalledWith(expect.objectContaining({
-      functionName: 'tip-user',
-      functionArgs: expect.arrayContaining([
-        expect.objectContaining({ value: '5000' })
-      ])
-    }));
+    expect(callContract).toHaveBeenCalledWith(
+      expect.objectContaining({
+        functionName: 'tip-user',
+        functionArgs: expect.arrayContaining([expect.objectContaining({ value: '5000' })]),
+      })
+    );
   });
 });

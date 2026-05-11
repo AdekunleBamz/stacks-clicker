@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef } from 'react';
 import { useWallet } from '../context/WalletContext';
-import { callContract } from '../utils/walletconnect';
+import { callContract } from '../utils/stacksWallet';
 import { DEPLOYER_ADDRESS, CONTRACT_NAMES } from '../config/contracts';
 
 /** @constant {string} Clicker contract name */

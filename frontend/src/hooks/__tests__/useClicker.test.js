@@ -2,7 +2,7 @@ import { renderHook, act } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { useClicker } from '../useClicker';
 import { useNotifications } from '../useNotifications';
-import { callContract } from '../../utils/walletconnect';
+import { callContract } from '../../utils/stacksWallet';
 
 // Mock dependencies
 vi.mock('../useNotifications', () => ({
@@ -12,7 +12,7 @@ vi.mock('../useNotifications', () => ({
   }),
 }));
 
-vi.mock('../../utils/walletconnect', () => ({
+vi.mock('../../utils/stacksWallet', () => ({
   callContract: vi.fn(),
 }));
 
@@ -31,9 +31,9 @@ describe('useClicker hook', () => {
   it('handles a successful click transaction', async () => {
     const mockTxId = '0x123';
     callContract.mockResolvedValueOnce({ txId: mockTxId });
-    
+
     const { result } = renderHook(() => useClicker({ onTxSubmit }));
-    
+
     // Trigger click - Wrapped in act because it updates state
     let promise;
     await act(async () => {
@@ -48,9 +48,9 @@ describe('useClicker hook', () => {
   it('handles a failed click transaction', async () => {
     const mockError = new Error('User Rejected');
     callContract.mockRejectedValueOnce(mockError);
-    
+
     const { result } = renderHook(() => useClicker({ onTxSubmit }));
-    
+
     await act(async () => {
       try {
         await result.current.click();
@@ -65,14 +65,16 @@ describe('useClicker hook', () => {
   it('correctly handles multi-click payloads', async () => {
     callContract.mockResolvedValueOnce({ txId: '0x' });
     const { result } = renderHook(() => useClicker({ onTxSubmit }));
-    
+
     await act(async () => {
       await result.current.multiClick(10);
     });
 
-    expect(callContract).toHaveBeenCalledWith(expect.objectContaining({
-      functionName: 'multi-click',
-      functionArgs: [{ type: 'uint128', value: '10' }]
-    }));
+    expect(callContract).toHaveBeenCalledWith(
+      expect.objectContaining({
+        functionName: 'multi-click',
+        functionArgs: [{ type: 'uint128', value: '10' }],
+      })
+    );
   });
 });

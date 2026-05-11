@@ -13,7 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Mention when a release includes support-facing copy or runbook changes.
 
 ## [Unreleased]
+
 ### Added
+
 - `PLATINUM` tier (500 interactions) to `STREAK_THRESHOLDS`.
 - `MAX_POLL_OPTIONS` constant to cap quick poll option count.
 - `isPositiveInteger` helper to validation utils.
@@ -27,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 2000 interaction milestone threshold to `useMilestones`.
 
 ### Changed
+
 - `stringToColor` now varies saturation for more visually distinct colors.
 - `useThrottle`, `useDebounce`, `useLongPress`, `useCombo`, `useClipboard` all use `Number.isFinite` for delay validation.
 - `useScrollPosition` removal call no longer passes unnecessary passive option.
@@ -40,13 +43,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `formatStx` allows display of negative micro-STX values.
 
 ### Fixed
+
 - `parseContractError` now handles `disconnected`/`connection lost` error patterns.
 
 ### Docs
+
 - Added commit type reference list to `CONTRIBUTING.md`.
 - Added response timeline table to `SECURITY.md`.
 
 ### Changed (prior)
+
 - Improved contributor and setup documentation quality.
 - Enhanced security policy with detailed procedures.
 - Updated code of conduct with comprehensive guidelines.
@@ -58,12 +64,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Derived tip amounts from MIN_TIP_MICRO_STX instead of hardcoded values.
 
 ### Fixed
+
 - useWindowFocus, useKeyPress, useNetworkStatus, useWindowSize missing passive flags.
 - Initial focus target in OnboardingTour now points to the correct button class.
 - ScrollArea effect missing handleScroll in dependency array.
 
 ## [v2p] - 2026-03-11
+
 ### Added
+
 - Comprehensive documentation improvements (Batch 1).
 - Visual Guide section in README.md.
 - CONTRIBUTING.md for project standards.
@@ -71,16 +80,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Detailed internal comments for transaction handlers in App.jsx.
 
 ### Changed
+
 - Refactored README.md feature descriptions for clarity.
-- Updated WalletConnect utility documentation.
+- Updated Stacks wallet utility documentation.
 
 ## [v2n] - 2026-03-10
+
 ### Added
+
 - Simplified global voting system (QuickPoll v2n).
 - Network heartbeat indicator.
 
 ## [v2m] - 2026-03-09
+
 ### Added
+
 - TipJar micro-tipping protocol.
 - Clicker streak mechanics.
 - Initial mainnet deployment plan.

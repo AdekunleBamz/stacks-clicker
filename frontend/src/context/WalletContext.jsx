@@ -1,24 +1,20 @@
 import { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import toast from 'react-hot-toast';
-import { connect as stacksConnect, disconnect as stacksDisconnect, isConnected as stacksIsConnected, getLocalStorage } from '@stacks/connect';
 import {
+  connectStacksWallet,
+  disconnectStacksWallet,
   getAddresses,
-  initProvider,
-  isValidProjectId,
-  wcConnect,
-  wcDisconnect,
-} from '../utils/walletconnect';
+  isConnected as isStacksConnected,
+} from '../utils/stacksWallet';
 
 /**
  * @typedef {Object} WalletContextValue
  * @property {string|null} address - The current Stacks mainnet address of the connected user
- * @property {Function} connectWallet - Function to trigger the WalletConnect pairing flow
- * @property {Function} disconnectWallet - Function to clear the active WalletConnect session
+ * @property {Function} connectWallet - Function to connect a native Stacks wallet
+ * @property {Function} disconnectWallet - Function to clear the active Stacks wallet session
  * @property {Object} appDetails - Metadata for the Stacks connection (name, icon)
  * @property {boolean} isConnected - Computed boolean indicating if a wallet is currently linked
- * @property {string|null} walletConnectUri - Current WalletConnect pairing URI, shown as QR
- * @property {Function} closeWalletConnectModal - Function to hide the pairing QR modal
  */
 
 /** @type {React.Context<WalletContextValue|null>} */
@@ -34,7 +30,6 @@ function getAppDetails() {
 
 /**
  * Provider component that manages the global Stacks wallet state and authentication lifecycle.
- * Integrates with WalletConnect for Stacks wallet interactions.
  *
  * @component
  * @param {Object} props - Component props
@@ -44,49 +39,27 @@ function getAppDetails() {
 export function WalletProvider({ children }) {
   const [address, setAddress] = useState(null);
   const [isConnecting, setIsConnecting] = useState(false);
-  const [walletConnectUri, setWalletConnectUri] = useState(null);
-  const [showWalletPicker, setShowWalletPicker] = useState(false);
 
-  // Check for existing WalletConnect session (legacy path)
   const checkConnection = useCallback(async () => {
-    if (typeof window === 'undefined' || !isValidProjectId()) return;
+    if (typeof window === 'undefined' || !isStacksConnected()) return;
     try {
-      await initProvider();
       const account = await getAddresses();
       setAddress(account.address.trim());
     } catch {
-      // not connected via WalletConnect — ignore
+      // no restorable Stacks wallet session
     }
   }, []);
 
-  // Restore Hiro/Leather session on mount (v8 localStorage-based)
   useEffect(() => {
-    if (stacksIsConnected()) {
-      const data = getLocalStorage();
-      const addr = data?.addresses?.stx?.[0]?.address;
-      if (addr) {
-        setAddress(addr);
-        return;
-      }
-    }
-    // Check WalletConnect session
     void checkConnection();
   }, [checkConnection]);
 
   const connectWallet = useCallback(async () => {
-    if (!isValidProjectId()) {
-      toast.error('WalletConnect project ID is not configured');
-      return;
-    }
-
     setIsConnecting(true);
-    setWalletConnectUri(null);
 
     try {
-      await wcConnect((uri) => setWalletConnectUri(uri));
-      const account = await getAddresses();
+      const account = await connectStacksWallet();
       setAddress(account.address.trim());
-      setWalletConnectUri(null);
       toast.success('Wallet connected!');
     } catch (error) {
       toast.error(error?.message || 'Wallet connection failed');
@@ -97,34 +70,9 @@ export function WalletProvider({ children }) {
   }, []);
 
   const disconnectWallet = useCallback(async () => {
-    // Sign out from Hiro/Leather (v8) and WalletConnect sessions
-    stacksDisconnect();
-    await wcDisconnect();
-    setWalletConnectUri(null);
+    disconnectStacksWallet();
     setAddress(null);
     toast('Wallet disconnected');
-  }, []);
-
-  const connectWithHiro = useCallback(async () => {
-    setIsConnecting(true);
-    try {
-      await stacksConnect();
-      const data = getLocalStorage();
-      const addr = data?.addresses?.stx?.[0]?.address;
-      if (addr) {
-        setAddress(addr);
-        setShowWalletPicker(false);
-        toast.success('Wallet connected!');
-      }
-    } catch {
-      // user cancelled
-    } finally {
-      setIsConnecting(false);
-    }
-  }, []);
-
-  const closeWalletConnectModal = useCallback(() => {
-    setWalletConnectUri(null);
   }, []);
 
   const appDetails = useMemo(() => getAppDetails(), []);
@@ -134,28 +82,12 @@ export function WalletProvider({ children }) {
       address,
       connectWallet,
       disconnectWallet,
-      connectWithHiro,
       appDetails,
       isConnected: !!address,
       isConnecting,
-      walletConnectUri,
-      closeWalletConnectModal,
-      showWalletPicker,
-      setShowWalletPicker,
     }),
-    [
-      address,
-      connectWallet,
-      disconnectWallet,
-      connectWithHiro,
-      appDetails,
-      isConnecting,
-      walletConnectUri,
-      closeWalletConnectModal,
-      showWalletPicker,
-    ]
+    [address, connectWallet, disconnectWallet, appDetails, isConnecting]
   );
-
 
   return <WalletContext.Provider value={value}>{children}</WalletContext.Provider>;
 }

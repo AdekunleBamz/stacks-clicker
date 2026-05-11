@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { useWallet } from '../context/WalletContext';
-import { callContract } from '../utils/walletconnect';
+import { callContract } from '../utils/stacksWallet';
 import { DEPLOYER_ADDRESS, CONTRACT_NAMES } from '../config/contracts';
 
 /** @constant {string} QuickPoll contract name */
@@ -16,38 +16,49 @@ export function useQuickPoll({ onTxSubmit } = {}) {
   const { isConnected } = useWallet();
   const [loadingStates, setLoadingStates] = useState({});
 
-  const executeAction = useCallback(async (key, functionName, functionArgs = []) => {
-    if (!isConnected) return;
-    setLoadingStates((prev) => ({ ...prev, [key]: true }));
-    try {
-      const result = await callContract({
-        contractAddress: DEPLOYER_ADDRESS,
-        contractName: CONTRACT_NAME,
-        functionName,
-        functionArgs,
-      });
-      onTxSubmit?.(key, result.txId);
-      return result;
-    } catch (err) {
-      console.error(`QuickPoll action ${key} failed:`, err);
-      throw err;
-    } finally {
-      setLoadingStates((prev) => ({ ...prev, [key]: false }));
-    }
-  }, [isConnected, onTxSubmit]);
+  const executeAction = useCallback(
+    async (key, functionName, functionArgs = []) => {
+      if (!isConnected) return;
+      setLoadingStates((prev) => ({ ...prev, [key]: true }));
+      try {
+        const result = await callContract({
+          contractAddress: DEPLOYER_ADDRESS,
+          contractName: CONTRACT_NAME,
+          functionName,
+          functionArgs,
+        });
+        onTxSubmit?.(key, result.txId);
+        return result;
+      } catch (err) {
+        console.error(`QuickPoll action ${key} failed:`, err);
+        throw err;
+      } finally {
+        setLoadingStates((prev) => ({ ...prev, [key]: false }));
+      }
+    },
+    [isConnected, onTxSubmit]
+  );
 
-  const vote = useCallback((pollId, option) => {
-    const voteYesFlag = option === true || option === 1 || option === 'yes';
-    return executeAction('🗳️ Vote', 'vote', [
-      { type: 'uint128', value: pollId.toString() },
-      { type: 'bool', value: voteYesFlag }
-    ]);
-  }, [executeAction]);
+  const vote = useCallback(
+    (pollId, option) => {
+      const voteYesFlag = option === true || option === 1 || option === 'yes';
+      return executeAction('🗳️ Vote', 'vote', [
+        { type: 'uint128', value: pollId.toString() },
+        { type: 'bool', value: voteYesFlag },
+      ]);
+    },
+    [executeAction]
+  );
 
-  const createPoll = useCallback((question) => {
-    const normalizedQuestion = String(question ?? '').trim();
-    return executeAction('📝 Create Poll', 'create-poll', [{ type: 'string-ascii', value: normalizedQuestion }]);
-  }, [executeAction]);
+  const createPoll = useCallback(
+    (question) => {
+      const normalizedQuestion = String(question ?? '').trim();
+      return executeAction('📝 Create Poll', 'create-poll', [
+        { type: 'string-ascii', value: normalizedQuestion },
+      ]);
+    },
+    [executeAction]
+  );
   const handlePollPing = useCallback(() => executeAction('📡 Poll-Ping', 'ping'), [executeAction]);
 
   return {

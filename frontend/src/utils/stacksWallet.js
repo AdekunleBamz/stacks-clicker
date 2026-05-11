@@ -1,10 +1,10 @@
 /**
- * Stacks Native Wallet Integration
+ * Stacks native wallet integration.
  *
- * Uses @stacks/connect v8 JSON-RPC API for modern wallet compatibility.
- * Supports Leather, Xverse, Asigna and other Stacks-compatible wallets.
+ * Uses @stacks/connect v8 JSON-RPC APIs for Leather, Xverse, Asigna,
+ * and other Stacks-compatible wallets.
  *
- * @module utils/walletconnect
+ * @module utils/stacksWallet
  */
 
 import {
@@ -26,24 +26,15 @@ function log(...args) {
 
 const network = STACKS_NETWORK === 'testnet' ? new StacksTestnet() : new StacksMainnet();
 
-export function isValidProjectId() {
-  return true;
-}
-
 export function getStacksChainId() {
   return STACKS_NETWORK === 'testnet' ? 'stacks:2147483648' : 'stacks:1';
 }
 
-export async function initProvider() {
-  log('initProvider called');
-  return true;
-}
-
 /**
- * Connect using the v8 JSON-RPC API — opens the wallet's connect-modal.
- * The onDisplayUri callback is kept for API compatibility but is not used.
+ * Connect using the v8 JSON-RPC API. This opens the user's installed
+ * Stacks wallet authorization prompt without adding a third-party relay provider.
  */
-export async function wcConnect(_onDisplayUri) {
+export async function connectStacksWallet() {
   log('Initiating Stacks native connection');
   await stacksConnect();
   return getAddresses();
@@ -113,7 +104,7 @@ export async function transferStx(recipient, amount, memo) {
   });
 }
 
-export async function wcDisconnect() {
+export function disconnectStacksWallet() {
   if (stacksIsConnected()) {
     log('Disconnecting session');
     stacksDisconnect();
@@ -126,8 +117,4 @@ export function isConnected() {
 
 export function getSession() {
   return stacksIsConnected() ? getLocalStorage() : null;
-}
-
-export function getWalletConnectLink(_wcUri) {
-  return '';
 }

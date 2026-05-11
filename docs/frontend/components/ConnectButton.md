@@ -9,10 +9,10 @@ The `ConnectButton` component shows wallet connection state in compact form, ser
 
 ## States
 
-| State | Display | Action |
-| :--- | :--- | :--- |
-| Disconnected | `Connect Wallet` button | Opens wallet connection modal |
-| Connected | Truncated address + disconnect icon | Shows address, allows disconnect |
+| State        | Display                             | Action                           |
+| :----------- | :---------------------------------- | :------------------------------- |
+| Disconnected | `Connect Wallet` button             | Opens wallet connection modal    |
+| Connected    | Truncated address + disconnect icon | Shows address, allows disconnect |
 
 ## Address Formatting
 
@@ -24,25 +24,28 @@ The `ConnectButton` component shows wallet connection state in compact form, ser
 
 ```tsx
 interface ConnectButtonProps {
-  variant?: 'compact' | 'full';  // Display variant
-  onConnect?: () => void;         // Connection callback
-  onDisconnect?: () => void;      // Disconnection callback
+  variant?: 'compact' | 'full'; // Display variant
+  onConnect?: () => void; // Connection callback
+  onDisconnect?: () => void; // Disconnection callback
 }
 ```
 
 ## Behavior
 
 ### Wallet Connection
+
 - Triggers wallet connection modal on click
 - Shows connection progress with loading indicator
 - Handles connection errors with user-friendly messages
 
 ### Accessibility
+
 - Preserve clear focus styling because this control is primary for onboarding
 - Keyboard accessible (Enter/Space to activate)
 - ARIA labels for screen readers
 
 ### Responsive Design
+
 - Keep connected-state copy short so wallet status remains readable on narrow screens
 - Adjust button size on mobile viewports
 - Show full address in tooltip on hover
@@ -56,7 +59,6 @@ interface ConnectButtonProps {
 ## Related Components
 
 - [`WalletContext`](../context/WalletContext.md) - Wallet state management
-- [`WalletConnectQRModal`](WalletConnectQRModal.md) - QR code modal
 - [`Header`](Header.md) - Parent container
 
 ---

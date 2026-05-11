@@ -9,8 +9,6 @@ import FloatingActionButton from './components/FloatingActionButton';
 import MilestoneCelebration from './components/MilestoneCelebration';
 import NetworkHeartbeat from './components/NetworkHeartbeat';
 import QuickActions from './components/QuickActions';
-import WalletConnectQRModal from './components/WalletConnectQRModal';
-import WalletPickerModal from './components/WalletPickerModal';
 import ParticleOverlay from './components/common/ParticleOverlay';
 import PerformanceOverlay from './components/common/PerformanceOverlay';
 import ScrollToTop from './components/common/ScrollToTop';
@@ -38,15 +36,7 @@ function getNextStats(stats, action) {
 }
 
 export default function App() {
-  const {
-    address,
-    walletConnectUri,
-    closeWalletConnectModal,
-    connectWallet,
-    connectWithHiro,
-    showWalletPicker,
-    setShowWalletPicker,
-  } = useWallet();
+  const { address } = useWallet();
   const { theme, toggleTheme } = useTheme();
   const { playSound } = useSound();
   const [txLog, setTxLog] = useState([]);
@@ -193,22 +183,6 @@ export default function App() {
       <ScrollToTop />
       <ParticleOverlay trigger={particleTrigger} />
       <MilestoneCelebration celebration={celebration} />
-      {walletConnectUri && (
-        <WalletConnectQRModal uri={walletConnectUri} onClose={closeWalletConnectModal} />
-      )}
-      {showWalletPicker && !address && (
-        <WalletPickerModal
-          onSelectHiro={() => {
-            setShowWalletPicker(false);
-            connectWithHiro();
-          }}
-          onSelectWalletConnect={() => {
-            setShowWalletPicker(false);
-            connectWallet();
-          }}
-          onClose={() => setShowWalletPicker(false)}
-        />
-      )}
       <Toaster position="top-right" />
     </div>
   );

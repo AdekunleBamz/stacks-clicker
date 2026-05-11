@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useWallet } from '../context/WalletContext';
-import { callContract } from '../utils/walletconnect';
+import { callContract } from '../utils/stacksWallet';
 import { useSound } from '../hooks/useSound';
 import CountUp from './CountUp';
 
@@ -117,7 +117,9 @@ export default function TipJar({ onTxSubmit }) {
     <div className="game-card tipjar">
       <div className="game-header">
         <h2 aria-label="TipJar Tipping Component">💰 TipJar</h2>
-        <span className="game-badge" title="Direct peer-to-peer creator tips interface">Support Creators</span>
+        <span className="game-badge" title="Direct peer-to-peer creator tips interface">
+          Support Creators
+        </span>
       </div>
 
       <div className="game-stats">
@@ -155,7 +157,9 @@ export default function TipJar({ onTxSubmit }) {
 
         <div className="tip-custom" role="form" aria-label="Custom Tip Amount Entry">
           <div className="input-group">
-            <label className="input-label" htmlFor="tip-recipient-input">Recipient Address</label>
+            <label className="input-label" htmlFor="tip-recipient-input">
+              Recipient Address
+            </label>
             <input
               id="tip-recipient-input"
               type="text"
@@ -167,7 +171,9 @@ export default function TipJar({ onTxSubmit }) {
             />
           </div>
           <div className="input-group">
-            <label className="input-label" htmlFor="tip-amount-input-primary">Amount (uSTX)</label>
+            <label className="input-label" htmlFor="tip-amount-input-primary">
+              Amount (uSTX)
+            </label>
             <div className="tip-amount-group">
               <input
                 id="tip-amount-input-primary"
@@ -177,7 +183,9 @@ export default function TipJar({ onTxSubmit }) {
                 step="1"
                 inputMode="numeric"
                 value={tipAmount}
-                onChange={(e) => setTipAmount(Math.max(1, Number.parseInt(e.target.value, 10) || 1000))}
+                onChange={(e) =>
+                  setTipAmount(Math.max(1, Number.parseInt(e.target.value, 10) || 1000))
+                }
                 className="amount-input"
               />
             </div>

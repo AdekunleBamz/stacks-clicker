@@ -1,7 +1,8 @@
 # Observability Notes
 
 Track these signals during runtime checks:
-- WalletConnect success/cancel rates
+
+- Native Stacks wallet success/cancel rates
 - Transaction submission feedback accuracy
 - Frontend error boundary trigger frequency
 - Transaction confirmation latency from submit to on-chain success
@@ -13,6 +14,7 @@ Track these signals during runtime checks:
 Companion index: [Operations docs](README.md).
 
 ### Signal Reminder
+
 - Track API latency spikes alongside rate-limit warnings during incident triage.
 
 Operational note: When escalating logs, include correlation/request IDs to reduce back-and-forth during incident response.

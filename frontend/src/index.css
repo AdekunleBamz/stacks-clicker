@@ -677,9 +677,7 @@ a {
 .contract-card,
 .tx-log,
 .quick-actions-panel,
-.modal-content,
-.wp-sheet,
-.qr-modal {
+.modal-content {
   backdrop-filter: blur(20px);
 }
 
@@ -864,10 +862,7 @@ a {
 .primary-button,
 .predefined-btn,
 .share-poll-btn,
-.toggle-create-btn,
-.qr-copy-btn,
-.qr-mobile-link,
-.wp-option {
+.toggle-create-btn {
   position: relative;
   display: inline-flex;
   min-height: 48px;
@@ -900,10 +895,7 @@ a {
 .primary-button:hover:not(:disabled),
 .predefined-btn:hover:not(:disabled),
 .share-poll-btn:hover,
-.toggle-create-btn:hover,
-.qr-copy-btn:hover,
-.qr-mobile-link:hover,
-.wp-option:hover {
+.toggle-create-btn:hover {
   transform: translateY(-2px);
   border-color: var(--border-strong);
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.16);
@@ -914,10 +906,7 @@ a {
 .primary-button:active:not(:disabled),
 .predefined-btn:active:not(:disabled),
 .share-poll-btn:active,
-.toggle-create-btn:active,
-.qr-copy-btn:active,
-.qr-mobile-link:active,
-.wp-option:active {
+.toggle-create-btn:active {
   transform: translateY(0);
 }
 
@@ -1632,8 +1621,6 @@ kbd {
 }
 
 .modal-overlay,
-.wp-overlay,
-.qr-modal-overlay,
 .audio-settings-overlay {
   position: fixed;
   inset: 0;
@@ -1647,8 +1634,6 @@ kbd {
 }
 
 .modal-content,
-.wp-sheet,
-.qr-modal,
 .audio-settings-panel {
   width: min(100%, 480px);
   overflow: hidden;
@@ -1665,8 +1650,6 @@ kbd {
 }
 
 .modal-header,
-.qr-modal-header,
-.wp-header,
 .panel-header {
   display: flex;
   align-items: center;
@@ -1674,16 +1657,12 @@ kbd {
   gap: 0.9rem;
 }
 
-.modal-header,
-.qr-modal-header,
-.wp-header {
+.modal-header {
   padding: 1rem;
   border-bottom: 1px solid var(--border);
 }
 
-.modal-body,
-.qr-modal-body,
-.wp-options {
+.modal-body {
   padding: 1rem;
 }
 
@@ -1696,9 +1675,7 @@ kbd {
 }
 
 .close-btn,
-.modal-close-btn,
-.qr-modal-close,
-.wp-close {
+.modal-close-btn {
   display: grid;
   width: 38px;
   height: 38px;
@@ -1710,132 +1687,11 @@ kbd {
   cursor: pointer;
 }
 
-.wp-logo-ring,
-.wp-option-icon {
-  display: grid;
-  width: 44px;
-  height: 44px;
-  place-items: center;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  background: var(--surface-muted);
-}
-
-.wp-title,
-.modal-title,
-.qr-modal-header h3 {
+.modal-title {
   color: var(--text-main);
   font-family: var(--font-heading);
   font-size: 1.15rem;
   font-weight: 900;
-}
-
-.wp-subtitle,
-.wp-footer,
-.qr-instructions,
-.qr-help-text {
-  color: var(--text-muted);
-  font-size: 0.88rem;
-}
-
-.wp-options {
-  display: grid;
-  gap: 0.75rem;
-}
-
-.wp-option {
-  width: 100%;
-  min-height: 82px;
-  justify-content: flex-start;
-  padding: 0.75rem;
-  text-align: left;
-}
-
-.wp-option--primary {
-  border-color: color-mix(in srgb, var(--secondary) 40%, transparent);
-  background: color-mix(in srgb, var(--secondary) 12%, transparent);
-}
-
-.wp-option-text {
-  display: grid;
-  min-width: 0;
-  flex: 1;
-  gap: 0.16rem;
-}
-
-.wp-option-name {
-  color: var(--text-main);
-}
-
-.wp-option-desc {
-  color: var(--text-muted);
-  font-size: 0.78rem;
-  font-weight: 700;
-}
-
-.wp-option-badge {
-  border-radius: var(--radius-sm);
-  background: var(--primary);
-  color: #fff;
-  padding: 0.25rem 0.42rem;
-  font-size: 0.68rem;
-}
-
-.wp-option-arrow {
-  flex: 0 0 auto;
-}
-
-.wp-footer {
-  padding: 0 1rem 1rem;
-}
-
-.qr-modal-body {
-  display: grid;
-  justify-items: center;
-  gap: 1rem;
-}
-
-.qr-code-container {
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  background: #fff;
-  padding: 0.8rem;
-}
-
-.qr-mobile-help {
-  display: grid;
-  width: 100%;
-  gap: 0.65rem;
-}
-
-.qr-mobile-link,
-.qr-copy-btn {
-  width: 100%;
-  justify-content: center;
-}
-
-.qr-supported-wallets {
-  display: grid;
-  width: 100%;
-  gap: 0.5rem;
-  color: var(--text-muted);
-  text-align: center;
-}
-
-.wallet-icons {
-  display: flex;
-  justify-content: center;
-  gap: 0.45rem;
-}
-
-.wallet-badge {
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  background: var(--surface-muted);
-  color: var(--text-main);
-  padding: 0.35rem 0.55rem;
-  font-size: 0.78rem;
-  font-weight: 800;
 }
 
 .milestone-celebration {
@@ -2110,8 +1966,6 @@ kbd {
   }
 
   .modal-overlay,
-  .wp-overlay,
-  .qr-modal-overlay,
   .audio-settings-overlay {
     align-items: end;
     padding: 0.65rem;

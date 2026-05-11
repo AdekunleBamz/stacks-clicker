@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import App from '../App';
@@ -14,14 +13,6 @@ vi.mock('../context/I18nContext', () => ({
 
 vi.mock('../hooks/useSound', () => ({
   useSound: () => ({ playSound: vi.fn() }),
-}));
-
-vi.mock('../utils/walletconnect', () => ({
-  getAddresses: vi.fn(),
-  initProvider: vi.fn(),
-  isValidProjectId: vi.fn(() => true),
-  wcConnect: vi.fn(),
-  wcDisconnect: vi.fn(),
 }));
 
 vi.mock('../hooks/useTheme', () => ({
@@ -77,7 +68,9 @@ vi.mock('../hooks/useKeyboardShortcuts', () => ({
 // Mock lazy-loaded components to avoid Suspense issues in simple smoke tests
 vi.mock('../components/MainGrid', () => ({ default: () => <div data-testid="main-grid" /> }));
 vi.mock('../components/PlayerStats', () => ({ default: () => <div data-testid="player-stats" /> }));
-vi.mock('../components/TransactionHistory', () => ({ default: () => <div data-testid="tx-history" /> }));
+vi.mock('../components/TransactionHistory', () => ({
+  default: () => <div data-testid="tx-history" />,
+}));
 vi.mock('../components/Header', () => ({ default: () => <header data-testid="header" /> }));
 vi.mock('../components/Footer', () => ({ default: () => <footer data-testid="footer" /> }));
 vi.mock('../components/NetworkHeartbeat', () => ({ default: () => <div data-testid="network" /> }));
@@ -85,7 +78,7 @@ vi.mock('../components/NetworkHeartbeat', () => ({ default: () => <div data-test
 describe('App Smoke Test', () => {
   it('renders the core application structure without crashing', () => {
     render(<App />);
-    
+
     // Check for main structural elements
     expect(screen.getByRole('application')).toBeDefined();
     expect(screen.getByTestId('header')).toBeDefined();

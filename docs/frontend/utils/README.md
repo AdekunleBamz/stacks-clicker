@@ -3,10 +3,11 @@
 This directory tracks behavior notes for shared utility modules in `frontend/src/utils`.
 
 Current references:
+
 - [format.js](format.md)
 - [errors.js](errors.md)
 - [hash.js](hash.md)
-- [walletconnect.js](walletconnect.md)
+- [stacksWallet.js](stacksWallet.md)
 
 Source directory: `frontend/src/utils/`.
 
@@ -16,6 +17,7 @@ Source directory: `frontend/src/utils/`.
 - Cross-link utility docs to matching test files when behavior contracts are updated.
 
 ### Maintenance Note
+
 - Keep utility index links current as helpers are added or renamed.
 
 Maintenance note: Keep utility examples synchronized with current import paths after any folder reshuffle.

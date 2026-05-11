@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useWallet } from '../context/WalletContext';
-import { callContract } from '../utils/walletconnect';
+import { callContract } from '../utils/stacksWallet';
 import ParticleSystem from './ClickParticle';
 import CountUp from './CountUp';
 import soundEngine from '../utils/SoundEngine';
@@ -25,13 +25,13 @@ export default function ClickerGame({ onTxSubmit }) {
     const newEvent = {
       id: Date.now(),
       x: e.clientX,
-      y: e.clientY
+      y: e.clientY,
     };
-    setClickEvents(prev => [...prev, newEvent]);
+    setClickEvents((prev) => [...prev, newEvent]);
   };
 
   const removeClickEvent = useCallback((id) => {
-    setClickEvents(prev => prev.filter(event => event.id !== id));
+    setClickEvents((prev) => prev.filter((event) => event.id !== id));
   }, []);
 
   const handleClick = async (e) => {
@@ -115,7 +115,9 @@ export default function ClickerGame({ onTxSubmit }) {
 
       <div className="game-header">
         <h2 aria-label="Clicker Game Primary Interface">🎮 Clicker Game</h2>
-        <span className="game-badge" title="Gamified operational click interface">Earn Streaks</span>
+        <span className="game-badge" title="Gamified operational click interface">
+          Earn Streaks
+        </span>
       </div>
 
       <div className="game-stats">
@@ -155,7 +157,7 @@ export default function ClickerGame({ onTxSubmit }) {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             className="action-btn secondary"
-            onClick={() => setShowMulti(prev => !prev)}
+            onClick={() => setShowMulti((prev) => !prev)}
             title="Toggle bulk click interface dialog"
             disabled={!isConnected || loading}
             aria-label={`Multi-click ${multiClickAmount} times`}

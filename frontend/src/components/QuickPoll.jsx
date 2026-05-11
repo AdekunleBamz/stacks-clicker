@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useWallet } from '../context/WalletContext';
-import { callContract } from '../utils/walletconnect';
+import { callContract } from '../utils/stacksWallet';
 import { useSound } from '../hooks/useSound';
 import CountUp from './CountUp';
 
@@ -53,7 +53,7 @@ export default function QuickPoll({ onTxSubmit }) {
         functionArgs: [{ type: 'uint128', value: pollId.toString() }],
       });
 
-      setVotes(prev => ({ ...prev, yes: prev.yes + 1 }));
+      setVotes((prev) => ({ ...prev, yes: prev.yes + 1 }));
       onTxSubmit?.('vote-yes', result.txId);
       play('success');
     } catch (err) {
@@ -75,7 +75,7 @@ export default function QuickPoll({ onTxSubmit }) {
         functionArgs: [{ type: 'uint128', value: pollId.toString() }],
       });
 
-      setVotes(prev => ({ ...prev, no: prev.no + 1 }));
+      setVotes((prev) => ({ ...prev, no: prev.no + 1 }));
       onTxSubmit?.('vote-no', result.txId);
       play('success');
     } catch (err) {
@@ -97,7 +97,7 @@ export default function QuickPoll({ onTxSubmit }) {
         functionArgs: [],
       });
 
-      setVotes(prev => ({ ...prev, yes: prev.yes + 1 }));
+      setVotes((prev) => ({ ...prev, yes: prev.yes + 1 }));
       onTxSubmit?.('quick-vote-yes', result.txId);
     } catch (err) {
       console.error('Quick vote yes failed:', err);
@@ -118,7 +118,7 @@ export default function QuickPoll({ onTxSubmit }) {
         functionArgs: [],
       });
 
-      setVotes(prev => ({ ...prev, no: prev.no + 1 }));
+      setVotes((prev) => ({ ...prev, no: prev.no + 1 }));
       onTxSubmit?.('quick-vote-no', result.txId);
     } catch (err) {
       console.error('Quick vote no failed:', err);
@@ -151,7 +151,9 @@ export default function QuickPoll({ onTxSubmit }) {
     <div className="game-card quickpoll">
       <div className="game-header">
         <h2 aria-label="QuickPoll Interactive Component">🗳️ QuickPoll</h2>
-        <span className="game-badge" title="Live decentralized community voting portal">Community Voting</span>
+        <span className="game-badge" title="Live decentralized community voting portal">
+          Community Voting
+        </span>
       </div>
 
       <div className="game-stats" aria-label="Live Polling Statistics">
@@ -256,7 +258,9 @@ export default function QuickPoll({ onTxSubmit }) {
         </motion.button>
       </div>
 
-      <p className="game-fee" style={{ color: 'var(--text-muted)', fontWeight: 500 }}>Fee: 0.0001 STX per action</p>
+      <p className="game-fee" style={{ color: 'var(--text-muted)', fontWeight: 500 }}>
+        Fee: 0.0001 STX per action
+      </p>
     </div>
   );
 }

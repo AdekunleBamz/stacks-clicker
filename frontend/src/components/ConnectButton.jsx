@@ -17,17 +17,17 @@ import { useMedia } from '../hooks/useMedia';
  * ```
  */
 export default function ConnectButton() {
-  const { address, disconnectWallet, isConnecting, setShowWalletPicker } = useWallet();
+  const { address, connectWallet, disconnectWallet, isConnecting } = useWallet();
   const [announcement, setAnnouncement] = useState('');
   const isMobile = useMedia('(max-width: 480px)');
 
   /**
-   * Opens the wallet picker modal instead of starting WalletConnect directly.
+   * Opens the user's installed Stacks wallet.
    */
   const handleConnect = useCallback(() => {
-    setAnnouncement('Opening wallet selector — choose a wallet to connect...');
-    setShowWalletPicker(true);
-  }, [setShowWalletPicker]);
+    setAnnouncement('Opening Stacks wallet connection...');
+    connectWallet();
+  }, [connectWallet]);
 
   /**
    * Handles wallet disconnection with accessibility announcements
@@ -43,7 +43,7 @@ export default function ConnectButton() {
     if (announcement) {
       const timer = setTimeout(() => setAnnouncement(''), 3000);
       return () => {
-        clearTimeout(timer);
+        window.clearTimeout(timer);
       };
     }
   }, [announcement]);
@@ -115,9 +115,10 @@ export default function ConnectButton() {
             onClick={handleConnect}
             aria-label="Connect Stacks Wallet"
             title="Connect Stacks wallet"
-            aria-haspopup="dialog"
+            aria-busy={isConnecting}
+            disabled={isConnecting}
           >
-            Connect Wallet
+            {isConnecting ? 'Connecting...' : 'Connect Wallet'}
           </motion.button>
         )}
       </AnimatePresence>
