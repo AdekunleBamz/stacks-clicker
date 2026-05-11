@@ -17,6 +17,10 @@ function getSystemTheme() {
  * Synchronizes with localStorage and updates the document's data-theme attribute.
  *
  * @returns {Object} { theme, toggleTheme, setTheme }
+ * @example
+ * const { theme, toggleTheme } = useTheme();
+ * // theme → 'dark'
+ * toggleTheme(); // switches to 'light'
  */
 export function useTheme() {
   const [theme, setTheme] = useLocalStorage('theme', getSystemTheme);
