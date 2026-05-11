@@ -16,7 +16,7 @@ const Footer = memo(function Footer() {
   return (
     <footer className="app-footer" role="contentinfo">
       <div className="footer-content">
-        <div className="footer-left">
+        <div className="footer-left" aria-label="App version and copyright information">
           <p>Stacks Clicker command deck • {currentYear}</p>
           <span className="app-version" title="Current Interface Version">
             v{VERSION}
