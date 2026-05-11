@@ -13,6 +13,9 @@ import PropTypes from 'prop-types';
  * @param {string} [props.prefix=''] - String to prepend to the displayed value
  * @param {string} [props.suffix=''] - String to append to the displayed value
  * @returns {JSX.Element} The rendered animated number
+ * @example
+ * // Show an animated STX balance
+ * <CountUp value={1500.25} decimals={2} suffix=" STX" />
  */
 const CountUp = memo(function CountUp({ value, decimals = 0, prefix = '', suffix = '' }) {
     const safeValue = Number.isFinite(value) ? value : 0;
