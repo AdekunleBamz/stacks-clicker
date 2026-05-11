@@ -72,6 +72,7 @@ export const BOOST_LEVEL_CAP = 5;
 /** @type {number} Maximum number of toast notifications to display concurrently. */
 export const MAX_NOTIFICATION_COUNT = 10;
 
+/** @type {number} Prestige bonus in basis points (500 bps = 5% bonus multiplier). */
 export const PRESTIGE_BONUS_BPS = 500;
 
 /** @type {number} Total session expiry duration in milliseconds (1 hour). User state resets after this period. */
