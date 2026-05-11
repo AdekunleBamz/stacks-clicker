@@ -17,6 +17,7 @@ function MilestoneCelebration({ celebration }) {
           role="alert"
           aria-label={`Milestone reached: ${celebration}`}
           aria-atomic="true"
+          aria-relevant="additions text"
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 1.5 }}
