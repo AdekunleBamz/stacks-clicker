@@ -6,6 +6,7 @@ import Tooltip from './common/Tooltip';
 
 /**
  * Component for the Clicker game interaction card.
+ * Renders click, multi-click, and network ping actions.
  * @param {Object} props - Component props.
  * @param {string} props.address - Connected wallet address.
  * @param {Object} props.clicker - Clicker hook object containing actions and loading state.
