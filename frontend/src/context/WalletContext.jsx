@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import toast from 'react-hot-toast';
-import { showConnect, AppConfig, UserSession } from '@stacks/connect';
+import { connect as stacksConnect, disconnect as stacksDisconnect, isConnected as stacksIsConnected, getLocalStorage } from '@stacks/connect';
 import {
   getAddresses,
   initProvider,
@@ -32,10 +32,6 @@ function getAppDetails() {
   };
 }
 
-// Stable module-level session — survives redirect-based auth flows
-const hiroAppConfig = new AppConfig(['store_write', 'publish_data']);
-export const userSession = new UserSession({ appConfig: hiroAppConfig });
-
 /**
  * Provider component that manages the global Stacks wallet state and authentication lifecycle.
  * Integrates with WalletConnect for Stacks wallet interactions.
@@ -51,40 +47,29 @@ export function WalletProvider({ children }) {
   const [walletConnectUri, setWalletConnectUri] = useState(null);
   const [showWalletPicker, setShowWalletPicker] = useState(false);
 
-  // Restore Hiro/Leather session on mount (handles redirect-based auth flow)
-  useEffect(() => {
-    if (userSession.isSignInPending()) {
-      userSession.handlePendingSignIn().then((userData) => {
-        const addr = userData?.profile?.stxAddress?.mainnet;
-        if (addr) setAddress(addr);
-      }).catch(() => {});
-    } else if (userSession.isUserSignedIn()) {
-      const userData = userSession.loadUserData();
-      const addr = userData?.profile?.stxAddress?.mainnet;
-      if (addr) setAddress(addr);
-    }
-  }, []);
-
+  // Check for existing WalletConnect session (legacy path)
   const checkConnection = useCallback(async () => {
-    if (typeof window === 'undefined') {
-      setAddress(null);
-      return;
-    }
-
-    if (!isValidProjectId()) {
-      return;
-    }
-
+    if (typeof window === 'undefined' || !isValidProjectId()) return;
     try {
       await initProvider();
       const account = await getAddresses();
       setAddress(account.address.trim());
-    } catch (error) {
-      // WalletConnect not connected — ignore
+    } catch {
+      // not connected via WalletConnect — ignore
     }
   }, []);
 
+  // Restore Hiro/Leather session on mount (v8 localStorage-based)
   useEffect(() => {
+    if (stacksIsConnected()) {
+      const data = getLocalStorage();
+      const addr = data?.addresses?.stx?.[0]?.address;
+      if (addr) {
+        setAddress(addr);
+        return;
+      }
+    }
+    // Check WalletConnect session
     void checkConnection();
   }, [checkConnection]);
 
@@ -112,28 +97,30 @@ export function WalletProvider({ children }) {
   }, []);
 
   const disconnectWallet = useCallback(async () => {
-    // Sign out from Hiro/Leather session
-    if (userSession.isUserSignedIn()) {
-      userSession.signUserOut();
-    }
+    // Sign out from Hiro/Leather (v8) and WalletConnect sessions
+    stacksDisconnect();
     await wcDisconnect();
     setWalletConnectUri(null);
     setAddress(null);
     toast('Wallet disconnected');
   }, []);
 
-  const connectWithHiro = useCallback(() => {
-    showConnect({
-      appDetails: getAppDetails(),
-      onFinish: () => {
-        const userData = userSession.loadUserData();
-        const addr = userData?.profile?.stxAddress?.mainnet;
-        if (addr) setAddress(addr);
+  const connectWithHiro = useCallback(async () => {
+    setIsConnecting(true);
+    try {
+      await stacksConnect();
+      const data = getLocalStorage();
+      const addr = data?.addresses?.stx?.[0]?.address;
+      if (addr) {
+        setAddress(addr);
         setShowWalletPicker(false);
-      },
-      onCancel: () => {},
-      userSession,
-    });
+        toast.success('Wallet connected!');
+      }
+    } catch {
+      // user cancelled
+    } finally {
+      setIsConnecting(false);
+    }
   }, []);
 
   const closeWalletConnectModal = useCallback(() => {
