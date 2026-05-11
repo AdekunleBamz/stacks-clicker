@@ -17,7 +17,7 @@ export default function FloatingActionButton({ onAction = () => {} }) {
   ], [onAction]);
 
   return (
-    <div className="fab-container" title="Floating quick actions">
+    <div className="fab-container" title="Floating quick actions" role="complementary" aria-label="Floating quick action controls">
       <AnimatePresence>
         {isOpen && (
           <div className="fab-menu" id="fab-menu" role="menu" aria-label="Quick actions menu" title="Quick actions">
