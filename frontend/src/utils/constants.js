@@ -65,8 +65,10 @@ export const MAX_POLL_OPTION_COUNT = 10;
 
 export const NOTIFICATION_DISMISS_MS = 5000;
 
+/** @type {number} Auto-clicker base rate: clicks credited per interval tick. */
 export const AUTO_CLICKER_BASE_RATE = 1;
 
+/** @type {number} Maximum boost level a player can reach (caps upgrade progression). */
 export const BOOST_LEVEL_CAP = 5;
 
 /** @type {number} Maximum number of toast notifications to display concurrently. */
