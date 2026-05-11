@@ -22,6 +22,7 @@ const NetworkHeartbeat = memo(function NetworkHeartbeat() {
         className="heartbeat-container"
         role={isConnected ? "status" : "alert"}
         aria-atomic="true"
+        aria-relevant="text"
         aria-label={heartbeatTitle}
         aria-busy={isUpdating}
         title={heartbeatTitle}
