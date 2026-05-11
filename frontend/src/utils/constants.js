@@ -77,6 +77,7 @@ export const SESSION_EXPIRY_MS = 3_600_000;
 
 export const AUTO_SAVE_INTERVAL_MS = 30_000;
 
+/** @type {number} Duration in milliseconds of a single combo window for multi-click scoring. */
 export const COMBO_WINDOW_MS = 500;
 
 export const CRITICAL_CLICK_CHANCE = 0.05;
