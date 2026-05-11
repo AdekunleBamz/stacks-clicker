@@ -28,7 +28,7 @@ function Achievement({ achievement }) {
             <div className="achievement-info">
                 <h3>{title}</h3>
                 <p>{description}</p>
-                {unlocked && date && <span className="achievement-date">Unlocked on {date}</span>}
+                {unlocked && date && <span className="achievement-date" title={`Unlocked on ${date}`} aria-label={`Unlocked on ${date}`}>Unlocked on {date}</span>}
             </div>
 
             {unlocked && (
