@@ -76,6 +76,7 @@ export const PRESTIGE_BONUS_BPS = 500;
 /** @type {number} Total session expiry duration in milliseconds (1 hour). User state resets after this period. */
 export const SESSION_EXPIRY_MS = 3_600_000;
 
+/** @type {number} Interval in milliseconds between auto-save operations. */
 export const AUTO_SAVE_INTERVAL_MS = 30_000;
 
 /** @type {number} Duration in milliseconds of a single combo window for multi-click scoring. */
