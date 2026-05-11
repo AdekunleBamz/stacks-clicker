@@ -19,7 +19,7 @@ function NetworkLogo({ isSyncing = false }) {
         scale: { type: 'spring', stiffness: 300, damping: 15 }
       }}
       role="img"
-      aria-label="Stacks Clicker animated diamond logo"
+      aria-label={isSyncing ? 'Stacks Clicker logo — syncing with network' : 'Stacks Clicker animated diamond logo'}
       title="Stacks Clicker Network Logo"
     >
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
