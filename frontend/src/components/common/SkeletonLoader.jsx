@@ -11,6 +11,7 @@ import { motion } from 'framer-motion';
  * @param {string|number} [props.height='20px'] - Height of the skeleton block
  * @param {string|number} [props.borderRadius='8px'] - Border radius for the block
  * @param {string} [props.className=''] - Additional CSS classes
+ * @param {string} [props.label='content'] - Describes what is loading, used in aria-label
  * @returns {JSX.Element} The rendered skeleton loader
  */
 function SkeletonLoader({ 
