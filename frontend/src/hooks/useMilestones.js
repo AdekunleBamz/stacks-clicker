@@ -13,6 +13,9 @@ export const MILESTONE_COUNT = MILESTONE_THRESHOLDS.length;
  * @param {Object} options.stats - Current gameplay statistics (clicks, tips, votes)
  * @param {Function} options.onMilestone - Callback triggered when a milestone is reached
  * @returns {Object} { celebration }
+ * @example
+ * const { celebration } = useMilestones({ stats: { clicks: 10, tips: 0, votes: 0 }, onMilestone: console.log });
+ * // When total hits a threshold: celebration → 'Level Up: 10 Interactions!'
  */
 export function useMilestones({ stats, onMilestone }) {
   const [celebration, setCelebration] = useState(null);
