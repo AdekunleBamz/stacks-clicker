@@ -29,6 +29,11 @@ export function truncateAddress(address, { prefix = 4, suffix = 4, separator = '
  * @param {number} value - The numeric value to format
  * @param {Object} [options] - Intl.NumberFormat options
  * @returns {string} The formatted string
+ * @example
+ * formatNumber(1234567)
+ * // => '1,234,567'
+ * formatNumber(9.95, { minimumFractionDigits: 2 })
+ * // => '9.95'
  */
 export function formatNumber(value, options = {}) {
   if (typeof value === 'bigint') {
