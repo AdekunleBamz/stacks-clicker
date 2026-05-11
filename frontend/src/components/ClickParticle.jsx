@@ -21,6 +21,7 @@ const ClickParticle = ({ x, y, onComplete }) => {
         <div
             className="particle-container"
             aria-hidden="true"
+            role="presentation"
             style={{
                 position: 'fixed',
                 left: x,
