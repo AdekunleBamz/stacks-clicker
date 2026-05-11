@@ -25,7 +25,7 @@ export default function ConnectButton() {
    * Opens the wallet picker modal instead of starting WalletConnect directly.
    */
   const handleConnect = useCallback(() => {
-    setAnnouncement('Choose a wallet to connect...');
+    setAnnouncement('Opening wallet selector — choose a wallet to connect...');
     setShowWalletPicker(true);
   }, [setShowWalletPicker]);
 
