@@ -11,6 +11,8 @@ import { notify } from '../../utils/toast';
  * @param {string} props.address - The full Stacks address to be truncated and displayed
  * @param {Function} [props.onDisconnect] - Optional callback to trigger wallet disconnection
  * @returns {JSX.Element|null} The rendered address badge or null if no address is provided
+ * @example
+ * <AddressBadge address="SP2J6ZY48GV1EZ5V2V5RB9MP66SW86PYKKNRV9EJ" onDisconnect={handleDisconnect} />
  */
 function AddressBadge({ address, onDisconnect }) {
   const [copied, setCopied] = useState(false);
