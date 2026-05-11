@@ -6,7 +6,7 @@ import ParticleSystem from './ClickParticle';
 import CountUp from './CountUp';
 import soundEngine from '../utils/SoundEngine';
 
-// Contract deployer address
+// Contract deployer address for the Stacks Clicker game contracts
 const DEPLOYER = 'SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N';
 
 /**
