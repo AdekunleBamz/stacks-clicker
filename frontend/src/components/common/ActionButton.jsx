@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 /**
  * Reusable action button component with motion effects.
+ * Automatically sets type=button, aria-busy, and aria-label for accessibility.
  */
 export default function ActionButton({
   label,
