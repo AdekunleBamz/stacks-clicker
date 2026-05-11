@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react';
 
 /**
  * WalletPickerModal - Modern wallet selection dialog.
+ * Supports keyboard navigation (Escape to close) and focus trapping.
  *
  * @param {Object} props
  * @param {Function} props.onSelectHiro - Called when user picks Hiro/Leather
