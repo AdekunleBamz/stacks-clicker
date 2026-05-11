@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 /**
  * Animated number component for smooth counting transitions between values.
  * Uses Framer Motion's internal 'animate' function for high-performance interpolation.
+ * Displays non-numeric values as-is without animation.
  *
  * @component
  * @param {Object} props - Component props
