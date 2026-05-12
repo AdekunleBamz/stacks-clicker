@@ -5,6 +5,9 @@ import { motion } from 'framer-motion';
 /**
  * LevelBadge Component
  * Displays the current level with a premium, animated badge
+ *
+ * @param {{ level: number }} props - Badge display props.
+ * @returns {JSX.Element} The rendered level badge.
  */
 function LevelBadge({ level }) {
     return (
