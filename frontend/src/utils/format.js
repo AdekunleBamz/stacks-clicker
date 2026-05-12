@@ -187,6 +187,12 @@ export function formatBytes(bytes, decimals = 1) {
   return `${value.toFixed(safeDecimals)} ${units[index]}`;
 }
 
+/**
+ * Formats a raw click count for compact UI counters.
+ *
+ * @param {number|string} n - Raw click count value.
+ * @returns {string} Localized count, or "0" for invalid input.
+ */
 export const formatClickCount = (n) => {
   const value = Number(n);
   return Number.isFinite(value) ? value.toLocaleString() : '0';
