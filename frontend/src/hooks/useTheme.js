@@ -1,6 +1,11 @@
 import { useEffect, useCallback } from 'react';
 import { useLocalStorage } from './useLocalStorage';
 
+/**
+ * Resolves the preferred color theme from the browser when available.
+ *
+ * @returns {'light'|'dark'} The detected system theme, defaulting to dark.
+ */
 function getSystemTheme() {
   if (
     typeof window !== 'undefined'
