@@ -3,7 +3,7 @@ import { useState, useRef, useLayoutEffect } from 'react';
 /**
  * Custom hook for measuring an element's dimensions using ResizeObserver.
  *
- * @returns {Array} [ref, dimensions]
+ * @returns {[import('react').RefObject<HTMLElement>, DOMRect|Object]} [ref, dimensions]
  */
 export function useMeasure() {
   const [dimensions, setDimensions] = useState({
