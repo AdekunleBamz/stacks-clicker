@@ -1,6 +1,12 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { notify } from '../utils/toast';
 
+/**
+ * Attempts a legacy textarea-based copy when the async Clipboard API is unavailable.
+ *
+ * @param {string} text - Text to place on the clipboard.
+ * @returns {boolean} Whether the fallback copy command succeeded.
+ */
 function fallbackCopy(text) {
   if (typeof document === 'undefined' || typeof document.execCommand !== 'function') {
     return false;
