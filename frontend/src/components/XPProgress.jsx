@@ -4,6 +4,9 @@ import { motion } from 'framer-motion';
 
 /**
  * XP Progress bar component for displaying player experience points.
+ *
+ * @param {{ currentXP: number, nextLevelXP: number }} props - XP totals for the current level.
+ * @returns {JSX.Element} The rendered progress meter.
  */
 function XPProgress({ currentXP, nextLevelXP }) {
   const safeCurrentXP = Math.max(0, Number.isFinite(currentXP) ? currentXP : 0);
