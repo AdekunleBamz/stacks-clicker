@@ -6,6 +6,7 @@ import Tooltip from './common/Tooltip';
  * Visual indicator for network synchronization and state.
  * Displays real-time block height and connection status to the Stacks network.
  * Uses memoization to prevent unnecessary re-renders since it reads from context.
+ * Keeps the title and ARIA label in sync so visual and assistive states match.
  *
  * @component
  * @returns {JSX.Element} The rendered network heartbeat indicator
