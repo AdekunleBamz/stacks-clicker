@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
  * CountUp Component - Animates a number from its current value to a new target value.
  * Uses Framer Motion's animate function for smooth number transitions.
  * Uses memoization to prevent unnecessary re-renders.
+ * Keeps the live-region value stable so screen readers announce the target value once.
  *
  * @param {Object} props - Component props
  * @param {number} props.value - Target numeric value to animate to
