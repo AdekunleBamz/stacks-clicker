@@ -7,6 +7,11 @@
 
 import { MIN_TIP_MICRO_STX } from './constants';
 
+/**
+ * Validation schemas for the supported contract interaction payloads.
+ *
+ * @type {Record<string, Record<string, (value: unknown) => boolean>>}
+ */
 export const SCHEMAS = {
   CLICK: {
     amount: (val) => typeof val === 'number' && val > 0,
