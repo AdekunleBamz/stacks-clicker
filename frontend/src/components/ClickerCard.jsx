@@ -10,6 +10,7 @@ import Tooltip from './common/Tooltip';
  * @param {Object} props - Component props.
  * @param {string} props.address - Connected wallet address.
  * @param {Object} props.clicker - Clicker hook object containing actions and loading state.
+ * @returns {JSX.Element} The rendered clicker interaction card.
  */
 function ClickerCard({ address, clicker }) {
   const { isLoading, click, multiClick, ping } = clicker;
