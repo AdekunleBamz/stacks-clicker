@@ -108,7 +108,9 @@ export function formatStx(microStx) {
 export function formatCompact(value) {
   const numericValue = Number(value);
   if (!Number.isFinite(numericValue)) return '0';
-  return new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 1 }).format(numericValue);
+  return new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 1 }).format(
+    numericValue
+  );
 }
 
 /**
@@ -252,7 +254,7 @@ export function formatCountdown(ms, { showMs = false, maxUnits = 2 } = {}) {
 
 export const formatScore = (n) => Number(n).toFixed(2);
 
-export const formatUpgradeLevel = (lvl) => "Level " + lvl;
+export const formatUpgradeLevel = (lvl) => 'Level ' + lvl;
 
 /**
  * Formats a Stacks block height into a human-readable string.
@@ -280,21 +282,22 @@ export function formatTimestamp(timestamp) {
   return date.toLocaleDateString(undefined, { dateStyle: 'medium' });
 }
 
-export const formatMultiplier = (m) => m + "x";
+export const formatMultiplier = (m) => m + 'x';
 
-export const formatCost = (n) => Number(n).toLocaleString() + " pts";
+export const formatCost = (n) => Number(n).toLocaleString() + ' pts';
 
-export const formatRank = (n) => "#" + n;
+export const formatRank = (n) => '#' + n;
 
 export const formatBoostName = (name) => name.charAt(0).toUpperCase() + name.slice(1);
 
-export const formatCombo = (n) => n + "x combo";
+export const formatCombo = (n) => n + 'x combo';
 
-export const formatPrestigeCount = (n) => "Prestige " + n;
+export const formatPrestigeCount = (n) => 'Prestige ' + n;
 
-export const formatSessionTime = (ms) => Math.floor(ms / 60000) + "m " + Math.floor((ms % 60000) / 1000) + "s";
+export const formatSessionTime = (ms) =>
+  Math.floor(ms / 60000) + 'm ' + Math.floor((ms % 60000) / 1000) + 's';
 
-export const formatLevel = (lvl) => "Lv." + Math.max(0, Math.floor(Number(lvl)));
+export const formatLevel = (lvl) => 'Lv.' + Math.max(0, Math.floor(Number(lvl)));
 
 /**
  * Formats a relative time (past or future) into a human-readable label.
@@ -314,35 +317,36 @@ export function formatRelativeTime(ms) {
   return `${prefix}${Math.floor(abs / 86_400_000)}d${suffix}`;
 }
 
-export const formatPlayerTag = (id) => "Player #" + Number(id);
+export const formatPlayerTag = (id) => 'Player #' + Number(id);
 
 export const formatBoostRemaining = (ms) => {
   const secs = Math.max(0, Math.ceil(Number(ms) / 1000));
-  return secs >= 60 ? Math.floor(secs / 60) + "m " + (secs % 60) + "s" : secs + "s left";
+  return secs >= 60 ? Math.floor(secs / 60) + 'm ' + (secs % 60) + 's' : secs + 's left';
 };
 
-export const formatCritHit = (dmg) => "CRIT! +" + Number(dmg).toLocaleString();
+export const formatCritHit = (dmg) => 'CRIT! +' + Number(dmg).toLocaleString();
 
-export const formatUpgradeCount = (n) => Number(n) === 1 ? "1 upgrade" : Number(n) + " upgrades";
+export const formatUpgradeCount = (n) => (Number(n) === 1 ? '1 upgrade' : Number(n) + ' upgrades');
 
-export const formatWinRate = (ratio) => (Number(ratio) * 100).toFixed(1) + "% win rate";
+export const formatWinRate = (ratio) => (Number(ratio) * 100).toFixed(1) + '% win rate';
 
 export const formatLeaderboardPosition = (pos) => {
   const n = Math.floor(Number(pos));
-  const suffixes = ["th","st","nd","rd"];
+  const suffixes = ['th', 'st', 'nd', 'rd'];
   const v = n % 100;
-  return n + (suffixes[(v - 20) % 10] || suffixes[v] || suffixes[0]) + " place";
+  return n + (suffixes[(v - 20) % 10] || suffixes[v] || suffixes[0]) + ' place';
 };
 
-export const formatAutoClickerCount = (n) => Number(n) + " auto-clicker" + (Number(n) === 1 ? "" : "s");
+export const formatAutoClickerCount = (n) =>
+  Number(n) + ' auto-clicker' + (Number(n) === 1 ? '' : 's');
 
-export const formatUpgradeName = (key) => key.replace(/_/g, " ").toLowerCase();
+export const formatUpgradeName = (key) => key.replace(/_/g, ' ').toLowerCase();
 
-export const formatCriticalLabel = (isCrit) => isCrit ? "CRITICAL!" : "";
+export const formatCriticalLabel = (isCrit) => (isCrit ? 'CRITICAL!' : '');
 
-export const formatBoostTimeLeft = (blocks) => blocks + " blocks left";
+export const formatBoostTimeLeft = (blocks) => blocks + ' blocks left';
 
-export const formatLeaderboardEntry = (addr, score) => addr + ": " + score;
+export const formatLeaderboardEntry = (addr, score) => addr + ': ' + score;
 
 export const formatClickRate = (cps) => {
   const numericCps = Number(cps);
@@ -357,36 +361,4 @@ export const formatWalletShort = (addr) => {
   return normalized.slice(0, 8) + '...';
 };
 
-export const formatBlockHeight = (h) => "Block #" + h;
-
-export const formatAutoClicker = (n) => n + " auto-clickers";
-
-/**
- * Formats a date as a relative time string (e.g., "2 minutes ago").
- * Falls back to a locale date string when Intl.RelativeTimeFormat is unavailable.
- * @param {Date|string|number} date - The date to format
- * @returns {string} Human-readable relative time
- */
-export function formatRelativeTime(date) {
-  const now = Date.now();
-  const then = new Date(date).getTime();
-  const diff = Math.round((then - now) / 1000);
-  const rtf = typeof Intl !== 'undefined' && typeof Intl.RelativeTimeFormat === 'function'
-    ? new Intl.RelativeTimeFormat('en', { numeric: 'auto' })
-    : null;
-  if (!rtf) return new Date(date).toLocaleString();
-  const units = [
-    { unit: 'year', sec: 31536000 },
-    { unit: 'month', sec: 2592000 },
-    { unit: 'day', sec: 86400 },
-    { unit: 'hour', sec: 3600 },
-    { unit: 'minute', sec: 60 },
-    { unit: 'second', sec: 1 },
-  ];
-  for (const { unit, sec } of units) {
-    if (Math.abs(diff) >= sec || unit === 'second') {
-      return rtf.format(Math.round(diff / sec), unit);
-    }
-  }
-  return new Date(date).toLocaleString();
-}
+export const formatAutoClicker = (n) => n + ' auto-clickers';

@@ -49,7 +49,7 @@ const ScrollToTop = memo(function ScrollToTop() {
             y: -5,
             scale: 1.1,
             backgroundColor: 'var(--primary)',
-            boxShadow: '0 10px 25px -5px var(--primary-glow)'
+            boxShadow: '0 10px 25px -5px var(--primary-glow)',
           }}
           whileTap={{ scale: 0.9, y: 0 }}
           onHoverStart={() => playSound('hover')}
@@ -60,7 +60,7 @@ const ScrollToTop = memo(function ScrollToTop() {
           <motion.span
             initial={{ y: 2 }}
             animate={{ y: [2, -2, 2] }}
-            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+            transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
             aria-hidden="true"
           >
             ▲

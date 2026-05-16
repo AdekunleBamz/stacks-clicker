@@ -37,5 +37,11 @@ export function useNetworkStatus() {
     };
   }, []);
 
-  return { isOnline, lastChanged, connectionCount, offlineCount, hasEverGoneOffline: offlineCount > 0 };
+  return {
+    isOnline,
+    lastChanged,
+    connectionCount,
+    offlineCount,
+    hasEverGoneOffline: offlineCount > 0,
+  };
 }

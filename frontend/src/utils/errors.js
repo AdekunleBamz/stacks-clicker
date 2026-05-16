@@ -9,21 +9,21 @@
 
 const ERROR_MAP = Object.freeze({
   // Common Stacks / Contract Errors
-  '100': 'Unauthorized: You do not have permission to perform this action.',
-  '101': 'Insufficient Funds: You do not have enough STX to complete this transaction.',
-  '102': 'Invalid Parameters: The data provided to the contract is malformed.',
-  '103': 'Cooldown Active: Please wait before performing this action again.',
-  '104': 'Limit Reached: You have reached the maximum allowed for this interaction.',
-  '105': 'Poll Expired: This poll is no longer accepting votes.',
-  '106': 'Already Voted: You have already cast your vote in this poll.',
-  '107': 'Feature Disabled: This feature has been temporarily disabled by governance.',
-  '108': 'Session Tip Limit: You have reached the maximum number of tips allowed this session.',
-  '401': 'User Rejected: The transaction request was cancelled in your wallet.',
-  '403': 'Contract Paused: This interaction is currently disabled by the maintainers.',
-  '408': 'Request Timeout: The transaction request timed out. Please retry.',
-  '409': 'Conflict: This action conflicts with the current contract state.',
-  '500': 'Network Error: Failed to broadcast the transaction. Please try again.',
-  '1001': 'Invalid Amount: Please specify a positive number for this interaction.',
+  100: 'Unauthorized: You do not have permission to perform this action.',
+  101: 'Insufficient Funds: You do not have enough STX to complete this transaction.',
+  102: 'Invalid Parameters: The data provided to the contract is malformed.',
+  103: 'Cooldown Active: Please wait before performing this action again.',
+  104: 'Limit Reached: You have reached the maximum allowed for this interaction.',
+  105: 'Poll Expired: This poll is no longer accepting votes.',
+  106: 'Already Voted: You have already cast your vote in this poll.',
+  107: 'Feature Disabled: This feature has been temporarily disabled by governance.',
+  108: 'Session Tip Limit: You have reached the maximum number of tips allowed this session.',
+  401: 'User Rejected: The transaction request was cancelled in your wallet.',
+  403: 'Contract Paused: This interaction is currently disabled by the maintainers.',
+  408: 'Request Timeout: The transaction request timed out. Please retry.',
+  409: 'Conflict: This action conflicts with the current contract state.',
+  500: 'Network Error: Failed to broadcast the transaction. Please try again.',
+  1001: 'Invalid Amount: Please specify a positive number for this interaction.',
 });
 
 /**
@@ -37,12 +37,12 @@ export function parseContractError(error) {
   const errorMessage =
     typeof error === 'string'
       ? error
-      : error?.message
-        || error?.reason
-        || error?.error?.message
-        || error?.error?.reason
-        || error?.error
-        || String(error);
+      : error?.message ||
+        error?.reason ||
+        error?.error?.message ||
+        error?.error?.reason ||
+        error?.error ||
+        String(error);
   const lowerMessage = errorMessage.toLowerCase();
 
   // Extract numeric codes from strings like "(err u101)" or "Error: 101"
@@ -67,7 +67,17 @@ export function parseContractError(error) {
     return ERROR_MAP['401'];
   }
 
-  return errorMessage;
+  if (lowerMessage.includes('disconnected') || lowerMessage.includes('connection lost')) {
+    return 'Wallet Disconnected: Please reconnect your wallet and try again.';
+  }
+
+  if (lowerMessage.includes('insufficient')) {
+    return ERROR_MAP['101'];
+  }
+
+  const compactMessage =
+    errorMessage.length > 60 ? `${errorMessage.slice(0, 60)}...` : errorMessage;
+  return `Transaction failed: ${compactMessage}`;
 }
 
 /**
@@ -85,7 +95,7 @@ export function getErrorCode(error) {
       : error?.message || error?.reason || error?.error?.message || String(error);
   const match = errorMessage.match(/\d+/);
   return match ? match[0] : null;
-  }
+}
 
 /**
  * Returns true if an error appears retryable based on known transient codes.
@@ -99,18 +109,6 @@ export function isRetryableError(error) {
   return code ? retryableCodes.has(code) : false;
 }
 
-  if (lowerMessage.includes('disconnected') || lowerMessage.includes('connection lost')) {
-    return 'Wallet Disconnected: Please reconnect your wallet and try again.';
-  }
-
-  if (lowerMessage.includes('insufficient')) {
-    return ERROR_MAP['101'];
-  }
-
-  const compactMessage = errorMessage.length > 60 ? `${errorMessage.slice(0, 60)}...` : errorMessage;
-  return `Transaction failed: ${compactMessage}`;
-}
-
 /** Alias for parseContractError for callers preferring a more generic name */
 export const getErrorMessage = parseContractError;
 
@@ -121,9 +119,7 @@ export const getErrorMessage = parseContractError;
  * @returns {boolean}
  */
 export function isNetworkError(error) {
-  const msg = typeof error === 'string'
-    ? error
-    : error?.message || error?.reason || String(error);
+  const msg = typeof error === 'string' ? error : error?.message || error?.reason || String(error);
   const lower = msg.toLowerCase();
   return (
     lower.includes('network') ||
@@ -134,20 +130,6 @@ export function isNetworkError(error) {
     lower.includes('econnrefused') ||
     lower.includes('failed to fetch')
   );
-}
-
-/**
- * Extracts a numeric error code from a raw error string or object.
- *
- * @param {any} error - The error to extract from
- * @returns {string|null} The extracted numeric code, or null
- */
-export function getErrorCode(error) {
-  const msg = typeof error === 'string'
-    ? error
-    : error?.message || error?.reason || String(error);
-  const match = msg.match(/\d+/);
-  return match ? match[0] : null;
 }
 
 /**

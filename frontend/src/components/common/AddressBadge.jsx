@@ -79,7 +79,7 @@ AddressBadge.defaultProps = {
 
 AddressBadge.propTypes = {
   address: PropTypes.string.isRequired,
-  onDisconnect: PropTypes.func
+  onDisconnect: PropTypes.func,
 };
 
 export default memo(AddressBadge);

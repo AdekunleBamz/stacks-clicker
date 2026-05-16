@@ -19,8 +19,6 @@ describe('validation utilities', () => {
   });
 
   test('ignores extra payload fields outside the schema', () => {
-    expect(
-      validatePayload({ optionId: 0, label: 'Yes', ignored: true }, SCHEMAS.POLL)
-    ).toBe(true);
+    expect(validatePayload({ optionId: 0, label: 'Yes', ignored: true }, SCHEMAS.POLL)).toBe(true);
   });
 });

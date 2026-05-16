@@ -15,7 +15,10 @@ export function useWindowFocus() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    const handleFocus = () => { setIsFocused(true); setFocusCount((c) => c + 1); };
+    const handleFocus = () => {
+      setIsFocused(true);
+      setFocusCount((c) => c + 1);
+    };
     const handleBlur = () => setIsFocused(false);
     const handleVisibilityChange = () => {
       setIsFocused(!document.hidden);

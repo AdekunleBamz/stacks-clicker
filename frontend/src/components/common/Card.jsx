@@ -46,18 +46,28 @@ const Card = ({
       {(title || icon || headerAction) && (
         <div className="card-header">
           <div className="card-title-group">
-            {icon && <span className="card-icon" aria-hidden="true">{icon}</span>}
+            {icon && (
+              <span className="card-icon" aria-hidden="true">
+                {icon}
+              </span>
+            )}
             <div className="card-text">
-              {title && <h3 id={titleId} className="card-title">{title}</h3>}
-              {subtitle && <p className="card-subtitle" id={`card-desc-${id}`}>{subtitle}</p>}
+              {title && (
+                <h3 id={titleId} className="card-title">
+                  {title}
+                </h3>
+              )}
+              {subtitle && (
+                <p className="card-subtitle" id={`card-desc-${id}`}>
+                  {subtitle}
+                </p>
+              )}
             </div>
           </div>
           {headerAction && <div className="card-header-action">{headerAction}</div>}
         </div>
       )}
-      <div className="card-body">
-        {children}
-      </div>
+      <div className="card-body">{children}</div>
     </motion.div>
   );
 };

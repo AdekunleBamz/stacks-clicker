@@ -20,30 +20,32 @@ export const ModalProvider = ({ children }) => {
     setModalData(null);
   }, []);
 
-  const toggleModal = useCallback((type, data = null) => {
-    if (activeModal === type) {
-      setActiveModal(null);
-      setModalData(null);
-    } else {
-      setActiveModal(type);
-      setModalData(data);
-    }
-  }, [activeModal]);
-
-  const value = useMemo(() => ({
-    activeModal,
-    modalData,
-    openModal,
-    closeModal,
-    toggleModal,
-    isOpen: (type) => activeModal === type,
-  }), [activeModal, modalData, openModal, closeModal, toggleModal]);
-
-  return (
-    <ModalContext.Provider value={value}>
-      {children}
-    </ModalContext.Provider>
+  const toggleModal = useCallback(
+    (type, data = null) => {
+      if (activeModal === type) {
+        setActiveModal(null);
+        setModalData(null);
+      } else {
+        setActiveModal(type);
+        setModalData(data);
+      }
+    },
+    [activeModal]
   );
+
+  const value = useMemo(
+    () => ({
+      activeModal,
+      modalData,
+      openModal,
+      closeModal,
+      toggleModal,
+      isOpen: (type) => activeModal === type,
+    }),
+    [activeModal, modalData, openModal, closeModal, toggleModal]
+  );
+
+  return <ModalContext.Provider value={value}>{children}</ModalContext.Provider>;
 };
 
 ModalProvider.propTypes = {

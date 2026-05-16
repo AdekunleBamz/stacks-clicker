@@ -95,29 +95,32 @@ function QuickPollCard({ address, quickpoll }) {
    * - '2' key: Vote No
    * - 'Enter' on input: Create poll
    */
-  const handleKeyDown = useCallback((e) => {
-    // Only handle keyboard shortcuts when the card is focused and not in input
-    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        handleAction(handleCreateNewPoll, 'create-poll', () => trimmedQuestion.length > 0);
+  const handleKeyDown = useCallback(
+    (e) => {
+      // Only handle keyboard shortcuts when the card is focused and not in input
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          handleAction(handleCreateNewPoll, 'create-poll', () => trimmedQuestion.length > 0);
+        }
+        return;
       }
-      return;
-    }
 
-    switch (e.key) {
-      case '1':
-        e.preventDefault();
-        handleAction(handleVoteYes, 'vote-yes');
-        break;
-      case '2':
-        e.preventDefault();
-        handleAction(handleVoteNo, 'vote-no');
-        break;
-      default:
-        break;
-    }
-  }, [handleAction, handleCreateNewPoll, handleVoteYes, handleVoteNo, trimmedQuestion.length]);
+      switch (e.key) {
+        case '1':
+          e.preventDefault();
+          handleAction(handleVoteYes, 'vote-yes');
+          break;
+        case '2':
+          e.preventDefault();
+          handleAction(handleVoteNo, 'vote-no');
+          break;
+        default:
+          break;
+      }
+    },
+    [handleAction, handleCreateNewPoll, handleVoteYes, handleVoteNo, trimmedQuestion.length]
+  );
 
   return (
     <ActionCard
@@ -187,7 +190,9 @@ function QuickPollCard({ address, quickpoll }) {
                   aria-required="true"
                   title="Enter the question for your new poll"
                 />
-                <span className="input-help-text" aria-hidden="true">{trimmedQuestion.length}/{MAX_POLL_TITLE_LENGTH}</span>
+                <span className="input-help-text" aria-hidden="true">
+                  {trimmedQuestion.length}/{MAX_POLL_TITLE_LENGTH}
+                </span>
               </div>
 
               <Tooltip text="Create a new poll on the Stacks blockchain.">
@@ -197,7 +202,11 @@ function QuickPollCard({ address, quickpoll }) {
                   cost="0.001 STX"
                   className="primary-button"
                   onClick={() =>
-                    handleAction(handleCreateNewPoll, 'create-poll', () => trimmedQuestion.length > 0)
+                    handleAction(
+                      handleCreateNewPoll,
+                      'create-poll',
+                      () => trimmedQuestion.length > 0
+                    )
                   }
                   isLoading={isLoading('create-poll')}
                   isError={errorField === 'create-poll'}
@@ -250,7 +259,9 @@ function QuickPollCard({ address, quickpoll }) {
         <div className="poll-footer">
           <div className="stat" aria-live="polite">
             <span className="stat-label">Total Votes</span>
-            <span className="timer-text" title="Time remaining until poll closes">Ends in: {formatTime(timeLeft)}</span>
+            <span className="timer-text" title="Time remaining until poll closes">
+              Ends in: {formatTime(timeLeft)}
+            </span>
           </div>
           <button
             type="button"
@@ -263,7 +274,8 @@ function QuickPollCard({ address, quickpoll }) {
                 return;
               }
 
-              navigator.clipboard.writeText(window.location.href)
+              navigator.clipboard
+                .writeText(window.location.href)
                 .then(() => notify.success('Results link copied to clipboard!'))
                 .catch(() => notify.error('Failed to copy results link'));
             }}

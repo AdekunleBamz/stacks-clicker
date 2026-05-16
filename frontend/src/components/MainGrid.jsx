@@ -10,19 +10,26 @@ import QuickPollCard from './QuickPollCard';
  * Main layout grid for the application.
  * Focused on the interaction cards section.
  */
-function MainGrid({
-  address,
-  stats,
-  clicker,
-  tipjar,
-  quickpoll
-}) {
+function MainGrid({ address, stats, clicker, tipjar, quickpoll }) {
   return (
-    <section className="interaction-section" aria-labelledby="interactions-title" title="Interaction panels">
-      <h2 className="section-title" id="interactions-title">Interactions</h2>
-      <InteractionStreaks totalInteractions={(stats.clicks || 0) + (stats.tips || 0) + (stats.votes || 0)} />
+    <section
+      className="interaction-section"
+      aria-labelledby="interactions-title"
+      title="Interaction panels"
+    >
+      <h2 className="section-title" id="interactions-title">
+        Interactions
+      </h2>
+      <InteractionStreaks
+        totalInteractions={(stats.clicks || 0) + (stats.tips || 0) + (stats.votes || 0)}
+      />
       <LayoutGroup>
-        <div className="cards-container main-interaction-grid" role="group" aria-label="Available Interaction Panels" data-testid="main-interaction-grid">
+        <div
+          className="cards-container main-interaction-grid"
+          role="group"
+          aria-label="Available Interaction Panels"
+          data-testid="main-interaction-grid"
+        >
           <ClickerCard address={address} clicker={clicker} />
           <TipJarCard address={address} tipjar={tipjar} />
           <QuickPollCard address={address} quickpoll={quickpoll} />
@@ -55,7 +62,7 @@ MainGrid.propTypes = {
     createPoll: PropTypes.func.isRequired,
     handlePollPing: PropTypes.func.isRequired,
     isLoading: PropTypes.func.isRequired,
-  }).isRequired
+  }).isRequired,
 };
 
 MainGrid.defaultProps = {

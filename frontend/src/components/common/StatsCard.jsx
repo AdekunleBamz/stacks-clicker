@@ -5,7 +5,6 @@ import AnimatedNumber from './AnimatedNumber';
 import Tooltip from './Tooltip';
 import { useMeasure } from '../../hooks/useMeasure';
 
-
 /**
  * Individual card for displaying a single statistic with animations and thematic coloring.
  *
@@ -23,7 +22,16 @@ import { useMeasure } from '../../hooks/useMeasure';
  * @example
  * <StatsCard label="Total Clicks" value={1024} icon="🖱️" color="#7c3aed" isGrowing />
  */
-function StatsCard({ label, value, icon, color, isPrice = false, isGrowing = false, index = 0, tooltip }) {
+function StatsCard({
+  label,
+  value,
+  icon,
+  color,
+  isPrice = false,
+  isGrowing = false,
+  index = 0,
+  tooltip,
+}) {
   const [measureRef, { width, height }] = useMeasure();
 
   const itemVariants = {
@@ -33,11 +41,11 @@ function StatsCard({ label, value, icon, color, isPrice = false, isGrowing = fal
       scale: 1,
       y: 0,
       transition: {
-        type: "spring",
+        type: 'spring',
         stiffness: 260,
-        damping: 20
-      }
-    }
+        damping: 20,
+      },
+    },
   };
 
   const cardContent = (
@@ -50,27 +58,29 @@ function StatsCard({ label, value, icon, color, isPrice = false, isGrowing = fal
       variants={itemVariants}
       whileHover={{
         scale: 1.05,
-        boxShadow: "0 10px 30px -10px rgba(0,0,0,0.5)",
-        borderColor: color + "44"
+        boxShadow: '0 10px 30px -10px rgba(0,0,0,0.5)',
+        borderColor: color + '44',
       }}
       style={{
         '--accent-color': color,
         '--card-width': `${width}px`,
-        '--card-height': `${height}px`
+        '--card-height': `${height}px`,
       }}
     >
-      <div className="stat-icon" style={{ filter: `drop-shadow(0 0 8px ${color}44)` }} aria-hidden="true">
+      <div
+        className="stat-icon"
+        style={{ filter: `drop-shadow(0 0 8px ${color}44)` }}
+        aria-hidden="true"
+      >
         {icon}
       </div>
       <div className="stat-content">
         <div className="value" id={`stat-value-${index}`}>
-          {isPrice ? (
-            <span>{value}</span>
-          ) : (
-            <AnimatedNumber value={value} />
-          )}
+          {isPrice ? <span>{value}</span> : <AnimatedNumber value={value} />}
         </div>
-        <div className="label" id={`stat-label-${index}`}>{label}</div>
+        <div className="label" id={`stat-label-${index}`}>
+          {label}
+        </div>
         {!isPrice && typeof value === 'number' && (
           <div
             className="progress-container"
@@ -86,7 +96,7 @@ function StatsCard({ label, value, icon, color, isPrice = false, isGrowing = fal
               initial={{ width: 0 }}
               animate={{ width: `${Math.min(((value % 100) / 100) * 100, 100)}%` }}
               style={{ background: color }}
-              transition={{ duration: 1, ease: "easeOut" }}
+              transition={{ duration: 1, ease: 'easeOut' }}
             />
           </div>
         )}
@@ -105,7 +115,7 @@ StatsCard.propTypes = {
   isPrice: PropTypes.bool,
   isGrowing: PropTypes.bool,
   index: PropTypes.number,
-  tooltip: PropTypes.string
+  tooltip: PropTypes.string,
 };
 
 StatsCard.defaultProps = {

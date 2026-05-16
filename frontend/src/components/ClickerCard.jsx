@@ -22,39 +22,39 @@ function ClickerCard({ address, clicker }) {
       icon="🚀"
       iconClass="clicker-icon"
     >
-        <Tooltip text="Perform a single on-chain click interaction instantly.">
-          <ActionButton
-            label="Express Click"
-            icon="⚡"
-            cost="0.001 STX"
-            onClick={click}
-            isLoading={isLoading('clicker-click')}
-            disabled={!address}
-            className="primary"
-          />
-        </Tooltip>
-        <Tooltip text="Boost your activity by performing 10 clicks in one batch.">
-          <ActionButton
-            label="Turbo 10x"
-            icon="🔥"
-            cost="0.005 STX"
-            className="secondary"
-            onClick={() => multiClick(10)}
-            isLoading={isLoading('clicker-multi-click')}
-            disabled={!address}
-          />
-        </Tooltip>
-        <Tooltip text="Ping the network to verify connection and contract state.">
-          <ActionButton
-            label="Network Ping"
-            icon="📡"
-            cost="0.001 STX"
-            className="success"
-            onClick={ping}
-            isLoading={isLoading('clicker-ping')}
-            disabled={!address}
-          />
-        </Tooltip>
+      <Tooltip text="Perform a single on-chain click interaction instantly.">
+        <ActionButton
+          label="Express Click"
+          icon="⚡"
+          cost="0.001 STX"
+          onClick={click}
+          isLoading={isLoading('clicker-click')}
+          disabled={!address}
+          className="primary"
+        />
+      </Tooltip>
+      <Tooltip text="Boost your activity by performing 10 clicks in one batch.">
+        <ActionButton
+          label="Turbo 10x"
+          icon="🔥"
+          cost="0.005 STX"
+          className="secondary"
+          onClick={() => multiClick(10)}
+          isLoading={isLoading('clicker-multi-click')}
+          disabled={!address}
+        />
+      </Tooltip>
+      <Tooltip text="Ping the network to verify connection and contract state.">
+        <ActionButton
+          label="Network Ping"
+          icon="📡"
+          cost="0.001 STX"
+          className="success"
+          onClick={ping}
+          isLoading={isLoading('clicker-ping')}
+          disabled={!address}
+        />
+      </Tooltip>
     </ActionCard>
   );
 }

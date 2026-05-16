@@ -41,7 +41,7 @@ const PerformanceOverlay = memo(function PerformanceOverlay() {
               // @ts-ignore
               used: Math.round(window.performance.memory.usedJSHeapSize / 1048576),
               // @ts-ignore
-              total: Math.round(window.performance.memory.jsHeapSizeLimit / 1048576)
+              total: Math.round(window.performance.memory.jsHeapSizeLimit / 1048576),
             });
           }
         }
@@ -62,16 +62,29 @@ const PerformanceOverlay = memo(function PerformanceOverlay() {
   if (!isVisible) return null;
 
   return (
-    <div className="perf-overlay" role="status" aria-live="polite" aria-label="Performance Stats" aria-atomic="true">
+    <div
+      className="perf-overlay"
+      role="status"
+      aria-live="polite"
+      aria-label="Performance Stats"
+      aria-atomic="true"
+    >
       <div className="perf-stat">
-        <span className="perf-label" aria-hidden="true">FPS:</span>
-        <span className={`perf-value ${fps < 30 ? 'bad' : fps < 50 ? 'warn' : 'good'}`} aria-label={`Frames per second: ${fps}`}>
+        <span className="perf-label" aria-hidden="true">
+          FPS:
+        </span>
+        <span
+          className={`perf-value ${fps < 30 ? 'bad' : fps < 50 ? 'warn' : 'good'}`}
+          aria-label={`Frames per second: ${fps}`}
+        >
           {fps}
         </span>
       </div>
       {memory && (
         <div className="perf-stat">
-          <span className="perf-label" aria-hidden="true">MEM:</span>
+          <span className="perf-label" aria-hidden="true">
+            MEM:
+          </span>
           <span className="perf-value">{memory.used}MB</span>
         </div>
       )}

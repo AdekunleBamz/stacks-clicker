@@ -30,11 +30,7 @@ import { useEffect, useRef, useState, useCallback } from 'react';
  * );
  * ```
  */
-export function useInfiniteScroll({
-  threshold = 100,
-  isEnabled = true,
-  debounceMs = 200,
-} = {}) {
+export function useInfiniteScroll({ threshold = 100, isEnabled = true, debounceMs = 200 } = {}) {
   const targetRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
   const [hasLoadedAll, setHasLoadedAll] = useState(false);

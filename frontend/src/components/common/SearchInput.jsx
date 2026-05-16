@@ -18,7 +18,9 @@ function SearchInput({ value, onChange, onClear, placeholder = 'Search...', coun
   return (
     <div className="search-wrapper" role="search" aria-label="Transaction search tools">
       <div className="search-relative">
-        <span className="search-icon" aria-hidden="true">🔍</span>
+        <span className="search-icon" aria-hidden="true">
+          🔍
+        </span>
         <input
           id="global-transaction-search"
           type="text"
@@ -29,7 +31,12 @@ function SearchInput({ value, onChange, onClear, placeholder = 'Search...', coun
           className="search-input"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          onKeyDown={(e) => { if (e.key === 'Escape' && value) { e.preventDefault(); onClear(); } }}
+          onKeyDown={(e) => {
+            if (e.key === 'Escape' && value) {
+              e.preventDefault();
+              onClear();
+            }
+          }}
           aria-label="Global transaction search"
           aria-describedby={count !== undefined ? 'global-transaction-search-count' : undefined}
           title={placeholder}
@@ -54,7 +61,16 @@ function SearchInput({ value, onChange, onClear, placeholder = 'Search...', coun
         </AnimatePresence>
       </div>
       {count !== undefined && (
-        <span id="global-transaction-search-count" className="search-count-badge" aria-live="polite" aria-atomic="true" aria-label={`${count} matching items`} title="Matching items found">{count}</span>
+        <span
+          id="global-transaction-search-count"
+          className="search-count-badge"
+          aria-live="polite"
+          aria-atomic="true"
+          aria-label={`${count} matching items`}
+          title="Matching items found"
+        >
+          {count}
+        </span>
       )}
     </div>
   );
@@ -70,7 +86,7 @@ SearchInput.propTypes = {
   onChange: PropTypes.func.isRequired,
   onClear: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
-  count: PropTypes.number
+  count: PropTypes.number,
 };
 
 export default memo(SearchInput);

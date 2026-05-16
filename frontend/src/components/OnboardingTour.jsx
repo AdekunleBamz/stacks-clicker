@@ -2,10 +2,22 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const steps = [
-  { target: 'logo', content: 'Welcome to Stacks Clicker V2! This is your gateway to the Stacks ecosystem.' },
-  { target: 'interaction-section', content: 'Here you can interact with various smart contracts — Click, Tip, and Vote!' },
-  { target: 'stats-aside', content: 'Track your real-time performance and transaction history here.' },
-  { target: 'wallet-section', content: 'Connect your wallet and monitor network status right here.' }
+  {
+    target: 'logo',
+    content: 'Welcome to Stacks Clicker V2! This is your gateway to the Stacks ecosystem.',
+  },
+  {
+    target: 'interaction-section',
+    content: 'Here you can interact with various smart contracts — Click, Tip, and Vote!',
+  },
+  {
+    target: 'stats-aside',
+    content: 'Track your real-time performance and transaction history here.',
+  },
+  {
+    target: 'wallet-section',
+    content: 'Connect your wallet and monitor network status right here.',
+  },
 ];
 
 export default function OnboardingTour() {
@@ -49,7 +61,7 @@ export default function OnboardingTour() {
 
   const handleNext = useCallback(() => {
     if (currentStep < steps.length - 1) {
-      setCurrentStep(prev => prev + 1);
+      setCurrentStep((prev) => prev + 1);
     } else {
       dismiss();
     }
@@ -57,7 +69,7 @@ export default function OnboardingTour() {
 
   const handleBack = useCallback(() => {
     if (currentStep > 0) {
-      setCurrentStep(prev => prev - 1);
+      setCurrentStep((prev) => prev - 1);
     }
   }, [currentStep]);
 
@@ -76,25 +88,46 @@ export default function OnboardingTour() {
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
           onClick={(e) => e.stopPropagation()}
         >
-          <h2 id="tour-title" className="sr-only">Application Onboarding Tour</h2>
+          <h2 id="tour-title" className="sr-only">
+            Application Onboarding Tour
+          </h2>
           <div className="tour-header">
             <div className="tour-step-dots">
               {steps.map((_, i) => (
-                 <div
+                <div
                   key={i}
                   className={`step-dot ${i === currentStep ? 'active' : ''}`}
                   aria-label={`Step ${i + 1}${i === currentStep ? ', current' : ''}`}
                   role="img"
-                 />
+                />
               ))}
             </div>
-            <button type="button" className="tour-close-top" onClick={dismiss} aria-label="Close tour overlay" title="Close tour"><span aria-hidden="true">×</span></button>
+            <button
+              type="button"
+              className="tour-close-top"
+              onClick={dismiss}
+              aria-label="Close tour overlay"
+              title="Close tour"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
           </div>
-          <div className="tour-progress" aria-live="polite" style={{ fontVariantNumeric: 'tabular-nums' }}>Step {currentStep + 1} of {steps.length}</div>
+          <div
+            className="tour-progress"
+            aria-live="polite"
+            style={{ fontVariantNumeric: 'tabular-nums' }}
+          >
+            Step {currentStep + 1} of {steps.length}
+          </div>
           <p className="tour-content">{steps[currentStep].content}</p>
           <div className="tour-footer" role="navigation" aria-label="Tour Navigation">
             <div className="footer-left">
-              <button type="button" className="tour-skip" onClick={dismiss} title="Skip onboarding tour">
+              <button
+                type="button"
+                className="tour-skip"
+                onClick={dismiss}
+                title="Skip onboarding tour"
+              >
                 Skip
               </button>
               {currentStep > 0 && (

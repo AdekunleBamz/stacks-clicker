@@ -112,12 +112,10 @@ describe('usePrice hook', () => {
 
   it('clears previous errors after a successful fetch', async () => {
     vi.useFakeTimers();
-    global.fetch
-      .mockRejectedValueOnce(new Error('temporary failure'))
-      .mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({ blockstack: { usd: 2.34 } }),
-      });
+    global.fetch.mockRejectedValueOnce(new Error('temporary failure')).mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({ blockstack: { usd: 2.34 } }),
+    });
 
     const { result } = renderHook(() => usePrice());
 

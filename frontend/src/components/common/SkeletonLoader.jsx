@@ -21,7 +21,7 @@ function SkeletonLoader({
   className = '',
   label = 'content',
   gradientAngle = 90,
-  shimmerColor = 'rgba(255, 255, 255, 0.05)'
+  shimmerColor = 'rgba(255, 255, 255, 0.05)',
 }) {
   return (
     <div
@@ -35,17 +35,17 @@ function SkeletonLoader({
         borderRadius,
         backgroundColor: 'var(--skeleton-base, rgba(255, 255, 255, 0.05))',
         overflow: 'hidden',
-        position: 'relative'
+        position: 'relative',
       }}
     >
       <motion.div
         animate={{
-          x: ['-100%', '100%']
+          x: ['-100%', '100%'],
         }}
         transition={{
           duration: 1.5,
           repeat: Infinity,
-          ease: "linear"
+          ease: 'linear',
         }}
         style={{
           position: 'absolute',
@@ -54,7 +54,7 @@ function SkeletonLoader({
           width: '100%',
           height: '100%',
           background: `linear-gradient(${gradientAngle}deg, transparent 0%, ${shimmerColor} 50%, transparent 100%)`,
-          willChange: 'transform'
+          willChange: 'transform',
         }}
       />
     </div>
@@ -78,7 +78,7 @@ SkeletonLoader.propTypes = {
   className: PropTypes.string,
   label: PropTypes.string,
   gradientAngle: PropTypes.number,
-  shimmerColor: PropTypes.string
+  shimmerColor: PropTypes.string,
 };
 
 export default memo(SkeletonLoader);

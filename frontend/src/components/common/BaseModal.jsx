@@ -18,7 +18,14 @@ import { useLockBodyScroll } from '../../hooks/useLockBodyScroll';
  * @param {string} [props.className=''] - Additional CSS class names
  * @returns {JSX.Element|null} The rendered modal or null if closed
  */
-const BaseModal = memo(function BaseModal({ isOpen, onClose, title, children, footer, className = '' }) {
+const BaseModal = memo(function BaseModal({
+  isOpen,
+  onClose,
+  title,
+  children,
+  footer,
+  className = '',
+}) {
   const closeBtnRef = useRef(null);
   const previousFocus = useRef(null);
 
@@ -61,7 +68,7 @@ const BaseModal = memo(function BaseModal({ isOpen, onClose, title, children, fo
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '1.5rem'
+            padding: '1.5rem',
           }}
         >
           <ModalContent
@@ -110,11 +117,7 @@ function ModalContent({ onClose, title, children, footer, className, closeBtnRef
       <div className="modal-body" id="modal-body-desc">
         {children}
       </div>
-      {footer && (
-        <div className="modal-footer">
-          {footer}
-        </div>
-      )}
+      {footer && <div className="modal-footer">{footer}</div>}
     </motion.div>
   );
 }
@@ -132,7 +135,7 @@ BaseModal.propTypes = {
   title: PropTypes.node,
   children: PropTypes.node.isRequired,
   footer: PropTypes.node,
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default BaseModal;

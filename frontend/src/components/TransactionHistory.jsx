@@ -11,19 +11,25 @@ function TransactionHistory({ txLog }) {
   return (
     <section className="tx-log" aria-labelledby="tx-history-title">
       <div className="log-header">
-        <h3 id="tx-history-title"><span aria-hidden="true">📜</span> Recent Activity</h3>
-        <span className="tx-count-badge" aria-label={`${txLog.length} transactions in history`} title="Transactions currently shown">{txLog.length}</span>
+        <h3 id="tx-history-title">
+          <span aria-hidden="true">📜</span> Recent Activity
+        </h3>
+        <span
+          className="tx-count-badge"
+          aria-label={`${txLog.length} transactions in history`}
+          title="Transactions currently shown"
+        >
+          {txLog.length}
+        </span>
       </div>
 
       <div className="tx-list" title="Recent transaction activity">
         <AnimatePresence mode="popLayout">
           {txLog.length === 0 ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="empty-state"
-            >
-              <div className="empty-icon" aria-hidden="true">📂</div>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="empty-state">
+              <div className="empty-icon" aria-hidden="true">
+                📂
+              </div>
               <p>No transactions yet. Trigger an action to populate activity.</p>
               <div className="skeleton-placeholder">
                 <SkeletonLoader height="60px" borderRadius="12px" className="mb-2" />
@@ -51,7 +57,9 @@ function TransactionHistory({ txLog }) {
                         <span className="step-dot"></span>
                         <span className="step-label">Submitted</span>
                       </div>
-                      <div className={`step ${tx.id?.startsWith('pending') ? 'pending' : 'active'}`}>
+                      <div
+                        className={`step ${tx.id?.startsWith('pending') ? 'pending' : 'active'}`}
+                      >
                         <span className="step-dot"></span>
                         <span className="step-label">Mempool</span>
                       </div>

@@ -8,9 +8,9 @@ import { useLocalStorage } from './useLocalStorage';
  */
 function getSystemTheme() {
   if (
-    typeof window !== 'undefined'
-    && typeof window.matchMedia === 'function'
-    && window.matchMedia('(prefers-color-scheme: light)').matches
+    typeof window !== 'undefined' &&
+    typeof window.matchMedia === 'function' &&
+    window.matchMedia('(prefers-color-scheme: light)').matches
   ) {
     return 'light';
   }

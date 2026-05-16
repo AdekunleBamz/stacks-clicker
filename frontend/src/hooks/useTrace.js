@@ -10,7 +10,8 @@ import { useEffect, useRef } from 'react';
 export function useTrace(componentName, props) {
   const prevProps = useRef(props);
   const renderCount = useRef(0);
-  const safeName = typeof componentName === 'string' && componentName.trim() ? componentName.trim() : 'Unknown';
+  const safeName =
+    typeof componentName === 'string' && componentName.trim() ? componentName.trim() : 'Unknown';
 
   useEffect(() => {
     renderCount.current += 1;

@@ -14,7 +14,12 @@ import { motion, AnimatePresence } from 'framer-motion';
  * @param {string} [props.color='var(--error)'] - Badge background color
  * @returns {JSX.Element|null} The rendered badge or null if not visible
  */
-const ButtonBadge = memo(function ButtonBadge({ count, showDotOnly = false, maxCount = 99, color = 'var(--error)' }) {
+const ButtonBadge = memo(function ButtonBadge({
+  count,
+  showDotOnly = false,
+  maxCount = 99,
+  color = 'var(--error)',
+}) {
   const isVisible = count > 0 || showDotOnly;
 
   const displayCount = count > maxCount ? `${maxCount}+` : count;
@@ -32,7 +37,11 @@ const ButtonBadge = memo(function ButtonBadge({ count, showDotOnly = false, maxC
           aria-label={showDotOnly ? 'New notification' : `${count} new notifications`}
           role="status"
         >
-          {!showDotOnly && <span className="badge-text" aria-hidden="true">{displayCount}</span>}
+          {!showDotOnly && (
+            <span className="badge-text" aria-hidden="true">
+              {displayCount}
+            </span>
+          )}
         </motion.div>
       )}
     </AnimatePresence>
@@ -50,7 +59,7 @@ ButtonBadge.propTypes = {
   count: PropTypes.number,
   showDotOnly: PropTypes.bool,
   maxCount: PropTypes.number,
-  color: PropTypes.string
+  color: PropTypes.string,
 };
 
 export default ButtonBadge;

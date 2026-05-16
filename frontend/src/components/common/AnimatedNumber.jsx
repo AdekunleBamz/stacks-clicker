@@ -14,7 +14,7 @@ import PropTypes from 'prop-types';
  * @returns {JSX.Element} The rendered animated number
  */
 const AnimatedNumber = ({ value, duration = 1 }) => {
-  const [displayValue, setDisplayValue] = useState(() => typeof value === 'number' ? value : 0);
+  const [displayValue, setDisplayValue] = useState(() => (typeof value === 'number' ? value : 0));
   const fromRef = useRef(displayValue);
 
   useEffect(() => {
@@ -30,12 +30,7 @@ const AnimatedNumber = ({ value, duration = 1 }) => {
   }, [value, duration]);
 
   return (
-    <span
-      role="status"
-      aria-live="polite"
-      aria-atomic="true"
-      className="animated-number"
-    >
+    <span role="status" aria-live="polite" aria-atomic="true" className="animated-number">
       {typeof value === 'number' ? displayValue.toLocaleString() : value}
     </span>
   );
@@ -47,7 +42,7 @@ AnimatedNumber.defaultProps = {
 
 AnimatedNumber.propTypes = {
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-  duration: PropTypes.number
+  duration: PropTypes.number,
 };
 
 export default memo(AnimatedNumber);

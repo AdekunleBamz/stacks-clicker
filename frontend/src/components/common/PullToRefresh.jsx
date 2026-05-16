@@ -24,14 +24,17 @@ const PullToRefresh = memo(function PullToRefresh({ onRefresh, children }) {
     }
   }, []);
 
-  const handleTouchMove = useCallback((e) => {
-    if (startY > 0) {
-      const currentY = e.touches[0].pageY;
-      const dist = Math.max(0, (currentY - startY) * 0.4);
-      setPullDistance(dist);
-      if (dist > 10) e.preventDefault();
-    }
-  }, [startY]);
+  const handleTouchMove = useCallback(
+    (e) => {
+      if (startY > 0) {
+        const currentY = e.touches[0].pageY;
+        const dist = Math.max(0, (currentY - startY) * 0.4);
+        setPullDistance(dist);
+        if (dist > 10) e.preventDefault();
+      }
+    },
+    [startY]
+  );
 
   const handleTouchEnd = useCallback(() => {
     if (refreshing) {
@@ -66,14 +69,17 @@ const PullToRefresh = memo(function PullToRefresh({ onRefresh, children }) {
         className="ptr-indicator"
         role="status"
         aria-live="polite"
-        style={{ transform: `translateY(${pullDistance - 50}px)`, opacity: pullDistance / PULL_THRESHOLD }}
+        style={{
+          transform: `translateY(${pullDistance - 50}px)`,
+          opacity: pullDistance / PULL_THRESHOLD,
+        }}
       >
         <div
           className={`ptr-spinner ${refreshing ? 'spinning' : ''}`}
-          role={refreshing ? "progressbar" : "img"}
-          aria-label={refreshing ? "Refreshing content" : "Pull to refresh"}
-          aria-valuemin={refreshing ? "0" : undefined}
-          aria-valuemax={refreshing ? "100" : undefined}
+          role={refreshing ? 'progressbar' : 'img'}
+          aria-label={refreshing ? 'Refreshing content' : 'Pull to refresh'}
+          aria-valuemin={refreshing ? '0' : undefined}
+          aria-valuemax={refreshing ? '100' : undefined}
         >
           <span aria-hidden="true">{refreshing ? '⏳' : '↓'}</span>
         </div>
@@ -91,7 +97,7 @@ PullToRefresh.defaultProps = {
 
 PullToRefresh.propTypes = {
   onRefresh: PropTypes.func.isRequired,
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 export default PullToRefresh;

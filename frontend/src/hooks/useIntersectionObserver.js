@@ -14,7 +14,7 @@ export function useIntersectionObserver({
   root = null,
   rootMargin = '0px',
   threshold = 0.1,
-  triggerOnce = true
+  triggerOnce = true,
 } = {}) {
   const safeThreshold = Number.isFinite(threshold) ? Math.min(1, Math.max(0, threshold)) : 0.1;
   const [isIntersecting, setIntersecting] = useState(false);

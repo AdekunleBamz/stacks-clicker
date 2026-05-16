@@ -27,7 +27,7 @@ const translations = Object.freeze({
   },
   fr: {
     welcome: 'Bienvenue sur Stacks Clicker V2',
-    accessibility_mode: 'Mode d\'accessibilité',
+    accessibility_mode: "Mode d'accessibilité",
     interactions: 'Interactions',
     stats: 'Statistiques',
     recent_activity: 'Activité Récente',

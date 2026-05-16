@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import { WalletContext } from '../../context/WalletContext';
 
@@ -16,11 +16,7 @@ export const MockWalletProvider = ({ children, value = {} }) => {
     ...value,
   };
 
-  return (
-    <WalletContext.Provider value={defaultValues}>
-      {children}
-    </WalletContext.Provider>
-  );
+  return <WalletContext.Provider value={defaultValues}>{children}</WalletContext.Provider>;
 };
 
 describe('MockWalletProvider', () => {

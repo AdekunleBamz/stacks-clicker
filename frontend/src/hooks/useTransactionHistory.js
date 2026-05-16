@@ -6,11 +6,6 @@ import { MAX_TX_LOG_SIZE, STACKS_NETWORK } from '../utils/constants';
 
 const DEBUG = import.meta.env.VITE_DEBUG === 'true';
 
-const STACKS_NETWORK =
-  String(import.meta.env.VITE_STACKS_NETWORK || 'mainnet').trim().toLowerCase() === 'testnet'
-    ? 'testnet'
-    : 'mainnet';
-
 /**
  * Custom hook for managing the transaction history log.
  * Handles adding new transactions, maintaining the log limit, and triggering feedback (sounds/toast).
@@ -25,7 +20,10 @@ export function useTransactionHistory({ playSound, onTxAdded }) {
   // Memoized derived stats
   const pendingTxs = useMemo(() => txLog.filter((tx) => tx.isPending), [txLog]);
   const successTxs = useMemo(() => txLog.filter((tx) => tx.status === 'success'), [txLog]);
-  const failedTxs = useMemo(() => txLog.filter((tx) => tx.status === 'failed' || tx.status === 'error'), [txLog]);
+  const failedTxs = useMemo(
+    () => txLog.filter((tx) => tx.status === 'failed' || tx.status === 'error'),
+    [txLog]
+  );
   const txCount = useMemo(() => txLog.length, [txLog]);
   const addTxToLog = useCallback(
     (action, txId, status = 'success') => {
@@ -38,7 +36,9 @@ export function useTransactionHistory({ playSound, onTxAdded }) {
         time: submittedAt.toLocaleTimeString(),
         submittedAt: submittedAt.toISOString(),
         network: STACKS_NETWORK,
-        explorerUrl: isPending ? null : `https://explorer.hiro.so/txid/${txId}?chain=${STACKS_NETWORK}`,
+        explorerUrl: isPending
+          ? null
+          : `https://explorer.hiro.so/txid/${txId}?chain=${STACKS_NETWORK}`,
         isPending,
       };
 
@@ -72,9 +72,12 @@ export function useTransactionHistory({ playSound, onTxAdded }) {
   /**
    * Removes a single transaction entry by id.
    */
-  const removeTx = useCallback((id) => {
-    setTxLog((prev) => prev.filter((tx) => tx.id !== id));
-  }, [setTxLog]);
+  const removeTx = useCallback(
+    (id) => {
+      setTxLog((prev) => prev.filter((tx) => tx.id !== id));
+    },
+    [setTxLog]
+  );
 
   /**
    * Clears all session transaction logs.

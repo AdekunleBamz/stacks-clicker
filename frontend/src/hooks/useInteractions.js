@@ -24,15 +24,18 @@ export function useInteractions({ onTxSubmit }) {
    * Enhanced callback that adds tactile haptic feedback (Vibration API)
    * to transaction submissions to improve mobile game feel.
    */
-  const handleTxSubmit = useCallback((action, txId) => {
-    // Trigger short haptic pulse (40ms) if supported
-    if (typeof window !== 'undefined' && 'vibrate' in navigator) {
-      navigator.vibrate(40);
-    }
+  const handleTxSubmit = useCallback(
+    (action, txId) => {
+      // Trigger short haptic pulse (40ms) if supported
+      if (typeof window !== 'undefined' && 'vibrate' in navigator) {
+        navigator.vibrate(40);
+      }
 
-    // Continue with original submission callback
-    onTxSubmit?.(action, txId);
-  }, [onTxSubmit]);
+      // Continue with original submission callback
+      onTxSubmit?.(action, txId);
+    },
+    [onTxSubmit]
+  );
 
   const clicker = useClicker({ onTxSubmit: handleTxSubmit });
   const tipjar = useTipJar({ onTxSubmit: handleTxSubmit });
@@ -49,10 +52,13 @@ export function useInteractions({ onTxSubmit }) {
     quickpoll?.handlePollPing?.();
   }, [clicker, tipjar, quickpoll]);
 
-  return useMemo(() => ({
-    clicker,
-    tipjar,
-    quickpoll,
-    pingAll,
-  }), [clicker, tipjar, quickpoll, pingAll]);
+  return useMemo(
+    () => ({
+      clicker,
+      tipjar,
+      quickpoll,
+      pingAll,
+    }),
+    [clicker, tipjar, quickpoll, pingAll]
+  );
 }

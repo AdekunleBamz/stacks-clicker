@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
  * Displays recent transactions with status
  */
 export default function TransactionLog({ transactions = [] }) {
-
   const getStatusIcon = (status) => {
     switch (status) {
       case 'success':
@@ -28,35 +27,47 @@ export default function TransactionLog({ transactions = [] }) {
     return (
       <div className="tx-log empty">
         <h3 aria-label="Detailed Transaction Log">📋 Transaction Log</h3>
-        <p className="empty-message" aria-label="No transactions yet">No transactions yet. Start playing!</p>
+        <p className="empty-message" aria-label="No transactions yet">
+          No transactions yet. Start playing!
+        </p>
       </div>
     );
   }
 
   return (
     <div className="tx-log" title="Recent transaction log">
-      <h3><span aria-hidden="true">📋</span> Transaction Log</h3>
-        <div className="tx-list" role="log" aria-live="polite" aria-atomic="false" aria-relevant="additions text">
+      <h3>
+        <span aria-hidden="true">📋</span> Transaction Log
+      </h3>
+      <div
+        className="tx-list"
+        role="log"
+        aria-live="polite"
+        aria-atomic="false"
+        aria-relevant="additions text"
+      >
         {transactions.map((tx, index) => {
           const explorerLink = getExplorerLink(tx.id, tx.network);
           return (
-          <div key={tx.id || index} className={`tx-item ${tx.status}`}>
-            <span className="tx-status" aria-label={`Transaction status: ${tx.status}`}>{getStatusIcon(tx.status)}</span>
-            <span className="tx-action">{tx.action}</span>
-            <span className="tx-time">{tx.time}</span>
-            {explorerLink && (
-              <a
-                href={explorerLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="tx-link"
-                title="View on Explorer"
-                aria-label={`Open transaction ${tx.id} on Hiro Explorer`}
-              >
-                🔗
-              </a>
-            )}
-          </div>
+            <div key={tx.id || index} className={`tx-item ${tx.status}`}>
+              <span className="tx-status" aria-label={`Transaction status: ${tx.status}`}>
+                {getStatusIcon(tx.status)}
+              </span>
+              <span className="tx-action">{tx.action}</span>
+              <span className="tx-time">{tx.time}</span>
+              {explorerLink && (
+                <a
+                  href={explorerLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="tx-link"
+                  title="View on Explorer"
+                  aria-label={`Open transaction ${tx.id} on Hiro Explorer`}
+                >
+                  🔗
+                </a>
+              )}
+            </div>
           );
         })}
       </div>
@@ -65,11 +76,13 @@ export default function TransactionLog({ transactions = [] }) {
 }
 
 TransactionLog.propTypes = {
-  transactions: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
-    status: PropTypes.string,
-    action: PropTypes.string,
-    time: PropTypes.string,
-    network: PropTypes.string
-  }))
+  transactions: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      status: PropTypes.string,
+      action: PropTypes.string,
+      time: PropTypes.string,
+      network: PropTypes.string,
+    })
+  ),
 };

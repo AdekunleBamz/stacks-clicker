@@ -10,17 +10,36 @@ export default function FloatingActionButton({ onAction = () => {} }) {
 
   const handleClose = useCallback(() => setIsOpen(false), []);
 
-  const actions = useMemo(() => [
-    { id: 'ping', icon: '📡', label: 'Ping All', onClick: () => onAction('ping') },
-    { id: 'clear', icon: '🗑️', label: 'Clear', onClick: () => onAction('clear') },
-    { id: 'top', icon: '⬆️', label: 'Top', onClick: () => window.scrollTo({ top: 0, behavior: 'smooth' }) },
-  ], [onAction]);
+  const actions = useMemo(
+    () => [
+      { id: 'ping', icon: '📡', label: 'Ping All', onClick: () => onAction('ping') },
+      { id: 'clear', icon: '🗑️', label: 'Clear', onClick: () => onAction('clear') },
+      {
+        id: 'top',
+        icon: '⬆️',
+        label: 'Top',
+        onClick: () => window.scrollTo({ top: 0, behavior: 'smooth' }),
+      },
+    ],
+    [onAction]
+  );
 
   return (
-    <div className="fab-container" title="Floating quick actions" role="complementary" aria-label="Floating quick action controls">
+    <div
+      className="fab-container"
+      title="Floating quick actions"
+      role="complementary"
+      aria-label="Floating quick action controls"
+    >
       <AnimatePresence>
         {isOpen && (
-          <div className="fab-menu" id="fab-menu" role="menu" aria-label="Quick actions menu" title="Quick actions">
+          <div
+            className="fab-menu"
+            id="fab-menu"
+            role="menu"
+            aria-label="Quick actions menu"
+            title="Quick actions"
+          >
             {actions.map((action, index) => (
               <motion.button
                 type="button"
@@ -39,7 +58,9 @@ export default function FloatingActionButton({ onAction = () => {} }) {
                 }}
               >
                 <span className="fab-label">{action.label}</span>
-                <span className="fab-icon" aria-hidden="true">{action.icon}</span>
+                <span className="fab-icon" aria-hidden="true">
+                  {action.icon}
+                </span>
               </motion.button>
             ))}
           </div>
@@ -57,7 +78,9 @@ export default function FloatingActionButton({ onAction = () => {} }) {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
-        <span className="fab-main-icon" aria-hidden="true">{isOpen ? '×' : '⚡'}</span>
+        <span className="fab-main-icon" aria-hidden="true">
+          {isOpen ? '×' : '⚡'}
+        </span>
       </motion.button>
     </div>
   );

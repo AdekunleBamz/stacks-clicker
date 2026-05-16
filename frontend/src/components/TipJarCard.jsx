@@ -55,12 +55,15 @@ function TipJarCard({ address, tipjar }) {
     setTimeout(() => setShowSuccess(false), 5000);
   }, [isTipAmountValid, parsedTipAmount, tip, playSound]);
 
-  const handlePredefinedTip = useCallback((amount) => {
-    tip(amount);
-    setShowSuccess(true);
-    setTimeout(() => setShowSuccess(false), 5000);
-    notify.success(`Tipping ${amount} STX...`);
-  }, [tip]);
+  const handlePredefinedTip = useCallback(
+    (amount) => {
+      tip(amount);
+      setShowSuccess(true);
+      setTimeout(() => setShowSuccess(false), 5000);
+      notify.success(`Tipping ${amount} STX...`);
+    },
+    [tip]
+  );
 
   /**
    * Internal wrapper to check connection and play sound before executing an action.
@@ -160,7 +163,7 @@ function TipJarCard({ address, tipjar }) {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              transition={{ ease: "easeOut", duration: 0.25 }}
+              transition={{ ease: 'easeOut', duration: 0.25 }}
               className="tip-success-msg"
               role="status"
               aria-live="polite"

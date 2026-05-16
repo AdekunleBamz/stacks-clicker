@@ -25,27 +25,30 @@ const ParticleOverlay = memo(function ParticleOverlay({ trigger }) {
    *
    * @param {number} [count=12] - Number of particles to generate in a single burst
    */
-  const createParticles = useCallback((count = isReduced ? 4 : 12) => {
-    const batchId = Date.now();
-    const newParticles = Array.from({ length: count }).map((_, i) => ({
-      id: `${batchId}-${i}`,
-      x: Math.random() * 100 - 50, // Relative to center
-      y: Math.random() * 100 - 50,
-      scale: Math.random() * 0.5 + 0.5,
-      color: ['#6366f1', '#10b981', '#f59e0b', '#ec4899'][Math.floor(Math.random() * 4)],
-      emoji: ['💎', '✨', '🚀', '🔥', '🎨'][Math.floor(Math.random() * 5)]
-    }));
+  const createParticles = useCallback(
+    (count = isReduced ? 4 : 12) => {
+      const batchId = Date.now();
+      const newParticles = Array.from({ length: count }).map((_, i) => ({
+        id: `${batchId}-${i}`,
+        x: Math.random() * 100 - 50, // Relative to center
+        y: Math.random() * 100 - 50,
+        scale: Math.random() * 0.5 + 0.5,
+        color: ['#6366f1', '#10b981', '#f59e0b', '#ec4899'][Math.floor(Math.random() * 4)],
+        emoji: ['💎', '✨', '🚀', '🔥', '🎨'][Math.floor(Math.random() * 5)],
+      }));
 
-    setParticles((prev) => [...prev, ...newParticles]);
+      setParticles((prev) => [...prev, ...newParticles]);
 
-    // Schedule cleanup after the animation duration (1s)
-    const timeout = setTimeout(() => {
-      setParticles((prev) => prev.filter(p => !newParticles.find(np => np.id === p.id)));
-      timeoutsRef.current = timeoutsRef.current.filter(t => t !== timeout);
-    }, 1000);
+      // Schedule cleanup after the animation duration (1s)
+      const timeout = setTimeout(() => {
+        setParticles((prev) => prev.filter((p) => !newParticles.find((np) => np.id === p.id)));
+        timeoutsRef.current = timeoutsRef.current.filter((t) => t !== timeout);
+      }, 1000);
 
-    timeoutsRef.current.push(timeout);
-  }, [isReduced]);
+      timeoutsRef.current.push(timeout);
+    },
+    [isReduced]
+  );
 
   useEffect(() => {
     if (trigger) {
@@ -57,7 +60,6 @@ const ParticleOverlay = memo(function ParticleOverlay({ trigger }) {
   // Cleanup all pending timeouts on unmount
   useEffect(() => {
     return () => {
-      // eslint-disable-next-line react-hooks/exhaustive-deps
       timeoutsRef.current.forEach(clearTimeout);
     };
   }, []);
@@ -71,7 +73,7 @@ const ParticleOverlay = memo(function ParticleOverlay({ trigger }) {
         top: '50%',
         left: '50%',
         pointerEvents: 'none',
-        zIndex: 1000
+        zIndex: 1000,
       }}
     >
       <AnimatePresence>
@@ -84,15 +86,15 @@ const ParticleOverlay = memo(function ParticleOverlay({ trigger }) {
               y: particle.y * 4,
               opacity: 0,
               scale: particle.scale,
-              rotate: Math.random() * 360
+              rotate: Math.random() * 360,
             }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
             style={{
               position: 'absolute',
               fontSize: `${particle.scale * 20}px`,
               textShadow: `0 0 10px ${particle.color}`,
-              userSelect: 'none'
+              userSelect: 'none',
             }}
           >
             {particle.emoji}
@@ -112,7 +114,7 @@ ParticleOverlay.propTypes = {
       id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
       count: PropTypes.number,
     }),
-  ])
+  ]),
 };
 
 export default ParticleOverlay;

@@ -14,13 +14,16 @@ export function useLongPress(callback, { delay = 500 } = {}) {
   const timerRef = useRef();
   const safeDelay = Number.isFinite(delay) && delay > 0 ? delay : 500;
 
-  const start = useCallback((event) => {
-    setIsPressing(true);
-    timerRef.current = setTimeout(() => {
-      callback(event);
-      setIsPressing(false);
-    }, safeDelay);
-  }, [callback, safeDelay]);
+  const start = useCallback(
+    (event) => {
+      setIsPressing(true);
+      timerRef.current = setTimeout(() => {
+        callback(event);
+        setIsPressing(false);
+      }, safeDelay);
+    },
+    [callback, safeDelay]
+  );
 
   const stop = useCallback(() => {
     clearTimeout(timerRef.current);

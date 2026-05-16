@@ -5,7 +5,13 @@ import PropTypes from 'prop-types';
  * ScrollArea provides custom scrollbars while using native scrolling performance.
  * It hides the default browser scrollbars and replaces them with sleek, theme-aware ones.
  */
-const ScrollArea = memo(function ScrollArea({ children, className = '', style = {}, height, orientation = 'vertical' }) {
+const ScrollArea = memo(function ScrollArea({
+  children,
+  className = '',
+  style = {},
+  height,
+  orientation = 'vertical',
+}) {
   const scrollRef = useRef(null);
   const [scrollState, setScrollState] = useState({
     scrollTop: 0,
@@ -19,8 +25,16 @@ const ScrollArea = memo(function ScrollArea({ children, className = '', style = 
 
   const handleScroll = useCallback(() => {
     if (scrollRef.current) {
-      const { scrollTop, scrollHeight, clientHeight, scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-      setScrollState({ scrollTop, scrollHeight, clientHeight, scrollLeft, scrollWidth, clientWidth });
+      const { scrollTop, scrollHeight, clientHeight, scrollLeft, scrollWidth, clientWidth } =
+        scrollRef.current;
+      setScrollState({
+        scrollTop,
+        scrollHeight,
+        clientHeight,
+        scrollLeft,
+        scrollWidth,
+        clientWidth,
+      });
     }
   }, []);
 
@@ -35,12 +49,19 @@ const ScrollArea = memo(function ScrollArea({ children, className = '', style = 
 
   // Calculate Thumb dimensions and positions
   const trackHeight = scrollState.clientHeight;
-  const thumbHeight = Math.max((scrollState.clientHeight / scrollState.scrollHeight) * trackHeight, 30);
-  const thumbTop = (scrollState.scrollTop / (scrollState.scrollHeight - scrollState.clientHeight)) * (trackHeight - thumbHeight);
+  const thumbHeight = Math.max(
+    (scrollState.clientHeight / scrollState.scrollHeight) * trackHeight,
+    30
+  );
+  const thumbTop =
+    (scrollState.scrollTop / (scrollState.scrollHeight - scrollState.clientHeight)) *
+    (trackHeight - thumbHeight);
 
   const trackWidth = scrollState.clientWidth;
   const thumbWidth = Math.max((scrollState.clientWidth / scrollState.scrollWidth) * trackWidth, 30);
-  const thumbLeft = (scrollState.scrollLeft / (scrollState.scrollWidth - scrollState.clientWidth)) * (trackWidth - thumbWidth);
+  const thumbLeft =
+    (scrollState.scrollLeft / (scrollState.scrollWidth - scrollState.clientWidth)) *
+    (trackWidth - thumbWidth);
 
   return (
     <div
@@ -51,11 +72,7 @@ const ScrollArea = memo(function ScrollArea({ children, className = '', style = 
       role="region"
       aria-label="Scrollable content area"
     >
-      <div
-        className={`scroll-viewport ${orientation}`}
-        ref={scrollRef}
-        onScroll={handleScroll}
-      >
+      <div className={`scroll-viewport ${orientation}`} ref={scrollRef} onScroll={handleScroll}>
         {children}
       </div>
 
@@ -65,7 +82,7 @@ const ScrollArea = memo(function ScrollArea({ children, className = '', style = 
             className="scroll-thumb"
             style={{
               height: `${thumbHeight}px`,
-              transform: `translateY(${thumbTop || 0}px)`
+              transform: `translateY(${thumbTop || 0}px)`,
             }}
           />
         </div>
@@ -77,7 +94,7 @@ const ScrollArea = memo(function ScrollArea({ children, className = '', style = 
             className="scroll-thumb"
             style={{
               width: `${thumbWidth}px`,
-              transform: `translateX(${thumbLeft || 0}px)`
+              transform: `translateX(${thumbLeft || 0}px)`,
             }}
           />
         </div>

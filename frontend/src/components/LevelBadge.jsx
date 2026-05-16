@@ -10,62 +10,66 @@ import { motion } from 'framer-motion';
  * @returns {JSX.Element} The rendered level badge.
  */
 function LevelBadge({ level }) {
-    return (
-        <motion.div
-            className="level-badge-container"
-            role="img"
-            aria-label={`Level ${level} badge`}
-            aria-roledescription="level badge"
-            title={`Level ${level} badge`}
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ type: "spring", damping: 12, stiffness: 200 }}
-        >
-            <div className="level-badge-glow"></div>
-            <div className="level-badge-inner">
-                <span className="level-text" aria-hidden="true">LVL</span>
-                <span className="level-number" aria-live="polite" aria-atomic="true">{level}</span>
-            </div>
+  return (
+    <motion.div
+      className="level-badge-container"
+      role="img"
+      aria-label={`Level ${level} badge`}
+      aria-roledescription="level badge"
+      title={`Level ${level} badge`}
+      initial={{ scale: 0.8, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{ type: 'spring', damping: 12, stiffness: 200 }}
+    >
+      <div className="level-badge-glow"></div>
+      <div className="level-badge-inner">
+        <span className="level-text" aria-hidden="true">
+          LVL
+        </span>
+        <span className="level-number" aria-live="polite" aria-atomic="true">
+          {level}
+        </span>
+      </div>
 
-            {/* Mini orbiting particles */}
-            {[...Array(3)].map((_, i) => (
-                <motion.div
-                    key={i}
-                    className="level-particle"
-                    aria-hidden="true"
-                    animate={{
-                        rotate: 360,
-                    }}
-                    transition={{
-                        duration: 3 + i,
-                        repeat: Infinity,
-                        ease: "linear"
-                    }}
-                    style={{
-                        position: 'absolute',
-                        width: '4px',
-                        height: '4px',
-                        borderRadius: '50%',
-                        background: i === 0 ? 'hsl(var(--pulse-cyan))' : 'hsl(var(--pulse-purple))',
-                        top: '50%',
-                        left: '50%',
-                        marginLeft: '-2px',
-                        marginTop: '-2px',
-                        transformOrigin: `${25 + i * 5}px center`,
-                        willChange: 'transform',
-                    }}
-                />
-            ))}
-        </motion.div>
-    );
+      {/* Mini orbiting particles */}
+      {[...Array(3)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="level-particle"
+          aria-hidden="true"
+          animate={{
+            rotate: 360,
+          }}
+          transition={{
+            duration: 3 + i,
+            repeat: Infinity,
+            ease: 'linear',
+          }}
+          style={{
+            position: 'absolute',
+            width: '4px',
+            height: '4px',
+            borderRadius: '50%',
+            background: i === 0 ? 'hsl(var(--pulse-cyan))' : 'hsl(var(--pulse-purple))',
+            top: '50%',
+            left: '50%',
+            marginLeft: '-2px',
+            marginTop: '-2px',
+            transformOrigin: `${25 + i * 5}px center`,
+            willChange: 'transform',
+          }}
+        />
+      ))}
+    </motion.div>
+  );
 }
 
 LevelBadge.propTypes = {
-    level: PropTypes.number.isRequired,
+  level: PropTypes.number.isRequired,
 };
 
 LevelBadge.defaultProps = {
-    level: 1,
+  level: 1,
 };
 
 export default memo(LevelBadge);

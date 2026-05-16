@@ -41,8 +41,14 @@ export function useNotifications() {
   const showPromise = useCallback((promise, { loading, success, error } = {}) => {
     if (loading) notify.loading(loading);
     return Promise.resolve(promise)
-      .then((result) => { if (success) notify.success(success); return result; })
-      .catch((err) => { if (error) notify.error(typeof error === 'function' ? error(err) : error); throw err; });
+      .then((result) => {
+        if (success) notify.success(success);
+        return result;
+      })
+      .catch((err) => {
+        if (error) notify.error(typeof error === 'function' ? error(err) : error);
+        throw err;
+      });
   }, []);
 
   return {

@@ -35,21 +35,24 @@ export function useBattery() {
       });
     }
 
-    navigator.getBattery().then((batt) => {
-      if (cancelled) return;
-      batteryInstance = batt;
+    navigator
+      .getBattery()
+      .then((batt) => {
+        if (cancelled) return;
+        batteryInstance = batt;
 
-      onBatteryChange = () => updateBattery(batt);
+        onBatteryChange = () => updateBattery(batt);
 
-      batteryInstance.addEventListener('levelchange', onBatteryChange);
-      batteryInstance.addEventListener('chargingchange', onBatteryChange);
+        batteryInstance.addEventListener('levelchange', onBatteryChange);
+        batteryInstance.addEventListener('chargingchange', onBatteryChange);
 
-      updateBattery(batt);
-    }).catch(() => {
-      if (!cancelled) {
-        setBattery((prev) => ({ ...prev, supported: false }));
-      }
-    });
+        updateBattery(batt);
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setBattery((prev) => ({ ...prev, supported: false }));
+        }
+      });
 
     return () => {
       cancelled = true;

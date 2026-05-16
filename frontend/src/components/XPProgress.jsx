@@ -36,7 +36,9 @@ function XPProgress({ currentXP, nextLevelXP }) {
           transition={{ duration: 0.8, ease: 'easeOut' }}
         />
       </div>
-      <span className="xp-percentage" aria-hidden="true">{percentage}%</span>
+      <span className="xp-percentage" aria-hidden="true">
+        {percentage}%
+      </span>
     </div>
   );
 }

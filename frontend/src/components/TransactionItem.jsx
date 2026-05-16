@@ -22,7 +22,13 @@ function TransactionItem({
   return (
     <div className="tx-item-wrapper" role="listitem" ref={ref}>
       <div className="tx-swipe-actions">
-        <button type="button" className="swipe-btn copy" onClick={() => onCopy(tx.id)} aria-label="Copy transaction ID" title="Copy transaction ID">
+        <button
+          type="button"
+          className="swipe-btn copy"
+          onClick={() => onCopy(tx.id)}
+          aria-label="Copy transaction ID"
+          title="Copy transaction ID"
+        >
           📋
         </button>
         <button
@@ -50,7 +56,7 @@ function TransactionItem({
           scale: 1.01,
           borderColor: 'var(--primary)',
           boxShadow: '0 0 0 2px var(--primary-glow)',
-          outline: 'none'
+          outline: 'none',
         }}
         onContextMenu={(e) => onContextMenu(e, tx)}
       >
@@ -58,14 +64,34 @@ function TransactionItem({
         <div className="tx-main">
           <div className="tx-header">
             <span className="tx-action-label">{highlightText(tx.action, searchTerm)}</span>
-            <span className="tx-timestamp" title={tx.time} aria-label={`Transaction time: ${tx.time}`}>{tx.time}</span>
+            <span
+              className="tx-timestamp"
+              title={tx.time}
+              aria-label={`Transaction time: ${tx.time}`}
+            >
+              {tx.time}
+            </span>
           </div>
           <div className="tx-actions-inline">
-            <button type="button" className="text-btn" onClick={() => onDetails(tx)} title="View full transaction details" aria-label="View full transaction details">
+            <button
+              type="button"
+              className="text-btn"
+              onClick={() => onDetails(tx)}
+              title="View full transaction details"
+              aria-label="View full transaction details"
+            >
               View Details <span aria-hidden="true">→</span>
             </button>
-            <span className="tx-action-separator" aria-hidden="true">•</span>
-            <button type="button" className="text-btn" onClick={() => onCopy(tx.id)} aria-label="Copy full transaction ID" title="Copy transaction ID to clipboard">
+            <span className="tx-action-separator" aria-hidden="true">
+              •
+            </span>
+            <button
+              type="button"
+              className="text-btn"
+              onClick={() => onCopy(tx.id)}
+              aria-label="Copy full transaction ID"
+              title="Copy transaction ID to clipboard"
+            >
               Copy ID
             </button>
           </div>
@@ -75,9 +101,18 @@ function TransactionItem({
                 <span className="step-dot" aria-hidden="true"></span>
                 <span className="step-label">Submitted</span>
               </div>
-              <div className={`step ${isPending ? 'pending' : (tx.status === 'failed' ? 'error' : 'active')}`}>
+              <div
+                className={`step ${isPending ? 'pending' : tx.status === 'failed' ? 'error' : 'active'}`}
+              >
                 <span className="step-dot" aria-hidden="true"></span>
-                <span className="step-label" title={tx.status === 'failed' ? 'Transaction execution failed' : 'Transaction is awaiting confirmation in the mempool'}>
+                <span
+                  className="step-label"
+                  title={
+                    tx.status === 'failed'
+                      ? 'Transaction execution failed'
+                      : 'Transaction is awaiting confirmation in the mempool'
+                  }
+                >
                   {tx.status === 'failed' ? 'Failed' : 'Mempool'}
                 </span>
               </div>
@@ -87,8 +122,13 @@ function TransactionItem({
               </div>
             </div>
             {tx.explorerUrl && (
-              <button type="button" onClick={() => onOpenExplorer(tx)} className="tx-explorer-link" title="View on Stacks Explorer"
-                aria-label={`Open transaction ${txId.slice(0, 8)} in Hiro Explorer`}>
+              <button
+                type="button"
+                onClick={() => onOpenExplorer(tx)}
+                className="tx-explorer-link"
+                title="View on Stacks Explorer"
+                aria-label={`Open transaction ${txId.slice(0, 8)} in Hiro Explorer`}
+              >
                 {highlightText(txId.slice(0, 8), searchTerm)}...
                 {highlightText(txId.slice(-6), searchTerm)} ↗
               </button>

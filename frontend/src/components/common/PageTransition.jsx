@@ -14,7 +14,7 @@ const PageTransition = memo(function PageTransition({ children, className = '' }
       exit={{ opacity: 0, y: -15 }}
       transition={{
         duration: 0.4,
-        ease: [0.22, 1, 0.36, 1]
+        ease: [0.22, 1, 0.36, 1],
       }}
       className={`page-transition-wrapper ${className}`}
     >
@@ -29,7 +29,7 @@ PageTransition.defaultProps = {
 
 PageTransition.propTypes = {
   children: PropTypes.node.isRequired,
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default PageTransition;

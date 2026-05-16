@@ -17,7 +17,7 @@ const toastStyle = {
   minWidth: '320px',
   display: 'flex',
   justifyContent: 'space-between',
-  alignItems: 'center'
+  alignItems: 'center',
 };
 
 /**
@@ -69,22 +69,26 @@ const GlassToast = ({ t, message, type, isLoading = false }) => {
       transition={{ type: 'spring', damping: 25, stiffness: 300 }}
       style={{
         ...getGlassStyle(color),
-        opacity: t.visible ? 1 : 0
+        opacity: t.visible ? 1 : 0,
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-        <div style={{
-          background: `${color}15`,
-          padding: '8px',
-          borderRadius: '50%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          border: `1px solid ${color}30`
-        }}>
+        <div
+          style={{
+            background: `${color}15`,
+            padding: '8px',
+            borderRadius: '50%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            border: `1px solid ${color}30`,
+          }}
+        >
           {icon}
         </div>
-        <span style={{ letterSpacing: '0.02em', textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>{message}</span>
+        <span style={{ letterSpacing: '0.02em', textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
+          {message}
+        </span>
       </div>
 
       {!isLoading && (
@@ -98,7 +102,7 @@ const GlassToast = ({ t, message, type, isLoading = false }) => {
             left: 0,
             height: '3px',
             background: `linear-gradient(90deg, transparent, ${color}, transparent)`,
-            boxShadow: `0 0 12px ${color}`
+            boxShadow: `0 0 12px ${color}`,
           }}
         />
       )}
@@ -126,7 +130,7 @@ const ToastWithProgress = ({ t, message, icon, color, isLoading = false }) => (
           left: 0,
           height: '3px',
           background: color || 'var(--primary)',
-          boxShadow: `0 0 8px ${color || 'var(--primary)'}`
+          boxShadow: `0 0 8px ${color || 'var(--primary)'}`,
         }}
       />
     )}
@@ -137,13 +141,22 @@ const ToastWithProgress = ({ t, message, icon, color, isLoading = false }) => (
  * Premium toast utility for consistent notifications with progress bars.
  */
 export const notify = {
-  success: (message, options = {}) => toast.custom((t) => <GlassToast t={t} message={message} type="success" />, options),
-  error: (message, options = {}) => toast.custom((t) => <GlassToast t={t} message={message} type="error" />, options),
-  info: (message, options = {}) => toast.custom((t) => <GlassToast t={t} message={message} type="info" />, options),
-  warning: (message, options = {}) => toast.custom((t) => <GlassToast t={t} message={message} type="warning" />, options),
-  loading: (message, options = {}) => toast.custom((t) => <GlassToast t={t} message={message} type="loading" isLoading={true} />, { ...options, duration: Infinity }),
-  custom: (message, options = {}) => toast.custom((t) => <GlassToast t={t} message={message} type="custom" />, options),
-  dismiss: (toastId) => toast.dismiss(toastId)
+  success: (message, options = {}) =>
+    toast.custom((t) => <GlassToast t={t} message={message} type="success" />, options),
+  error: (message, options = {}) =>
+    toast.custom((t) => <GlassToast t={t} message={message} type="error" />, options),
+  info: (message, options = {}) =>
+    toast.custom((t) => <GlassToast t={t} message={message} type="info" />, options),
+  warning: (message, options = {}) =>
+    toast.custom((t) => <GlassToast t={t} message={message} type="warning" />, options),
+  loading: (message, options = {}) =>
+    toast.custom((t) => <GlassToast t={t} message={message} type="loading" isLoading={true} />, {
+      ...options,
+      duration: Infinity,
+    }),
+  custom: (message, options = {}) =>
+    toast.custom((t) => <GlassToast t={t} message={message} type="custom" />, options),
+  dismiss: (toastId) => toast.dismiss(toastId),
 };
 
 export default notify;

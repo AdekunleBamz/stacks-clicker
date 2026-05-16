@@ -44,7 +44,9 @@ const Button = ({
       disabled={disabled || isLoading}
       aria-disabled={disabled || isLoading}
       aria-busy={isLoading}
-      aria-label={isLoading ? `Processing ${typeof children === 'string' ? children : 'action'}` : undefined}
+      aria-label={
+        isLoading ? `Processing ${typeof children === 'string' ? children : 'action'}` : undefined
+      }
       title={typeof children === 'string' ? children : undefined}
       whileHover={disabled || isLoading ? undefined : { scale: 1.02 }}
       whileTap={disabled || isLoading ? undefined : { scale: 0.98 }}
@@ -54,7 +56,11 @@ const Button = ({
         <span className="btn-spinner" role="progressbar" aria-label="Loading"></span>
       ) : (
         <>
-          {icon && <span className="btn-icon" aria-hidden="true">{icon}</span>}
+          {icon && (
+            <span className="btn-icon" aria-hidden="true">
+              {icon}
+            </span>
+          )}
           {children}
         </>
       )}

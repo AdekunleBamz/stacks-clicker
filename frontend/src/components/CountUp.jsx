@@ -19,43 +19,49 @@ import PropTypes from 'prop-types';
  * <CountUp value={1500.25} decimals={2} suffix=" STX" />
  */
 const CountUp = memo(function CountUp({ value, decimals = 0, prefix = '', suffix = '' }) {
-    const safeValue = Number.isFinite(value) ? value : 0;
-    const [displayValue, setDisplayValue] = useState(() => Number(safeValue).toFixed(decimals));
-    const prevValue = useRef(safeValue);
+  const safeValue = Number.isFinite(value) ? value : 0;
+  const [displayValue, setDisplayValue] = useState(() => Number(safeValue).toFixed(decimals));
+  const prevValue = useRef(safeValue);
 
-    useEffect(() => {
-        const controls = animate(prevValue.current, safeValue, {
-            duration: 1,
-            onUpdate: (latest) => {
-                setDisplayValue(latest.toFixed(decimals));
-            }
-        });
+  useEffect(() => {
+    const controls = animate(prevValue.current, safeValue, {
+      duration: 1,
+      onUpdate: (latest) => {
+        setDisplayValue(latest.toFixed(decimals));
+      },
+    });
 
-        prevValue.current = safeValue;
-        return () => controls.stop();
-    }, [safeValue, decimals]);
+    prevValue.current = safeValue;
+    return () => controls.stop();
+  }, [safeValue, decimals]);
 
-    return (
-        <span className="count-up">
-            <span aria-hidden="true">{prefix}{displayValue}{suffix}</span>
-            <span className="sr-only" aria-live="polite" aria-atomic="true">
-                {prefix}{Number(safeValue).toFixed(decimals)}{suffix}
-            </span>
-        </span>
-    );
+  return (
+    <span className="count-up">
+      <span aria-hidden="true">
+        {prefix}
+        {displayValue}
+        {suffix}
+      </span>
+      <span className="sr-only" aria-live="polite" aria-atomic="true">
+        {prefix}
+        {Number(safeValue).toFixed(decimals)}
+        {suffix}
+      </span>
+    </span>
+  );
 });
 
 CountUp.propTypes = {
-    value: PropTypes.number.isRequired,
-    decimals: PropTypes.number,
-    prefix: PropTypes.string,
-    suffix: PropTypes.string
+  value: PropTypes.number.isRequired,
+  decimals: PropTypes.number,
+  prefix: PropTypes.string,
+  suffix: PropTypes.string,
 };
 
 CountUp.defaultProps = {
-    decimals: 0,
-    prefix: '',
-    suffix: '',
+  decimals: 0,
+  prefix: '',
+  suffix: '',
 };
 
 export default CountUp;

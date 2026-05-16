@@ -83,13 +83,17 @@ export function usePrice() {
     [price]
   );
 
-  const isStale = lastFetched !== null
-    ? Date.now() - lastFetched > PRICE_REFRESH_INTERVAL_MS * 2
-    : false;
+  const isStale =
+    lastFetched !== null ? Date.now() - lastFetched > PRICE_REFRESH_INTERVAL_MS * 2 : false;
 
-  const formattedPrice = price !== null && Number.isFinite(price)
-    ? new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 4 }).format(price)
-    : null;
+  const formattedPrice =
+    price !== null && Number.isFinite(price)
+      ? new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'USD',
+          minimumFractionDigits: 4,
+        }).format(price)
+      : null;
 
   return { price, loading, error, lastFetched, stxValueOf, isStale, formattedPrice };
 }
