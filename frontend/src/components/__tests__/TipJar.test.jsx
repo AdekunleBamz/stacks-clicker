@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import TipJar from '../TipJar';
 import { WalletContext } from '../../context/WalletContext';
@@ -65,8 +65,6 @@ describe('TipJar component', () => {
     // Find input (assuming it has a label or descriptive text)
     // Looking at the TipJar.jsx preview, it has setTipAmount(1000)
     const amountInput = screen.getByRole('spinbutton'); // Assuming type="number"
-    const recipientInput = screen.getByPlaceholderText('SP123...');
-
     fireEvent.change(amountInput, { target: { value: '5000' } });
 
     const tipUserBtn = screen.getByText(/Tip User/i);
