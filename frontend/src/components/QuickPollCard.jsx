@@ -35,7 +35,6 @@ function QuickPollCard({ address, quickpoll }) {
   const trimmedQuestion = pollQuestion.trim();
   const [timeLeft, setTimeLeft] = useState(3600); // 1 hour in seconds
   const cardRef = useRef(null);
-  const inputRef = useRef(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
