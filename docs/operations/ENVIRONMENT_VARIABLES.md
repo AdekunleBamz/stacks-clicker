@@ -32,6 +32,6 @@ Companion index: [Operations docs](README.md).
 
 Operational note: After changing env values, restart both the frontend dev server and any local API proxy process.
 
-Operational note: Flag which variables are safe to expose in client-side bundles.
+Operational note: Document which variables are safe to expose in client-side bundles.
 
 Quarterly follow-up: Reconfirm default values for non-production environments.
