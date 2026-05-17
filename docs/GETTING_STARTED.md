@@ -1,6 +1,6 @@
 # Getting Started with Stacks Clicker
 
-Welcome to the Stacks Clicker development guide! This document will help you go from zero to a running dApp in minutes.
+Welcome to the Stacks Clicker development guide. This document helps you go from zero to a running dApp in minutes.
 
 ## 🧱 Project Overview
 
