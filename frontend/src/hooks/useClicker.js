@@ -1,5 +1,4 @@
 import { useState, useCallback, useRef } from 'react';
-import { useWallet } from '../context/WalletContext';
 import { callContract } from '../utils/stacksWallet';
 import { DEPLOYER_ADDRESS, CONTRACT_NAMES } from '../config/contracts';
 
@@ -13,7 +12,6 @@ const CONTRACT_NAME = CONTRACT_NAMES.clicker;
  * @returns {Object} Clicker actions and loading state.
  */
 export function useClicker({ onTxSubmit } = {}) {
-  const { isConnected } = useWallet();
   const [loadingStates, setLoadingStates] = useState({});
   const actionCountRef = useRef(0);
 
