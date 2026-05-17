@@ -111,33 +111,6 @@ const GlassToast = ({ t, message, type, isLoading = false }) => {
 };
 
 /**
- * Progress indicator component for toast notifications.
- */
-const ToastWithProgress = ({ t, message, icon, color, isLoading = false }) => (
-  <div style={toastStyle}>
-    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-      {icon && <span style={{ fontSize: '1.2rem' }}>{icon}</span>}
-      <span>{message}</span>
-    </div>
-    {!isLoading && (
-      <motion.div
-        initial={{ width: '100%' }}
-        animate={{ width: 0 }}
-        transition={{ duration: (t.duration || 4000) / 1000, ease: 'linear' }}
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          height: '3px',
-          background: color || 'var(--primary)',
-          boxShadow: `0 0 8px ${color || 'var(--primary)'}`,
-        }}
-      />
-    )}
-  </div>
-);
-
-/**
  * Premium toast utility for consistent notifications with progress bars.
  */
 export const notify = {
