@@ -38,7 +38,7 @@ Stacks Clicker aims to be more than just a game; it serves as a gateway for user
 - **Stacks Wallet**: Hiro Wallet, Leather, or Xverse extension
 - **Clarinet**: Required for smart contract development and testing
 
-### Local Discovery
+### Local Development Notes
 
 - Clarinet is recommended for local smart contract testing and development.
 - Docker is required for spinning up a local Stacks Devnet environment.
