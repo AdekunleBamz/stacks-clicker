@@ -12,16 +12,6 @@ vi.mock('framer-motion', () => ({
           (
             {
               children,
-              animate,
-              exit,
-              initial,
-              transition,
-              variants,
-              viewport,
-              whileDrag,
-              whileHover,
-              whileInView,
-              whileTap,
               ...props
             },
             ref
