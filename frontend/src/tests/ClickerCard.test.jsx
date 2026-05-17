@@ -8,14 +8,8 @@ vi.mock('framer-motion', () => ({
     {},
     {
       get: (_, tag) =>
-        React.forwardRef(
-          (
-            {
-              children,
-              ...props
-            },
-            ref
-          ) => React.createElement(tag, { ...props, ref }, children)
+        React.forwardRef(({ children, ...props }, ref) =>
+          React.createElement(tag, { ...props, ref }, children)
         ),
     }
   ),
