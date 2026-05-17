@@ -4,25 +4,6 @@ import { animate } from 'framer-motion';
 import StatsCard from './common/StatsCard';
 
 /**
- * Animated number component for smooth counting transitions.
- */
-function AnimatedNumber({ value }) {
-  const [displayValue, setDisplayValue] = useState(value);
-  const fromRef = useRef(value);
-
-  useEffect(() => {
-    const controls = animate(fromRef.current, value, {
-      duration: 1,
-      onUpdate: (latest) => setDisplayValue(Math.floor(latest)),
-    });
-    fromRef.current = value;
-    return () => controls.stop();
-  }, [value]);
-
-  return <span>{displayValue.toLocaleString()}</span>;
-}
-
-/**
  * Component to display aggregate player statistics with premium animations.
  * @param {Object} props - Component props.
  * @param {Object} props.stats - Stats object { clicks, tips, votes }.
