@@ -91,7 +91,7 @@ If you wish to modify, test, or deploy the Stacks smart contracts locally:
    ```bash
    npm run frontend:dev
    ```
-   Build for production when needed:
+   Build a production bundle when needed:
    ```bash
    npm run build
    ```
