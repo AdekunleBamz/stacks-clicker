@@ -33,7 +33,7 @@ cd frontend
 npm ci
 ```
 
-Use `npm install` only when you intentionally need to refresh the lockfile.
+Use `npm install` only when you intentionally need to update the lockfile.
 
 ### 3. Configure Environment
 
