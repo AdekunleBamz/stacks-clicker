@@ -1,6 +1,5 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
-import { motion } from 'framer-motion';
 import XPProgress from './XPProgress';
 import LevelBadge from './LevelBadge';
 import StatsGrid from './StatsGrid';
