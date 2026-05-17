@@ -26,7 +26,7 @@ git clone https://github.com/AdekunleBamz/stacks-clicker.git
 cd stacks-clicker
 ```
 
-### 2. Install Frontend Dependencies
+### 2. Install frontend dependencies
 
 ```bash
 cd frontend
