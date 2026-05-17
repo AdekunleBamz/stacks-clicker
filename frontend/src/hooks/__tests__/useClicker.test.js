@@ -1,7 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { useClicker } from '../useClicker';
-import { useNotifications } from '../useNotifications';
 import { callContract } from '../../utils/stacksWallet';
 
 // Mock dependencies
@@ -35,9 +34,8 @@ describe('useClicker hook', () => {
     const { result } = renderHook(() => useClicker({ onTxSubmit }));
 
     // Trigger click - Wrapped in act because it updates state
-    let promise;
     await act(async () => {
-      promise = result.current.click();
+      await result.current.click();
     });
 
     expect(callContract).toHaveBeenCalled();
@@ -54,7 +52,7 @@ describe('useClicker hook', () => {
     await act(async () => {
       try {
         await result.current.click();
-      } catch (e) {
+      } catch {
         // Expected
       }
     });
