@@ -28,7 +28,7 @@ Companion index: [Operations docs](README.md).
 ### Environment Reminder
 
 - Revalidate required env vars whenever network defaults change between testnet and mainnet.
-- Reconfirm CI and local env var names stay aligned after configuration refactors.
+- Reconfirm CI and local env var names remain aligned after configuration refactors.
 
 Operational note: After changing env values, restart both the frontend dev server and any local API proxy process.
 
