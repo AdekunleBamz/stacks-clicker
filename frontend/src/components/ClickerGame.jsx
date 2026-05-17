@@ -17,10 +17,7 @@ export default function ClickerGame({ onTxSubmit }) {
   const { isConnected } = useWallet();
   const [loading, setLoading] = useState(false);
   const [clickCount, setClickCount] = useState(0);
-  const [multiClickAmount, setMultiClickAmount] = useState(5);
   const [clickEvents, setClickEvents] = useState([]);
-  const [showMulti, setShowMulti] = useState(false);
-
   const addClickEvent = (e) => {
     const newEvent = {
       id: Date.now(),
@@ -53,31 +50,6 @@ export default function ClickerGame({ onTxSubmit }) {
       soundEngine.play('success');
     } catch (err) {
       console.error('Click failed:', err);
-      soundEngine.play('error');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleMultiClick = async (e) => {
-    if (!isConnected) return;
-    addClickEvent(e);
-    soundEngine.play('click');
-
-    setLoading(true);
-    try {
-      const result = await callContract({
-        contractAddress: DEPLOYER,
-        contractName: 'clicker-v2p',
-        functionName: 'multi-click',
-        functionArgs: [{ type: 'uint128', value: multiClickAmount.toString() }],
-      });
-
-      setClickCount((prev) => prev + multiClickAmount);
-      onTxSubmit?.('multi-click', result.txId);
-      soundEngine.play('success');
-    } catch (err) {
-      console.error('Multi-click failed:', err);
       soundEngine.play('error');
     } finally {
       setLoading(false);
@@ -139,32 +111,6 @@ export default function ClickerGame({ onTxSubmit }) {
         >
           {loading ? '⏳' : '👆'} Click!
         </button>
-
-        <div className="multi-click-group" role="group" aria-label="Multi-Click Interventions">
-          <input
-            id="rapid-clicker-amount"
-            type="number"
-            min="1"
-            max="100"
-            value={multiClickAmount}
-            onChange={(e) => setMultiClickAmount(Number.parseInt(e.target.value, 10) || 1)}
-            className="multi-input"
-            aria-label="Multi-click amount"
-            title="Set multi-click batch amount"
-          />
-          <motion.button
-            type="button"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="action-btn secondary"
-            onClick={() => setShowMulti((prev) => !prev)}
-            title="Toggle bulk click interface dialog"
-            disabled={!isConnected || loading}
-            aria-label={`Multi-click ${multiClickAmount} times`}
-          >
-            Multi-Click ×{multiClickAmount}
-          </motion.button>
-        </div>
 
         <motion.button
           type="button"
