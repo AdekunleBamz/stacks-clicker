@@ -4,7 +4,7 @@ Manage environment configuration for the Stacks Clicker frontend.
 
 ## Setup
 
-Quick reference:
+Quick reference table:
 
 | Variable                 | Required | Notes                                                    |
 | ------------------------ | -------- | -------------------------------------------------------- |
