@@ -162,7 +162,7 @@ When release timing is tight, prefer a brief smoke pass over skipping verificati
 ## Troubleshooting 🔍
 
 - **Wallet Prompt Missing**: Ensure a supported Stacks wallet extension is installed, unlocked, and allowed to open popups.
-- **Transaction Failed**: Check if you have enough STX for gas fees. Re-connecting your wallet can often resolve stale session issues.
+- **Transaction Failed**: Check if you have enough STX for gas fees. Reconnecting your wallet can often resolve stale session issues.
 - **Nonce Out of Sync**: If transactions fail with a "nonce" error, try manually incrementing the nonce in your wallet settings or wait a few minutes for the network to sync.
 - **Contract Not Found**: Ensure you are on the correct network (Mainnet vs Testnet) by checking the toggle in the app header and your wallet extension.
 - **UI Not Updating**: Try a hard refresh (`Cmd+Shift+R` or `Ctrl+F5`) to clear the local cache and reload the latest assets.
