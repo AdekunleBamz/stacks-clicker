@@ -27,7 +27,7 @@ function getAudioContext() {
     }
 
     return { ctx: audioContext, destination: compressor };
-  } catch (e) {
+  } catch {
     return null;
   }
 }
