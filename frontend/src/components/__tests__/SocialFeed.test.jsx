@@ -5,12 +5,8 @@ import SocialFeed from '../SocialFeed';
 vi.mock('framer-motion', () => ({
   AnimatePresence: ({ children }) => <>{children}</>,
   motion: {
-    div: ({ children, ...props }) => (
-      <div {...props}>{children}</div>
-    ),
-    span: ({ children, ...props }) => (
-      <span {...props}>{children}</span>
-    ),
+    div: ({ children, ...props }) => <div {...props}>{children}</div>,
+    span: ({ children, ...props }) => <span {...props}>{children}</span>,
   },
 }));
 
