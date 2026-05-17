@@ -4,7 +4,7 @@ Welcome to the Stacks Clicker development guide. This document helps you go from
 
 ## 🧱 Project Overview
 
-Stacks Clicker is a GameFi demonstration built on the Stacks blockchain (Bitcoin Layer 2). It showcases:
+Stacks Clicker is a GameFi sample application built on the Stacks blockchain (Bitcoin Layer 2). It showcases:
 
 - Contract interactions (Clicker, TipJar, QuickPoll)
 - Native Stacks wallet integration
