@@ -155,7 +155,7 @@ graph TD
 
 ## Security & Verification 🔑
 
-Shared branch commits should be signed (SSH or GPG) before they are pushed. You can confirm the latest signature locally with `git log -1 --show-signature` and verify the pushed commit through GitHub's `Verified` badge.
+Shared branch commits should be signed (SSH or GPG) before push. You can confirm the latest signature locally with `git log -1 --show-signature` and verify the pushed commit through GitHub's `Verified` badge.
 Before pushing to `main`, run `npm run verify:local` from the repository root.
 When release timing is tight, prefer a brief smoke pass over skipping verification entirely.
 
