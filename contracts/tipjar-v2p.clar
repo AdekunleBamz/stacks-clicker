@@ -1,5 +1,6 @@
 ;; TipJar Contract v2p - Enhanced with validation, admin controls, and improved events
 ;; Contract 2 of 3 for Stacks Transaction Hub
+;; SPDX-License-Identifier: MIT
 
 ;; ============================================
 ;; CONTRACT METADATA

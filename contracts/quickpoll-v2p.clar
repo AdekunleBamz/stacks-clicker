@@ -1,5 +1,6 @@
 ;; QuickPoll Contract v2p - Simplified for reliable testing
 ;; Contract 3 of 3 for Stacks Transaction Hub
+;; SPDX-License-Identifier: MIT
 
 ;; ============================================
 ;; CONTRACT METADATA
