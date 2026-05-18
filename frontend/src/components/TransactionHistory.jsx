@@ -4,6 +4,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import SkeletonLoader from './common/SkeletonLoader';
 import { STACKS_NETWORK } from '../utils/constants';
 
+const emptyInitial = { opacity: 0 };
+const emptyAnimate = { opacity: 1 };
+const txItemInitial = { opacity: 0, x: -20 };
+const txItemAnimate = { opacity: 1, x: 0 };
+
 /**
  * Error fallback component for transaction history
  */
@@ -26,7 +31,7 @@ function TransactionHistory({ txLog }) {
       <div className="tx-list" title="Recent transaction activity">
         <AnimatePresence mode="popLayout">
           {txLog.length === 0 ? (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="empty-state">
+            <motion.div initial={emptyInitial} animate={emptyAnimate} className="empty-state">
               <div className="empty-icon" aria-hidden="true">
                 📂
               </div>
@@ -41,8 +46,8 @@ function TransactionHistory({ txLog }) {
               <motion.div
                 key={tx.id}
                 className={`tx-item ${tx.status}`}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={txItemInitial}
+                animate={txItemAnimate}
                 layout
               >
                 <div className="tx-status-dot" aria-hidden="true" />
