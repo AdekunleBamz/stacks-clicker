@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import ActionButton from './common/ActionButton';
 import { useSound } from '../hooks/useSound';
@@ -9,10 +10,13 @@ import { useSound } from '../hooks/useSound';
 export default function QuickActions({ address, onClearLog, onPingAll }) {
   const { playSound } = useSound();
 
-  const handleAction = (fn) => {
-    playSound('click');
-    fn();
-  };
+  const handleAction = useCallback(
+    (fn) => {
+      playSound('click');
+      fn();
+    },
+    [playSound]
+  );
 
   return (
     <div
