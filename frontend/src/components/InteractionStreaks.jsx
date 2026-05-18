@@ -3,6 +3,28 @@ import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 import { STREAK_THRESHOLDS } from '../utils/constants';
 
+const fireStyle = {
+  filter: 'drop-shadow(0 2px 4px rgba(245,158,11,0.4))',
+  willChange: 'transform, filter',
+};
+const fireAnimate = {
+  scale: [1, 1.2, 1],
+  filter: [
+    'drop-shadow(0 0 0px #ff4500)',
+    'drop-shadow(0 0 10px #ff4500)',
+    'drop-shadow(0 0 0px #ff4500)',
+  ],
+};
+const fireTransition = {
+  duration: 1.5,
+  repeat: Infinity,
+  ease: 'easeInOut',
+  opacity: { duration: 0.2 },
+};
+const badgeInitial = { scale: 0, opacity: 0 };
+const badgeAnimate = { scale: 1, opacity: 1 };
+const badgeHover = { y: -5 };
+
 /**
  * Component to track and display user interaction streaks and achievement badges.
  * Provides visual feedback on user engagement levels through animated fire icons and tiered badges.
@@ -58,24 +80,9 @@ function InteractionStreaks({ totalInteractions }) {
         <div className="streak-count" aria-label={`Current streak: ${streak}`}>
           <motion.span
             className="streak-fire"
-            style={{
-              filter: 'drop-shadow(0 2px 4px rgba(245,158,11,0.4))',
-              willChange: 'transform, filter',
-            }}
-            animate={{
-              scale: [1, 1.2, 1],
-              filter: [
-                'drop-shadow(0 0 0px #ff4500)',
-                'drop-shadow(0 0 10px #ff4500)',
-                'drop-shadow(0 0 0px #ff4500)',
-              ],
-            }}
-            transition={{
-              duration: 1.5,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              opacity: { duration: 0.2 },
-            }}
+            style={fireStyle}
+            animate={fireAnimate}
+            transition={fireTransition}
             role="img"
             aria-label="Streak fire icon"
           >
@@ -104,9 +111,9 @@ function InteractionStreaks({ totalInteractions }) {
               className="badge-item"
               role="listitem"
               aria-label={`Achievement: ${badge.label}`}
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              whileHover={{ y: -5 }}
+              initial={badgeInitial}
+              animate={badgeAnimate}
+              whileHover={badgeHover}
               style={{ borderColor: badge.color }}
             >
               <span
