@@ -62,6 +62,8 @@ const translations = Object.freeze({
 
 const I18nContext = createContext(null);
 
+const SUPPORTED_LANGS = Object.keys(translations);
+
 /**
  * Provider component for internationalization (i18n).
  * Manages language selection and provides a translation function.
@@ -76,7 +78,7 @@ export function I18nProvider({ children }) {
     () => ({
       lang: activeLang,
       setLang,
-      supportedLangs: Object.keys(translations),
+      supportedLangs: SUPPORTED_LANGS,
       t: (key) => translations[activeLang][key] ?? key,
     }),
     [activeLang, setLang]
