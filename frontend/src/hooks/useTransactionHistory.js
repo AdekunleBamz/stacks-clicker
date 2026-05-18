@@ -87,7 +87,7 @@ export function useTransactionHistory({ playSound, onTxAdded }) {
     if (DEBUG) {
       console.debug('[useTransactionHistory] Transaction log cleared');
     }
-  }, [DEBUG, setTxLog]);
+  }, [setTxLog]);
 
   return {
     txLog,
