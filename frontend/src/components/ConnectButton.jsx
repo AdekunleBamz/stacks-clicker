@@ -4,6 +4,18 @@ import { useWallet } from '../context/WalletContext';
 import { truncateAddress } from '../utils/format';
 import { useMedia } from '../hooks/useMedia';
 
+const connectedInitial = { opacity: 0, x: 20 };
+const connectedAnimate = { opacity: 1, x: 0 };
+const connectedExit = { opacity: 0, x: 20 };
+const addrHover = { scale: 1.05 };
+const disconnectHover = { scale: 1.05, backgroundColor: 'rgba(239, 68, 68, 0.1)' };
+const disconnectTap = { scale: 0.95 };
+const connectInitial = { opacity: 0, scale: 0.9 };
+const connectAnimate = { opacity: 1, scale: 1 };
+const connectExit = { opacity: 0, scale: 0.9 };
+const connectHover = { scale: 1.05, translateY: -2 };
+const connectTap = { scale: 0.95 };
+
 /**
  * Wallet connection button component with enhanced accessibility
  * Shows connect/disconnect based on connection state
@@ -43,7 +55,7 @@ export default function ConnectButton() {
     if (announcement) {
       const timer = setTimeout(() => setAnnouncement(''), 3000);
       return () => {
-        window.clearTimeout(timer);
+        clearTimeout(timer);
       };
     }
   }, [announcement]);
@@ -65,16 +77,16 @@ export default function ConnectButton() {
         {address ? (
           <motion.div
             key="connected"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 20 }}
+            initial={connectedInitial}
+            animate={connectedAnimate}
+            exit={connectedExit}
             className="wallet-connected"
             role="region"
             aria-label="Wallet connection info"
             aria-live="polite"
           >
             <motion.span
-              whileHover={{ scale: 1.05 }}
+              whileHover={addrHover}
               className="wallet-address glass-card"
               title={`Full Stacks address: ${address}`}
               aria-label={`Connected address ${truncateAddress(address, { prefix: 4 })}`}
@@ -85,8 +97,8 @@ export default function ConnectButton() {
               {truncateAddress(address, isMobile ? { prefix: 4 } : { prefix: 6 })}
             </motion.span>
             <motion.button
-              whileHover={{ scale: 1.05, backgroundColor: 'rgba(239, 68, 68, 0.1)' }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={disconnectHover}
+              whileTap={disconnectTap}
               type="button"
               className="disconnect-btn secondary-button btn-sm"
               onClick={handleDisconnect}
@@ -105,11 +117,11 @@ export default function ConnectButton() {
         ) : (
           <motion.button
             key="connect"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            whileHover={{ scale: 1.05, translateY: -2 }}
-            whileTap={{ scale: 0.95 }}
+            initial={connectInitial}
+            animate={connectAnimate}
+            exit={connectExit}
+            whileHover={connectHover}
+            whileTap={connectTap}
             type="button"
             className="connect-btn primary-button"
             onClick={handleConnect}
