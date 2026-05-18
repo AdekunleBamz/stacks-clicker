@@ -70,12 +70,16 @@ export const SCORE_PRECISION = 2;
 /** @type {number} Default click multiplier applied before any upgrades. */
 export const DEFAULT_CLICK_MULTIPLIER = 1;
 
+/** @type {number} Minimum character length for a valid player username. */
 export const MIN_USERNAME_LENGTH = 3;
 
+/** @type {number} Maximum character length for a poll title. */
 export const MAX_POLL_TITLE_LENGTH = 100;
 
+/** @type {number} Maximum number of answer options per poll. */
 export const MAX_POLL_OPTION_COUNT = 10;
 
+/** @type {number} Duration in ms before a notification is auto-dismissed. */
 export const NOTIFICATION_DISMISS_MS = 5000;
 
 /** @type {number} Auto-clicker base rate: clicks credited per interval tick. */
