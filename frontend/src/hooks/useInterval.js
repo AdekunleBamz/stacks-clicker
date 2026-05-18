@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 /**
  * Custom hook for declarative intervals.
@@ -40,6 +40,6 @@ export function useInterval(callback, delay) {
 export function useCountup(delay) {
   const [count, setCount] = useState(0);
   useInterval(() => setCount((c) => c + 1), delay);
-  const reset = () => setCount(0);
+  const reset = useCallback(() => setCount(0), []);
   return { count, reset };
 }
