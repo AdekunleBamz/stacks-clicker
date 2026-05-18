@@ -18,7 +18,7 @@ export default function ActionButton({
   return (
     <motion.button
       type="button"
-      className={`action-btn ${className}${isError ? ' btn-error' : ''}`}
+      className={`action-btn${className ? ` ${className}` : ''}${isError ? ' btn-error' : ''}`}
       onClick={onClick}
       disabled={disabled || isLoading}
       title={label}
