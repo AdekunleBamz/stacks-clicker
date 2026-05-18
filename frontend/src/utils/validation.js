@@ -81,7 +81,7 @@ export function isNonEmptyString(value) {
  * @returns {boolean}
  */
 export function isPositiveNumber(value) {
-  return typeof value === 'number' && isFinite(value) && value > 0;
+  return typeof value === 'number' && Number.isFinite(value) && value > 0;
 }
 
 /**
@@ -91,7 +91,7 @@ export function isPositiveNumber(value) {
  * @returns {boolean}
  */
 export function isNonNegativeNumber(value) {
-  return typeof value === 'number' && isFinite(value) && value >= 0;
+  return typeof value === 'number' && Number.isFinite(value) && value >= 0;
 }
 
 /**
