@@ -25,7 +25,7 @@ export function useBattery() {
     let onBatteryChange = null;
     let cancelled = false;
 
-    function updateBattery(batt) {
+    const updateBattery = (batt) => {
       setBattery({
         level: batt.level,
         charging: batt.charging,
@@ -33,7 +33,7 @@ export function useBattery() {
         isCritical: batt.level <= 0.05 && !batt.charging,
         supported: true,
       });
-    }
+    };
 
     navigator
       .getBattery()
