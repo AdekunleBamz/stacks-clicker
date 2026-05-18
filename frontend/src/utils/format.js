@@ -254,7 +254,7 @@ export function formatCountdown(ms, { showMs = false, maxUnits = 2 } = {}) {
 
 export const formatScore = (n) => Number(n).toFixed(2);
 
-export const formatUpgradeLevel = (lvl) => 'Level ' + lvl;
+export const formatUpgradeLevel = (lvl) => `Level ${lvl}`;
 
 /**
  * Formats a Stacks block height into a human-readable string.
@@ -282,17 +282,17 @@ export function formatTimestamp(timestamp) {
   return date.toLocaleDateString(undefined, { dateStyle: 'medium' });
 }
 
-export const formatMultiplier = (m) => m + 'x';
+export const formatMultiplier = (m) => `${m}x`;
 
-export const formatCost = (n) => Number(n).toLocaleString() + ' pts';
+export const formatCost = (n) => `${Number(n).toLocaleString()} pts`;
 
-export const formatRank = (n) => '#' + n;
+export const formatRank = (n) => `#${n}`;
 
 export const formatBoostName = (name) => name.charAt(0).toUpperCase() + name.slice(1);
 
-export const formatCombo = (n) => n + 'x combo';
+export const formatCombo = (n) => `${n}x combo`;
 
-export const formatPrestigeCount = (n) => 'Prestige ' + n;
+export const formatPrestigeCount = (n) => `Prestige ${n}`;}
 
 export const formatSessionTime = (ms) =>
   Math.floor(ms / 60000) + 'm ' + Math.floor((ms % 60000) / 1000) + 's';
