@@ -2,6 +2,17 @@ import { useState, useCallback, memo } from 'react';
 import { motion } from 'framer-motion';
 import { notify } from '../utils/toast';
 
+const cardInitial = { opacity: 0, y: 20 };
+const cardAnimate = { opacity: 1, y: 0 };
+const cardFocus = {
+  scale: 1.02,
+  borderColor: 'var(--primary)',
+  boxShadow: '0 0 0 4px var(--primary-glow)',
+  outline: 'none',
+};
+const btnHover = { scale: 1.05 };
+const btnTap = { scale: 0.95 };
+
 const INITIAL_ROADMAP_ITEMS = [
   { quarter: 'Q1 2026', title: 'Core Clicker Launch', status: 'completed', votes: 124 },
   { quarter: 'Q2 2026', title: 'PWA & Mobile Optimization', status: 'completed', votes: 89 },
@@ -57,14 +68,9 @@ function RoadmapBoard() {
             tabIndex={0}
             role="article"
             aria-labelledby={`roadmap-item-title-${index}`}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            whileFocus={{
-              scale: 1.02,
-              borderColor: 'var(--primary)',
-              boxShadow: '0 0 0 4px var(--primary-glow)',
-              outline: 'none',
-            }}
+            initial={cardInitial}
+            animate={cardAnimate}
+            whileFocus={cardFocus}
             transition={{ delay: index * 0.1 }}
           >
             <div className={`status-tag ${item.status}`} title={`Status: ${item.status}`}>
@@ -92,8 +98,8 @@ function RoadmapBoard() {
               </div>
               {item.status !== 'completed' && (
                 <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={btnHover}
+                  whileTap={btnTap}
                   type="button"
                   className="roadmap-vote-btn secondary-button btn-sm"
                   onClick={() => handleVote(item.title)}
