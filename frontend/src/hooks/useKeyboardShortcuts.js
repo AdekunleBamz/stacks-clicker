@@ -14,8 +14,7 @@ export function useKeyboardShortcuts({ isEnabled, actions, playSound }) {
   useEffect(() => {
     const handleKeyDown = (e) => {
       const activeElement = document.activeElement;
-      const isTyping =
-        TYPING_TAGS.has(activeElement?.tagName) || activeElement?.isContentEditable;
+      const isTyping = TYPING_TAGS.has(activeElement?.tagName) || activeElement?.isContentEditable;
 
       if (isTyping || e.repeat || e.metaKey || e.ctrlKey || e.altKey || !isEnabled) {
         return;

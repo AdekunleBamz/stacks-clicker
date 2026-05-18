@@ -35,7 +35,14 @@ const Button = ({
   const variantClass = `btn-${variant}`;
   const sizeClass = `btn-${size}`;
 
-  const computedClassName = [baseClass, variantClass, sizeClass, isLoading && 'btn-loading', 'glass-card', className]
+  const computedClassName = [
+    baseClass,
+    variantClass,
+    sizeClass,
+    isLoading && 'btn-loading',
+    'glass-card',
+    className,
+  ]
     .filter(Boolean)
     .join(' ');
 

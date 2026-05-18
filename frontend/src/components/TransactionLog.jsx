@@ -18,7 +18,6 @@ const getExplorerLink = (txId, network = 'mainnet') => {
  * Displays recent transactions with status
  */
 export default function TransactionLog({ transactions = [] }) {
-
   if (transactions.length === 0) {
     return (
       <div className="tx-log empty">

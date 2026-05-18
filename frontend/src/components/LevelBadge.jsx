@@ -6,7 +6,11 @@ const badgeInitial = { scale: 0.8, opacity: 0 };
 const badgeAnimate = { scale: 1, opacity: 1 };
 const badgeTransition = { type: 'spring', damping: 12, stiffness: 200 };
 const particleAnimate = { rotate: 360 };
-const PARTICLE_COLORS = ['hsl(var(--pulse-cyan))', 'hsl(var(--pulse-purple))', 'hsl(var(--pulse-purple))'];
+const PARTICLE_COLORS = [
+  'hsl(var(--pulse-cyan))',
+  'hsl(var(--pulse-purple))',
+  'hsl(var(--pulse-purple))',
+];
 const PARTICLE_COUNT = 3;
 
 /**

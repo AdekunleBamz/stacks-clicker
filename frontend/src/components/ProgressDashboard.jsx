@@ -39,11 +39,7 @@ function ProgressDashboard({ userData }) {
 
       <StatsGrid stats={stats} />
 
-      <div
-        className="achievements-section"
-        style={achSectionStyle}
-        title="Milestone achievements"
-      >
+      <div className="achievements-section" style={achSectionStyle} title="Milestone achievements">
         <h3 id="milestones-title" style={achHeadingStyle}>
           Milestones
         </h3>
