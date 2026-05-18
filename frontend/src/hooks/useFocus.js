@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 /**
  * Custom hook for tracking the focus state of an element.
@@ -26,7 +26,7 @@ export function useFocus() {
     return undefined;
   }, []);
 
-  const blur = () => ref.current?.blur();
-  const focus = () => ref.current?.focus();
+  const blur = useCallback(() => ref.current?.blur(), []);
+  const focus = useCallback(() => ref.current?.focus(), []);
   return [ref, isFocused, blur, focus];
 }
