@@ -2,6 +2,14 @@ import { memo, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
 
+const particleInitial = { x: 0, y: 0, opacity: 1, scale: 1 };
+const particleTransition = { duration: 0.6, ease: 'easeOut' };
+const containerStyle = {
+  position: 'fixed',
+  pointerEvents: 'none',
+  zIndex: 9999,
+};
+
 /**
  * ClickParticle Component
  * Creates a visual "burst" effect at the click location
@@ -26,26 +34,20 @@ const ClickParticle = ({ x, y, onComplete }) => {
       className="particle-container"
       aria-hidden="true"
       role="presentation"
-      style={{
-        position: 'fixed',
-        left: x,
-        top: y,
-        pointerEvents: 'none',
-        zIndex: 9999,
-      }}
+      style={{ ...containerStyle, left: x, top: y }}
     >
       {particles.map(({ i, targetX, targetY }) => {
         return (
           <motion.div
             key={i}
-            initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
+            initial={particleInitial}
             animate={{
               x: targetX,
               y: targetY,
               opacity: 0,
               scale: 0.5,
             }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
+            transition={particleTransition}
             onAnimationComplete={i === 0 ? onComplete : undefined}
             style={{
               position: 'absolute',
