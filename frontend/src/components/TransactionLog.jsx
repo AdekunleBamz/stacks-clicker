@@ -1,27 +1,23 @@
 import PropTypes from 'prop-types';
 
+const STATUS_ICONS = {
+  success: '✅',
+  pending: '⏳',
+  failed: '❌',
+};
+
+const getStatusIcon = (status) => STATUS_ICONS[status] ?? '📝';
+
+const getExplorerLink = (txId, network = 'mainnet') => {
+  if (!txId || txId.startsWith('pending-')) return null;
+  return `https://explorer.hiro.so/txid/${txId}?chain=${network}`;
+};
+
 /**
  * Transaction Log Component
  * Displays recent transactions with status
  */
 export default function TransactionLog({ transactions = [] }) {
-  const getStatusIcon = (status) => {
-    switch (status) {
-      case 'success':
-        return '✅';
-      case 'pending':
-        return '⏳';
-      case 'failed':
-        return '❌';
-      default:
-        return '📝';
-    }
-  };
-
-  const getExplorerLink = (txId, network = 'mainnet') => {
-    if (!txId || txId.startsWith('pending-')) return null;
-    return `https://explorer.hiro.so/txid/${txId}?chain=${network}`;
-  };
 
   if (transactions.length === 0) {
     return (
