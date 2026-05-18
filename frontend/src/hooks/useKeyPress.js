@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 /**
  * Custom hook for tracking the pressed state of a specific key.
@@ -16,12 +16,12 @@ export function useKeyPress(targetKey) {
   useEffect(() => {
     if (typeof window === 'undefined' || !targetKey) return;
 
-    function downHandler({ key }) {
+    const downHandler = ({ key }) => {
       if (key === targetKey) {
         setKeyPressed(true);
         pressCountRef.current += 1;
       }
-    }
+    };
 
     const upHandler = ({ key }) => {
       if (key === targetKey) {
@@ -38,7 +38,7 @@ export function useKeyPress(targetKey) {
     };
   }, [targetKey]);
 
-  const reset = () => setKeyPressed(false);
+  const reset = useCallback(() => setKeyPressed(false), []);
 
   return { isPressed: keyPressed, reset, pressCount: pressCountRef.current };
 }
