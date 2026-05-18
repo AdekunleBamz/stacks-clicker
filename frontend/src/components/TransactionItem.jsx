@@ -3,6 +3,21 @@ import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 
+const OBSERVER_OPTIONS = { threshold: 0.1 };
+const itemInitial = { opacity: 0, y: 20 };
+const itemVisible = { opacity: 1, y: 0 };
+const itemHidden = { opacity: 0, y: 20 };
+const itemTransition = { type: 'spring', stiffness: 260, damping: 20 };
+const dragConstraints = { left: -140, right: 0 };
+const dragTransitionCfg = { bounceStiffness: 600, bounceDamping: 20 };
+const itemWhileDrag = { scale: 1.01, cursor: 'grabbing' };
+const itemWhileFocus = {
+  scale: 1.01,
+  borderColor: 'var(--primary)',
+  boxShadow: '0 0 0 2px var(--primary-glow)',
+  outline: 'none',
+};
+
 /**
  * Individual transaction item with swipe actions and status visualization.
  */
@@ -17,7 +32,7 @@ function TransactionItem({
 }) {
   const txId = String(tx.id ?? '');
   const isPending = tx.isPending ?? txId.startsWith('pending');
-  const [ref, inView] = useIntersectionObserver({ threshold: 0.1 });
+  const [ref, inView] = useIntersectionObserver(OBSERVER_OPTIONS);
 
   return (
     <div className="tx-item-wrapper" role="listitem" ref={ref}>
@@ -44,20 +59,15 @@ function TransactionItem({
       <motion.div
         className={`tx-item ${tx.status}`}
         tabIndex={0}
-        initial={{ opacity: 0, y: 20 }}
-        animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-        transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+        initial={itemInitial}
+        animate={inView ? itemVisible : itemHidden}
+        transition={itemTransition}
         drag="x"
-        dragConstraints={{ left: -140, right: 0 }}
+        dragConstraints={dragConstraints}
         dragElastic={0.15}
-        dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }}
-        whileDrag={{ scale: 1.01, cursor: 'grabbing' }}
-        whileFocus={{
-          scale: 1.01,
-          borderColor: 'var(--primary)',
-          boxShadow: '0 0 0 2px var(--primary-glow)',
-          outline: 'none',
-        }}
+        dragTransition={dragTransitionCfg}
+        whileDrag={itemWhileDrag}
+        whileFocus={itemWhileFocus}
         onContextMenu={(e) => onContextMenu(e, tx)}
       >
         <div className="tx-status-dot" aria-hidden="true" />
