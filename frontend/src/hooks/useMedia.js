@@ -41,8 +41,7 @@ export function useMedia(query) {
  * @returns {boolean}
  */
 export function useIsSmallScreen() {
-  const isSmall = useMedia('(max-width: 639px)');
-  return isSmall;
+  return useMedia('(max-width: 639px)');
 }
 
 /**
