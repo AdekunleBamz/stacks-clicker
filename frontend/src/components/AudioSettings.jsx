@@ -2,6 +2,18 @@ import { motion, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useSound } from '../hooks/useSound';
 
+const overlayInitial = { opacity: 0 };
+const overlayAnimate = { opacity: 1 };
+const overlayExit = { opacity: 0 };
+const panelInitial = { scale: 0.9, y: 20 };
+const panelAnimate = { scale: 1, y: 0 };
+const panelExit = { scale: 0.9, y: 20 };
+const rowInitial = { opacity: 0, x: -10 };
+const rowAnimate = { opacity: 1, x: 0 };
+const toggleTransition = { type: 'spring', stiffness: 500, damping: 30 };
+const btnHover = { scale: 1.05 };
+const btnTap = { scale: 0.95 };
+
 /**
  * AudioSettings Component
  * Control panel for game sounds and music
@@ -13,16 +25,16 @@ export default function AudioSettings({ isOpen, onClose, settings, onUpdate }) {
       {isOpen && (
         <motion.div
           className="audio-settings-overlay"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          initial={overlayInitial}
+          animate={overlayAnimate}
+          exit={overlayExit}
           onClick={onClose}
         >
           <motion.div
             className="audio-settings-panel"
-            initial={{ scale: 0.9, y: 20 }}
-            animate={{ scale: 1, y: 0 }}
-            exit={{ scale: 0.9, y: 20 }}
+            initial={panelInitial}
+            animate={panelAnimate}
+            exit={panelExit}
             onClick={(e) => e.stopPropagation()}
             role="dialog"
             aria-modal="true"
@@ -44,8 +56,8 @@ export default function AudioSettings({ isOpen, onClose, settings, onUpdate }) {
 
             <div className="settings-list">
               <motion.div
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={rowInitial}
+                animate={rowAnimate}
                 transition={{ delay: 0.1 }}
                 className="setting-item"
               >
@@ -63,22 +75,22 @@ export default function AudioSettings({ isOpen, onClose, settings, onUpdate }) {
                   max="1"
                   step="0.01"
                   value={settings.masterVolume}
-                  onChange={(e) => onUpdate('masterVolume', parseFloat(e.target.value))}
+                  onChange={(e) => onUpdate('masterVolume', Number.parseFloat(e.target.value))}
                   className="volume-slider"
                   aria-labelledby="master-volume-label"
                 />
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={rowInitial}
+                animate={rowAnimate}
                 transition={{ delay: 0.2 }}
                 className="setting-item toggle"
               >
                 <span className="setting-label">Sound Effects</span>
                 <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={btnHover}
+                  whileTap={btnTap}
                   className={`toggle-switch ${settings.sfxEnabled ? 'on' : 'off'}`}
                   onClick={() => onUpdate('sfxEnabled', !settings.sfxEnabled)}
                   type="button"
@@ -88,21 +100,21 @@ export default function AudioSettings({ isOpen, onClose, settings, onUpdate }) {
                   <motion.div
                     className="toggle-handle"
                     animate={{ x: settings.sfxEnabled ? 20 : 0 }}
-                    transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                    transition={toggleTransition}
                   />
                 </motion.button>
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={rowInitial}
+                animate={rowAnimate}
                 transition={{ delay: 0.3 }}
                 className="setting-item toggle"
               >
                 <span className="setting-label">Ambient Music</span>
                 <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={btnHover}
+                  whileTap={btnTap}
                   className={`toggle-switch ${settings.musicEnabled ? 'on' : 'off'}`}
                   onClick={() => onUpdate('musicEnabled', !settings.musicEnabled)}
                   type="button"
@@ -112,7 +124,7 @@ export default function AudioSettings({ isOpen, onClose, settings, onUpdate }) {
                   <motion.div
                     className="toggle-handle"
                     animate={{ x: settings.musicEnabled ? 20 : 0 }}
-                    transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                    transition={toggleTransition}
                   />
                 </motion.button>
               </motion.div>
@@ -120,8 +132,8 @@ export default function AudioSettings({ isOpen, onClose, settings, onUpdate }) {
 
             <div className="panel-footer">
               <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={btnHover}
+                whileTap={btnTap}
                 className="action-btn secondary"
                 onClick={() => playSound('click')}
                 style={{ marginRight: '1rem' }}
