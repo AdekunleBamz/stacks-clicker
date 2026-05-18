@@ -15,7 +15,7 @@ export function usePerformance() {
   useEffect(() => {
     const updateStats = () => {
       const time = performance.now();
-      framesRef.current++;
+      framesRef.current += 1;
 
       if (time > prevTimeRef.current + 1000) {
         setFps(Math.round((framesRef.current * 1000) / (time - prevTimeRef.current)));
