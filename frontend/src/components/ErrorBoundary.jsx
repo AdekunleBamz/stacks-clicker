@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const titleStyle = { color: 'var(--error)' };
+
 /**
  * ErrorBoundary component - Catches JavaScript errors anywhere in the component tree.
  * Displays a fallback UI with recovery options when an error occurs.
@@ -18,6 +20,8 @@ class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
     this.state = { hasError: false, error: null };
+    this.handleReset = () => this.setState({ hasError: false, error: null });
+    this.handleReload = () => window.location.reload();
   }
 
   /**
@@ -59,7 +63,7 @@ class ErrorBoundary extends React.Component {
         >
           <div className="error-content">
             <div className="error-icon">⚠️</div>
-            <h2 id="error-boundary-title" className="error-title" style={{ color: 'var(--error)' }}>
+            <h2 id="error-boundary-title" className="error-title" style={titleStyle}>
               Something went wrong
             </h2>
             <p className="error-message" aria-describedby="error-boundary-title">
@@ -69,7 +73,7 @@ class ErrorBoundary extends React.Component {
               <button
                 type="button"
                 className="action-btn primary"
-                onClick={() => this.setState({ hasError: false, error: null })}
+                onClick={this.handleReset}
                 aria-label="Try rendering the component again"
               >
                 <span aria-hidden="true">🔄</span> Try Again
@@ -77,7 +81,7 @@ class ErrorBoundary extends React.Component {
               <button
                 type="button"
                 className="action-btn secondary"
-                onClick={() => window.location.reload()}
+                onClick={this.handleReload}
                 aria-label="Reload the application"
               >
                 🌐 Reload App
