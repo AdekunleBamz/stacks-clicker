@@ -5,6 +5,11 @@ import LevelBadge from './LevelBadge';
 import StatsGrid from './StatsGrid';
 import Achievement from './Achievement';
 
+const xpWrapStyle = { flex: 1 };
+const achSectionStyle = { marginTop: '3rem' };
+const achHeadingStyle = { marginBottom: '1.5rem', fontWeight: 800 };
+const EMPTY_ARRAY = [];
+
 /**
  * ProgressDashboard Component
  * Aggregate view for player progression
@@ -27,7 +32,7 @@ function ProgressDashboard({ userData }) {
 
       <div className="dashboard-main-row" role="group" aria-label="Level and XP overview">
         <LevelBadge level={level} />
-        <div style={{ flex: 1 }}>
+        <div style={xpWrapStyle}>
           <XPProgress currentXP={xp} nextLevelXP={nextLevelXP} level={level} />
         </div>
       </div>
@@ -36,14 +41,14 @@ function ProgressDashboard({ userData }) {
 
       <div
         className="achievements-section"
-        style={{ marginTop: '3rem' }}
+        style={achSectionStyle}
         title="Milestone achievements"
       >
-        <h3 id="milestones-title" style={{ marginBottom: '1.5rem', fontWeight: 800 }}>
+        <h3 id="milestones-title" style={achHeadingStyle}>
           Milestones
         </h3>
         <div className="achievements-list" role="list" aria-labelledby="milestones-title">
-          {(achievements ?? []).map((ach) => (
+          {(achievements ?? EMPTY_ARRAY).map((ach) => (
             <Achievement key={ach.id || ach.title} achievement={ach} />
           ))}
         </div>
