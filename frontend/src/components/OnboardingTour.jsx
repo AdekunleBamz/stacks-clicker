@@ -1,6 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+const cardInitial = { opacity: 0, scale: 0.9, y: 20 };
+const cardAnimate = { opacity: 1, scale: 1, y: 0 };
+const cardExit = { opacity: 0, scale: 0.9, y: 20 };
+
 const steps = [
   {
     target: 'logo',
@@ -83,9 +87,9 @@ export default function OnboardingTour() {
           role="dialog"
           aria-modal="true"
           aria-labelledby="tour-title"
-          initial={{ opacity: 0, scale: 0.9, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.9, y: 20 }}
+          initial={cardInitial}
+          animate={cardAnimate}
+          exit={cardExit}
           onClick={(e) => e.stopPropagation()}
         >
           <h2 id="tour-title" className="sr-only">
