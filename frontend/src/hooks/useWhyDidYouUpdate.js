@@ -16,16 +16,11 @@ export function useWhyDidYouUpdate(name, props) {
     const safeProps = props != null && typeof props === 'object' ? props : {};
     if (previousProps.current) {
       const allKeys = Object.keys({ ...previousProps.current, ...safeProps });
-      const changesObj = {};
-
-      allKeys.forEach((key) => {
-        if (previousProps.current[key] !== safeProps[key]) {
-          changesObj[key] = {
-            from: previousProps.current[key],
-            to: safeProps[key],
-          };
-        }
-      });
+      const changesObj = Object.fromEntries(
+        allKeys
+          .filter((key) => previousProps.current[key] !== safeProps[key])
+          .map((key) => [key, { from: previousProps.current[key], to: safeProps[key] }])
+      );
 
       if (Object.keys(changesObj).length && import.meta.env.DEV) {
         setChangeCount((c) => c + 1);
