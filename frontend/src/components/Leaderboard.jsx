@@ -3,6 +3,16 @@ import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import { truncateAddress } from '../utils/format';
 
+const itemInitial = { opacity: 0, x: -10 };
+const itemAnimate = { opacity: 1, x: 0 };
+const itemWhileHover = {
+  scale: 1.02,
+  x: 10,
+  backgroundColor: 'hsla(var(--bg-black) / 0.5)',
+  borderColor: 'hsla(var(--pulse-cyan) / 0.4)',
+};
+const MEDALS = ['🥇', '🥈', '🥉'];
+
 /**
  * Leaderboard Component
  * Displays top players in a vibrant, ranked list
@@ -30,15 +40,10 @@ function Leaderboard({ players }) {
             key={player.address}
             className={`leaderboard-item rank-${i + 1}`}
             role="listitem"
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={itemInitial}
+            animate={itemAnimate}
             transition={{ delay: i * 0.1, type: 'spring', stiffness: 100 }}
-            whileHover={{
-              scale: 1.02,
-              x: 10,
-              backgroundColor: 'hsla(var(--bg-black) / 0.5)',
-              borderColor: 'hsla(var(--pulse-cyan) / 0.4)',
-            }}
+            whileHover={itemWhileHover}
           >
             <div
               className="rank-indicator"
@@ -60,7 +65,7 @@ function Leaderboard({ players }) {
             </div>
             {i < 3 && (
               <div className="medal-icon" aria-hidden="true">
-                {i === 0 ? '🥇' : i === 1 ? '🥈' : '🥉'}
+                {MEDALS[i]}
               </div>
             )}
           </motion.div>
