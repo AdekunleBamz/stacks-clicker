@@ -8,6 +8,19 @@ import { useSound } from '../hooks/useSound';
 import { notify } from '../utils/toast';
 import { MAX_POLL_TITLE_LENGTH } from '../utils/constants';
 
+const panelInitial = { height: 0, opacity: 0 };
+const panelAnimate = { height: 'auto', opacity: 1 };
+const panelExit = { height: 0, opacity: 0 };
+const panelTransition = { type: 'spring', stiffness: 300, damping: 25 };
+const panelStyle = { overflow: 'hidden' };
+const inputGroupStyle = { paddingTop: '1.5rem' };
+
+function formatTime(seconds) {
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return `${m}m ${s.toString().padStart(2, '0')}s`;
+}
+
 /**
  * Component for the QuickPoll interaction card.
  * Enables users to create new polls and vote (Yes/No) on existing on-chain polls.
@@ -42,12 +55,6 @@ function QuickPollCard({ address, quickpoll }) {
     }, 1000);
     return () => clearInterval(timer);
   }, []);
-
-  const formatTime = (seconds) => {
-    const m = Math.floor(seconds / 60);
-    const s = seconds % 60;
-    return `${m}m ${s.toString().padStart(2, '0')}s`;
-  };
 
   /**
    * Triggers a 'YES' vote transaction for the current poll.
@@ -166,14 +173,14 @@ function QuickPollCard({ address, quickpoll }) {
           {isCreating && (
             <motion.div
               id="quickpoll-create-panel"
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+              initial={panelInitial}
+              animate={panelAnimate}
+              exit={panelExit}
+              transition={panelTransition}
               className="expandable-section"
-              style={{ overflow: 'hidden' }}
+              style={panelStyle}
             >
-              <div className="input-group" style={{ paddingTop: '1.5rem' }}>
+              <div className="input-group" style={inputGroupStyle}>
                 <label className="input-label" htmlFor="poll-question-input">
                   Poll Question
                 </label>
