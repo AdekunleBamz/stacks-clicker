@@ -2,6 +2,13 @@ import { memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 
+const cardInitial = { opacity: 0, scale: 0.9 };
+const cardAnimate = { opacity: 1, scale: 1 };
+const cardHoverActive = { y: -5, boxShadow: '0 0 20px hsla(var(--pulse-purple) / 0.2)' };
+const cardHoverLocked = {};
+const glowAnimate = { opacity: [0.3, 0.6, 0.3] };
+const glowTransition = { duration: 3, repeat: Infinity };
+
 /**
  * Achievement Component
  * Displays individual player milestones
@@ -16,9 +23,9 @@ function Achievement({ achievement }) {
       aria-label={`${title} achievement, ${unlocked ? 'unlocked' : 'locked'}`}
       title={title}
       role="listitem"
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      whileHover={unlocked ? { y: -5, boxShadow: '0 0 20px hsla(var(--pulse-purple) / 0.2)' } : {}}
+      initial={cardInitial}
+      animate={cardAnimate}
+      whileHover={unlocked ? cardHoverActive : cardHoverLocked}
     >
       <div className="achievement-icon-wrapper">
         <span className="achievement-icon" aria-hidden="true">
@@ -48,8 +55,8 @@ function Achievement({ achievement }) {
       {unlocked && (
         <motion.div
           className="achievement-glow"
-          animate={{ opacity: [0.3, 0.6, 0.3] }}
-          transition={{ duration: 3, repeat: Infinity }}
+          animate={glowAnimate}
+          transition={glowTransition}
         />
       )}
     </motion.div>
