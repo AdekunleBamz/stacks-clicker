@@ -2,6 +2,8 @@ import { memo } from 'react';
 import PropTypes from 'prop-types';
 import StatsCard from './common/StatsCard';
 
+const sectionStyle = { textRendering: 'optimizeLegibility' };
+
 /**
  * Component to display aggregate player statistics with premium animations.
  * @param {Object} props - Component props.
@@ -22,7 +24,7 @@ function PlayerStats({ stats, txCount }) {
       className="stats-bar"
       aria-label="Player Statistics"
       title="Your Personal Player Statistics Overview"
-      style={{ textRendering: 'optimizeLegibility' }}
+      style={sectionStyle}
     >
       <div
         className={`stats-cards ${txCount === 0 && stats.clicks === 0 ? 'shimmer' : ''}`}
