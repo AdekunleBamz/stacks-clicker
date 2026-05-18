@@ -31,8 +31,8 @@ export function useNetwork() {
   const [isUpdating, setIsUpdating] = useState(false);
   const [lastUpdated, setLastUpdated] = useState(null);
 
-  const isFocused = useWindowFocus();
-  const isVisible = useDocumentVisibility();
+  const { isFocused } = useWindowFocus();
+  const { isVisible } = useDocumentVisibility();
 
   const fetchStatus = useCallback(async () => {
     setIsUpdating(true);
@@ -62,23 +62,12 @@ export function useNetwork() {
   }, []);
 
   useEffect(() => {
-    if (
-      isFocused?.isFocused !== undefined
-        ? isFocused.isFocused
-        : isFocused && isVisible?.isVisible !== undefined
-          ? isVisible.isVisible
-          : isVisible
-    ) {
+    if (isFocused && isVisible) {
       fetchStatus();
     }
   }, [fetchStatus, isFocused, isVisible]);
 
-  const isFocusedBool =
-    isFocused?.isFocused !== undefined ? isFocused.isFocused : Boolean(isFocused);
-  const isVisibleBool =
-    isVisible?.isVisible !== undefined ? isVisible.isVisible : Boolean(isVisible);
-
-  useInterval(fetchStatus, isFocusedBool && isVisibleBool ? NETWORK_POLL_INTERVAL_MS : null); // Update every 30s only when active
+  useInterval(fetchStatus, isFocused && isVisible ? NETWORK_POLL_INTERVAL_MS : null); // Update every 30s only when active
 
   const blocksSince = useCallback(
     (referenceHeight) => {
