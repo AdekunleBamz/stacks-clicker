@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import Modal from './common/Modal';
 import { useModal } from '../context/ModalContext';
 import { useTheme } from '../hooks/useTheme';
@@ -16,10 +16,13 @@ const SettingsModal = memo(function SettingsModal() {
 
   if (!isOpen('settings')) return null;
 
-  const handleLanguageChange = (newLang) => {
-    setLang(newLang);
-    playSound('click');
-  };
+  const handleLanguageChange = useCallback(
+    (newLang) => {
+      setLang(newLang);
+      playSound('click');
+    },
+    [setLang, playSound]
+  );
 
   return (
     <Modal isOpen={true} onClose={closeModal} title="⚙️ Application Settings">
