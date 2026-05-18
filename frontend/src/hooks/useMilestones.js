@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 const MILESTONE_THRESHOLDS = [10, 50, 100, 200, 500, 1000, 2000];
 
@@ -37,7 +37,9 @@ export function useMilestones({ stats, onMilestone }) {
     return () => window.clearTimeout(celebrationTimeoutRef.current);
   }, [clicks, tips, votes, onMilestone]);
 
-  return { celebration, dismissCelebration: () => setCelebration(null) };
+  const dismissCelebration = useCallback(() => setCelebration(null), []);
+
+  return { celebration, dismissCelebration };
 }
 
 /**
