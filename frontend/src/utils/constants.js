@@ -103,8 +103,10 @@ export const AUTO_SAVE_INTERVAL_MS = 30_000;
 /** @type {number} Duration in milliseconds of a single combo window for multi-click scoring. */
 export const COMBO_WINDOW_MS = 500;
 
+/** @type {number} Probability (0–1) that a click triggers a critical hit bonus. */
 export const CRITICAL_CLICK_CHANCE = 0.05;
 
+/** @type {number} Score multiplier applied when a critical click is triggered. */
 export const CRITICAL_CLICK_MULTIPLIER = 5;
 
 /**
@@ -117,12 +119,16 @@ export const TIMEOUT_CONFIG = Object.freeze({
   NETWORK_RETRY: 3_000,
 });
 
+/** @type {number} Duration in ms for standard UI transition animations. */
 export const ANIMATION_DURATION_MS = 200;
 
+/** @type {number} Duration in ms a toast notification remains visible. */
 export const TOAST_DURATION_MS = 3_000;
 
+/** @type {number} Maximum number of simultaneous active boost effects. */
 export const MAX_ACTIVE_BOOSTS = 5;
 
+/** @type {number} Number of Stacks blocks a boost effect remains active. */
 export const BOOST_DURATION_BLOCKS = 10;
 
 /** Minimum tip in micro-STX (1000 = 0.001 STX) */
