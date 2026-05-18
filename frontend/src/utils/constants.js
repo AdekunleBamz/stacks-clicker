@@ -55,14 +55,19 @@ export const UPGRADE_BASE_COST = 100;
 /** @type {number} Multiplier applied to upgrade cost at each successive level. */
 export const UPGRADE_COST_MULTIPLIER = 1.5;
 
+/** @type {number} Total score required to unlock the prestige system. */
 export const PRESTIGE_THRESHOLD = 1_000_000;
 
+/** @type {number} Score multiplier applied after a successful prestige. */
 export const PRESTIGE_MULTIPLIER = 2;
 
+/** @type {number} Number of entries displayed per leaderboard page. */
 export const LEADERBOARD_PAGE_SIZE = 20;
 
+/** @type {number} Decimal places used when rendering score values. */
 export const SCORE_PRECISION = 2;
 
+/** @type {number} Default click multiplier applied before any upgrades. */
 export const DEFAULT_CLICK_MULTIPLIER = 1;
 
 export const MIN_USERNAME_LENGTH = 3;
