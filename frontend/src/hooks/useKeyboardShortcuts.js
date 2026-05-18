@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 
+const TYPING_TAGS = new Set(['INPUT', 'SELECT', 'TEXTAREA']);
+
 /**
  * Custom hook to manage global keyboard shortcuts for the application.
  *
@@ -13,10 +15,7 @@ export function useKeyboardShortcuts({ isEnabled, actions, playSound }) {
     const handleKeyDown = (e) => {
       const activeElement = document.activeElement;
       const isTyping =
-        activeElement?.tagName === 'INPUT' ||
-        activeElement?.tagName === 'SELECT' ||
-        activeElement?.tagName === 'TEXTAREA' ||
-        activeElement?.isContentEditable;
+        TYPING_TAGS.has(activeElement?.tagName) || activeElement?.isContentEditable;
 
       if (isTyping || e.repeat || e.metaKey || e.ctrlKey || e.altKey || !isEnabled) {
         return;
