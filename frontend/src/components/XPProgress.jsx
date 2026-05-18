@@ -2,6 +2,9 @@ import { memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 
+const barInitial = { width: 0 };
+const barTransition = { duration: 0.8, ease: 'easeOut' };
+
 /**
  * XP Progress bar component for displaying player experience points.
  *
@@ -31,9 +34,9 @@ function XPProgress({ currentXP, nextLevelXP }) {
       >
         <motion.div
           className="xp-bar-fill"
-          initial={{ width: 0 }}
+          initial={barInitial}
           animate={{ width: `${percentage}%` }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
+          transition={barTransition}
         />
       </div>
       <span className="xp-percentage" aria-hidden="true">
