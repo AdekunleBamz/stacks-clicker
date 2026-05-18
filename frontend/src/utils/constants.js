@@ -40,14 +40,19 @@ export default {
   HIRO_EXPLORER_TX_BASE,
 };
 
+/** @type {number} Reward points credited per single click action. */
 export const CLICK_REWARD_AMOUNT = 10;
 
+/** @type {number} Maximum number of clicks allowed in a single session. */
 export const MAX_CLICKS_PER_SESSION = 1000;
 
+/** @type {number} Minimum time in ms between consecutive click actions. */
 export const CLICK_COOLDOWN_MS = 100;
 
+/** @type {number} Base cost in points for the first upgrade level. */
 export const UPGRADE_BASE_COST = 100;
 
+/** @type {number} Multiplier applied to upgrade cost at each successive level. */
 export const UPGRADE_COST_MULTIPLIER = 1.5;
 
 export const PRESTIGE_THRESHOLD = 1_000_000;
