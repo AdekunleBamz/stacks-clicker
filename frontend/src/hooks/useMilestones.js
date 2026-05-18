@@ -30,11 +30,11 @@ export function useMilestones({ stats, onMilestone }) {
       setCelebration(message);
       onMilestone?.(total);
 
-      window.clearTimeout(celebrationTimeoutRef.current);
-      celebrationTimeoutRef.current = window.setTimeout(() => setCelebration(null), 3500);
+      clearTimeout(celebrationTimeoutRef.current);
+      celebrationTimeoutRef.current = setTimeout(() => setCelebration(null), 3500);
     }
 
-    return () => window.clearTimeout(celebrationTimeoutRef.current);
+    return () => clearTimeout(celebrationTimeoutRef.current);
   }, [clicks, tips, votes, onMilestone]);
 
   const dismissCelebration = useCallback(() => setCelebration(null), []);
