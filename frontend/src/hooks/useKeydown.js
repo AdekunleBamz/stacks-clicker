@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react';
 
+const TYPING_TAGS = new Set(['INPUT', 'TEXTAREA']);
+
 /**
  * Custom hook for capturing global keydown events with multi-key support.
  *
@@ -17,9 +19,7 @@ export function useKeydown(keyMap) {
     function handleKeyDown(event) {
       // Ignore if user is typing in an input, textarea, or contentEditable element
       const isTyping =
-        event.target.tagName === 'INPUT' ||
-        event.target.tagName === 'TEXTAREA' ||
-        event.target.isContentEditable;
+        TYPING_TAGS.has(event.target.tagName) || event.target.isContentEditable;
 
       if (isTyping) return;
 
