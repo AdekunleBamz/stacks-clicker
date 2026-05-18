@@ -2,6 +2,13 @@ import { memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 
+const logoHover = {
+  scale: 1.15,
+  filter: 'brightness(1.2) drop-shadow(0 0 8px var(--primary-glow))',
+};
+
+const logoStyle = { willChange: 'transform' };
+
 /**
  * Animated SVG logo for the Stacks Clicker dApp.
  */
@@ -9,11 +16,8 @@ function NetworkLogo({ isSyncing = false }) {
   return (
     <motion.div
       className={`logo-glow ${isSyncing ? 'syncing' : ''}`}
-      style={{ willChange: 'transform' }}
-      whileHover={{
-        scale: 1.15,
-        filter: 'brightness(1.2) drop-shadow(0 0 8px var(--primary-glow))',
-      }}
+      style={logoStyle}
+      whileHover={logoHover}
       animate={isSyncing ? { rotate: 360 } : { rotate: [0, 5, -5, 0] }}
       transition={{
         rotate: isSyncing
