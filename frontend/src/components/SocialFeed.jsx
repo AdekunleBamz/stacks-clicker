@@ -2,6 +2,17 @@ import { memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
 
+const itemInitial = { opacity: 0, scale: 0.95, y: -10 };
+const itemAnimate = { opacity: 1, scale: 1, y: 0 };
+const itemExit = { opacity: 0, x: 20 };
+
+const ACTIVITY_ICONS = {
+  click: '👆',
+  tip: '💰',
+  poll: '🗳️',
+  streak: '🔥',
+};
+
 /**
  * SocialFeed Component
  * Real-time community activity stream
@@ -33,17 +44,14 @@ function SocialFeed({ activities }) {
           {activities.map((activity) => (
             <motion.div
               key={activity.id}
-              initial={{ opacity: 0, scale: 0.95, y: -10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, x: 20 }}
+              initial={itemInitial}
+              animate={itemAnimate}
+              exit={itemExit}
               className="activity-item"
               role="article"
             >
               <span className="activity-icon" aria-hidden="true">
-                {activity.type === 'click' && '👆'}
-                {activity.type === 'tip' && '💰'}
-                {activity.type === 'poll' && '🗳️'}
-                {activity.type === 'streak' && '🔥'}
+                {ACTIVITY_ICONS[activity.type] ?? ''}
               </span>
               <div className="activity-content">
                 <span className="activity-user">{activity.user}</span>
