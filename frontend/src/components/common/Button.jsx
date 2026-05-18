@@ -34,12 +34,15 @@ const Button = ({
   const baseClass = 'app-btn';
   const variantClass = `btn-${variant}`;
   const sizeClass = `btn-${size}`;
-  const loadingClass = isLoading ? 'btn-loading' : '';
+
+  const computedClassName = [baseClass, variantClass, sizeClass, isLoading && 'btn-loading', 'glass-card', className]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <motion.button
       type={type}
-      className={`${baseClass} ${variantClass} ${sizeClass} ${loadingClass} glass-card ${className}`}
+      className={computedClassName}
       onClick={onClick}
       disabled={disabled || isLoading}
       aria-disabled={disabled || isLoading}
