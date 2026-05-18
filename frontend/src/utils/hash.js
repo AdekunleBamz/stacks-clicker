@@ -12,8 +12,8 @@
 export function simpleHash(str) {
   if (!str || typeof str !== 'string') return 0;
   let hash = 5381;
-  for (let i = 0; i < str.length; i++) {
-    hash = (hash * 33) ^ str.charCodeAt(i);
+  for (const char of str) {
+    hash = (hash * 33) ^ char.charCodeAt(0);
   }
   return hash >>> 0;
 }
