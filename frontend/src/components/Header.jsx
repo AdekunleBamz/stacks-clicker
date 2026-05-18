@@ -6,6 +6,15 @@ import { useWallet } from '../context/WalletContext';
 import { useI18n } from '../context/I18nContext';
 import { useScrollPosition } from '../hooks/useScrollPosition';
 
+const LANGUAGE_LABELS = {
+  en: 'EN',
+  es: 'ES',
+  fr: 'FR',
+  pt: 'PT',
+  de: 'DE',
+};
+const DEFAULT_SUPPORTED_LANGS = ['en', 'es', 'fr', 'pt', 'de'];
+
 /**
  * Main application header component.
  * Manages the logo, language selector, theme toggle, and wallet connection state.
@@ -16,16 +25,9 @@ import { useScrollPosition } from '../hooks/useScrollPosition';
  */
 export default function Header({ theme, toggleTheme }) {
   const { address, connectWallet, disconnectWallet, isConnecting } = useWallet();
-  const { lang, setLang, supportedLangs = ['en', 'es', 'fr', 'pt', 'de'] } = useI18n();
+  const { lang, setLang, supportedLangs = DEFAULT_SUPPORTED_LANGS } = useI18n();
   const { y } = useScrollPosition();
   const isScrolled = y > 12;
-  const languageLabels = {
-    en: 'EN',
-    es: 'ES',
-    fr: 'FR',
-    pt: 'PT',
-    de: 'DE',
-  };
 
   return (
     <header
@@ -57,7 +59,7 @@ export default function Header({ theme, toggleTheme }) {
           >
             {supportedLangs.map((code) => (
               <option key={code} value={code}>
-                {languageLabels[code] ?? code.toUpperCase()}
+                {LANGUAGE_LABELS[code] ?? code.toUpperCase()}
               </option>
             ))}
           </select>
