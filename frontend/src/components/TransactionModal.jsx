@@ -4,6 +4,9 @@ import { useModal } from '../context/ModalContext';
 import { truncateAddress } from '../utils/format';
 import { STACKS_NETWORK } from '../utils/constants';
 
+const getExplorerLink = (txId) =>
+  txId ? `https://explorer.hiro.so/txid/${txId}?chain=${STACKS_NETWORK}` : '#';
+
 /**
  * Modal to view detailed information about a specific transaction.
  */
@@ -13,11 +16,6 @@ const TransactionModal = memo(() => {
   if (activeModal !== 'transaction' || !modalData) return null;
 
   const { txId, action, timestamp, status = 'success' } = modalData;
-
-  const getExplorerLink = () => {
-    if (!txId) return '#';
-    return `https://explorer.hiro.so/txid/${txId}?chain=${STACKS_NETWORK}`;
-  };
 
   return (
     <Modal isOpen={true} onClose={closeModal} title="🔍 Transaction Details">
@@ -56,7 +54,7 @@ const TransactionModal = memo(() => {
 
         <div className="modal-actions">
           <a
-            href={getExplorerLink()}
+            href={getExplorerLink(txId)}
             target="_blank"
             rel="noopener noreferrer"
             className="primary-button explorer-btn"
