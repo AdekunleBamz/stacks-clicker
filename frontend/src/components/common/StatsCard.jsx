@@ -5,6 +5,20 @@ import AnimatedNumber from './AnimatedNumber';
 import Tooltip from './Tooltip';
 import { useMeasure } from '../../hooks/useMeasure';
 
+const itemVariants = {
+  hidden: { opacity: 0, scale: 0.9, y: 20 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: {
+      type: 'spring',
+      stiffness: 260,
+      damping: 20,
+    },
+  },
+};
+
 /**
  * Individual card for displaying a single statistic with animations and thematic coloring.
  *
@@ -33,20 +47,6 @@ function StatsCard({
   tooltip,
 }) {
   const [measureRef, { width, height }] = useMeasure();
-
-  const itemVariants = {
-    hidden: { opacity: 0, scale: 0.9, y: 20 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: {
-        type: 'spring',
-        stiffness: 260,
-        damping: 20,
-      },
-    },
-  };
 
   const cardContent = (
     <motion.div
