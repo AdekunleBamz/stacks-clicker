@@ -67,8 +67,8 @@ export async function callContract({
       contractAddress,
       contractName,
       functionName,
-      functionArgs: functionArgs || [],
-      postConditions: postConditions || [],
+      functionArgs: functionArgs ?? [],
+      postConditions: postConditions ?? [],
       postConditionMode: 1,
       onFinish: (data) => {
         log('Contract call result:', data);
@@ -94,7 +94,7 @@ export async function transferStx(recipient, amount, memo) {
       network,
       recipient,
       amount: amount.toString(),
-      memo: memo || '',
+      memo: memo ?? '',
       onFinish: (data) => {
         log('Transfer result:', data);
         resolve({ txId: data.txId });
