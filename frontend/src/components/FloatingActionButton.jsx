@@ -2,13 +2,19 @@ import { useState, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 
+const itemInitial = { opacity: 0, scale: 0, y: 20 };
+const itemAnimate = { opacity: 1, scale: 1, y: 0 };
+const itemExit = { opacity: 0, scale: 0, y: 20 };
+const mainHover = { scale: 1.1 };
+const mainTap = { scale: 0.9 };
+
 /**
  * FAB component for mobile quick actions.
  */
 export default function FloatingActionButton({ onAction = () => {} }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleClose = useCallback(() => setIsOpen(false), []);
+  const handleToggle = useCallback(() => setIsOpen((prev) => !prev), []);
 
   const actions = useMemo(
     () => [
@@ -48,13 +54,13 @@ export default function FloatingActionButton({ onAction = () => {} }) {
                 aria-label={action.label}
                 title={action.label}
                 role="menuitem"
-                initial={{ opacity: 0, scale: 0, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0, y: 20 }}
+                initial={itemInitial}
+                animate={itemAnimate}
+                exit={itemExit}
                 transition={{ delay: index * 0.05 }}
                 onClick={() => {
                   action.onClick();
-                  handleClose();
+                  setIsOpen(false);
                 }}
               >
                 <span className="fab-label">{action.label}</span>
@@ -69,14 +75,14 @@ export default function FloatingActionButton({ onAction = () => {} }) {
       <motion.button
         type="button"
         className={`fab-main ${isOpen ? 'active' : ''}`}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={handleToggle}
         aria-expanded={isOpen}
         aria-haspopup="menu"
         aria-controls="fab-menu"
         aria-label={isOpen ? 'Close quick actions menu' : 'Open quick actions menu'}
         title={isOpen ? 'Close quick actions' : 'Open quick actions'}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
+        whileHover={mainHover}
+        whileTap={mainTap}
       >
         <span className="fab-main-icon" aria-hidden="true">
           {isOpen ? '×' : '⚡'}
