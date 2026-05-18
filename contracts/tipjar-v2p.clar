@@ -12,7 +12,7 @@
 ;; ============================================
 (define-constant contract-owner tx-sender)
 (define-constant interaction-fee u100) ;; 0.0001 STX = 100 microSTX
-(define-constant MIN-TIP u100) ;; Minimum tip: 0.0001 STX
+(define-data-var min-tip uint u100) ;; Minimum tip: 0.0001 STX
 (define-constant MAX-TIP u100000000000) ;; Maximum tip: 100,000 STX
 (define-constant QUICK-TIP-AMOUNT u10000) ;; Quick tip fixed amount: 0.01 STX
 
@@ -84,7 +84,7 @@
 (define-private (validate-tip-amount (amount uint))
   (begin
     (asserts! (> amount u0) ERR-ZERO-VALUE)
-    (asserts! (>= amount MIN-TIP) ERR-TIP-TOO-SMALL)
+    (asserts! (>= amount (var-get min-tip)) ERR-TIP-TOO-SMALL)
     (asserts! (<= amount MAX-TIP) ERR-TIP-TOO-LARGE)
     (ok true)
   )
