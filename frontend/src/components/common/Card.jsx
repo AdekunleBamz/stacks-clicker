@@ -20,13 +20,13 @@ import { motion } from 'framer-motion';
  */
 const Card = ({
   children,
-  title,
-  subtitle,
-  icon,
+  title = undefined,
+  subtitle = undefined,
+  icon = null,
   depth = 1,
   interactive = false,
   className = '',
-  headerAction,
+  headerAction = null,
   ...props
 }) => {
   const id = useId();
@@ -70,16 +70,6 @@ const Card = ({
       <div className="card-body">{children}</div>
     </motion.div>
   );
-};
-
-Card.defaultProps = {
-  title: undefined,
-  subtitle: undefined,
-  icon: null,
-  depth: 1,
-  interactive: false,
-  className: '',
-  headerAction: null,
 };
 
 Card.propTypes = {
