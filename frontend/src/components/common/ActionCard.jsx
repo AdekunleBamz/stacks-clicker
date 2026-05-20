@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
  * @returns {JSX.Element} The rendered action card.
  */
 const ActionCard = forwardRef(function ActionCard(
-  { title, subtitle, icon, iconClass, children, id, ...rest },
+  { title, subtitle = '', icon = null, iconClass = '', children = null, id, ...rest },
   ref
 ) {
   const headingId = id || `action-card-heading-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
@@ -48,13 +48,6 @@ const ActionCard = forwardRef(function ActionCard(
     </motion.div>
   );
 });
-
-ActionCard.defaultProps = {
-  subtitle: '',
-  icon: null,
-  iconClass: '',
-  children: null,
-};
 
 ActionCard.propTypes = {
   title: PropTypes.string.isRequired,
