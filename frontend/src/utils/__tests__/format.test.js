@@ -141,6 +141,10 @@ describe('format utilities', () => {
     test('formats positive values with a plus sign', () => {
       expect(formatSignedNumber(1.234, 1)).toBe('+1.2');
     });
+
+    test('formats negative values with a minus sign', () => {
+      expect(formatSignedNumber(-0.3, 2)).toBe('-0.30');
+    });
   });
 
   describe('formatStx', () => {
