@@ -12,7 +12,7 @@
 ;; CONFIGURATION
 ;; ============================================
 (define-constant contract-owner tx-sender)
-(define-constant interaction-fee u100) ;; 0.0001 STX = 100 microSTX
+(define-data-var interaction-fee uint u100) ;; 0.0001 STX = 100 microSTX
 (define-constant MAX-MULTI-CLICK u100)
 
 ;; ============================================
@@ -66,9 +66,9 @@
 
 ;; Collect interaction fee
 (define-private (collect-fee)
-  (begin
-    (try! (stx-transfer? interaction-fee tx-sender contract-owner))
-    (var-set total-fees-collected (+ (var-get total-fees-collected) interaction-fee))
+  (let ((fee (var-get interaction-fee)))
+    (try! (stx-transfer? fee tx-sender contract-owner))
+    (var-set total-fees-collected (+ (var-get total-fees-collected) fee))
     (ok true)
   )
 )
@@ -106,7 +106,7 @@
 )
 
 (define-read-only (get-interaction-fee)
-  interaction-fee
+  (var-get interaction-fee)
 )
 
 (define-read-only (get-user-clicks (user principal))
@@ -154,7 +154,7 @@
     version: VERSION,
     total-clicks: (var-get total-clicks),
     unique-users: (var-get unique-users),
-    fee: interaction-fee,
+    fee: (var-get interaction-fee),
     last-activity: (var-get last-activity-block),
     owner: contract-owner,
     paused: (var-get is-paused)
@@ -296,6 +296,21 @@
       event: "contract-unpaused",
       version: VERSION,
       by: tx-sender,
+      block: block-height
+    })
+    (ok true)
+  )
+)
+;; Set interaction fee (owner only)
+(define-public (set-interaction-fee (new-fee uint))
+  (begin
+    (try! (check-owner))
+    (var-set interaction-fee new-fee)
+    (print {
+      event: "fee-updated",
+      version: VERSION,
+      by: tx-sender,
+      new-fee: new-fee,
       block: block-height
     })
     (ok true)
