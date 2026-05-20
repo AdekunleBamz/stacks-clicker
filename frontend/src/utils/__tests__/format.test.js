@@ -117,6 +117,10 @@ describe('format utilities', () => {
     test('accepts non-negative integer decimal places', () => {
       expect(normalizeDecimalPlaces(4)).toBe(4);
     });
+
+    test('falls back when decimal places are invalid', () => {
+      expect(normalizeDecimalPlaces(-1, 3)).toBe(3);
+    });
   });
 
   describe('formatStx', () => {
