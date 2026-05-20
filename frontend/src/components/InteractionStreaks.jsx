@@ -34,7 +34,7 @@ const badgeHover = { y: -5 };
  * @param {number} props.totalInteractions - The total count of verified on-chain interactions
  * @returns {JSX.Element} The rendered interaction streaks and badges panel
  */
-function InteractionStreaks({ totalInteractions }) {
+function InteractionStreaks({ totalInteractions = 0 }) {
   const safeTotalInteractions = Math.max(
     0,
     Number.isFinite(totalInteractions) ? totalInteractions : 0
@@ -133,10 +133,6 @@ function InteractionStreaks({ totalInteractions }) {
 
 InteractionStreaks.propTypes = {
   totalInteractions: PropTypes.number,
-};
-
-InteractionStreaks.defaultProps = {
-  totalInteractions: 0,
 };
 
 export default memo(InteractionStreaks);
