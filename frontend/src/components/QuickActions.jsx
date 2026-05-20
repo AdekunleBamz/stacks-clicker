@@ -7,7 +7,7 @@ import { useSound } from '../hooks/useSound';
  * QuickActions component for common utility tasks.
  * Provides shortcut buttons for ping, log clearing, and external links.
  */
-export default function QuickActions({ address, onClearLog, onPingAll }) {
+export default function QuickActions({ address = null, onClearLog, onPingAll }) {
   const { playSound } = useSound();
 
   const handleAction = useCallback(
@@ -55,10 +55,6 @@ export default function QuickActions({ address, onClearLog, onPingAll }) {
     </div>
   );
 }
-
-QuickActions.defaultProps = {
-  address: null,
-};
 
 QuickActions.propTypes = {
   onClearLog: PropTypes.func.isRequired,
