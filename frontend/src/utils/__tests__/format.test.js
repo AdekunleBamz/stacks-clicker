@@ -187,6 +187,10 @@ describe('format utilities', () => {
     test('limits countdown output to requested units', () => {
       expect(formatCountdown(90_061_000, { maxUnits: 2 })).toBe('1d 1h');
     });
+
+    test('returns 0s for invalid countdown values', () => {
+      expect(formatCountdown(Number.NaN)).toBe('0s');
+    });
   });
 
   describe('formatStx', () => {
