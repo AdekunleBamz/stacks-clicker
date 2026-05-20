@@ -23,7 +23,7 @@ const DEFAULT_SUPPORTED_LANGS = ['en', 'es', 'fr', 'pt', 'de'];
  * @param {string} props.theme - Current theme ('dark' or 'light').
  * @param {Function} props.toggleTheme - Function to toggle between themes.
  */
-export default function Header({ theme, toggleTheme }) {
+export default function Header({ theme = 'dark', toggleTheme }) {
   const { address, connectWallet, disconnectWallet, isConnecting } = useWallet();
   const { lang, setLang, supportedLangs = DEFAULT_SUPPORTED_LANGS } = useI18n();
   const { y } = useScrollPosition();
@@ -113,8 +113,4 @@ export default function Header({ theme, toggleTheme }) {
 Header.propTypes = {
   theme: PropTypes.oneOf(['dark', 'light']),
   toggleTheme: PropTypes.func.isRequired,
-};
-
-Header.defaultProps = {
-  theme: 'dark',
 };
