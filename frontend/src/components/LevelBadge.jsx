@@ -20,7 +20,7 @@ const PARTICLE_COUNT = 3;
  * @param {{ level: number }} props - Badge display props.
  * @returns {JSX.Element} The rendered level badge.
  */
-function LevelBadge({ level }) {
+function LevelBadge({ level = 1 }) {
   return (
     <motion.div
       className="level-badge-container"
@@ -74,11 +74,7 @@ function LevelBadge({ level }) {
 }
 
 LevelBadge.propTypes = {
-  level: PropTypes.number.isRequired,
-};
-
-LevelBadge.defaultProps = {
-  level: 1,
+  level: PropTypes.number,
 };
 
 export default memo(LevelBadge);
