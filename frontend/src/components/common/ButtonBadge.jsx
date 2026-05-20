@@ -15,7 +15,7 @@ import { motion, AnimatePresence } from 'framer-motion';
  * @returns {JSX.Element|null} The rendered badge or null if not visible
  */
 const ButtonBadge = memo(function ButtonBadge({
-  count,
+  count = 0,
   showDotOnly = false,
   maxCount = 99,
   color = 'var(--error)',
@@ -47,13 +47,6 @@ const ButtonBadge = memo(function ButtonBadge({
     </AnimatePresence>
   );
 });
-
-ButtonBadge.defaultProps = {
-  count: 0,
-  showDotOnly: false,
-  maxCount: 99,
-  color: 'var(--error)',
-};
 
 ButtonBadge.propTypes = {
   count: PropTypes.number,
