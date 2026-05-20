@@ -165,6 +165,12 @@ describe('format utilities', () => {
     });
   });
 
+  describe('formatTransactionId', () => {
+    test('normalizes and truncates transaction ids', () => {
+      expect(formatTransactionId(' ABCDEFGHIJKL ', { prefix: 4, suffix: 3 })).toBe('abcd...jkl');
+    });
+  });
+
   describe('formatStx', () => {
     test('converts micro-STX to STX with 2 decimals', () => {
       expect(formatStx(1000000)).toBe('1.00 STX');
