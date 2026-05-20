@@ -14,7 +14,7 @@ import { motion, AnimatePresence } from 'framer-motion';
  * @param {number} [props.count] - Optional match count to display in a badge
  * @returns {JSX.Element} The rendered search input
  */
-function SearchInput({ value, onChange, onClear, placeholder = 'Search...', count }) {
+function SearchInput({ value, onChange, onClear, placeholder = 'Search...', count = undefined }) {
   return (
     <div className="search-wrapper" role="search" aria-label="Transaction search tools">
       <div className="search-relative">
@@ -75,11 +75,6 @@ function SearchInput({ value, onChange, onClear, placeholder = 'Search...', coun
     </div>
   );
 }
-
-SearchInput.defaultProps = {
-  placeholder: 'Search...',
-  count: undefined,
-};
 
 SearchInput.propTypes = {
   value: PropTypes.string.isRequired,
