@@ -123,6 +123,12 @@ describe('format utilities', () => {
     });
   });
 
+  describe('formatDuration', () => {
+    test('formats second-only durations', () => {
+      expect(formatDuration(45_000)).toBe('45s');
+    });
+  });
+
   describe('formatStx', () => {
     test('converts micro-STX to STX with 2 decimals', () => {
       expect(formatStx(1000000)).toBe('1.00 STX');
