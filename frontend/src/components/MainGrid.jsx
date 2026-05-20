@@ -10,7 +10,7 @@ import QuickPollCard from './QuickPollCard';
  * Main layout grid for the application.
  * Focused on the interaction cards section.
  */
-function MainGrid({ address, stats, clicker, tipjar, quickpoll }) {
+function MainGrid({ address = null, stats, clicker, tipjar, quickpoll }) {
   return (
     <section
       className="interaction-section"
@@ -63,10 +63,6 @@ MainGrid.propTypes = {
     handlePollPing: PropTypes.func.isRequired,
     isLoading: PropTypes.func.isRequired,
   }).isRequired,
-};
-
-MainGrid.defaultProps = {
-  address: null,
 };
 
 export default memo(MainGrid);
