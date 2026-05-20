@@ -87,6 +87,10 @@ describe('format utilities', () => {
     test('formats millions with the M suffix', () => {
       expect(formatNumberCompact(2_000_000)).toBe('2.0M');
     });
+
+    test('returns small values without suffixes', () => {
+      expect(formatNumberCompact(999)).toBe('999');
+    });
   });
 
   describe('formatStx', () => {
