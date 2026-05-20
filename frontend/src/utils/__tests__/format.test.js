@@ -169,6 +169,10 @@ describe('format utilities', () => {
     test('normalizes and truncates transaction ids', () => {
       expect(formatTransactionId(' ABCDEFGHIJKL ', { prefix: 4, suffix: 3 })).toBe('abcd...jkl');
     });
+
+    test('returns empty string for missing transaction ids', () => {
+      expect(formatTransactionId(null)).toBe('');
+    });
   });
 
   describe('formatStx', () => {
