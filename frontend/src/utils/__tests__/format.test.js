@@ -137,6 +137,12 @@ describe('format utilities', () => {
     });
   });
 
+  describe('formatSignedNumber', () => {
+    test('formats positive values with a plus sign', () => {
+      expect(formatSignedNumber(1.234, 1)).toBe('+1.2');
+    });
+  });
+
   describe('formatStx', () => {
     test('converts micro-STX to STX with 2 decimals', () => {
       expect(formatStx(1000000)).toBe('1.00 STX');
