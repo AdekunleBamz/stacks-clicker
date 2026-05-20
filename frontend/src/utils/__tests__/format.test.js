@@ -1,5 +1,24 @@
 import { expect, test, describe } from 'vitest';
-import { truncateAddress, formatNumber, formatStx } from '../format';
+import {
+  formatAutoClickerCount,
+  formatBlockHeight,
+  formatBytes,
+  formatClickRate,
+  formatCompact,
+  formatCountdown,
+  formatDuration,
+  formatLeaderboardPosition,
+  formatLevel,
+  formatNumber,
+  formatNumberCompact,
+  formatPercent,
+  formatSignedNumber,
+  formatStx,
+  formatTransactionId,
+  formatWalletShort,
+  normalizeDecimalPlaces,
+  truncateAddress,
+} from '../format';
 
 describe('format utilities', () => {
   describe('truncateAddress', () => {
@@ -57,6 +76,12 @@ describe('format utilities', () => {
 
     test('preserves precision for bigint input', () => {
       expect(formatNumber(12345678901234567890n)).toBe('12,345,678,901,234,567,890');
+    });
+  });
+
+  describe('formatNumberCompact', () => {
+    test('formats thousands with the K suffix', () => {
+      expect(formatNumberCompact(1500)).toBe('1.5K');
     });
   });
 
