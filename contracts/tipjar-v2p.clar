@@ -12,7 +12,7 @@
 ;; CONFIGURATION
 ;; ============================================
 (define-constant contract-owner tx-sender)
-(define-constant interaction-fee u100) ;; 0.0001 STX = 100 microSTX
+(define-data-var interaction-fee uint u100) ;; 0.0001 STX = 100 microSTX
 (define-constant MIN-TIP u100) ;; Minimum tip: 0.0001 STX
 (define-constant MAX-TIP u100000000000) ;; Maximum tip: 100,000 STX
 (define-constant QUICK-TIP-AMOUNT u10000) ;; Quick tip fixed amount: 0.01 STX
@@ -74,9 +74,9 @@
 
 ;; Collect interaction fee
 (define-private (collect-fee)
-  (begin
-    (try! (stx-transfer? interaction-fee tx-sender contract-owner))
-    (var-set total-fees-collected (+ (var-get total-fees-collected) interaction-fee))
+  (let ((fee (var-get interaction-fee)))
+    (try! (stx-transfer? fee tx-sender contract-owner))
+    (var-set total-fees-collected (+ (var-get total-fees-collected) fee))
     (ok true)
   )
 )
@@ -139,7 +139,7 @@
 )
 
 (define-read-only (get-interaction-fee)
-  interaction-fee
+  (var-get interaction-fee)
 )
 
 (define-read-only (get-user-tips-sent (user principal))
@@ -188,7 +188,7 @@
     tip-count: (var-get tip-count),
     unique-tippers: (var-get unique-tippers),
     largest-tip: (var-get largest-tip),
-    fee: interaction-fee,
+    fee: (var-get interaction-fee),
     min-tip: MIN-TIP,
     max-tip: MAX-TIP,
     last-activity: (var-get last-activity-block),
