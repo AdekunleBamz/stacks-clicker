@@ -151,6 +151,12 @@ describe('format utilities', () => {
     });
   });
 
+  describe('formatBytes', () => {
+    test('formats zero bytes', () => {
+      expect(formatBytes(0)).toBe('0 B');
+    });
+  });
+
   describe('formatStx', () => {
     test('converts micro-STX to STX with 2 decimals', () => {
       expect(formatStx(1000000)).toBe('1.00 STX');
