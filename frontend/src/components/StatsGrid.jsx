@@ -7,7 +7,7 @@ import CountUp from './CountUp';
  * StatsGrid Component
  * Displays advanced game metrics in a grid
  */
-function StatsGrid({ stats }) {
+function StatsGrid({ stats = {} }) {
   const statItems = [
     {
       label: 'Total STX Tipped',
@@ -77,10 +77,6 @@ StatsGrid.propTypes = {
     totalStreaks: PropTypes.number,
     rank: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   }),
-};
-
-StatsGrid.defaultProps = {
-  stats: {},
 };
 
 export default memo(StatsGrid);
