@@ -95,7 +95,3 @@ export default function FloatingActionButton({ onAction = () => {} }) {
 FloatingActionButton.propTypes = {
   onAction: PropTypes.func,
 };
-
-FloatingActionButton.defaultProps = {
-  onAction: () => {},
-};
