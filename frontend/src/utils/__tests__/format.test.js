@@ -113,6 +113,12 @@ describe('format utilities', () => {
     });
   });
 
+  describe('normalizeDecimalPlaces', () => {
+    test('accepts non-negative integer decimal places', () => {
+      expect(normalizeDecimalPlaces(4)).toBe(4);
+    });
+  });
+
   describe('formatStx', () => {
     test('converts micro-STX to STX with 2 decimals', () => {
       expect(formatStx(1000000)).toBe('1.00 STX');
