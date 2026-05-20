@@ -14,7 +14,7 @@ import { notify } from '../../utils/toast';
  * @example
  * <AddressBadge address="SP2J6ZY48GV1EZ5V2V5RB9MP66SW86PYKKNRV9EJ" onDisconnect={handleDisconnect} />
  */
-function AddressBadge({ address, onDisconnect }) {
+function AddressBadge({ address, onDisconnect = null }) {
   const [copied, setCopied] = useState(false);
   const timerRef = useRef(null);
 
@@ -72,10 +72,6 @@ function AddressBadge({ address, onDisconnect }) {
     </div>
   );
 }
-
-AddressBadge.defaultProps = {
-  onDisconnect: null,
-};
 
 AddressBadge.propTypes = {
   address: PropTypes.string.isRequired,
