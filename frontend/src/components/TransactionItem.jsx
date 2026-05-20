@@ -23,7 +23,7 @@ const itemWhileFocus = {
  */
 function TransactionItem({
   tx,
-  searchTerm,
+  searchTerm = '',
   highlightText,
   onDetails,
   onCopy,
@@ -163,10 +163,6 @@ TransactionItem.propTypes = {
   onCopy: PropTypes.func.isRequired,
   onContextMenu: PropTypes.func.isRequired,
   onOpenExplorer: PropTypes.func.isRequired,
-};
-
-TransactionItem.defaultProps = {
-  searchTerm: '',
 };
 
 export default memo(TransactionItem);
