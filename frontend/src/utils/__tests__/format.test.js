@@ -103,6 +103,12 @@ describe('format utilities', () => {
     });
   });
 
+  describe('formatPercent', () => {
+    test('formats decimal ratios as percentages', () => {
+      expect(formatPercent(0.1234, 2)).toBe('12.34%');
+    });
+  });
+
   describe('formatStx', () => {
     test('converts micro-STX to STX with 2 decimals', () => {
       expect(formatStx(1000000)).toBe('1.00 STX');
