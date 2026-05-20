@@ -127,6 +127,10 @@ describe('format utilities', () => {
     test('formats second-only durations', () => {
       expect(formatDuration(45_000)).toBe('45s');
     });
+
+    test('formats mixed minute and second durations', () => {
+      expect(formatDuration(150_000)).toBe('2m 30s');
+    });
   });
 
   describe('formatStx', () => {
