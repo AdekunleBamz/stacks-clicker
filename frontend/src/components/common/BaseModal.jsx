@@ -21,9 +21,9 @@ import { useLockBodyScroll } from '../../hooks/useLockBodyScroll';
 const BaseModal = memo(function BaseModal({
   isOpen,
   onClose,
-  title,
+  title = '',
   children,
-  footer,
+  footer = null,
   className = '',
 }) {
   const closeBtnRef = useRef(null);
@@ -121,13 +121,6 @@ function ModalContent({ onClose, title, children, footer, className, closeBtnRef
     </motion.div>
   );
 }
-
-BaseModal.defaultProps = {
-  onClose: undefined,
-  title: '',
-  footer: null,
-  className: '',
-};
 
 BaseModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
