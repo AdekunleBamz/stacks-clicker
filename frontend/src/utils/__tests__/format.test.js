@@ -215,6 +215,12 @@ describe('format utilities', () => {
     });
   });
 
+  describe('formatWalletShort', () => {
+    test('shortens long wallet labels', () => {
+      expect(formatWalletShort('SP1234567890')).toBe('SP123456...');
+    });
+  });
+
   describe('formatStx', () => {
     test('converts micro-STX to STX with 2 decimals', () => {
       expect(formatStx(1000000)).toBe('1.00 STX');
