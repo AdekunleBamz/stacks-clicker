@@ -13,7 +13,7 @@ const celebTransition = { type: 'spring', stiffness: 200, damping: 25 };
  * @param {Object} props - Component props.
  * @param {string|null} props.celebration - The celebration message to display.
  */
-function MilestoneCelebration({ celebration }) {
+function MilestoneCelebration({ celebration = null }) {
   return (
     <AnimatePresence>
       {celebration && (
@@ -34,10 +34,6 @@ function MilestoneCelebration({ celebration }) {
     </AnimatePresence>
   );
 }
-
-MilestoneCelebration.defaultProps = {
-  celebration: null,
-};
 
 MilestoneCelebration.propTypes = {
   celebration: PropTypes.string,
