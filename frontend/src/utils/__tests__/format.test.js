@@ -221,6 +221,12 @@ describe('format utilities', () => {
     });
   });
 
+  describe('formatLeaderboardPosition', () => {
+    test('formats ordinal leaderboard positions', () => {
+      expect(formatLeaderboardPosition(21)).toBe('21st place');
+    });
+  });
+
   describe('formatStx', () => {
     test('converts micro-STX to STX with 2 decimals', () => {
       expect(formatStx(1000000)).toBe('1.00 STX');
