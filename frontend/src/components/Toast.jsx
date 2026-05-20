@@ -133,10 +133,6 @@ function Toast({ toasts = [] }) {
   );
 }
 
-Toast.defaultProps = {
-  toasts: [],
-};
-
 Toast.propTypes = {
   toasts: PropTypes.arrayOf(
     PropTypes.shape({
