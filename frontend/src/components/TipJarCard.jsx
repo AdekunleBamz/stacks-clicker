@@ -24,7 +24,7 @@ const MIN_TIP_STX = MIN_TIP_MICRO_STX / 1_000_000;
  * @param {Function} props.tipjar.isLoading - Function to check loading state by action name
  * @returns {JSX.Element} The rendered TipJar interaction card
  */
-function TipJarCard({ address, tipjar }) {
+function TipJarCard({ address = null, tipjar }) {
   const { isLoading, tip, handleSelfPing } = tipjar;
   const [tipAmount, setTipAmount] = useState(String(MIN_TIP_STX));
   const { playSound } = useSound();
@@ -205,10 +205,6 @@ TipJarCard.propTypes = {
     handleSelfPing: PropTypes.func.isRequired,
     isLoading: PropTypes.func.isRequired,
   }).isRequired,
-};
-
-TipJarCard.defaultProps = {
-  address: null,
 };
 
 export default memo(TipJarCard);
