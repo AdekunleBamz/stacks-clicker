@@ -227,6 +227,12 @@ describe('format utilities', () => {
     });
   });
 
+  describe('formatAutoClickerCount', () => {
+    test('formats singular auto-clicker counts', () => {
+      expect(formatAutoClickerCount(1)).toBe('1 auto-clicker');
+    });
+  });
+
   describe('formatStx', () => {
     test('converts micro-STX to STX with 2 decimals', () => {
       expect(formatStx(1000000)).toBe('1.00 STX');
