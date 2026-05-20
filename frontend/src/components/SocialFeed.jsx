@@ -12,12 +12,13 @@ const ACTIVITY_ICONS = {
   poll: '🗳️',
   streak: '🔥',
 };
+const EMPTY_ACTIVITIES = [];
 
 /**
  * SocialFeed Component
  * Real-time community activity stream
  */
-function SocialFeed({ activities }) {
+function SocialFeed({ activities = EMPTY_ACTIVITIES }) {
   return (
     <div className="game-card social-feed" title="Live community activity feed">
       <div className="game-header">
@@ -78,10 +79,6 @@ SocialFeed.propTypes = {
       time: PropTypes.string,
     })
   ),
-};
-
-SocialFeed.defaultProps = {
-  activities: [],
 };
 
 export default memo(SocialFeed);
