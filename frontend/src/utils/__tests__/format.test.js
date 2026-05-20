@@ -97,6 +97,12 @@ describe('format utilities', () => {
     });
   });
 
+  describe('formatCompact', () => {
+    test('uses Intl compact notation for large values', () => {
+      expect(formatCompact(1_250_000)).toBe('1.3M');
+    });
+  });
+
   describe('formatStx', () => {
     test('converts micro-STX to STX with 2 decimals', () => {
       expect(formatStx(1000000)).toBe('1.00 STX');
