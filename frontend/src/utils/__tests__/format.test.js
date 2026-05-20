@@ -197,6 +197,10 @@ describe('format utilities', () => {
     test('formats valid block heights with separators', () => {
       expect(formatBlockHeight(123456)).toBe('Block #123,456');
     });
+
+    test('returns placeholder for invalid block heights', () => {
+      expect(formatBlockHeight(-1)).toBe('--');
+    });
   });
 
   describe('formatStx', () => {
