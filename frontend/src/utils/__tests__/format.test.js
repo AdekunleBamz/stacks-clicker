@@ -193,6 +193,12 @@ describe('format utilities', () => {
     });
   });
 
+  describe('formatBlockHeight', () => {
+    test('formats valid block heights with separators', () => {
+      expect(formatBlockHeight(123456)).toBe('Block #123,456');
+    });
+  });
+
   describe('formatStx', () => {
     test('converts micro-STX to STX with 2 decimals', () => {
       expect(formatStx(1000000)).toBe('1.00 STX');
