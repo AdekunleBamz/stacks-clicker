@@ -145,6 +145,10 @@ describe('format utilities', () => {
     test('formats negative values with a minus sign', () => {
       expect(formatSignedNumber(-0.3, 2)).toBe('-0.30');
     });
+
+    test('returns 0 for invalid signed values', () => {
+      expect(formatSignedNumber(Number.NaN)).toBe('0');
+    });
   });
 
   describe('formatStx', () => {
