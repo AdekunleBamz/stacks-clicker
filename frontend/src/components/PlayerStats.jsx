@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import StatsCard from './common/StatsCard';
 
 const sectionStyle = { textRendering: 'optimizeLegibility' };
+const DEFAULT_STATS = { clicks: 0, tips: 0, votes: 0 };
 
 /**
  * Component to display aggregate player statistics with premium animations.
@@ -11,7 +12,7 @@ const sectionStyle = { textRendering: 'optimizeLegibility' };
  * @param {number} props.txCount - Total transaction count.
  * @returns {JSX.Element} The rendered stats bar.
  */
-function PlayerStats({ stats, txCount }) {
+function PlayerStats({ stats = DEFAULT_STATS, txCount = 0 }) {
   const statItems = [
     { label: 'Clicks', value: stats.clicks, icon: '🎯', color: '#6366f1' },
     { label: 'Tips Sent', value: stats.tips, icon: '💰', color: '#10b981' },
@@ -47,11 +48,6 @@ PlayerStats.propTypes = {
     votes: PropTypes.number,
   }),
   txCount: PropTypes.number,
-};
-
-PlayerStats.defaultProps = {
-  stats: { clicks: 0, tips: 0, votes: 0 },
-  txCount: 0,
 };
 
 export default memo(PlayerStats);
