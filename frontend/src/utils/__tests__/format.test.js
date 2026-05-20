@@ -179,6 +179,12 @@ describe('format utilities', () => {
     });
   });
 
+  describe('formatCountdown', () => {
+    test('shows milliseconds when requested under one second', () => {
+      expect(formatCountdown(250.2, { showMs: true })).toBe('251ms');
+    });
+  });
+
   describe('formatStx', () => {
     test('converts micro-STX to STX with 2 decimals', () => {
       expect(formatStx(1000000)).toBe('1.00 STX');
