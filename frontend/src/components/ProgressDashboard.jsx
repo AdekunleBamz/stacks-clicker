@@ -9,12 +9,13 @@ const xpWrapStyle = { flex: 1 };
 const achSectionStyle = { marginTop: '3rem' };
 const achHeadingStyle = { marginBottom: '1.5rem', fontWeight: 800 };
 const EMPTY_ARRAY = [];
+const DEFAULT_USER_DATA = { level: 1, xp: 0, nextLevelXP: 100, stats: {}, achievements: [] };
 
 /**
  * ProgressDashboard Component
  * Aggregate view for player progression
  */
-function ProgressDashboard({ userData }) {
+function ProgressDashboard({ userData = DEFAULT_USER_DATA }) {
   const { level, xp, nextLevelXP, stats, achievements } = userData;
 
   return (
@@ -61,10 +62,6 @@ ProgressDashboard.propTypes = {
     stats: PropTypes.object,
     achievements: PropTypes.array,
   }),
-};
-
-ProgressDashboard.defaultProps = {
-  userData: { level: 1, xp: 0, nextLevelXP: 100, stats: {}, achievements: [] },
 };
 
 export default memo(ProgressDashboard);
