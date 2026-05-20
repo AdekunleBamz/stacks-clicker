@@ -12,12 +12,13 @@ const itemWhileHover = {
   borderColor: 'hsla(var(--pulse-cyan) / 0.4)',
 };
 const MEDALS = ['🥇', '🥈', '🥉'];
+const EMPTY_PLAYERS = [];
 
 /**
  * Leaderboard Component
  * Displays top players in a vibrant, ranked list
  */
-function Leaderboard({ players }) {
+function Leaderboard({ players = EMPTY_PLAYERS }) {
   return (
     <div className="game-card leaderboard" title="Top clicker rankings">
       <div className="game-header">
@@ -74,10 +75,6 @@ function Leaderboard({ players }) {
     </div>
   );
 }
-
-Leaderboard.defaultProps = {
-  players: [],
-};
 
 Leaderboard.propTypes = {
   players: PropTypes.arrayOf(
