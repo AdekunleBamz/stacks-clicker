@@ -173,6 +173,10 @@ describe('format utilities', () => {
     test('returns empty string for missing transaction ids', () => {
       expect(formatTransactionId(null)).toBe('');
     });
+
+    test('returns full transaction ids when visible segments are disabled', () => {
+      expect(formatTransactionId('ABC123', { prefix: 0, suffix: 0 })).toBe('abc123');
+    });
   });
 
   describe('formatStx', () => {
