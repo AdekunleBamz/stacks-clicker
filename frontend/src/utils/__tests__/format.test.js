@@ -203,6 +203,12 @@ describe('format utilities', () => {
     });
   });
 
+  describe('formatLevel', () => {
+    test('floors level values and prefixes them', () => {
+      expect(formatLevel(3.9)).toBe('Lv.3');
+    });
+  });
+
   describe('formatStx', () => {
     test('converts micro-STX to STX with 2 decimals', () => {
       expect(formatStx(1000000)).toBe('1.00 STX');
