@@ -8,13 +8,20 @@ const cardHoverActive = { y: -5, boxShadow: '0 0 20px hsla(var(--pulse-purple) /
 const cardHoverLocked = {};
 const glowAnimate = { opacity: [0.3, 0.6, 0.3] };
 const glowTransition = { duration: 3, repeat: Infinity };
+const DEFAULT_ACHIEVEMENT = {
+  icon: '',
+  title: '',
+  description: '',
+  unlocked: false,
+  date: null,
+};
 
 /**
  * Achievement Component
  * Displays individual player milestones
  */
 
-function Achievement({ achievement }) {
+function Achievement({ achievement = DEFAULT_ACHIEVEMENT }) {
   const { icon, title, description, unlocked, date } = achievement;
 
   return (
@@ -63,15 +70,6 @@ function Achievement({ achievement }) {
   );
 }
 
-Achievement.defaultProps = {
-  achievement: {
-    icon: '',
-    description: '',
-    unlocked: false,
-    date: null,
-  },
-};
-
 Achievement.propTypes = {
   achievement: PropTypes.shape({
     icon: PropTypes.string,
@@ -79,7 +77,7 @@ Achievement.propTypes = {
     description: PropTypes.string,
     unlocked: PropTypes.bool,
     date: PropTypes.string,
-  }).isRequired,
+  }),
 };
 
 export default memo(Achievement);
