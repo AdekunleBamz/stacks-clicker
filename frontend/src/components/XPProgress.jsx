@@ -11,7 +11,7 @@ const barTransition = { duration: 0.8, ease: 'easeOut' };
  * @param {{ currentXP: number, nextLevelXP: number }} props - XP totals for the current level.
  * @returns {JSX.Element} The rendered progress meter.
  */
-function XPProgress({ currentXP, nextLevelXP }) {
+function XPProgress({ currentXP = 0, nextLevelXP = 100 }) {
   const safeCurrentXP = Math.max(0, Number.isFinite(currentXP) ? currentXP : 0);
   const safeNextLevelXP = nextLevelXP > 0 ? nextLevelXP : 100;
   const percentage = Math.min(100, Math.floor((safeCurrentXP / safeNextLevelXP) * 100));
@@ -47,13 +47,8 @@ function XPProgress({ currentXP, nextLevelXP }) {
 }
 
 XPProgress.propTypes = {
-  currentXP: PropTypes.number.isRequired,
-  nextLevelXP: PropTypes.number.isRequired,
-};
-
-XPProgress.defaultProps = {
-  currentXP: 0,
-  nextLevelXP: 100,
+  currentXP: PropTypes.number,
+  nextLevelXP: PropTypes.number,
 };
 
 export default memo(XPProgress);
