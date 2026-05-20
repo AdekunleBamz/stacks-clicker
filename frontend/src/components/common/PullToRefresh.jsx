@@ -13,7 +13,7 @@ const PULL_THRESHOLD = 80;
  * @param {React.ReactNode} props.children - Content to wrap with pull-to-refresh
  * @returns {JSX.Element} The rendered pull-to-refresh wrapper
  */
-const PullToRefresh = memo(function PullToRefresh({ onRefresh, children }) {
+const PullToRefresh = memo(function PullToRefresh({ onRefresh, children = null }) {
   const [startY, setStartY] = useState(0);
   const [pullDistance, setPullDistance] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
@@ -90,10 +90,6 @@ const PullToRefresh = memo(function PullToRefresh({ onRefresh, children }) {
     </div>
   );
 });
-
-PullToRefresh.defaultProps = {
-  children: null,
-};
 
 PullToRefresh.propTypes = {
   onRefresh: PropTypes.func.isRequired,
