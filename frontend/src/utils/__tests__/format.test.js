@@ -209,6 +209,12 @@ describe('format utilities', () => {
     });
   });
 
+  describe('formatClickRate', () => {
+    test('formats click rates to one decimal place', () => {
+      expect(formatClickRate(2.34)).toBe('2.3 clicks/s');
+    });
+  });
+
   describe('formatStx', () => {
     test('converts micro-STX to STX with 2 decimals', () => {
       expect(formatStx(1000000)).toBe('1.00 STX');
