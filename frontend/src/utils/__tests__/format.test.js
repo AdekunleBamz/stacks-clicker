@@ -159,6 +159,10 @@ describe('format utilities', () => {
     test('formats kibibyte-sized values', () => {
       expect(formatBytes(1536)).toBe('1.5 KB');
     });
+
+    test('returns 0 B for invalid byte counts', () => {
+      expect(formatBytes(-10)).toBe('0 B');
+    });
   });
 
   describe('formatStx', () => {
