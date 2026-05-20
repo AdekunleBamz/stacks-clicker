@@ -40,7 +40,7 @@ function formatTime(seconds) {
  * @param {Function} props.quickpoll.isLoading - Function to check loading state by action name
  * @returns {JSX.Element} The rendered QuickPoll interaction card
  */
-function QuickPollCard({ address, quickpoll }) {
+function QuickPollCard({ address = null, quickpoll }) {
   const { isLoading, vote, createPoll, handlePollPing } = quickpoll;
   const [pollQuestion, setPollQuestion] = useState('');
   const { playSound } = useSound();
@@ -315,10 +315,6 @@ QuickPollCard.propTypes = {
     handlePollPing: PropTypes.func.isRequired,
     isLoading: PropTypes.func.isRequired,
   }).isRequired,
-};
-
-QuickPollCard.defaultProps = {
-  address: null,
 };
 
 export default memo(QuickPollCard);
