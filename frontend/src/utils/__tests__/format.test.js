@@ -107,6 +107,10 @@ describe('format utilities', () => {
     test('formats decimal ratios as percentages', () => {
       expect(formatPercent(0.1234, 2)).toBe('12.34%');
     });
+
+    test('returns 0 percent for invalid values', () => {
+      expect(formatPercent(undefined)).toBe('0%');
+    });
   });
 
   describe('formatStx', () => {
