@@ -155,6 +155,10 @@ describe('format utilities', () => {
     test('formats zero bytes', () => {
       expect(formatBytes(0)).toBe('0 B');
     });
+
+    test('formats kibibyte-sized values', () => {
+      expect(formatBytes(1536)).toBe('1.5 KB');
+    });
   });
 
   describe('formatStx', () => {
