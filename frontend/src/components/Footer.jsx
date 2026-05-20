@@ -14,7 +14,7 @@ const VERSION = versionData.version || '1.0.0';
 const Footer = memo(function Footer() {
   const currentYear = new Date().getFullYear();
   return (
-    <footer className="app-footer" role="contentinfo">
+    <footer className="app-footer" role="contentinfo" title="Application footer">
       <div className="footer-content">
         <div className="footer-left" aria-label="App version and copyright information">
           <p>Stacks Clicker command deck • {currentYear}</p>
