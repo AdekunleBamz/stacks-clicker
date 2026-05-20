@@ -183,6 +183,10 @@ describe('format utilities', () => {
     test('shows milliseconds when requested under one second', () => {
       expect(formatCountdown(250.2, { showMs: true })).toBe('251ms');
     });
+
+    test('limits countdown output to requested units', () => {
+      expect(formatCountdown(90_061_000, { maxUnits: 2 })).toBe('1d 1h');
+    });
   });
 
   describe('formatStx', () => {
