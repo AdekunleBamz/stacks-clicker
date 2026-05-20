@@ -91,6 +91,10 @@ describe('format utilities', () => {
     test('returns small values without suffixes', () => {
       expect(formatNumberCompact(999)).toBe('999');
     });
+
+    test('returns 0 for invalid compact input', () => {
+      expect(formatNumberCompact(Number.NaN)).toBe('0');
+    });
   });
 
   describe('formatStx', () => {
