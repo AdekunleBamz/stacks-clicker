@@ -83,6 +83,10 @@ describe('format utilities', () => {
     test('formats thousands with the K suffix', () => {
       expect(formatNumberCompact(1500)).toBe('1.5K');
     });
+
+    test('formats millions with the M suffix', () => {
+      expect(formatNumberCompact(2_000_000)).toBe('2.0M');
+    });
   });
 
   describe('formatStx', () => {
