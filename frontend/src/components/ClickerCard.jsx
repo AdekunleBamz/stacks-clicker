@@ -12,7 +12,7 @@ import Tooltip from './common/Tooltip';
  * @param {Object} props.clicker - Clicker hook object containing actions and loading state.
  * @returns {JSX.Element} The rendered clicker interaction card.
  */
-function ClickerCard({ address, clicker }) {
+function ClickerCard({ address = null, clicker }) {
   const { isLoading, click, multiClick, ping } = clicker;
 
   return (
@@ -67,10 +67,6 @@ ClickerCard.propTypes = {
     ping: PropTypes.func.isRequired,
     isLoading: PropTypes.func.isRequired,
   }).isRequired,
-};
-
-ClickerCard.defaultProps = {
-  address: null,
 };
 
 export default memo(ClickerCard);
