@@ -36,10 +36,6 @@ const AnimatedNumber = ({ value, duration = 1 }) => {
   );
 };
 
-AnimatedNumber.defaultProps = {
-  duration: 1,
-};
-
 AnimatedNumber.propTypes = {
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   duration: PropTypes.number,
