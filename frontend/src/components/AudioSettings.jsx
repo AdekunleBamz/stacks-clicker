@@ -18,7 +18,12 @@ const btnTap = { scale: 0.95 };
  * AudioSettings Component
  * Control panel for game sounds and music
  */
-export default function AudioSettings({ isOpen, onClose, settings, onUpdate }) {
+export default function AudioSettings({
+  isOpen,
+  onClose,
+  settings = { masterVolume: 1, sfxEnabled: true, musicEnabled: true },
+  onUpdate,
+}) {
   const { playSound } = useSound();
   return (
     <AnimatePresence>
@@ -167,8 +172,4 @@ AudioSettings.propTypes = {
     musicEnabled: PropTypes.bool,
   }),
   onUpdate: PropTypes.func.isRequired,
-};
-
-AudioSettings.defaultProps = {
-  settings: { masterVolume: 1, sfxEnabled: true, musicEnabled: true },
 };
