@@ -80,3 +80,5 @@ Source file: `frontend/src/components/QuickPollCard.jsx`.
 Maintenance note: Keep create-panel toggle semantics synchronized with aria-expanded/aria-controls behavior.
 
 Operational note: Verify poll option truncation still preserves decision-critical context.
+
+Maintenance note: Recheck pending-vote button labels whenever transaction status copy changes.
