@@ -19,3 +19,5 @@ Props:
 Maintenance note: Keep header language and wallet-control behavior notes in sync with accessibility attributes.
 
 Operational note: Validate header action visibility at narrow mobile breakpoints.
+
+Maintenance note: Recheck wallet connect wording after any provider selection flow changes.
