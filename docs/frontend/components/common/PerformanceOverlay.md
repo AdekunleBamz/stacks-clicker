@@ -14,3 +14,5 @@ Keep this overlay disabled in production builds to avoid noisy metrics output.
 - Avoid exposing wallet or user-identifying values in developer metric overlays.
 
 Operational note: Ensure performance overlay can be disabled quickly during live demos.
+
+Maintenance note: Reconfirm diagnostic overlay activation stays limited to development triggers.
