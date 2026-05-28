@@ -21,3 +21,5 @@ Input guard:
 Maintenance note: Reconfirm minimum tip thresholds after any contract upgrade that touches denomination rules.
 
 Operational note: Include recipient validation behavior in manual tip flow checks.
+
+Maintenance note: Revalidate memo handling whenever tip transaction options change.
