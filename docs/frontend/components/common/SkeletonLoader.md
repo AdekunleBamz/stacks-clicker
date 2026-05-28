@@ -14,3 +14,5 @@ Match skeleton dimensions to final content to reduce layout shifts.
 - Confirm decorative skeletons stay `aria-hidden` so assistive tech focuses on real content.
 
 Operational note: Keep skeleton duration short enough to avoid perceived freeze on fast responses.
+
+Maintenance note: Confirm skeleton dimensions are updated with matching content layout changes.
