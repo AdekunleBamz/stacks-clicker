@@ -20,3 +20,5 @@ Current content is intentionally minimal and can be extended with:
 Maintenance note: Verify all social-link labels and titles together whenever footer links are edited.
 
 Operational note: Check footer external links after every docs URL update.
+
+Maintenance note: Confirm footer release metadata matches the deployed commit when shown.
