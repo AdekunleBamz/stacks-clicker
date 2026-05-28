@@ -21,3 +21,5 @@ Operational note: Confirm preview and production environment variables are both 
 Operational note: Keep a fallback wallet funded before predeploy validation starts.
 
 Quarterly follow-up: Verify predeploy checklist still matches current release tooling.
+
+Maintenance note: Confirm explorer URLs in release evidence match the selected deployment network.
