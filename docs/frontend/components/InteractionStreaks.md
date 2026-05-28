@@ -19,3 +19,5 @@ Milestones currently award:
 Maintenance note: Re-check streak badge labels whenever progression thresholds are recalibrated.
 
 Operational note: Confirm streak reset messaging appears only when reset is final.
+
+Maintenance note: Reconfirm streak milestones stay sorted after reward threshold edits.
