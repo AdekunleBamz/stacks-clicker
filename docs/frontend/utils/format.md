@@ -28,3 +28,5 @@ Source file: `frontend/src/utils/format.js`.
 Maintenance note: Include bigint-based examples whenever number-formatting behavior is changed.
 
 Operational note: Recheck locale-sensitive number formatting during i18n updates.
+
+Maintenance note: Confirm compact formatting examples stay below ambiguous rounding thresholds.
