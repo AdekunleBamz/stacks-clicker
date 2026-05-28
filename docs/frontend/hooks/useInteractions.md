@@ -19,3 +19,5 @@ Surface transaction callbacks from this level to keep card components lean.
 Maintenance note: When adding new interaction channels, document callback ordering expectations explicitly.
 
 Operational note: Keep interaction source tracking consistent between pointer and keyboard paths.
+
+Maintenance note: Reconfirm interaction errors preserve enough context for toast recovery copy.
