@@ -16,3 +16,5 @@ Checks:
 Maintenance note: Keep button-state assertions updated when loading or disabled semantics are adjusted.
 
 Operational note: Revalidate click burst expectations after score multiplier changes.
+
+Maintenance note: Recheck disabled-state assertions when click action labels change.
