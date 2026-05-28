@@ -20,3 +20,5 @@ Keep external support links reviewed to avoid stale destinations.
 Maintenance note: Keep quick-action item labels synchronized with keyboard shortcut and tooltip text.
 
 Operational note: Ensure quick action labels stay explicit for first-time users.
+
+Maintenance note: Verify clear-log affordances do not remove persistent transaction history unexpectedly.
