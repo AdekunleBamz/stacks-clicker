@@ -17,3 +17,5 @@ Keep placeholder text action-oriented to improve discoverability.
 - Preserve caret position when search input formatting or normalization is applied.
 
 Operational note: Confirm search clear controls remain keyboard-accessible.
+
+Maintenance note: Recheck debounce delay copy when search responsiveness is tuned.
