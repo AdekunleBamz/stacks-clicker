@@ -16,3 +16,5 @@ Provide descriptive `alt` text when this component is wrapped in an image tag.
 Maintenance note: Re-check decorative logo semantics whenever iconography or branding assets are swapped.
 
 Operational note: Validate contrast for network badges on both light and dark headers.
+
+Maintenance note: Confirm logo fallback text remains accurate when network labels change.
