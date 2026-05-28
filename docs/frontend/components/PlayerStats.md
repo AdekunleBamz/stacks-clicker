@@ -22,3 +22,5 @@ Keep stat labels consistent with transaction history terminology.
 Maintenance note: Reconcile stat-card labels with analytics events when metric definitions change.
 
 Operational note: Confirm stat labels remain understandable without icon context.
+
+Maintenance note: Recheck aggregate totals after adding or removing tracked interaction types.
