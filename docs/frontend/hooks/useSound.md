@@ -18,3 +18,5 @@ Supported sound types:
 Maintenance note: List supported audio-failure fallback behavior for browsers that block autoplay.
 
 Operational note: Document autoplay fallback behavior for browsers blocking initial sound playback.
+
+Maintenance note: Confirm mute preference persists before adding new sound effects.
