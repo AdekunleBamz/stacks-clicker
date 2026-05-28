@@ -22,3 +22,5 @@ Keep recipient validation strict to avoid malformed address submissions.
 Maintenance note: Reconcile preset amount labels with current denomination helpers during tip UX changes.
 
 Operational note: Cross-check default tip amount copy against current product messaging.
+
+Maintenance note: Verify recipient error text distinguishes invalid addresses from disconnected wallets.
