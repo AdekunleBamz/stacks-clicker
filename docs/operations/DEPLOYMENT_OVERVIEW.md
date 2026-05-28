@@ -66,3 +66,5 @@ Operational note: Store the deployed artifact checksum in the deployment ticket 
 Operational note: Document which environment secret bundle was used for each deployment pass.
 
 Quarterly follow-up: Confirm deployment flow diagrams still match live automation.
+
+Maintenance note: Confirm deployment records include the exact Clarinet plan file.
