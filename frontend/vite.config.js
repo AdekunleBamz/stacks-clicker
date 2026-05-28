@@ -11,6 +11,7 @@ export default defineConfig({
     global: 'globalThis',
   },
   resolve: {
+    preserveSymlinks: true,
     alias: {
       buffer: 'buffer',
     },
