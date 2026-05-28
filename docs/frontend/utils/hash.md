@@ -22,3 +22,5 @@ Source file: `frontend/src/utils/hash.js`.
 Maintenance note: Treat hash-output changes as breaking for persisted keys and include a migration note.
 
 Operational note: Confirm hash truncation output stays stable for support references.
+
+Maintenance note: Recheck hash input encoding assumptions when accepting new identifier types.
