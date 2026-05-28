@@ -15,3 +15,5 @@ Prefer this view for lightweight embeds where filters/export are unnecessary.
 Maintenance note: Re-check live-region wording after toast severity or ordering behavior changes.
 
 Operational note: Capture pagination behavior evidence for wallets with long histories.
+
+Maintenance note: Recheck explorer-link labels when compact log entries are truncated.
