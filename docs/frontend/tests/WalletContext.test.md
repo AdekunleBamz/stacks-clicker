@@ -16,3 +16,5 @@ Covers:
 Maintenance note: Re-check provider-mock setup when wallet session behavior changes.
 
 Operational note: Recheck disconnect cleanup assertions when wallet SDK is upgraded.
+
+Maintenance note: Confirm session restore tests cover missing address arrays.
