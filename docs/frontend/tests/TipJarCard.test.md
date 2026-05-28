@@ -19,3 +19,5 @@ Source file: `frontend/src/tests/TipJarCard.test.jsx`.
 Maintenance note: Keep min-tip and invalid-recipient assertions together when updating this suite.
 
 Operational note: Confirm invalid amount scenarios still surface actionable helper text.
+
+Maintenance note: Recheck recipient validation assertions after wallet address parsing updates.
