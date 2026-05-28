@@ -7,6 +7,7 @@
 - Keep rollback commit reference prepared.
 - Confirm environment variables match the intended target network.
 - Back up the active `.env` file before changing any production-sensitive values.
+- Verify wallet callback and explorer URLs resolve against the same network target.
 - Confirm deploy operator clock is synced to avoid confusing timestamp drift in release logs.
 - Reconfirm deploy wallet can sign transactions before entering the release window.
 
