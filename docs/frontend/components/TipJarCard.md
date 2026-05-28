@@ -68,3 +68,5 @@ Source file: `frontend/src/components/TipJarCard.jsx`.
 Maintenance note: Keep custom-amount validation notes tied to current minimum micro-STX constraints.
 
 Operational note: Ensure recipient and amount validation errors are not visually ambiguous.
+
+Maintenance note: Confirm preset chip order still matches the recommended tipping path.
