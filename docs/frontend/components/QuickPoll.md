@@ -24,3 +24,5 @@ Source file: `frontend/src/components/QuickPoll.jsx`.
 Maintenance note: Revisit vote fee copy if contract-side polling costs change.
 
 Operational note: Include expired poll behavior in manual regression runs.
+
+Maintenance note: Confirm poll-id input hints still match supported contract lookup formats.
