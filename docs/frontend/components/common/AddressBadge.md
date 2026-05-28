@@ -14,3 +14,5 @@ Confirm copy success feedback is visible for keyboard-only users.
 - Keep manual copy fallback text available for restricted clipboard permissions.
 
 Operational note: Validate truncation rules preserve enough address context for support checks.
+
+Maintenance note: Recheck disconnect affordance copy when wallet session behavior changes.
