@@ -14,3 +14,5 @@ Keep reveal threshold high enough to avoid showing the button on minor scrolls.
 - Recheck smooth-scroll behavior against reduced-motion user preferences.
 
 Operational note: Verify scroll restore behavior after modal close and route changes.
+
+Maintenance note: Confirm scroll control labels remain accurate after layout changes.
