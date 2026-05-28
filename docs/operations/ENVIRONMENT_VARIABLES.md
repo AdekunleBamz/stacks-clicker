@@ -35,3 +35,5 @@ Operational note: After changing env values, restart both the frontend dev serve
 Operational note: Document which variables are safe to expose in client-side bundles.
 
 Quarterly follow-up: Reconfirm default values for non-production environments.
+
+Maintenance note: Verify client-safe variable names remain prefixed for Vite exposure.
