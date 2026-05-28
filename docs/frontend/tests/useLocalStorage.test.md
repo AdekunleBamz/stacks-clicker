@@ -18,3 +18,5 @@ Source file: `frontend/src/tests/useLocalStorage.test.jsx`.
 Maintenance note: Include malformed storage-event scenarios whenever browser event handling changes.
 
 Operational note: Validate malformed JSON recovery path in storage tests each quarter.
+
+Maintenance note: Add private-mode storage coverage whenever persistence fallbacks change.
