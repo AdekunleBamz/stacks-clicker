@@ -19,3 +19,5 @@ Operational note: Capture the exact Node and npm versions used when documenting 
 Operational note: Save the build artifact checksum in release notes for reproducibility.
 
 Quarterly follow-up: Verify build output paths remain stable for deployment scripts.
+
+Maintenance note: Recheck build warnings after dependency updates before approving previews.
