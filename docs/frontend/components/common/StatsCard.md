@@ -14,3 +14,5 @@ Avoid animating rapidly changing values to keep motion readable.
 - Verify non-finite values gracefully fall back instead of rendering raw `NaN` text.
 
 Operational note: Verify stat value alignment stays stable with large number magnitudes.
+
+Maintenance note: Recheck animated value timing when stat refresh cadence changes.
