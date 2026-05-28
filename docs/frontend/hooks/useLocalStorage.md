@@ -17,3 +17,5 @@ Prefer JSON-safe values to keep parsing and migration predictable.
 Maintenance note: Re-check storage event caveats whenever browser support targets are updated.
 
 Operational note: Note migration handling when storage key shapes change.
+
+Maintenance note: Verify storage fallback behavior in private browsing modes.
