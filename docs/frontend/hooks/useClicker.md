@@ -25,3 +25,5 @@ Source file: `frontend/src/hooks/useClicker.js`.
 Maintenance note: Keep click callback examples aligned with the latest optimistic-update behavior.
 
 Operational note: Capture click burst throttling behavior under unstable network conditions.
+
+Maintenance note: Recheck optimistic score rollback when click submission fails.
