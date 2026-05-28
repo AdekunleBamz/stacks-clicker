@@ -66,7 +66,7 @@ From the repository root, you can run `npm run frontend:dev` for the same comman
 From the `frontend` directory, run the automated test suite:
 
 ```bash
-npm run test:run
+npm run test -- --run
 ```
 
 For watch mode during development:
