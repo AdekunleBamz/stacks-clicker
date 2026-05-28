@@ -16,3 +16,5 @@ Include recovery hints for failures that users can immediately retry.
 Maintenance note: Revisit toast priority and live-region text whenever severity ordering is updated.
 
 Operational note: Verify toast dismissal timing in reduced-motion mode.
+
+Maintenance note: Recheck retry-action labels whenever toast error categories change.
