@@ -20,3 +20,5 @@ Operational note: Mark flaky tests with quarantine status and link the tracking 
 Operational note: Label flaky tests with first-seen date to track stability trends.
 
 Quarterly follow-up: Review flaky-test quarantine entries for stale suppressions.
+
+Maintenance note: Confirm quarantined test names still match current suite names before release.
