@@ -19,3 +19,5 @@ Avoid flashing animations during reconnect loops to reduce visual noise.
 Maintenance note: Keep heartbeat tooltip and status title wording consistent across idle and active states.
 
 Operational note: Track heartbeat reconnection delay after transient network loss.
+
+Maintenance note: Confirm screen-reader status text changes only when the visible network state changes.
