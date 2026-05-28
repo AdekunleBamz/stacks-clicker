@@ -18,3 +18,5 @@ Prefer locale-aware timestamp formatting so support logs align with user-reporte
 Maintenance note: Reconfirm explorer-link formatting whenever network selection logic is touched.
 
 Operational note: Validate empty-state guidance includes a next action for new users.
+
+Maintenance note: Recheck local history retention copy when persistence behavior changes.
