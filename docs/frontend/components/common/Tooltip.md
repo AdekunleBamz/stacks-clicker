@@ -14,3 +14,5 @@ Keep tooltip content short enough to avoid obscuring nearby controls.
 - Re-test tooltip discoverability on touch devices where hover is unavailable.
 
 Operational note: Ensure tooltip content stays readable at 200 percent browser zoom.
+
+Maintenance note: Verify tooltip dismissal remains predictable for keyboard-only users.
