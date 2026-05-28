@@ -23,3 +23,5 @@ Source directory: `frontend/src/utils/`.
 Maintenance note: Keep utility examples synchronized with current import paths after any folder reshuffle.
 
 Operational note: Document utility side effects explicitly to prevent accidental misuse.
+
+Maintenance note: Recheck utility export names after bundler alias changes.
