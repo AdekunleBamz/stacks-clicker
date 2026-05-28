@@ -18,3 +18,5 @@ Treat unknown network responses as degraded state instead of hard failure.
 Maintenance note: Document fallback RPC behavior whenever network probe logic is adjusted.
 
 Operational note: Log fallback endpoint usage during network degradation drills.
+
+Maintenance note: Confirm degraded-state wording remains distinct from disconnected-wallet wording.
