@@ -22,3 +22,5 @@ Prefer adding new cards through this layout to keep dashboard ordering explicit.
 Maintenance note: Revalidate section role and heading hierarchy after any main grid slot rearrangement.
 
 Operational note: Verify grid collapse order for keyboard navigation on tablets.
+
+Maintenance note: Confirm new dashboard cards declare clear loading and empty states.
