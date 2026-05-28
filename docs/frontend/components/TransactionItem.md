@@ -20,3 +20,5 @@ Source file: `frontend/src/components/TransactionItem.jsx`.
 Maintenance note: Keep status-icon accessibility notes aligned with any visual stepper updates.
 
 Operational note: Keep timestamp format consistent with transaction log exports.
+
+Maintenance note: Confirm swipe actions remain discoverable when context menus are hidden.
