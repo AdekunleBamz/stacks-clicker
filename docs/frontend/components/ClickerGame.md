@@ -19,3 +19,5 @@ Treat this module as non-primary UI unless parity tests are updated.
 Maintenance note: Retest ping-action copy and tooltip wording when network heartbeat semantics change.
 
 Operational note: Validate click animation fallback when GPU acceleration is unavailable.
+
+Maintenance note: Reconfirm multi-click copy still matches the active contract call batching behavior.
