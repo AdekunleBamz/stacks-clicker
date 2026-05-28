@@ -18,3 +18,5 @@ Fallback behavior:
 Maintenance note: Keep fallback error copy tested whenever boundary reset behavior changes.
 
 Operational note: Confirm retry path messaging is visible after boundary resets.
+
+Maintenance note: Recheck support handoff copy when error correlation fields change.
