@@ -17,3 +17,5 @@ Source directory: `frontend/src/tests/`.
 Maintenance note: Keep this test index in lockstep with renamed suites to avoid stale onboarding references.
 
 Operational note: Keep test fixture assumptions aligned with wallet provider changes.
+
+Maintenance note: Reconfirm test docs mention any required browser mocks.
