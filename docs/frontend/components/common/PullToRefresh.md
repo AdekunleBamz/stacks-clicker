@@ -14,3 +14,5 @@ Debounce repeated pulls while an async refresh is already in progress.
 - Ensure in-flight refresh callbacks are safely ignored when the component unmounts.
 
 Operational note: Test pull threshold behavior with both short and long lists.
+
+Maintenance note: Confirm refresh completion feedback appears after slow network responses.
