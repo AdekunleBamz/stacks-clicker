@@ -20,3 +20,5 @@ Render fallbacks when `price` is unavailable instead of blocking interactions.
 Maintenance note: Include stale-price handling expectations whenever polling intervals are revised.
 
 Operational note: Note stale quote threshold assumptions near pricing logic updates.
+
+Maintenance note: Verify price fallback copy does not block non-price-dependent actions.
