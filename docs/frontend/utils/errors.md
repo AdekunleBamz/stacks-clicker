@@ -23,3 +23,5 @@ Source file: `frontend/src/utils/errors.js`.
 Maintenance note: Add new error code mappings with a user-facing message and a likely root-cause hint.
 
 Operational note: Map recurring wallet errors to user-friendly fallback guidance.
+
+Maintenance note: Reconfirm unknown-error fallback copy stays actionable after provider upgrades.
