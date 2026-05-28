@@ -17,3 +17,5 @@ Keep global side effects centralized here to minimize prop drilling complexity.
 Maintenance note: Reconcile this overview with route-level composition whenever top-level layout changes.
 
 Operational note: Revisit app-level provider ordering when adding new global state.
+
+Maintenance note: Confirm global keyboard handlers do not conflict with wallet modal shortcuts.
