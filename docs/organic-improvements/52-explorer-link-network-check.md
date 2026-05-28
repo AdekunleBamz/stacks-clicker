@@ -10,3 +10,5 @@ Incorrect links can hide successful transactions from users.
 - Keep fallback explorer host mapping documented for incident-mode troubleshooting.
 
 Follow-up note: Reconfirm explorer base URL mapping after network config edits.
+
+Follow-up note: Spot-check explorer links from both pending and confirmed states.
