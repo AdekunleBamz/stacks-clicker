@@ -15,3 +15,5 @@ Prefer status labels that map directly to your release checklist states.
 Maintenance note: Validate vote-count label formatting after roadmap status taxonomy changes.
 
 Operational note: Keep swimlane labels consistent with roadmap status definitions.
+
+Maintenance note: Verify roadmap dates are not presented as commitments when statuses are tentative.
