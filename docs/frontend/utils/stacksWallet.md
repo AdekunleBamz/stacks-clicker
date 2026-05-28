@@ -13,3 +13,5 @@ Public helpers:
 - `getSession()`
 
 Source file: `frontend/src/utils/stacksWallet.js`.
+
+Maintenance note: Reconfirm wallet helper docs whenever provider session fields change.
