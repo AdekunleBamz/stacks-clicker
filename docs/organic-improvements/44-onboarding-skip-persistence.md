@@ -10,3 +10,5 @@ This prevents repeated tours after reconnects and improves retention.
 - Reconfirm persistence keys include network context when multiple environments are used.
 
 Follow-up note: Re-test skip persistence when onboarding steps are reordered.
+
+Follow-up note: Confirm skip persistence resets only when onboarding version changes.
