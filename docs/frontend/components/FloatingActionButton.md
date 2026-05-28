@@ -22,3 +22,5 @@ Source file: `frontend/src/components/FloatingActionButton.jsx`.
 Maintenance note: Verify focus order whenever floating action menu items are added or removed.
 
 Operational note: Verify floating button placement avoids overlap with wallet prompts.
+
+Maintenance note: Retest expanded-menu dismissal when route transitions occur.
