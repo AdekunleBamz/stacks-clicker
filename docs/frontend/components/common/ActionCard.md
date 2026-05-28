@@ -14,3 +14,5 @@ Avoid embedding unrelated layout concerns so this wrapper stays reusable.
 - Keep empty and populated card states on matching padding to reduce layout jitter.
 
 Operational note: Confirm action card headings remain concise on small screens.
+
+Maintenance note: Recheck card action order when adding secondary controls.
