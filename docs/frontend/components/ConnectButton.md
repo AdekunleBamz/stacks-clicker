@@ -74,3 +74,5 @@ Source file: `frontend/src/components/ConnectButton.jsx`.
 Maintenance note: Keep connect/disconnect button labels synchronized with busy-state accessibility copy.
 
 Operational note: Check loading text for connect actions under slow wallet handshakes.
+
+Maintenance note: Recheck copied-address feedback timing after clipboard helper changes.
