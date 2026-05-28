@@ -16,3 +16,5 @@ Source file: `frontend/src/components/common/ParticleOverlay.jsx`.
 - Reconfirm reduced-motion behavior can disable particle bursts when user preference is set.
 
 Operational note: Gate heavy particle effects behind performance and motion preferences.
+
+Maintenance note: Confirm particle cleanup runs after burst animations complete.
