@@ -12,6 +12,7 @@ import {
   formatNumber,
   formatNumberCompact,
   formatPercent,
+  formatRelativeTime,
   formatSignedNumber,
   formatStx,
   formatTransactionId,
@@ -134,6 +135,12 @@ describe('format utilities', () => {
 
     test('returns 0s for negative durations', () => {
       expect(formatDuration(-1)).toBe('0s');
+    });
+  });
+
+  describe('formatRelativeTime', () => {
+    test('returns a placeholder for invalid timestamps', () => {
+      expect(formatRelativeTime(Number.NaN)).toBe('--');
     });
   });
 

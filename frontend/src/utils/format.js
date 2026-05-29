@@ -309,7 +309,9 @@ export const formatLevel = (lvl) => 'Lv.' + Math.max(0, Math.floor(Number(lvl)))
  * @returns {string} Relative label like "just now", "2m ago", "in 5h"
  */
 export function formatRelativeTime(ms) {
-  const diff = Date.now() - Number(ms);
+  const timestamp = Number(ms);
+  if (!Number.isFinite(timestamp)) return '--';
+  const diff = Date.now() - timestamp;
   const abs = Math.abs(diff);
   const suffix = diff >= 0 ? ' ago' : '';
   const prefix = diff < 0 ? 'in ' : '';
