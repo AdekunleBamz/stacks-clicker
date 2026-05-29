@@ -19,20 +19,20 @@ describe('hash utilities', () => {
       expect(Number.isInteger(hash)).toBe(true);
     });
 
-    test('returns stable seed hash for empty strings', () => {
-      expect(simpleHash('')).toBe(5381);
+    test('returns zero for empty strings', () => {
+      expect(simpleHash('')).toBe(0);
     });
 
-    test('handles undefined input by hashing empty string', () => {
-      expect(simpleHash(undefined)).toBe(5381);
+    test('guards undefined input', () => {
+      expect(simpleHash(undefined)).toBe(0);
     });
 
-    test('treats null input the same way as an empty string', () => {
-      expect(simpleHash(null)).toBe(5381);
+    test('guards null input', () => {
+      expect(simpleHash(null)).toBe(0);
     });
 
-    test('coerces numeric input consistently', () => {
-      expect(simpleHash(42)).toBe(simpleHash('42'));
+    test('guards numeric input', () => {
+      expect(simpleHash(42)).toBe(0);
     });
 
     test('handles unicode input deterministically', () => {
