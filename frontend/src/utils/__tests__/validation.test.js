@@ -1,4 +1,5 @@
 import { describe, expect, test } from 'vitest';
+import { MIN_TIP_MICRO_STX } from '../constants';
 import { SCHEMAS, validatePayload } from '../validation';
 
 describe('validation utilities', () => {
@@ -13,9 +14,9 @@ describe('validation utilities', () => {
   });
 
   test('rejects tip payloads with non-stacks recipients', () => {
-    expect(() => validatePayload({ amount: 100, recipient: '0xabc' }, SCHEMAS.TIP)).toThrow(
-      'Validation failed for key: recipient. Value: 0xabc'
-    );
+    expect(() =>
+      validatePayload({ amount: MIN_TIP_MICRO_STX, recipient: '0xabc' }, SCHEMAS.TIP)
+    ).toThrow('Validation failed for key: recipient. Value: 0xabc');
   });
 
   test('ignores extra payload fields outside the schema', () => {
