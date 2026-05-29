@@ -18,7 +18,7 @@ import {
  */
 
 /** @type {React.Context<WalletContextValue|null>} */
-const WalletContext = createContext(null);
+export const WalletContext = createContext(null);
 
 function getAppDetails() {
   const origin = typeof window !== 'undefined' ? window.location.origin : '';

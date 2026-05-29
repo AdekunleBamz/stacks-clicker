@@ -112,27 +112,29 @@ describe('usePrice hook', () => {
 
   it('clears previous errors after a successful fetch', async () => {
     vi.useFakeTimers();
-    global.fetch.mockRejectedValueOnce(new Error('temporary failure')).mockResolvedValueOnce({
-      ok: true,
-      json: async () => ({ blockstack: { usd: 2.34 } }),
-    });
+    try {
+      global.fetch.mockRejectedValueOnce(new Error('temporary failure')).mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ blockstack: { usd: 2.34 } }),
+      });
 
-    const { result } = renderHook(() => usePrice());
+      const { result } = renderHook(() => usePrice());
 
-    await waitFor(() => {
-      expect(result.current.loading).toBe(false);
-      expect(result.current.error).toBeInstanceOf(Error);
-    });
+      await vi.waitFor(() => {
+        expect(result.current.loading).toBe(false);
+        expect(result.current.error).toBeInstanceOf(Error);
+      });
 
-    act(() => {
-      vi.advanceTimersByTime(PRICE_REFRESH_INTERVAL_MS);
-    });
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(PRICE_REFRESH_INTERVAL_MS);
+      });
 
-    await waitFor(() => {
-      expect(result.current.price).toBe(2.34);
-      expect(result.current.error).toBeNull();
-    });
-
-    vi.useRealTimers();
+      await vi.waitFor(() => {
+        expect(result.current.price).toBe(2.34);
+        expect(result.current.error).toBeNull();
+      });
+    } finally {
+      vi.useRealTimers();
+    }
   });
 });

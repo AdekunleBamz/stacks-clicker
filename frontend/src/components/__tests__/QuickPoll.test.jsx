@@ -32,7 +32,8 @@ describe('QuickPoll component', () => {
   it('renders correctly with initial stats', () => {
     renderQuickPoll();
     expect(screen.getByText(/QuickPoll/i)).toBeDefined();
-    expect(screen.getAllByText('0')).toHaveLength(2); // Yes and No initial votes
+    expect(screen.getByText('Yes Votes').parentElement.textContent).toBe('Yes Votes0');
+    expect(screen.getByText('No Votes').parentElement.textContent).toContain('0');
   });
 
   it('handles poll creation', async () => {

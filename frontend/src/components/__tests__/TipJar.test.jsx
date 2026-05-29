@@ -65,9 +65,13 @@ describe('TipJar component', () => {
     // Find input (assuming it has a label or descriptive text)
     // Looking at the TipJar.jsx preview, it has setTipAmount(1000)
     const amountInput = screen.getByRole('spinbutton'); // Assuming type="number"
+    const recipientInput = screen.getByLabelText(/Recipient wallet address/i);
+    fireEvent.change(recipientInput, {
+      target: { value: 'SP2C2YFP58CMQ2AGK4Z6Y0ZRY3B4SB4T9X7D7XQK3' },
+    });
     fireEvent.change(amountInput, { target: { value: '5000' } });
 
-    const tipUserBtn = screen.getByText(/Tip User/i);
+    const tipUserBtn = screen.getByRole('button', { name: /Send Tip/i });
     fireEvent.click(tipUserBtn);
 
     expect(callContract).toHaveBeenCalledWith(
