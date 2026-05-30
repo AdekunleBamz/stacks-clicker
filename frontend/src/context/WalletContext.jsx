@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import toast from 'react-hot-toast';
+import Modal from '../components/common/Modal';
 import {
   connectStacksWallet,
   disconnectStacksWallet,
@@ -39,6 +40,7 @@ function getAppDetails() {
 export function WalletProvider({ children }) {
   const [address, setAddress] = useState(null);
   const [isConnecting, setIsConnecting] = useState(false);
+  const [isWalletPickerOpen, setIsWalletPickerOpen] = useState(false);
 
   const checkConnection = useCallback(async () => {
     if (typeof window === 'undefined' || !isStacksConnected()) return;
@@ -54,10 +56,11 @@ export function WalletProvider({ children }) {
     void checkConnection();
   }, [checkConnection]);
 
-  const connectWallet = useCallback(async () => {
+  const connectNativeWallet = useCallback(async () => {
     setIsConnecting(true);
 
     try {
+      setIsWalletPickerOpen(false);
       const account = await connectStacksWallet();
       setAddress(account.address.trim());
       toast.success('Wallet connected!');
@@ -68,6 +71,16 @@ export function WalletProvider({ children }) {
       setIsConnecting(false);
     }
   }, []);
+
+  const connectWallet = useCallback(() => {
+    setIsWalletPickerOpen(true);
+  }, []);
+
+  const closeWalletPicker = useCallback(() => {
+    if (!isConnecting) {
+      setIsWalletPickerOpen(false);
+    }
+  }, [isConnecting]);
 
   const disconnectWallet = useCallback(async () => {
     disconnectStacksWallet();
@@ -89,7 +102,40 @@ export function WalletProvider({ children }) {
     [address, connectWallet, disconnectWallet, appDetails, isConnecting]
   );
 
-  return <WalletContext.Provider value={value}>{children}</WalletContext.Provider>;
+  return (
+    <WalletContext.Provider value={value}>
+      {children}
+      <Modal
+        isOpen={isWalletPickerOpen}
+        onClose={closeWalletPicker}
+        title="Connect a Wallet"
+        maxWidth="420px"
+      >
+        <div className="wallet-picker-options">
+          <p className="wallet-picker-copy">
+            Choose a Stacks wallet provider to continue.
+          </p>
+          <button
+            type="button"
+            className="primary-button wallet-picker-option"
+            onClick={connectNativeWallet}
+            disabled={isConnecting}
+            aria-busy={isConnecting}
+          >
+            {isConnecting ? 'Opening wallet...' : 'Hiro Wallet / Leather'}
+          </button>
+          <a
+            className="secondary-button wallet-picker-option"
+            href="https://www.xverse.app/download"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Xverse Wallet
+          </a>
+        </div>
+      </Modal>
+    </WalletContext.Provider>
+  );
 }
 
 WalletProvider.propTypes = {
