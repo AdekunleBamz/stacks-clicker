@@ -1,24 +1,26 @@
-import { useCallback, useState } from 'react';
+import { lazy, Suspense, useCallback, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 import Header from './components/Header';
-import PlayerStats from './components/PlayerStats';
-import TransactionHistory from './components/TransactionHistory';
 import MainGrid from './components/MainGrid';
-import Footer from './components/Footer';
-import FloatingActionButton from './components/FloatingActionButton';
-import MilestoneCelebration from './components/MilestoneCelebration';
-import NetworkHeartbeat from './components/NetworkHeartbeat';
-import QuickActions from './components/QuickActions';
-import ParticleOverlay from './components/common/ParticleOverlay';
-import PerformanceOverlay from './components/common/PerformanceOverlay';
-import ScrollToTop from './components/common/ScrollToTop';
 import { useWallet } from './context/WalletContext';
 import { useInteractions } from './hooks/useInteractions';
 import { useMilestones } from './hooks/useMilestones';
 import { useSound } from './hooks/useSound';
 import { useTheme } from './hooks/useTheme';
 
+const PlayerStats = lazy(() => import('./components/PlayerStats'));
+const TransactionHistory = lazy(() => import('./components/TransactionHistory'));
+const Footer = lazy(() => import('./components/Footer'));
+const FloatingActionButton = lazy(() => import('./components/FloatingActionButton'));
+const MilestoneCelebration = lazy(() => import('./components/MilestoneCelebration'));
+const NetworkHeartbeat = lazy(() => import('./components/NetworkHeartbeat'));
+const QuickActions = lazy(() => import('./components/QuickActions'));
+const ParticleOverlay = lazy(() => import('./components/common/ParticleOverlay'));
+const PerformanceOverlay = lazy(() => import('./components/common/PerformanceOverlay'));
+const ScrollToTop = lazy(() => import('./components/common/ScrollToTop'));
+
 const INITIAL_STATS = { clicks: 0, tips: 0, votes: 0 };
+const deferredFallback = null;
 
 function getNextStats(stats, action) {
   const label = action.toLowerCase();
@@ -110,7 +112,9 @@ export default function App() {
         Skip to main content
       </a>
 
-      <PerformanceOverlay />
+      <Suspense fallback={deferredFallback}>
+        <PerformanceOverlay />
+      </Suspense>
       <Header theme={theme} toggleTheme={toggleTheme} />
 
       <main id="main-content" className="app-main" role="main" tabIndex={-1}>
@@ -156,11 +160,15 @@ export default function App() {
                 </span>
               </div>
             </div>
-            <NetworkHeartbeat />
+            <Suspense fallback={deferredFallback}>
+              <NetworkHeartbeat />
+            </Suspense>
           </div>
         </section>
 
-        <PlayerStats stats={stats} txCount={txLog.length} />
+        <Suspense fallback={deferredFallback}>
+          <PlayerStats stats={stats} txCount={txLog.length} />
+        </Suspense>
 
         <div className="main-grid">
           <MainGrid
@@ -172,17 +180,21 @@ export default function App() {
           />
 
           <aside className="stats-aside" aria-label="Recent activity and quick tools">
-            <TransactionHistory txLog={txLog} />
-            <QuickActions address={address} onClearLog={clearLog} onPingAll={pingAll} />
+            <Suspense fallback={deferredFallback}>
+              <TransactionHistory txLog={txLog} />
+              <QuickActions address={address} onClearLog={clearLog} onPingAll={pingAll} />
+            </Suspense>
           </aside>
         </div>
       </main>
 
-      <Footer />
-      <FloatingActionButton onAction={handleFabAction} />
-      <ScrollToTop />
-      <ParticleOverlay trigger={particleTrigger} />
-      <MilestoneCelebration celebration={celebration} />
+      <Suspense fallback={deferredFallback}>
+        <Footer />
+        <FloatingActionButton onAction={handleFabAction} />
+        <ScrollToTop />
+        <ParticleOverlay trigger={particleTrigger} />
+        <MilestoneCelebration celebration={celebration} />
+      </Suspense>
       <Toaster position="top-right" />
     </div>
   );
