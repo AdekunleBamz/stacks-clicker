@@ -95,6 +95,10 @@ If you wish to modify, test, or deploy the Stacks smart contracts locally:
    ```bash
    npm run build
    ```
+   Run the combined production verification shortcut before release checks:
+   ```bash
+   npm run verify:production
+   ```
 
 ## UX & Accessibility Enhancements
 
