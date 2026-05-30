@@ -32,7 +32,8 @@
     "contracts:check": "clarinet check",
     "check": "npm run contracts:check",
     "contracts:test": "clarinet test",
-    "verify:local": "npm run contracts:check && npm run test"
+    "verify:local": "npm run contracts:check && npm run test",
+    "verify:production": "npm run lint && npm run build"
   },
   "engines": {
     "node": ">=18.0.0"
