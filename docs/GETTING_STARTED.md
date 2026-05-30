@@ -77,6 +77,7 @@ npm run test
 
 Use `npm run lint` before opening a pull request if you touched application code.
 Use `npm run format:check` before opening a pull request if you touched UI code.
+Use `npm run verify:production` from the repository root before release-oriented frontend changes.
 
 ## 🧰 Troubleshooting
 
