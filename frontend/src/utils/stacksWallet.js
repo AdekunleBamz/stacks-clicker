@@ -25,9 +25,24 @@ function log(...args) {
 }
 
 const network = STACKS_NETWORK === 'testnet' ? new StacksTestnet() : new StacksMainnet();
+const connectNetwork = STACKS_NETWORK === 'testnet' ? 'testnet' : 'mainnet';
 
 export function getStacksChainId() {
   return STACKS_NETWORK === 'testnet' ? 'stacks:2147483648' : 'stacks:1';
+}
+
+function getStxAddressFromEntries(entries) {
+  if (!Array.isArray(entries)) return null;
+  const stxEntry =
+    entries.find((entry) => entry?.address?.startsWith('SP') || entry?.address?.startsWith('ST')) ??
+    entries.find((entry) => entry?.symbol?.toLowerCase?.() === 'stx');
+
+  return stxEntry?.address ?? null;
+}
+
+function getStoredStxAddress() {
+  const data = getLocalStorage();
+  return getStxAddressFromEntries(data?.addresses?.stx);
 }
 
 /**
@@ -36,13 +51,17 @@ export function getStacksChainId() {
  */
 export async function connectStacksWallet() {
   log('Initiating Stacks native connection');
-  await stacksConnect();
-  return getAddresses();
+  const response = await stacksConnect({ network: connectNetwork });
+  const address = getStxAddressFromEntries(response?.addresses) ?? getStoredStxAddress();
+
+  if (!address) throw new Error('No Stacks address returned by wallet');
+
+  log('Got address:', address);
+  return { address, publicKey: null };
 }
 
 export async function getAddresses() {
-  const data = getLocalStorage();
-  const address = data?.addresses?.stx?.[0]?.address;
+  const address = getStoredStxAddress();
   if (!address) throw new Error('Not connected');
   log('Got address:', address);
   return { address, publicKey: null };
