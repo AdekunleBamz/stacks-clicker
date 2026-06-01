@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 
 /**
  * Custom hook for synchronizing state with window.localStorage.
@@ -14,10 +14,11 @@ export function useLocalStorage(key, initialValue) {
     throw new Error('useLocalStorage: key must be a non-empty string');
   }
   const trimmedKey = key.trim();
-  const resolveInitialValue = useCallback(
-    () => (typeof initialValue === 'function' ? initialValue() : initialValue),
-    [initialValue]
-  );
+  const initialValueRef = useRef(initialValue);
+  const resolveInitialValue = useCallback(() => {
+    const fallback = initialValueRef.current;
+    return typeof fallback === 'function' ? fallback() : fallback;
+  }, []);
 
   const readValue = useCallback(() => {
     if (typeof window === 'undefined') return resolveInitialValue();
@@ -37,10 +38,11 @@ export function useLocalStorage(key, initialValue) {
   const setValue = useCallback(
     (value) => {
       try {
-        const valueToStore = typeof value === 'function' ? value(storedValue) : value;
+        const currentValue = readValue();
+        const valueToStore = typeof value === 'function' ? value(currentValue) : value;
 
         // Prevent redundant writes if values are deep-equal (simple check for now)
-        if (JSON.stringify(valueToStore) === JSON.stringify(storedValue)) {
+        if (JSON.stringify(valueToStore) === JSON.stringify(currentValue)) {
           return;
         }
 
@@ -54,7 +56,7 @@ export function useLocalStorage(key, initialValue) {
         console.error(`[useLocalStorage] Error setting key "${trimmedKey}":`, error);
       }
     },
-    [trimmedKey, storedValue]
+    [readValue, trimmedKey]
   );
 
   useEffect(() => {

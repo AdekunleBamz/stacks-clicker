@@ -4,6 +4,7 @@ import Header from './components/Header';
 import MainGrid from './components/MainGrid';
 import { useWallet } from './context/WalletContext';
 import { useInteractions } from './hooks/useInteractions';
+import { useLocalStorage } from './hooks/useLocalStorage';
 import { useMilestones } from './hooks/useMilestones';
 import { useSound } from './hooks/useSound';
 import { useTheme } from './hooks/useTheme';
@@ -20,7 +21,21 @@ const PerformanceOverlay = lazy(() => import('./components/common/PerformanceOve
 const ScrollToTop = lazy(() => import('./components/common/ScrollToTop'));
 
 const INITIAL_STATS = { clicks: 0, tips: 0, votes: 0 };
+const STATS_STORAGE_KEY = 'stacks-clicker-session-stats';
+const TX_LOG_STORAGE_KEY = 'stacks-clicker-transaction-log';
 const deferredFallback = null;
+
+function normalizeStats(value) {
+  return {
+    clicks: Math.max(0, Number(value?.clicks) || 0),
+    tips: Math.max(0, Number(value?.tips) || 0),
+    votes: Math.max(0, Number(value?.votes) || 0),
+  };
+}
+
+function normalizeTxLog(value) {
+  return Array.isArray(value) ? value : [];
+}
 
 function getNextStats(stats, action) {
   const label = action.toLowerCase();
@@ -41,9 +56,11 @@ export default function App() {
   const { address } = useWallet();
   const { theme, toggleTheme } = useTheme();
   const { playSound } = useSound();
-  const [txLog, setTxLog] = useState([]);
-  const [stats, setStats] = useState(INITIAL_STATS);
+  const [storedTxLog, setTxLog] = useLocalStorage(TX_LOG_STORAGE_KEY, []);
+  const [storedStats, setStats] = useLocalStorage(STATS_STORAGE_KEY, INITIAL_STATS);
   const [particleTrigger, setParticleTrigger] = useState(0);
+  const txLog = normalizeTxLog(storedTxLog);
+  const stats = normalizeStats(storedStats);
   const totalInteractions = stats.clicks + stats.tips + stats.votes;
   const walletLabel = address ? `${address.slice(0, 6)}...${address.slice(-4)}` : 'Wallet pending';
   const activityLevel =
@@ -61,8 +78,8 @@ export default function App() {
         isPending: !txId,
       };
 
-      setTxLog((current) => [nextTx, ...current].slice(0, 50));
-      setStats((current) => getNextStats(current, action));
+      setTxLog((current) => [nextTx, ...normalizeTxLog(current)].slice(0, 50));
+      setStats((current) => getNextStats(normalizeStats(current), action));
       setParticleTrigger((current) => current + 1);
       playSound('success');
       return nextTx;

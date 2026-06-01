@@ -44,6 +44,19 @@ describe('useLocalStorage hook', () => {
     expect(result.current[0]).toEqual({ count: 1 });
   });
 
+  it('applies multiple functional updates against the latest value', () => {
+    const { result } = renderHook(() => useLocalStorage(key, initialValue));
+
+    act(() => {
+      result.current[1]((prev) => ({ count: prev.count + 1 }));
+      result.current[1]((prev) => ({ count: prev.count + 1 }));
+      result.current[1]((prev) => ({ count: prev.count + 1 }));
+    });
+
+    expect(result.current[0]).toEqual({ count: 3 });
+    expect(JSON.parse(window.localStorage.getItem(key))).toEqual({ count: 3 });
+  });
+
   it('gracefully handles malformed JSON in local storage', () => {
     window.localStorage.setItem(key, 'not-json');
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});

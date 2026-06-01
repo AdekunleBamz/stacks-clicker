@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
+import { beforeEach, describe, it, expect, vi } from 'vitest';
 import App from '../App';
 
 // Mock all complex hooks used in App.jsx
@@ -76,13 +76,17 @@ vi.mock('../components/Footer', () => ({ default: () => <footer data-testid="foo
 vi.mock('../components/NetworkHeartbeat', () => ({ default: () => <div data-testid="network" /> }));
 
 describe('App Smoke Test', () => {
-  it('renders the core application structure without crashing', () => {
+  beforeEach(() => {
+    window.localStorage.clear();
+  });
+
+  it('renders the core application structure without crashing', async () => {
     render(<App />);
 
     // Check for main structural elements
     expect(screen.getByRole('application')).toBeDefined();
     expect(screen.getByTestId('header')).toBeDefined();
-    expect(screen.getByTestId('footer')).toBeDefined();
+    expect(await screen.findByTestId('footer')).toBeDefined();
     expect(screen.getByRole('main')).toBeDefined();
   });
 
@@ -91,5 +95,16 @@ describe('App Smoke Test', () => {
     const skipLink = screen.getByText(/Skip to main content/i);
     expect(skipLink).toBeDefined();
     expect(skipLink.getAttribute('href')).toBe('#main-content');
+  });
+
+  it('hydrates session stats from local storage', () => {
+    window.localStorage.setItem(
+      'stacks-clicker-session-stats',
+      JSON.stringify({ clicks: 12, tips: 3, votes: 2 })
+    );
+
+    render(<App />);
+
+    expect(screen.getByText(/Current output: 17 interactions/i)).toBeDefined();
   });
 });

@@ -1,6 +1,7 @@
-import { useState, useEffect, memo } from 'react';
+import { useState, useEffect, useRef, memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 import { STREAK_THRESHOLDS } from '../utils/constants';
 
 const fireStyle = {
@@ -39,18 +40,21 @@ function InteractionStreaks({ totalInteractions = 0 }) {
     0,
     Number.isFinite(totalInteractions) ? totalInteractions : 0
   );
-  const [streak, setStreak] = useState(0);
+  const [storedStreak, setStreak] = useLocalStorage('stacks-clicker-interaction-streak', 0);
   const [badges, setBadges] = useState([]);
+  const previousTotalRef = useRef(safeTotalInteractions);
+  const streak = Math.max(0, Number(storedStreak) || 0);
 
   /**
    * Internal effect to increment streak based on interaction activity.
    * In a production environment, this would ideally be calculated from timestamped transaction logs.
    */
   useEffect(() => {
-    if (safeTotalInteractions > 0) {
+    if (safeTotalInteractions > previousTotalRef.current) {
       setStreak((prev) => prev + 1);
     }
-  }, [safeTotalInteractions]);
+    previousTotalRef.current = safeTotalInteractions;
+  }, [safeTotalInteractions, setStreak]);
 
   /**
    * Effect to calculate and update earned badges based on total interaction milestones.

@@ -1,6 +1,7 @@
 import { act, renderHook } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { useTransactionHistory } from '../useTransactionHistory';
+import { MAX_TX_LOG_SIZE } from '../../utils/constants';
 
 vi.mock('../../utils/toast', () => ({
   notify: {
@@ -35,17 +36,17 @@ describe('useTransactionHistory hook', () => {
     expect(result.current.txLog[0].isPending).toBe(false);
   });
 
-  it('keeps only the 50 most recent transactions', () => {
+  it('keeps only the configured maximum number of recent transactions', () => {
     const { result } = renderHook(() => useTransactionHistory({}));
 
     act(() => {
-      for (let i = 0; i < 60; i += 1) {
+      for (let i = 0; i < MAX_TX_LOG_SIZE + 10; i += 1) {
         result.current.addTxToLog(`Action ${i}`, `0x${i}`, 'success');
       }
     });
 
-    expect(result.current.txLog).toHaveLength(50);
-    expect(result.current.txLog[0].id).toBe('0x59');
-    expect(result.current.txLog[49].id).toBe('0x10');
+    expect(result.current.txLog).toHaveLength(MAX_TX_LOG_SIZE);
+    expect(result.current.txLog[0].id).toBe(`0x${MAX_TX_LOG_SIZE + 9}`);
+    expect(result.current.txLog[MAX_TX_LOG_SIZE - 1].id).toBe('0x10');
   });
 });
