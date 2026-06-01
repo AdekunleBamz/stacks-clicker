@@ -74,10 +74,6 @@ describe('WalletContext', () => {
       screen.getByText('Connect').click();
     });
 
-    await act(async () => {
-      screen.getByText('Hiro Wallet / Leather').click();
-    });
-
     expect(stacksWallet.connectStacksWallet).toHaveBeenCalledTimes(1);
     await waitFor(() => expect(screen.getByTestId('status')).toHaveTextContent('Connected'));
     expect(screen.getByTestId('address')).toHaveTextContent('SP9CONNECTED');
