@@ -135,7 +135,7 @@ export default function QuickPoll({ onTxSubmit }) {
       const result = await callContract({
         contractAddress: DEPLOYER,
         contractName: 'quickpoll-v2p',
-        functionName: 'poll-ping',
+        functionName: 'ping',
         functionArgs: [],
       });
 

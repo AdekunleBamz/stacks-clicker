@@ -50,7 +50,7 @@ export function useTipJar({ onTxSubmit } = {}) {
   );
   const withdraw = useCallback(() => executeAction('💸 Withdraw', 'withdraw'), [executeAction]);
   const handleSelfPing = useCallback(
-    () => executeAction('📡 Self-Ping', 'self-ping'),
+    () => executeAction('self-ping', 'ping'),
     [executeAction]
   );
 

@@ -53,7 +53,7 @@ export default function TipJar({ onTxSubmit }) {
       const result = await callContract({
         contractAddress: DEPLOYER,
         contractName: 'tipjar-v2p',
-        functionName: 'self-ping',
+        functionName: 'ping',
         functionArgs: [],
       });
 
