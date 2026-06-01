@@ -40,7 +40,7 @@ describe('stacksWallet', () => {
       address: 'SP9CONNECTED',
       publicKey: null,
     });
-    expect(stacksConnect).toHaveBeenCalledWith({ network: 'mainnet' });
+    expect(stacksConnect).toHaveBeenCalledWith();
   });
 
   it('restores the cached Stacks address from Connect local storage', async () => {

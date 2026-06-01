@@ -25,7 +25,6 @@ function log(...args) {
 }
 
 const network = STACKS_NETWORK === 'testnet' ? new StacksTestnet() : new StacksMainnet();
-const connectNetwork = STACKS_NETWORK === 'testnet' ? 'testnet' : 'mainnet';
 
 export function getStacksChainId() {
   return STACKS_NETWORK === 'testnet' ? 'stacks:2147483648' : 'stacks:1';
@@ -51,7 +50,7 @@ function getStoredStxAddress() {
  */
 export async function connectStacksWallet() {
   log('Initiating Stacks native connection');
-  const response = await stacksConnect({ network: connectNetwork });
+  const response = await stacksConnect();
   const address = getStxAddressFromEntries(response?.addresses) ?? getStoredStxAddress();
 
   if (!address) throw new Error('No Stacks address returned by wallet');
