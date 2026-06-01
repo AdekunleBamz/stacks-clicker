@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import { useWallet } from '../context/WalletContext';
 import { callContract } from '../utils/stacksWallet';
+import { notify } from '../utils/toast';
 import { DEPLOYER_ADDRESS, CONTRACT_NAMES } from '../config/contracts';
 
 /** @constant {string} TipJar contract name */
@@ -48,7 +49,10 @@ export function useTipJar({ onTxSubmit } = {}) {
     },
     [executeAction]
   );
-  const withdraw = useCallback(() => executeAction('💸 Withdraw', 'withdraw'), [executeAction]);
+  const withdraw = useCallback(() => {
+    notify.info('Withdraw is not available on this contract version.');
+    return undefined;
+  }, []);
   const handleSelfPing = useCallback(
     () => executeAction('self-ping', 'ping'),
     [executeAction]

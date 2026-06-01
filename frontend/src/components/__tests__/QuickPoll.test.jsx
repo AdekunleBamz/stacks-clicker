@@ -36,7 +36,7 @@ describe('QuickPoll component', () => {
     expect(screen.getByText('No Votes').parentElement.textContent).toContain('0');
   });
 
-  it('handles poll creation', async () => {
+  it('does not call the wallet for unsupported poll creation', async () => {
     callContract.mockResolvedValueOnce({ txId: '0xabc' });
     renderQuickPoll();
 
@@ -46,12 +46,7 @@ describe('QuickPoll component', () => {
     const createBtn = screen.getByText(/Create Poll/i);
     fireEvent.click(createBtn);
 
-    expect(callContract).toHaveBeenCalledWith(
-      expect.objectContaining({
-        functionName: 'create-poll',
-        functionArgs: [{ type: 'string-ascii', value: 'Should we add Dark Mode?' }],
-      })
-    );
+    expect(callContract).not.toHaveBeenCalled();
   });
 
   it('handles quick voting', async () => {
@@ -63,7 +58,8 @@ describe('QuickPoll component', () => {
 
     expect(callContract).toHaveBeenCalledWith(
       expect.objectContaining({
-        functionName: 'quick-vote-yes',
+        functionName: 'vote-yes',
+        functionArgs: [],
       })
     );
   });
@@ -81,7 +77,7 @@ describe('QuickPoll component', () => {
     expect(callContract).toHaveBeenCalledWith(
       expect.objectContaining({
         functionName: 'vote-yes',
-        functionArgs: [{ type: 'uint128', value: '5' }],
+        functionArgs: [],
       })
     );
   });

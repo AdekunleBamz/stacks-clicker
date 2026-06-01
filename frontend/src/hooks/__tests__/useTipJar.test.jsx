@@ -9,6 +9,12 @@ vi.mock('../../utils/stacksWallet', () => ({
   callContract: vi.fn(),
 }));
 
+vi.mock('../../utils/toast', () => ({
+  notify: {
+    info: vi.fn(),
+  },
+}));
+
 const walletValue = {
   isConnected: true,
   address: 'SP3K8AD8ARD4VTC6K1D75X9P90NVST68S2K6PP4Y',

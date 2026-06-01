@@ -23,22 +23,9 @@ export default function QuickPoll({ onTxSubmit }) {
   const handleCreatePoll = async () => {
     if (!isConnected || !pollQuestion.trim()) return;
 
-    setLoading(true);
-    try {
-      const result = await callContract({
-        contractAddress: DEPLOYER,
-        contractName: QUICKPOLL_CONTRACT,
-        functionName: 'create-poll',
-        functionArgs: [{ type: 'string-ascii', value: pollQuestion }],
-      });
-
-      setPollQuestion('');
-      onTxSubmit?.('create-poll', result.txId);
-    } catch (err) {
-      console.error('Create poll failed:', err);
-    } finally {
-      setLoading(false);
-    }
+    setPollQuestion('');
+    play('error');
+    console.warn('Poll creation is not available on quickpoll-v2p.');
   };
 
   const handleVoteYes = async () => {
@@ -50,7 +37,7 @@ export default function QuickPoll({ onTxSubmit }) {
         contractAddress: DEPLOYER,
         contractName: QUICKPOLL_CONTRACT,
         functionName: 'vote-yes',
-        functionArgs: [{ type: 'uint128', value: pollId.toString() }],
+        functionArgs: [],
       });
 
       setVotes((prev) => ({ ...prev, yes: prev.yes + 1 }));
@@ -72,7 +59,7 @@ export default function QuickPoll({ onTxSubmit }) {
         contractAddress: DEPLOYER,
         contractName: QUICKPOLL_CONTRACT,
         functionName: 'vote-no',
-        functionArgs: [{ type: 'uint128', value: pollId.toString() }],
+        functionArgs: [],
       });
 
       setVotes((prev) => ({ ...prev, no: prev.no + 1 }));
@@ -93,7 +80,7 @@ export default function QuickPoll({ onTxSubmit }) {
       const result = await callContract({
         contractAddress: DEPLOYER,
         contractName: QUICKPOLL_CONTRACT,
-        functionName: 'quick-vote-yes',
+        functionName: 'vote-yes',
         functionArgs: [],
       });
 
@@ -114,7 +101,7 @@ export default function QuickPoll({ onTxSubmit }) {
       const result = await callContract({
         contractAddress: DEPLOYER,
         contractName: QUICKPOLL_CONTRACT,
-        functionName: 'quick-vote-no',
+        functionName: 'vote-no',
         functionArgs: [],
       });
 

@@ -100,7 +100,7 @@ export default function TipJar({ onTxSubmit }) {
       const result = await callContract({
         contractAddress: DEPLOYER,
         contractName: 'tipjar-v2p',
-        functionName: 'donate',
+        functionName: 'tip',
         functionArgs: [{ type: 'uint128', value: tipAmount.toString() }],
       });
 

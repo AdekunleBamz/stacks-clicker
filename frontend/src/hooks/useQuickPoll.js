@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import { useWallet } from '../context/WalletContext';
 import { callContract } from '../utils/stacksWallet';
+import { notify } from '../utils/toast';
 import { DEPLOYER_ADDRESS, CONTRACT_NAMES } from '../config/contracts';
 
 /** @constant {string} QuickPoll contract name */
@@ -40,24 +41,19 @@ export function useQuickPoll({ onTxSubmit } = {}) {
   );
 
   const vote = useCallback(
-    (pollId, option) => {
+    (_pollId, option) => {
       const voteYesFlag = option === true || option === 1 || option === 'yes';
-      return executeAction('🗳️ Vote', 'vote', [
-        { type: 'uint128', value: pollId.toString() },
-        { type: 'bool', value: voteYesFlag },
-      ]);
+      return executeAction('🗳️ Vote', voteYesFlag ? 'vote-yes' : 'vote-no');
     },
     [executeAction]
   );
 
   const createPoll = useCallback(
-    (question) => {
-      const normalizedQuestion = String(question ?? '').trim();
-      return executeAction('📝 Create Poll', 'create-poll', [
-        { type: 'string-ascii', value: normalizedQuestion },
-      ]);
+    () => {
+      notify.info('Poll creation is not available on this contract version.');
+      return undefined;
     },
-    [executeAction]
+    []
   );
   const handlePollPing = useCallback(() => executeAction('📡 Poll-Ping', 'ping'), [executeAction]);
 
